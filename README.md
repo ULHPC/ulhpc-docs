@@ -1,13 +1,13 @@
 ![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg) [![gitlab](https://img.shields.io/badge/git-gitlab-lightgray.svg)](https://gitlab.uni.lu/www/ulhpc-docs) [![Issues](https://img.shields.io/badge/issues-gitlab-green.svg)](https://gitlab.uni.lu/www/ulhpc-docs/issues)
 
-         _    _ _      _    _ _____   _____   _______        _           _           _   _____                 
-        | |  | | |    | |  | |  __ \ / ____| |__   __|      | |         (_)         | | |  __ \                
-        | |  | | |    | |__| | |__) | |         | | ___  ___| |__  _ __  _  ___ __ _| | | |  | | ___   ___ ___ 
+         _    _ _      _    _ _____   _____   _______        _           _           _   _____
+        | |  | | |    | |  | |  __ \ / ____| |__   __|      | |         (_)         | | |  __ \
+        | |  | | |    | |__| | |__) | |         | | ___  ___| |__  _ __  _  ___ __ _| | | |  | | ___   ___ ___
         | |  | | |    |  __  |  ___/| |         | |/ _ \/ __| '_ \| '_ \| |/ __/ _` | | | |  | |/ _ \ / __/ __|
         | |__| | |____| |  | | |    | |____     | |  __/ (__| | | | | | | | (__ (_| | | | |__| | (_) | (__\__ \
          \____/|______|_|  |_|_|     \_____|    |_|\___|\___|_| |_|_| |_|_|\___\__,_|_| |_____/ \___/ \___|___/
-                                                                                                               
-                                                                                                               
+
+
        Copyright (c) 2020 UL HPC Team <hpc-team@uni.lu>
 
 ULHPC Technical Documentation, based on mkdocs
@@ -25,7 +25,6 @@ $> cd ~/git/gitlab.uni.lu/www/
 $> git clone ssh://git@gitlab.uni.lu:8022/www/ulhpc-docs.git
 ```
 
-
 **`/!\ IMPORTANT`**: Once cloned, initiate your local copy of the repository by running:
 
 ```bash
@@ -33,7 +32,9 @@ $> cd ulhpc-docs
 $> make setup
 ```
 
-This will initiate the [Git submodules of this repository](.gitmodules) and setup the [git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) layout for this repository. Later on, you can update your local branches by running:
+This will initiate the [Git submodules of this repository](.gitmodules) and setup the [git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) layout for this repository. It will also ensure python compoenents ([direnv](https://direnv.net/), [pyenv](https://github.com/pyenv/pyenv) and [`pyenv-virtualenv`](https://github.com/pyenv/pyenv-virtualenv))) are installed.
+
+Later on, you can update your local branches by running:
 
      $> make up
 
@@ -43,9 +44,52 @@ Finally, you can upgrade the [Git submodules](.gitmodules) to the latest version
 
     $> make upgrade
 
+
+## Python Virtualenv / Pyenv and Direnv
+
+You will have to ensure you have installed [direnv](https://direnv.net/) (configured by [`.envrc`](.envrc)), [pyenv](https://github.com/pyenv/pyenv) and [`pyenv-virtualenv`](https://github.com/pyenv/pyenv-virtualenv). This assumes also the presence of `~/.config/direnv/direnvrc` from [this page](https://github.com/Falkor/dotfiles/blob/master/direnv/direnvrc) - for more details, see [this blog post](https://varrette.gforge.uni.lu/blog/2019/09/10/using-pyenv-virtualenv-direnv/).
+
+You can run the following command to setup your local machine in a compliant way (this was normally done as part of the `make setup` step) :
+
+```
+make setup-direnv
+make setup-pyenv
+```
+
+Adapt your favorite shell configuration as suggested. You may want to add the following:
+
+``` bash
+for f in $XDG_CONFIG_HOME/*/init.sh; do
+  . ${f}
+done
+```
+
+Running `direnv allow` (this will have to be done only once), you should automatically enable the virtualenv `ulhpc-docs` based on the python version specified in [`.python-version`](.python-version). You'll eventually need to install the appropripriate Python version with `pyenv`:
+
+```bash
+pyenv versions   # Plural: show all versions
+pyenv install $(head .python-version)
+# Activate the virtualenv by reentering into the directory
+cd ..
+cd -
+```
+
+From that point, you should install the required packages using:
+
+``` bash
+make setup-python
+
+# OR (manually)
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+
+
 ## Issues / Feature request
 
 You can submit bug / issues / feature request using the [`ULHPC/ulhpc-docs` Project Tracker](https://gitlab.uni.lu/www/ulhpc-docs/issues)
+
 
 
 
@@ -53,7 +97,7 @@ You can submit bug / issues / feature request using the [`ULHPC/ulhpc-docs` Proj
 
 ### Git
 
-This repository make use of [Git](http://git-scm.com/) such that you should have it installed on your working machine: 
+This repository make use of [Git](http://git-scm.com/) such that you should have it installed on your working machine:
 
        $> apt-get install git-core # On Debian-like systems
        $> yum install git          # On CentOS-like systems
@@ -76,7 +120,7 @@ At least, you shall configure the following variables
        $> git config --global color.status auto
        $> git config --global color.branch auto
 
-Note that you can create git command aliases in `~/.gitconfig` as follows: 
+Note that you can create git command aliases in `~/.gitconfig` as follows:
 
        [alias]
            up = pull origin
@@ -90,7 +134,7 @@ Note that you can create git command aliases in `~/.gitconfig` as follows:
            gr = log --graph --oneline --decorate
            amend = commit --amend
 
-Consider my personal [`.gitconfig`](https://github.com/Falkor/dotfiles/blob/master/git/.gitconfig) as an example -- if you decide to use it, simply copy it in your home directory and adapt the `[user]` section. 
+Consider my personal [`.gitconfig`](https://github.com/Falkor/dotfiles/blob/master/git/.gitconfig) as an example -- if you decide to use it, simply copy it in your home directory and adapt the `[user]` section.
 
 ### [Git-flow](https://github.com/petervanderdoes/gitflow-avh)
 
@@ -137,31 +181,6 @@ Once you have finished to commit your last changes, make the release effective b
 
 It will finish the release using `git-flow`, create the appropriate tag in the `production` branch and merge all things the way they should be.
 
-## Python Virtualenv / Pyenv and Direnv
-
-You will have to ensure you have installed [direnv](https://direnv.net/) (configured by [`.envrc`](.envrc)), [pyenv](https://github.com/pyenv/pyenv) and [`pyenv-virtualenv`](https://github.com/pyenv/pyenv-virtualenv). This assumes also the presence of `~/.config/direnv/direnvrc` from [this page](https://github.com/Falkor/dotfiles/blob/master/direnv/direnvrc) - for more details, see [this blog post](https://varrette.gforge.uni.lu/blog/2019/09/10/using-pyenv-virtualenv-direnv/).
-
-You can run the following command to setup your local machine in a compliant way:
-
-```
-make setup-pyenv   # AND/OR 'make setup-direnv'
-```
-
-Running `direnv allow` (this will have to be done only once), you should automatically enable the virtualenv `ulhpc-docs` based on the python version specified in [`.python-version`](.python-version). You'll eventually need to install the appropripriate Python version with `pyenv`:
-
-```bash
-pyenv versions   # Plural: show all versions
-pyenv install $(head .python-version)
-# Activate the virtualenv by reentering into the directory
-cd ..
-cd -
-```
-
-From that point, you should install the required packages using:
-
-    pip install -r requirements.txt
-
-Alternatively, you can use `make setup-python`
 
 ## Python Code Development
 
