@@ -85,56 +85,13 @@ pip install -r requirements.txt
 ```
 
 
-
 ## Issues / Feature request
 
 You can submit bug / issues / feature request using the [`ULHPC/ulhpc-docs` Project Tracker](https://gitlab.uni.lu/www/ulhpc-docs/issues)
 
 
 
-
-## Advanced Topics
-
-### Git
-
-This repository make use of [Git](http://git-scm.com/) such that you should have it installed on your working machine:
-
-       $> apt-get install git-core # On Debian-like systems
-       $> yum install git          # On CentOS-like systems
-       $> brew install git         # On Mac OS, using [Homebrew](http://mxcl.github.com/homebrew/)
-       $> port install git         # On Mac OS, using MacPort
-
-Consider these resources to become more familiar (if not yet) with Git:
-
-* [Simple Git Guide](http://rogerdudler.github.io/git-guide/)
-* [Git book](http://book.git-scm.com/index.html)
-* [Github:help](http://help.github.com/mac-set-up-git/)
-* [Git reference](http://gitref.org/)
-
-At least, you shall configure the following variables
-
-       $> git config --global user.name "Your Name Comes Here"
-       $> git config --global user.email you@yourdomain.example.com
-       # configure colors
-       $> git config --global color.diff auto
-       $> git config --global color.status auto
-       $> git config --global color.branch auto
-
-Note that you can create git command aliases in `~/.gitconfig` as follows:
-
-       [alias]
-           up = pull origin
-           pu = push origin
-           st = status
-           df = diff
-           ci = commit -s
-           br = branch
-           w  = whatchanged --abbrev-commit
-           ls = ls-files
-           gr = log --graph --oneline --decorate
-           amend = commit --amend
-
-Consider my personal [`.gitconfig`](https://github.com/Falkor/dotfiles/blob/master/git/.gitconfig) as an example -- if you decide to use it, simply copy it in your home directory and adapt the `[user]` section.
+## Misc.
 
 ### [Git-flow](https://github.com/petervanderdoes/gitflow-avh)
 
@@ -180,23 +137,3 @@ Once you have finished to commit your last changes, make the release effective b
       $> make release
 
 It will finish the release using `git-flow`, create the appropriate tag in the `production` branch and merge all things the way they should be.
-
-
-## Python Code Development
-
-The Python code for `ulhpc-docs` is developed as a Python package, i.e. following the [official guidelines](https://packaging.python.org/overview/).
-
-To play in live with the code while developing it, install it in "_editable_" mode by running:
-
-    pip install -e ./
-
-In practice:
-
-    cd src
-    make
-
-Later on, you can clean the directory using
-
-    make clean
-
-Now you can enjoy live runs.

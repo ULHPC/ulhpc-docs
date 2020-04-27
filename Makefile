@@ -246,7 +246,7 @@ setup-pyenv: setup-xdg git-clone-pyenv git-clone-pyenv-virtualenv
 	@$(MAKE) setup-shell-pyenv
 
 # --- python
-ifeq (,$(wildcard ./$(PIP_REQUIREMENTS_FILE)))
+ifneq (,$(wildcard ./$(PIP_REQUIREMENTS_FILE)))
 setup-python:
 	@echo "=> updating pip version"
 	pip install --upgrade pip
