@@ -1,6 +1,6 @@
 ####################################################################################
 # Makefile (configuration file for GNU make - see http://www.gnu.org/software/make/)
-# Time-stamp: <Mon 2020-01-20 16:08 svarrette>
+# Time-stamp: <Mon 2020-04-27 13:54 svarrette>
 #     __  __       _         __ _ _
 #    |  \/  | __ _| | _____ / _(_) | ___
 #    | |\/| |/ _` | |/ / _ \ |_| | |/ _ \
@@ -19,6 +19,10 @@ UNAME = $(shell uname)
 
 # Some directories
 SUPER_DIR   = $(shell basename `pwd`)
+
+XDG_CACHE_HOME  ?= $(HOME)/.cache
+XDG_CONFIG_HOME ?= $(HOME)/.config
+XDG_DATA_HOME   ?= $(HOME)/.local/share
 
 # Git stuff management
 HAS_GITFLOW      = $(shell git flow version 2>/dev/null || [ $$? -eq 0 ])
@@ -74,6 +78,10 @@ NEXT_MINOR_VERSION = $(MAJOR).$(shell expr $(MINOR) + 1).0
 NEXT_PATCH_VERSION = $(MAJOR).$(MINOR).$(shell expr $(PATCH) + 1)
 endif
 
+# Python stuff
+# See https://pip.pypa.io/en/stable/user_guide/#requirements-files
+PIP_REQUIREMENTS_FILE = requirements.txt
+
 ##################### Main targets #####################
 # Default targets - append your own with TARGETS += <xXx>
 TARGETS =
@@ -81,6 +89,9 @@ TARGETS =
 CLEAN_TARGETS = clean-gitstats
 # Default targets for 'make setup' - append your own with SETUP_TARGETS += setup-<xXx>
 SETUP_TARGETS = setup-git setup-gitflow setup-submodules setup-subtrees setup-githooks
+# Default targets for 'make git-clone'. To append your own:
+#   Define
+GIT_CLONE_TARGETS =
 
 
 ################### Custom Makefile  ###################
@@ -103,6 +114,13 @@ ifneq (,$(wildcard $(MAKEFILE_BEFORE)))
 include $(MAKEFILE_BEFORE)
 endif
 
+# Default Git clone parameters (url, target path for the working directory)
+PYENV_GIT_REPO_URL            ?= https://github.com/pyenv/pyenv.git
+PYENV_GIT_REPO                ?= $(XDG_DATA_HOME)/pyenv
+PYENV_VIRTUALENV_GIT_REPO_URL ?= https://github.com/pyenv/pyenv-virtualenv.git
+PYENV_VIRTUALENV_GIT_REPO     ?= $(XDG_DATA_HOME)/pyenv/plugins/pyenv-virtualenv
+
+
 # Required rule : what's to be done each time
 all: $(TARGETS)
 
@@ -111,7 +129,10 @@ info:
 	@echo "--- Compilation commands --- "
 	@echo "HAS_GITFLOW      -> '$(HAS_GITFLOW)'"
 	@echo "--- Directories --- "
-	@echo "SUPER_DIR    -> '$(SUPER_DIR)'"
+	@echo "SUPER_DIR       -> '$(SUPER_DIR)'"
+	@echo "XDG_CONFIG_HOME -> '$(XDG_CONFIG_HOME)'"
+	@echo "XDG_CACHE_HOME  -> '$(XDG_CACHE_HOME)'"
+	@echo "XDG_DATA_HOME   -> '$(XDG_DATA_HOME)'"
 	@echo "--- Git stuff ---"
 	@echo "GIT_ROOTDIR            -> '$(GIT_ROOTDIR)'"
 	@echo "GITFLOW                -> '$(GITFLOW)'"
@@ -135,7 +156,7 @@ archive: clean
 	tar -C ../ -cvzf ../$(SUPER_DIR)-$(VERSION).tar.gz --exclude ".svn" --exclude ".git"  --exclude "*~" --exclude ".DS_Store" $(SUPER_DIR)/
 
 ############################### Git Bootstrapping rules ################################
-.PHONE: setup setup-git setup-gitflow setup-
+.PHONE: setup setup-git setup-gitflow setup-xdg
 setup: $(SETUP_TARGETS)
 	@if [ -d "$(GIT_ROOTDIR)/$(SRC_HOOKSDIR)" ]; then \
 		echo "=> setup local git hooks"; \
@@ -167,7 +188,6 @@ setup-githooks:
 		$(MAKE) _setup_git_hooks; \
 	fi
 
-
 _setup_git_hooks:
 	@if [ -n "$(SRC_PRECOMMIT_HOOK)" ]; then \
 		if [ -f "$(GIT_ROOTDIR)/$(SRC_PRECOMMIT_HOOK)" ] && [ ! -f "$(GIT_ROOTDIR)/$(GIT_HOOKSDIR)/pre-commit" ]; then \
@@ -175,6 +195,89 @@ _setup_git_hooks:
 			ln -s ../../$(SRC_PRECOMMIT_HOOK) $(GIT_ROOTDIR)/$(GIT_HOOKSDIR)/pre-commit; \
 		fi ; \
 	fi
+
+setup-xdg:
+	@echo "=> setup XDG Base Directories"
+	mkdir -p $(XDG_CONFIG_HOME)
+	mkdir -p $(XDG_DATA_HOME)
+	mkdir -p $(XDG_CACHE_HOME)
+
+define __SHELL_PROFILE_SOURCE_IF_PRESENT
+
+# Add the following to your favorite shell config (~/.bashrc or ~/.zshrc etc.)
+if [ -f "$1"]; then
+	. $1
+fi
+
+endef
+.PHONY: setup-shell-direnv setup-shell-pyenv
+setup-shell-direnv:
+	$(info $(call __SHELL_PROFILE_SOURCE_IF_PRESENT,$(XDG_CONFIG_HOME)/direnv/init.sh))
+setup-shell-pyenv:
+	$(info $(call __SHELL_PROFILE_SOURCE_IF_PRESENT,$(XDG_CONFIG_HOME)/pyenv/init.sh))
+
+
+# --- Direnv
+setup-direnv: setup-xdg
+	@echo "=> setup direnv -- see https://varrette.gforge.uni.lu/tutorials/pyenv.html"
+	mkdir -p $(XDG_CONFIG_HOME)/direnv
+	@if [ ! -f "$(XDG_CONFIG_HOME)/direnv/init.sh" ]; then \
+		echo " - creating $(XDG_CONFIG_HOME)/direnv/init.sh"; \
+		curl -o $(XDG_CONFIG_HOME)/direnv/init.sh https://raw.githubusercontent.com/Falkor/dotfiles/master/shell/available/direnv.sh; \
+	fi
+	@echo " - sample override of direnv-stdlib in $(XDG_CONFIG_HOME)/direnv/direnvrc"
+	@if [ ! -f "$(XDG_CONFIG_HOME)/direnv/direnvrc" ]; then \
+		curl -o $(XDG_CONFIG_HOME)/direnv/direnvrc https://raw.githubusercontent.com/Falkor/dotfiles/master/direnv/direnvrc; \
+	fi
+	@echo " - sample '.envrc' for your projects in  $(XDG_CONFIG_HOME)/direnv/envrc"
+	@if [ ! -f "$(XDG_CONFIG_HOME)/direnv/envrc" ]; then \
+		curl -o $(XDG_CONFIG_HOME)/direnv/envrc https://raw.githubusercontent.com/Falkor/dotfiles/master/direnv/envrc; \
+	fi
+	@$(MAKE) setup-shell-direnv
+
+# --- pyenv
+setup-pyenv: setup-xdg git-clone-pyenv git-clone-pyenv-virtualenv
+	@echo "=> setup pyenv -- see https://varrette.gforge.uni.lu/tutorials/pyenv.html"
+	mkdir -p $(XDG_CONFIG_HOME)/pyenv
+	@if [ ! -f "$(XDG_CONFIG_HOME)/pyenv/init.sh" ]; then \
+		echo " - creating $(XDG_CONFIG_HOME)/pyenv/init.sh"; \
+		curl -o $(XDG_CONFIG_HOME)/pyenv/init.sh https://raw.githubusercontent.com/Falkor/dotfiles/master/shell/available/pyenv.sh; \
+	fi
+	@$(MAKE) setup-shell-pyenv
+
+# --- python
+ifeq (,$(wildcard ./$(PIP_REQUIREMENTS_FILE)))
+setup-python:
+	@echo "=> updating pip version"
+	pip install --upgrade pip
+	@echo "=> installing Python dependencies from Requirements files '$(PIP_REQUIREMENTS_FILE)'"
+	pip install -r $(PIP_REQUIREMENTS_FILE)
+else
+setup-python:
+	@echo "=> updating pip version"
+	pip install --upgrade pip
+endif
+
+
+
+### Git clone
+#######
+# Usage: $(eval $(call __GIT_CLONE,<suffix>,<path>,<url>))
+##
+define __GIT_CLONE
+.PHONY: git-clone-$1
+git-clone-$1:
+	@if [ ! -d "$2" ]; then \
+		mkdir -p $(shell dirname $2); \
+		echo "=> cloning '$3' into $2"; \
+		git clone $3 $2; \
+	else \
+		echo "... existing directory '$2', thus exiting"; \
+	fi
+GIT_CLONE_TARGETS += git-clone-$1
+endef
+$(eval $(call __GIT_CLONE,pyenv,$(PYENV_GIT_REPO),$(PYENV_GIT_REPO_URL)))
+$(eval $(call __GIT_CLONE,pyenv-virtualenv,$(PYENV_VIRTUALENV_GIT_REPO),$(PYENV_VIRTUALENV_GIT_REPO_URL)))
 
 fetch:
 	git fetch --all -v
