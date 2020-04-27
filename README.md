@@ -32,7 +32,7 @@ $> cd ulhpc-docs
 $> make setup
 ```
 
-This will initiate the [Git submodules of this repository](.gitmodules) and setup the [git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) layout for this repository. It will also ensure python compoenents ([direnv](https://direnv.net/), [pyenv](https://github.com/pyenv/pyenv) and [`pyenv-virtualenv`](https://github.com/pyenv/pyenv-virtualenv))) are installed.
+This will initiate the [Git submodules of this repository](.gitmodules) and setup the [git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) layout for this repository. It will also ensure python components ([direnv](https://direnv.net/), [pyenv](https://github.com/pyenv/pyenv) and [`pyenv-virtualenv`](https://github.com/pyenv/pyenv-virtualenv)) are installed.
 
 Later on, you can update your local branches by running:
 
