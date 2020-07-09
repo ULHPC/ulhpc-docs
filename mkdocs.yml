@@ -1,6 +1,9 @@
 site_name: ULHPC Documentation
 nav:
-- Home: 'index.md'
+  - General:
+    - Home: 'index.md'
+    - Getting Started: 'getting-started.md'
+# tab Clusters:
 # - Organization: 'layout.md'
 # - Pre-Requisites and Repository Setup: 'setup.md'
 # - Contributing:
@@ -22,7 +25,7 @@ repo_url: https://gitlab.uni.lu/www/ulhpc-docs
 #edit_uri: blob/master/docs/
 
 # Copyright
-copyright: Copyright &copy; 2007 - 2020 UL HPC Team
+copyright: Copyright &copy; 2007 - __YEAR__ UL HPC Team
 
 # Configuration
 # strict: true
@@ -34,11 +37,14 @@ theme:
   palette:
     primary: blue
     accent: light blue
+  # features:
+  #   - tabs
 
 plugins:
   - search # necessary for search to work
   - git-revision-date-localized:
       type: date
+  - progress
 
 # Extras
 extra:
@@ -52,9 +58,12 @@ extra:
 
 # Extensions
 markdown_extensions:
+  - attr_list
   - admonition
   - codehilite:
       guess_lang: false
+  - footnotes
+  - markdown.extensions.admonition
   - pymdownx.details
   - toc:
       permalink: true
