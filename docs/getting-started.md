@@ -122,7 +122,7 @@ There are a number of policies which apply to ULHPC users.
 In order to use the ULHPC facilities, you need to have a user account with an associated user login name (also called username) placed under an account hierarchy.
 
 * [Get a ULHPC account](accounts/index.md)
-* [Understanding account hierarchy and accounting rules](account/hierarchy.md)
+* [Understanding account hierarchy and accounting rules](accounts/hierarchy.md)
 * [ULHPC Identity Management (IPA portal)](accounts/ipa.md)
 * [Password policy](accounts/passwords.md)
 

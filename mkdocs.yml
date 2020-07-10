@@ -3,6 +3,9 @@ nav:
   - General:
     - Home: 'index.md'
     - Getting Started: 'getting-started.md'
+    - Accounts:
+        - Get an Account: "accounts/index.md"
+
 # tab Clusters:
 # - Organization: 'layout.md'
 # - Pre-Requisites and Repository Setup: 'setup.md'
@@ -36,7 +39,7 @@ theme:
   language: en
   palette:
     primary: blue
-    accent: light blue
+    accent:  light blue
   # features:
   #   - tabs
 
@@ -56,6 +59,15 @@ extra:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/ULHPC
 
+# Twitter Bootstrap
+extra_css:
+  - stylesheets//bootstrap.min.css
+# Extra javascript
+extra_javascript:
+  - javascripts/extra.js
+  - javascripts/bootstrap.min.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js
+
 # Extensions
 markdown_extensions:
   - attr_list
@@ -64,6 +76,8 @@ markdown_extensions:
       guess_lang: false
   - footnotes
   - markdown.extensions.admonition
+  - pymdownx.arithmatex
   - pymdownx.details
+  - pymdownx.smartsymbols
   - toc:
       permalink: true
