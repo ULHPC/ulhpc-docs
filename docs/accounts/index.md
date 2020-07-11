@@ -15,10 +15,12 @@ There are a number of policies which apply to ULHPC users.
 <button type="button" class="btn btn-light"><a href="https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf">UL HPC Acceptable Use Policy (AUP) [pdf]</a></button>
 </p>
 
+Remember that **you are expected to acknowledge ULHPC in your publications**.
 
+??? warning "ULHPC Platforms are meant for R&D!"
+    Note that the ULHPC facility is made for Research and Development and it is **NOT** a full production computing center -- for such needs, consider using the [national HPC center](https://lxp.lu).
 
-??? warning "ULHPC Platform is meant for R&D!"
-    Note that the ULHPC facility is made for Research and Development and it is **NOT** a full production computing center -- for such needs, consider using the [national HPC center](https://lxp.lu). In particular, we cannot make any guarantees of cluster availability or timely job completion even if we target a minimum compute node availability above 95% -- past KPI statistics in 2019 report a computing node availability above 97%).
+    In particular, we cannot make any guarantees of cluster availability or timely job completion even if we target a minimum compute node availability above 95% which is typically met - for instance, past KPI statistics in 2019 report a computing node availability above 97%.
 
 ### General conditions for UL staff
 
@@ -51,8 +53,10 @@ The University extends access to its HPC resources (_i.e._, facility and expert 
 4. After vetting has completed, you will receive a welcome email with your login information, and a unique link to a [PrivateBin](https://privatebin.info/) [^1] holding a random temporary password. That link will expire if not used within 24 hours.
 The PI and PI Proxies for the project will be notified when applicable.
 5. Finally, you will need to log into the [HPC IPA](https://***REMOVED***) Portal to set up your initial password and Multi-Factor Authentication (MFA) for your account.
-    * [ULHPC Identity Management (IPA portal) documentation](accounts/ipa.md)
-    * [Password policy and guidelines](accounts/passwords.md)
+    * **Your new password must adhere to ULHPC's password requirements**
+        - see  [Password policy and guidelines](passwords.md)
+    * [ULHPC Identity Management (IPA portal) documentation](ipa.md)
+
 
 
 ??? warning "UL HPC $\neq$ University credentials"
@@ -61,7 +65,7 @@ The PI and PI Proxies for the project will be notified when applicable.
     * ULHPC credentials are maintained by the HPC team; associated portal: <https://***REMOVED***>
         - authentication service for: UL HPC, Gitlab
     * University credentials are maintained by the IT team of the University
-        - authentication service for Service Now and all UL services
+        - authentication service for Service Now and all other UL services
 
 [^1]: [PrivateBin](https://privatebin.info/) is a minimalist, open source online [pastebin](https://pastebin.com/) where the server has zero knowledge of pasted data. Data is encrypted / decrypted in the browser using 256bit AES in Galois Counter mode.
 

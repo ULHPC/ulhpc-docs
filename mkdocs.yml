@@ -5,6 +5,7 @@ nav:
     - Getting Started: 'getting-started.md'
     - Accounts:
         - Get an Account: "accounts/index.md"
+        - Password Policy: "accounts/passwords.md"
 
 # tab Clusters:
 # - Organization: 'layout.md'
@@ -59,9 +60,10 @@ extra:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/ULHPC
 
-# Twitter Bootstrap
+# Extra stylesheets (incl. Twitter Bootstrap)
 extra_css:
-  - stylesheets//bootstrap.min.css
+  - stylesheets/extra.css
+  - stylesheets/bootstrap.min.css
 # Extra javascript
 extra_javascript:
   - javascripts/extra.js
