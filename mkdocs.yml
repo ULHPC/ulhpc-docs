@@ -4,8 +4,16 @@ nav:
     - Home: 'index.md'
     - Getting Started: 'getting-started.md'
     - Accounts:
-        - Get an Account: "accounts/index.md"
-        - Password Policy: "accounts/passwords.md"
+        - Get an Account: 'accounts/index.md'
+        - Password Policy: 'accounts/passwords.md'
+        - Collaboration Accounts: 'accounts/collaboration_accounts.md'
+        - Identity Management Portal: 'accounts/ipa.md'
+  - Web Portals:
+    - ULHPC Website: https://hpc.uni.lu
+    - Technical Documentation: https://hpc-docs.uni.lu
+    - IPA Portal: https://***REMOVED***
+    - OpenOn Demand: https://hpc.uni.lu
+    - ULHPC Tutorials: https://ulhpc-tutorials.readthedocs.io/
 
 # tab Clusters:
 # - Organization: 'layout.md'
@@ -63,7 +71,7 @@ extra:
 # Extra stylesheets (incl. Twitter Bootstrap)
 extra_css:
   - stylesheets/extra.css
-  - stylesheets/bootstrap.min.css
+  # - stylesheets/bootstrap.min.css
 # Extra javascript
 extra_javascript:
   - javascripts/extra.js
@@ -73,6 +81,7 @@ extra_javascript:
 # Extensions
 markdown_extensions:
   - attr_list
+  # notes, warnings, hints, ...
   - admonition
   - codehilite:
       guess_lang: false
@@ -80,6 +89,12 @@ markdown_extensions:
   - markdown.extensions.admonition
   - pymdownx.arithmatex
   - pymdownx.details
+  # auto-link HTML, FTP, and email links
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      social_url_shorthand: true
   - pymdownx.smartsymbols
+  # code blocks with syntax highlighting, graphs
+  - pymdownx.superfences
   - toc:
       permalink: true

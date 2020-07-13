@@ -25,7 +25,7 @@ Here is a list of recommended applications:
 * [LastPass](https://www.lastpass.com/)
 * [NordPass](https://nordpass.com/) - free version limited to one device with unlimited number of passwords; 36$ per year for premium plan
 * [1Password](https://1password.com/) - paid version only (yet worth it) with 30-day free trial, 36$ per year (60$ for families)
-* Self-Hosted solutions:
+* _Self-Hosted solutions_:
     - [KeepassXC](https://keepassxc.org/download/)
     - [`pass`: the Standard Unix Password Manager](https://www.passwordstore.org/).
         * See also [our tutorial on pass setup within the ULHPC team](services/pass.md)

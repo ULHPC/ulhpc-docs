@@ -219,7 +219,7 @@ We have always maintained an extensive [documentation](https://docs.hpc.uni.lu).
 * [ULHPC Support Overview](support/index.md)
 * [Helpdesk - HPC Ticketing Service](https://hpc-tracker.uni.lu) (preferred, login required)
 * [ULHPC Team Email](mailto:hpc-team@uni.lu) (if you cannot login): [`hpc-team@uni.lu`](mailto:hpc-team@uni.lu)
-* HPC User community mailing list: (moderated): [hpc-users@uni.lu](mailto:hpc-users@uni.lu)
+* HPC User community mailing list: (moderated): [`hpc-users@uni.lu`](mailto:hpc-users@uni.lu)
 
 !!! info "Availability and Response Time"
     HPC support is provided on a volunteer basis by UL HPC staff and associated UL experts working at normal business hours. We offer **no guarantee** on response time except with paid support contracts.
