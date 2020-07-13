@@ -267,12 +267,14 @@ endif
 define __GIT_CLONE
 .PHONY: git-clone-$1
 git-clone-$1:
-	@if [ ! -d "$2" ]; then \
+	@if [ -d "$2" ]; then \
+		echo "... existing directory '$2', thus exiting"; \
+	elif command -v $1 > /dev/null 2>&1; then \
+		echo "... existing command '$1', thus exiting"; \
+	else \
 		mkdir -p $(shell dirname $2); \
 		echo "=> cloning '$3' into $2"; \
 		git clone $3 $2; \
-	else \
-		echo "... existing directory '$2', thus exiting"; \
 	fi
 GIT_CLONE_TARGETS += git-clone-$1
 endef
