@@ -9,6 +9,11 @@ nav:
         - Collaboration Accounts: 'accounts/collaboration_accounts.md'
         - Identity Management Portal: 'accounts/ipa.md'
         - Slurm Account Hierarchy: 'accounts/hierarchy.md'
+  - Data Center:
+    - Centre de Calcul (CDC): 'data-center/index.md'
+  # - Supercomputers:
+  #   - Iris:
+  #       - Iris Cluster Overview: 'systems/iris/index.md'
   - Web Portals:
     - ULHPC Website: https://hpc.uni.lu
     - Technical Documentation: https://hpc-docs.uni.lu
