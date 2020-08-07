@@ -8,6 +8,7 @@ nav:
         - Password Policy: 'accounts/passwords.md'
         - Collaboration Accounts: 'accounts/collaboration_accounts.md'
         - Identity Management Portal: 'accounts/ipa.md'
+        - Slurm Account Hierarchy: 'accounts/hierarchy.md'
   - Web Portals:
     - ULHPC Website: https://hpc.uni.lu
     - Technical Documentation: https://hpc-docs.uni.lu
