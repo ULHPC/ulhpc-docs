@@ -1,4 +1,4 @@
-site_name: ULHPC Documentation
+site_name: ULHPC Technical Documentation
 nav:
   - General:
     - Home: 'index.md'
@@ -11,10 +11,10 @@ nav:
         - Slurm Account Hierarchy: 'accounts/hierarchy.md'
   - Data Center:
     - Centre de Calcul (CDC): 'data-center/index.md'
-  - HPC Systems:
-    - Chronological Evolution: 'systems/index.md'
+  - HPC Supercomputers:
+    - Overview: 'systems/index.md'
     - Iris:
-        - Iris Cluster Overview: 'systems/iris/index.md'
+        - Iris System: 'systems/iris/index.md'
     # - Aion:
     #     - Aion Supercomputer Overview: 'systems/aion/index.md'
   - Web Portals:
@@ -34,7 +34,7 @@ nav:
 #   - Semantic Versioning: 'contributing/versioning.md'
 
 # Project Information
-site_name: ULHPC Documentation
+site_name: ULHPC Technical Documentation
 site_description: ULHPC Technical Documentation
 site_author: ULHPC Team
 site_dir: public

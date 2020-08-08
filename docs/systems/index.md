@@ -1,29 +1,39 @@
-# HPC @ Uni.lu: A chronological overview
+# HPC @ Uni.lu
+
+![](../images/plots/plot_piechart_compute_cluster_2020.png){: style="width:300px;"}
+![](../images/plots/plot_piechart_storage_fs_2020.png){: style="width:300px;"}
+
+
+## Chronological Evolution
 
 With the advent of the technological revolution and the digital transformation that made all scientific disciplines becoming computational nowadays, High-Performance Computing (HPC) is increasingly identified as a strategic asset and enabler to accelerate the research performed in all areas requiring intensive computing and large-scale Big Data analytic capabilities.
-The University of Luxembourg (UL) operates since 2007 a large academic HPC facility that remains the reference implementation within the country, offering a cutting-edge research infrastructure to Luxembourg public research while serving as edge access to the Euro-HPC Luxembourg supercomputer operated by [LuxProvide](http://www.lxp.lu).
-Special focus was laid on the development of large computing power combined with huge data storage capacity to accelerate the research performed in intensive computing and large-scale data analytic (Big Data).
+
+**The [University of Luxembourg](https://wwwen.uni.lu/university/high_performance_computing) (UL) operates since 2007 a large academic HPC facility** that remains the **reference HPC implementation** within the country until 2021, offering a **cutting-edge research infrastructure** to Luxembourg public research while serving as edge access to the Euro-HPC Luxembourg supercomputer operated by [LuxProvide](http://www.lxp.lu) and more focused at serving the private sector.
+Special focus was laid for the ULHPC facility on the development of large computing power combined with huge data storage capacity to accelerate the research performed in intensive computing and large-scale data analytic (Big Data).
 This was made possible through an ambitious funding strategy enabled from the early stage of the HPC developments, which was supported at the rectorate level to establish the HPC strategy as transversal to all research domains.
 
-For more details[^1]: [:fontawesome-solid-sign-in-alt: hpc.uni.lu](#){: .md-button .md-button--link }
+For more details[^1]: [:fontawesome-solid-sign-in-alt: hpc.uni.lu](https://hpc.uni.lu){: .md-button .md-button--link }
 
-[^1]: Main contacts: Prof. P. Bouvry (Head), Dr. S. Varrette (Deputy head, HPC for research). HPC Team: [hpc-team@uni.lu](mailto:hpc-team@uni.lu)
+[^1]: Main contacts: Prof. P. Bouvry (Head), Dr. [S. Varrette](https://varrette.gforge.uni.lu) (Deputy head, HPC for research). HPC Team: [hpc-team@uni.lu](mailto:hpc-team@uni.lu)
+
+## Capacity evolution
 
 The historically first production system installed in 2007 has been [Chaos](https://hpc.uni.lu/systems/chaos/) with a final theoretical peak performance of 14.5 TFlop/s.
 [Gaia](https://hpc.uni.lu/systems/gaia/) was then launched in 2011 as a replacement to reach a theoretical peak performance of 145.5 TFlops. It was the first computing cluster introducing GPU accelerators to our users.
 Both systems were kept running until their decommissioning in 2019.
 
-Current, [Iris](iris/index.md) and [Aion](aion/index.md) are our production systems sharing the same High Performance Storage solutions, when __[Aion](aion/index.md) is our flagship supercomputer__ until 2024.
+!!! info
+    Currently, **[Iris](iris/index.md)** ($R_\text{peak}$=1071 TFlops) **and [Aion](aion/index.md)** ($R_\text{peak}$=1693 TFlops) are our production systems sharing the same High Performance Storage solutions, when __[Aion](aion/index.md) is our flagship supercomputer__ until 2024.
 
-We maintain (or used to maintain) several experimental systems in parallel.
-
-## Capacity evolution
-
-The below figures illustrates the evolution of the computing and storage capacity of the ULHPC facility over the last 5 years.
+The below figures illustrates the evolution of the computing and storage capacity of the ULHPC facility over the last years.
 
 ![](../images/plots/plot_compute_capacity_yearly_evolution.png)
 
 ![](../images/plots/plot_storage_capacity_yearly_evolution.png)
+
+## Experimental systems
+
+We maintain (or used to maintain) several experimental systems in parallel (`nyx`, a testing cluster, `pyro`, on OpenStack-based cluster, `viridis`, a low-power ARM-based cluster). As of now, only our experimental [Grid'5000](https://hpc.uni.lu/systems/g5k/) clusters are still maintained.
 
 
 ## Usage

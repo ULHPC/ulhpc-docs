@@ -103,7 +103,7 @@ and is meant to host **temporary scratch data**.
 In 2014, the SIU, the UL HPC and the LCSB join their forces (and their funding) to acquire a scalable and modular NAS solution able to sustain the need for an internal big data storage, i.e. provides space for centralized data and backups of all devices used by the UL staff and all research-related data, including the one proceed on the UL HPC platform.
 A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) system is available on all ULHPC computational systems. It is intended for long term storage of data that is not frequently accessed.
 
-* [Detailed specifications](filesystems/lustre.md)
+* [Detailed specifications](filesystems/isilon.md)
 * [Live status](https://hpc.uni.lu/live-status/motd/)
 
 
