@@ -98,6 +98,13 @@ markdown_extensions:
   - markdown.extensions.admonition
   - pymdownx.arithmatex
   - pymdownx.details
+  # Icons from Emoji extensions, giving access to following icon sets:
+  # - Material Design: https://materialdesignicons.com/
+  # - FontAwesome:     https://fontawesome.com/icons?d=gallery&m=free
+  # – Octicons:        https://octicons.github.com/
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   # auto-link HTML, FTP, and email links
   - pymdownx.magiclink:
       repo_url_shorthand: true
