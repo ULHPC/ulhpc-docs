@@ -3,7 +3,6 @@
 The University of Luxembourg (UL) operates since 2007 a large academic HPC facility which remains the reference implementation within the country, offering a cutting-edge research infrastructure to Luxembourg public research while serving as edge access to the Euro-HPC Luxembourg supercomputer operated by [LuxProvide](http://www.lxp.lu).
 This was made possible through an ambitious funding strategy enabled from the early stage of the HPC developments, which was supported at the rectorate level to establish the HPC strategy as transversal to all research domains.
 
-Led by Dr. Varrette, the HPC team managing the UL HPC facility has kept growing over time.
 The historically first production system installed in 2007 has been [Chaos](https://hpc.uni.lu/systems/chaos/) with a final theoretical peak performance of 14.5 TFlop/s.
 [Gaia](https://hpc.uni.lu/systems/gaia/) was then launched in 2011 as a replacement to reach a theoretical peak performance of 145.5 TFlops. It was the first computing cluster introducing GPU accelerators to our users.
 Both systems were kept running until their decommissioning in 2019.
@@ -19,6 +18,17 @@ The below figures illustrates the evolution of the computing and storage capacit
 ![](../images/plots/plot_compute_capacity_yearly_evolution.png)
 
 ![](../images/plots/plot_storage_capacity_yearly_evolution.png)
+
+
+## Usage
+
+The below figure outline the cumulative usage (in CPU Years) of the production clusters within the ULHPC facility for the time period 2015-2019.
+
+* During their lifetime, [Gaia](https://hpc.uni.lu/systems/gaia/) and [Chaos](https://hpc.uni.lu/systems/chaos/) processed respectively **4.5 million and 1.7 million jobs**, cumulating **13835 Years of CPU Time usage**.
+
+![](../images/plots/plot_ulhpc_cluster_utilization.png)
+
+
 
 
 ## Naming conventions
