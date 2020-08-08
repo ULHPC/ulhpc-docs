@@ -1,7 +1,13 @@
 # HPC @ Uni.lu: A chronological overview
 
-The University of Luxembourg (UL) operates since 2007 a large academic HPC facility which remains the reference implementation within the country, offering a cutting-edge research infrastructure to Luxembourg public research while serving as edge access to the Euro-HPC Luxembourg supercomputer operated by [LuxProvide](http://www.lxp.lu).
+With the advent of the technological revolution and the digital transformation that made all scientific disciplines becoming computational nowadays, High-Performance Computing (HPC) is increasingly identified as a strategic asset and enabler to accelerate the research performed in all areas requiring intensive computing and large-scale Big Data analytic capabilities.
+The University of Luxembourg (UL) operates since 2007 a large academic HPC facility that remains the reference implementation within the country, offering a cutting-edge research infrastructure to Luxembourg public research while serving as edge access to the Euro-HPC Luxembourg supercomputer operated by [LuxProvide](http://www.lxp.lu).
+Special focus was laid on the development of large computing power combined with huge data storage capacity to accelerate the research performed in intensive computing and large-scale data analytic (Big Data).
 This was made possible through an ambitious funding strategy enabled from the early stage of the HPC developments, which was supported at the rectorate level to establish the HPC strategy as transversal to all research domains.
+
+For more details[^1]: [:fontawesome-solid-sign-in-alt: hpc.uni.lu](#){: .md-button .md-button--link }
+
+[^1]: Main contacts: Prof. P. Bouvry (Head), Dr. S. Varrette (Deputy head, HPC for research). HPC Team: [hpc-team@uni.lu](mailto:hpc-team@uni.lu)
 
 The historically first production system installed in 2007 has been [Chaos](https://hpc.uni.lu/systems/chaos/) with a final theoretical peak performance of 14.5 TFlop/s.
 [Gaia](https://hpc.uni.lu/systems/gaia/) was then launched in 2011 as a replacement to reach a theoretical peak performance of 145.5 TFlops. It was the first computing cluster introducing GPU accelerators to our users.

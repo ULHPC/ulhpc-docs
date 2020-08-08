@@ -1,3 +1,3 @@
-# Iris cluster
+# Iris
 
 Iris is a Dell supercomputer with a peak performance of about 1,072 petaflops.
