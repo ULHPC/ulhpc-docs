@@ -7,7 +7,7 @@ This tool is configured to collect accounting information for every job and job 
 ??? info "ULHPC account (login) vs. Slurm [meta-]account"
     - Your [ULHPC account](index.md) defines the UNIX **user** you can use to connect to the facility and make you known to our systems. They are managed by [IPA](ipa.md) and define your `login`.
 
-    - _Slurm accounts_, further refered to as **meta-account** in the sequel, are more loosely defined in Slurm terminology for accounting purposes, and should be seen as something similar to a UNIX group: it may contain other (set of) slurm account(s), multiple users, or just a single user. **A user may belong to multiple slurm accounts, but must have a DefaultAccount**.
+    - _Slurm accounts_, refered to as **meta-account** in the sequel, are more loosely defined [in Slurm](https://slurm.schedmd.com/accounting.html), and should be seen as something similar to a UNIX group: it may contain other (set of) slurm account(s), multiple users, or just a single user. **A user may belong to multiple slurm accounts, but MUST have a DefaultAccount**, which is set to your line manager or principal investigator meta-account.
 
 ## Meta-account Tree Organization
 
@@ -15,12 +15,12 @@ Accounting records are organized as a hierarchical tree according to 4 layers as
 
 [![](../images/slurm_account_hierarchy.png)](../images/slurm_account_hierarchy.pdf)
 
-| Level  | Account Type  | Description                                                       | Example                    |
-|--------|---------------|-------------------------------------------------------------------|----------------------------|
-| __L1__ | meta-account  | Top-level structure / organizations                               | UL, Externals, Projects... |
-| __L2__ | meta-account  | Organizational Units, Projects Acronyms                           | FSTM, LCSB, LIST...        |
-| __L3__ | meta-acccount | Principal investigators (PIs), courses/lectures                   | `firstname.lastname`       |
-| __L4__ | login         | End-users (staff, student) _i.e._, your [ULHPC account](index.md) | `svarrette`                |
+| Level  | Account Type | Description                                                       | Example                    |
+|--------|--------------|-------------------------------------------------------------------|----------------------------|
+| __L1__ | meta-account | Top-level structure / organizations                               | UL, Externals, Projects... |
+| __L2__ | meta-account | Organizational Units, Projects Acronyms                           | FSTM, LCSB, LIST...        |
+| __L3__ | meta-account | Principal investigators (PIs), courses/lectures                   | `firstname.lastname`       |
+| __L4__ | login        | End-users (staff, student):  your [ULHPC account](index.md) | `yourlogin`       |
 
 ??? warning "No association, no job!"
     It is mandatory to have your login registered within at least one _association_ toward a meta-account (PI, project name) to be able to schedule jobs on the
@@ -54,6 +54,7 @@ Default account associations are defined as follows:
 
 * For UL staff or external partners: your Line Manager `firstname.lastname` within the institution (Faculty, IC, Company) you belong too.
 * For students: the lecture/course they are registered too
+    - Guest student/training accounts are associated to the `Students`meta-account.
 
 In addition, your user account (ULHPC login) may be associated to other meta-accounts such as projects or specific training events.
 To establish Job accounting against these extra specific accounts, use: `{sbatch|srun} -A <name>`
