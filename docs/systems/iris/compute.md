@@ -39,8 +39,19 @@ Each Iris node rely on an Intel x86_64 processor architecture with the following
     With regards the _estimation_ of the Maximum Performance $R_\text{max}$, an efficiency factor of 85% is applied.
     It is computed from the expected performance runs during the [HPL](http://www.netlib.org/benchmark/hpl/index.html) benchmark workload as follows:
 
+## Accelerators Performance
 
-## Regular Dual-CPU Nodes without Accelerators
+Iris is equipped with 96 [NVIDIA Tesla V100-SXM2](https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf) GPU Accelerators with 16 or 32 GB of GPU memory, interconnected within each node through [NVLink](https://www.nvidia.com/en-us/data-center/nvlink/) which provides  higher bandwidth and improved scalability for multi-GPU system configurations.
+
+[![](https://www.nvidia.com/content/dam/en-zz/es_em/es_em/Solutions/Data-Center/tesla-v100/data-center-tesla-v100-nvlink-625-ud@2x.jpg)](https://www.nvidia.com/fr-fr/data-center/tesla-v100/)
+
+| NVidia GPU Model                                                                                                          | #CUDA core | #Tensor core | Power | Interconnect<br/>Bandwidth | GPU Memory | $R_\text{peak}$<br/><small>[TFlops]</small> |
+|---------------------------------------------------------------------------------------------------------------------------|------------|--------------|-------|----------------------------|--------|---------------------------------------------|
+| [V100-SXM2](https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf) |       5120 |          640 | 300W  | 300 GB/s                   | 16GB   | 7.8 TF                                      |
+| [V100-SXM2](https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf) |       5120 |          640 | 300W  | 300 GB/s                   | 32GB   | 7.8 TF                                      |
+
+
+## Regular Dual-CPU Nodes
 
 These nodes are packaged within Dell PowerEdge C6300 chassis, each hosting 4 PowerEdge C6320 blade servers.
 
@@ -50,26 +61,41 @@ These nodes are packaged within Dell PowerEdge C6300 chassis, each hosting 4 Pow
 
 Iris comprises 108 Dell C6320 "regular" compute nodes `iris-001-108` relying on [Broadwell](https://en.wikipedia.org/wiki/Broadwell_(microarchitecture)) Xeon processor generation, totalling 3024 computing cores.
 
+* Each node are configured as follows:
+    - 2 [Intel Xeon E5-2680v4](#processors-performance) @ 2.4GHz [14c/120W]
+    - RAM: 128 GB DDR4 2400MT/s  (4x16 GB DIMMs _per socket_)
+    - SSD 120GB
+    - InfiniBand (IB) EDR ConnectX-4 Single Port
+    - Theoretical Peak Performance per Node: $R_\text{peak}$ 1.075 TF (see [processor performance](#processors-performance))
 
 
+### Skylake Compute Nodes
 
-nodes `iris-001-108`
+Iris also features 60 Dell C6320 "regular" compute nodes `iris-109-168` relying on [Skylake](https://en.wikipedia.org/wiki/Skylake_(microarchitecture)) Xeon processor generation, totalling 1680 computing cores.
 
 * Each node are configured as follows:
-    - 2 Intel Xeon E5-2680v4 @ 2.4GHz [14c/120W]
-
-(2 Xeon E5-2680v4 @ 2.4GHz, [14c/120W]) and featuring 128GB RAM per node
-
-
-    or AMD high-core density CPUs, for example (see Table 2): ◦ Intel Xeon Gold Cascade Lake 6248 processors (20c@2.5GHz) ◦ AMD EPYC Rome Processor (64c@2.2GHz)
-• RAM: 384GB or 512GB DDR4 with ECC (Error Correcting Codes), i.e., using the best configuration enabling all DRAM channels available on the selected processor family (6 on the targeted Intel processor, 8 on the targeted AMD processors) with 32 GB DDR4 RAM DIMMs.
-• IB HDR Connect-X6 Dual Port mezzanine card (or equivalent Intel Omni-Path mezzanine card) depending on selected interconnect technology.
-• 1 NVMe drive at 1.6 TB.
+    - 2 [Intel Xeon Gold 6132](#processors-performance) @ 2.6GHz [14c/140W]
+    - RAM: 128 GB DDR4 2400MT/s  (4x16 GB DIMMs _per socket_)
+    - SSD 120GB
+    - InfiniBand (IB) EDR ConnectX-4 Single Port
+    - Theoretical Peak Performance per Node: $R_\text{peak}$ 2.061 TF (see [processor performance](#processors-performance))
 
 
+## Multi-GPU Compute Nodes
 
-- Theoretical Peak Performance $$
+Iris includes 24 [Dell PowerEdge C4140](https://i.dell.com/sites/doccontent/shared-content/data-sheets/en/Documents/PowerEdge-C4140-Spec-Sheet.pdf) "gpu" compute nodes embedding on total 96  [NVIDIA Tesla V100-SXM2]https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf) GPU Accelerators.
+
+* Each node are configured as follows:
+    - 2 [Intel Xeon Gold 6132](#processors-performance) @ 2.6GHz [14c/140W]
+    - RAM: 768 GB DDR4 2666MT/s  (12x 32 GB DIMMs _per socket_)
+    - 1 Dell NVMe 1.6TB, NVMe, Mixed Use Express Flash, HHHL AIC, PM1725a, DIB
+    - InfiniBand (IB) EDR ConnectX-4 Dual Port
+    - 4x [NVIDIA Tesla V100-SXM2]https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf) GPU Accelerators over NVLink
+        * `iris-[169-186]` feature 16G GPU memory - use `-C volta`   as slurm feature
+        * `iris-[191-196]` feature 32G GPU memory - use `-C volta32` as slurm feature
+    - Theoretical Peak Performance per Node: $R_\text{peak}$ 33.26 TF (see [processor performance](#processors-performance) and [accelerators performance](#accelerators-performance))
 
 
 
-(3024 based on Intel Xeon "[Broadwell](https://en.wikipedia.org/wiki/Broadwell_(microarchitecture))" processors, 2800 based on Intel Xeon "[Broadwell](https://en.wikipedia.org/wiki/Skylake_(microarchitecture))" processors).
+
+## Large-Memory Compute Nodes
