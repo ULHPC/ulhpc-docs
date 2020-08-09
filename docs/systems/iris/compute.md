@@ -63,7 +63,7 @@ Iris comprises 108 Dell C6320 "regular" compute nodes `iris-001-108` relying on 
 
 * Each node are configured as follows:
     - 2 [Intel Xeon E5-2680v4](#processors-performance) @ 2.4GHz [14c/120W]
-    - RAM: 128 GB DDR4 2400MT/s  (4x16 GB DIMMs _per socket_)
+    - RAM: 128 GB DDR4 2400MT/s  (4x16 GB DIMMs _per socket_, 8 DIMMs per node)
     - SSD 120GB
     - InfiniBand (IB) EDR ConnectX-4 Single Port
     - Theoretical Peak Performance per Node: $R_\text{peak}$ 1.075 TF (see [processor performance](#processors-performance))
@@ -75,7 +75,7 @@ Iris also features 60 Dell C6320 "regular" compute nodes `iris-109-168` relying 
 
 * Each node are configured as follows:
     - 2 [Intel Xeon Gold 6132](#processors-performance) @ 2.6GHz [14c/140W]
-    - RAM: 128 GB DDR4 2400MT/s  (4x16 GB DIMMs _per socket_)
+    - RAM: 128 GB DDR4 2400MT/s  (4x16 GB DIMMs _per socket_, 8 DIMMs per node)
     - SSD 120GB
     - InfiniBand (IB) EDR ConnectX-4 Single Port
     - Theoretical Peak Performance per Node: $R_\text{peak}$ 2.061 TF (see [processor performance](#processors-performance))
@@ -87,15 +87,23 @@ Iris includes 24 [Dell PowerEdge C4140](https://i.dell.com/sites/doccontent/shar
 
 * Each node are configured as follows:
     - 2 [Intel Xeon Gold 6132](#processors-performance) @ 2.6GHz [14c/140W]
-    - RAM: 768 GB DDR4 2666MT/s  (12x 32 GB DIMMs _per socket_)
-    - 1 Dell NVMe 1.6TB, NVMe, Mixed Use Express Flash, HHHL AIC, PM1725a, DIB
+    - RAM: 768 GB DDR4 2666MT/s  (12x 32 GB DIMMs _per socket_, 24 DIMMs per node)
+    - 1 Dell NVMe 1.6TB
     - InfiniBand (IB) EDR ConnectX-4 Dual Port
-    - 4x [NVIDIA Tesla V100-SXM2]https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf) GPU Accelerators over NVLink
+    - 4x [NVIDIA Tesla V100-SXM2](https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf) GPU Accelerators over NVLink
         * `iris-[169-186]` feature 16G GPU memory - use `-C volta`   as slurm feature
         * `iris-[191-196]` feature 32G GPU memory - use `-C volta32` as slurm feature
     - Theoretical Peak Performance per Node: $R_\text{peak}$ 33.26 TF (see [processor performance](#processors-performance) and [accelerators performance](#accelerators-performance))
 
 
 
-
 ## Large-Memory Compute Nodes
+
+Iris holds 4 [Dell PowerEdge R840](https://i.dell.com/sites/csdocuments/Shared-Content_data-Sheets_Documents/en/poweredge-r840-spec-sheet.pdf?newtab=true) Large-Memory ("_bibmem_") compute nodes `iris-[187-190]`, totalling 448 computing cores.
+
+* Each node are configured as follows:
+    - 4 [Xeon Platinum 8180M](#processors-performance) @ 2.5GHz [28c/205W]
+    - RAM: 3072 GB DDR4 2666MT/s  (12x64 GB DIMMs _per socket_, 48 DIMMs per node)
+    - 1 Dell NVMe 1.6TB
+    - InfiniBand (IB) EDR ConnectX-4 Dual Port
+    - Theoretical Peak Performance per Node: $R_\text{peak}$ 8.24 TF (see [processor performance](#processors-performance))
