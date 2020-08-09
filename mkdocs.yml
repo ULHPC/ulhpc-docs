@@ -11,10 +11,11 @@ nav:
         - Slurm Account Hierarchy: 'accounts/hierarchy.md'
   - Data Center:
     - Centre de Calcul (CDC): 'data-center/index.md'
-  - HPC Supercomputers:
+  - ULHPC Supercomputers:
     - Overview: 'systems/index.md'
     - Iris:
         - Iris System: 'systems/iris/index.md'
+        - Compute Nodes: 'systems/iris/compute.md'
     # - Aion:
     #     - Aion Supercomputer Overview: 'systems/aion/index.md'
   - Web Portals:
