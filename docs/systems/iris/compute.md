@@ -68,6 +68,8 @@ Iris comprises 108 Dell C6320 "regular" compute nodes `iris-001-108` relying on 
     - InfiniBand (IB) EDR ConnectX-4 Single Port
     - Theoretical Peak Performance per Node: $R_\text{peak}$ 1.075 TF (see [processor performance](#processors-performance))
 
+!!! info "Reserving a Broadwell node"
+    If you want to specifically reserve a broadwell node (`iris-[001-108]`), you should use the feature `-C broadwell` on the `batch` partition: `{sbatch|srun|salloc} -p batch -C broadwell [...]`
 
 ### Skylake Compute Nodes
 
@@ -80,10 +82,12 @@ Iris also features 60 Dell C6320 "regular" compute nodes `iris-109-168` relying 
     - InfiniBand (IB) EDR ConnectX-4 Single Port
     - Theoretical Peak Performance per Node: $R_\text{peak}$ 2.061 TF (see [processor performance](#processors-performance))
 
+!!! info "Reserving a Regular Skylake node"
+    If you want to specifically reserve a regular skylake node (`iris-[109-168]`), you should use the feature `-C skylake` on the `batch` partition: `{sbatch|srun|salloc} -p batch -C skylake [...]`
 
 ## Multi-GPU Compute Nodes
 
-Iris includes 24 [Dell PowerEdge C4140](https://i.dell.com/sites/doccontent/shared-content/data-sheets/en/Documents/PowerEdge-C4140-Spec-Sheet.pdf) "gpu" compute nodes embedding on total 96  [NVIDIA Tesla V100-SXM2]https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf) GPU Accelerators.
+Iris includes 24 [Dell PowerEdge C4140](https://i.dell.com/sites/doccontent/shared-content/data-sheets/en/Documents/PowerEdge-C4140-Spec-Sheet.pdf) "gpu" compute nodes embedding on total 96  [NVIDIA Tesla V100-SXM2](https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf) GPU Accelerators.
 
 * Each node are configured as follows:
     - 2 [Intel Xeon Gold 6132](#processors-performance) @ 2.6GHz [14c/140W]
@@ -95,7 +99,30 @@ Iris includes 24 [Dell PowerEdge C4140](https://i.dell.com/sites/doccontent/shar
         * `iris-[191-196]` feature 32G GPU memory - use `-C volta32` as slurm feature
     - Theoretical Peak Performance per Node: $R_\text{peak}$ 33.26 TF (see [processor performance](#processors-performance) and [accelerators performance](#accelerators-performance))
 
+!!! info "Reserving a GPU node"
+    Multi-GPU Compute Nodes can be reserved using the `gpu` partition. Use the `-G [<type>:]<number>` to specify  the  total number of GPUs required for the job
 
+    ```bash
+    # Interactive job on 1 GPU nodes with 1 GPU
+    srun -G 1 -p gpu --pty bash -i
+    nvidia-smi      # Check allocated GPU
+
+    # Interactive job with 4 GPUs on the same node, one task per gpu, 7 cores per task
+    srun -p gpu -N 1 -G 4 --ntasks-per-node 4 --ntasks-per-socket 2 -c 7 --pty bash
+
+    # Job submission on 2 nodes, 4 GPUs/node and 4 tasks/node:
+    sbatch -p gpu -N 2 -G 4 --ntasks-per-node 4 --ntasks-per-socket 2 -c 7 launcher.sh
+    ```
+
+!!! warning "Do NOT reserve a GPU node if you don't need a GPU!"
+    Multi-GPU nodes are scarce resources and should be dedicated to GPU-enabled workflows.
+
+??? tips "16 GB vs. 32 GB Onboard GPU Memory"
+    - Compute nodes with Nvidia V100-SMX2 **16GB** accelerators are registrered with the `-C volta` feature.
+        * it corresponds to the 18 Multi-GPU compute nodes `iris-[169-186]`
+
+    - If you want to reserve GPUs with more memory (_i.e._ **32GB** on-board HBM2), you should use `-C volta32`
+        * you would then end on one of the 6 Multi-GPU compute nodes `iris-[191-196]`
 
 ## Large-Memory Compute Nodes
 
@@ -107,3 +134,10 @@ Iris holds 4 [Dell PowerEdge R840](https://i.dell.com/sites/csdocuments/Shared-C
     - 1 Dell NVMe 1.6TB
     - InfiniBand (IB) EDR ConnectX-4 Dual Port
     - Theoretical Peak Performance per Node: $R_\text{peak}$ 8.24 TF (see [processor performance](#processors-performance))
+
+!!! info "Reserving a Large-Memory node"
+    These nodes can be reserved using the `bigmem` partition:
+    `{sbatch|srun|salloc} -p bigmem [...]`
+
+!!! danger "Do NOT use bigmem nodes..."
+    ... Unless you know what you are doing. Carefully check your workflow and memory usage (using `seff`)
