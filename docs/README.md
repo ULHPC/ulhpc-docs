@@ -11,7 +11,7 @@
 	are welcome!
 	[Fork this repo](https://gitlab.uni.lu/www/ulhpc-docs-/forks/new)
 
-**[docs.hpc.uni.lu](https://docs.hpc.uni.lu)** is a resource with the
+**[hpc-docs.uni.lu](https://hpc-docs.uni.lu)** is a resource with the
 **technical details** for users to make _effective_ use
 of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'s resources.
 
