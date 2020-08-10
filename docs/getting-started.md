@@ -135,7 +135,7 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 * [Multi-Factor Authentication (MFA)](connect/mfa.md)
 * [SSH](connect/ssh.md)
 * [Open On Demand Portal](connect/ood.md)
-* [ULHPC Login nodes](./connect/login-nodes.md)
+* [ULHPC Login/Access servers](connect/access.md)
 * [Troubleshooting connection problems](./connect/troubleshooting.md)
 * [Live status](https://www.nersc.gov/live-status/motd/)
 
@@ -183,7 +183,7 @@ Typical usage of the ULHPC supercomputers involves the reservation and allocatio
 * [Slurm overview](slurm/index.md)
 * [Convenient Slurm Commands](slurm/commands.md)
 * [Rich set of launcher scripts examples](slurm/launchers.md)
-* [Fairshare and Job Accounting](slurm/accoutning.md)
+* [Fairshare and Job Accounting](slurm/accounting.md)
 
 ## Interactive Computing
 
