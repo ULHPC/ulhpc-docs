@@ -37,7 +37,7 @@ Each Iris node rely on an Intel x86_64 processor architecture with the following
     Then $R_\text{peak} = ops/cycle \times Freq. \times \#Cores$ with the appropriate frequency (2.3 GHz instead of 2.6 for our Skylake processors).
 
     With regards the _estimation_ of the Maximum Performance $R_\text{max}$, an efficiency factor of 85% is applied.
-    It is computed from the expected performance runs during the [HPL](http://www.netlib.org/benchmark/hpl/index.html) benchmark workload as follows:
+    It is computed from the expected performance runs during the [HPL](http://www.netlib.org/benchmark/hpl/index.html) benchmark workload.
 
 ## Accelerators Performance
 
@@ -61,7 +61,7 @@ These nodes are packaged within Dell PowerEdge C6300 chassis, each hosting 4 Pow
 
 Iris comprises 108 Dell C6320 "regular" compute nodes `iris-001-108` relying on [Broadwell](https://en.wikipedia.org/wiki/Broadwell_(microarchitecture)) Xeon processor generation, totalling 3024 computing cores.
 
-* Each node are configured as follows:
+* Each node is configured as follows:
     - 2 [Intel Xeon E5-2680v4](#processors-performance) @ 2.4GHz [14c/120W]
     - RAM: 128 GB DDR4 2400MT/s  (4x16 GB DIMMs _per socket_, 8 DIMMs per node)
     - SSD 120GB
@@ -75,7 +75,7 @@ Iris comprises 108 Dell C6320 "regular" compute nodes `iris-001-108` relying on 
 
 Iris also features 60 Dell C6320 "regular" compute nodes `iris-109-168` relying on [Skylake](https://en.wikipedia.org/wiki/Skylake_(microarchitecture)) Xeon processor generation, totalling 1680 computing cores.
 
-* Each node are configured as follows:
+* Each node is configured as follows:
     - 2 [Intel Xeon Gold 6132](#processors-performance) @ 2.6GHz [14c/140W]
     - RAM: 128 GB DDR4 2400MT/s  (4x16 GB DIMMs _per socket_, 8 DIMMs per node)
     - SSD 120GB
@@ -89,7 +89,7 @@ Iris also features 60 Dell C6320 "regular" compute nodes `iris-109-168` relying 
 
 Iris includes 24 [Dell PowerEdge C4140](https://i.dell.com/sites/doccontent/shared-content/data-sheets/en/Documents/PowerEdge-C4140-Spec-Sheet.pdf) "gpu" compute nodes embedding on total 96  [NVIDIA Tesla V100-SXM2](https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf) GPU Accelerators.
 
-* Each node are configured as follows:
+* Each node is configured as follows:
     - 2 [Intel Xeon Gold 6132](#processors-performance) @ 2.6GHz [14c/140W]
     - RAM: 768 GB DDR4 2666MT/s  (12x 32 GB DIMMs _per socket_, 24 DIMMs per node)
     - 1 Dell NVMe 1.6TB
@@ -115,7 +115,7 @@ Iris includes 24 [Dell PowerEdge C4140](https://i.dell.com/sites/doccontent/shar
     ```
 
 !!! warning "Do NOT reserve a GPU node if you don't need a GPU!"
-    Multi-GPU nodes are scarce resources and should be dedicated to GPU-enabled workflows.
+    Multi-GPU nodes are scarce (and **very expansive**) resources and should be dedicated to GPU-enabled workflows.
 
 ??? tips "16 GB vs. 32 GB Onboard GPU Memory"
     - Compute nodes with Nvidia V100-SMX2 **16GB** accelerators are registrered with the `-C volta` feature.
@@ -128,7 +128,7 @@ Iris includes 24 [Dell PowerEdge C4140](https://i.dell.com/sites/doccontent/shar
 
 Iris holds 4 [Dell PowerEdge R840](https://i.dell.com/sites/csdocuments/Shared-Content_data-Sheets_Documents/en/poweredge-r840-spec-sheet.pdf?newtab=true) Large-Memory ("_bibmem_") compute nodes `iris-[187-190]`, totalling 448 computing cores.
 
-* Each node are configured as follows:
+* Each node is configured as follows:
     - 4 [Xeon Platinum 8180M](#processors-performance) @ 2.5GHz [28c/205W]
     - RAM: 3072 GB DDR4 2666MT/s  (12x64 GB DIMMs _per socket_, 48 DIMMs per node)
     - 1 Dell NVMe 1.6TB
@@ -139,5 +139,8 @@ Iris holds 4 [Dell PowerEdge R840](https://i.dell.com/sites/csdocuments/Shared-C
     These nodes can be reserved using the `bigmem` partition:
     `{sbatch|srun|salloc} -p bigmem [...]`
 
-!!! danger "Do NOT use bigmem nodes..."
-    ... Unless you know what you are doing. Carefully check your workflow and memory usage (using `seff`)
+!!! danger "DO NOT use bigmem nodes..."
+    ... Unless you know what you are doing. We have **too few** large-memory compute nodes so kindly keep them for workloads that truly need these kind of **expansive** resources.
+
+    * _In short_: **carefully check your workflow and memory usage before considering using these node!**
+        - use `seff <jobid>` or `sacct -j <jobid> [...]` for instance

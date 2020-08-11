@@ -1,6 +1,6 @@
 # Aion Overview
 
-Aion is a [Atos/Bull]()/AMD supercomputer which consists of **318 compute nodes, totaling 40704 compute cores** and 81408 GB RAM,
+Aion is a [Atos/Bull](https://atos.net/en/solutions/high-performance-computing-hpc)/AMD supercomputer which consists of **318 compute nodes, totaling 40704 compute cores** and 81408 GB RAM,
 with a peak performance of about **1,693 PetaFLOP/s**.
 
 All nodes are interconnected through a **Fast InfiniBand (IB) HDR100 network**[^1], configured over a ** [Fat-Tree](https://clusterdesign.org/fat-trees/) Topology** (blocking factor 1:2).
@@ -23,18 +23,22 @@ For more information: see [ULHPC slurm docs](../../slurm/index.md).
 
 ### Data Center Configuration
 
-![](images/aion_compute_racks.png){: style="width:300px;float: left;margin-right:10px" }
+[![](images/aion_compute_racks.png){: style="width:300px;float: left;margin-right:10px" }](BullSequanaXH2000_Features_Atos_supercomputers.pdf)
 
 The Aion cluster is based on a cell made of 4 [BullSequana XH2000](https://atos.net/en/solutions/high-performance-computing-hpc/bullsequana-x-supercomputers) adjacent racks installed in the [CDC (_Centre de Calcul_) data center of the University](../../data-center/index.md) within one of the DLC-enabled server room (CDC S-02-004) adjacent to the room hosting the [Iris](../iris/index.md) cluster and the [global storage](../../filesystems/index.md).
 
 Each rack has the following dimensions: HxWxD (mm) = 2030x750x1270 (Depth is 1350mm with aesthetic doors).
 The full solution with 4 racks (total dimension: dimensions: HxWxD (mm) = 2030x3000x1270) with the following characteristics:
 
-|                   | Rack 1 | Rack 2 | Rack 3 | Rack 4 | __TOTAL__ |
-|-------------------|--------|--------|--------|--------|-----------|
-| Weight [kg]       | 1872,4 | 1830,2 | 1830,2 | 1824,2 |      7357 |
-| #X2410 Rome Blade |     28 |     26 |     26 |     26 |       106 |
-| #Compute Nodes    |     84 |     78 |     78 |     78 |       318 |
+|                              |    Rack 1 |    Rack 2 |    Rack 3 |    Rack 4 | __TOTAL__      |
+|------------------------------|-----------|-----------|-----------|-----------|----------------|
+| __Weight [kg]__              |    1872,4 |    1830,2 |    1830,2 |    1824,2 | __7357 kg__    |
+| __#X2410 Rome Blade__        |        28 |        26 |        26 |        26 | __106__        |
+| __#Compute Nodes__           |        84 |        78 |        78 |        78 | __318__        |
+| __#Compute Cores__           |     10752 |      9984 |      9984 |      9984 | __40704__      |
+| __$R_\text{peak}$ [TFlops]__ | 447,28 TF | 415,33 TF | 415,33 TF | 415,33 TF | __1693.29 TF__ |
+
+For more details: [:fontawesome-solid-sign-in-alt: BullSequana XH2000 SpecSheet (PDF)](BullSequanaXH2000_Features_Atos_supercomputers.pdf){: .md-button .md-button--link }
 
 ### Cooling
 
@@ -52,7 +56,7 @@ The DLC[^1] components in the rack are:
 
 The cooling area in the rack is composed of:
 
-* 2 Hydraulic chassis (HYCs) and optional a 3rd HYC for 2+1 redundancy at the bottom of the cabinet, 10.5U height.
+* 3 Hydraulic chassis (HYCs) for 2+1 redundancy at the bottom of the cabinet, 10.5U height.
    - Each HYCs dissipates at a maximum of 240W in the air.
 * A primary manifold system connects the University hot-water loop to the HYCs primary water inlets
 * A secondary manifold system connects HYCs outlets to each blade in the compute cabinet
@@ -68,8 +72,6 @@ The cooling area in the rack is composed of:
 !!! warning "Access servers are not meant for compute!"
     - The `module` command is not available on the access servers, only on the compute nodes
     - **you MUST NOT run any computing process on the access servers**.
-
-## Gateway Nodes
 
 
 ## Rack Cabinets
