@@ -19,7 +19,7 @@ nav:
     - Aion:
       - Aion System:   'systems/aion/index.md'
       - Compute Nodes: 'systems/aion/compute.md'
-      - Fast Local Interconnect: 'systems/aion/network.md'
+      - Fast Local Interconnect: 'systems/aion/interconnect.md'
     #  - Storage:       'filesystems/index.md'
       - Timeline:      'systems/iris/timeline.md'
     - Iris:

@@ -4,9 +4,9 @@ The Fast _local_ interconnect network implemented within Aion relies on the [Mel
 For more details, see [Introduction to
 High-Speed InfiniBand Interconnect](https://www.hpcadvisorycouncil.com/pdf/Intro_to_InfiniBand.pdf).
 
-[^1]: High Data Rate (HDR) – 200 Gb/s throughput (HDR100) with a very low latency, typically below 0,6$\mu$s. The HDR100 technology allows one 200Gbps HDR port (aggregation 4x 50Gbps) to be divided into 2 HDR100 ports with 100Gbps (2x 50Gbps) bandwidth using an [optical] ["_splitter_" cable](https://www.mellanox.com/related-docs/prod_cables/PB_MFS1S50-HxxxE_200Gbps_QSFP56_to_2x100Gbps_QSFP56_AOC.pdf).
+[^1]: High Data Rate (HDR) – 200 Gb/s throughput with a very low latency, typically below 0,6$\mu$s. The HDR100 technology allows one 200Gbps HDR port (aggregation 4x 50Gbps) to be divided into 2 HDR100 ports with 100Gbps (2x 50Gbps) bandwidth using an [optical] ["_splitter_" cable](https://www.mellanox.com/related-docs/prod_cables/PB_MFS1S50-HxxxE_200Gbps_QSFP56_to_2x100Gbps_QSFP56_AOC.pdf).
 
-## Network Topology
+## IB Network Topology
 
 One of the most significant differentiators between HPC systems and lesser performing systems is, apart from the interconnect technology deployed, the supporting topology. There are several topologies commonly used in large-scale HPC deployments ([Fat-Tree](https://clusterdesign.org/fat-trees/), [3D-Torus](https://clusterdesign.org/torus/), Dragonfly+ etc.).
 
@@ -44,7 +44,7 @@ For more details:
 ## Routing Algorithm
 
 The IB Subnet Managers in Aion are configured with the [Up/Down](https://community.mellanox.com/s/article/understanding-up-down-infiniband-routing-algorithm) InfiniBand Routing Algorithm
-Up-Down is a super-set of Fat-Tree with a tracker mode that allow each node to have dedicated route. This is well adapted to IO traffic patterns, and would be used within Aion for Gateway nodes, Lustre OSS, and GPFS/SpectrumScale NSD servers.
+Up-Down is a super-set of Fat-Tree with a tracker mode that allow each node to have dedicated route. This is well adapted to IO traffic patterns, and would be used within Aion for Gateway nodes, [Lustre](../../filesystems/lustre.md) OSS, and [GPFS/SpectrumScale](../../filesystems/gpfs.md) NSD servers.
 
 For more details:
 [:fontawesome-solid-sign-in-alt: Understanding Up/Down InfiniBand Routing Algorithm](https://community.mellanox.com/s/article/understanding-up-down-infiniband-routing-algorithm){: .md-button .md-button--link }
