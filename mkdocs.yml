@@ -16,22 +16,22 @@ nav:
   #######################
   - ULHPC Supercomputers:
     - Overview: 'systems/index.md'
+    - Aion:
+      - Aion System:   'systems/aion/index.md'
+      - Compute Nodes: 'systems/aion/compute.md'
+      - Fast Local Interconnect: 'systems/aion/network.md'
+    #  - Storage:       'filesystems/index.md'
+      - Timeline:      'systems/iris/timeline.md'
     - Iris:
       - Iris System:   'systems/iris/index.md'
       - Compute Nodes: 'systems/iris/compute.md'
       - Fast Local Interconnect: 'systems/iris/interconnect.md'
-      - Storage:       'filesystems/index.md'
-      - Timeline:      'systems/iris/timeline.md'
-    - Aion:
-      - Aion System:   'systems/aion/index.md'
-      - Compute Nodes: 'systems/aion/compute.md'
-      - Network:       'systems/aion/network.md'
-      - Storage:       'filesystems/index.md'
+    #  - Storage:       'filesystems/index.md'
       - Timeline:      'systems/iris/timeline.md'
     - Live status: https://hpc.uni.lu/live-status/motd
   #######################
   - Interconnect:
-    - Overview:                     'interconnect/index.md'
+    # - Overview:                     'interconnect/index.md'
     - Fast Infiniband Interconnect: 'interconnect/ib.md'
     - Ethernet Interconnect:        'interconnect/ethernet.md'
   #######################

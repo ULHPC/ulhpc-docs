@@ -23,3 +23,7 @@ Iris 2-Level 1:1.5 Fat-Tree is composed of:
 
 For more details:
 [:fontawesome-solid-sign-in-alt: ULHPC Fast IB Interconnect](../../interconnect/ib.md#ulhpc-ib-topology){: .md-button .md-button--link }
+
+Illustration of Iris network cabling (IB and Ethernet) within one of the rack hosting the compute nodes:
+
+![](images/iris-compute_back.jpg)

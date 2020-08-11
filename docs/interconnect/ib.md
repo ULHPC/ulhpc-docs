@@ -31,6 +31,9 @@ For more details:
 [:fontawesome-solid-sign-in-alt: Iris IB Interconnect](../systems/iris/interconnect.md){: .md-button .md-button--link }
 [:fontawesome-solid-sign-in-alt: Aion IB Interconnect](../systems/aion/interconnect.md){: .md-button .md-button--link }
 
+The tight integration of I/O and compute in the ULHPC supercomputer architecture gives a very robust, time critical production systems. The [selected routing algorithms](https://community.mellanox.com/s/article/understanding-up-down-infiniband-routing-algorithm) also provides a dedicated and fast path to the IO targets, avoiding congestion on the high-speed network and mitigating the risk of runtime "jitter" for time critical jobs.
+
+
 ## IB Fabric Diagnostic Utilities
 
 An InfiniBand fabric is composed of switches and channel adapter (HCA/Connect-X cards) devices.
