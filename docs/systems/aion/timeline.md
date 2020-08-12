@@ -70,4 +70,4 @@ See also [:fontawesome-solid-sign-in-alt: Atos Press Release](https://atos.net/e
         * target finalization of the CDC-S02-004 server room by end of September
     - Assembly and factory Burn tests completed
     - ULHPC maintenance with physical intervention of external expert support team by DDN
-       * preparation work for iris storage (HW upgrade, GPFS/SpectrumScale Metadata pool extension, Lustre upgrade)
+        * preparation work for iris storage (HW upgrade, GPFS/SpectrumScale Metadata pool extension, Lustre upgrade)
