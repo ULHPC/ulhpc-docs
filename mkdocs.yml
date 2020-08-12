@@ -201,13 +201,13 @@ nav:
     - Helpdesk / Ticket Portal: https://hpc-tracker.uni.lu
     - ULHPC Consulting Services: 'support/professional-services.md'
   #########################
-  - Services:
-    - Gitlab: 'services/gitlab.md'
-    - Gforge: 'service/Gforge.md'
-    - Jupyter : 'services/jupyter.md'
-    - EtherPad: 'services/etherpad.md'
-    - PrivateBin: 'services/privatebin.md'
-    - Databases: 'services/databases.md'
+  - Services: 'services/index.md'
+    # - Gitlab: 'services/gitlab.md'
+    # - Gforge: 'service/gforge.md'
+    # - Jupyter : 'services/jupyter.md'
+    # - EtherPad: 'services/etherpad.md'
+    # - PrivateBin: 'services/privatebin.md'
+    # - Databases: 'services/databases.md'
   #########################
   - DevOps Management:
     - Collaborative Development:
