@@ -14,7 +14,7 @@ The **Iris** cluster exists since the beginning of 2017 as the flagship HPC supe
 ### October 2016
 
 * Bids Opening for both RFPs on October 12, 2016.
-    - Starting offers analysis by the ULHPC team
+    - Starting offers analysis by the ULHPC team, together with the procurement and legal departments of the University
 
 ### November 2016
 
@@ -50,7 +50,7 @@ Delivery and installation of the `iris` cluster composed of:
 ### November 2017
 
 * Bids Opening for Lustre RFP on November 28, 2017.
-    - Starting offers analysis by the ULHPC team
+    - Starting offers analysis by the ULHPC team, together with the procurement and legal departments of the University
 
 ### December 2017
 
@@ -80,7 +80,7 @@ Delivery and installation of the `iris` cluster composed of:
 ### September 2018
 
 * Bids Opening for Multi-GPU and Large-Memory nodes RFP on September 10, 2018.
-    - Starting offers analysis by the ULHPC team
+    - Starting offers analysis by the ULHPC team, together with the procurement and legal departments of the University
 
 ### October 2018
 
