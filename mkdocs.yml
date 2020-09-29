@@ -85,20 +85,48 @@ nav:
     - RESIF:                       'software/resif.md'
     - Contributing:                'software/contributing.md'
     - BigData Analytics:           'software/bigdata/index.md'
-    - Bioinformatics/Life Science: 'software/bio/index.md'
+    - Bioinformatics/Life Science: 
+      - NAMD:                      'software/bio/namd.md'
     - Containers:                  'containers/index.md'
-    - Computer Aided Engineering:  'software/cae/index.md'
-    - Computational Chemistry:     'software/chem/index.md'
-    - Deep and Machine Learning:   'software/ml/index.md'
-    - Earth Sciences:              'software/geo/index.md'
-    - Mathematics & Statistics:    'software/maths/index.md'
-    - Optimizers:                  'software/optim/index.md'
+    - Geometry and Meshing tools:
+      - Salome:                    'software/geometry-mesh/salome.md'
+      - Gmesh:                     'software/geometry-mesh/gmesh.md'
+      - Sumo:                      'software/geometry-mesh/sumo.md'
+    - Computer Aided Engineering:  
+      - ANSYS:                     'software/cae/ansys.md'
+      - OpenFOAM:                  'software/cae/openfoam.md'
+      - FDS:                       'software/cae/fds.md'
+      - ABAQUS:                    'software/cae/abaqus.md'
+    - Computational Chemistry:
+      - VASP:                      'software/chem/vasp.md'
+      - CRYSTAL:                   'software/chem/crystal.md'
+      - LAMMPS:                    'software/chem/lammps.md'
+      - GROMACS:                   'software/chem/gromacs.md'
+    - Deep and Machine Learning:   
+      - TensorFlow:                'software/ml/tensorflow.md'
+      - Theano:                    'software/ml/theano.md'
+      - Keras:                     'software/ml/keras.md'
+      - Horovod:                   'software/ml/horovod.md'
+    - Earth Sciences:              'software/ml/index.md'
+    - Mathematics & Statistics:    
+      - Mathematica:               'software/maths/mathematica.md'
+      - MATLAB:                    'software/maths/matlab.md'
+      - R:                         'software/maths/r.md'
+    - Optimization:                  
+      - CPLEX:                     'software/optimization/cplex.md'
+      - Gurobi:                    'software/optimization/gurobi.md'
+      - GLPK:                      'software/optimization/glpk.md'
+      - Dakota:                    'software/optimization/dakota.md'
     - Performance/Debugging:       'development/performance-debugging-tools/index.md'
     - Physics:                     'software/phys/index.md'
     - Toolchains/Compilers:        'development/toolchains/index.md'
-    - Visualization:               'software/visu/index.md'
-
-
+    - Visualization:               
+      - Paraview:                  'software/visu/paraview.md'
+      - VisIt:                     'software/visu/visit.md'
+      - VTK:                       'software/visu/vtk.md'
+      - VMD:                       'software/visu/vmd.md'
+      - OpenCV:                    'software/visu/opencv.md'
+      - VirtualGL:                 'software/visu/virtualgl.md'
   ###############
   - Running Jobs:
     - Slurm Overview: 'slurm/index.md'
