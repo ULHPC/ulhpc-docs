@@ -1,0 +1,101 @@
+# OpenFOAM
+
+1. [Introduction](#introduction)
+2. [Available versions of OpenFOAM in UL-HPC](#available-versions-of-openfoam-in-ul-hpc)
+3. [Interactive mode](#interactive mode)
+4. [Batch mode](#batch mode)
+5. [Additional information](#additional information)
+
+## Introduction
+OpenFOAM is the free, open source CFD software developed primarily by OpenCFD Ltd since 2004.
+It has a large user base across most areas of engineering and science,
+from both commercial and academic organisations. OpenFOAM has an extensive
+range of features to solve anything from complex fluid flows involving chemical reactions,
+turbulence and heat transfer, to acoustics, solid mechanics and electromagnetics
+
+## Available versions of OpenFOAM in UL-HPC
+The following version of OpenFOAM is available in UL-HPC
+```shell
+# Available versions
+cae/OpenFOAM/v1712-intel-2018a
+cae/OpenFOAM/v1812-foss-2019a   
+```
+
+## Interactive mode
+To open an ANSYS in the interactive mode, please follow the following steps:
+```shell
+# From your local computer
+$ ssh -X iris-cluster
+
+# Reserve the node for interactive computation
+$ srun -p batch --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+
+# Load the required version of OpenFOAM and Intel environment
+$ module load swenv/default-env/v1.1-20180716-production
+$ module load cae/OpenFOAM/v1712-intel-2018a
+
+# Load the OpenFOAM environment
+$ source $FOAM_BASH
+
+$ mkdir OpenFOAM
+$ cd OpenFOAM
+
+# Copy the example to your local folder (cavity example)
+$ cp -r /opt/apps/resif/data/production/v1.1-20180716/default/software/cae/OpenFOAM/v1712-intel-2018a/OpenFOAM-v1712/tutorials/incompressible/icoFoam/cavity/cavity .
+$ cd cavity
+
+# To initialize the mesh
+$ blockMesh
+
+# Run the simulation
+$ icoFoam
+
+# Visualize the solution
+$ paraFoam
+```
+
+## Batch mode
+Example of computational domain preparation (Dambreak example)
+```shell
+$ mkdir OpenFOAM
+$ cd OpenFOAM
+$ cp -r /opt/apps/resif/data/production/v1.1-20180716/default/software/cae/OpenFOAM/v1712-intel-2018a/OpenFOAM-v1712/tutorials/multiphase/interFoam/laminar/damBreak/damBreak .
+$ blockMesh
+$ cd damBreak/system
+```
+Open a `decomposeParDict` and set `numberOfSubdomains 16` where `n` is numper of MPI processor.
+And do `blockMesh` to prepare the computational domain (mesh) and finally do the `decomposePar` to
+repartition the mesh domain. 
+
+```shell
+#!/bin/bash -l
+#SBATCH -J OpenFOAM
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=16
+#SBATCH --time=00:30:00
+#SBATCH -p batch
+# Write out the stdout+stderr in a file
+#SBATCH -o output.txt
+# Mail me on job start & end
+#SBATCH --mail-user=myemailaddress@universityname.domain
+#SBATCH --mail-type=BEGIN,END
+
+echo "== Starting run at $(date)"
+echo "== Job ID: ${SLURM_JOBID}"
+echo "== Node list: ${SLURM_NODELIST}"
+echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
+
+# Load the modules
+module purge
+module load swenv/default-env/v1.1-20180716-production
+module load cae/OpenFOAM/v1712-intel-2018a
+
+source $FOAM_BASH
+srun interFoam -parallel
+```
+
+## Additional information
+For more information about OpenFOAM tutorial,
+please visit [https://www.openfoam.com/documentation/tutorial-guide/]
+
+

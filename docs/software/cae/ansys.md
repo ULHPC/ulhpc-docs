@@ -1,0 +1,81 @@
+# ANSYS
+
+1. [Introduction](#introduction)
+2. [Available versions of ANSYS in UL-HPC](#available-versions-of-ansys-in-ul-hpc)
+3. [Interactive mode](#interactive mode)
+4. [Batch mode](#batch mode)
+5. [Additional information](#additional information)
+
+## Introduction
+[ANSYS](https://www.ansys.com/) offers a comprehensive software suite that spans
+the entire range of physics, providing access to virtually any
+field of engineering simulation that a design process requires.
+Organizations around the world trust Ansys to deliver the best value for
+their engineering simulation software investment.
+
+
+## Available versions of ANSYS in UL-HPC
+
+The following version of ANSYS is available in UL-HPC
+```shell
+# Available versions 
+tools/ANSYS/18.0
+tools/ANSYS/19.0
+tools/ANSYS/19.4
+```
+
+## Interactive mode
+To open an ANSYS in the interactive mode, please follow the following steps:
+```shell
+# From your local computer
+$ ssh -X iris-cluster
+
+# Reserve the node for interactive computation
+$ srun -p batch --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+
+# Load the required version of ansys
+$module load tools/ANSYS/19.4
+
+# To lunch ANSYS
+$ runwb2
+```
+
+## Batch mode
+
+```shell
+#!/bin/bash -l
+#SBATCH -J ANSYS-CFX
+#SBATCH -N 2
+#SBATCH --ntasks-per-node=56
+#SBATCH --time=00:30:00
+#SBATCH -p batch
+# Write out the stdout+stderr in a file
+#SBATCH -o output.txt
+# Mail me on job start & end
+#SBATCH --mail-user=myemailaddress@universityname.domain
+#SBATCH --mail-type=BEGIN,END
+
+echo "== Starting run at $(date)"
+echo "== Job ID: ${SLURM_JOBID}"
+echo "== Node list: ${SLURM_NODELIST}"
+echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
+
+# Load the modules
+module purge
+module load toolchain/intel/2019a
+module load tools/ANSYS/19.4
+
+# The Input file
+defFile=Benchmark.def
+
+MYHOSTLIST=$(srun hostname | sort | uniq -c | awk '{print $2 "*" $1}' | paste -sd, -)
+echo $MYHOSTLIST
+cfx5solve -double -def $defFile -start-method "Platform MPI Distributed Parallel" -par-dist $MYHOSTLIST
+```
+
+## Additional information
+ANSYS provides the [customer support](https://support.ansys.com),
+if you have a license key, you should be able to get all
+the support and needed documents.
+
+
