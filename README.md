@@ -10,7 +10,8 @@
 
        Copyright (c) 2020 UL HPC Team <hpc-team@uni.lu>
 
-ULHPC Technical Documentation, based on mkdocs
+ULHPC Technical Documentation, based on the [mkdocs-material](https://squidfunk.github.io/mkdocs-material/getting-started/) theme and the [PyMdown Extensions](https://facelessuser.github.io/pymdown-extensions/).
+Inspired by the _excellent_ [NERSC Technical documentation](https://docs.nersc.gov/)
 
 ## Installation / Repository Setup
 
@@ -47,22 +48,53 @@ Finally, you can upgrade the [Git submodules](.gitmodules) to the latest version
 
 ## Python Virtualenv / Pyenv and Direnv
 
-You will have to ensure you have installed [direnv](https://direnv.net/) (configured by [`.envrc`](.envrc)), [pyenv](https://github.com/pyenv/pyenv) and [`pyenv-virtualenv`](https://github.com/pyenv/pyenv-virtualenv). This assumes also the presence of `~/.config/direnv/direnvrc` from [this page](https://github.com/Falkor/dotfiles/blob/master/direnv/direnvrc) - for more details, see [this blog post](https://varrette.gforge.uni.lu/blog/2019/09/10/using-pyenv-virtualenv-direnv/).
+You will have to ensure you have installed [direnv](https://direnv.net/), configured by [`.envrc`](.envrc)), [pyenv](https://github.com/pyenv/pyenv) and [`pyenv-virtualenv`](https://github.com/pyenv/pyenv-virtualenv). This assumes also the presence of `~/.config/direnv/direnvrc` from [this page](https://github.com/Falkor/dotfiles/blob/master/direnv/direnvrc) - for more details, see [this blog post](https://varrette.gforge.uni.lu/blog/2019/09/10/using-pyenv-virtualenv-direnv/).
 
-You can run the following command to setup your local machine in a compliant way (this was normally done as part of the `make setup` step) :
-
+```bash
+### TL;DR; installation
+# Mac OS
+brew install direnv pyenv pyenv-virtualenv
+# Linux/WSL
+sudo { apt-get | yum | ... } install direnv
+curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+export PATH="$HOME/.pyenv/bin:$PATH"
+pyenv root     # Should return $HOME/.pyenv
+git clone https://github.com/pyenv/pyenv-virtualenv.git \
+    $(pyenv root)/plugins/pyenv-virtualenv
 ```
+
+**Assuming** you have configured the [XDG Base Directories](https://specifications.freedesktop.org/basedir-spec/latest/) in your favorite shell configuration (`~/.bashrc`, `~/.zshrc` or `~/.profile`), you can enable direnv and pyenv as follows
+
+```bash
+# XDG  Base Directory Specification
+# See https://specifications.freedesktop.org/basedir-spec/latest/
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+# [...]
+# Direnv - see https://direnv.net/
+if [ -f "$HOME/.config/direnv/init.sh" ]; then
+	. $HOME/.config/direnv/init.sh
+fi
+# - pyenv: https://github.com/pyenv/pyenv
+# - pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
+export PATH="$HOME/.pyenv/bin:$PATH"    # /!\ Linux/WSL ONLY
+if [ -n "$(which pyenv)" ]; then
+   eval "$(pyenv init -)"
+   eval "$(pyenv virtualenv-init -)"
+   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+fi
+```
+
+Source your shell configuration file.
+You can now run the following command to setup your local machine in a compliant way (this was normally done as part of the `make setup` step) :
+
+```bash
+# Global Direnv Setup (to be done only once)
 make setup-direnv
 make setup-pyenv
 ```
 
-Adapt your favorite shell configuration as suggested. You may want to add the following:
-
-``` bash
-for f in $XDG_CONFIG_HOME/*/init.sh; do
-  . ${f}
-done
-```
 
 Running `direnv allow` (this will have to be done only once), you should automatically enable the virtualenv `ulhpc-docs` based on the python version specified in [`.python-version`](.python-version). You'll eventually need to install the appropripriate Python version with `pyenv`:
 
@@ -70,8 +102,8 @@ Running `direnv allow` (this will have to be done only once), you should automat
 pyenv versions   # Plural: show all versions
 pyenv install $(head .python-version)
 # Activate the virtualenv by reentering into the directory
-cd ..
-cd -
+direnv allow .
+pyenv version # check current pyenv[-virtualenv] version. MUST return the vurtualenv 'ulhpc-docs'
 ```
 
 From that point, you should install the required packages using:
@@ -83,6 +115,19 @@ make setup-python
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
+
+# Documentation
+
+See [`docs/`](docs/README.md).
+
+The documentation for this project is handled by [`mkdocs`](http://www.mkdocs.org/#installation) with the [mkdocs-material](https://squidfunk.github.io/mkdocs-material/getting-started/) theme and the [PyMdown Extensions](https://facelessuser.github.io/pymdown-extensions/).
+You might wish to generate locally the docs (**after** setting up your local virtualenv) i.e. to preview the documentation from the project root directory by running:
+
+```bash
+mkdocs serve    # OR make doc
+```
+
+Then visit with your favorite browser the URL `http://localhost:8000`. Alternatively, you can run `make doc` at the root of the repository.
 
 
 ## Issues / Feature request
