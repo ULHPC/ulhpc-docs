@@ -78,8 +78,7 @@ if [ -f "$HOME/.config/direnv/init.sh" ]; then
 fi
 # - pyenv: https://github.com/pyenv/pyenv
 # - pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
-export PYENV_ROOT=$HOME/.pyenv
-export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/plugins/pyenv-virtualenv/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"    # /!\ Linux/WSL ONLY
 if [ -n "$(which pyenv)" ]; then
    eval "$(pyenv init -)"
    eval "$(pyenv virtualenv-init -)"
@@ -97,7 +96,7 @@ make setup-pyenv
 ```
 
 
-Running `direnv allow` (this will have to be done only once), you should automatically enable the virtualenv `ulhpc-docs` based on the python version specified in [`.python-version`](.python-version). You'll eventually need to install the appropriate Python version with `pyenv`:
+Running `direnv allow` (this will have to be done only once), you should automatically enable the virtualenv `ulhpc-docs` based on the python version specified in [`.python-version`](.python-version). You'll eventually need to install the appropripriate Python version with `pyenv`:
 
 ```bash
 pyenv versions   # Plural: show all versions
