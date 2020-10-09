@@ -1,12 +1,5 @@
 # VTune
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Environmental models for VTune on UL-HPC](#environmental-models-for-vtune-on-ul-hpc)
-3. [Interactive Mode](#interactive-mode)
-4. [Batch Mode](#batch-mode)
-5. [Additional Information](#additional-information)
-
 ## Introduction
 
 See the [Intel VTune Amplifier documentation](https://software.intel.com/en-us/vtune-help) for general usage.
@@ -47,7 +40,7 @@ you want to use.
 	running VTune on KNL, add the parameter	`-finalization-mode=deferred`
 
 ## Environmental models for VTune on UL-HPC:
-```
+```bash
 module purge 
 module load swenv/default-env/v1.2-20191021-production
 module load toolchain/intel/2019a
@@ -60,7 +53,7 @@ module load vis/GTK+/3.24.8-GCCcore-8.2.0
 
 ## Interactive Mode
 
-```
+```bash
 # Compilation
 $ icc -qopenmp example.c
 
@@ -77,7 +70,7 @@ To see the result in GUI `$ amplxe-gui my_result`
 ## Batch Mode
 
 ### Shared Memory Programming Model (OpenMP)
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J VTune
 #SBATCH -N 1
@@ -100,7 +93,7 @@ amplxe-cl -collect hotspots-r my_result ./a.out
 To compile just `MPI` application run `$ mpiicc example.c`
 and for `MPI+OpenMP` run `$ mpiicc -qopenmp example.c`
 
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J VTune
 #SBATCH -N 2
@@ -117,7 +110,7 @@ module load vis/GTK+/3.24.8-GCCcore-8.2.0
 srun -n 56 amplxe-cl -collect uarch-exploration -r vtune_mpi -- ./a.out
 ```
 
-```
+```bash
 # Report collection
 $ amplxe-cl -report uarch-exploration -report-output output -r vtune_mpi
 
