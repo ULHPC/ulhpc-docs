@@ -1,11 +1,3 @@
-1. [Introduction](#introduction)
-2. [Available versions of CRYSTAL in UL-HPC](#available-versions-of-crystal-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
-
-## Introduction
-
 The  [CRYSTAL](https://www.crystal.unito.it/index.php) package
 performs `ab  initio` calculations  of  the  ground
 state  energy,  energy gradient, electronic wave function and properties
@@ -22,7 +14,7 @@ local functions (hereafter indicated as ’Atomic Orbitals’, AOs).
 ## Available versions of CRYSTAL in UL-HPC
 To check available versions of CRYSTAL at UL-HPC type `module spider crystal`.
 Below it shows list of available versions of CRYSTAL in UL-HPC. 
-```shell
+```bash
 chem/CRYSTAL/17-intel-2017a-1.0.1
 chem/CRYSTAL/17-intel-2018a-1.0.1
 chem/CRYSTAL/17-intel-2019a-1.0.2
@@ -31,7 +23,7 @@ chem/CRYSTAL/17-intel-2019a-1.0.2
 ## Interactive mode
 To test CRYTAL in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -48,7 +40,7 @@ Please note your input file should be named just as `INPUT`. Pcrytal automatical
 will recognize the INPUT file from the folder where you are currently in.
 
 ## Batch mode
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J CRYSTAL
 #SBATCH -N 2
