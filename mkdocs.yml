@@ -87,7 +87,7 @@ nav:
     - BigData Analytics:           'software/bigdata/index.md'
     - Bioinformatics/Life Science: 'software/bio/index.md'
     - Containers:                  'containers/index.md'
-    - Computer Aided Engineering:
+    - Computer Aided Eng. (CAE):
         - ANSYS : 'software/cae/ansys.md'
         - OpenFOAM : 'software/cae/openfoam.md'
         - Abaqus : 'software/cae/abaqus.md'
