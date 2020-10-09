@@ -1,5 +1,3 @@
-# ANSYS
-
 1. [Introduction](#introduction)
 2. [Available versions of ANSYS in UL-HPC](#available-versions-of-ansys-in-ul-hpc)
 3. [Interactive mode](#interactive mode)
@@ -15,8 +13,8 @@ their engineering simulation software investment.
 
 
 ## Available versions of ANSYS in UL-HPC
-
-The following version of ANSYS is available in UL-HPC
+To check available versions of ANSYS at UL-HPC type `module spider ansys`.
+The following versions of ANSYS are available in UL-HPC
 ```shell
 # Available versions 
 tools/ANSYS/18.0
@@ -34,7 +32,7 @@ $ ssh -X iris-cluster
 $ srun -p batch --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
 # Load the required version of ansys
-$module load tools/ANSYS/19.4
+$ module load tools/ANSYS/19.4
 
 # To lunch ANSYS
 $ runwb2
@@ -49,8 +47,10 @@ $ runwb2
 #SBATCH --ntasks-per-node=56
 #SBATCH --time=00:30:00
 #SBATCH -p batch
+
 # Write out the stdout+stderr in a file
 #SBATCH -o output.txt
+
 # Mail me on job start & end
 #SBATCH --mail-user=myemailaddress@universityname.domain
 #SBATCH --mail-type=BEGIN,END
@@ -78,4 +78,6 @@ ANSYS provides the [customer support](https://support.ansys.com),
 if you have a license key, you should be able to get all
 the support and needed documents.
 
-
+!!! tip
+    If you find some issues with the instructions above,
+    please file a [support ticket](https://hpc.uni.lu/support).

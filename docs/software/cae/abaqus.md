@@ -1,5 +1,3 @@
-## Abaqus
-
 1. [Introduction](#introduction)
 2. [Available versions of Abaqus in UL-HPC](#available-versions-of-openfoam-in-ul-hpc)
 3. [Interactive mode](#interactive mode)
@@ -18,6 +16,7 @@ Abaqus Unified FEA to consolidate their processes and tools,
 reduce costs and inefficiencies, and gain a competitive advantage
 
 ## Available versions of Abaqus in UL-HPC
+To check available versions of Abaqus at UL-HPC type `module spider abaqus`.
 The following versions of Abaqus are available in UL-HPC
 ```shell
 # Available versions
@@ -30,7 +29,7 @@ The following versions of Abaqus are available in UL-HPC
 ```
 
 ## Interactive mode
-To open an ANSYS in the interactive mode, please follow the following steps:
+To open an Abaqus in the interactive mode, please follow the following steps:
 
 ```shell
 # From your local computer
@@ -57,7 +56,6 @@ abaqus job=job-name resume
 ```
 
 ## Batch mode
-Example for Abaqus batch job
 ```shell
 #!/bin/bash -l
 #SBATCH -J Abaqus
@@ -87,5 +85,7 @@ abaqus-mpi job=job input=input.inp interactive
 
 ## Additional information
 
-
+!!! tip
+    If you find some issues with the instructions above,
+    please file a [support ticket](https://hpc.uni.lu/support).
 

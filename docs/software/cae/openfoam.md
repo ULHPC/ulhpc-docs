@@ -1,5 +1,3 @@
-# OpenFOAM
-
 1. [Introduction](#introduction)
 2. [Available versions of OpenFOAM in UL-HPC](#available-versions-of-openfoam-in-ul-hpc)
 3. [Interactive mode](#interactive mode)
@@ -14,7 +12,8 @@ range of features to solve anything from complex fluid flows involving chemical 
 turbulence and heat transfer, to acoustics, solid mechanics and electromagnetics
 
 ## Available versions of OpenFOAM in UL-HPC
-The following version of OpenFOAM is available in UL-HPC
+To check available versions of OpenFOAM at UL-HPC type `module spider openfoam`.
+The following versions of OpenFOAM are available in UL-HPC
 ```shell
 # Available versions
 cae/OpenFOAM/v1712-intel-2018a
@@ -95,7 +94,10 @@ srun interFoam -parallel
 ```
 
 ## Additional information
-For more information about OpenFOAM tutorial,
+To know more information about OpenFOAM tutorial/documentation,
 please visit [https://www.openfoam.com/documentation/tutorial-guide/]
 
 
+!!! tip
+    If you find some issues with the instructions above,
+    please file a [support ticket](https://hpc.uni.lu/support).
