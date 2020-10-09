@@ -59,7 +59,7 @@ Again, if you configured the SSH connection in your `~/.ssh/config` file, you ca
     $> scp iris-cluster:experiments/parallel_run/* /path/to/local/directory
 
 
-See the [scp(1) man page](http://www.bash-linux.com/unix-man-scp.html) for more details.
+See the [scp(1) man page](https://linux.die.net/man/1/scp) or `man scp` for more details.
 
 WARNING: `scp` **SHOULD NOT be used in the following cases:**
 
@@ -69,7 +69,7 @@ WARNING: `scp` **SHOULD NOT be used in the following cases:**
 # Using `rsync`
 
 The clever alternative to `scp` is `rsync`, which has the advantage of transferring only the files which differ between the source and the destination. This feature is often referred to as fast incremental file transfer. Additionally, symbolic links can be  preserved.
-The typical syntax of `rsync` (see [rsync(1)](http://www.bash-linux.com/unix-man-rsync.html) ) for the cluster is similar to the one of `scp`:
+The typical syntax of `rsync` (see [rsync(1)](https://linux.die.net/man/1/rsync) ) for the cluster is similar to the one of `scp`:
 
     rsync --rsh='ssh -p 8022' -avzu source_path destination_path
 
@@ -110,7 +110,7 @@ Again, if you configured the SSH connection in your `~/.ssh/config` file, you ca
 
     $> rsync -avzu iris-cluster:experiments/parallel_run /path/to/local/directory
 
-As always, see the [man page](http://www.bash-linux.com/unix-man-rsync.html) for more details.
+As always, see the [man page](https://linux.die.net/man/1/rsync) or `man rsync` for more details.
 
 
 # Using MobaXterm (Windows)
