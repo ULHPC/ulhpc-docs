@@ -204,7 +204,7 @@ nav:
   - Help and Support:
     - FAQ: 'support/faq.md'
     - Guidelines: 'support/index.md'
-    - Helpdesk / Ticket Portal: https://hpc-tracker.uni.lu
+    - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
     - ULHPC Consulting Services: 'support/professional-services.md'
   #########################
   - Services: 'services/index.md'
