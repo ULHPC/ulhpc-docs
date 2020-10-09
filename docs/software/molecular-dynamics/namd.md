@@ -1,10 +1,3 @@
-1. [Introduction](#introduction)
-2. [Available versions of NAMD in UL-HPC](#available-versions-of-namd-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
-
-## Introduction
 [NAMD](https://www.ks.uiuc.edu/Research/namd/), recipient of a 2002 Gordon Bell Award and a 2012 Sidney Fernbach Award,
 is a parallel molecular dynamics code designed for high-performance simulation
 of large biomolecular systems. Based on Charm++ parallel objects,
@@ -15,11 +8,11 @@ NAMD is distributed free of charge with source code. You can build NAMD yourself
 download binaries for a wide variety of platforms.
 Our tutorials show you how to use NAMD and VMD for biomolecular modeling. 
 
-## Available versions of NAMD in UL-HPC
+## Available versions of NAMD in ULHPC
 To check available versions of NAMD at UL-HPC type `module spider namd`.
 Below it shows list of available versions of NAMD in UL-HPC.
 
-```shell
+```bash
 chem/NAMD/2.12-intel-2017a-mpi
 chem/NAMD/2.12-intel-2018a-mpi
 chem/NAMD/2.13-foss-2019a-mpi
@@ -28,7 +21,7 @@ chem/NAMD/2.13-foss-2019a-mpi
 ## Interactive mode
 To open an NAMD in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -43,7 +36,7 @@ $ namd2 +setcpuaffinity +p4 config_file > output_file
 ```
 
 ## Batch mode
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J NAMD
 #SBATCH -N 2
