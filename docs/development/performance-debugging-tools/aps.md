@@ -25,10 +25,6 @@ in application performance analysis to get a simple snapshot of key
 optimization areas and learn about profiling tools that specialize in
 particular aspects of application performance.
 
-<!-- Application Performance Snapshot is available as a free product download from
-the Intel Developer Zone at https://software.intel.com/performance-snapshot and
-is also available pre-installed as part of Intel Parallel Studio or Intel VTune
-Amplifier. -->
 
 ## Prerequisites
 
@@ -60,44 +56,6 @@ module load swenv/default-env/v1.2-20191021-production
 module load tools/VTune/2019_update4
 module load toolchain/intel/2019a
 ```
-
-<!--
-Run `<install-dir>/apsvars.sh`, where `<install-dir>` is the location where
-Application Performance Snapshot is installed either as a standalone package or
-as part of Intel Parallel Studio or Intel VTune Amplifier.
-
-Example:
-
-```
-nersc$ /opt/intel/performance_snapshots/apsvars.sh
-```
-
-
-## Analyzing Shared Memory Applications
-
-Run the following command:
-
-```
-nersc$ aps <my app> <app parameters>
-```
-
-where `<my app>` is the location of your application and `<app parameters>` are
-your application parameters.
-
-Application Performance Snapshot launches the application and runs the data
-collection.
-
-After the analysis completes, a report appears in the command window. You can
-also open a HTML report with the same information in a supported browser. The
-path to the HTML report is included in the command window.
-
-Analyze the data shown in the report. See the metric descriptions below or
-hover over a metric in the HTML report for more information.
-
-Determine appropriate next steps based on result analysis. Common next steps
-may include application tuning or using another performance analysis tool for
-more detailed information, such as Intel VTune Amplifier or Intel Advisor.
--->
 
 ## Analyzing Shared Memory Applications
 
@@ -147,56 +105,6 @@ module load toolchain/intel/2019a
 export OMP_NUM_THREADS=16
 aps --collection-mode=all -r report_output ./a.out
 ```
-
-<!--
-## Analyzing MPI Applications
-
-Run the following command to collect data about your MPI application:
-
-```
-nersc$ <mpi launcher> <mpi parameters>aps <my app> <app parameters>
-```
-
-where:
-
-* `<mpi launcher>` is an MPI job launcher such as `mpirun`, `srun`, or `aprun`
-* `<mpi parameters>` are the MPI launcher parameters
-* `<my app>` is the location of your application
-* `<app parameters>` are your application parameters
-
-!!! note
-    `aps` must be the last `<mpi launcher>` parameter.
-
-Application Performance Snapshot launches the application and runs the data
-collection. After the analysis completes, an `aps_result_<date>` directory is
-created. To complete the analysis, run:
-
-```
-nersc$ aps --report=aps_result_<date>
-```
-
-After the analysis completes, a report appears in the command window. You can
-also open a HTML report with the same information in a supported browser.
-
-Analyze the data shown in the report. See the metric descriptions below or
-hover over a metric in the HTML report for more information.
-
-!!! tip
-    If your application is MPI-bound, run the following command to get more
-    details about message passing such as message sizes, data transfers between
-    ranks or nodes, and time in collective operations:
-
-    ```
-    nersc$ aps-reports <option> app_result_<date>
-    ```
-
-    Use `aps-reports --help` to see the available options.
-
-Determine appropriate next steps based on result analysis. Common next steps
-may include communication tuning with the `mpitune` utility or using another
-performance analysis tool for more detailed information, such as Intel Trace
-Analyzer and Collector or Intel VTune Amplifier.
--->
 
 ## Analyzing MPI Applications
 To compile just `MPI` application run `$ mpiicc example.c` and for `MPI+OpenMP` run `$ mpiicc -qopenmp example.c`
