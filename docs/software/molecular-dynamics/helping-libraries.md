@@ -1,10 +1,3 @@
-1. [libctl](#libctl)
-2. [Libint](#libint)
-3. [libxc](#libxc)
-4. [PLUMED](#plumed)
-5. [ESPResSo](#espresso)
-6. [UDUNITS](#udunits)
-
 ## libctl
 This is [libctl](https://github.com/NanoComp/libctl), a Guile-based library
 for supporting flexible control files in scientific simulations.
