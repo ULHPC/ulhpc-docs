@@ -12,7 +12,11 @@ The two most common commands you can use for data transfers over SSH:
 
 !!! danger "scp or rsync?"
     While both ensure a secure transfer of the data within an encrypted tunnel, **`rsync` should be preferred**: as mentionned in the [from openSSH 8.0 release notes](https://www.openssh.com/txt/release-8.0):
-    "_The **`scp`** protocol is **outdated**, **inflexible** and **not readily fixed**. We recommend the use of more modern protocols like sftp and rsync for file transfer instead_"
+    "_The **`scp`** protocol is **outdated**, **inflexible** and **not readily fixed**. We recommend the use of more modern protocols like sftp and rsync for file transfer instead_".
+
+    `scp` is also relatively slow when compared to `rsync` as exhibited for instance in the below sample [Distem](https://distem.gitlabpages.inria.fr/) experience:
+
+    ![](images/distem-scp-vs-rsync.png){: style="width:300px;" }
 
     You will find below notes on `scp` usage, but **kindly prefer to use [rsync](##using-rsync)**.
 
@@ -100,7 +104,7 @@ rsync --rsh='ssh -p 8022' -avzu [user@]hostname:/path/to/source  /path/to/local/
 * the `-u` option (or `--update`) corresponds to an updating process which skips files that are newer on the receiver. At this level, you may prefer the more dangerous option `--delete` that deletes extraneous files from dest dirs.
 Just like `scp`, the syntax for qualifying a remote path is as follows on the cluster: `yourlogin@iris-cluster:path/from/homedir`
 
-### Transfer from your local machine to the remote cluster login node
+### Transfer from your local machine to the remote cluster
 
 Coming back to the previous examples, let's assume you have a local directory `~/devel/myproject` you want to transfer to the cluster, in your remote homedir. In that case:
 
@@ -122,7 +126,7 @@ $> rsync -avzu ~/devel/myproject iris-cluster:
 $> rsync -avzu ~/devel/myproject aion-cluster:
 ```
 
-### Transfer from your local machine to a project directory on the remote cluster login node
+### Transfer from your local machine to a project directory on the remote cluster
 
 When transferring data to a project directory you should keep the group and group permissions imposed by the project directory and quota. Therefore you need to add the options `--no-p --no-g` to your rsync command:
 
@@ -130,7 +134,7 @@ When transferring data to a project directory you should keep the group and grou
 $> rsync -avP --no-p --no-g ~/devel/myproject iris-cluster:/work/projects/myproject/
 ```
 
-### Transfer from the remote cluster login node to your local machine
+### Transfer from the remote cluster to your local machine
 
 Conversely, let's assume you want to synchronize (retrieve) the remote files `~/experiments/parallel_run/*` on your local machine:
 
