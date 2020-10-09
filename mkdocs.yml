@@ -51,7 +51,7 @@ nav:
   #################
   - Access/Connect:
     - Login/Access Servers:        'connect/access.md'
-    - Multi-Factor Authentication: 'connect/mfa.md'
+    # - Multi-Factor Authentication: 'connect/mfa.md'
     - SSH:                         'connect/ssh.md'
     - Open On Demand Portal:       'connect/ood.md'
     - Troubleshooting:             'connect/troubleshooting.md'
