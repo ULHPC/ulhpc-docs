@@ -20,16 +20,16 @@ Windows and OS X users may wish to transfer files from their systems to the clus
 * [FileZilla Client](https://filezilla-project.org) (Windows, OS X)
 * [Cyberduck](http://cyberduck.ch/) (Windows, OS X)
 
-These applications will need to be configured to connect to the frontends with the same parameters as [discussed on the SSH access page](/users/docs/access.html#configuration).
+These applications will need to be configured to connect to the frontends with the same parameters as [discussed on the SSH access page](/connect/ssh.md).
 
 # Using `scp`
 
-`scp` (see [scp(1)](http://www.bash-linux.com/unix-man-scp.html) ) or secure copy is probably the easiest of all the methods. The basic syntax is as follows:
+`scp` (see [scp(1)](https://linux.die.net/man/1/scp) ) or secure copy is probably the easiest of all the methods. The basic syntax is as follows:
 
     scp [-P 8022] [-Cr] source_path destination_path
 
 * the `-P` option specifies the SSH port to use (in this case 8022)
-* the `-C` option activates the compression (actually, it passes the -C flag to [ssh(1)](http://www.bash-linux.com/unix-man-ssh.html) to enable compression).
+* the `-C` option activates the compression (actually, it passes the -C flag to [ssh(1)](https://linux.die.net/man/1/ssh) to enable compression).
 * the `-r` option states to recursively copy entire directories (in this case, `scp` follows symbolic links encountered in the tree traversal).  Please note that in this case, you must specify the source file as a directory for this to work.
 
 The syntax for declaring a remote path is as follows on the cluster:
