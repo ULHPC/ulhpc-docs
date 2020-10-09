@@ -1,11 +1,3 @@
-1. [Introduction](#introduction)
-2. [Available versions of CP2K in UL-HPC](#available-versions-of-cp2k-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
-
-## Introduction
-
 [CP2K](https://www.cp2k.org/) is a quantum chemistry and solid state physics software package that can perform atomistic
 simulations of solid state, liquid, molecular, periodic, material, crystal, and biological systems.
 CP2K provides a general framework for different modeling methods such as DFT using the mixed
@@ -21,7 +13,7 @@ It is therefore easy to give the code a try, and to make modifications as needed
 ## Available versions of CP2K in UL-HPC
 To check available versions of CP2K at UL-HPC type `module spider cp2k`.
 Below it shows list of available versions of CP2K in UL-HPC. 
-```shell
+```bash
 chem/CP2K/6.1-foss-2019a
 chem/CP2K/6.1-intel-2018a
 ```
@@ -29,7 +21,7 @@ chem/CP2K/6.1-intel-2018a
 ## Interactive mode
 To open an CP2K in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -44,7 +36,7 @@ $ cp2k.popt -i example.inp
 ```
 
 ## Batch mode
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J CP2K
 #SBATCH -N 2
