@@ -78,7 +78,8 @@ if [ -f "$HOME/.config/direnv/init.sh" ]; then
 fi
 # - pyenv: https://github.com/pyenv/pyenv
 # - pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
-export PATH="$HOME/.pyenv/bin:$PATH"    # /!\ Linux/WSL ONLY
+export PYENV_ROOT=$HOME/.pyenv
+export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/plugins/pyenv-virtualenv/bin:$PATH"
 if [ -n "$(which pyenv)" ]; then
    eval "$(pyenv init -)"
    eval "$(pyenv virtualenv-init -)"
