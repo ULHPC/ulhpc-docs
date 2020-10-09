@@ -1,10 +1,3 @@
-1. [Introduction](#introduction)
-2. [Available versions of Meep in UL-HPC](#available-versions-of-meep-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
-
-## Introduction
 [Meep](https://meep.readthedocs.io/en/latest/) is a free and open-source
 software package for electromagnetics simulation via
 the finite-difference time-domain (FDTD) method spanning a
@@ -13,7 +6,7 @@ broad range of applications.
 ## Available versions of Meep in UL-HPC
 To check available versions of Meep at UL-HPC type `module spider meep`.
 Below it shows list of available versions of Meep in UL-HPC.
-```shell
+```bash 
 phys/Meep/1.3-intel-2017a
 phys/Meep/1.4.3-intel-2018a
 phys/Meep/1.4.3-intel-2019a
@@ -22,7 +15,7 @@ phys/Meep/1.4.3-intel-2019a
 ## Interactive mode
 To try a Meep in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -39,7 +32,7 @@ $ meep example.ctl > result_output
 ```
 
 ## Batch mode
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J Meep
 #SBATCH -N 1
