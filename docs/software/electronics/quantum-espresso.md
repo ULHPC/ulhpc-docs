@@ -1,0 +1,87 @@
+1. [Introduction](#introduction)
+2. [Available versions of Quantum ESPRESSO in UL-HPC](#available-versions-of-quantum-espresso-in-ul-hpc)
+3. [Interactive mode](#interactive mode)
+4. [Batch mode](#batch-mode)
+5. [Additional information](#additional-information)
+
+## Introduction
+
+[Quantum ESPRESSO](https://www.quantum-espresso.org/project/manifesto)
+is an integrated suite of Open-Source computer codes for electronic-structure
+calculations and materials modeling at the nanoscale.
+It is based on density-functional theory, plane waves, and pseudopotentials.
+
+Quantum ESPRESSO has evolved into a distribution of independent and
+inter-operable codes in the spirit of an open-source project.
+The Quantum ESPRESSO distribution consists of a “historical”
+core set of components, and a set of plug-ins that perform more advanced tasks,
+plus a number of third-party packages designed to be inter-operable with
+the core components. Researchers active in the field of electronic-structure
+calculations are encouraged to participate in the project by
+contributing their own codes or by implementing their own
+ideas into existing codes.
+
+
+## Available versions of Quantum ESPRESSO in UL-HPC
+To check available versions of Quantum ESPRESSO at UL-HPC type `module spider quantum espresso`.
+Below it shows list of available versions of Quantum ESPRESSO in UL-HPC. 
+```shell
+chem/QuantumESPRESSO/6.1-intel-2017a
+chem/QuantumESPRESSO/6.1-intel-2018a-maxter500
+chem/QuantumESPRESSO/6.1-intel-2018a
+chem/QuantumESPRESSO/6.2.1-intel-2018a
+chem/QuantumESPRESSO/6.4.1-intel-2019a
+```
+
+## Interactive mode
+To open an Quantum ESPRESSO in the interactive mode, please follow the following steps:
+
+```shell
+# From your local computer
+$ ssh -X iris-cluster
+
+# Reserve the node for interactive computation
+$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+
+# Load the modules
+$ module purge
+$ module load chem/QuantumESPRESSO/6.4.1-intel-2019a
+
+$ pw.x -input example.in
+```
+
+## Batch mode
+```shell
+#!/bin/bash -l
+#SBATCH -J QuantumESPRESSO
+#SBATCH -N 2
+#SBATCH --ntasks-per-node=56
+#SBATCH --time=00:30:00
+#SBATCH -p batch
+
+# Write out the stdout+stderr in a file
+#SBATCH -o output.txt
+
+# Mail me on job start & end
+#SBATCH --mail-user=myemailaddress@universityname.domain
+#SBATCH --mail-type=BEGIN,END
+
+echo "== Starting run at $(date)"
+echo "== Job ID: ${SLURM_JOBID}"
+echo "== Node list: ${SLURM_NODELIST}"
+echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
+
+# Load the modules
+module purge
+module load chem/QuantumESPRESSO/6.4.1-intel-2019a
+
+srun pw.x -input example.inp
+```
+
+## Additional information
+For more information about the tutorial and documention about Quantum ESPRESSO,
+please refer https://www.quantum-espresso.org/resources/users-manual
+
+!!! tip
+    If you find some issues with the instructions above,
+    please file a [support ticket](https://hpc.uni.lu/support).        
