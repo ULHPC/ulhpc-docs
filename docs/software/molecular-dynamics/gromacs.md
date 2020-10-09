@@ -1,11 +1,3 @@
-1. [Introduction](#introduction)
-2. [Available versions of GROMACS in UL-HPC](#available-versions-of-gromacs-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
-
-## Introduction
-
 [GROMACS](http://www.gromacs.org/) is a versatile package to perform molecular dynamics, i.e. simulate
 the Newtonian equations of motion for systems with hundreds to millions of particles.
 It is primarily designed for biochemical molecules like proteins, lipids and nucleic
@@ -17,7 +9,7 @@ for research on non-biological systems, e.g. polymers.
 ## Available versions of GROMACS in UL-HPC
 To check available versions of GROMACS at UL-HPC type `module spider gromacs`.
 Below it shows list of available versions of GROMACS in UL-HPC. 
-```shell
+```bash
 bio/GROMACS/2016.3-intel-2017a-hybrid
 bio/GROMACS/2016.5-intel-2018a-hybrid
 bio/GROMACS/2019.2-foss-2019a
@@ -29,7 +21,7 @@ bio/GROMACS/2019.2-intelcuda-2019a
 ## Interactive mode
 To try GROMACS in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -44,7 +36,7 @@ $ gmx_mpi mdrun <all your GMX job specification options in here>
 ```
 
 ## Batch mode
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J GROMACS
 #SBATCH -N 2
