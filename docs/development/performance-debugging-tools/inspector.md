@@ -1,13 +1,5 @@
 # Intel Inspector
 
-## Table of Contents
-
-1. [Introduction](#introduction)
-2. [Environmental models for Inspector on UL-HPC](#environmental-models-for-inspector-on-ul-hpc)
-3. [Interactive mode](#interactive-mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
-
 ## Introduction
 
 Intel Inspector is a memory and threading error checking tool for users
@@ -53,7 +45,7 @@ https://software.intel.com/en-us/intel-inspector-xe.
 
 ## Environmental models for Inspector on UL-HPC
 
-```
+```bash
 module purge 
 module load swenv/default-env/v1.2-20191021-production
 module load toolchain/intel/2019a
@@ -66,7 +58,7 @@ To launch Inspector on Iris, we recommend that you use the command
 line tool  `inspxe-cl`  to collect data via batch jobs and then display
 results using the GUI, `inspxe-gui`, on a login node.
 
-```shell
+```bash
 # Compilation
 $ icc -qopenmp example.cc
 
@@ -87,7 +79,7 @@ $ cat inspxe-cl.txt
 
 Example for the batch script:
 
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J Inspector
 #SBATCH -N 1
@@ -105,7 +97,7 @@ inspxe-cl -collect mi1 -result-dir mi1 -- ./a.out`
 ```
 To see the result:
 
-```
+```bash
 # Result view
 $ cat inspxe-cl.txt
 === Start: [2020/04/08 02:11:50] ===
@@ -117,7 +109,7 @@ $ cat inspxe-cl.txt
 
 ### Distributed memory programming model (MPI)
 To compile:
-```
+```bash
 # Compilation
 $ mpiicc -qopenmp example.cc
 ```
@@ -140,7 +132,7 @@ srun -n 56 inspxe-cl -collect=ti2 -r result ./a.out
 ```
 
 To see result output:
-```
+```bash
 $ cat inspxe-cl.txt
 0 new problem(s) found
 === End: [2020/04/08 16:41:56] ===
