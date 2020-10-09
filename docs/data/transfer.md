@@ -40,38 +40,52 @@ The syntax for declaring a remote path is as follows on the cluster:
 
 For instance, let's assume you have a local directory `~/devel/myproject` you want to transfer to the cluster, in your remote homedir.
 
-    $> scp -P 8022 -r ~/devel/myproject yourlogin@iris-cluster:
+```bash
+# /!\ ADAPT yourlogin to... your ULHPC login 
+$> scp -P 8022 -r ~/devel/myproject yourlogin@iris-cluster:
+```
 
 This will transfer recursively your local directory `~/devel/myproject`  on the cluster login node (in your homedir).
 
 Note that if you configured (as advised elsewhere) the SSH connection in your `~/.ssh/config` file, you can use a much simpler syntax:
 
-    $> scp -r ~/devel/myproject iris-cluster:
+```bash
+$> scp -r ~/devel/myproject iris-cluster:
+```
 
 **Transfer from the remote cluster front-end to your local machine**
 
 Conversely, let's assume you want to retrieve the files `~/experiments/parallel_run/*`
-
-    $> scp -P 8022 yourlogin@iris-cluster:experiments/parallel_run/* /path/to/local/directory
+```bash
+$> scp -P 8022 yourlogin@iris-cluster:experiments/parallel_run/* /path/to/local/directory
+```
 
 Again, if you configured the SSH connection in your `~/.ssh/config` file, you can use a simpler syntax:
 
-    $> scp iris-cluster:experiments/parallel_run/* /path/to/local/directory
-
+```bash
+$> scp iris-cluster:experiments/parallel_run/* /path/to/local/directory
+```
 
 See the [scp(1) man page](https://linux.die.net/man/1/scp) or `man scp` for more details.
 
-WARNING: `scp` **SHOULD NOT be used in the following cases:**
+!!! warning 
+    `scp` **SHOULD NOT be used in the following cases:** 
 
-* When you are copying more than a few files, as scp spawns a new process for each file and can be quite slow and resource intensive when copying a large number of files.
-* When using the `-r` switch, scp does not know about symbolic links and will blindly follow them, even if it has already made a copy of the file. That can lead to scp copying an infinite amount of data and can easily fill up your hard disk (or worse, a system shared disk), so be careful.
+    * When you are copying more than a few files, as scp spawns a new process for each file and can be quite slow and resource intensive when copying a large number of files.
+    * When using the `-r` switch, scp does not know about symbolic links and will blindly follow them, even if it has already made a copy of the file. That can lead to scp copying an infinite amount of data and can easily fill up your hard disk (or worse, a system shared disk), so be careful.
 
 # Using `rsync`
 
 The clever alternative to `scp` is `rsync`, which has the advantage of transferring only the files which differ between the source and the destination. This feature is often referred to as fast incremental file transfer. Additionally, symbolic links can be  preserved.
 The typical syntax of `rsync` (see [rsync(1)](https://linux.die.net/man/1/rsync) ) for the cluster is similar to the one of `scp`:
 
-    rsync --rsh='ssh -p 8022' -avzu source_path destination_path
+```bash
+# /!\ ADAPT </path/to/source> and </path/to/destination>
+# From LOCAL directory (/path/to/local/source) toward REMOTE server <hostname>
+rsync --rsh='ssh -p 8022' -avzu /path/to/local/source  [user@]hostname:/path/to/destination
+# Ex: from REMOTE server <hostname> to LOCAL directory
+rsync --rsh='ssh -p 8022' -avzu [user@]hostname:/path/to/source  /path/to/local/destination
+```
 
 * the `--rsh` option specifies the connector to use (here SSH on port 8022)
 * the `-a` option corresponds to the "Archive" mode. Most likely you should always keep this on as it preserves file permissions and does not follow symlinks.
@@ -84,19 +98,29 @@ Just like `scp`, the syntax for qualifying a remote path is as follows on the cl
 
 Coming back to the previous examples, let's assume you have a local directory `~/devel/myproject` you want to transfer to the cluster, in your remote homedir. In that case:
 
-    $> rsync --rsh='ssh -p 8022' -avzu ~/devel/myproject iris-cluster:
-
+```bash
+# /!\ ADAPT yourlogin to... your ULHPC login 
+$> rsync --rsh='ssh -p 8022' -avzu ~/devel/myproject yourlogin@access-iris.uni.lu:
+```
 This will synchronize your local directory `~/devel/myproject`  on the cluster front-end (in your homedir).
 
-Note that if you configured (as advised above) you SSH connection in your `~/.ssh/config` file, you can use a simpler syntax:
+!!! info "Transfer to Iris, Aion or both?"
+    The above example target the access server of Iris.
+    Actually, you could have targetted the access server of Aion: **it doesn't matter** since the storage is **SHARED** between both clusters. 
 
-    $> rsync -avzu ~/devel/myproject iris-cluster:
+Note that if you configured (as advised above) your SSH connection in your `~/.ssh/config` file with a dedicated SSH entry `{iris,aion}-cluster`, you can use a simpler syntax:
+
+```bash
+$> rsync -avzu ~/devel/myproject iris-cluster:
+# OR (it doesn't matter)
+$> rsync -avzu ~/devel/myproject aion-cluster:
+```
 
 **Transfer from your local machine to a project directory on the remote cluster login node**
 
 When transferring data to a project directory you should keep the group and group permissions imposed by the project directory and quota. Therefore you need to add the options `--no-p --no-g` to your rsync command:
 
-```
+```bash
 $> rsync -avP --no-p --no-g ~/devel/myproject iris-cluster:/work/projects/myproject/
 ```
 
@@ -104,11 +128,18 @@ $> rsync -avP --no-p --no-g ~/devel/myproject iris-cluster:/work/projects/myproj
 
 Conversely, let's assume you want to synchronize (retrieve) the remote files `~/experiments/parallel_run/*` on your local machine:
 
-    $> rsync --rsh='ssh -p 8022' -avzu iris-cluster:experiments/parallel_run /path/to/local/directory
+```bash
+# /!\ ADAPT yourlogin to... your ULHPC login 
+$> rsync --rsh='ssh -p 8022' -avzu yourlogin@access-iris.uni.lu:experiments/parallel_run /path/to/local/directory
+```
 
 Again, if you configured the SSH connection in your `~/.ssh/config` file, you can use a simpler syntax:
 
-    $> rsync -avzu iris-cluster:experiments/parallel_run /path/to/local/directory
+```bash 
+$> rsync -avzu iris-cluster:experiments/parallel_run /path/to/local/directory
+# OR (it doesn't matter)
+$> rsync -avzu aion-cluster:experiments/parallel_run /path/to/local/directory
+```
 
 As always, see the [man page](https://linux.die.net/man/1/rsync) or `man rsync` for more details.
 
