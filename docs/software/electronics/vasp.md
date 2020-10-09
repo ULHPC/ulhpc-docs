@@ -1,11 +1,3 @@
-1. [Introduction](#introduction)
-2. [Available versions of VASP in UL-HPC](#available-versions-of-vasp-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
-
-## Introduction
-
 [VASP](https://www.vasp.at/documentation/) is a package for performing ab initio quantum-mechanical molecular dynamics (MD)
 using pseudopotentials and a plane wave basis set. The approach implemented in VASP
 is based on a finite-temperature local-density approximation (with the free energy as variational quantity)
@@ -16,7 +8,7 @@ using efficient matrix diagonalization schemes and an efficient Pulay mixing.
 ## Available versions of VASP in UL-HPC
 To check available versions of VASP at UL-HPC type `module spider vasp`.
 Below it shows list of available versions of VASP in UL-HPC.
-```shell
+```bash
 phys/VASP/5.4.4-intel-2017a
 phys/VASP/5.4.4-intel-2018a
 phys/VASP/5.4.4-intel-2019a
@@ -25,7 +17,7 @@ phys/VASP/5.4.4-intel-2019a
 ## Interactive mode
 To open an Quantum VASP in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -40,7 +32,7 @@ $ vasp_[std/gam/ncl]
 ```
 
 ## Batch mode
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J VASP
 #SBATCH -N 2
