@@ -1,15 +1,5 @@
 # Application Performance Snapshot (APS)
 
-## Table of Contents
-
-1. [Introduction](#introduction)
-2. [Prerequisites](#prerequisites)
-3. [Analyzing Shared Memory Applications](#analyzing-shared-memory-applications)
-4. [Analyzing MPI Applications](#analyzing-mpi-applications)
-5. [Next Steps](#next-steps)
-6. [Quick Metrics Reference](#quick-metrics-reference)
-7. [Documentation and Resources](#documentation-and-resources)
-
 ## Introduction
 
 Application Performance Snapshot (APS) is a lightweight open source profiling
