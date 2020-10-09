@@ -1,10 +1,4 @@
-1. [Introduction](#introduction)
-2. [Available versions of ASE in UL-HPC](#available-versions-of-ASE-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
-
-## Introduction
+![](https://atomistica.github.io/atomistica/images/logo.png){: style="width:300px;float: right;" }
 [The Atomic Simulation Environment (ASE)](https://wiki.fysik.dtu.dk/ase/) is a set of tools and Python
 modules for setting up, manipulating, running, visualizing and
 analyzing atomistic simulations. The code is freely available
@@ -16,7 +10,7 @@ central `Atoms` object and the many available algorithms in ASE.
 ## Available versions of ASE in UL-HPC
 To check available versions of ASE at UL-HPC type `module spider ase`.
 Below it shows list of available versions of ASE in UL-HPC.
-```shell
+```bash
 chem/ASE/3.13.0-intel-2017a-Python-2.7.13
 chem/ASE/3.16.0-foss-2018a-Python-2.7.14
 chem/ASE/3.16.0-intel-2018a-Python-2.7.14
@@ -28,7 +22,7 @@ chem/ASE/3.17.0-intel-2019a-Python-3.7.2
 ## Interactive mode
 To open an Quantum ASE in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -44,7 +38,7 @@ $ python3 example.py
 ```
 
 ## Batch mode
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J ASE
 #SBATCH -N 1
