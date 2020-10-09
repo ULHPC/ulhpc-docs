@@ -1,13 +1,5 @@
 # Intel Advisor
 
-## Table of Contents
-  
-1. [Introduction](#introduction)
-2. [Environmental models for Advisor on UL-HPC](#environmental-models-for-advisor-on-ul-hpc)
-3. [Interactive mode](#interactive-mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
-
 ## Introduction
 
 Intel Advisor provides two workflows to help ensure that Fortran, C, and C++
@@ -34,7 +26,7 @@ to use each feature in Advisor. For more information on Intel Advisor, visit
 [this page](https://software.intel.com/en-us/advisor).
 
 ## Environmental models for Advisor on UL-HPC¶
-```shell
+```bash
 module purge 
 module load swenv/default-env/v1.2-20191021-production
 module load toolchain/intel/2019a
@@ -43,7 +35,7 @@ module load vis/GTK+/3.24.8-GCCcore-8.2.0
 ```
 
 ## Interactive mode
-```
+```bash
 # Compilation
 $ icc -qopenmp example.c
 
@@ -65,7 +57,7 @@ $ advixe-gui my_result
 ## Batch mode
 ### Shared memory programming model (OpenMP)
 Example for the batch script:
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J Advisor
 #SBATCH -N 1
@@ -89,7 +81,7 @@ advixe-cl -collect survey -project-dir my_result -- ./a.out
 To compile just `MPI` application run `$ mpiicc example.c` and for `MPI+OpenMP` run `$ mpiicc -qopenmp example.c`
 
 Example for the batch script:
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J Advisor
 #SBATCH -N 2
@@ -106,7 +98,7 @@ module load vis/GTK+/3.24.8-GCCcore-8.2.0
 srun -n 56 advixe-cl --collect survey --project-dir result -- ./a.out
 ```
 To collect the result and see the result in GUI use the below commands
-```
+```bash
 # Report collection
 $ advixe-cl --report survey --project-dir result
 
