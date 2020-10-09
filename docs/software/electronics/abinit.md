@@ -1,11 +1,7 @@
-1. [Introduction](#introduction)
-2. [Available versions of ABINIT in UL-HPC](#available-versions-of-abinit-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
 
 ## Introduction
 
+![](https://www.abinit.org/themes/abinit/logo-abinit-2015.svg){: style="width:300px;float: right;" }
 [ABINIT](https://www.abinit.org/) is a software suite to calculate the optical, mechanical, vibrational,
 and other observable properties of materials. Starting from the quantum equations
 of density functional theory, you can build up to advanced applications with
@@ -18,7 +14,7 @@ and several schools and workshops are organized each year.
 ## Available versions of ABINIT in UL-HPC
 To check available versions of ABINIT at UL-HPC type `module spider abinit`.
 Below it shows list of available versions of ABINIT in UL-HPC. 
-```shell
+```bash 
 chem/ABINIT/8.2.3-intel-2017a
 chem/ABINIT/8.6.3-intel-2018a-trio-nc
 chem/ABINIT/8.6.3-intel-2018a
@@ -28,7 +24,7 @@ chem/ABINIT/8.10.2-intel-2019a
 ## Interactive mode
 To open an ABINIT in the interactive mode, please follow the following steps:
 
-```shell
+```bash 
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -43,7 +39,7 @@ $ abinit < example.in
 ```
 
 ## Batch mode
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J ABINIT
 #SBATCH -N 2
