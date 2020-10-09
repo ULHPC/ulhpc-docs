@@ -96,7 +96,7 @@ make setup-pyenv
 ```
 
 
-Running `direnv allow` (this will have to be done only once), you should automatically enable the virtualenv `ulhpc-docs` based on the python version specified in [`.python-version`](.python-version). You'll eventually need to install the appropripriate Python version with `pyenv`:
+Running `direnv allow` (this will have to be done only once), you should automatically enable the virtualenv `ulhpc-docs` based on the python version specified in [`.python-version`](.python-version). You'll eventually need to install the appropriate Python version with `pyenv`:
 
 ```bash
 pyenv versions   # Plural: show all versions
