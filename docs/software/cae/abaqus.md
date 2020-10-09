@@ -1,8 +1,4 @@
-1. [Introduction](#introduction)
-2. [Available versions of Abaqus in UL-HPC](#available-versions-of-openfoam-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch mode)
-5. [Additional information](#additional information)
+# ABAQUS
 
 ## Introduction
 The Abaqus Unified FEA product suite offers powerful and complete solutions
@@ -15,10 +11,10 @@ solver technology. Best-in-class companies are taking advantage of
 Abaqus Unified FEA to consolidate their processes and tools,
 reduce costs and inefficiencies, and gain a competitive advantage
 
-## Available versions of Abaqus in UL-HPC
+## Available versions of Abaqus in ULHPC
 To check available versions of Abaqus at UL-HPC type `module spider abaqus`.
 The following versions of Abaqus are available in UL-HPC
-```shell
+```bash
 # Available versions
  cae/ABAQUS/6.14.2
  cae/ABAQUS/2017-hotfix-1729
@@ -31,7 +27,7 @@ The following versions of Abaqus are available in UL-HPC
 ## Interactive mode
 To open an Abaqus in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -43,6 +39,7 @@ module purge
 module load swenv/default-env/v0.1-20170602-production
 module load cae/ABAQUS/2017-hotfix-1803
 module load vis/libGLU/9.0.0-intel-2017a
+# /!\ IMPORTANT: ADAPT the url to point to YOUR licence server!!!
 export LM_License_file=xyz
 
 abaqus job=job-name input=input.inp cpus=n gpus=n
@@ -50,13 +47,13 @@ abaqus job=job-name input=input.inp cpus=n gpus=n
 where `n=number of cores` and for gpus `n=number of GPUs`.
 
 The following options for simulation to stop and resume it:
-```shell
+```bash
 abaqus job=job-name suspend
 abaqus job=job-name resume
 ```
 
 ## Batch mode
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J Abaqus
 #SBATCH -N 1

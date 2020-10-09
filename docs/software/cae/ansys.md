@@ -1,9 +1,6 @@
-1. [Introduction](#introduction)
-2. [Available versions of ANSYS in UL-HPC](#available-versions-of-ansys-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch mode)
-5. [Additional information](#additional information)
+# ANSYS
 
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/ANSYS_logo.png/320px-ANSYS_logo.png){: style="width:200px;float: right;" }
 ## Introduction
 [ANSYS](https://www.ansys.com/) offers a comprehensive software suite that spans
 the entire range of physics, providing access to virtually any
@@ -15,7 +12,7 @@ their engineering simulation software investment.
 ## Available versions of ANSYS in UL-HPC
 To check available versions of ANSYS at UL-HPC type `module spider ansys`.
 The following versions of ANSYS are available in UL-HPC
-```shell
+```bash
 # Available versions 
 tools/ANSYS/18.0
 tools/ANSYS/19.0
@@ -24,7 +21,7 @@ tools/ANSYS/19.4
 
 ## Interactive mode
 To open an ANSYS in the interactive mode, please follow the following steps:
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -40,7 +37,7 @@ $ runwb2
 
 ## Batch mode
 
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J ANSYS-CFX
 #SBATCH -N 2

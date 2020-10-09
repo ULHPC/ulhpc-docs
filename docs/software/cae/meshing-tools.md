@@ -1,8 +1,8 @@
-1. [Gmsh](#gmsh)
-2. [Salome](#salome)
+# Meshing Tools
 
 ## Gmsh
-Gmsh is an open source 3D finite element mesh generator with a built-in CAD engine and post-processor.
+
+![](https://gitlab.onelab.info/uploads/-/system/project/avatar/3/gmsh.png){: style="width:200px;float: right;" } [Gmsh](https://gmsh.info/) is an open source 3D finite element mesh generator with a built-in CAD engine and post-processor.
 Its design goal is to provide a fast, light and user-friendly meshing tool with parametric
 input and advanced visualization capabilities. Gmsh is built around four modules: geometry, mesh,
 solver and post-processing. The specification of any input to these modules is done either
@@ -21,12 +21,12 @@ built-in script language and the API (see e.g. the tutorials and the and [demos]
 ### Available versions of Gmsh in UL-HPC
 To check available versions of Gmsh at UL-HPC type `module spider gmsh`.
 Below it shows list of available versions of Gmsh in UL-HPC. 
-```shell
+```bash
 cae/gmsh/4.3.0-intel-2018a
 cae/gmsh/4.4.0-intel-2019a
 ```
 ### To work with Gmsh interactively on UL-HPC:
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -54,14 +54,14 @@ To know more about salome documentation please refer to https://www.salome-platf
 To check available versions of SALOME at UL-HPC type `module spider salome`.
 Below it shows list of available versions of SALOME in UL-HPC.
 
-```shell
+```bash
 cae/Salome/8.5.0-intel-2018a
 cae/Salome/8.5.0-intel-2019a
 ```
 
 ### To work with SALOME interactively on UL-HPC:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
