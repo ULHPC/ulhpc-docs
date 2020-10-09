@@ -1,11 +1,3 @@
-1. [Introduction](#introduction)
-2. [Available versions of Quantum ESPRESSO in UL-HPC](#available-versions-of-quantum-espresso-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch-mode)
-5. [Additional information](#additional-information)
-
-## Introduction
-
 [Quantum ESPRESSO](https://www.quantum-espresso.org/project/manifesto)
 is an integrated suite of Open-Source computer codes for electronic-structure
 calculations and materials modeling at the nanoscale.
@@ -25,7 +17,7 @@ ideas into existing codes.
 ## Available versions of Quantum ESPRESSO in UL-HPC
 To check available versions of Quantum ESPRESSO at UL-HPC type `module spider quantum espresso`.
 Below it shows list of available versions of Quantum ESPRESSO in UL-HPC. 
-```shell
+```bash
 chem/QuantumESPRESSO/6.1-intel-2017a
 chem/QuantumESPRESSO/6.1-intel-2018a-maxter500
 chem/QuantumESPRESSO/6.1-intel-2018a
@@ -36,7 +28,7 @@ chem/QuantumESPRESSO/6.4.1-intel-2019a
 ## Interactive mode
 To open an Quantum ESPRESSO in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -51,7 +43,7 @@ $ pw.x -input example.in
 ```
 
 ## Batch mode
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J QuantumESPRESSO
 #SBATCH -N 2
