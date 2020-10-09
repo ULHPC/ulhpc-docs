@@ -3,7 +3,7 @@
 ## Introduction
 
 Application Performance Snapshot (APS) is a lightweight open source profiling
-tool developed by the Intel VTune developers. 
+tool developed by the Intel VTune developers.
 
 Use Application Performance Snapshot for a quick view into a shared memory or
 MPI application's use of available hardware (CPU, FPU, and memory). Application
@@ -18,30 +18,31 @@ particular aspects of application performance.
 
 ## Prerequisites
 
-**Optional:** Use the following software to get an advanced metric set when
-running Application Performance Snapshot:
+??? tips "Optional Configuration"
+    **Optional:** Use the following software to get an advanced metric set when
+    running Application Performance Snapshot:
 
-* Recommended compilers: Intel C/C++ or Fortran Compiler (other compilers can
-  be used, but information about OpenMP imbalance is only available from the
-  Intel OpenMP library)
-* Use Intel MPI library version 2017 or later. Other MPICH-based MPI
-  implementations can be used, but information about MPI imbalance is only
-  available from the Intel MPI library. There is no support for OpenMPI.
+    * Recommended compilers: Intel C/C++ or Fortran Compiler (other compilers can
+      be used, but information about OpenMP imbalance is only available from the
+      Intel OpenMP library)
+    * Use Intel MPI library version 2017 or later. Other MPICH-based MPI
+      implementations can be used, but information about MPI imbalance is only
+      available from the Intel MPI library. There is no support for OpenMPI.
 
-**Optional:** Enable system-wide monitoring to reduce collection overhead and
-collect memory bandwidth measurements. Use one of these options to enable
-system-wide monitoring:
+    **Optional:** Enable system-wide monitoring to reduce collection overhead and
+    collect memory bandwidth measurements. Use one of these options to enable
+    system-wide monitoring:
 
-* Set the `/proc/sys/kernel/perf_event_paranoid` value to 0 (or less), or
-* Install the Intel VTune Amplifier drivers. Driver sources are available in
-  `<APS_install_dir>/internal/sepdk/src`. Installation instructions are
-  available online at
-  https://software.intel.com/en-us/vtune-amplifier-help-building-and-installing-the-sampling-drivers-for-linux-targets.
+    * Set the `/proc/sys/kernel/perf_event_paranoid` value to 0 (or less), or
+    * Install the Intel VTune Amplifier drivers. Driver sources are available in
+      `<APS_install_dir>/internal/sepdk/src`. Installation instructions are
+      available online at
+      https://software.intel.com/en-us/vtune-amplifier-help-building-and-installing-the-sampling-drivers-for-linux-targets.
 
 Before running the tool, set up your environment appropriately:
 
-```
-module purge 
+```bash
+module purge
 module load swenv/default-env/v1.2-20191021-production
 module load tools/VTune/2019_update4
 module load toolchain/intel/2019a
@@ -51,7 +52,7 @@ module load toolchain/intel/2019a
 
 Run the following commands (interactive mode):
 
-```
+```bash
 # Compilation
 $ icc -qopenmp example.c
 
@@ -61,7 +62,7 @@ aps --collection-mode=all -r report_output ./a.out
 
 `aps -help` will list out `--collection-mode=<mode>` available in APS.
 
-```
+```bash
 # To create a .html file
 aps-report -g report_output
 
@@ -78,7 +79,7 @@ $ aps-report <result_dir>
 ```
 
 Example for the batch script:
-```
+```bash
 #!/bin/bash -l
 #SBATCH -J APS
 #SBATCH -N 1
@@ -87,7 +88,7 @@ Example for the batch script:
 #SBATCH -p batch
 #SBATCH --nodelist=node0xx
 
-module purge 
+module purge
 module load swenv/default-env/v1.2-20191021-production
 module load tools/VTune/2019_update4
 module load toolchain/intel/2019a
@@ -100,7 +101,7 @@ aps --collection-mode=all -r report_output ./a.out
 To compile just `MPI` application run `$ mpiicc example.c` and for `MPI+OpenMP` run `$ mpiicc -qopenmp example.c`
 
 Example for the batch script:
-```
+```bash
 #!/bin/bash -l
 #SBATCH -J APS
 #SBATCH -N 2
@@ -109,7 +110,7 @@ Example for the batch script:
 #SBATCH -p batch
 #SBATCH --reservation=<name>
 
-module purge 
+module purge
 module load swenv/default-env/v1.2-20191021-production
 module load tools/VTune/2019_update4
 module load toolchain/intel/2019a
@@ -150,73 +151,72 @@ The below figure shows the hybrid(MPI+OpenMP) programming analysis results:
       design, tune, and check threading design options without disrupting a
       regular environment
 
-## Quick Metrics Reference
+??? info "Quick Metrics Reference"
+    The following metrics are collected with Application Performance Snapshot.
+    Additional detail about each of these metrics is available in the
+    [Intel VTune Amplifier online help](https://software.intel.com/en-us/vtune-amplifier-help-cpu-metrics-reference).
 
-The following metrics are collected with Application Performance Snapshot.
-Additional detail about each of these metrics is available in the
-[Intel VTune Amplifier online help](https://software.intel.com/en-us/vtune-amplifier-help-cpu-metrics-reference).
+    **Elapsed Time**: Execution time of specified application in seconds.
 
-**Elapsed Time**: Execution time of specified application in seconds.
+    **SP GFLOPS**: Number of single precision giga-floating point operations
+    calculated per second. All double operations are converted to two single
+    operations. SP GFLOPS metrics are only available for 3rd Generation Intel Core
+    processors, 5th Generation Intel processors, and 6th Generation Intel
+    processors.
 
-**SP GFLOPS**: Number of single precision giga-floating point operations
-calculated per second. All double operations are converted to two single
-operations. SP GFLOPS metrics are only available for 3rd Generation Intel Core
-processors, 5th Generation Intel processors, and 6th Generation Intel
-processors.
+    **Cycles per Instruction Retired (CPI)**: The amount of time each executed
+    instruction took measured by cycles. A CPI of 1 is considered acceptable for
+    high performance computing (HPC) applications, but different application
+    domains will have varied expected values. The CPI value tends to be greater
+    when there is long-latency memory, floating-point, or SIMD operations,
+    non-retired instructions due to branch mispredictions, or instruction
+    starvation at the front end.
 
-**Cycles per Instruction Retired (CPI)**: The amount of time each executed
-instruction took measured by cycles. A CPI of 1 is considered acceptable for
-high performance computing (HPC) applications, but different application
-domains will have varied expected values. The CPI value tends to be greater
-when there is long-latency memory, floating-point, or SIMD operations,
-non-retired instructions due to branch mispredictions, or instruction
-starvation at the front end.
+    **MPI Time**: Average time per process spent in MPI calls. This metric does not
+    include the time spent in `MPI_Finalize`. High values could be caused by high
+    wait times inside the library, active communications, or sub-optimal settings
+    of the MPI library. The metric is available for MPICH-based MPIs.
 
-**MPI Time**: Average time per process spent in MPI calls. This metric does not
-include the time spent in `MPI_Finalize`. High values could be caused by high
-wait times inside the library, active communications, or sub-optimal settings
-of the MPI library. The metric is available for MPICH-based MPIs.
+    **MPI Imbalance**: CPU time spent by ranks spinning in waits on communication
+    operations. A high value can be caused by application workload imbalance
+    between ranks, or non-optimal communication schema or MPI library settings.
+    This metric is available only for Intel MPI Library version 2017 and later.
 
-**MPI Imbalance**: CPU time spent by ranks spinning in waits on communication
-operations. A high value can be caused by application workload imbalance
-between ranks, or non-optimal communication schema or MPI library settings.
-This metric is available only for Intel MPI Library version 2017 and later.
+    **OpenMP Imbalance**: Percentage of elapsed time that your application wastes
+    at OpenMP synchronization barriers because of load imbalance. This metric is
+    only available for the Intel OpenMP Runtime Library.
 
-**OpenMP Imbalance**: Percentage of elapsed time that your application wastes
-at OpenMP synchronization barriers because of load imbalance. This metric is
-only available for the Intel OpenMP Runtime Library.
+    **CPU Utilization**: Estimate of the utilization of all logical CPU cores on
+    the system by your application. Use this metric to help evaluate the parallel
+    efficiency of your application. A utilization of 100% means that your
+    application keeps all of the logical CPU cores busy for the entire time that it
+    runs. Note that the metric does not distinguish between useful application work
+    and the time that is spent in parallel runtimes.
 
-**CPU Utilization**: Estimate of the utilization of all logical CPU cores on
-the system by your application. Use this metric to help evaluate the parallel
-efficiency of your application. A utilization of 100% means that your
-application keeps all of the logical CPU cores busy for the entire time that it
-runs. Note that the metric does not distinguish between useful application work
-and the time that is spent in parallel runtimes.
+    **Memory Stalls**: Indicates how memory subsystem issues affect application
+    performance. This metric measures a fraction of slots where pipeline could be
+    stalled due to demand load or store instructions. If the metric value is high,
+    review the Cache and DRAM Stalls and the percent of remote accesses metrics to
+    understand the nature of memory-related performance bottlenecks. If the average
+    memory bandwidth numbers are close to the system bandwidth limit, optimization
+    techniques for memory bound applications may be required to avoid memory
+    stalls.
 
-**Memory Stalls**: Indicates how memory subsystem issues affect application
-performance. This metric measures a fraction of slots where pipeline could be
-stalled due to demand load or store instructions. If the metric value is high,
-review the Cache and DRAM Stalls and the percent of remote accesses metrics to
-understand the nature of memory-related performance bottlenecks. If the average
-memory bandwidth numbers are close to the system bandwidth limit, optimization
-techniques for memory bound applications may be required to avoid memory
-stalls.
+    **FPU Utilization**: The effective FPU usage while the application was running.
+    Use the FPU Utilization value to evaluate the vector efficiency of your
+    application. The value is calculated by estimating the percentage of operations
+    that are performed by the FPU. A value of 100% means that the FPU is fully
+    loaded. Any value over 50% requires additional analysis. FPU metrics are only
+    available for 3rd Generation Intel Core processors, 5th Generation Intel
+    processors, and 6th Generation Intel processors.
 
-**FPU Utilization**: The effective FPU usage while the application was running.
-Use the FPU Utilization value to evaluate the vector efficiency of your
-application. The value is calculated by estimating the percentage of operations
-that are performed by the FPU. A value of 100% means that the FPU is fully
-loaded. Any value over 50% requires additional analysis. FPU metrics are only
-available for 3rd Generation Intel Core processors, 5th Generation Intel
-processors, and 6th Generation Intel processors.
+    **I/O Operations**: The time spent by the application while reading data from
+    the disk or writing data to the disk. **Read** and **Write** values denote mean
+    and maximum amounts of data read and written during the elapsed time. This
+    metric is only available for MPI applications.
 
-**I/O Operations**: The time spent by the application while reading data from
-the disk or writing data to the disk. **Read** and **Write** values denote mean
-and maximum amounts of data read and written during the elapsed time. This
-metric is only available for MPI applications.
-
-**Memory Footprint**: Average per-rank and per-node consumption of both virtual
-and resident memory.
+    **Memory Footprint**: Average per-rank and per-node consumption of both virtual
+    and resident memory.
 
 ## Documentation and Resources
 
