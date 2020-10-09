@@ -11,7 +11,7 @@ for supporting flexible control files in scientific simulations.
 For more information about libctl, please refer https://libctl.readthedocs.io/en/latest/
 
 ### Availble versions of libctl in UL-HPC:
-```shell
+```bash
 chem/libctl/3.2.2-intel-2017a
 chem/libctl/4.0.0-intel-2018a
 chem/libctl/4.0.0-intel-2019a
@@ -23,7 +23,7 @@ certain novel two-body matrix elements (integrals) over Cartesian
 Gaussian functions used in modern atomic and molecular theory.
 
 ### Availble versions of Libint in UL-HPC:
-```shell
+```bash
 chem/Libint/1.1.6-GCC-8.2.0-2.31.1
 chem/Libint/1.2.1-intel-2018a
 ```
@@ -34,7 +34,7 @@ The aim is to provide a portable, well tested and reliable set of exchange and
 correlation functionals that can be used by all the ETSF codes and also other codes.
 
 ### Availble versions of Libxc in UL-HPC:
-```shell
+```bash
 chem/libxc/3.0.0-intel-2017a
 chem/libxc/3.0.1-intel-2018a
 chem/libxc/4.2.3-intel-2019a
@@ -56,7 +56,7 @@ and is thus compatible with the majority of the codes used in the community.
 The PLUMED license (L-GPL) also allows it to be interfaced with proprietary software.
 
 ### Availble versions of PLUMED in UL-HPC:
-```shell
+```bash
 chem/PLUMED/2.4.2-intel-2018a
 chem/PLUMED/2.5.1-foss-2019a
 chem/PLUMED/2.5.1-intel-2019a
@@ -80,7 +80,7 @@ The parallel code is controlled via the scripting language Python,
 which gives the software its great flexibility.
 
 ### Availble versions of ESPResSo in UL-HPC:
-```shell
+```bash
 phys/ESPResSo/3.3.1-intel-2017a-parallel
 phys/ESPResSo/3.3.1-intel-2018a-parallel
 phys/ESPResSo/4.0.2-intel-2019a
@@ -98,7 +98,7 @@ which is in XML format and user-extendable. The package also contains a
 command-line utility for investigating units and converting values.
 
 ### Availble versions of UDUNITS in UL-HPC:
-```shell
+```bash
 phys/UDUNITS/2.2.26-GCCcore-8.2.0
 ```
 For more information about tutorial and documention about UDUNITS, please
