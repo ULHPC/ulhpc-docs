@@ -1,16 +1,9 @@
-1. [Introduction](#introduction)
-2. [Available versions of FDS in UL-HPC](#available-versions-of-ansys-in-ul-hpc)
-3. [Interactive mode](#interactive mode)
-4. [Batch mode](#batch mode)
-5. [Additional information](#additional information)
-
-## Introduction
 [Fire Dynamics Simulator (FDS)](https://pages.nist.gov/fds-smv/) is a large-eddy simulation (LES)
 code for low-speed flows, with an emphasis on smoke and heat transport from fires.
 
-## Available versions of FDS in UL-HPC
-
-The following version of FDS is available in UL-HPC
+## Available versions of FDS in ULHPC
+To check available versions of FDS at ULHPC type `module spider abaqus`.
+The following versions of FDS are available in ULHPC: 
 ```shell
 # Available versions
 phys/FDS/6.7.1-intel-2018a
@@ -25,14 +18,14 @@ To try FDS in the interactive mode, please follow the following steps:
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation
-$ srun -p batch --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
-# Load the required version of ansys
+# Load the required version of FDS and needed environment
 $ module purge
 $ module load swenv/default-env/devel
 $ module load phys/FDS/6.7.3-intel-2019a
 
-# example in fds 
+# Example in fds 
 $ fds example.fds
 ```
 
@@ -54,12 +47,13 @@ $ fds example.fds
 #SBATCH --mail-user=myemailaddress@universityname.domain
 #SBATCH --mail-type=BEGIN,END
 
+# To get basic info. about the job
 echo "== Starting run at $(date)"
 echo "== Job ID: ${SLURM_JOBID}"
 echo "== Node list: ${SLURM_NODELIST}"
 echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
 
-# Load the modules
+# Load the required version of FDS and needed environment
 module purge
 module load swenv/default-env/devel
 module load phys/FDS/6.7.3-intel-2019a
@@ -84,12 +78,13 @@ srun fds example.fds
 #SBATCH --mail-user=myemailaddress@universityname.domain
 #SBATCH --mail-type=BEGIN,END
 
+# To get basic info. about the job
 echo "== Starting run at $(date)"
 echo "== Job ID: ${SLURM_JOBID}"
 echo "== Node list: ${SLURM_NODELIST}"
 echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
 
-# Load the modules
+# Load the required version of FDS and needed environment
 module purge
 module load swenv/default-env/devel
 module load phys/FDS/6.7.3-intel-2019a

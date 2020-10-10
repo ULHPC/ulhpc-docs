@@ -18,22 +18,22 @@ asked questions](https://gmsh.info/doc/texinfo/gmsh.html#Frequently-asked-questi
 The [source code repository](https://gitlab.onelab.info/gmsh/gmsh/) contains many examples written using both the
 built-in script language and the API (see e.g. the tutorials and the and [demos](https://gitlab.onelab.info/gmsh/gmsh/tree/master/demos)).
 
-### Available versions of Gmsh in UL-HPC
-To check available versions of Gmsh at UL-HPC type `module spider gmsh`.
-Below it shows list of available versions of Gmsh in UL-HPC. 
+### Available versions of Gmsh in ULHPC
+To check available versions of Gmsh at ULHPC type `module spider gmsh`.
+Below it shows list of available versions of Gmsh in ULHPC. 
 ```bash
 cae/gmsh/4.3.0-intel-2018a
 cae/gmsh/4.4.0-intel-2019a
 ```
-### To work with Gmsh interactively on UL-HPC:
+### To work with Gmsh interactively on ULHPC:
 ```bash
 # From your local computer
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation
-$ srun -p batch --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
-# Load the module and its environment
+# Load the module for Gmesh and neeed environment
 $ module purge
 $ module load swenv/default-env/v1.2-20191021-production
 $ module load cae/gmsh/4.4.0-intel-2019a
@@ -48,18 +48,18 @@ It is based on an open and flexible architecture made of reusable components.
 SALOME is a cross-platform solution. It is distributed under the terms of the GNU LGPL license.
 You can download both the source code and the executables from this site.
 
-To know more about salome documentation please refer to https://www.salome-platform.org/user-section/salome-tutorials
+To know more about salome documentation please refer https://www.salome-platform.org/user-section/salome-tutorials
 
-### Available versions of SALOME in UL-HPC
-To check available versions of SALOME at UL-HPC type `module spider salome`.
-Below it shows list of available versions of SALOME in UL-HPC.
+### Available versions of SALOME in ULHPC
+To check available versions of SALOME at ULHPC type `module spider salome`.
+Below it shows list of available versions of SALOME in ULHPC.
 
 ```bash
 cae/Salome/8.5.0-intel-2018a
 cae/Salome/8.5.0-intel-2019a
 ```
 
-### To work with SALOME interactively on UL-HPC:
+### To work with SALOME interactively on ULHPC:
 
 ```bash
 # From your local computer
@@ -68,7 +68,7 @@ $ ssh -X iris-cluster
 # Reserve the node for interactive computation
 $ srun -p batch --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
-# Load the module and its environment
+# Load the module Salome and needed environment
 $ module purge
 $ module load swenv/default-env/v1.2-20191021-production
 $ module load cae/Salome/8.5.0-intel-2019a
