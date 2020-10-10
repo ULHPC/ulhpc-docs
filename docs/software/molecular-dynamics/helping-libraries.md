@@ -3,7 +3,7 @@ This is [libctl](https://github.com/NanoComp/libctl), a Guile-based library
 for supporting flexible control files in scientific simulations.
 For more information about libctl, please refer https://libctl.readthedocs.io/en/latest/
 
-### Availble versions of libctl in UL-HPC:
+### Available versions of libctl in ULHPC:
 ```bash
 chem/libctl/3.2.2-intel-2017a
 chem/libctl/4.0.0-intel-2018a
@@ -15,7 +15,7 @@ Libint library is used to evaluate the traditional (electron repulsion) and
 certain novel two-body matrix elements (integrals) over Cartesian
 Gaussian functions used in modern atomic and molecular theory.
 
-### Availble versions of Libint in UL-HPC:
+### Available versions of Libint in ULHPC:
 ```bash
 chem/Libint/1.1.6-GCC-8.2.0-2.31.1
 chem/Libint/1.2.1-intel-2018a
@@ -26,7 +26,7 @@ chem/Libint/1.2.1-intel-2018a
 The aim is to provide a portable, well tested and reliable set of exchange and
 correlation functionals that can be used by all the ETSF codes and also other codes.
 
-### Availble versions of Libxc in UL-HPC:
+### Available versions of Libxc in ULHPC:
 ```bash
 chem/libxc/3.0.0-intel-2017a
 chem/libxc/3.0.1-intel-2018a
@@ -36,6 +36,7 @@ chem/libxc/4.3.4-iccifort-2019.1.144-GCC-8.2.0-2.31.1
 ```
 
 ## PLUMED
+[![](https://i2.wp.com/bioexcel.eu/wp-content/uploads/2019/08/PLUMED-logo.png?fit=910%2C910&ssl=1&w=640){: style="width:300px;float: right;" }](url)
 [PLUMED](https://www.plumed.org/) works together with some of the most popular MD engines,
 such as ACEMD, Amber, DL_POLY, GROMACS, LAMMPS, NAMD, OpenMM, DFTB+, ABIN, CP2K, i-PI, PINY-MD,
 and Quantum Espresso. In addition, PLUMED can be used to augment the capabilities of
@@ -48,7 +49,7 @@ The API is accessible from multiple languages (C, C++, FORTRAN, and Python),
 and is thus compatible with the majority of the codes used in the community.
 The PLUMED license (L-GPL) also allows it to be interfaced with proprietary software.
 
-### Availble versions of PLUMED in UL-HPC:
+### Available versions of PLUMED in ULHPC:
 ```bash
 chem/PLUMED/2.4.2-intel-2018a
 chem/PLUMED/2.5.1-foss-2019a
@@ -58,6 +59,7 @@ For more information about tutorial and documention about PLUMED, please
 refer https://www.plumed.org/doc-v2.6/user-doc/html/cambridge.html
 
 ## ESPResSo
+[![](https://espressomd.org/wordpress/wp-content/uploads/2013/03/logo_500x500.png){: style="width:300px;float: right;" }](url)
 [ESPResSo](http://espressomd.org/wordpress/) is a highly versatile software package for performing and analyzing
 scientific Molecular Dynamics many-particle simulations of coarse-grained
 atomistic or bead-spring models as they are used in soft matter research in physics,
@@ -72,7 +74,7 @@ supercomputers with hundreds of CPUs, and some modules have also support for GPU
 The parallel code is controlled via the scripting language Python,
 which gives the software its great flexibility.
 
-### Availble versions of ESPResSo in UL-HPC:
+### Available versions of ESPResSo in ULHPC:
 ```bash
 phys/ESPResSo/3.3.1-intel-2017a-parallel
 phys/ESPResSo/3.3.1-intel-2018a-parallel
@@ -83,6 +85,7 @@ For more information about tutorial and documention about ESPResSo, please
 refer http://espressomd.org/wordpress/documentation/
 
 ## UDUNITS
+[![](https://www.unidata.ucar.edu/images/logo.png){: style="width:300px;float: right;" }](url)
 The [UDUNITS](https://www.unidata.ucar.edu/software/udunits/) package supports
 units of physical quantities. Its C library provides for arithmetic
 manipulation of units and for conversion of numeric values between
@@ -90,7 +93,7 @@ compatible units. The package contains an extensive unit database,
 which is in XML format and user-extendable. The package also contains a
 command-line utility for investigating units and converting values.
 
-### Availble versions of UDUNITS in UL-HPC:
+### Available version of UDUNITS in ULHPC:
 ```bash
 phys/UDUNITS/2.2.26-GCCcore-8.2.0
 ```

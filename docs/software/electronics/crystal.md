@@ -1,3 +1,4 @@
+[![](https://www.crystal.unito.it/images/slide2_cry17.png){: style="width:300px;float: right;" }](url)
 The  [CRYSTAL](https://www.crystal.unito.it/index.php) package
 performs `ab  initio` calculations  of  the  ground
 state  energy,  energy gradient, electronic wave function and properties
@@ -11,9 +12,9 @@ as a linear combination of Bloch functions (BF) defined in terms of
 local functions (hereafter indicated as ’Atomic Orbitals’, AOs). 
 
 
-## Available versions of CRYSTAL in UL-HPC
+## Available versions of CRYSTAL in ULHPC
 To check available versions of CRYSTAL at UL-HPC type `module spider crystal`.
-Below it shows list of available versions of CRYSTAL in UL-HPC. 
+Below it shows list of available versions of CRYSTAL in ULHPC. 
 ```bash
 chem/CRYSTAL/17-intel-2017a-1.0.1
 chem/CRYSTAL/17-intel-2018a-1.0.1
@@ -30,14 +31,17 @@ $ ssh -X iris-cluster
 # Reserve the node for interactive computation
 $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
-# Load the modules
+# Load the module crytal and needed environment
 $ module purge
 $ module load chem/CRYSTAL/17-intel-2019a-1.0.2
 
 $ Pcrystal >& log.out
 ```
-Please note your input file should be named just as `INPUT`. Pcrytal automatically
-will recognize the INPUT file from the folder where you are currently in.
+
+!!! warning 
+    Please note your input file should be named just as `INPUT`. Pcrytal automatically
+    will recognize the INPUT file from the folder where you are currently in.
+    
 
 ## Batch mode
 ```bash
@@ -55,12 +59,13 @@ will recognize the INPUT file from the folder where you are currently in.
 #SBATCH --mail-user=myemailaddress@universityname.domain
 #SBATCH --mail-type=BEGIN,END
 
+# To get basic info. about the job
 echo "== Starting run at $(date)"
 echo "== Job ID: ${SLURM_JOBID}"
 echo "== Node list: ${SLURM_NODELIST}"
 echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
 
-# Load the modules
+# Load the module crytal and needed environment
 module purge
 module load chem/CRYSTAL/17-intel-2019a-1.0.2
 
@@ -73,3 +78,4 @@ about CRYSTAL, please refer http://tutorials.crystalsolutions.eu/
 !!! tip
     If you find some issues with the instructions above,
     please file a [support ticket](https://hpc.uni.lu/support).
+    

@@ -1,3 +1,4 @@
+[![](https://www.vasp.at/images/logo.png){: style="width:300px;float: right;" }](url)
 [VASP](https://www.vasp.at/documentation/) is a package for performing ab initio quantum-mechanical molecular dynamics (MD)
 using pseudopotentials and a plane wave basis set. The approach implemented in VASP
 is based on a finite-temperature local-density approximation (with the free energy as variational quantity)
@@ -5,9 +6,9 @@ and an exact evaluation of the instantaneous electronic ground state at each MD 
 using efficient matrix diagonalization schemes and an efficient Pulay mixing.
 
 
-## Available versions of VASP in UL-HPC
-To check available versions of VASP at UL-HPC type `module spider vasp`.
-Below it shows list of available versions of VASP in UL-HPC.
+## Available versions of VASP in ULHPC
+To check available versions of VASP at ULHPC type `module spider vasp`.
+Below it shows list of available versions of VASP in ULHPC.
 ```bash
 phys/VASP/5.4.4-intel-2017a
 phys/VASP/5.4.4-intel-2018a
@@ -15,7 +16,7 @@ phys/VASP/5.4.4-intel-2019a
 ```
 
 ## Interactive mode
-To open an Quantum VASP in the interactive mode, please follow the following steps:
+To open VASP in the interactive mode, please follow the following steps:
 
 ```bash
 # From your local computer
@@ -24,7 +25,7 @@ $ ssh -X iris-cluster
 # Reserve the node for interactive computation
 $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
-# Load the modules
+# Load the module vasp and needed environment 
 $ module purge
 $ module load phys/VASP/5.4.4-intel-2019a
 
@@ -47,12 +48,13 @@ $ vasp_[std/gam/ncl]
 #SBATCH --mail-user=myemailaddress@universityname.domain
 #SBATCH --mail-type=BEGIN,END
 
+# To get basic info. about the job
 echo "== Starting run at $(date)"
 echo "== Job ID: ${SLURM_JOBID}"
 echo "== Node list: ${SLURM_NODELIST}"
 echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
 
-# Load the modules
+# Load the module vasp and needed environment 
 module purge
 module load phys/VASP/5.4.4-intel-2019a
 

@@ -1,3 +1,4 @@
+[![](https://lh3.googleusercontent.com/proxy/JudSfSMQdWnxdHRiJEgJj_WuQaM9D4DdAfH54GcGkgynXOFv1NRP2HUcSjkGJhVF-LRzKaXSnMIlP243UfvqnStwm8IsKqltEx9adkdXGuCXMbiWkox6VaBsTosKH4IHuik){: style="width:300px;float: right;" }](url)
 [GROMACS](http://www.gromacs.org/) is a versatile package to perform molecular dynamics, i.e. simulate
 the Newtonian equations of motion for systems with hundreds to millions of particles.
 It is primarily designed for biochemical molecules like proteins, lipids and nucleic
@@ -6,9 +7,9 @@ is extremely fast at calculating the nonbonded interactions
 (that usually dominate simulations) many groups are also using it
 for research on non-biological systems, e.g. polymers.
 
-## Available versions of GROMACS in UL-HPC
-To check available versions of GROMACS at UL-HPC type `module spider gromacs`.
-Below it shows list of available versions of GROMACS in UL-HPC. 
+## Available versions of GROMACS in ULHPC
+To check available versions of GROMACS at ULHPC type `module spider gromacs`.
+Below it shows list of available versions of GROMACS in ULHPC. 
 ```bash
 bio/GROMACS/2016.3-intel-2017a-hybrid
 bio/GROMACS/2016.5-intel-2018a-hybrid
@@ -28,7 +29,7 @@ $ ssh -X iris-cluster
 # Reserve the node for interactive computation
 $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
-# Load the modules
+# Load the module gromacs and needed environment 
 $ module purge
 $ module load bio/GROMACS/2019.2-intel-2019a
 
@@ -51,12 +52,13 @@ $ gmx_mpi mdrun <all your GMX job specification options in here>
 #SBATCH --mail-user=myemailaddress@universityname.domain
 #SBATCH --mail-type=BEGIN,END
 
+# To get basic info. about the job
 echo "== Starting run at $(date)"
 echo "== Job ID: ${SLURM_JOBID}"
 echo "== Node list: ${SLURM_NODELIST}"
 echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
 
-# Load the modules
+# Load the module gromacs and needed environment 
 module purge
 module load bio/GROMACS/2019.2-intel-2019a
 

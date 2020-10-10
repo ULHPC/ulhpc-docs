@@ -1,3 +1,4 @@
+[![](https://d7umqicpi7263.cloudfront.net/img/product/9615ba9a-d797-4aab-852a-e5c0bc869e44/c85079c9-c6f0-4c93-9576-4b0c7a3eaedf.png){: style="width:300px;float: right;" }](url)
 [NAMD](https://www.ks.uiuc.edu/Research/namd/), recipient of a 2002 Gordon Bell Award and a 2012 Sidney Fernbach Award,
 is a parallel molecular dynamics code designed for high-performance simulation
 of large biomolecular systems. Based on Charm++ parallel objects,
@@ -9,9 +10,8 @@ download binaries for a wide variety of platforms.
 Our tutorials show you how to use NAMD and VMD for biomolecular modeling. 
 
 ## Available versions of NAMD in ULHPC
-To check available versions of NAMD at UL-HPC type `module spider namd`.
-Below it shows list of available versions of NAMD in UL-HPC.
-
+To check available versions of NAMD at ULHPC type `module spider namd`.
+Below it shows list of available versions of NAMD in ULHPC.
 ```bash
 chem/NAMD/2.12-intel-2017a-mpi
 chem/NAMD/2.12-intel-2018a-mpi
@@ -19,7 +19,7 @@ chem/NAMD/2.13-foss-2019a-mpi
 ```
 
 ## Interactive mode
-To open an NAMD in the interactive mode, please follow the following steps:
+To open NAMD in the interactive mode, please follow the following steps:
 
 ```bash
 # From your local computer
@@ -28,7 +28,7 @@ $ ssh -X iris-cluster
 # Reserve the node for interactive computation
 $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
-# Load the modules
+# Load the module namd and needed environment 
 $ module purge
 $ module load chem/NAMD/2.12-intel-2018a-mpi
 
@@ -51,12 +51,13 @@ $ namd2 +setcpuaffinity +p4 config_file > output_file
 #SBATCH --mail-user=myemailaddress@universityname.domain
 #SBATCH --mail-type=BEGIN,END
 
+# To get basic info. about the job
 echo "== Starting run at $(date)"
 echo "== Job ID: ${SLURM_JOBID}"
 echo "== Node list: ${SLURM_NODELIST}"
 echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
 
-# Load the modules
+# Load the module namd and needed environment 
 module purge
 module load chem/NAMD/2.12-intel-2018a-mpi
 
@@ -68,4 +69,5 @@ please refer https://www.ks.uiuc.edu/Research/namd/2.14/ug/
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).  
+    please file a [support ticket](https://hpc.uni.lu/support).
+

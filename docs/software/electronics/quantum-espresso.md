@@ -1,3 +1,4 @@
+[![](https://www.quantum-espresso.org/user/themes/quantum/images/logo_header.jpg){: style="width:300px;float: right;" }](url)
 [Quantum ESPRESSO](https://www.quantum-espresso.org/project/manifesto)
 is an integrated suite of Open-Source computer codes for electronic-structure
 calculations and materials modeling at the nanoscale.
@@ -14,9 +15,9 @@ contributing their own codes or by implementing their own
 ideas into existing codes.
 
 
-## Available versions of Quantum ESPRESSO in UL-HPC
-To check available versions of Quantum ESPRESSO at UL-HPC type `module spider quantum espresso`.
-Below it shows list of available versions of Quantum ESPRESSO in UL-HPC. 
+## Available versions of Quantum ESPRESSO in ULHPC
+To check available versions of Quantum ESPRESSO at ULHPC type `module spider quantum espresso`.
+Below it shows list of available versions of Quantum ESPRESSO in ULHPC. 
 ```bash
 chem/QuantumESPRESSO/6.1-intel-2017a
 chem/QuantumESPRESSO/6.1-intel-2018a-maxter500
@@ -35,7 +36,7 @@ $ ssh -X iris-cluster
 # Reserve the node for interactive computation
 $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
-# Load the modules
+# Load the module quantumespresso and needed environment 
 $ module purge
 $ module load chem/QuantumESPRESSO/6.4.1-intel-2019a
 
@@ -58,12 +59,13 @@ $ pw.x -input example.in
 #SBATCH --mail-user=myemailaddress@universityname.domain
 #SBATCH --mail-type=BEGIN,END
 
+# To get basic info. about the job
 echo "== Starting run at $(date)"
 echo "== Job ID: ${SLURM_JOBID}"
 echo "== Node list: ${SLURM_NODELIST}"
 echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
 
-# Load the modules
+# Load the module quantumespresso and needed environment 
 module purge
 module load chem/QuantumESPRESSO/6.4.1-intel-2019a
 
@@ -76,4 +78,5 @@ please refer https://www.quantum-espresso.org/resources/users-manual
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).        
+    please file a [support ticket](https://hpc.uni.lu/support).
+
