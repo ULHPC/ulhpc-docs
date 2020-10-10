@@ -200,6 +200,7 @@ nav:
         - PAPI:            'development/performance-debugging-tools/papi.md'
         - Scalasca:        'development/performance-debugging-tools/scalasca.md'
         - Valgrind:        'development/performance-debugging-tools/valgrind.md'
+        - APS:             'development/performance-debugging-tools/aps.md'
     - Containers:
         - About:       'containers/index.md'
         - Singularity: 'containers/singularity.md'
