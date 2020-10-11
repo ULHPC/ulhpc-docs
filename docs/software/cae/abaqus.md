@@ -41,7 +41,11 @@ $ module load cae/ABAQUS/2017-hotfix-1803
 $ module load vis/libGLU/9.0.0-intel-2017a
 # /!\ IMPORTANT: ADAPT the url to point to YOUR licence server!!!
 $ export LM_LICENSE_FILE=xyz
-
+# Check License server token available
+$ abaqus licensing lmstat -a
+lmutil - Copyright (c) 1989-2015 Flexera Software LLC. All Rights Reserved.
+Flexible License Manager status on Wed 4/8/2020 14:25
+[...]
 $ abaqus job=job-name input=input.inp cpus=n gpus=n
 ```
 where `n=number of cores` and for gpus `n=number of GPUs`.
