@@ -85,7 +85,8 @@ module load cae/ABAQUS/2017-hotfix-1803
 module load vis/libGLU/9.0.0-intel-2017a
 # /!\ IMPORTANT: ADAPT the url to point to YOUR licence server!!!
 export LM_LICENSE_FILE=xyz
-
+# check licenses available
+abaqus licensing lmstat -a
 abaqus-mpi job=job input=input.inp interactive
 ```
 
