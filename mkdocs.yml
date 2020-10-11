@@ -232,6 +232,8 @@ nav:
     - Monitoring: 'infra/monitoring.md'
     - Virtualization:
       - KVM: 'virtualization/kvm/index.md'
+  - Contributing:
+    - Overview: 'contributing/index.md'
   ##############
   - Web Portals:
     - ULHPC Website: https://hpc.uni.lu
