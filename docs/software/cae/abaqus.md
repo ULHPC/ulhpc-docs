@@ -1,4 +1,4 @@
-[![](https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_d05e3566f966e83e3ef9753e3aed4086/abaqus.png){: style="width:300px;float: right;" }](url)
+[![](https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_d05e3566f966e83e3ef9753e3aed4086/abaqus.png){: style="width:300px;float: right;" }](https://www.3ds.com/products-services/simulia/products/abaqus/abaquscae/)
 
 The [Abaqus Unified FEA](https://www.3ds.com/products-services/simulia/products/abaqus/abaquscae/)
 product suite offers powerful and complete solutions
