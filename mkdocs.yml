@@ -234,11 +234,11 @@ nav:
       - KVM: 'virtualization/kvm/index.md'
   - Contributing:
     - Overview: 'contributing/index.md'
+    - Semantic Versioning: 'contributing/versioning.md'
   ##############
   - Web Portals:
     - ULHPC Website: https://hpc.uni.lu
     - Technical Documentation: https://hpc-docs.uni.lu
-    - IPA Portal: https://***REMOVED***
     - OpenOn Demand: https://hpc.uni.lu
     - Live Platform status: https://hpc.uni.lu/live-status/motd
     - ULHPC Tutorials: https://ulhpc-tutorials.readthedocs.io/

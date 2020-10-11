@@ -138,13 +138,19 @@ git push  # sync master branch
 
 Throughout all its projects, the ULHPC team has enforced a stricter workflow for Git repository summarized in the below figure:
 
-![](gitflow.png)
+![](images/gitflow.png)
 
 The main concepts inherited from both advanced workflows ([Git-flow](http://nvie.com/posts/a-successful-git-branching-model/) and [Github Flow](https://guides.github.com/introduction/flow/)) are listed below:
 
 * The central repository holds **two main branches** with an infinite lifetime:
-    - `production`: the *production-ready* branch
+    - `production`: the *production-ready* branch, used for the deployed version of the documentation.
     - `devel | master` (`master` in this case): the main (master) branch where the latest developments intervene (name depends on repository purpose). This is the *default* branch you get when you clone the repository.
 * You should **always setup** your local copy of the repository with `make setup`
     - ensure also you have installed the `gitflow` extension
     - ensure you are properly made the initial configuration of git -- see also [sample `.gitconfig`](https://github.com/Falkor/dotfiles/blob/master/git/.gitconfig)
+
+In compliment to the [Github Flow](https://guides.github.com/introduction/flow/) described above, several additional operations are facilitated by the root `Makefile`:
+
+* Initial setup of the repository with `make setup`
+* Release of a new version of this repository with `make start_bump_{patch,minor,major}` and `make release`
+    - this action is managed by the ULHPC team according to the [semantic versioning](versioning.md) scheme implemented within this this project.
