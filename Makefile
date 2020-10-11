@@ -1,6 +1,6 @@
 ####################################################################################
 # Makefile (configuration file for GNU make - see http://www.gnu.org/software/make/)
-# Time-stamp: <Mon 2020-04-27 13:54 svarrette>
+# Time-stamp: <Sun 2020-10-11 22:46 svarrette>
 #     __  __       _         __ _ _
 #    |  \/  | __ _| | _____ / _(_) | ___
 #    | |\/| |/ _` | |/ / _ \ |_| | |/ _ \
@@ -85,8 +85,9 @@ PIP_REQUIREMENTS_FILE = requirements.txt
 ##################### Main targets #####################
 # Default targets - append your own with TARGETS += <xXx>
 TARGETS =
-# Default targets for 'make clean' - append your own with CLEAN_TARGETS += clean-<xXx>
+# Default targets for 'make [dist]clean' - append your own with [DIST]CLEAN_TARGETS += [dist]clean-<xXx>
 CLEAN_TARGETS = clean-gitstats
+DISTCLEAN_TARGETS =
 # Default targets for 'make setup' - append your own with SETUP_TARGETS += setup-<xXx>
 SETUP_TARGETS = setup-git setup-gitflow setup-submodules setup-subtrees setup-githooks
 # Default targets for 'make git-clone'. To append your own:
@@ -114,12 +115,15 @@ ifneq (,$(wildcard $(MAKEFILE_BEFORE)))
 include $(MAKEFILE_BEFORE)
 endif
 
+### Below default could be set in .Makefile.{local,before}
+# Default python virtualenv - by default under venv/$(basename <dir>)
+PYTHON_VENV_DIR ?= venv
+PYTHON_VENV     ?= $(SUPER_DIR)
 # Default Git clone parameters (url, target path for the working directory)
 PYENV_GIT_REPO_URL            ?= https://github.com/pyenv/pyenv.git
 PYENV_GIT_REPO                ?= $(XDG_DATA_HOME)/pyenv
 PYENV_VIRTUALENV_GIT_REPO_URL ?= https://github.com/pyenv/pyenv-virtualenv.git
 PYENV_VIRTUALENV_GIT_REPO     ?= $(XDG_DATA_HOME)/pyenv/plugins/pyenv-virtualenv
-
 
 # Required rule : what's to be done each time
 all: $(TARGETS)
@@ -148,6 +152,13 @@ info:
 	@echo "SRC_HOOKSDIR           -> '$(SRC_HOOKSDIR)'"
 	@echo "SRC_HOOKSDIR_TO_ROOTDIR-> '$(SRC_HOOKSDIR_TO_ROOTDIR)'"
 	@echo "SRC_PRECOMMIT_HOOK     -> '$(SRC_PRECOMMIT_HOOK)'"
+	@echo "--- Python stuff ---"
+	@echo "PYTHON_VENV_DIR        -> '${PYTHON_VENV_DIR}'"
+	@echo "PYTHON_VENV            -> '${PYTHON_VENV}'"
+	@echo "PYENV_GIT_REPO_URL     -> '${PYENV_GIT_REPO_URL}'"
+	@echo "PYENV_GIT_REPO         -> '${PYENV_GIT_REPO}'"
+	@echo "PYENV_VIRTUALENV_GIT_REPO_URL -> '${PYENV_VIRTUALENV_GIT_REPO_URL}'"
+	@echo "PYENV_VIRTUALENV_GIT_REPO     -> '${PYENV_VIRTUALENV_GIT_REPO}'"
 	@echo ""
 	@echo "Consider running 'make versioninfo' to get info on git versionning variables"
 
@@ -156,12 +167,19 @@ archive: clean
 	tar -C ../ -cvzf ../$(SUPER_DIR)-$(VERSION).tar.gz --exclude ".svn" --exclude ".git"  --exclude "*~" --exclude ".DS_Store" $(SUPER_DIR)/
 
 ############################### Git Bootstrapping rules ################################
-.PHONE: setup setup-git setup-gitflow setup-xdg
+.PHONE: setup setup-git setup-gitflow setup-xdg setup-git-lfs
 setup: $(SETUP_TARGETS)
 	@if [ -d "$(GIT_ROOTDIR)/$(SRC_HOOKSDIR)" ]; then \
 		echo "=> setup local git hooks"; \
 		$(MAKE) setup_git_hooks; \
 	fi
+	@if [ -f .gitattributes ] && [ -n "$(shell grep '=lfs' .gitattributes)" ]; then \
+		echo "=> setup git-lfs"; \
+		$(MAKE) setup-git-lfs; \
+	fi
+	# @if [ -f .envrc ]; then \
+	# 	$(MAKE) setup-direnv; \
+	# fi
 
 setup-git:
 	-git fetch origin
@@ -196,6 +214,16 @@ _setup_git_hooks:
 		fi ; \
 	fi
 
+ifneq (,$(shell which git-lfs 2>/dev/null))
+setup-git-lfs:
+	git-lfs pull
+else
+setup-git-lfs:
+	@echo "*** ERROR *** git-lfs extension not found on your system"
+	@echo "              install it (see https://git-lfs.github.com/) and run "
+	@echo "        make $@"
+endif
+
 setup-xdg:
 	@echo "=> setup XDG Base Directories"
 	mkdir -p $(XDG_CONFIG_HOME)
@@ -205,7 +233,7 @@ setup-xdg:
 define __SHELL_PROFILE_SOURCE_IF_PRESENT
 
 # Add the following to your favorite shell config (~/.bashrc or ~/.zshrc etc.)
-if [ -f "$1"]; then
+if [ -f "$1" ]; then
 	. $1
 fi
 
@@ -218,6 +246,7 @@ setup-shell-pyenv:
 
 
 # --- Direnv
+.PHONY: setup-direnv setup-pyenv setup-venv setup-python
 setup-direnv: setup-xdg
 	@echo "=> setup direnv -- see https://varrette.gforge.uni.lu/tutorials/pyenv.html"
 	mkdir -p $(XDG_CONFIG_HOME)/direnv
@@ -244,6 +273,10 @@ setup-pyenv: setup-xdg git-clone-pyenv git-clone-pyenv-virtualenv
 		curl -o $(XDG_CONFIG_HOME)/pyenv/init.sh https://raw.githubusercontent.com/Falkor/dotfiles/master/shell/available/pyenv.sh; \
 	fi
 	@$(MAKE) setup-shell-pyenv
+
+# --- venv
+setup-venv:
+	python3 -m venv $(PYTHON_VENV_DIR)/$(PYTHON_VENV)
 
 # --- python
 ifneq (,$(wildcard ./$(PIP_REQUIREMENTS_FILE)))
@@ -291,7 +324,7 @@ versioninfo:
 	@echo "next minor version: $(NEXT_MINOR_VERSION)"
 	@echo "next patch version: $(NEXT_PATCH_VERSION)"
 
-### Git flow management - this should be factorized
+### Git flow management
 ifeq ($(HAS_GITFLOW),)
 start_bump_patch start_bump_minor start_bump_major release:
 	@echo "Unable to find git-flow on your system. "
@@ -397,8 +430,9 @@ subtree_up:
 endif
 
 
-### Clean option
+### [Dist]Clean option
 clean: $(CLEAN_TARGETS)
+distclean: $(DISTCLEAN_TARGETS)
 
 clean-gitstats:
 	@if [ -d "$(GITSTATS_DIR)" ]; then \
