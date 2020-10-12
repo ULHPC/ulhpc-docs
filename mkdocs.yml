@@ -87,7 +87,12 @@ nav:
     - BigData Analytics:           'software/bigdata/index.md'
     - Bioinformatics/Life Science: 'software/bio/index.md'
     - Containers:                  'containers/index.md'
-    - Computer Aided Engineering:  'software/cae/index.md'
+    - Computer Aided Eng. (CAE):
+        - ANSYS : 'software/cae/ansys.md'
+        - OpenFOAM : 'software/cae/openfoam.md'
+        - Abaqus : 'software/cae/abaqus.md'
+        - FDS : 'software/cae/fds.md'
+        - Meshing-Tools : 'software/cae/meshing-tools.md'
     - Computational Chemistry:     'software/chem/index.md'
     - Deep and Machine Learning:   'software/ml/index.md'
     - Earth Sciences:              'software/geo/index.md'
@@ -188,6 +193,7 @@ nav:
         - PAPI:            'development/performance-debugging-tools/papi.md'
         - Scalasca:        'development/performance-debugging-tools/scalasca.md'
         - Valgrind:        'development/performance-debugging-tools/valgrind.md'
+        - APS:             'development/performance-debugging-tools/aps.md'
     - Containers:
         - About:       'containers/index.md'
         - Singularity: 'containers/singularity.md'
@@ -231,11 +237,13 @@ nav:
     - Monitoring: 'infra/monitoring.md'
     - Virtualization:
       - KVM: 'virtualization/kvm/index.md'
+  - Contributing:
+    - Overview: 'contributing/index.md'
+    - Semantic Versioning: 'contributing/versioning.md'
   ##############
   - Web Portals:
     - ULHPC Website: https://hpc.uni.lu
     - Technical Documentation: https://hpc-docs.uni.lu
-    - IPA Portal: https://***REMOVED***
     - OpenOn Demand: https://hpc.uni.lu
     - Live Platform status: https://hpc.uni.lu/live-status/motd
     - ULHPC Tutorials: https://ulhpc-tutorials.readthedocs.io/
