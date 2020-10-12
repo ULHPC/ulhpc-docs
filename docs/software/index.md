@@ -1,3 +1,3 @@
 # List of all softwares
 
-{!software/softwares.md!}
+{!../data/all_softwares.md!}
