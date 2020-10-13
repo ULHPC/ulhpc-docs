@@ -146,11 +146,8 @@ nav:
         - EasyBuild:         'development/build-tools/easybuild.md'
         - Spack:             'development/build-tools/spack.md'
     - Programming Models:
-        - Overview: 'development/programming-models/index.md'
-        - MPI Stack:
-          - About:   'development/programming-models/mpi/index.md'
-          - OpenMPI: 'development/programming-models/mpi/openmpi.md'
-        - OpenMP:  'development/programming-models/openmp/openmp.md'
+        - OpenMP:  'development/programming-models/openmp.md'
+        - MPI:     'development/programming-models/mpi.md'
         - CUDA:    'development/programming-models/cuda.md'
         - Kokkos : 'development/programming-models/kokkos.md'
         - UPC :    'development/programming-models/upc.md'
