@@ -88,19 +88,20 @@ nav:
     - Bioinformatics/Life Science: 'software/bio/index.md'
     - Containers:                  'containers/index.md'
     - Computer Aided Engineering:  'software/cae/index.md'
-    - Electronic Structure:
-        - ABINIT: 'software/electronics/abinit.md'
-        - Quantum ESPRESSO: 'software/electronics/quantum-espresso.md'
-        - VASP: 'software/electronics/vasp.md'
-        - ASE: 'software/electronics/ase.md'
-        - CRYSTAL: 'software/electronics/crystal.md'
-        - Meep: 'software/electronics/meep.md'
-    - Molecular Dynamics:
-        - CP2K: 'software/molecular-dynamics/cp2k.md'
-        - GROMACS: 'software/molecular-dynamics/gromacs.md'
-        - NAMD: 'software/molecular-dynamics/namd.md'
-        - NWChem: 'software/molecular-dynamics/nwchem.md'
-        - Other Libraries: 'software/molecular-dynamics/helping-libraries.md'
+    - Computational Chemistry:
+        - Electronic Structure:
+            - ABINIT: 'software/computational-chemistry/electronics/abinit.md'
+            - Quantum ESPRESSO: 'software/computational-chemistry/electronics/quantum-espresso.md'
+            - VASP: 'software/computational-chemistry/electronics/vasp.md'
+            - ASE: 'software/computational-chemistry/electronics/ase.md'
+            - CRYSTAL: 'software/computational-chemistry/electronics/crystal.md'
+            - Meep: 'software/computational-chemistry/electronics/meep.md'
+        - Molecular Dynamics:
+            - CP2K: 'software/computational-chemistry/molecular-dynamics/cp2k.md'
+            - GROMACS: 'software/computational-chemistry/molecular-dynamics/gromacs.md'
+            - NAMD: 'software/computational-chemistry/molecular-dynamics/namd.md'
+            - NWChem: 'software/computational-chemistry/molecular-dynamics/nwchem.md'
+            - Other Libraries: 'software/computational-chemistry/molecular-dynamics/helping-libraries.md'
     - Deep and Machine Learning:   'software/ml/index.md'
     - Earth Sciences:              'software/geo/index.md'
     - Mathematics & Statistics:    'software/maths/index.md'
