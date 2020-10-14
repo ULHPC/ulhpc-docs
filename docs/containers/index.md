@@ -41,19 +41,19 @@ Like [Docker](https://www.docker.com/), Singularity provide a way to pull images
 ```
 You should see the following output:
 
-
-<pre><font color="#3465A4">INFO:   </font> Converting OCI blobs to SIF format
-<font color="#3465A4">INFO:   </font> Starting build...</pre>
-<pre>Getting image source signatures
-Copying blob d72e567cc804 done  
-Copying blob 0f3630e5ff08 done  
-Copying blob b6a83d81d1f4 done  
-Copying config bbea2a0436 done  
-Writing manifest to image destination
-Storing signatures
-...
-<font color="#3465A4">INFO:   </font> Creating SIF file...
-</pre>
+!!! note "Output"
+    <pre><font color="#3465A4">INFO:   </font> Converting OCI blobs to SIF format
+    <font color="#3465A4">INFO:   </font> Starting build...</pre>
+    <pre>Getting image source signatures
+    Copying blob d72e567cc804 done  
+    Copying blob 0f3630e5ff08 done  
+    Copying blob b6a83d81d1f4 done  
+    Copying config bbea2a0436 done  
+    Writing manifest to image destination
+    Storing signatures
+    ...
+    <font color="#3465A4">INFO:   </font> Creating SIF file...
+    </pre>
 
 You may now test the container by executing some inner commands:
 
@@ -61,19 +61,21 @@ You may now test the container by executing some inner commands:
 >$ singularity exec ubuntu_latest.sif cat /etc/os-release
 
 ```
-<pre>NAME=&quot;Ubuntu&quot;
-VERSION=&quot;20.04.1 LTS (Focal Fossa)&quot;
-ID=ubuntu
-ID_LIKE=debian
-PRETTY_NAME=&quot;Ubuntu 20.04.1 LTS&quot;
-VERSION_ID=&quot;20.04&quot;
-HOME_URL=&quot;https://www.ubuntu.com/&quot;
-SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;
-BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;
-PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;
-VERSION_CODENAME=focal
-UBUNTU_CODENAME=focal
-</pre>
+
+!!! note "Output"
+    <pre>NAME=&quot;Ubuntu&quot;
+    VERSION=&quot;20.04.1 LTS (Focal Fossa)&quot;
+    ID=ubuntu
+    ID_LIKE=debian
+    PRETTY_NAME=&quot;Ubuntu 20.04.1 LTS&quot;
+    VERSION_ID=&quot;20.04&quot;
+    HOME_URL=&quot;https://www.ubuntu.com/&quot;
+    SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;
+    BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;
+    PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;
+    VERSION_CODENAME=focal
+    UBUNTU_CODENAME=focal
+    </pre>
 
 
 ### Building container images
@@ -130,6 +132,50 @@ singularity run --nv cuda_samples.sif
 
 
 The lastest command should print:
+!!! note "Output"
+    <pre>CUDA Device Query (Runtime API) version (CUDART static linking)
+    
+    Detected 1 CUDA Capable device(s)
+    
+    Device 0: &quot;Tesla V100-SXM2-16GB&quot;
+      CUDA Driver Version / Runtime Version          10.2 / 10.1
+      CUDA Capability Major/Minor version number:    7.0
+      Total amount of global memory:                 16160 MBytes (16945512448 bytes)
+      (80) Multiprocessors, ( 64) CUDA Cores/MP:     5120 CUDA Cores
+      GPU Max Clock rate:                            1530 MHz (1.53 GHz)
+      Memory Clock rate:                             877 Mhz
+      Memory Bus Width:                              4096-bit
+      L2 Cache Size:                                 6291456 bytes
+      Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
+      Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
+      Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
+      Total amount of constant memory:               65536 bytes
+      Total amount of shared memory per block:       49152 bytes
+      Total number of registers available per block: 65536
+      Warp size:                                     32
+      Maximum number of threads per multiprocessor:  2048
+      Maximum number of threads per block:           1024
+      Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+      Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+      Maximum memory pitch:                          2147483647 bytes
+      Texture alignment:                             512 bytes
+      Concurrent copy and kernel execution:          Yes with 5 copy engine(s)
+      Run time limit on kernels:                     No
+      Integrated GPU sharing Host Memory:            No
+      Support host page-locked memory mapping:       Yes
+      Alignment requirement for Surfaces:            Yes
+      Device has ECC support:                        Enabled
+      Device supports Unified Addressing (UVA):      Yes
+      Device supports Compute Preemption:            Yes
+      Supports Cooperative Kernel Launch:            Yes
+      Supports MultiDevice Co-op Kernel Launch:      Yes
+      Device PCI Domain ID / Bus ID / location ID:   0 / 30 / 0
+      Compute Mode:
+         &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
+    
+    deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 10.2, CUDA Runtime Version = 10.1, NumDevs = 1
+    Result = PASS
+    </pre>
 
 
 ### MPI and Singularity containers
@@ -143,11 +189,11 @@ from: debian:jessie
 %post
     # Install software
     apt-get update
-    apt-get install -y file g++ gcc gfortran make gdb strace realpath wget --no-install-recommends
+    apt-get install -y file g++ gcc gfortran make gdb strace realpath wget curl --no-install-recommends
 
     # Install mpich
-    wget -q http://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz
-    tar xf mpich-3.1.4.tar.gz
+    curl -kO https://www.mpich.org/static/downloads/3.1.4/mpich-3.1.4.tar.gz
+    tar -zxvf mpich-3.1.4.tar.gz
     cd mpich-3.1.4
     ./configure --disable-fortran --enable-fast=all,O3 --prefix=/usr
     make -j$(nproc)
@@ -176,14 +222,42 @@ Once the container image is ready, you can use it for example inside the followi
 ```slurm
 #!/bin/bash -l
 #SBATCH -J ParallelJob
-#SBATCH -n 128
-#SBATCH -c 1
-#SBATCH --time=0-01:00:00
+#SBATCH -N 2
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=05:00
 #SBATCH -p batch
 #SBATCH --qos=qos-besteffort
 
-# Multi-node parallel application OpenMPI launcher, using 128 distributed cores
 module load tools/Singularity
-srun -n $SLURM_NTASKS run singularity run mpi_osu.sif
+srun -n $SLURM_NTASKS singularity run mpi_osu.sif
 ```
+The content of the output file:
+
+!!! note "Output"
+    <pre>
+    \# OSU MPI Bandwidth Test v5.3.2
+    \# Size      Bandwidth (MB/s)
+    1                       0.35
+    2                       0.78
+    4                       1.70
+    8                       3.66
+    16                      7.68
+    32                     16.38
+    64                     32.86
+    128                    66.61
+    256                    80.12
+    512                    97.68
+    1024                  151.57
+    2048                  274.60
+    4096                  408.71
+    8192                  456.51
+    16384                 565.84
+    32768                 582.62
+    65536                 587.17
+    131072                630.64
+    262144                656.45
+    524288                682.37
+    1048576               712.19
+    2097152               714.55
+    </pre>
 
