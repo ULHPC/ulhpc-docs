@@ -129,6 +129,7 @@ To check available versions of Intel MPI at ULHPC type `module -r spider '.*tool
     toolchain/intel/2017a
     toolchain/intel/2018a
     toolchain/intel/2019a
+    toolchain/intel/2019b
     ```
 
 ### Interactive mode
