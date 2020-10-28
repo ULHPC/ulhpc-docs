@@ -30,6 +30,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
 # Load the module abinit and needed environment
 $ module purge
+$ module load swenv/default-env/devel
 $ module load chem/ABINIT/8.10.2-intel-2019a
 
 $ abinit < example.in 
@@ -39,33 +40,22 @@ $ abinit < example.in
 ```shell
 #!/bin/bash -l
 #SBATCH -J ABINIT
+#SBATCH -A <project name>
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
 
-# Write out the stdout+stderr in a file
-#SBATCH -o output.txt
-
-# Mail me on job start & end
-#SBATCH --mail-user=myemailaddress@universityname.domain
-#SBATCH --mail-type=BEGIN,END
-
-# To get basic info. about the job
-echo "== Starting run at $(date)"
-echo "== Job ID: ${SLURM_JOBID}"
-echo "== Node list: ${SLURM_NODELIST}"
-echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
-
 # Load the module abinit and needed environment
 module purge
+module load swenv/default-env/devel
 module load chem/ABINIT/8.10.2-intel-2019a
 
-srun abinit < input.files &> out
+srun ${SLURM_NTASKS} abinit < input.files &> out
 ```
 ## Additional information
 To know more information about ABINIT tutorial and documentation,
-please refer to [ABINIT tutorials](https://docs.abinit.org/tutorial/).
+please refer to [ABINIT tutorial](https://docs.abinit.org/tutorial/).
 
 !!! tip
     If you find some issues with the instructions above,

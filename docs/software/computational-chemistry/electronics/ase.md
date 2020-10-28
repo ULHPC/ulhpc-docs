@@ -30,7 +30,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
 # Load the module ase and needed environment
 $ module purge
-$ module load swenv/default-env/v1.2-20191021-production
+$ module load swenv/default-env/devel
 $ module load chem/ASE/3.17.0-intel-2019a-Python-3.7.2
 
 $ python3 example.py
@@ -45,23 +45,10 @@ $ python3 example.py
 #SBATCH --time=00:30:00
 #SBATCH -p batch
 
-# Write out the stdout+stderr in a file
-#SBATCH -o output.txt
-
-# Mail me on job start & end
-#SBATCH --mail-user=myemailaddress@universityname.domain
-#SBATCH --mail-type=BEGIN,END
-
-# To get basic info. about the job
-echo "== Starting run at $(date)"
-echo "== Job ID: ${SLURM_JOBID}"
-echo "== Node list: ${SLURM_NODELIST}"
-echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
-
 # Load the module ase and needed environment
-module purge
-module load swenv/default-env/v1.2-20191021-production
-module load chem/ASE/3.17.0-intel-2019a-Python-3.7.2
+$ module purge
+$ module load swenv/default-env/devel
+$ module load chem/ASE/3.17.0-intel-2019a-Python-3.7.2
 
 python3 example.py
 ```
