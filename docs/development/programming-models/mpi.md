@@ -109,7 +109,7 @@ module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 export OMP_NUM_THREADS=2
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-srun -n 56 ./a.out                                                                                         
+srun -n ${SLURM_NTASKS} ./a.out                                                                                         
 ```
 
 
