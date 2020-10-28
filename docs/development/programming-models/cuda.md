@@ -44,7 +44,7 @@ $ module load swenv/default-env/v1.2-20191021-production
 $ module load system/CUDA/10.1.243 
 ```
 
-??? info "To check if you really succeed on having GPU:"
+??? info "To check if you really succeeded on having GPU:"
     ```bash  
     $ nvidia-smi
     Tue Oct  6 15:15:11 2020       
