@@ -83,6 +83,7 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J APS
 #SBATCH -N 1
+#SBATCH -A <project name>
 #SBATCH -c 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -105,7 +106,8 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J APS
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH -A <project name>
+#SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 #SBATCH --reservation=<name>
@@ -119,7 +121,7 @@ module load toolchain/intel/2019a
 export MPS_STAT_LEVEL=2
 # An option for the OpenMP+MPI application
 export OMP_NUM_THREADS=2
-srun -n 32 aps --collection-mode=mpi -r result_output ./a.out
+srun -n ${SLURM_NTASKS} aps --collection-mode=mpi -r result_output ./a.out
 ```
 
 The below figure shows the hybrid(MPI+OpenMP) programming analysis results:

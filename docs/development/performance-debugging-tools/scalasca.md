@@ -70,8 +70,9 @@ $ scalasca -examine result_folder
 ```bash
 #!/bin/bash -l
 #SBATCH -J Scalasca
+#SBATCH -A <project name>
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 
@@ -81,7 +82,7 @@ module load toolchain/foss/2018a
 module load perf/Scalasca/2.3.1-foss-2018a
 module load perf/Score-P/3.1-foss-2018a
 
-scalasca -analyze srun -n 56 ./a.out
+scalasca -analyze srun -n ${SLURM_NTASKS} ./a.out
 ```
 
 Report collection and visualization

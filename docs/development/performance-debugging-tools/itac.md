@@ -40,6 +40,7 @@ Example for the batch script:
 ```bash
 #!/bin/bash -l
 #SBATCH -J ITAC
+#SBATCH -A <project name>
 #SBATCH -N 1
 #SBATCH -c 16
 #SBATCH --time=00:10:00
@@ -70,8 +71,9 @@ Example for the batch script:
 ```bash
 #!/bin/bash -l
 #SBATCH -J ITAC
+#SBATCH -A <project name>
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 
@@ -81,7 +83,7 @@ module load toolchain/intel/2019a
 module load tools/itac/2019.4.036
 module load vis/GTK+/3.24.8-GCCcore-8.2.0
 
-srun -n 56 -trace-collective ./a.out
+srun -n ${SLURM_NTASKS} -trace-collective ./a.out
 ```
 To collect the result and see the result in GUI use the below commands
 ```bash

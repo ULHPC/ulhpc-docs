@@ -83,6 +83,7 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J Inspector
 #SBATCH -N 1
+#SBATCH -A <project name>
 #SBATCH -c 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -118,7 +119,8 @@ Example for batch script:
 #!/bin/bash -l
 #SBATCH -J Inspector
 #SBATCH -N 2
-#SBATCH -c 56
+#SBATCH -A <project name>
+#SBATCH --ntasks-per-node 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 
@@ -128,7 +130,7 @@ module load toolchain/intel/2019a
 module load tools/Inspector/2019_update4
 module load vis/GTK+/3.24.8-GCCcore-8.2.0
 
-srun -n 56 inspxe-cl -collect=ti2 -r result ./a.out
+srun -n {SLURM_NTASKS} inspxe-cl -collect=ti2 -r result ./a.out
 ```
 
 To see result output:

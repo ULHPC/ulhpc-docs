@@ -73,6 +73,7 @@ To see the result in GUI `$ amplxe-gui my_result`
 ```bash
 #!/bin/bash -l
 #SBATCH -J VTune
+#SBATCH -A <project name>
 #SBATCH -N 1
 #SBATCH -c 28
 #SBATCH --time=00:10:00
@@ -96,8 +97,9 @@ and for `MPI+OpenMP` run `$ mpiicc -qopenmp example.c`
 ```bash
 #!/bin/bash -l
 #SBATCH -J VTune
+#SBATCH -A <project name>
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 
@@ -107,7 +109,7 @@ module load toolchain/intel/2019a
 module load tools/VTune/2019_update4
 module load vis/GTK+/3.24.8-GCCcore-8.2.0
 
-srun -n 56 amplxe-cl -collect uarch-exploration -r vtune_mpi -- ./a.out
+srun -n ${SLURM_NTASKS} amplxe-cl -collect uarch-exploration -r vtune_mpi -- ./a.out
 ```
 
 ```bash

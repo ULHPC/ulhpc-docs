@@ -41,6 +41,7 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J ArmForge
 #SBATCH -N 1
+#SBATCH -A <project name>
 #SBATCH -c 16
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -69,8 +70,9 @@ Example for the batch script:
 ```bash
 #!/bin/bash -l
 #SBATCH -J ArmForge
+#SBATCH -A <project name>
 #SBATCH -N 2
-#SBATCH -c 56
+#SBATCH --ntasks-per-node 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 
@@ -81,13 +83,13 @@ module load tools/ArmForge/19.1
 module load tools/ArmReports/19.1
 
 # for debugging
-$ ddt srun -n 56 ./a .out
+$ ddt srun -n ${SLURM_NTASKS} ./a .out
 
 # for profiling
-$ map srun -n 56 ./a .out
+$ map srun -n ${SLURM_NTASKS} ./a .out
 
 # for analysis
-$ perf-report srun -n 56 ./a .out
+$ perf-report srun -n ${SLURM_NTASKS} ./a .out
 ```
 To see the result
 ![ArmForge report](./images/arm_forge_report.png)
