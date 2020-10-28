@@ -106,7 +106,7 @@ fi
 module purge             # Clean all previously loaded modules
 module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
 srun -n ${SLURM_NTASKS} ./a.out                                                                                         
