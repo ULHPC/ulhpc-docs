@@ -31,6 +31,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
 # Load the module cp2k and needed environment 
 $ module purge
+$ module load swenv/default-env/devel
 $ module load chem/CP2K/6.1-intel-2018a
         
 $ cp2k.popt -i example.inp 
@@ -41,28 +42,17 @@ $ cp2k.popt -i example.inp
 #!/bin/bash -l
 #SBATCH -J CP2K
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH -A <project name>
+#SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
 
-# Write out the stdout+stderr in a file
-#SBATCH -o output.txt
-
-# Mail me on job start & end
-#SBATCH --mail-user=myemailaddress@universityname.domain
-#SBATCH --mail-type=BEGIN,END
-
-# To get basic info. about the job
-echo "== Starting run at $(date)"
-echo "== Job ID: ${SLURM_JOBID}"
-echo "== Node list: ${SLURM_NODELIST}"
-echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
-
 # Load the module cp2k and needed environment 
 module purge
+module load swenv/default-env/devel
 module load chem/CP2K/6.1-intel-2018a
 
-srun cp2k.popt -i example.inp > outputfile.out
+srun -n ${SLURM_NTASKS} cp2k.popt -i example.inp > outputfile.out
 ```
 ## Additional information
 To know more information about CP2K tutorial and documentation,

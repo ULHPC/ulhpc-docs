@@ -26,7 +26,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
 # Load the module nwchem and needed environment 
 $ module purge
-$ module load swenv/default-env/v1.2-20191021-production
+$ module load swenv/default-env/devel
 $ module load chem/NWChem/6.8.revision47-intel-2019a-Python-2.7.15
 
 $ nwchem example
@@ -41,29 +41,17 @@ $ nwchem example
 #!/bin/bash -l
 #SBATCH -J NWChem
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH -A <project name>
+#SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
 
-# Write out the stdout+stderr in a file
-#SBATCH -o output.txt
-
-# Mail me on job start & end
-#SBATCH --mail-user=myemailaddress@universityname.domain
-#SBATCH --mail-type=BEGIN,END
-
-# To get basic info. about the job
-echo "== Starting run at $(date)"
-echo "== Job ID: ${SLURM_JOBID}"
-echo "== Node list: ${SLURM_NODELIST}"
-echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
-
 # Load the module nwchem and needed environment 
 module purge 
-module load swenv/default-env/v1.2-20191021-production
+module load swenv/default-env/devel
 module load chem/NWChem/6.8.revision47-intel-2019a-Python-2.7.15
 
-srun -n 56 nwchem example 
+srun -n ${SLURM_NTASKS} nwchem example 
 ```
 ## Additional information
 To know more information about NWChem tutorial and documentation,

@@ -30,6 +30,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 
 # Load the module namd and needed environment 
 $ module purge
+$ module load swenv/default-env/devel
 $ module load chem/NAMD/2.12-intel-2018a-mpi
 
 $ namd2 +setcpuaffinity +p4 config_file > output_file
@@ -40,28 +41,17 @@ $ namd2 +setcpuaffinity +p4 config_file > output_file
 #!/bin/bash -l
 #SBATCH -J NAMD
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH -A <project name>
+#SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
 
-# Write out the stdout+stderr in a file
-#SBATCH -o output.txt
-
-# Mail me on job start & end
-#SBATCH --mail-user=myemailaddress@universityname.domain
-#SBATCH --mail-type=BEGIN,END
-
-# To get basic info. about the job
-echo "== Starting run at $(date)"
-echo "== Job ID: ${SLURM_JOBID}"
-echo "== Node list: ${SLURM_NODELIST}"
-echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
-
 # Load the module namd and needed environment 
 module purge
+module load swenv/default-env/devel
 module load chem/NAMD/2.12-intel-2018a-mpi
 
-srun namd2 +setcpuaffinity +p56 config_file.namd > output_file
+srun -n ${SLURM_NTASKS} namd2 +setcpuaffinity +p56 config_file.namd > output_file
 ```
 ## Additional information
 To know more information about NAMD tutorial and documentation,
