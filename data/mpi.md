@@ -1,0 +1,5 @@
+| Software                                                                    | Version                                                | Category   | Clusters            | Description                                                  |
+|:----------------------------------------------------------------------------|:-------------------------------------------------------|:-----------|:--------------------|:-------------------------------------------------------------|
+| <p><a href=http://software.intel.com/en-us/intel-mpi-library/>impi</a></p>  | <p>2018.4.274-iccifort-2019.1.144-GCC-8.2.0-2.31.1</p> | <p>MPI</p> | <p>Iris<br>Aion</p> | Intel MPI Library, compatible with MPICH ABI                 |
+| <p><a href=https://software.intel.com/en-us/intel-mpi-library/>impi</a></p> | <p>2018.4.274-iccifortcuda-2019a</p>                   | <p>MPI</p> | <p>Iris</p>         | Intel MPI Library, compatible with MPICH ABI                 |
+| <p><a href=https://www.open-mpi.org/>OpenMPI</a></p>                        | <p>3.1.4-GCC-8.2.0-2.31.1<br>3.1.4-gcccuda-2019a</p>   | <p>MPI</p> | <p>Iris<br>Aion</p> | The Open MPI Project is an open source MPI-3 implementation. |

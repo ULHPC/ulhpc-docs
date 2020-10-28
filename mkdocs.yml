@@ -323,6 +323,8 @@ markdown_extensions:
   - codehilite:
       guess_lang: false
   - footnotes
+  - markdown_include.include:
+      base_path: docs
   - markdown.extensions.admonition
   - pymdownx.arithmatex
   - pymdownx.details
