@@ -35,6 +35,8 @@ To check available versions of CUDA at ULHPC type `module spider system cuda`.
 To reserve the 1 GPU on single node with 4 CPU cores:
 ```bash
 $ srun -N 1 -c 4 -p gpu --gpus=1 --time=00:30:00 --pty --x11 bash -i
+# OR use the 'si-gpu' helper 
+$ si-gpu -N 1 -c 4 -G 1 --x11
 
 # Load the module cuda and needed environment 
 $ module purge
