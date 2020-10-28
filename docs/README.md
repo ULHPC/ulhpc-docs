@@ -15,11 +15,14 @@
 **technical details** for users to make _effective_ use
 of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'s resources.
 
+[![](https://hpc.uni.lu/download/slides/2020-ULHPC-overview.png)](https://hpc.uni.lu/download/slides/2020-ULHPC-overview.pdf))
+
 ## ULHPC Web Portals
 
 
 * [ULHPC Home page](https://hpc.uni.lu) - center news and information: [hpc.uni.lu](https://hpc.uni.lu)
-* [Helpdesk / Ticket Portal](https://hpc-tracker.uni.lu) - open tickets, make requests
+* [Helpdesk / Ticket Portal](https://hpc.uni.lu/support) - open tickets, make requests
+      - Uni.lu Service Now Portal - use your Uni.lu credentials to access.
 * [ULHPC Tutorials](https://ulhpc-tutorials.readthedocs.io/) - HPC tutorials covering many (many) topics: [ulhpc-tutorials.readthedocs.io](https://ulhpc-tutorials.readthedocs.io/)
 
 
