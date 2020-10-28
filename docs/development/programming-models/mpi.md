@@ -144,7 +144,7 @@ module load toolchain/intel/2019a
 unset I_MPI_PMI_LIBRARY  # This is to use mpirun
 
 # Code execution
-$ mpirun -np 6 ./a.out
+$ mpirun -np ${SLURM_NTASKS} ./a.out
 ```
 
 ### Batch job
