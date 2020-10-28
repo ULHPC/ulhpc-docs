@@ -46,7 +46,9 @@ To check available versions of OpenMPI at ULHPC type `module spider openmpi`.
 
 ```bash
 # Reserve the node
-$ srun -p interactive --time=00:10:00 -N 2 --ntasks-per-node=3 --x11 --pty bash -i
+$ srun -p interactive --time=00:10:00 -N 2 --ntasks-per-node=3 --pty bash -i
+# OR, use the 'si' helper script
+$ si --time=00:10:00 -N 2 --ntasks-per-node=3 
 
 # Module the OpenMPI and needed environment 
 $ module purge             # Clean all previously loaded modules
