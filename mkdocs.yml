@@ -1,0 +1,346 @@
+site_name: ULHPC Technical Documentation
+nav:
+  ##########
+  - General:
+    - Home: 'index.md'
+    - Getting Started: 'getting-started.md'
+    - Accounts:
+      - Get an Account:             'accounts/index.md'
+      - Password Policy:            'accounts/passwords.md'
+      - Collaboration Accounts:     'accounts/collaboration_accounts.md'
+      - Identity Management Portal: 'accounts/ipa.md'
+      - Slurm Account Hierarchy:    'accounts/hierarchy.md'
+  ##############
+  - Data Center:
+    - Centre de Calcul (CDC): 'data-center/index.md'
+  #######################
+  - ULHPC Supercomputers:
+    - Overview: 'systems/index.md'
+    - Aion:
+      - Aion System:   'systems/aion/index.md'
+      - Compute Nodes: 'systems/aion/compute.md'
+      - Fast Local Interconnect: 'systems/aion/interconnect.md'
+    #  - Storage:       'filesystems/index.md'
+      - Timeline:      'systems/aion/timeline.md'
+    - Iris:
+      - Iris System:   'systems/iris/index.md'
+      - Compute Nodes: 'systems/iris/compute.md'
+      - Fast Local Interconnect: 'systems/iris/interconnect.md'
+    #  - Storage:       'filesystems/index.md'
+      - Timeline:      'systems/iris/timeline.md'
+    - Live status: https://hpc.uni.lu/live-status/motd
+  #######################
+  - Interconnect:
+    # - Overview:                     'interconnect/index.md'
+    - Fast Infiniband Interconnect: 'interconnect/ib.md'
+    - Ethernet Interconnect:        'interconnect/ethernet.md'
+  #######################
+  - Storage Systems:
+    - Overview:                   'filesystems/index.md'
+    - GPFS/SpectrumScale:         'filesystems/gpfs.md'
+    - Lustre:                     'filesystems/lustre.md'
+    - OneFS Isilon:               'filesystems/isilon.md'
+    - Quotas and Purging:         'filesystems/quotas.md'
+    - Global Directory Structure: 'filesystems/layout.md'
+    - Project Data Management:    'filesystems/project.md'
+    - Scratch Data Management:    'filesystems/scratch.md'
+    - Backups:                    'filesystems/backups.md'
+    - Archiving:                  'filesystems/archiving.md'
+    - Unix File Permissions:      'filesystems/unix-file-permissions.md'
+    - Live status: https://hpc.uni.lu/live-status/motd
+  #################
+  - Access/Connect:
+    - Access Servers:              'connect/access.md'
+    - SSH:                         'connect/ssh.md'
+    - Connect from Windows:        'connect/windows.md'
+    - Connect from MacOS/Linux:    'connect/linux.md'
+    - Troubleshooting:             'connect/troubleshooting.md'
+    # - Open On Demand Portal:       'connect/ood.md'
+    # - Multi-Factor Authentication: 'connect/mfa.md'
+  ##################
+  - Data Management:
+    - Overview:        'filesystems/layout.md'
+    - Data Sharing:    'data/sharing.md'
+    - Data Transfer:   'data/transfer.md'
+    - GDPR Compliance: 'data/gdpr.md'
+    - Backup:          'filesystems/backups.md'
+    - Version Control with Git:   'workflow/git.md'
+    - Sensitive Data Protection:  'data/encryption.md'
+  ##############
+  - Environment:
+    - Overview: 'environment/index.md'
+    - Modules:  'environment/modules.md'
+  ###########
+  - Policies:
+    - Acceptable Use Policy (AUP):               'policies/aup.md'
+    - Downtime and Maintenance:                  'policies/maintenance.md'
+    - Software Update Policy:                    'policies/software.md'
+    - Job Charging Policy:                       'policies/charging-policy.md'
+    - Resource Allocations for Research Project: 'policies/projects.md'
+    - HPC Service Agreement for Externals:       'policies/externals.md'
+    - Expert-level service:                      'support/professional-services.md'
+  ###########
+  - Software:
+    - Supported Software List:     'software/index.md'
+    - Software Set Versioning:     'software/swsets.md'
+    - Compiling/building software: 'development/software/index.md'
+    - RESIF:                       'software/resif.md'
+    - Contributing:                'software/contributing.md'
+    - BigData Analytics:           'software/bigdata/index.md'
+    - Bioinformatics/Life Science: 'software/bio/index.md'
+    - Containers:                  'containers/index.md'
+    - Computer Aided Eng. (CAE):
+        - ANSYS : 'software/cae/ansys.md'
+        - OpenFOAM : 'software/cae/openfoam.md'
+        - Abaqus : 'software/cae/abaqus.md'
+        - FDS : 'software/cae/fds.md'
+        - Meshing-Tools : 'software/cae/meshing-tools.md'
+    - Computational Chemistry:     'software/chem/index.md'
+    - Deep and Machine Learning:   'software/ml/index.md'
+    - Earth Sciences:              'software/geo/index.md'
+    - Mathematics & Statistics:    'software/maths/index.md'
+    - Optimizers:                  'software/optim/index.md'
+    - Performance/Debugging:       'development/performance-debugging-tools/index.md'
+    - Physics:                     'software/phys/index.md'
+    - Toolchains/Compilers:        'development/toolchains/index.md'
+    - Visualization:               'software/visu/index.md'
+
+
+  ###############
+  - Running Jobs:
+    - Slurm Overview: 'slurm/index.md'
+    - Convenient Slurm Commands: 'slurm/commands.md'
+    - Partition/Queues: 'slurm/partitions.md'
+    - Quality of Service (QOS) Policy: 'slurm/qos.md'
+    - Fairshare and Job Accounting: 'slurm/accounting.md'
+    - Limits: 'jobs/limits.md'
+    - Interactive Job: 'jobs/interactive.md'
+    - Batch Job Submission: 'jobs/submit.md'
+    - Best-effort Jobs: 'jobs/best-effort.md'
+    - Launcherchec Scripts Examples: 'slurm/launchers.md'
+    - Affinity: 'jobs/affinity.md'
+    - (Multi-)GPU Jobs: 'jobs/gpu.md'
+    - Memory Management: 'jobs/memory.md'
+    - Best Practices: 'jobs/best-practices.md'
+    - Reservations: 'jobs/reservations.md'
+    - Monitoring: 'jobs/monitoring.md'
+    - Licenses Management: 'slurm/licenses.md'
+    - FAQs: 'jobs/faq.md'
+    - Workflow Tools:
+      - Overview: 'jobs/workflow/indes.md'
+      - GNU Parallel: 'jobs/workflow/gnuparallel.md'
+      - Parsl: 'jobs/workflow/parsl.md'
+      - Snakemake: 'jobs/workflow/snakemake.md'
+      - Spark Cluster: 'bigdata/spark.md'
+    - Jupyter Notebook: 'services/jupyter.md'
+    - Checkpoint/Restart: 'jobs/checkpoint-restart.md'
+  ##############
+  - Development:
+    - Toolchains and Compilers:
+        - Overview: 'development/toolchains/index.md'
+        - FOSS:     'development/toolchains/foss.md'
+        - Intel:    'development/toolchains/intel.md'
+        - LLVM:     'development/compilers/llvm.md'
+        - PGI:      'development/compilers/pgi.md'
+    - Build Tools:
+        - Autoconf and Make: 'development/build-tools/autoconf-make.md'
+        - CMake:             'development/build-tools/cmake.md'
+        - EasyBuild:         'development/build-tools/easybuild.md'
+        - Spack:             'development/build-tools/spack.md'
+    - Programming Models:
+        - Overview: 'development/programming-models/index.md'
+        - MPI Stack:
+          - About:   'development/programming-models/mpi/index.md'
+          - OpenMPI: 'development/programming-models/mpi/openmpi.md'
+        - OpenMP:  'development/programming-models/openmp/openmp.md'
+        - CUDA:    'development/programming-models/cuda.md'
+        - Kokkos : 'development/programming-models/kokkos.md'
+        - UPC :    'development/programming-models/upc.md'
+    - Languages:
+        - Go:    'development/languages/go.md'
+        - Java:  'development/languages/java.md'
+        - Julia: 'development/languages/julia.md'
+        - Python:
+            - About:            'development/languages/python/index.md'
+            - Virtual Env.:     'development/languages/python/venv.md'
+            - Best Practices:   'development/languages/python/best-practices.md'
+            - Python on GPU:    'development/languages/python/python-on-gpu.md'
+            - Scaling Up:       'development/languages/python/scaling-up.md'
+            - Multiprocessing:  'development/languages/python/multiprocessing.md'
+            - mpi4py:           'development/languages/python/mpi4py.md'
+            - Notebook:         'development/languages/python/notebook.md'
+            - Python Profiling: 'development/languages/python/profiling.md'
+            - Python FAQ:       'development/languages/python/faq.md'
+        - R:    'development/languages/r.md'
+        - Ruby: 'development/languages/ruby.md'
+        - Rust: 'development/languages/rust.md'
+    - Libraries:
+        - About:     'development/libraries/index.md'
+        - Boost C++: 'development/libraries/boost.md'
+        - FFTW :     'development/libraries/fftw.md'
+        - HDF5 :     'development/libraries/hdf5.md'
+        - LAPACK :   'development/libraries/lapack.md'
+        - MKL :      'development/libraries/mkl.md'
+        - NetCDF :   'development/libraries/netcdf.md'
+    - Performance/Debugging:
+        - About:           'development/performance-debugging-tools/index.md'
+        - Arm Forge:       'development/performance-debugging-tools/arm-forge.md'
+        - GDB:             'development/performance-debugging-tools/gdb.md'
+        - Intel VTune:     'development/performance-debugging-tools/vtune.md'
+        - Intel Advisor:   'development/performance-debugging-tools/advisor.md'
+        - Intel Inspector: 'development/performance-debugging-tools/inspector.md'
+        - LIKWID:          'development/performance-debugging-tools/likwid.md'
+        - Nvidia Nsight:   'development/performance-debugging-tools/nsight.md'
+        - Roofline Performance Model: 'development/performance-debugging-tools/roofline.md'
+        - PAPI:            'development/performance-debugging-tools/papi.md'
+        - Scalasca:        'development/performance-debugging-tools/scalasca.md'
+        - Valgrind:        'development/performance-debugging-tools/valgrind.md'
+        - APS:             'development/performance-debugging-tools/aps.md'
+    - Containers:
+        - About:       'containers/index.md'
+        - Singularity: 'containers/singularity.md'
+  ###############
+  # - Applications:
+  #   - Overview: 'software/index.md'
+  #########################
+  - Help and Support:
+    - FAQ: 'support/faq.md'
+    - Guidelines: 'support/index.md'
+    - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
+    - ULHPC Consulting Services: 'support/professional-services.md'
+  #########################
+  - Services: 'services/index.md'
+    # - Gitlab: 'services/gitlab.md'
+    # - Gforge: 'service/gforge.md'
+    # - Jupyter : 'services/jupyter.md'
+    # - EtherPad: 'services/etherpad.md'
+    # - PrivateBin: 'services/privatebin.md'
+    # - Databases: 'services/databases.md'
+  #########################
+  - DevOps Management:
+    - Collaborative Development:
+      - SSH: 'tools/ssh.md'
+      - DSH: 'tools/dsh.md'
+      - ClusterShell: 'tools/clustershell.md'
+      - GPG: 'tools/gpg.md'
+      - Git:
+          - Basics: 'git/index.md'
+          - Workflow: 'git/workflow.md'
+      - Password Management: 'tools/password-manager.md'
+    - Configuration Management:
+      - Puppet: 'infra/management/puppet.md'
+      - Ansible: 'infra/management/ansible.md'
+    - Compute Node Provisioning:
+      - FAI: 'infra/deployment/fai.md'
+      - Bright Computing: 'infra/deployment/bright.md'
+      - KickStart: 'infra/deployment/kickstart.md'
+    - Identity Management: 'infra/idm.md'
+    - Resource and Job Management Systems: 'infra/slurm.md'
+    - Monitoring: 'infra/monitoring.md'
+    - Virtualization:
+      - KVM: 'virtualization/kvm/index.md'
+  - Contributing:
+    - Overview: 'contributing/index.md'
+    - Semantic Versioning: 'contributing/versioning.md'
+  ##############
+  - Web Portals:
+    - ULHPC Website: https://hpc.uni.lu
+    - Technical Documentation: https://hpc-docs.uni.lu
+    # - OpenOn Demand: https://hpc.uni.lu
+    - Live Platform status: https://hpc.uni.lu/live-status/motd
+    - ULHPC Tutorials: https://ulhpc-tutorials.readthedocs.io/
+  ##############
+  - Acronyms: 'help/acronyms.md'
+
+# tab Clusters:
+# - Organization: 'layout.md'
+# - Pre-Requisites and Repository Setup: 'setup.md'
+# - Contributing:
+#   - Overview: 'contributing/index.md'
+#   - Directory Layout: 'layout.md'
+#   - Repository Setup and Git Developments: 'contributing/setup.md'
+#   - Semantic Versioning: 'contributing/versioning.md'
+
+# Project Information
+site_name: ULHPC Technical Documentation
+site_description: ULHPC Technical Documentation
+site_author: ULHPC Team
+site_dir: public
+site_url: "https://hpc-docs.uni.lu/"
+
+# Repository
+repo_name: www/ulhpc-docs
+repo_url: https://gitlab.uni.lu/www/ulhpc-docs
+#edit_uri: blob/master/docs/
+
+# Copyright
+copyright: Copyright &copy; 2007 - __YEAR__ UL HPC Team
+
+# Configuration
+# strict: true
+
+theme:
+  name: material
+  logo: images/logo_ULHPC_square.jpg
+  language: en
+  palette:
+    primary: blue
+    accent:  light blue
+  # features:
+  #   - tabs
+
+plugins:
+  - search # necessary for search to work
+  - git-revision-date-localized:
+      type: date
+  - progress
+
+# Extras
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/ULHPC
+    - icon: fontawesome/brands/gitlab
+      link: https://gitlab.uni.lu/ULHPC
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/ULHPC
+
+# Extra stylesheets (incl. Twitter Bootstrap)
+extra_css:
+  - stylesheets/extra.css
+  # - stylesheets/bootstrap.min.css
+# Extra javascript
+extra_javascript:
+  - javascripts/extra.js
+  - javascripts/bootstrap.min.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js
+
+# Extensions
+markdown_extensions:
+  - attr_list
+  # notes, warnings, hints, ...
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - footnotes
+  - markdown_include.include:
+      base_path: docs
+  - markdown.extensions.admonition
+  - pymdownx.arithmatex
+  - pymdownx.details
+  # Icons from Emoji extensions, giving access to following icon sets:
+  # - Material Design: https://materialdesignicons.com/
+  # - FontAwesome:     https://fontawesome.com/icons?d=gallery&m=free
+  # – Octicons:        https://octicons.github.com/
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  # auto-link HTML, FTP, and email links
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      social_url_shorthand: true
+  - pymdownx.smartsymbols
+  # code blocks with syntax highlighting, graphs
+  - pymdownx.superfences
+  - toc:
+      permalink: true
