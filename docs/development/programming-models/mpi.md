@@ -169,7 +169,7 @@ module load swenv/default-env/latest
 module load toolchain/intel/2019a
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-srun -n 56 ./a.out
+srun -n ${SLURM_NTASKS} ./a.out
 ```
 
 Example for MPI+OpenMP (hybrid):
