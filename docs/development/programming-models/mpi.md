@@ -326,7 +326,6 @@ threads or processes close to each other.
     #SBATCH -N 2                         # Number of nodes
     #SBATCH --ntasks-per-node=28         # Number of tasks per node
     #SBATCH --time=00:05:00              # Total run time of the job allocation
-    ##SBATCH --cpus-per-task=2           # Option for OpenMP 
     #SBATCH -p batch
 
     # Load module OpenMPI and needed environment 
