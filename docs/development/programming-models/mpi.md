@@ -367,7 +367,7 @@ To know more information about process pinning for OpenMPI please refer [OpenMPI
     set I_MPI_PIN_ORDER=compact          # Order the processes in a compact way to avoid costly memory access. 
 
     #srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-    srun -n 56 ./a.out
+    srun -n ${SLURM_NTASKS} ./a.out
     ```
 
 ??? info "Example for MPI+OpenMP (hybrid)"
