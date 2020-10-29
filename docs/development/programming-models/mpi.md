@@ -191,7 +191,7 @@ module purge             # Clean all previously loaded modules
 module load swenv/default-env/latest
 module load toolchain/intel/2019a
 
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
 srun -n 56 ./a.out
