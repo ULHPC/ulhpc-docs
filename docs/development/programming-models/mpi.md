@@ -46,7 +46,9 @@ To check available versions of OpenMPI at ULHPC type `module spider openmpi`.
 
 ```bash
 # Reserve the node
-$ srun -p interactive --time=00:10:00 -N 2 --ntasks-per-node=3 --x11 --pty bash -i
+$ srun -p interactive --time=00:10:00 -N 2 --ntasks-per-node=3 --pty bash -i
+# OR, use the 'si' helper script
+$ si --time=00:10:00 -N 2 --ntasks-per-node=3 
 
 # Module the OpenMPI and needed environment 
 $ module purge             # Clean all previously loaded modules
@@ -89,7 +91,9 @@ Example for MPI+OpenMP (hybrid):
 #!/bin/bash -l
 #SBATCH -J OpenMPI (MPI+OpenMP)
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=28
+#SBATCH --ntasks-per-node=14
+#SBATCH --ntasks-per-socket=7
+#SBATCH -c 2
 #SBATCH --time=00:05:00
 #SBATCH -p batch
 
@@ -102,10 +106,10 @@ fi
 module purge             # Clean all previously loaded modules
 module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-srun -n 56 ./a.out                                                                                         
+srun -n ${SLURM_NTASKS} ./a.out                                                                                         
 ```
 
 
@@ -125,6 +129,7 @@ To check available versions of Intel MPI at ULHPC type `module -r spider '.*tool
     toolchain/intel/2017a
     toolchain/intel/2018a
     toolchain/intel/2019a
+    toolchain/intel/2019b
     ```
 
 ### Interactive mode
@@ -139,7 +144,7 @@ module load toolchain/intel/2019a
 unset I_MPI_PMI_LIBRARY  # This is to use mpirun
 
 # Code execution
-$ mpirun -np 6 ./a.out
+$ mpirun -np ${SLURM_NTASKS} ./a.out
 ```
 
 ### Batch job
@@ -319,9 +324,10 @@ threads or processes close to each other.
     #!/bin/bash -l
     #SBATCH -J MPI+OpenMP (hybrid)
     #SBATCH -N 2                         # Number of nodes
-    #SBATCH --ntasks-per-node=28         # Number of tasks per node
+    #SBATCH --ntasks-per-node=14         # Number of MPI processes/tasks per node
+    #SBATCH --ntasks-per-socket=7        # Number of MPI processes/tasks per socket/CPU
+    #SBATCH -c 2                         # multithreading per MPI process
     #SBATCH --time=00:05:00              # Total run time of the job allocation
-    ##SBATCH --cpus-per-task=2           # Option for OpenMP 
     #SBATCH -p batch
 
     # Load module OpenMPI and needed environment 
@@ -331,11 +337,10 @@ threads or processes close to each other.
 
     # Option for OpenMP threads 
     #export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-    # Or 
     export OMP_NUM_THREADS=2            # Number of threads (openmp)
 
     # Set mpi processes close to each other  and print out CPU affinity    
-    mpirun -np 56 --bind-to core --map-by core --report-bindings ./a.out
+    mpirun -np ${SLURM_NTASKS} --bind-to core --map-by core --report-bindings ./a.out
     ```
      
 To know more information about process pinning for OpenMPI please refer [OpenMPI pinning](https://www.open-mpi.org/doc/v3.0/man1/mpirun.1.php)
