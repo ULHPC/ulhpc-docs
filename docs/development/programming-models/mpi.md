@@ -340,7 +340,7 @@ threads or processes close to each other.
     export OMP_NUM_THREADS=2            # Number of threads (openmp)
 
     # Set mpi processes close to each other  and print out CPU affinity    
-    mpirun -np 56 --bind-to core --map-by core --report-bindings ./a.out
+    mpirun -np ${SLURM_NTASKS} --bind-to core --map-by core --report-bindings ./a.out
     ```
      
 To know more information about process pinning for OpenMPI please refer [OpenMPI pinning](https://www.open-mpi.org/doc/v3.0/man1/mpirun.1.php)
