@@ -283,7 +283,7 @@ module purge             # Clean all previously loaded modules
 module load swenv/default-env/v0.1-20170602-production
 module load mpi/MVAPICH2/2.3a-GCC-6.3.0-2.28
 
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
 srun -n ${SLURM_NTASKS} ./a.out
