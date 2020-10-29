@@ -56,7 +56,7 @@ $ module load swenv/default-env/latest
 $ module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 
 # Code execution
-$ mpirun --oversubscribe -np 6 ./a.out
+$ srun -n ${SLURM_NTASKS} ./a.out
 ```
 
 ### Batch job
@@ -82,7 +82,7 @@ module load swenv/default-env/latest
 module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-srun -n 56 ./a.out
+srun -n ${SLURM_NTASKS} ./a.out
 ```
 
 Example for MPI+OpenMP (hybrid):
@@ -136,6 +136,8 @@ To check available versions of Intel MPI at ULHPC type `module -r spider '.*tool
 ```bash
 # Reserve the node
 $ srun -p interactive --time=00:10:00 -N 2 --ntasks-per-node=3 --x11 --pty bash -i
+# OR, using the 'si' helper
+$ si --time=00:10:00 -N 2 --ntasks-per-node=3
 
 # Load module Intel MPI and needed environment 
 module purge             # Clean all previously loaded modules
@@ -169,7 +171,7 @@ module load swenv/default-env/latest
 module load toolchain/intel/2019a
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-srun -n 56 ./a.out
+srun -n ${SLURM_NTASKS} ./a.out
 ```
 
 Example for MPI+OpenMP (hybrid):
@@ -177,7 +179,9 @@ Example for MPI+OpenMP (hybrid):
 #!/bin/bash -l
 #SBATCH -J Intel-MPI (MPI+OpenMP)
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=28
+#SBATCH --ntasks-per-node=14
+#SBATCH --ntasks-per-socket=7
+#SBATCH -c 2
 #SBATCH --time=00:05:00
 #SBATCH -p batch
 
@@ -191,10 +195,10 @@ module purge             # Clean all previously loaded modules
 module load swenv/default-env/latest
 module load toolchain/intel/2019a
 
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-srun -n 56 ./a.out
+srun -n ${SLURM_NTASKS} ./a.out
 ```
 
 ## How to use the MVAPICH2 in UL-HPC
@@ -269,7 +273,9 @@ Example for MPI+OpenMP (hybrid):
 #!/bin/bash -l
 #SBATCH -J MVAPICH2 (MPI+OpenMP)
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=28
+#SBATCH --ntasks-per-node=14
+#SBATCH --ntasks-per-socket=7
+#SBATCH -c 2
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 
@@ -283,10 +289,10 @@ module purge             # Clean all previously loaded modules
 module load swenv/default-env/v0.1-20170602-production
 module load mpi/MVAPICH2/2.3a-GCC-6.3.0-2.28
 
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-srun -n 56 ./a.out
+srun -n ${SLURM_NTASKS} ./a.out
 ```
 
 To know more about MPI programming techniques and optimization,
@@ -306,7 +312,7 @@ threads or processes close to each other.
     #!/bin/bash -l
     #SBATCH -J MPI
     #SBATCH -N 2                         # Number of nodes
-    #SBATCH --ntasks-per-node=28         # Number of tasks per node
+    #SBATCH --ntasks-per-node=28         # Number of MPI processes/tasks per node
     #SBATCH --time=00:05:00              # Total run time of the job allocation
     #SBATCH -p batch
 
@@ -337,7 +343,7 @@ threads or processes close to each other.
 
     # Option for OpenMP threads 
     #export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-    export OMP_NUM_THREADS=2            # Number of threads (openmp)
+    export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}            # Number of threads (openmp)
 
     # Set mpi processes close to each other  and print out CPU affinity    
     mpirun -np ${SLURM_NTASKS} --bind-to core --map-by core --report-bindings ./a.out
@@ -367,7 +373,7 @@ To know more information about process pinning for OpenMPI please refer [OpenMPI
     set I_MPI_PIN_ORDER=compact          # Order the processes in a compact way to avoid costly memory access. 
 
     #srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-    srun -n 56 ./a.out
+    srun -n ${SLURM_NTASKS} ./a.out
     ```
 
 ??? info "Example for MPI+OpenMP (hybrid)"
