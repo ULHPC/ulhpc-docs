@@ -136,6 +136,8 @@ To check available versions of Intel MPI at ULHPC type `module -r spider '.*tool
 ```bash
 # Reserve the node
 $ srun -p interactive --time=00:10:00 -N 2 --ntasks-per-node=3 --x11 --pty bash -i
+# OR, using the 'si' helper
+$ si --time=00:10:00 -N 2 --ntasks-per-node=3
 
 # Load module Intel MPI and needed environment 
 module purge             # Clean all previously loaded modules
