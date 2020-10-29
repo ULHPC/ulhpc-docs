@@ -286,7 +286,7 @@ module load mpi/MVAPICH2/2.3a-GCC-6.3.0-2.28
 export OMP_NUM_THREADS=2
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-srun -n 56 ./a.out
+srun -n ${SLURM_NTASKS} ./a.out
 ```
 
 To know more about MPI programming techniques and optimization,
