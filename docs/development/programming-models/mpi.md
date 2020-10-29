@@ -82,7 +82,7 @@ module load swenv/default-env/latest
 module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-srun -n 56 ./a.out
+srun -n ${SLURM_NTASKS} ./a.out
 ```
 
 Example for MPI+OpenMP (hybrid):
