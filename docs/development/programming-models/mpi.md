@@ -198,7 +198,7 @@ module load toolchain/intel/2019a
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
-srun -n 56 ./a.out
+srun -n ${SLURM_NTASKS} ./a.out
 ```
 
 ## How to use the MVAPICH2 in UL-HPC
