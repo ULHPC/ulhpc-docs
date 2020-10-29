@@ -269,7 +269,9 @@ Example for MPI+OpenMP (hybrid):
 #!/bin/bash -l
 #SBATCH -J MVAPICH2 (MPI+OpenMP)
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=28
+#SBATCH --ntasks-per-node=14
+#SBATCH --ntasks-per-socket=7
+#SBATCH -c 2
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 
