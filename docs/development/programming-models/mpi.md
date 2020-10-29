@@ -306,7 +306,7 @@ threads or processes close to each other.
     #!/bin/bash -l
     #SBATCH -J MPI
     #SBATCH -N 2                         # Number of nodes
-    #SBATCH --ntasks-per-node=28         # Number of tasks per node
+    #SBATCH --ntasks-per-node=28         # Number of MPI processes/tasks per node
     #SBATCH --time=00:05:00              # Total run time of the job allocation
     #SBATCH -p batch
 
