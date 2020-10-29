@@ -343,7 +343,7 @@ threads or processes close to each other.
 
     # Option for OpenMP threads 
     #export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-    export OMP_NUM_THREADS=2            # Number of threads (openmp)
+    export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}            # Number of threads (openmp)
 
     # Set mpi processes close to each other  and print out CPU affinity    
     mpirun -np ${SLURM_NTASKS} --bind-to core --map-by core --report-bindings ./a.out
