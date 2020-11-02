@@ -65,12 +65,16 @@ def collect(lst):
                 software_version=row[-1].split(".lua")[0]
                 software_name="<p><a href={0}>{1}</a></p>".format(url,row[-2])
                 software_categorie="<p>{0}</p>".format(get_catlongname(row[-3]))
-                software_cluster="<p>{0}</p>".format("Iris" if software_version.find("cuda") != -1 else "Iris<br>Aion")
+                software_cluster=row[4]
+                software_swset=row[5]
+                software_archi=row[6]
                 if softwares.get(software_name,None) is None:
-                    softwares[software_name]=["<p>{0}</p>".format(software_version),software_categorie,software_cluster,software_description]
+                    softwares[software_name]=["<p>{0}</p>".format(software_version),"<p>{0}</p>".format(software_swset),"<p>{0}</p>".format(software_archi),software_categorie,"<p>{0}</p>".format(software_cluster),software_description]
                 else:
                     softwares[software_name][0] = softwares[software_name][0].replace("</p>","<br>{0}</p>".format(software_version))  
-    df=pd.DataFrame.from_dict(softwares,orient="index",columns=['Version','Category','Clusters','Description'])
+                    softwares[software_name][1] = softwares[software_name][1].replace("</p>","<br>{0}</p>".format(software_swset))  
+                    softwares[software_name][2] = softwares[software_name][2].replace("</p>","<br>{0}</p>".format(software_archi))  
+    df=pd.DataFrame.from_dict(softwares,orient="index",columns=['Version','Swset','Architecture','Category','Clusters','Description'])
     df.index.name="Software"
     df.sort_values(['Category','Software'], ascending=[False, True], inplace=True)
 
