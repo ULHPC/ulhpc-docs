@@ -99,7 +99,7 @@ The below launcher is an example showing how to reserve ressources on multiple n
 #SBATCH -J Distrbuted\_cplex
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=14
-#SBATCH --cpus-per-task=2
+#SBATCH -c 2    # multithreading -- #threads (slurm cpu) per task 
 #SBATCH --time=0-01:00:00
 #SBATCH -p batch
 #SBATCH --qos=normal
