@@ -141,7 +141,7 @@ The script below allows you to start multi-threaded MIP optimization with Gurobi
 ```slurm
 #!/bin/bash -l
 #SBATCH -J Multi-threaded_gurobi
-#SBATCH --ntasks=1
+#SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=28
 #SBATCH --time=0-01:00:00
 #SBATCH -p batch
