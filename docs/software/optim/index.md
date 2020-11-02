@@ -169,7 +169,7 @@ Using the script ```gurobi_mtt.slurm ```, you can launch a batch job with the ``
 #SBATCH -J Distrbuted_gurobi
 #SBATCH --ntasks=3
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=5
+#SBATCH -c 5   # multithreading -- #threads (slurm cpu) per task 
 #SBATCH --time=00:15:00
 #SBATCH -p batch
 #SBATCH --qos normal
