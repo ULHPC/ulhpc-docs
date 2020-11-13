@@ -21,7 +21,7 @@ def get_modulefile_whatis(mfpath):
         desc = "No description available."
         www = ""
         return desc, www
-
+    
     desc = []
 
     # The description is split between many lines, get them in a list
@@ -29,7 +29,7 @@ def get_modulefile_whatis(mfpath):
     for line in raw:
         line = line.strip()
         if line.startswith("whatis([[Description:") or line.startswith("whatis([==[Description:"): isDescLine = True
-        if line.startswith("whatis([[Homepage:") or line.startswith("whatis([==[Homepage:"):
+        if line.startswith("whatis([[Homepage:") or line.startswith("whatis([==[Homepage:"): 
             isDescLine = False    # description ends before www whatis block
             match_homepage = line
         if isDescLine and (line != ''): desc.append(line)
@@ -45,7 +45,7 @@ def get_catlongname(cat):
         ''' Return a long name (if known) for a given category. '''
         knowncats = {'bio':"Biology", 'cae':"CFD/Finite element modelling",
                      'chem':"Chemistry", 'compiler':"Compilers", 'data':"Data processing",
-                     'debugger':"Debugging", 'devel':"Development", 'geo':"Weather modelling",
+                     'debugger':"Debugging", 'devel':"Development", 'geo':"Weather modelling", 
                      'lang': "Programming Languages", 'lib':"Libraries",  'math':"Mathematics",
                      'mpi': "MPI", 'numlib':"Numerical libraries", 'perf':"Performance measurements",
                      'phys':"Physics", 'system':"System-level software", 'toolchain':"Toolchains (software stacks)",
@@ -71,21 +71,21 @@ def collect(lst):
                 if softwares.get(software_name,None) is None:
                     softwares[software_name]=["<p>{0}</p>".format(software_version),"<p>{0}</p>".format(software_swset),"<p>{0}</p>".format(software_archi),software_categorie,"<p>{0}</p>".format(software_cluster),software_description]
                 else:
-                    softwares[software_name][0] = softwares[software_name][0].replace("</p>","<br>{0}</p>".format(software_version))
-                    softwares[software_name][1] = softwares[software_name][1].replace("</p>","<br>{0}</p>".format(software_swset))
-                    softwares[software_name][2] = softwares[software_name][2].replace("</p>","<br>{0}</p>".format(software_archi))
+                    softwares[software_name][0] = softwares[software_name][0].replace("</p>","<br>{0}</p>".format(software_version))  
+                    softwares[software_name][1] = softwares[software_name][1].replace("</p>","<br>{0}</p>".format(software_swset))  
+                    softwares[software_name][2] = softwares[software_name][2].replace("</p>","<br>{0}</p>".format(software_archi))  
     df=pd.DataFrame.from_dict(softwares,orient="index",columns=['Version','Swset','Architecture','Category','Clusters','Description'])
     df.index.name="Software"
     df.sort_values(['Category','Software'], ascending=[False, True], inplace=True)
 
-    folder=pathlib.Path("/tmp/" + os.getenv('USER') + "software_list")
+    folder=pathlib.Path("/tmp/software_list")
     if not folder.exists():
         folder.mkdir(parents=True)
 
     all_softwares=folder / "all_softwares.md"
     with all_softwares.open("w") as fd:
         df.to_markdown(fd)
-
+        
     all_categories=get_catlongname(None)
     for cat in all_categories:
         cat_softwares = folder / "{0}.md".format(cat)
@@ -93,7 +93,7 @@ def collect(lst):
             df[df['Category']=="<p>{0}</p>".format(all_categories[cat])].to_markdown(fd)
 
 
-
+                
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog="resif3_module2markdown.py")
