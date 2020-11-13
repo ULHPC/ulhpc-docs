@@ -8,7 +8,7 @@ central `Atoms` object and the many available algorithms in ASE.
 
 ## Available versions of ASE in ULHPC
 To check available versions of ASE at ULHPC type `module spider ase`.
-Below it shows list of available versions of ASE in ULHPC.
+The following list shows the available versions of ASE in ULHPC.
 ```bash
 chem/ASE/3.13.0-intel-2017a-Python-2.7.13
 chem/ASE/3.16.0-foss-2018a-Python-2.7.14
@@ -41,6 +41,7 @@ $ python3 example.py
 #!/bin/bash -l
 #SBATCH -J ASE
 #SBATCH -N 1
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=1
 #SBATCH --time=00:30:00
 #SBATCH -p batch
@@ -59,5 +60,5 @@ please refer to [ASE tutorials](https://wiki.fysik.dtu.dk/ase/tutorials/tutorial
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
     

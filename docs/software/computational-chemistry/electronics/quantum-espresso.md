@@ -17,7 +17,7 @@ ideas into existing codes.
 
 ## Available versions of Quantum ESPRESSO in ULHPC
 To check available versions of Quantum ESPRESSO at ULHPC type `module spider quantum espresso`.
-Below it shows list of available versions of Quantum ESPRESSO in ULHPC. 
+The following list shows the available versions of Quantum ESPRESSO in ULHPC. 
 ```bash
 chem/QuantumESPRESSO/6.1-intel-2017a
 chem/QuantumESPRESSO/6.1-intel-2018a-maxter500
@@ -50,6 +50,7 @@ $ pw.x -input example.in
 #SBATCH -J QuantumESPRESSO
 #SBATCH -N 2
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
@@ -68,5 +69,4 @@ please refer to [Quantum ESPRESSO user manual](https://www.quantum-espresso.org/
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
-
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

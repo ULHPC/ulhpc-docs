@@ -14,7 +14,7 @@ local functions (hereafter indicated as ’Atomic Orbitals’, AOs).
 
 ## Available versions of CRYSTAL in ULHPC
 To check available versions of CRYSTAL at UL-HPC type `module spider crystal`.
-Below it shows list of available versions of CRYSTAL in ULHPC. 
+The following list shows the available versions of CRYSTAL in ULHPC. 
 ```bash
 chem/CRYSTAL/17-intel-2017a-1.0.1
 chem/CRYSTAL/17-intel-2018a-1.0.1
@@ -50,6 +50,7 @@ $ Pcrystal >& log.out
 #SBATCH -J CRYSTAL
 #SBATCH -N 2
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
@@ -67,5 +68,5 @@ please refer to [CRYSTAL solutions tutorials](http://tutorials.crystalsolutions.
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
     

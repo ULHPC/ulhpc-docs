@@ -6,7 +6,7 @@ broad range of applications.
 
 ## Available versions of Meep in ULHPC
 To check available versions of Meep at ULHPC type `module spider meep`.
-Below it shows list of available versions of Meep in ULHPC.
+The following list shows the available versions of Meep in ULHPC.
 ```bash
 phys/Meep/1.3-intel-2017a
 phys/Meep/1.4.3-intel-2018a
@@ -38,6 +38,7 @@ $ meep example.ctl > result_output
 #SBATCH -J Meep
 #SBATCH -N 2
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
@@ -56,5 +57,7 @@ please refer to [Meep tutorial](http://ab-initio.mit.edu/wiki/index.php/Meep_tut
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
-    
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
+
+
+

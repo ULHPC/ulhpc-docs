@@ -10,7 +10,7 @@ and several schools and workshops are organized each year.
 
 ## Available versions of ABINIT in ULHPC
 To check available versions of ABINIT at ULHPC type `module spider abinit`.
-Below it shows list of available versions of ABINIT in ULHPC. 
+The following list shows the available versions of ABINIT in ULHPC. 
 ```shell
 chem/ABINIT/8.2.3-intel-2017a
 chem/ABINIT/8.6.3-intel-2018a-trio-nc
@@ -41,6 +41,7 @@ $ abinit < example.in
 #!/bin/bash -l
 #SBATCH -J ABINIT
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH -N 2
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
@@ -59,5 +60,5 @@ please refer to [ABINIT tutorial](https://docs.abinit.org/tutorial/).
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    lease report it to us using [support ticket](https://hpc.uni.lu/support).
 

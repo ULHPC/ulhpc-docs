@@ -7,7 +7,7 @@ using efficient matrix diagonalization schemes and an efficient Pulay mixing.
 
 ## Available versions of VASP in ULHPC
 To check available versions of VASP at ULHPC type `module spider vasp`.
-Below it shows list of available versions of VASP in ULHPC.
+The following list shows the available versions of VASP in ULHPC.
 ```bash
 phys/VASP/5.4.4-intel-2017a
 phys/VASP/5.4.4-intel-2018a
@@ -38,6 +38,7 @@ $ vasp_[std/gam/ncl]
 #SBATCH -J VASP
 #SBATCH -N 2
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
@@ -56,4 +57,4 @@ please refer to [VASP manual](https://www.vasp.at/wiki/index.php/The_VASP_Manual
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).        
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
