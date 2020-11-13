@@ -71,7 +71,7 @@ srun -n ${SLURM_NTASKS} julia {example}.jl
 
 !!! example
 
-    ```bash
+    ```julia
     using Distributed
     
     # launch worker processes
