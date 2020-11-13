@@ -60,5 +60,5 @@ please refer to [ABINIT tutorial](https://docs.abinit.org/tutorial/).
 
 !!! tip
     If you find some issues with the instructions above,
-    lease report it to us using [support ticket](https://hpc.uni.lu/support).
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
 
