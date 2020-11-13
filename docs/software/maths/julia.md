@@ -69,7 +69,7 @@ module load lang/Julia/1.3.0
 srun -n ${SLURM_NTASKS} julia {example}.jl
 ```
 
-!!! exmaple
+!!! example
 
     ```bash
     using Distributed
