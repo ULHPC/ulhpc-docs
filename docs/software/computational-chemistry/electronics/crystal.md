@@ -57,7 +57,7 @@ $ Pcrystal >& log.out
 
 # Load the module crytal and needed environment
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel    # Eventually (only relevant on 2019a software environment) 
 $ module load chem/CRYSTAL/17-intel-2019a-1.0.2
 
 srun -n ${SLURM_NTASKS} Pcrystal >& log.out
