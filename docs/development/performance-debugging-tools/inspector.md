@@ -1,8 +1,6 @@
 # Intel Inspector
-
-## Introduction
-
-Intel Inspector is a memory and threading error checking tool for users
+[![](https://software.intel.com/content/dam/develop/public/us/en/images/screenshots/screen-intel-inspector-16x9.png.rendition.intel.web.720.405.png){: style="width:300px;float: right;" }](https://software.intel.com/content/www/us/en/develop/tools/inspector.html)
+[Intel Inspector](https://software.intel.com/content/www/us/en/develop/tools/inspector.html) is a memory and threading error checking tool for users
 developing serial and multithreaded applications on Windows and Linux operating
 systems. The essential features of Intel Inspector for Linux are:
 
@@ -120,6 +118,7 @@ Example for batch script:
 #SBATCH -J Inspector
 #SBATCH -N 2
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -143,3 +142,6 @@ $ cat inspxe-cl.txt
 === End: [2020/04/08 16:41:56] ===
 ```
 
+!!! tip
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

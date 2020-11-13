@@ -1,3 +1,4 @@
+[![](https://upload.wikimedia.org/wikipedia/en/f/f9/Valgrind_logo.png){: style="width:300px;float: right;" }](https://valgrind.org/)
 The [Valgrind](https://valgrind.org/) tool suite provides a number of debugging and profiling
 tools that help you make your programs faster and more correct. The
 most popular of these tools is called Memcheck which can detect
@@ -26,7 +27,7 @@ $ module load debugger/Valgrind/3.15.0-intel-2019a
 ## Interactive mode
 
 Example code:
-```bash
+```cpp
 #include <iostream>                                                                                           
 using namespace std;                                                                                          
 int main()                                                                                                    
@@ -122,4 +123,4 @@ information about valgrind, please refer to
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

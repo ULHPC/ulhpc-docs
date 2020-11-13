@@ -1,10 +1,7 @@
 # Application Performance Snapshot (APS)
-
-## Introduction
-
-Application Performance Snapshot (APS) is a lightweight open source profiling
+[![](https://software.intel.com/sites/products/snapshots/application-snapshot/img/screenshot_mpi_bound.jpg){: style="width:300px;float: right;" }](https://software.intel.com/sites/products/snapshots/application-snapshot/)
+[Application Performance Snapshot (APS)](https://software.intel.com/sites/products/snapshots/application-snapshot/) is a lightweight open source profiling
 tool developed by the Intel VTune developers.
-
 Use Application Performance Snapshot for a quick view into a shared memory or
 MPI application's use of available hardware (CPU, FPU, and memory). Application
 Performance Snapshot analyzes your application's time spent in MPI, MPI and
@@ -230,3 +227,7 @@ The below figure shows the hybrid(MPI+OpenMP) programming analysis results:
   online documentation
 * [Application Performance Snapshot User's Guide](https://software.intel.com/en-us/application-snapshot-user-guide):
   Learn more about Application Performance Snapshot, including details on specific metrics and best practices for application optimization
+
+!!! tip
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

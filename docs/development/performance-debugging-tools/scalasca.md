@@ -1,4 +1,5 @@
-[Scalascais](https://www.scalasca.org/) is a performance analysis tool that supports large-scale systems,
+[![](https://www.scalasca.org/scalasca/upload/images/logos/software_box.png){: style="width:300px;float: right;" }](https://www.scalasca.org/)
+[Scalasca](https://www.scalasca.org/) is a performance analysis tool that supports large-scale systems,
 including IBM Blue Gene and CrayXT and small systems.
 The Scalasca provides information about the communication and synchronization among
 the processors. This information will help to do the performance analysis, optimization,
@@ -72,6 +73,7 @@ $ scalasca -examine result_folder
 #SBATCH -J Scalasca
 #SBATCH -A <project name>
 #SBATCH -N 2
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -97,4 +99,4 @@ $ scalasca -examine result_folder
 ```
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

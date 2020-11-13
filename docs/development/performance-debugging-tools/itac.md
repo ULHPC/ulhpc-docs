@@ -1,3 +1,4 @@
+[![](https://software.intel.com/content/dam/dita/develop/get-started-with-itac/d631f4f3-a680-4d0e-9912-ef30dad75f7f.png/_jcr_content/renditions/original){: style="width:300px;float: right;" }](https://software.intel.com/content/www/us/en/develop/documentation/get-started-with-itac/top1.html)
 Intel [Trace
 Analyzer](https://software.intel.com/en-us/ita-user-and-reference-guide) and
 [Collector](https://software.intel.com/en-us/itc-user-and-reference-guide)
@@ -73,6 +74,7 @@ Example for the batch script:
 #SBATCH -J ITAC
 #SBATCH -A <project name>
 #SBATCH -N 2
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -100,4 +102,4 @@ $ stftool tracefile.stf --print-statistics
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

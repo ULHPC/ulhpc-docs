@@ -1,45 +1,11 @@
 # VTune
 
-## Introduction
+[![](https://software.intel.com/content/dam/develop/public/us/en/images/diagrams-infographics/screen-intel-vtune-profiler-16x9.png.rendition.intel.web.720.405.png){: style="width:300px;float: right;" }](https://software.intel.com/content/www/us/en/develop/tools/vtune-profiler.html)
+Use [Intel VTune](https://software.intel.com/content/www/us/en/develop/tools/vtune-profiler.html) Profiler to profile serial and multithreaded applications that are executed on a variety of hardware platforms (CPU, GPU, FPGA). The tool is delivered as a Performance Profiler with Intel Performance Snapshots and supports local and remote target analysis on the Windows*, Linux*, and Android* platforms.
+Without the right data, you’re guessing about how to improve software performance and are unlikely to make the most effective improvements.
+Intel® VTune™ Profiler collects key profiling data and presents it with a powerful interface that simplifies its analysis and interpretation. 
 
-See the [Intel VTune Amplifier documentation](https://software.intel.com/en-us/vtune-help) for general usage.
-
-!!! tip "VTune command name changes in version 2020"
-	Version 2020 of VTune includes several significant upgrades in 
-	functionality. It also includes some command name changes. The 
-	command line interface to VTune has changed from `amplxe-cl` to 
-	simply `vtune`, and the GUI has changed from `amplxe-gui` to 
-	`vtune-gui`. Intel provides symbolic links such that the old 
-	commands `amplxe-cl` and `amplxe-gui` will continue to work, 
-	but those symbolic links may be removed in a future version.
-
-
-!!! tip "Recommended compiler flags for VTune performance collection"
-    Intel provides a
-    [page](https://software.intel.com/en-us/vtune-help-compiler-switches-for-performance-analysis-on-linux-targets)
-    documenting their recommended compiler flags for compiling applications
-    when collecting performance data with VTune. Users will generally have the
-    best results when compiling codes using the Intel compilers, although the
-    [CCE](../../compilers/native#cray) and [GCC](../../compilers/native/#gnu)
-    compilers can also produce application suitable for analysis with VTune.
-
-When collecting performance data with VTune, it is **strongly
-recommended** to add the Slurm flag `--perf=vtune` or
-`--perf=<vtune_module_version>` to your job allocation, where
-`<vtune_module_version>` is the full module name of the VTune version
-you want to use.
-
-!!! warning 
-	Certain VTune collections can function without the 
-	`#SBATCH --perf=vtune` flag, but many others will fail.
-
-!!! tip "Defer finalization" 
-	It is generally recommended to defer finalization when running 
-	on KNL. Finalization is an inherently serial process and the 
-	individual core performance on KNL is very poor. Thus, when 
-	running VTune on KNL, add the parameter	`-finalization-mode=deferred`
-
-## Environmental models for VTune on UL-HPC:
+## Environmental models for VTune on ULHPC:
 ```bash
 module purge 
 module load swenv/default-env/v1.2-20191021-production
@@ -47,9 +13,6 @@ module load toolchain/intel/2019a
 module load tools/VTune/2019_update4
 module load vis/GTK+/3.24.8-GCCcore-8.2.0
 ```
-
-
-
 
 ## Interactive Mode
 
@@ -123,23 +86,9 @@ The below figure shows the hybrid(MPI+OpenMP) programming analysis results:
 
 ![VTune MPI result](images/MPI-VTune.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+!!! tip
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
 
 
 

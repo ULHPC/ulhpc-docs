@@ -1,3 +1,5 @@
+
+[![](https://developer.nvidia.com/sites/default/files/Arm_Arm_FORGE_vertical_blue%20_1.png){: style="width:300px;float: right;" }](https://developer.arm.com/tools-and-software/server-and-hpc/debug-and-profile/arm-forge)
 [Arm Forge](https://developer.arm.com/tools-and-software/server-and-hpc/debug-and-profile/arm-forge) is
 the leading server and HPC development tool suite in research,
 industry, and academia for C, C++, Fortran, and Python high performance code on Linux.  
@@ -42,6 +44,7 @@ Example for the batch script:
 #SBATCH -J ArmForge
 #SBATCH -N 1
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH -c 16
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -96,4 +99,4 @@ To see the result
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
