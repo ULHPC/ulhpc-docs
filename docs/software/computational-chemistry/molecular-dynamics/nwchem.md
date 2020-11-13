@@ -22,7 +22,7 @@ To try NWChem in the interactive mode, please follow the following steps:
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation
-$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR si [...]
+$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR si --x11 [...]
 
 # Load the module nwchem and needed environment 
 $ module purge
