@@ -41,6 +41,7 @@ $ python3 example.py
 #!/bin/bash -l
 #SBATCH -J ASE
 #SBATCH -N 1
+#SBATCH -A <project name>
 #SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=1
 #SBATCH --time=00:30:00
