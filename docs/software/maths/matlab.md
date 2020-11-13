@@ -28,7 +28,8 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i # OR s
 
 # Load the module MATLAB and needed environment
 $ module purge
-$ module load base/MATLAB/2019b
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
+$ module load base/MATLAB/2019a
 
 $ matlab &
 ```
