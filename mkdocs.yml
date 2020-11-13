@@ -93,7 +93,19 @@ nav:
         - Abaqus : 'software/cae/abaqus.md'
         - FDS : 'software/cae/fds.md'
         - Meshing-Tools : 'software/cae/meshing-tools.md'
-    - Computational Chemistry:     'software/chem/index.md'
+    - Computational Chemistry:
+        - Electronics:
+            - ABINIT:              'software/computational-chemistry/electronics/abinit.md'
+            - ASE:                 'software/computational-chemistry/electronics/ase.md'
+            - MEEP:                'software/computational-chemistry/electronics/meep.md'
+            - Quantum Espresso:    'software/computational-chemistry/electronics/quantum-espresso.md'
+            - VASP:                'software/computational-chemistry/electronics/vasp.md'
+        - Molecular Dynamics:
+            - CP2K: 'software/computational-chemistry/molecular-dynamics/cp2k.md'
+            - GROMACS: 'software/computational-chemistry/molecular-dynamics/gromacs.md'
+            - NAMD: 'software/computational-chemistry/molecular-dynamics/namd.md'
+            - NWCHEM: 'software/computational-chemistry/molecular-dynamics/nwchem.md'
+            - Helping Libraries: 'software/computational-chemistry/molecular-dynamics/helping-libraries.md'
     - Deep and Machine Learning:   'software/ml/index.md'
     - Earth Sciences:              'software/geo/index.md'
     - Mathematics & Statistics:    'software/maths/index.md'
