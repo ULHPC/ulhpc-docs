@@ -17,11 +17,11 @@ To open an MATLAB in the interactive mode, please follow the following steps:
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation
-$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i # OR si --x11 [...]
 
 # Load the module Julia and needed environment
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load lang/Julia/1.3.0
 
 $ julia
@@ -42,7 +42,7 @@ $ julia
 
 # Load the module Julia and needed environment
 module purge
-module load swenv/default-env/devel
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load lang/Julia/1.3.0
 
 julia {example}.jl
@@ -55,6 +55,7 @@ julia {example}.jl
 #!/bin/bash -l
 #SBATCH -J Julia
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH -N 1
 #SBATCH --ntasks-per-node 28
 #SBATCH --time=00:10:00
@@ -62,7 +63,7 @@ julia {example}.jl
 
 # Load the module Julia and needed environment
 module purge
-module load swenv/default-env/devel
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load lang/Julia/1.3.0
 
 srun -n ${SLURM_NTASKS} julia {example}.jl
@@ -99,5 +100,5 @@ To know more information about Julia tutorial and documentation,
 please refer to [Julia tutorial](https://julialang.org/learning/tutorials/).
 
 !!! tip
-If you find some issues with the instructions above,
-please file a [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above,
+    please file a [support ticket](https://hpc.uni.lu/support).

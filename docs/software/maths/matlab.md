@@ -24,7 +24,7 @@ To open an MATLAB in the interactive mode, please follow the following steps:
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation
-$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i # OR si --x11 [...]
 
 # Load the module MATLAB and needed environment
 $ module purge
@@ -48,8 +48,8 @@ $ matlab &
 
 # Load the module Julia and needed environment
 module purge
-module load swenv/default-env/devel
-module load base/MATLAB/2019b
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
+module load base/MATLAB/2019a
 
 srun matlab -nodisplay -r matlab_script_file -logfile output.out
 
@@ -74,7 +74,7 @@ rm -rf /home/users/ur_user_name/java*
 
 # Load the module Julia and needed environment
 module purge
-module load swenv/default-env/devel
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load base/MATLAB/2019b
 
 srun -c $SLURM_CPUS_PER_TASK matlab -nodisplay -r matlab_script_file -logfile output.out

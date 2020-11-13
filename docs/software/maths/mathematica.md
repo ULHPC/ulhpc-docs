@@ -23,11 +23,11 @@ To open an MATHEMATICA in the interactive mode, please follow the following step
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation
-$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i # OR si --x11 [...]
 
 # Load the module MATHEMATICA and needed environment
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load math/Mathematica/12.0.0
 
 $ math
@@ -47,7 +47,7 @@ $ math
 
 # Load the module MATHEMATICA and needed environment
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load math/Mathematica/12.0.0
 
 srun -n ${SLURM_NTASKS} math -run < {mathematica-script-file}.m
@@ -59,6 +59,7 @@ srun -n ${SLURM_NTASKS} math -run < {mathematica-script-file}.m
 ```bash
 #!/bin/bash -l
 #SBATCH -J MATHEMATICA
+#SBATCH -M --cluster iris 
 #SBATCH -N 1
 #SBATCH -c 28
 #SBATCH --time=00:10:00
@@ -66,7 +67,7 @@ srun -n ${SLURM_NTASKS} math -run < {mathematica-script-file}.m
 
 # Load the module MATHEMATICA and needed environment
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load math/Mathematica/12.0.0
 
 srun -n ${SLURM_NTASKS} math -run < {mathematica-script-file}.m
