@@ -82,6 +82,7 @@ Example for the batch script:
 #SBATCH -J Inspector
 #SBATCH -N 1
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH -c 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch

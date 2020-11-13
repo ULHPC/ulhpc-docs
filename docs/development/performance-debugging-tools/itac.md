@@ -42,6 +42,7 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J ITAC
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH -N 1
 #SBATCH -c 16
 #SBATCH --time=00:10:00

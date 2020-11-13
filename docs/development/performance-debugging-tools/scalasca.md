@@ -40,6 +40,8 @@ $ scalasca -examine result_folder
 ```bash
 #!/bin/bash -l
 #SBATCH -J Scalasca
+#SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH -N 1
 #SBATCH -c 16
 #SBATCH --time=00:10:00
@@ -72,8 +74,8 @@ $ scalasca -examine result_folder
 #!/bin/bash -l
 #SBATCH -J Scalasca
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris
 #SBATCH -N 2
-#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
