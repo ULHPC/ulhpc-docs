@@ -458,3 +458,6 @@ To know more information about process pinning for MVAPICH2 please refer [MVAPIC
 * [Step by Step Performance Optimization with Intel® C++ Compiler](https://software.intel.com/content/www/us/en/develop/articles/step-by-step-optimizing-with-intel-c-compiler.html)
 
 
+!!! tip
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

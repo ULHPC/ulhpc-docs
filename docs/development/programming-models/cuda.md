@@ -123,3 +123,7 @@ srun nvprof ./vector
 ## Additional information
 To know more about CUDA programming, please refer to [Nvidia CUDA](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
 and also [ULHPC summer school](https://hpc.uni.lu/hpc-school/2019/06/index.html).
+
+!!! tip
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

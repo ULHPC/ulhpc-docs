@@ -30,7 +30,6 @@ OpenMP programs accomplish parallelism **exclusively** through the use of thread
 [![](https://upload.wikimedia.org/wikipedia/commons/f/f1/Fork_join.svg){: style="width:900px;float: center;" }](url)
 
 
-
 OpenMP compilers in ULHPC:
 
 |Toolchain|Compilation(C)|Compilation(Fortran)|
@@ -67,10 +66,6 @@ $ ./a.out
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 
-# Use the RESIF build modules of the UL HPC platform
-if [ -f  /etc/profile ]; then
-   .  /etc/profile
-fi
 # Load the {intel | foss} toolchain and whatever module(s) you need
 module purge
 module load toolchain/intel    # or toolchain/foss
@@ -125,10 +120,6 @@ Batch script for Intel:
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 
-# Use the RESIF build modules of the UL HPC platform
-if [ -f  /etc/profile ]; then
-   .  /etc/profile
-fi
 # Load the {intel | foss} toolchain and whatever module(s) you need
 module purge
 module load toolchain/intel    # or toolchain/foss
@@ -152,10 +143,6 @@ Batch script for GNU Compiler Collection:
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 
-# Use the RESIF build modules of the UL HPC platform
-if [ -f  /etc/profile ]; then
-   .  /etc/profile
-fi
 # Load the {intel | foss} toolchain and whatever module(s) you need
 module purge
 module load toolchain/foss     # or toolchain/foss
@@ -172,3 +159,6 @@ srun ./a.out
 To know more about the OpenMP at ULHPC, please
 refer [ULHPC OpenMP Tutorial](https://ulhpc-tutorials.readthedocs.io/en/latest/parallel/basics/#parallel-openmp-jobs)
 
+!!! tip
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
