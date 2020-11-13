@@ -11,7 +11,7 @@ Our tutorials show you how to use NAMD and VMD for biomolecular modeling.
 
 ## Available versions of NAMD in ULHPC
 To check available versions of NAMD at ULHPC type `module spider namd`.
-Below it shows list of available versions of NAMD in ULHPC.
+The following list shows the available versions of NAMD in ULHPC.
 ```bash
 chem/NAMD/2.12-intel-2017a-mpi
 chem/NAMD/2.12-intel-2018a-mpi
@@ -42,6 +42,7 @@ $ namd2 +setcpuaffinity +p4 config_file > output_file
 #SBATCH -J NAMD
 #SBATCH -N 2
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
@@ -59,5 +60,4 @@ please refer to [NAMD User's Guide](https://www.ks.uiuc.edu/Research/namd/2.14/u
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
-
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

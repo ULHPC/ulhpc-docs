@@ -13,7 +13,7 @@ It is therefore easy to give the code a try, and to make modifications as needed
 
 ## Available versions of CP2K in ULHPC
 To check available versions of CP2K at ULHPC type `module spider cp2k`.
-Below it shows list of available versions of CP2K in ULHPC. 
+The following list shows the available versions of CP2K in ULHPC. 
 ```bash
 chem/CP2K/6.1-foss-2019a
 chem/CP2K/6.1-intel-2018a
@@ -43,6 +43,7 @@ $ cp2k.popt -i example.inp
 #SBATCH -J CP2K
 #SBATCH -N 2
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
@@ -60,5 +61,5 @@ please refer to [CP2K HOWTOs](https://www.cp2k.org/howto).
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
 

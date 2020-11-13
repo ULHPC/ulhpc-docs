@@ -9,7 +9,7 @@ for research on non-biological systems, e.g. polymers.
 
 ## Available versions of GROMACS in ULHPC
 To check available versions of GROMACS at ULHPC type `module spider gromacs`.
-Below it shows list of available versions of GROMACS in ULHPC. 
+The following list shows the available versions  of GROMACS in ULHPC. 
 ```bash
 bio/GROMACS/2016.3-intel-2017a-hybrid
 bio/GROMACS/2016.5-intel-2018a-hybrid
@@ -39,8 +39,10 @@ $ gmx_mpi mdrun <all your GMX job specification options in here>
 ## Batch mode
 ```bash
 #!/bin/bash -l
-#SBATCH -J GROMACS
+#SBATCH -J GROMAC
 #SBATCH -N 2
+#SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
@@ -58,4 +60,4 @@ please refer to [GROMACS documentation](http://manual.gromacs.org/).
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).  
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

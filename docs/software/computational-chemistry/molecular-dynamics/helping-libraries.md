@@ -102,4 +102,4 @@ refer to [UDUNITS 2.2.26 Manual](https://www.unidata.ucar.edu/software/udunits/u
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).  
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

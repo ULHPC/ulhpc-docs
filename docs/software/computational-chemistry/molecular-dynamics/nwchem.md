@@ -6,7 +6,7 @@ high-performance parallel supercomputers to conventional workstation clusters.
 
 ## Available versions of NWChem in ULHPC
 To check available versions of NWChem at ULHPC type `module spider nwchem`.
-Below it shows list of available versions of NWChem in ULHPC.
+The following list shows the available versions of NWChem in ULHPC.
 
 ```bash
 chem/NWChem/6.6.revision27746-intel-2017a-2015-10-20-patches-20170814-Python-2.7.13
@@ -42,6 +42,7 @@ $ nwchem example
 #SBATCH -J NWChem
 #SBATCH -N 2
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
@@ -59,4 +60,4 @@ please refer to [NWChem User Documentation](https://nwchemgit.github.io/Home.htm
 
 !!! tip
     If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).  
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
