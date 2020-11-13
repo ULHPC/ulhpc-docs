@@ -40,13 +40,6 @@ nav:
     - GPFS/SpectrumScale:         'filesystems/gpfs.md'
     - Lustre:                     'filesystems/lustre.md'
     - OneFS Isilon:               'filesystems/isilon.md'
-    - Quotas and Purging:         'filesystems/quotas.md'
-    - Global Directory Structure: 'filesystems/layout.md'
-    - Project Data Management:    'filesystems/project.md'
-    - Scratch Data Management:    'filesystems/scratch.md'
-    - Backups:                    'filesystems/backups.md'
-    - Archiving:                  'filesystems/archiving.md'
-    - Unix File Permissions:      'filesystems/unix-file-permissions.md'
     - Live status: https://hpc.uni.lu/live-status/motd
   #################
   - Access/Connect:
@@ -59,11 +52,16 @@ nav:
     # - Multi-Factor Authentication: 'connect/mfa.md'
   ##################
   - Data Management:
-    - Overview:        'filesystems/layout.md'
-    - Data Sharing:    'data/sharing.md'
-    - Data Transfer:   'data/transfer.md'
-    - GDPR Compliance: 'data/gdpr.md'
-    - Backup:          'filesystems/backups.md'
+    - Global Directory Structure: 'data/layout.md'
+    - Data Sharing:               'data/sharing.md'
+    - Data Transfer:              'data/transfer.md'
+    - GDPR Compliance:            'data/gdpr.md'
+    - Quotas and Purging:         'filesystems/quotas.md'
+    - Project Data Management:    'data/project.md'
+    - Scratch Data Management:    'data/scratch.md'
+    - Backups:                    'data/backups.md'
+    - Archiving:                  'data/archiving.md'
+    - Unix File Permissions:      'filesystems/unix-file-permissions.md'
     - Version Control with Git:   'workflow/git.md'
     - Sensitive Data Protection:  'data/encryption.md'
   ##############
