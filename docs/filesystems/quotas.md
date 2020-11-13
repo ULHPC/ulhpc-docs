@@ -4,7 +4,7 @@
 
 | Directory    | Default space quota | Default inode quota | Purge time |
 | ---------------------- | ------------------- | ------------------- | ---------- |
-| `$HOME`                | 500 TB              | 1 M                 | -          |
+| `$HOME`                | 500 GB              | 1 M                 | -          |
 | `$SCRATCH`             | 10 TB               | 1 M                 | 60 days    |
 | `/work/projects/...`   | 16 MB               | 0                   | -          |
 | `/mnt/isilon/projects/...` | 1.14 PB globally | -                   | -          |
