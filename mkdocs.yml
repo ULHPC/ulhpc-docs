@@ -50,11 +50,13 @@ nav:
     - Live status: https://hpc.uni.lu/live-status/motd
   #################
   - Access/Connect:
-    - Login/Access Servers:        'connect/access.md'
-    - Multi-Factor Authentication: 'connect/mfa.md'
+    - Access Servers:              'connect/access.md'
     - SSH:                         'connect/ssh.md'
-    - Open On Demand Portal:       'connect/ood.md'
+    - Connect from Windows:        'connect/windows.md'
+    - Connect from MacOS/Linux:    'connect/linux.md'
     - Troubleshooting:             'connect/troubleshooting.md'
+    # - Open On Demand Portal:       'connect/ood.md'
+    # - Multi-Factor Authentication: 'connect/mfa.md'
   ##################
   - Data Management:
     - Overview:        'filesystems/layout.md'
@@ -208,7 +210,7 @@ nav:
   - Help and Support:
     - FAQ: 'support/faq.md'
     - Guidelines: 'support/index.md'
-    - Helpdesk / Ticket Portal: https://hpc-tracker.uni.lu
+    - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
     - ULHPC Consulting Services: 'support/professional-services.md'
   #########################
   - Services: 'services/index.md'
@@ -248,7 +250,7 @@ nav:
   - Web Portals:
     - ULHPC Website: https://hpc.uni.lu
     - Technical Documentation: https://hpc-docs.uni.lu
-    - OpenOn Demand: https://hpc.uni.lu
+    # - OpenOn Demand: https://hpc.uni.lu
     - Live Platform status: https://hpc.uni.lu/live-status/motd
     - ULHPC Tutorials: https://ulhpc-tutorials.readthedocs.io/
   ##############
@@ -325,6 +327,8 @@ markdown_extensions:
   - codehilite:
       guess_lang: false
   - footnotes
+  - markdown_include.include:
+      base_path: docs
   - markdown.extensions.admonition
   - pymdownx.arithmatex
   - pymdownx.details
