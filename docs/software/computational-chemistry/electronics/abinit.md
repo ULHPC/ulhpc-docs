@@ -52,7 +52,7 @@ module purge
 module load swenv/default-env/devel
 module load chem/ABINIT/8.10.2-intel-2019a
 
-srun ${SLURM_NTASKS} abinit < input.files &> out
+srun -n ${SLURM_NTASKS} abinit < input.files &> out
 ```
 ## Additional information
 To know more information about ABINIT tutorial and documentation,
