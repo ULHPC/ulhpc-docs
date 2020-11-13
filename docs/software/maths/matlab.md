@@ -8,8 +8,8 @@ and formatted text in an executable notebook.
 
 ## Available versions of MATLAB in ULHPC
 To check available versions of MATLAB at ULHPC type `module spider matlab`.
-Below it shows list of available versions of MATLAB in ULHPC. 
-```shell
+The following list shows the available versions of MATLAB in ULHPC. 
+```bash
 base/MATLAB/2017a
 base/MATLAB/2018a
 base/MATLAB/2019a
@@ -19,7 +19,7 @@ base/MATLAB/2019b
 ## Interactive mode
 To open an MATLAB in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -36,10 +36,11 @@ $ matlab &
 ## Batch mode
 ### An example for serial case
 
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J MATLAB
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node 1
 #SBATCH -c 1
 #SBATCH --time=00:15:00
@@ -61,10 +62,11 @@ rm -rf /home/users/ur_user_name/java*
 
 ### An example for parallel case
 
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J MATLAB
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH -N 1
 #SBATCH -c 28
 #SBATCH --time=00:10:00
@@ -83,7 +85,7 @@ rm -rf /home/users/ur_user_name/java*
 
 !!! exmaple
 
-    ```shell
+    ```bash
     # example for MATLAB ParFor (matlab_script_file.m)
     parpool('local', str2num(getenv('SLURM_CPUS_PER_TASK'))) % set the default cores
     %as number of threads
@@ -104,5 +106,5 @@ To know more information about MATLAB tutorial and documentation,
 please refer to [MATLAB tutorial](https://nl.mathworks.com/academia/books.html).
 
 !!! tip
-If you find some issues with the instructions above,
-please file a [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

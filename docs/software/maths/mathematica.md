@@ -8,8 +8,8 @@ computing-and seamlessly available in the cloud through any web browser, as well
 
 ## Available versions of MATHEMATICA in ULHPC
 To check available versions of MATHEMATICA at ULHPC type `module spider mathematica`.
-Below it shows list of available versions of MATHEMATICA in ULHPC. 
-```shell
+The following list shows the available versions of MATHEMATICA in ULHPC. 
+```bash
 math/Mathematica/11.0.0
 math/Mathematica/11.3.0
 math/Mathematica/12.0.0
@@ -18,7 +18,7 @@ math/Mathematica/12.0.0
 ## Interactive mode
 To open an MATHEMATICA in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -36,9 +36,10 @@ $ math
 ## Batch mode
 ### An example for serial case
 
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J MATHEMATICA
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node 1
 #SBATCH -c 1
 #SBATCH --time=00:15:00
@@ -49,13 +50,13 @@ $ module purge
 $ module load swenv/default-env/devel
 $ module load math/Mathematica/12.0.0
 
-srun -n 1 math -run < {mathematica-script-file}.m
+srun -n ${SLURM_NTASKS} math -run < {mathematica-script-file}.m
 
 ```
 
 ### An example for parallel case
 
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J MATHEMATICA
 #SBATCH -N 1
@@ -68,12 +69,12 @@ $ module purge
 $ module load swenv/default-env/devel
 $ module load math/Mathematica/12.0.0
 
-srun -n 28 math -run < {mathematica-script-file}.m
+srun -n ${SLURM_NTASKS} math -run < {mathematica-script-file}.m
 
 ```
 
 !!! exmaple
-    ```shell
+    ```bash
     # example for MATHEMATICA prallel (mathematica_script_file.m)
     //Limits Mathematica to requested resources
     Unprotect[$ProcessorCount];$ProcessorCount = 28;
@@ -92,5 +93,6 @@ To know more information about MATHEMATICA tutorial and documentation,
 please refer to [MATHEMATICA tutorial](https://www.wolfram.com/language/fast-introduction-for-math-students/en/).
 
 !!! tip
-If you find some issues with the instructions above,
-please file a [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).
+

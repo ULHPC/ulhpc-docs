@@ -3,8 +3,8 @@ Scientific computing has traditionally required the highest performance, yet dom
 
 ## Available versions of Julia in ULHPC
 To check available versions of Julia at ULHPC type `module spider julia`.
-Below it shows list of available versions of Julia in ULHPC. 
-```shell
+The following list shows the available versions of Julia in ULHPC. 
+```bash
 lang/Julia/1.1.1
 lang/Julia/1.3.0
 ```
@@ -12,7 +12,7 @@ lang/Julia/1.3.0
 ## Interactive mode
 To open an MATLAB in the interactive mode, please follow the following steps:
 
-```shell
+```bash
 # From your local computer
 $ ssh -X iris-cluster
 
@@ -30,10 +30,11 @@ $ julia
 ## Batch mode
 ### An example for serial code
 
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J Julia
 #SBATCH -A <project name>
+#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node 1
 #SBATCH -c 1
 #SBATCH --time=00:15:00
@@ -50,7 +51,7 @@ julia {example}.jl
 
 ### An example for parallel code
 
-```shell
+```bash
 #!/bin/bash -l
 #SBATCH -J Julia
 #SBATCH -A <project name>
@@ -64,12 +65,12 @@ module purge
 module load swenv/default-env/devel
 module load lang/Julia/1.3.0
 
-srun -n 28 julia {example}.jl
+srun -n ${SLURM_NTASKS} julia {example}.jl
 ```
 
 !!! exmaple
 
-    ```shell
+    ```bash
     using Distributed
     
     # launch worker processes
