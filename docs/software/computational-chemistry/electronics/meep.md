@@ -25,7 +25,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR 
 
 # Load the module meep and needed environment 
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load toolchain/intel/2019a
 $ module load phys/Meep/1.4.3-intel-2019a
 
@@ -45,7 +45,7 @@ $ meep example.ctl > result_output
 
 # Load the module meep and needed environment 
 module purge
-module load swenv/default-env/devel
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load toolchain/intel/2019a
 module load phys/Meep/1.4.3-intel-2019a
 

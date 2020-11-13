@@ -30,7 +30,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR 
 
 # Load the module abinit and needed environment
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/ABINIT/8.10.2-intel-2019a
 
 $ abinit < example.in 
@@ -49,7 +49,7 @@ $ abinit < example.in
 
 # Load the module abinit and needed environment
 module purge
-module load swenv/default-env/devel
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load chem/ABINIT/8.10.2-intel-2019a
 
 srun -n ${SLURM_NTASKS} abinit < input.files &> out

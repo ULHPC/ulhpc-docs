@@ -31,6 +31,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR 
 
 # Load the module gromacs and needed environment 
 $ module purge
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load bio/GROMACS/2019.2-intel-2019a
 
 $ gmx_mpi mdrun <all your GMX job specification options in here>
@@ -49,7 +50,7 @@ $ gmx_mpi mdrun <all your GMX job specification options in here>
 
 # Load the module gromacs and needed environment 
 module purge
-module load swenv/default-env/devel
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load bio/GROMACS/2019.2-intel-2019a
 
 srun -n ${SLURM_NTASKS} gmx_mpi mdrun <all your GMX job specification options in here>

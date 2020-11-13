@@ -26,7 +26,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR 
 
 # Load the module nwchem and needed environment 
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/NWChem/6.8.revision47-intel-2019a-Python-2.7.15
 
 $ nwchem example
@@ -49,7 +49,7 @@ $ nwchem example
 
 # Load the module nwchem and needed environment 
 module purge 
-module load swenv/default-env/devel
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load chem/NWChem/6.8.revision47-intel-2019a-Python-2.7.15
 
 srun -n ${SLURM_NTASKS} nwchem example 

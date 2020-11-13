@@ -30,7 +30,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR 
 
 # Load the module namd and needed environment 
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/NAMD/2.12-intel-2018a-mpi
 
 $ namd2 +setcpuaffinity +p4 config_file > output_file
@@ -49,7 +49,7 @@ $ namd2 +setcpuaffinity +p4 config_file > output_file
 
 # Load the module namd and needed environment 
 module purge
-module load swenv/default-env/devel
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load chem/NAMD/2.12-intel-2018a-mpi
 
 srun -n ${SLURM_NTASKS} namd2 +setcpuaffinity +p56 config_file.namd > output_file

@@ -31,7 +31,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR 
 
 # Load the module cp2k and needed environment 
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/CP2K/6.1-intel-2018a
         
 $ cp2k.popt -i example.inp 
@@ -50,8 +50,8 @@ $ cp2k.popt -i example.inp
 
 # Load the module cp2k and needed environment 
 module purge
-module load swenv/default-env/devel
-module load chem/CP2K/6.1-intel-2018a
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
+module load chem/CP2K/6.1-intel-2018a 
 
 srun -n ${SLURM_NTASKS} cp2k.popt -i example.inp > outputfile.out
 ```

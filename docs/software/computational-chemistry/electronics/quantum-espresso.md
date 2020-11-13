@@ -38,7 +38,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR 
 
 # Load the module quantumespresso and needed environment 
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/QuantumESPRESSO/6.4.1-intel-2019a
 
 $ pw.x -input example.in
@@ -57,7 +57,7 @@ $ pw.x -input example.in
 
 # Load the module quantumespresso and needed environment 
 module purge
-module load swenv/default-env/devel
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load chem/QuantumESPRESSO/6.4.1-intel-2019a
 
 srun -n ${SLURM_NTASKS} pw.x -input example.inp

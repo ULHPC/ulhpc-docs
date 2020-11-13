@@ -26,7 +26,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR 
 
 # Load the module vasp and needed environment 
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load phys/VASP/5.4.4-intel-2019a
 
 $ vasp_[std/gam/ncl]
@@ -44,8 +44,8 @@ $ vasp_[std/gam/ncl]
 #SBATCH -p batch
 
 # Load the module vasp and needed environment 
-module purge
-module load swenv/default-env/devel
+module purge 
+module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load phys/VASP/5.4.4-intel-2019a
 
 srun -n ${SLURM_NTASKS} vasp_[std/gam/ncl]

@@ -30,7 +30,7 @@ $ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i  # OR 
 
 # Load the module ase and needed environment
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/ASE/3.17.0-intel-2019a-Python-3.7.2
 
 $ python3 example.py
@@ -49,7 +49,7 @@ $ python3 example.py
 
 # Load the module ase and needed environment
 $ module purge
-$ module load swenv/default-env/devel
+$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/ASE/3.17.0-intel-2019a-Python-3.7.2
 
 python3 example.py
