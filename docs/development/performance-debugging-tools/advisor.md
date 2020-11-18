@@ -59,7 +59,7 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J Advisor
 #SBATCH -N 1
-#SBATCH -A <project name>
+###SBATCH -A <project_name>
 #SBATCH -M --cluster iris 
 #SBATCH -c 28
 #SBATCH --time=00:10:00
