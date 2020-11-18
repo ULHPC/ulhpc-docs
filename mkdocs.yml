@@ -155,7 +155,7 @@ nav:
     - Build Tools:
         - Autoconf and Make: 'development/build-tools/autoconf-make.md'
         - CMake:             'development/build-tools/cmake.md'
-        - EasyBuild:         'development/build-tools/easybuild.md'
+        - EasyBuild:         'https://easybuilders.github.io/easybuild-tutorial/'
         - Spack:             'development/build-tools/spack.md'
     - Programming Models:
         - Overview: 'development/programming-models/index.md'
