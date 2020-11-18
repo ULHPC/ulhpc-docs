@@ -60,7 +60,6 @@ Example for the batch script:
 #SBATCH -J Advisor
 #SBATCH -N 1
 ###SBATCH -A <project_name>
-#SBATCH -M --cluster iris 
 #SBATCH -c 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -86,7 +85,6 @@ Example for the batch script:
 #SBATCH -J Advisor
 #SBATCH -N 2
 ###SBATCH -A <project_name>
-#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch

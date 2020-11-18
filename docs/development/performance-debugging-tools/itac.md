@@ -41,8 +41,7 @@ Example for the batch script:
 ```bash
 #!/bin/bash -l
 #SBATCH -J ITAC
-#SBATCH -A <project name>
-#SBATCH -M --cluster iris 
+###SBATCH -A <project_name>
 #SBATCH -N 1
 #SBATCH -c 16
 #SBATCH --time=00:10:00
@@ -73,9 +72,8 @@ Example for the batch script:
 ```bash
 #!/bin/bash -l
 #SBATCH -J ITAC
-#SBATCH -A <project name>
+###SBATCH -A <project_name>
 #SBATCH -N 2
-#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch

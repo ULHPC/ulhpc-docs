@@ -36,8 +36,7 @@ To see the result in GUI `$ amplxe-gui my_result`
 ```bash
 #!/bin/bash -l
 #SBATCH -J VTune
-#SBATCH -A <project name>
-#SBATCH -M --cluster iris 
+###SBATCH -A <project_name>
 #SBATCH -N 1
 #SBATCH -c 28
 #SBATCH --time=00:10:00
@@ -61,8 +60,7 @@ and for `MPI+OpenMP` run `$ mpiicc -qopenmp example.c`
 ```bash
 #!/bin/bash -l
 #SBATCH -J VTune
-#SBATCH -A <project name>
-#SBATCH -M --cluster iris 
+###SBATCH -A <project_name>
 #SBATCH -N 2
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00

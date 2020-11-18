@@ -44,7 +44,6 @@ Example for the batch script:
 #SBATCH -J ArmForge
 #SBATCH -N 1
 ###SBATCH -A <project_name>
-#SBATCH -M --cluster iris 
 #SBATCH -c 16
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -74,7 +73,6 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J ArmForge
 ###SBATCH -A <project_name>
-#SBATCH -M --cluster iris 
 #SBATCH -N 2
 #SBATCH --ntasks-per-node 28
 #SBATCH --time=00:10:00
