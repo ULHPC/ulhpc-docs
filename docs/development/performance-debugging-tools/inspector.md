@@ -117,7 +117,7 @@ Example for batch script:
 #!/bin/bash -l
 #SBATCH -J Inspector
 #SBATCH -N 2
-#SBATCH -A <project name>
+###SBATCH -A <project_name>
 #SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node 28
 #SBATCH --time=00:10:00
