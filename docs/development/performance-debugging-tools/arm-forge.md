@@ -73,7 +73,7 @@ Example for the batch script:
 ```bash
 #!/bin/bash -l
 #SBATCH -J ArmForge
-#SBATCH -A <project name>
+###SBATCH -A <project_name>
 #SBATCH -M --cluster iris 
 #SBATCH -N 2
 #SBATCH --ntasks-per-node 28
