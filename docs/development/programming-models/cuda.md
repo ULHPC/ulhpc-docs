@@ -90,6 +90,7 @@ Example for batch script:
 #SBATCH --time=0-00:10:00
 #SBATCH --partition=gpu
 #SBATCH -G 1
+###SBATCH -A <project_name>
 
 echo "== Starting run at $(date)"
 echo "== Job ID: ${SLURM_JOBID}"
