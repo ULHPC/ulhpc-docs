@@ -40,8 +40,7 @@ $ matlab &
 ```bash
 #!/bin/bash -l
 #SBATCH -J MATLAB
-#SBATCH -A <project name>
-#SBATCH -M --cluster iris 
+###SBATCH -A <project_name>
 #SBATCH --ntasks-per-node 1
 #SBATCH -c 1
 #SBATCH --time=00:15:00
@@ -52,22 +51,36 @@ module purge
 module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load base/MATLAB/2019a
 
-srun matlab -nodisplay -r matlab_script_file -logfile output.out
+srun matlab -nodisplay -r matlab_script_serial_file -logfile output.out
 
 # example for if you need to have a input parameters for the computations
-srun matlab -nodisplay -r 'iteration(2,2,1)' -logfile output.out
+# matlab_script_serial_file(x,y,z)
+srun matlab -nodisplay -r 'matlab_script_serial_file(2,2,1)' -logfile output.out
 
 rm -rf /home/users/ur_user_name/.matlab
 rm -rf /home/users/ur_user_name/java*
 ```
+
+!!! exmaple
+
+    ```bash
+    # example for MATLAB ParFor (matlab_script_serial_serial_file.m)
+    tic
+    n = 500;
+    A = 500;
+    a = zeros(1,n);
+    for i = 1:n
+    a(i) = max(abs(eig(rand(A))));
+    end
+    toc  
+     ```
 
 ### An example for parallel case
 
 ```bash
 #!/bin/bash -l
 #SBATCH -J MATLAB
-#SBATCH -A <project name>
-#SBATCH -M --cluster iris 
+###SBATCH -A <project_name>
 #SBATCH -N 1
 #SBATCH -c 28
 #SBATCH --time=00:10:00
@@ -78,7 +91,7 @@ module purge
 module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load base/MATLAB/2019b
 
-srun -c $SLURM_CPUS_PER_TASK matlab -nodisplay -r matlab_script_file -logfile output.out
+srun -c $SLURM_CPUS_PER_TASK matlab -nodisplay -r matlab_script_parallel_file -logfile output.out
 
 rm -rf /home/users/ur_user_name/.matlab
 rm -rf /home/users/ur_user_name/java*
@@ -87,7 +100,7 @@ rm -rf /home/users/ur_user_name/java*
 !!! exmaple
 
     ```bash
-    # example for MATLAB ParFor (matlab_script_file.m)
+    # example for MATLAB ParFor (matlab_script_parallel_file.m)
     parpool('local', str2num(getenv('SLURM_CPUS_PER_TASK'))) % set the default cores
     %as number of threads
     tic
@@ -101,7 +114,6 @@ rm -rf /home/users/ur_user_name/java*
     delete(gcp); % you have to delete the parallel region after the work is done
     exit;
     ```
-
 ## Additional information
 To know more information about MATLAB tutorial and documentation,
 please refer to [MATLAB tutorial](https://nl.mathworks.com/academia/books.html).

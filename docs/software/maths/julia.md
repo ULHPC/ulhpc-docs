@@ -33,8 +33,7 @@ $ julia
 ```bash
 #!/bin/bash -l
 #SBATCH -J Julia
-#SBATCH -A <project name>
-#SBATCH -M --cluster iris 
+###SBATCH -A <project name>
 #SBATCH --ntasks-per-node 1
 #SBATCH -c 1
 #SBATCH --time=00:15:00
@@ -54,8 +53,7 @@ julia {example}.jl
 ```bash
 #!/bin/bash -l
 #SBATCH -J Julia
-#SBATCH -A <project name>
-#SBATCH -M --cluster iris 
+###SBATCH -A <project name>
 #SBATCH -N 1
 #SBATCH --ntasks-per-node 28
 #SBATCH --time=00:10:00

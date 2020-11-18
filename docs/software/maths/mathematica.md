@@ -39,11 +39,11 @@ $ math
 ```bash
 #!/bin/bash -l
 #SBATCH -J MATHEMATICA
-#SBATCH -M --cluster iris 
 #SBATCH --ntasks-per-node 1
 #SBATCH -c 1
 #SBATCH --time=00:15:00
 #SBATCH -p batch
+### SBATCH -A <project_name>
 
 # Load the module MATHEMATICA and needed environment
 $ module purge
@@ -59,11 +59,11 @@ srun -n ${SLURM_NTASKS} math -run < {mathematica-script-file}.m
 ```bash
 #!/bin/bash -l
 #SBATCH -J MATHEMATICA
-#SBATCH -M --cluster iris 
 #SBATCH -N 1
 #SBATCH -c 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
+### SBATCH -A <project_name>
 
 # Load the module MATHEMATICA and needed environment
 $ module purge
