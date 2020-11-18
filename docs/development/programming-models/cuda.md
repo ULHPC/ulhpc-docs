@@ -85,7 +85,7 @@ Example for batch script:
 ```bash
 #! /bin/bash -l
 #SBATCH -J TEST
-#SBATCH --ntasks=1
+#SBATCH -N 1
 #SBATCH --ntasks-per-core=1
 #SBATCH --time=0-00:10:00
 #SBATCH --partition=gpu
