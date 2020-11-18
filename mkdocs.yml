@@ -156,7 +156,7 @@ nav:
         - Autoconf and Make: 'development/build-tools/autoconf-make.md'
         - CMake:             'development/build-tools/cmake.md'
         - EasyBuild:         'development/build-tools/easybuild.md'
-        - Spack:             'development/build-tools/spack.md'
+        - Spack:             'https://spack-tutorial.readthedocs.io/en/latest/'
     - Programming Models:
         - Overview: 'development/programming-models/index.md'
         - MPI Stack:
