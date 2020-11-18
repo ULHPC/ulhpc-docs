@@ -119,7 +119,7 @@ module load toolchain/intel/2019a
 # To collect all the results
 export MPS_STAT_LEVEL=${SLURM_CPUS_PER_TASK:-1}
 # An option for the OpenMP+MPI application
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 srun -n ${SLURM_NTASKS} aps --collection-mode=mpi -r result_output ./a.out
 ```
 
