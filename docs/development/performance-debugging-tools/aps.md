@@ -105,7 +105,8 @@ Example for the batch script:
 #SBATCH -J APS
 #SBATCH -N 2
 ###SBATCH -A <project_name>
-#SBATCH --ntasks-per-node=28
+#SBATCH --ntasks-per-node=14
+#SBATCH -c 2
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 #SBATCH --reservation=<name>
