@@ -104,7 +104,7 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J APS
 #SBATCH -N 2
-#SBATCH -A <project name>
+###SBATCH -A <project_name>
 #SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
