@@ -43,7 +43,7 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J ArmForge
 #SBATCH -N 1
-#SBATCH -A <project name>
+###SBATCH -A <project_name>
 #SBATCH -M --cluster iris 
 #SBATCH -c 16
 #SBATCH --time=00:10:00
