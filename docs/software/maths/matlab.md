@@ -64,7 +64,7 @@ rm -rf /home/users/ur_user_name/java*
 !!! exmaple
 
     ```bash
-    # example for MATLAB ParFor (matlab_script_serial_serial_file.m)
+    # example for MATLAB ParFor (matlab_script_serial_file.m)
     tic
     n = 500;
     A = 500;
