@@ -89,7 +89,7 @@ Example for batch script:
 #SBATCH --ntasks-per-core=1
 #SBATCH --time=0-00:10:00
 #SBATCH --partition=gpu
-#SBATCH --gres=gpu:1
+#SBATCH -G 1
 #SBATCH --qos=qos-gpu
 
 echo "== Starting run at $(date)"
