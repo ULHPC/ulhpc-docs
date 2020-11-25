@@ -113,8 +113,8 @@ nav:
     - Performance/Debugging:       'development/performance-debugging-tools/index.md'
     - Physics:                     'software/phys/index.md'
     - Toolchains/Compilers:        'development/toolchains/index.md'
-    - Visualization:               'software/visu/index.md'
-
+    - Visualization:               
+      - ParaView:                  'software/visu/paraview.md'
 
   ###############
   - Running Jobs:
