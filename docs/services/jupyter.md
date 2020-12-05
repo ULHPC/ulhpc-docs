@@ -57,7 +57,6 @@ Jupyter notebooks can be started as a slurm job. The following script is an exam
 #SBATCH -c 2 # Cores assigned to each tasks
 #SBATCH --time=0-01:00:00
 #SBATCH -p batch
-#SBATCH --qos=normal
 
 module load lang/Python
 source jupyter_env/bin/activate
