@@ -59,8 +59,6 @@ sudo { apt-get | yum | ... } install direnv
 curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
 export PATH="$HOME/.pyenv/bin:$PATH"
 pyenv root     # Should return $HOME/.pyenv
-git clone https://github.com/pyenv/pyenv-virtualenv.git \
-    $(pyenv root)/plugins/pyenv-virtualenv
 ```
 
 **Assuming** you have configured the [XDG Base Directories](https://specifications.freedesktop.org/basedir-spec/latest/) in your favorite shell configuration (`~/.bashrc`, `~/.zshrc` or `~/.profile`), you can enable direnv and pyenv as follows
