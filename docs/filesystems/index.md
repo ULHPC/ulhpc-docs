@@ -39,7 +39,8 @@ Each machine has access to at least three different file systems with different 
 | `/home/users/<login>`         | `$HOME`    | GPFS/Spectrumscale | yes    | no      |
 | `/work/projects/<name>`       | -          | GPFS/Spectrumscale | yes    | no      |
 | `/scratch/users/<login>`      | `$SCRATCH` | Lustre             | no     | yes     |
-| `/mnt/isilon/projects/<name>` | -          | OneFS             | yes*   | no      |
+| `/scratch/projects/<name>`    | -          | Lustre             | no     | yes     |
+| `/mnt/isilon/projects/<name>` | -          | OneFS              | yes*   | no      |
 
 * [ULHPC backup policies](../data/backups.md)
 * [Quotas and purging policies](quotas.md)

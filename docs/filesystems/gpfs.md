@@ -2,6 +2,8 @@
 
 ![](../images/plots/plot_piechart_storage_fs_2020.png){: style="width:350px; float: right;"}
 
+## Introduction
+
 [IBM Spectrum Scale](https://www.ibm.com/products/scale-out-file-and-object-storage), formerly known as the General Parallel File System (GPFS), is global _high_-performance clustered file system available on all ULHPC computational systems through a [DDN GridScaler/GS7K](https://www.ddn.com/products/sfa7990x-hybrid-flash-storage-appliance/) system.
 
 It allows sharing **homedirs and project data** between users, systems, and eventually (i.e. if needed) with the "outside world".
@@ -9,21 +11,27 @@ In terms of raw storage capacities, it represents more than **4PB**.
 
 * [Live status](https://hpc.uni.lu/live-status/motd/)
 
-## Global Home directory `$HOME`
 
-Home directories provide a convenient means for a user to have access to files such as dotfiles, source files, input files, configuration files regardless of the platform.
-
-Refer to your home directory using the environment variable `$HOME` whenever possible.
-The absolute path may change, but the value of `$HOME` will always be correct.
+{%
+   include-markdown "home.md"
+   end="<!--intro-end-->"
+%}
 
 !!! note "`$HOME` quotas and backup policies"
     See [quotas](quotas.md) for detailed information about inode,
     space quotas, and file system purge policies.
-    Your HOME is daily backuped, according to the policy detailled in the the [ULHPC backup policies](../data/backups.md).
+    Your HOME is daily backuped, according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
 
-## Global Project directory `/work/projects/` (`$PROJECTHOME`)
+{%
+   include-markdown "projecthome.md"
+   end="<!--intro-end-->"
+%}
 
-Project directories are intended for sharing data within a group of researchers, under `/work/projects/<name>`
+!!! note "Global Project quotas and backup policies"
+    See [quotas](quotas.md) for detailed information about inode,
+    space quotas, and file system purge policies.
+    Your global projects are daily backuped, according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
+
 
 !!! danger "Access rights to project directory: Quota for `clusterusers` group in project directories is 0 !!!"
     When a project `<name>` is created, a group of the same name (`<name>`) is also created and researchers allowed to collaborate on the project are made members of this group,which grant them access to the project directory.
