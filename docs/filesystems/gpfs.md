@@ -55,7 +55,7 @@ In terms of raw storage capacities, it represents more than **4PB**.
 
 The way the ULHPC GPFS file system is implemented is depicted on the below figure.
 
-![](ulhpc_gpfs.png){: style="width:600px;"}
+![](images/ulhpc_gpfs.png){: style="width:600px;"}
 
 It is composed of:
 
@@ -63,7 +63,7 @@ It is composed of:
 * One DDN GridScaler 7K system acquired [as part of RFP 160019](../systems/iris/timeline.md) deployed in 2017 and later extended, composed of
     - 1x DDN GS7K enclosure (~11GB/s IO throughput)
     - 4x SS8460 disk expansion enclosures
-    - 350x HGST (7.2K RPM HDD, 6TB, Self Encrypted Disks (SED) configured over 35 RAID6 (8+2) pools
+    - 350x HGST disks (7.2K RPM HDD, 6TB, Self Encrypted Disks (SED) configured over 35 RAID6 (8+2) pools
     - 28x Sandisk SSD 400GB disks
 * Another DDN GridScaler 7K system acquired [as part of RFP 190027](../systems/aion/timeline.md) deployed in 2020 as part of Aion  and later extended.
     - 1x DDN GS7990-EDR embedded storage
