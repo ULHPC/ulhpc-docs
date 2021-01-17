@@ -11,7 +11,6 @@ In terms of raw storage capacities, it represents more than **4PB**.
 
 * [Live status](https://hpc.uni.lu/live-status/motd/)
 
-
 {%
    include-markdown "home.md"
    end="<!--intro-end-->"
