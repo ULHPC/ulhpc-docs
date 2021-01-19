@@ -21,8 +21,7 @@
    end="<!--intro-end-->"
 %}
 
-## Project Cold-Data and Archives on Isilon
-
+## Project Cold-Data and Archives
 {%
    include-markdown "../filesystems/isilon.md"
    start="<!--intro-start-->"
