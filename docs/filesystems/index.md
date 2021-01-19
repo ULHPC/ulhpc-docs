@@ -26,7 +26,7 @@ The ULHPC facility relies on **2** types of [Distributed/Parallel File Systems](
 
 In addition, the following file-systems complete the ULHPC storage infrastructure:
 
-* OneFS, A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) solution used to host project data, and serve for backup and archival purposes
+* OneFS, A global _low_-performance [Dell/EMC Isilon](isilon.md) solution used to host project data, and serve for backup and archival purposes
 * The ULHPC team relies on other filesystems within its internal backup infrastructure, such as [`xfs`](https://en.wikipedia.org/wiki/XFS), a high-performant disk file-system deployed on storage/backup servers.
 
 ## Summary
