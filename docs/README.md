@@ -15,7 +15,7 @@
 **technical details** for users to make _effective_ use
 of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'s resources.
 
-[![](https://hpc.uni.lu/download/slides/2020-ULHPC-overview.png)](https://hpc.uni.lu/download/slides/2020-ULHPC-overview.pdf))
+[![](https://hpc.uni.lu/download/slides/2020-ULHPC-user-guide.png)](https://hpc.uni.lu/download/slides/2020-ULHPC-user-guide.pdf)
 
 ## ULHPC Web Portals
 

@@ -34,13 +34,10 @@ The HPC facility is one element of the extensive digital research infrastructure
 ## Supercomputing and Storage Resources at a glance
 
 
-![](images/plots/plot_piechart_compute_cluster_2020.png){: style="width:250px;float: right;"}
-
 [ULHPC](https://hpc.uni.lu) is a strategic asset of the university and an important factor for the scientific and therefore also economic competitiveness of the Grand Duchy of Luxembourg.
-
 We provide a key research infrastructure featuring state-of-the-art computing and storage resources serving the UL HPC community primarily composed by UL researchers.
 
-The UL HPC platform has kept growing over time thanks to the continuous efforts of the core HPC team (Dr. S. Varrette, S. Peter, H. Cartiaux, Dr. F. Pinel, Dr. E. Kieffer, Dr. E. Krishnasamy, T. Valette, A. Olloh) - contact: [hpc-team@uni.lu](mailto:hpc-team@uni.lu).
+The UL HPC platform has kept growing over time thanks to the continuous efforts of the core HPC team (Dr. S. Varrette, S. Peter, H. Cartiaux, Dr. F. Pinel, Dr. E. Kieffer, Dr. E. Krishnasamy, T. Valette, A. Olloh) - contact: [hpc-team@uni.lu](mailto:hpc-team@uni.lu), recently completed with the [EuroHPC Competence Center](https://www.eurocc-project.eu/) Task force (A. Vandeventer (Project Manager), L. Koutsantonis).
 
 !!! info "ULHPC Computing and Storage Capacity (2020)"
     Installed in the premises of the University’s _Centre de Calcul_ (CDC), the UL HPC facilities provides in 2020 a total computing capacity of __2.76 PetaFlops__ and a shared storage capacity of around **10 PetaBytes**.
@@ -49,15 +46,16 @@ The UL HPC platform has kept growing over time thanks to the continuous efforts 
     * 1 PetaFlops = 10<sup>15</sup> floating-point operations per second (PFlops or PF for short), corresponds to the cumulative performance of more than 3510 Macbook Pro 13" laptops [^1], or 7420 iPhone XS [^2]
     * 1 PetaByte = 10<sup>15</sup> bytes = 8*10<sup>15</sup> bits, corresponding to the cumulative raw capacity of more than 975 SSDs 512GB.
 
-![](images/plots/plot_piechart_storage_fs_2020.png){: style="width:250px;float: right;"}
+![](images/plots/plot_piechart_compute_cluster_2020.png){: style="width:325px;"}
+![](images/plots/plot_piechart_storage_fs_2020.png){: style="width:325px;"}
 
 This places the HPC center of the University of Luxembourg as one of the major actors in HPC and Big Data for the Greater Region Saar-Lor-Lux.
 
 In practice, the UL HPC Facility features 3 types of computing resources:
 
-* "regular" nodes: Dual CPU, no accelerators, 128 to 256 GB of RAM
-* "gpu" nodes:     Dual CPU, 4 Nvidia accelerators, 768 GB RAM
-* "bigmem" nodes:  Quad-CPU, no accelerators, 3072 GB RAM
+* "__regular__" nodes: Dual CPU, no accelerators, 128 to 256 GB of RAM
+* "__gpu__" nodes:     Dual CPU, 4 Nvidia accelerators, 768 GB RAM
+* "__bigmem__" nodes:  Quad-CPU, no accelerators, 3072 GB RAM
 
 These resources can be reserved and allocated for the execution of jobs scheduled on the platform thanks to a Resource and Job Management Systems (RJMS) - [Slurm](https://slurm.schedmd.com/documentation.html) in practice. This tool allows for a fine-grain analysis and accounting of the used resources, facilitating the generation of activity reports for a given time period.
 
@@ -80,6 +78,7 @@ These resources can be reserved and allocated for the execution of jobs schedule
 
 * [Detailed system specifications](systems/aion/index.md)
 * [Live status](https://hpc.uni.lu/live-status/motd/)
+
 
 ### GPFS/SpectrumScale File System (`$HOME`, project)
 

@@ -1,10 +1,7 @@
 # Application Performance Snapshot (APS)
-
-## Introduction
-
-Application Performance Snapshot (APS) is a lightweight open source profiling
+[![](https://software.intel.com/sites/products/snapshots/application-snapshot/img/screenshot_mpi_bound.jpg){: style="width:300px;float: right;" }](https://software.intel.com/sites/products/snapshots/application-snapshot/)
+[Application Performance Snapshot (APS)](https://software.intel.com/sites/products/snapshots/application-snapshot/) is a lightweight open source profiling
 tool developed by the Intel VTune developers.
-
 Use Application Performance Snapshot for a quick view into a shared memory or
 MPI application's use of available hardware (CPU, FPU, and memory). Application
 Performance Snapshot analyzes your application's time spent in MPI, MPI and
@@ -83,6 +80,7 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J APS
 #SBATCH -N 1
+###SBATCH -A <project_name>
 #SBATCH -c 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -105,7 +103,9 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J APS
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+###SBATCH -A <project_name>
+#SBATCH --ntasks-per-node=14
+#SBATCH -c 2
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 #SBATCH --reservation=<name>
@@ -116,10 +116,10 @@ module load tools/VTune/2019_update4
 module load toolchain/intel/2019a
 
 # To collect all the results
-export MPS_STAT_LEVEL=2
+export MPS_STAT_LEVEL=${SLURM_CPUS_PER_TASK:-1}
 # An option for the OpenMP+MPI application
-export OMP_NUM_THREADS=2
-srun -n 32 aps --collection-mode=mpi -r result_output ./a.out
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
+srun -n ${SLURM_NTASKS} aps --collection-mode=mpi -r result_output ./a.out
 ```
 
 The below figure shows the hybrid(MPI+OpenMP) programming analysis results:
@@ -228,3 +228,7 @@ The below figure shows the hybrid(MPI+OpenMP) programming analysis results:
   online documentation
 * [Application Performance Snapshot User's Guide](https://software.intel.com/en-us/application-snapshot-user-guide):
   Learn more about Application Performance Snapshot, including details on specific metrics and best practices for application optimization
+
+!!! tip
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

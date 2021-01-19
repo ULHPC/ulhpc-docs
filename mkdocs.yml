@@ -108,13 +108,17 @@ nav:
             - Helping Libraries: 'software/computational-chemistry/molecular-dynamics/helping-libraries.md'
     - Deep and Machine Learning:   'software/ml/index.md'
     - Earth Sciences:              'software/geo/index.md'
-    - Mathematics & Statistics:    'software/maths/index.md'
+    - Mathematics & Statistics:    
+          - MATLAB:    'software/maths/matlab.md'
+          - MATHEMATICA:    'software/maths/mathematica.md'
+          - Julia:    'software/maths/julia.md'
+      
     - Optimizers:                  'software/optim/index.md'
     - Performance/Debugging:       'development/performance-debugging-tools/index.md'
     - Physics:                     'software/phys/index.md'
     - Toolchains/Compilers:        'development/toolchains/index.md'
-    - Visualization:               'software/visu/index.md'
-
+    - Visualization:               
+      - ParaView:                  'software/visu/paraview.md'
 
   ###############
   - Running Jobs:
@@ -196,6 +200,7 @@ nav:
         - Intel VTune:     'development/performance-debugging-tools/vtune.md'
         - Intel Advisor:   'development/performance-debugging-tools/advisor.md'
         - Intel Inspector: 'development/performance-debugging-tools/inspector.md'
+        - Intel Trace Analyzer and Collector: 'development/performance-debugging-tools/itac.md'
         - LIKWID:          'development/performance-debugging-tools/likwid.md'
         - Nvidia Nsight:   'development/performance-debugging-tools/nsight.md'
         - Roofline Performance Model: 'development/performance-debugging-tools/roofline.md'
@@ -301,6 +306,7 @@ plugins:
   - git-revision-date-localized:
       type: date
   - progress
+  - include-markdown
 
 # Extras
 extra:
