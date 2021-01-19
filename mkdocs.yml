@@ -199,6 +199,7 @@ nav:
         - Intel VTune:     'development/performance-debugging-tools/vtune.md'
         - Intel Advisor:   'development/performance-debugging-tools/advisor.md'
         - Intel Inspector: 'development/performance-debugging-tools/inspector.md'
+        - Intel Trace Analyzer and Collector: 'development/performance-debugging-tools/itac.md'
         - LIKWID:          'development/performance-debugging-tools/likwid.md'
         - Nvidia Nsight:   'development/performance-debugging-tools/nsight.md'
         - Roofline Performance Model: 'development/performance-debugging-tools/roofline.md'
