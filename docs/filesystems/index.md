@@ -21,8 +21,8 @@ In particular, once connected, you have access to several different _File System
 Current statistics of the available filesystems are depicted on the side figure.
 The ULHPC facility relies on **2** types of [Distributed/Parallel File Systems](https://en.wikipedia.org/wiki/Clustered_file_system) to deliver high-performant Data storage at a BigData scale:
 
-* [IBM Spectrum Scale](https://www.ibm.com/products/scale-out-file-and-object-storage), formerly known as the General Parallel File System (GPFS), a global _high_-performance clustered file system hosting your `$HOME` and projects data.
-* [Lustre](http://lustre.org/), an open-source, parallel file system dedicated to large, local, parallel **scratch** storage.
+* [IBM Spectrum Scale](gpfs.md), formerly known as the General Parallel File System ([GPFS](gpfs.md)), a global _high_-performance clustered file system hosting your `$HOME` and projects data.
+* [Lustre](lustre.md), an open-source, parallel file system dedicated to large, local, parallel **scratch** storage.
 
 In addition, the following file-systems complete the ULHPC storage infrastructure:
 
@@ -34,13 +34,14 @@ In addition, the following file-systems complete the ULHPC storage infrastructur
 File systems are configured for different purposes.
 Each machine has access to at least three different file systems with different levels of performance, permanence and available space.
 
-| Directory                     | Env.       | file system        | backup | purging |
-|-------------------------------|------------|--------------------|--------|---------|
-| `/home/users/<login>`         | `$HOME`    | GPFS/Spectrumscale | yes    | no      |
-| `/work/projects/<name>`       | -          | GPFS/Spectrumscale | yes    | no      |
-| `/scratch/users/<login>`      | `$SCRATCH` | Lustre             | no     | yes     |
-| `/scratch/projects/<name>`    | -          | Lustre             | no     | yes     |
-| `/mnt/isilon/projects/<name>` | -          | OneFS              | yes*   | no      |
+| Directory                     | Env.       | file system                   | backup | purging |
+|-------------------------------|------------|-------------------------------|--------|---------|
+| `/home/users/<login>`         | `$HOME`    | [GPFS/Spectrumscale](gpfs.md) | yes    | no      |
+| `/scratch/users/<login>`      | `$SCRATCH` | [Lustre](lustre.md)           | no     | yes     |
+| `/work/projects/<name>`       | -          | [GPFS/Spectrumscale](gpfs.md) | yes    | no      |
+| `/scratch/projects/<name>`    | -          | [Lustre](lustre.md)           | no     | yes     |
+| `/mnt/isilon/projects/<name>` | -          | [OneFS](isilon.md)            | yes*   | no      |
 
 * [ULHPC backup policies](../data/backups.md)
 * [Quotas and purging policies](quotas.md)
+* ULHPC [GPFS/SpectrumScale](gpfs.md) and [Lustre](lustre.md) filesystems
