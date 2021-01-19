@@ -108,7 +108,11 @@ nav:
             - Helping Libraries: 'software/computational-chemistry/molecular-dynamics/helping-libraries.md'
     - Deep and Machine Learning:   'software/ml/index.md'
     - Earth Sciences:              'software/geo/index.md'
-    - Mathematics & Statistics:    'software/maths/index.md'
+    - Mathematics & Statistics:    
+          - MATLAB:    'software/maths/matlab.md'
+          - MATHEMATICA:    'software/maths/mathematica.md'
+          - Julia:    'software/maths/julia.md'
+      
     - Optimizers:                  'software/optim/index.md'
     - Performance/Debugging:       'development/performance-debugging-tools/index.md'
     - Physics:                     'software/phys/index.md'
