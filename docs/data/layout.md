@@ -20,3 +20,11 @@
    include-markdown "../filesystems/scratch.md"
    end="<!--intro-end-->"
 %}
+
+## Project Cold-Data and Archives on Isilon
+
+{%
+   include-markdown "../filesystems/isilon.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
