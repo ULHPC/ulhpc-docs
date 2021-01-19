@@ -40,7 +40,7 @@ $ si-gpu -N 1 -c 4 -G 1 --x11
 
 # Load the module cuda and needed environment 
 $ module purge
-$ module load swenv/default-env/v1.2-20191021-production         
+$ module load swenv/default-env/devel
 $ module load system/CUDA/10.1.243 
 ```
 
@@ -92,13 +92,8 @@ Example for batch script:
 #SBATCH -G 1
 ###SBATCH -A <project_name>
 
-echo "== Starting run at $(date)"
-echo "== Job ID: ${SLURM_JOBID}"
-echo "== Node list: ${SLURM_NODELIST}"
-echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
-
 module purge
-module load swenv/default-env/v1.2-20191021-production
+module load swenv/default-env/devel
 module load system/CUDA/10.1.243
 
 srun nvprof ./vector

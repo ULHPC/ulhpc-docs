@@ -52,7 +52,7 @@ $ si --time=00:10:00 -N 2 --ntasks-per-node=3
 
 # Module the OpenMPI and needed environment 
 $ module purge             # Clean all previously loaded modules
-$ module load swenv/default-env/latest
+$ module load swenv/default-env/latest # Change according to the software set 
 $ module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 
 # Code execution
@@ -78,7 +78,7 @@ fi
 
 # Load module openmpi and needed environment 
 module purge             # Clean all previously loaded modules
-module load swenv/default-env/latest
+module load swenv/default-env/latest # Change according to the software set
 module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
@@ -104,6 +104,7 @@ fi
 
 # Load module openmpi and needed environment 
 module purge             # Clean all previously loaded modules
+module load swenv/default-env/latest # Change according to the software set 
 module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
@@ -141,7 +142,7 @@ $ si --time=00:10:00 -N 2 --ntasks-per-node=3
 
 # Load module Intel MPI and needed environment 
 module purge             # Clean all previously loaded modules
-module load swenv/default-env/latest
+module load swenv/default-env/latest # Change according to the software set
 module load toolchain/intel/2019a
 unset I_MPI_PMI_LIBRARY  # This is to use mpirun
 
@@ -167,7 +168,7 @@ fi
 
 # Load module Intel MPI and needed environment 
 module purge             # Clean all previously loaded modules
-module load swenv/default-env/latest
+module load swenv/default-env/latest # Change according to the software set 
 module load toolchain/intel/2019a
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
@@ -192,7 +193,7 @@ fi
 
 # Load module Intel MPI and needed environment 
 module purge             # Clean all previously loaded modules
-module load swenv/default-env/latest
+module load swenv/default-env/latest # Change according to the software set
 module load toolchain/intel/2019a
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
@@ -232,7 +233,7 @@ $ srun -p interactive --time=00:10:00 -N 2 --ntasks-per-node=3 --x11 --pty bash 
 
 # Load the module MVAPICH2 and needed environment 
 $ module purge             # Clean all previously loaded modules
-$ module load swenv/default-env/v0.1-20170602-production
+$ module load swenv/default-env/v0.1-20170602-production # Change according to the software set
 $ module load mpi/MVAPICH2/2.3a-GCC-6.3.0-2.28
 
 # Compilation
@@ -260,7 +261,7 @@ fi
 
 # Load the module MVAPICH2 and needed environment
 module purge             # Clean all previously loaded modules
-module load swenv/default-env/v0.1-20170602-production
+module load swenv/default-env/v0.1-20170602-production # Change according to the software set
 module load mpi/MVAPICH2/2.3a-GCC-6.3.0-2.28
 
 # srun -n $SLURM_NTASKS /path/to/your/hybrid_program
@@ -286,7 +287,7 @@ fi
 
 # Load the module MVAPICH2 and needed environment
 module purge             # Clean all previously loaded modules
-module load swenv/default-env/v0.1-20170602-production
+module load swenv/default-env/v0.1-20170602-production # Change according to the software set
 module load mpi/MVAPICH2/2.3a-GCC-6.3.0-2.28
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
@@ -318,7 +319,7 @@ threads or processes close to each other.
 
     # Load module OpenMPI and needed environment        
     module purge                         # Clean all previously loaded modules
-    module load swenv/default-env/latest               
+    module load swenv/default-env/latest # Change according to the software set
     module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 
     # Set mpi processes close to each other  and print out CPU affinity    
@@ -338,7 +339,7 @@ threads or processes close to each other.
 
     # Load module OpenMPI and needed environment 
     module purge                         # Clean all previously loaded modules
-    module load swenv/default-env/latest         
+    module load swenv/default-env/latest # Change according to the software set
     module load mpi/OpenMPI/3.1.4-GCC-8.2.0-2.31.1
 
     # Option for OpenMP threads 
@@ -365,7 +366,7 @@ To know more information about process pinning for OpenMPI please refer [OpenMPI
 
     # Load module Intel MPI and needed environment 
     module purge             # Clean all previously loaded modules
-    module load swenv/default-env/latest        
+    module load swenv/default-env/latest # Change according to the software set        
     module load toolchain/intel/2019a
 
     set I_MPI_PIN=1                      # Enable processes pinning     
@@ -387,7 +388,7 @@ To know more information about process pinning for OpenMPI please refer [OpenMPI
 
     # Load module Intel MPI and needed environment 
     module purge                         # Clean all previously loaded modules
-    module load swenv/default-env/latest
+    module load swenv/default-env/latest # Change according to the software set
     module load toolchain/intel/2019a
 
     set I_MPI_PIN=1                      # Enable processes pinning     
@@ -415,7 +416,7 @@ To know more information about process pinning for Intel MPI please refer [Intel
 
     # Load module MVAPICH2 and needed environmental modules 
     module purge                          # Clean all previously loaded modules 
-    module load swenv/default-env/v0.1-20170602-production
+    module load swenv/default-env/v0.1-20170602-production # Change according to the software set
     module load mpi/MVAPICH2/2.3a-GCC-6.3.0-2.28
 
     export MV2_CPU_BINDING_POLICY=bunch   # Uniform processes distribution (hybrid|bunch|scatter)
@@ -437,7 +438,7 @@ To know more information about process pinning for Intel MPI please refer [Intel
 
     # Load module MVAPICH2 and needed environmental modules 
     module purge                          # Clean all previously loaded modules 
-    module load swenv/default-env/v0.1-20170602-production
+    module load swenv/default-env/v0.1-20170602-production # Change according to the software set
     module load mpi/MVAPICH2/2.3a-GCC-6.3.0-2.28
 
     export MV2_ENABLE_AFFINITY=0          # Disable for hybrid mode 
