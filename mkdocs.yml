@@ -304,6 +304,7 @@ plugins:
   - git-revision-date-localized:
       type: date
   - progress
+  - include-markdown
 
 # Extras
 extra:

@@ -73,6 +73,11 @@ Such restore requests may take a few days to complete.
 	`$SCRATCH` directories are **not** backed up
 
 
+## Backup Tools
 
+In practice, the ULHPC backup infrastructure is fully puppetized and make use of several tools facilitating the operations:
 
-
+* [backupninja](https://0xacab.org/riseuplabs/backupninja), which allows you to coordinate system backup by dropping a few simple configuration files into `/etc/backup.d/`
+* a forked version of [bontmia](https://github.com/hcartiaux/bontmia), which stands for "Backup Over Network To Multiple Incremental Archives"
+* [BorgBackup](https://borgbackup.readthedocs.io/en/stable/), a deduplicating backup program supporting compression and authenticated encryption.
+* several internal scripts to pilot LVM snapshots/backup/restore operations
