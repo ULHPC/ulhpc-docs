@@ -58,7 +58,7 @@ nav:
     - GDPR Compliance:            'data/gdpr.md'
     - Quotas and Purging:         'filesystems/quotas.md'
     - Project Data Management:    'data/project.md'
-    - Scratch Data Management:    'data/scratch.md'
+    - Scratch Data Management:    'filesystems/lfs.md'
     - Backups:                    'data/backups.md'
     - Archiving:                  'data/archiving.md'
     - Unix File Permissions:      'filesystems/unix-file-permissions.md'
@@ -108,16 +108,16 @@ nav:
             - Helping Libraries: 'software/computational-chemistry/molecular-dynamics/helping-libraries.md'
     - Deep and Machine Learning:   'software/ml/index.md'
     - Earth Sciences:              'software/geo/index.md'
-    - Mathematics & Statistics:    
+    - Mathematics & Statistics:
           - MATLAB:    'software/maths/matlab.md'
           - MATHEMATICA:    'software/maths/mathematica.md'
           - Julia:    'software/maths/julia.md'
-      
+
     - Optimizers:                  'software/optim/index.md'
     - Performance/Debugging:       'development/performance-debugging-tools/index.md'
     - Physics:                     'software/phys/index.md'
     - Toolchains/Compilers:        'development/toolchains/index.md'
-    - Visualization:               
+    - Visualization:
       - ParaView:                  'software/visu/paraview.md'
 
   ###############
@@ -126,7 +126,9 @@ nav:
     - Convenient Slurm Commands: 'slurm/commands.md'
     - Partition/Queues: 'slurm/partitions.md'
     - Quality of Service (QOS) Policy: 'slurm/qos.md'
-    - Fairshare and Job Accounting: 'slurm/accounting.md'
+    - Account Hierarchy: 'slurm/accounts.md'
+    - Job Priority and FairSharing: 'jobs/priority.md'
+    - Job Accounting and Billing: 'slurm/billing.md'
     - Limits: 'jobs/limits.md'
     - Interactive Job: 'jobs/interactive.md'
     - Batch Job Submission: 'jobs/submit.md'
@@ -141,7 +143,7 @@ nav:
     - Licenses Management: 'slurm/licenses.md'
     - FAQs: 'jobs/faq.md'
     - Workflow Tools:
-      - Overview: 'jobs/workflow/indes.md'
+      - Overview: 'jobs/workflow/index.md'
       - GNU Parallel: 'jobs/workflow/gnuparallel.md'
       - Parsl: 'jobs/workflow/parsl.md'
       - Snakemake: 'jobs/workflow/snakemake.md'
