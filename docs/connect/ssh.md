@@ -39,6 +39,11 @@ To generate an RSA SSH keys **of 4096-bit length**, just use the `ssh-keygen` co
 ssh-keygen -t rsa -b 4096 -o -a 100
 ```
 
+After the execution of this command, the generated keys are stored in the following files:
+
+* SSH RSA _Private_ key: `~/.ssh/id_rsa`.      **NEVER EVER TRANSMIT THIS FILE**
+* SSH RSA _Public_ key:  `~/.ssh/id_rsa.pub`.  **This file is the ONLY one SAFE to distribute**
+
 !!! danger "To passphrase or not to passphrase"
     To ensure the security of your SSH key-pair on your laptop, you **MUST** protect your SSH keys with a passphrase!
     Note however that while possible, this passphrase is purely private and has _a priori_ nothing to do with your University or your ULHPC credentials. Nevertheless, a strong passphrase follows the same recommendations as for strong passwords (for instance: see [Google password tips](https://support.google.com/accounts/answer/32040?hl=en)).
@@ -61,9 +66,12 @@ $ ls -l ~/.ssh/id_*
 -rw-r--r-- username groupname ~/.ssh/id_ed25519.pub # Public ED25519 key
 ```
 
+Ensure the access rights are correct on the generated keys using the '`ls -l`' command.
+In particular, the _private_ key should be readable only by you:
+
 For more details, follow the [ULHPC Tutorials: Preliminaries / SSH](https://ulhpc-tutorials.readthedocs.io/en/latest/preliminaries/#secure-shell-ssh).
 
-??? note "(deprecated) Windows only: SSH key management with MobaKeyGen tool"
+??? note "(deprecated - Windows only): SSH key management with MobaKeyGen tool"
     On Windows with [MobaXterm](http://mobaxterm.mobatek.net/), a tool exists and can be used to generate an SSH key pair. While not recommended (we encourage you to run WSL), here are the instructions to follow to generate these keys:
 
     * Open the application **Start > Program Files > MobaXterm**.
@@ -79,7 +87,7 @@ For more details, follow the [ULHPC Tutorials: Preliminaries / SSH](https://ulhp
 
     ![MobaKeyGen (SSH key generator)](images/moba-ssh-key-gen.png)
 
-!!! note "(deprecated) Windows only: SSH key management with PuTTY"
+??? note "(deprecated - Windows only): SSH key management with PuTTY"
     While no longer recommended, you may still want to use [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/) and the associated tools, more precisely:
 
     * [PuTTY](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe), the free SSH client
@@ -90,15 +98,15 @@ For more details, follow the [ULHPC Tutorials: Preliminaries / SSH](https://ulhp
 
     The different steps involved in the installation process are illustrated below (**REMEMBER to tick the option "Associate .PPK files (PuTTY Private Key) with Pageant and PuTTYGen"**):
 
-    ![Putty Setup Screen #4](images/putty-screenshot-5.png)
+    ![Putty Setup Screen #4](images/putty-setup-screenshot.png)
 
     Now you can use the [PuTTYgen](http://the.earth.li/~sgtatham/putty/latest/x86/puttygen.exe) utility to generate an RSA key pair. The main steps for the generation of the keys are illustrated below (yet with **4096 bits** instead of 2048):
 
-    ![Configuring a passphrase](images/puttygen-screenshot-8.png)
+    ![Configuring a passphrase](images/puttygen-screenshot-1.png)
 
-    ![Saving the private key](images/puttygen-screenshot-9.png)
+    ![Saving the private key](images/puttygen-screenshot-2.png)
 
-    ![Saving the public key](images/puttygen-screenshot-10.png)
+    ![Saving the public key](images/puttygen-screenshot-3.png)
 
     * Save the public and private keys as respectively `id_rsa.pub` and `id_rsa.ppk`.
          - Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
@@ -107,10 +115,28 @@ For more details, follow the [ULHPC Tutorials: Preliminaries / SSH](https://ulhp
 ## Password-less logins and transfers
 
 Password based authentication is disabled on all ULHPC servers.
-You can only use public-key authentication.
+You can **only use public-key authentication**.
+This assumes that you upload your **public** SSH keys `*.pub` to your user entry on the [ULHPC Identity Management Portal](ipa.md).
 
-Consult the documentation on using the [IPA service](ipa.md) service
-for ways to upload your SSH public key to your account.
+Consult the [associated documentation](ipa.md) to discover how to do it.
+
+Once done, you can connect by SSH to the ULHPC clusters.
+Note that the port on which the SSH servers are listening is **not** the default SSH one (*i.e.* 22) but **8022**. Consequently, if you want to connect to the Iris cluster, open a terminal and run (substituting *yourlogin* with the login name you received from us):
+
+=== "Iris"
+    ```bash
+    # ADAPT 'yourlogin' accordingly
+    ssh -p 8022 yourlogin@access-iris.uni.lu
+    ```
+
+=== "Aion"
+
+    ```bash
+    # ADAPT 'yourlogin' accordingly
+    ssh -p 8022 yourlogin@access-aion.uni.lu
+    ```
+
+Of course, we advise you to setup your SSH configuration to avoid typing this detailed command. This is explained in the next section.
 
 ## SSH Configuration
 
@@ -137,6 +163,145 @@ Host *-cluster
     Port 8022
     ForwardAgent no
 ```
+
+You should now be able to connect as follows
+
+=== "Iris"
+    ```bash
+    ssh iris-cluster
+    ```
+
+=== "Aion"
+    ```bash
+    ssh aion-cluster
+    ```
+
+??? note "(Windows only) Remote session configuration with MobaXterm"
+    This part of the documentation comes from [MobaXterm documentation page](http://mobaxterm.mobatek.net/documentation.html#1_1)
+    MobaXterm allows you to launch remote sessions. You just have to click on the "Sessions" button to start a new session. Select SSH session on the second screen.
+
+    ![MobaXterm Session button](images/moba-session-button.png)
+
+    ![MobaXterm Session Manager](images/moba-network-sessions-manager.png)
+
+    Enter the following parameters:
+
+    * Remote host: `access-iris.uni.lu` (repeat with `access-aion.uni.lu`)
+    * Check the **Specify username** box
+    * Username: `yourlogin`
+         - Adapt to match the one that was sent to you in the Welcome e-mail once your HPC account was created
+    * Port: `8022`
+    * Go in **Advanced SSH settings** and check the **Use private key** box.
+        - Select your previously generated key `id_rsa.ppk`.
+
+    ![MobaXterm Session Manager Advanced](images/moba-session-advanced.png)
+
+    You can now click on **Connect** and enjoy.
+
+??? note "(deprecated - Windows only) - Remote session configuration with PuTTY"
+    If you want to connect to one of the ULHPC cluster, open Putty and enter the following settings:
+
+    * In _Category:Session_ :
+      - Host Name: `access-iris.uni.lu` (or `access-aion.uni.lu` if you want to access Aion)
+      - Port: `8022`
+      - Connection Type: `SSH` (leave as default)
+    * In _Category:Connection:Data_ :
+       - Auto-login username: `yourlogin`
+           * Adapt to match the one that was sent to you in the Welcome e-mail once your HPC account was created
+    * In _Category:SSH:Auth_ :
+       - Upload your private key: `Options controlling SSH authentication`
+
+    Click on _Open_ button. If this is the first time connecting to the server from this computer a **Putty Security Alert** will appear. Accept the connection by clicking _Yes_.
+
+    You should now be logged into the selected [ULHPC login node](access.md).
+
+    Now you probably want want to **save the configuration of this connection**:
+
+    * Go onto the _Session_ category.
+       - Enter the settings you want to save.
+       - Enter a name in the _Saved session_ field (for example `Iris` for access to Iris cluster).
+       - Click on the _Save_ button.
+
+    Next time you want to connect to the cluster, click on _Load_ button and _Open_ to open a new connection.
+
+## SSH Agent
+
+### On your laptop
+
+To be able to use your SSH key in a public-key authentication scheme, it must be loaded by an **SSH agent**.
+
+* **:fontawesome-brands-apple: Mac OS X (>= 10.5)**, this will be handled automatically; you will be asked to fill in the passphrase on the first connection.
+
+* **:fontawesome-brands-linux: Linux**, this will be handled automatically; you will be asked to fill the passphrase on the first connection.
+
+However if you get a message similar to the following:
+
+```bash
+(your_workstation)$> ssh -vv iris-cluster
+[...]
+Agent admitted failure to sign using the key.
+Permission denied (publickey).
+```
+
+This means that you have to manually load your key in the SSH agent by running:
+
+
+```bash
+(laptop)$> ssh-add ~/.ssh/id_rsa
+Enter passphrase for ~/.ssh/id_rsa:           # <-- enter your passphrase here
+Identity added: ~/.ssh/id_rsa (<login>@<hostname>)
+
+(laptop)$> ssh-add ~/.ssh/id_ed25519
+Enter passphrase for ~/.ssh/id_ed25519:       # <-- enter your passphrase here
+Identity added: ~/.ssh/id_ed25519 (<login>@<hostname>)
+```
+
+On **Ubuntu/WSL**, if you experience issues when using `ssh-add`, you should install the `keychain` package and use it as follows (eventually add it to your `~/.profile`):
+
+```bash
+# Installation
+(laptop)$> sudo apt install keychain
+
+# Save your passphrase
+/usr/bin/keychain --nogui ~/.ssh/id_ed25519    # (eventually) repeat with ~/.ssh/id_rsa
+# Load the agent in your shell
+source ~/.keychain/$(hostname)-sh
+```
+
+!!! note "(deprecated - Windows only) - SSH Agent with PuTTY Pageant"
+    To be able to use your PuTTY key in a public-key authentication scheme, it must be loaded by an **SSH agent**.
+    You should run [Pageant](http://the.earth.li/~sgtatham/putty/latest/x86/pageant.exe) for that.
+    To load your SSH key in Pageant:
+
+    * Right-click on the pageant icon in the system tray,
+        - click on the `Add key` menu item
+        - select the private key file you saved while running puttygen.exe i.e. ``
+        - click on the Open button: a new dialog will pop up and ask for your passphrase. Once your passphrase is entered, your key will be loaded in pageant, enabling you to connect with Putty.
+
+
+### On ULHPC clusters
+
+For security reason, SSH agent forwarding is prohibited and explicitly disabled (see `ForwardAgent no` configuration by default in the [above configuration](#ssh-configuration), you may need to manually load an agent once connected on the ULHPC facility, for instance if you are tired of typing the passphrase of a SSH key generated on the cluster to access a remote (private) service.
+
+You need to proceed as follows:
+
+```bash
+$ eval "$(ssh-agent)"    # export the SSH_AUTH_SOCK and SSH_AGENT_PID variables
+$ ssh-add ~/.ssh/id_rsa
+# [...]
+Enter passphrase for [...]
+Identity added: ~/.ssh/id_rsa (<login>@<hostname>)
+```
+
+You can then enjoy it.
+Be aware however that this exposes your private key. So you **MUST** properly kill your agent when you don't need it any mode, using
+
+```console
+$ eval "$(ssh-agent -k)"
+Agent pid <PID> killed
+```
+
+
 
 
 ## Key fingerprints
