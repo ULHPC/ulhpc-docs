@@ -32,4 +32,7 @@ Your global projects are daily backuped, according to the policy detailed in the
 
 ## Project directory modification
 
-You can request changes for your project directory (quotas extension, add/remove a group member) under [ServiceNow](https://hpc.uni.lu/support/) (HPC &rarr; Storage & projects &rarr; Extend quota/Request information etc. ).
+You can request changes for your project directory (quotas extension, add/remove a group member) under [ServiceNow](https://hpc.uni.lu/support/):
+
+* HPC &rarr; Storage & projects &rarr; Extend quota/Request information
+* HPC &rarr; User access & accounts &rarr; Add/Remove user within project

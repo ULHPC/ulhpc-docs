@@ -357,6 +357,7 @@ markdown_extensions:
   - pymdownx.magiclink:
       repo_url_shorthand: true
       social_url_shorthand: true
+  - pymdownx.tabbed
   - pymdownx.smartsymbols
   # code blocks with syntax highlighting, graphs
   - pymdownx.superfences
