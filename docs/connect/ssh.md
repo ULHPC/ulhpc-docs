@@ -237,7 +237,7 @@ To be able to use your SSH key in a public-key authentication scheme, it must be
 However if you get a message similar to the following:
 
 ```bash
-(your_workstation)$> ssh -vv iris-cluster
+(laptop)$> ssh -vv iris-cluster
 [...]
 Agent admitted failure to sign using the key.
 Permission denied (publickey).
@@ -256,7 +256,7 @@ Enter passphrase for ~/.ssh/id_ed25519:       # <-- enter your passphrase here
 Identity added: ~/.ssh/id_ed25519 (<login>@<hostname>)
 ```
 
-On **Ubuntu/WSL**, if you experience issues when using `ssh-add`, you should install the `keychain` package and use it as follows (eventually add it to your `~/.profile`):
+* :fontawesome-brands-ubuntu: :fontawesome-brands-windows: On **Ubuntu/WSL**, if you experience issues when using `ssh-add`, you should install the `keychain` package and use it as follows (eventually add it to your `~/.profile`):
 
 ```bash
 # Installation
@@ -268,7 +268,7 @@ On **Ubuntu/WSL**, if you experience issues when using `ssh-add`, you should ins
 source ~/.keychain/$(hostname)-sh
 ```
 
-!!! note "(deprecated - Windows only) - SSH Agent with PuTTY Pageant"
+??? note "(deprecated - Windows only) - SSH Agent with PuTTY Pageant"
     To be able to use your PuTTY key in a public-key authentication scheme, it must be loaded by an **SSH agent**.
     You should run [Pageant](http://the.earth.li/~sgtatham/putty/latest/x86/pageant.exe) for that.
     To load your SSH key in Pageant:
@@ -374,3 +374,103 @@ These are the entries in `~/.ssh/known_hosts`.
 ## Troubleshooting
 
 See [the corresponding section](troubleshooting.md).
+
+## Advanced SSH Tips and Tricks
+
+### CLI Completion
+
+The `bash-completion` package eases the ssh command usage by providing completion for hostnames and more (assuming you set the directive `HashKnownHost` to `no` in your `~/etc/ssh_config`)
+
+### SOCKS 5 Proxy plugin
+
+Many Data Analytics framework involves a web interface (at the level of the master and/or the workers) you probably want to access in a relative transparent way.
+
+For that, a convenient way is to rely on a SOCKS proxy, which is basically an SSH tunnel in which specific applications forward their traffic down the tunnel to the server, and then on the server end, the proxy forwards the traffic out to the general Internet.
+Unlike a VPN, a SOCKS proxy has to be configured on an app by app basis on the client machine, but can be set up without any specialty client agents.
+
+#### Setting Up the Tunnel
+
+To initiate such a SOCKS proxy using SSH (listening on `localhost:1080` for instance), you simply need to use the `-D 1080` command line option when connecting to a remote server:
+
+=== "Iris"
+    ```console
+    ssh -D 1080 -C iris-cluster
+    ```
+
+=== "Aion"
+    ```console
+    ssh -D 1080 -C aion-cluster
+    ```
+
+* `-D`: Tells SSH that we want a SOCKS tunnel on the specified port number (you can choose a number between 1025-65536)
+* `-C`: Compresses the data before sending it
+
+#### FoxyProxy [Firefox] Extension
+
+Now that you have an SSH tunnel, it's time to configure your web browser (recommended: Firefox) to use that tunnel.
+In particular, install the [Foxy Proxy](https://getfoxyproxy.org/order/?src=FoxyProxyForFirefox)
+extension for Firefox and configure it to use your SOCKS proxy:
+
+* Right click on the fox icon, Select Options
+* **Add a new proxy** button
+* Name: `ULHPC proxy`
+* Informations > **Manual configuration**
+    -  Host IP: `127.0.0.1`
+    -  Port: `1080`
+    -  Check the **Proxy SOCKS** Option
+* Click on **OK**
+* Close
+* Open a new tab
+* Click on the Fox
+* Choose the **ULHPC proxy**
+    - disable it when you no longer need it.
+
+You can now access any web interface deployed on any service reachable from the SSH jump host _i.e._ the ULHPC login node.
+
+#### Using `tsock`
+
+Once you setup a SSH SOCKS proxy, you can also use `tsocks`, a Shell wrapper to simplify the use of the [tsocks(8)](https://linux.die.net/man/8/tsocks) library to transparently allow an application (not aware of SOCKS) to transparently use a SOCKS proxy. For instance, assuming you create a VNC server on a given remote server as follows:
+
+```console
+(remote_server)$> vncserver -geometry 1366x768
+New 'X' desktop is remote_server:1
+
+Starting applications specified in /home/username/.vnc/xstartup
+Log file is /home/username/.vnc/remote_server:1.log
+```
+
+Then you can make the VNC client on your workstation use this tunnel to access the VNS server as follows:
+
+```console
+(laptop)$> tsocks vncviewer <IP_of_remote_server>:1
+```
+
+!!! tips "tsock Escape character"
+    Use `~.` to disconnect, even if your remote command hangs.
+
+
+### SSH Port Forwarding
+
+#### Forwarding a local port
+
+You can forward a local port to a host behind a firewall.
+
+![SSH forward of local port](images/SshL.png)
+
+This is useful if you run a server on one of the cluster nodes (let's say listening on port 2222) and you want to access it via the local port 1111 on your machine. Then you'll run:
+
+```bash
+# Here targeting iris cluster
+(laptop)$ ssh iris-cluster -L 1111:iris-014:2222
+```
+
+#### Forwarding a remote port
+
+You can forward a remote port back to a host protected by your firewall.
+
+![SSH forward of a remote port](images/SshR.png)
+
+
+#### Tunnelling for others
+
+By using the `-g` parameter, you allow connections from other hosts than localhost to use your SSH tunnels. Be warned that anybody within your network may access the tunnelized host this way, which may be a security issue.
