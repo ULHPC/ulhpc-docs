@@ -387,6 +387,9 @@ Many Data Analytics framework involves a web interface (at the level of the mast
 
 For that, a convenient way is to rely on a SOCKS proxy, which is basically an SSH tunnel in which specific applications forward their traffic down the tunnel to the server, and then on the server end, the proxy forwards the traffic out to the general Internet.
 Unlike a VPN, a SOCKS proxy has to be configured on an app by app basis on the client machine, but can be set up without any specialty client agents.
+The general principle is depicted below.
+
+![Creating a SOCKS proxy with SSH](images/SshD.png)
 
 #### Setting Up the Tunnel
 
@@ -404,6 +407,7 @@ To initiate such a SOCKS proxy using SSH (listening on `localhost:1080` for inst
 
 * `-D`: Tells SSH that we want a SOCKS tunnel on the specified port number (you can choose a number between 1025-65536)
 * `-C`: Compresses the data before sending it
+
 
 #### FoxyProxy [Firefox] Extension
 
@@ -474,3 +478,29 @@ You can forward a remote port back to a host protected by your firewall.
 #### Tunnelling for others
 
 By using the `-g` parameter, you allow connections from other hosts than localhost to use your SSH tunnels. Be warned that anybody within your network may access the tunnelized host this way, which may be a security issue.
+
+
+
+## Extras Tools around SSH
+
+* [Assh](https://github.com/moul/advanced-ssh-config) - Advanced SSH config is a transparent wrapper that make `~/.ssh/config` easier to manage
+    - support for _templates_, _aliases_, _defaults_, _inheritance_ etc.
+    - _gateways_: transparent ssh connection chaining
+    - more flexible command-line. _Ex_: Connect to `hosta` using `hostb` as a gateway
+      ```console
+      $ ssh hosta/hostb
+      ```
+
+    - drastically simplify your SSH config
+    - Linux / Mac OS **only**
+
+*  [ClusterShell](https://clustershell.readthedocs.io): `clush`, `nodeset` (or cluset),
+    - light, unified, robust command execution framework
+    - well-suited to _ease daily administrative tasks_ of Linux clusters.
+        * using tools like `clush` and `nodeset`
+    - _efficient, parallel, scalable command execution engine_ \hfill{\tiny in Python}
+    - provides an _unified node groups syntax_ and external group access
+        * see `nodeset` and the NodeSet class
+
+* [DSH](http://www.netfort.gr.jp/~dancer/software/dsh.html.en) - Distributed / Dancer's Shell
+* [sshutle](https://github.com/sshuttle/sshuttle), "_where transparent proxy meets VPN meets ssh_"
