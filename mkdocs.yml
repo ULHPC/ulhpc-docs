@@ -1,15 +1,15 @@
 site_name: ULHPC Technical Documentation
 nav:
   ##########
-  - General:
-    - Home: 'index.md'
-    - Getting Started: 'getting-started.md'
-    - Accounts:
-      - Get an Account:             'accounts/index.md'
-      - Password Policy:            'accounts/passwords.md'
-      - Collaboration Accounts:     'accounts/collaboration_accounts.md'
-      - Identity Management Portal: 'accounts/ipa.md'
-      - Slurm Account Hierarchy:    'accounts/hierarchy.md'
+#  - General:
+  - Home: 'index.md'
+  - Getting Started: 'getting-started.md'
+  - Accounts:
+    - Get an Account:             'accounts/index.md'
+    - Password Policy:            'policies/passwords.md'
+    - Collaboration Accounts:     'accounts/collaboration_accounts.md'
+    - Identity Management Portal: 'connect/ipa.md'
+    - Slurm Account Hierarchy:    'accounts/hierarchy.md'
   ##############
   - Data Center:
     - Centre de Calcul (CDC): 'data-center/index.md'

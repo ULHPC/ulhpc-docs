@@ -46,7 +46,7 @@ After the execution of this command, the generated keys are stored in the follow
 
 !!! danger "To passphrase or not to passphrase"
     To ensure the security of your SSH key-pair on your laptop, you **MUST** protect your SSH keys with a passphrase!
-    Note however that while possible, this passphrase is purely private and has _a priori_ nothing to do with your University or your ULHPC credentials. Nevertheless, a strong passphrase follows the same recommendations as for strong passwords (for instance: see [Google password tips](https://support.google.com/accounts/answer/32040?hl=en)).
+    Note however that while possible, this passphrase is purely private and has _a priori_ nothing to do with your University or your ULHPC credentials. Nevertheless, a strong passphrase follows the same recommendations as for strong passwords (for instance: see [password requirements and guidelines](../policies/passwords.md#password-requirements-and-guidelines).
 
     Finally, just like encryption keys, passphrases need to be kept safe and protected from _unauthorised_ access. A _Password Manager_  can help you to store all your passwords safely. The University is currently not offering a university wide password manger but there are many free and paid ones you can use, for example: [KeePassX](https://www.keepassx.org/), [PWSafe](https://www.pwsafe.org/relatedprojects.shtml), [Dashlane](https://www.dashlane.com/), [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/).
 
