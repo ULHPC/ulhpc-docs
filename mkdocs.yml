@@ -46,8 +46,9 @@ nav:
     - Access Servers:                'connect/access.md'
     - SSH:                           'connect/ssh.md'
     - Identity Management (IdM/IPA): 'connect/ipa.md'
+    - Open On Demand Portal:         'connect/ood.md'
     - Troubleshooting:               'connect/troubleshooting.md'
-    # - Open On Demand Portal:       'connect/ood.md'
+
     # - Multi-Factor Authentication: 'connect/mfa.md'
   ##################
   - Data Management:
