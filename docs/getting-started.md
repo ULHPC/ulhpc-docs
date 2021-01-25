@@ -23,7 +23,7 @@ All world-class universities require this type of facility to accelerate its res
 
 Since 2007, the [University of Luxembourg](https://www.uni.lu) (UL) has invested tens of millions of euro into its own HPC facilities to responds to the growing needs for increased computing and storage.
 [ULHPC](https://hpc.uni.lu) (sometimes referred to as Uni.lu HPC) is the entity  providing High Performance Computing and Big Data Storage services and support for UL researchers and its external partners.
-Led by Prof. [Pascal Bouvry](https://wwwen.uni.lu/research/fstm/dcs/members/pascal_bouvry) and Dr. [Sébastien Varrette](https://varrette.gforge.uni.lu), the [ULHPC](https://hpc.uni.lu) staff and facilities are located on the [Belval campus](https://wwwen.uni.lu/contact/campus_de_belval), offering a **cutting-edge research infrastructure to Luxembourg public research** while serving as _edge_ access to the Euro-HPC Luxembourg supercomputer "MeluXina" operated by [LuxProvide S.A](https://lxp.lu), the National HPC center.
+Led by Dr. [Sébastien Varrette](https://varrette.gforge.uni.lu), the [ULHPC](https://hpc.uni.lu) facilities are located on the [Belval campus](https://wwwen.uni.lu/contact/campus_de_belval), offering a **cutting-edge research infrastructure to Luxembourg public research** while serving as _edge_ access to the Euro-HPC Luxembourg supercomputer "MeluXina" operated by [LuxProvide S.A](https://lxp.lu), the National HPC center.
 
 !!! warning
     In particular, the [ULHPC](https://hpc.uni.lu) is **NOT** the national HPC center of Luxembourg, but simply one of its strategic partner operating the second largest HPC facility of the country.
@@ -39,8 +39,8 @@ We provide a key research infrastructure featuring state-of-the-art computing an
 
 The UL HPC platform has kept growing over time thanks to the continuous efforts of the core HPC team (Dr. S. Varrette, S. Peter, H. Cartiaux, Dr. F. Pinel, Dr. E. Kieffer, Dr. E. Krishnasamy, T. Valette, A. Olloh) - contact: [hpc-team@uni.lu](mailto:hpc-team@uni.lu), recently completed with the [EuroHPC Competence Center](https://www.eurocc-project.eu/) Task force (A. Vandeventer (Project Manager), L. Koutsantonis).
 
-!!! info "ULHPC Computing and Storage Capacity (2020)"
-    Installed in the premises of the University’s _Centre de Calcul_ (CDC), the UL HPC facilities provides in 2020 a total computing capacity of __2.76 PetaFlops__ and a shared storage capacity of around **10 PetaBytes**.
+!!! info "ULHPC Computing and Storage Capacity (2021)"
+    Installed in the premises of the University’s _Centre de Calcul_ (CDC), the UL HPC facilities provides a total computing capacity of __2.76 PetaFlops__ and a shared storage capacity of around **10 PetaBytes**.
 
 ??? question "How big is 1 PetaFlops? 1 PetaByte?"
     * 1 PetaFlops = 10<sup>15</sup> floating-point operations per second (PFlops or PF for short), corresponds to the cumulative performance of more than 3510 Macbook Pro 13" laptops [^1], or 7420 iPhone XS [^2]
@@ -123,8 +123,8 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 
 * [Get a ULHPC account](accounts/index.md)
 * [Understanding account hierarchy and accounting rules](accounts/hierarchy.md)
-* [ULHPC Identity Management (IPA portal)](accounts/ipa.md)
-* [Password policy](accounts/passwords.md)
+* [ULHPC Identity Management (IPA portal)](connect/ipa.md)
+* [Password policy](policies/passwords.md)
 
 ## Connecting to ULHPC supercomputers
 
@@ -136,14 +136,14 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 * [Open On Demand Portal](connect/ood.md)
 * [ULHPC Login/Access servers](connect/access.md)
 * [Troubleshooting connection problems](./connect/troubleshooting.md)
-* [Live status](https://www.nersc.gov/live-status/motd/)
+* [Live status](https://hpc.uni.lu/live-status/motd/)
 
 ## Transferring Data
 
 ULHPC provides several ways to transfer data both inside and outside
 of ULHPC.
 
-* [Transferring data](./data/transfer.md): Tools and recommendations.
+* [Transferring data](data/transfer.md): Tools and recommendations.
 
 ## User Environment
 

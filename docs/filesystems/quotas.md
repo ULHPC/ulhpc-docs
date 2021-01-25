@@ -15,7 +15,7 @@
 	When a quota is reached writes to that directory will fail.
 
 !!! note
-	On Isilon everyone shares one global quota. Unfortunately it is not possible to see the quota status on the cluster. 
+	On Isilon everyone shares one global quota. Unfortunately it is not possible to see the quota status on the cluster.
 
 ### Current usage
 
@@ -49,7 +49,7 @@ df -h .
 
 ### Increases
 
-If you or your project needs additional space or inodes for your scratch or project directory you may request it via [ServiceNow](https://service.uni.lu/) (HPC &rarr; Storage & projects &rarr; Extend quota).
+If you or your project needs additional space or inodes for your scratch or project directory you may request it via [ServiceNow](https://hpc.uni.lu/support/) (HPC &rarr; Storage & projects &rarr; Extend quota).
 
 Quotas on the home directory cannot be increased.
 
@@ -62,6 +62,6 @@ To avoid this issue, check out the `newgrp` command or set the `s` mode bit ("se
 To transfer data with `rsync` into a project directory, please check the [data transfer documentation](/data/transfer/#transfer-from-your-local-machine-to-a-project-directory-on-the-remote-cluster).
 
 ## Purging
-Files in the scratch (`$SCRATCH`, `/mnt/lscratch`) directories are purged. This means files that have not been read (i.e. atime has not been updated) within the last 60 days are automatically removed every month.
+Files in the scratch (`$SCRATCH`, `/mnt/lscratch`) directories are purged. This means **files that have not been read** (i.e. atime has not been updated) **within the last 60 days are automatically removed every month**.
 
-Files in `/tmp` on the compute nodes are removed at the end of the job.
+Files in `/tmp` on the compute nodes are **removed** at the end of the job.

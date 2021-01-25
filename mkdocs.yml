@@ -1,15 +1,15 @@
 site_name: ULHPC Technical Documentation
 nav:
   ##########
-  - General:
-    - Home: 'index.md'
-    - Getting Started: 'getting-started.md'
-    - Accounts:
-      - Get an Account:             'accounts/index.md'
-      - Password Policy:            'accounts/passwords.md'
-      - Collaboration Accounts:     'accounts/collaboration_accounts.md'
-      - Identity Management Portal: 'accounts/ipa.md'
-      - Slurm Account Hierarchy:    'accounts/hierarchy.md'
+#  - General:
+  - Home: 'index.md'
+  - Getting Started: 'getting-started.md'
+  - Accounts:
+    - Get an Account:             'accounts/index.md'
+    - Password Policy:            'policies/passwords.md'
+    - Collaboration Accounts:     'accounts/collaboration_accounts.md'
+    - Identity Management Portal: 'connect/ipa.md'
+    - Slurm Account Hierarchy:    'accounts/hierarchy.md'
   ##############
   - Data Center:
     - Centre de Calcul (CDC): 'data-center/index.md'
@@ -43,12 +43,12 @@ nav:
     - Live status: https://hpc.uni.lu/live-status/motd
   #################
   - Access/Connect:
-    - Access Servers:              'connect/access.md'
-    - SSH:                         'connect/ssh.md'
-    - Connect from Windows:        'connect/windows.md'
-    - Connect from MacOS/Linux:    'connect/linux.md'
-    - Troubleshooting:             'connect/troubleshooting.md'
-    # - Open On Demand Portal:       'connect/ood.md'
+    - Access Servers:                'connect/access.md'
+    - SSH:                           'connect/ssh.md'
+    - Identity Management (IdM/IPA): 'connect/ipa.md'
+    - Open On Demand Portal:         'connect/ood.md'
+    - Troubleshooting:               'connect/troubleshooting.md'
+
     # - Multi-Factor Authentication: 'connect/mfa.md'
   ##################
   - Data Management:
@@ -58,11 +58,11 @@ nav:
     - GDPR Compliance:            'data/gdpr.md'
     - Quotas and Purging:         'filesystems/quotas.md'
     - Project Data Management:    'data/project.md'
-    - Scratch Data Management:    'data/scratch.md'
+    - Scratch Data Management:    'filesystems/lfs.md'
     - Backups:                    'data/backups.md'
-    - Archiving:                  'data/archiving.md'
+    # - Archiving:                  'data/archiving.md'
     - Unix File Permissions:      'filesystems/unix-file-permissions.md'
-    - Version Control with Git:   'workflow/git.md'
+    # - Version Control with Git:   'workflow/git.md'
     - Sensitive Data Protection:  'data/encryption.md'
   ##############
   - Environment:
@@ -108,16 +108,16 @@ nav:
             - Helping Libraries: 'software/computational-chemistry/molecular-dynamics/helping-libraries.md'
     - Deep and Machine Learning:   'software/ml/index.md'
     - Earth Sciences:              'software/geo/index.md'
-    - Mathematics & Statistics:    
+    - Mathematics & Statistics:
           - MATLAB:    'software/maths/matlab.md'
           - MATHEMATICA:    'software/maths/mathematica.md'
           - Julia:    'software/maths/julia.md'
-      
+
     - Optimizers:                  'software/optim/index.md'
     - Performance/Debugging:       'development/performance-debugging-tools/index.md'
     - Physics:                     'software/phys/index.md'
     - Toolchains/Compilers:        'development/toolchains/index.md'
-    - Visualization:               
+    - Visualization:
       - ParaView:                  'software/visu/paraview.md'
 
   ###############
@@ -126,7 +126,9 @@ nav:
     - Convenient Slurm Commands: 'slurm/commands.md'
     - Partition/Queues: 'slurm/partitions.md'
     - Quality of Service (QOS) Policy: 'slurm/qos.md'
-    - Fairshare and Job Accounting: 'slurm/accounting.md'
+    - Account Hierarchy: 'slurm/accounts.md'
+    - Job Priority and FairSharing: 'jobs/priority.md'
+    - Job Accounting and Billing: 'slurm/billing.md'
     - Limits: 'jobs/limits.md'
     - Interactive Job: 'jobs/interactive.md'
     - Batch Job Submission: 'jobs/submit.md'
@@ -141,7 +143,7 @@ nav:
     - Licenses Management: 'slurm/licenses.md'
     - FAQs: 'jobs/faq.md'
     - Workflow Tools:
-      - Overview: 'jobs/workflow/indes.md'
+      - Overview: 'jobs/workflow/index.md'
       - GNU Parallel: 'jobs/workflow/gnuparallel.md'
       - Parsl: 'jobs/workflow/parsl.md'
       - Snakemake: 'jobs/workflow/snakemake.md'
@@ -279,17 +281,18 @@ nav:
 # Project Information
 site_name: ULHPC Technical Documentation
 site_description: ULHPC Technical Documentation
-site_author: ULHPC Team
+site_author: S. Varrette and Uni.lu HPC (ULHPC) Team
 site_dir: public
 site_url: "https://hpc-docs.uni.lu/"
 
 # Repository
-repo_name: www/ulhpc-docs
-repo_url: https://gitlab.uni.lu/www/ulhpc-docs
+#repo_name: www/ulhpc-docs
+#repo_url: https://gitlab.uni.lu/www/ulhpc-docs
 #edit_uri: blob/master/docs/
 
 # Copyright
-copyright: Copyright &copy; 2007 - __YEAR__ UL HPC Team
+copyright: Copyright &copy; 2007-2021 S. Varrette and Uni.lu HPC (ULHPC) Team
+
 
 # Configuration
 # strict: true
@@ -355,6 +358,9 @@ markdown_extensions:
   - pymdownx.magiclink:
       repo_url_shorthand: true
       social_url_shorthand: true
+  - pymdownx.snippets:
+      base_path: snippets
+  - pymdownx.tabbed
   - pymdownx.smartsymbols
   # code blocks with syntax highlighting, graphs
   - pymdownx.superfences

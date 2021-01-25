@@ -4,12 +4,12 @@
 
 <p align="center"><img src="images/logo_ULHPC.png" alt="UL HPC logo" width="150px"/></p>
 
-!!! tip "The ULHPC Team welcomes your contributions"
-	These pages are hosted from a
-	[git repository](https://gitlab.uni.lu/www/ulhpc-docs) and
-	[contributions](https://gitlab.uni.lu/www/ulhpc-docs/docs/contributing)
-	are welcome!
-	[Fork this repo](https://gitlab.uni.lu/www/ulhpc-docs-/forks/new)
+<!-- !!! tip "The ULHPC Team welcomes your contributions" -->
+<!-- 	These pages are hosted from a -->
+<!-- 	[git repository](https://gitlab.uni.lu/www/ulhpc-docs) and -->
+<!-- 	[contributions](https://gitlab.uni.lu/www/ulhpc-docs/docs/contributing) -->
+<!-- 	are welcome! -->
+<!-- 	[Fork this repo](https://gitlab.uni.lu/www/ulhpc-docs-/forks/new) -->
 
 **[hpc-docs.uni.lu](https://hpc-docs.uni.lu)** is a resource with the
 **technical details** for users to make _effective_ use
@@ -24,6 +24,7 @@ of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'
 * [Helpdesk / Ticket Portal](https://hpc.uni.lu/support) - open tickets, make requests
       - Uni.lu Service Now Portal - use your Uni.lu credentials to access.
 * [ULHPC Tutorials](https://ulhpc-tutorials.readthedocs.io/) - HPC tutorials covering many (many) topics: [ulhpc-tutorials.readthedocs.io](https://ulhpc-tutorials.readthedocs.io/)
+* [Trainings and HPC School](https://hpc.uni.lu/hpc-school/)
 
 
 ## Popular documentation pages

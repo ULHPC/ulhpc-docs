@@ -7,7 +7,7 @@ username/password pair may be used by a **single** individual only:
 share their passwords will have their access to ULHPC disabled.
 
 !!! tip "Do not confuse your UL[HPC] password/passphrase and your SSH passphrase"
-    We sometimes receive requests to reset your SSH passphrase, which is something you control upon SSH key generation - see [SSH documentation](connect/ssh.md).
+    We sometimes receive requests to reset your SSH passphrase, which is something you control upon SSH key generation - see [SSH documentation](../connect/ssh.md).
 
 Passwords must be changed as soon as possible after exposure or
 suspected compromise. Exposure of passwords and suspected compromises
@@ -46,14 +46,7 @@ necessary.
 
 ## How To Change Your Password on IPA
 
-1.  Point your browser to <https://***REMOVED***>
-    and log in.
-2. On the top right under your name, select the entry "Change Password"
-3.  In the dialog window that appears, enter the current password,
-    and your new password. Your password should meet the password
-    requirements explained in the next section below, and must be
-    'safe' or 'very safe' according to the provided password strength
-    meter.
+See [IPA documentation](../connect/ipa.md#change-your-password)
 
 !!! tip
     Passwords must be changed under any one of the following circumstances:

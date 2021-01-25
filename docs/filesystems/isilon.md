@@ -1,6 +1,10 @@
 # Dell EMC Isilon (Archives and cold project data)
 
-OneFS, A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) solution is used to host project data, and serve for backup and archival purposes. You will find it mounted under `/mnt/isilon`.
+<!--intro-start-->
+
+OneFS, A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) solution is used to host project data, and serve for backup and archival purposes. You will find them mounted under `/mnt/isilon/projects`.
+
+<!--intro-end-->
 
 In 2014, the [IT Department of the University](https://wwwen.uni.lu/universite/presentation/organigrammes/organigramme_rectorat_administration_centrale/service_informatique_de_l_universite), the [UL HPC]
 (https://hpc.uni.lu/about/team.html) and the [LCSB](http://wwwen.uni.lu/lcsb/) join their forces (and their funding) to acquire a scalable and modular

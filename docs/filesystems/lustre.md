@@ -1,19 +1,23 @@
-# Lustre File System (`$SCRATCH`)
+# Lustre (`$SCRATCH`)
 
 ![](../images/plots/plot_piechart_storage_fs_2020.png){: style="width:350px; float: right;"}
 
 ## Introduction
 
-The [Lustre](http://lustre.org/) file system is an open-source, parallel file system that supports many requirements of leadership class HPC simulation environments. It is available as a global _high_-performance file system on all ULHPC computational systems through a [DDN ExaScaler](https://www.ddn.com/products/lustre-file-system-exascaler/)
-and is meant to host **temporary scratch data**.
-It is intended to support large I/O for jobs that are being actively computed on the ULHPC systems. We recommend that you run your jobs, especially data intensive ones, from the ULHPC scratch file system.
+The [Lustre](http://lustre.org/) file system is an open-source, parallel file system that supports many requirements of leadership class HPC simulation environments.
 
-<!--intro-end-->
+It is available as a global _high_-performance file system on all ULHPC computational systems through a [DDN ExaScaler](https://www.ddn.com/products/lustre-file-system-exascaler/) system.
+
+It is meant to host **temporary scratch data** within your jobs.
+In terms of raw storage capacities, it represents more than **1.6TB**.
 
 * [Live status](https://hpc.uni.lu/live-status/motd/)
 
-Refer to your scratch directory using the environment variable `$SCRATCH` whenever possible (which expands to `/scratch/users/$(whoami)` a priori).
-The scratch file system is shared via the Infiniband network of the ULHPC facility is available from all nodes and is tuned for high performance.
+{%
+   include-markdown "scratch.md"
+   end="<!--intro-end-->"
+%}
+
 
 !!! warning "ULHPC `$SCRATCH` quotas, backup and purging policies"
     Extended ACLs are provided for sharing data with other users using fine-grained control.
@@ -34,7 +38,7 @@ The scratch file system is shared via the Infiniband network of the ULHPC facili
 
 A Lustre file system has three major functional units:
 
-* One or more __MetaData Servers (MDS)__nodes (here two) that have one or more _MetaData Target (MDT)_ devices per Lustre filesystem that stores namespace metadata, such as filenames, directories, access permissions, and file layout. The MDT data is stored in a local disk filesystem. However, unlike block-based distributed filesystems, such as GPFS/SpectrumScale and PanFS, where the metadata server controls all of the block allocation, the Lustre metadata server is only involved in pathname and permission checks, and is not involved in any file I/O operations, avoiding I/O scalability bottlenecks on the metadata server.
+* One or more __MetaData Servers (MDS)__ nodes (here two) that have one or more _MetaData Target (MDT)_ devices per Lustre filesystem that stores namespace metadata, such as filenames, directories, access permissions, and file layout. The MDT data is stored in a local disk filesystem. However, unlike block-based distributed filesystems, such as GPFS/SpectrumScale and PanFS, where the metadata server controls all of the block allocation, the Lustre metadata server is only involved in pathname and permission checks, and is not involved in any file I/O operations, avoiding I/O scalability bottlenecks on the metadata server.
 * One or more __Object Storage Server (OSS)__ nodes that store file data on one or more _Object Storage Target (OST)_ devices.
      - The capacity of a Lustre file system is the sum of the capacities provided by the OSTs.
      - OSSs do most of the work and thus require as much RAM as possible

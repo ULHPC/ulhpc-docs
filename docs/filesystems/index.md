@@ -31,17 +31,12 @@ In addition, the following file-systems complete the ULHPC storage infrastructur
 
 ## Summary
 
-File systems are configured for different purposes.
-Each machine has access to at least three different file systems with different levels of performance, permanence and available space.
-
-| Directory                     | Env.       | file system                   | backup | purging |
-|-------------------------------|------------|-------------------------------|--------|---------|
-| `/home/users/<login>`         | `$HOME`    | [GPFS/Spectrumscale](gpfs.md) | yes    | no      |
-| `/scratch/users/<login>`      | `$SCRATCH` | [Lustre](lustre.md)           | no     | yes     |
-| `/work/projects/<name>`       | -          | [GPFS/Spectrumscale](gpfs.md) | yes    | no      |
-| `/scratch/projects/<name>`    | -          | [Lustre](lustre.md)           | no     | yes     |
-| `/mnt/isilon/projects/<name>` | -          | [OneFS](isilon.md)            | yes*   | no      |
+{%
+   include-markdown "overview.md"
+   start="<!--content-start-->"
+%}
 
 * [ULHPC backup policies](../data/backups.md)
 * [Quotas and purging policies](quotas.md)
 * ULHPC [GPFS/SpectrumScale](gpfs.md) and [Lustre](lustre.md) filesystems
+* UL [Isilon/OneFS](isilon.md) filesystems
