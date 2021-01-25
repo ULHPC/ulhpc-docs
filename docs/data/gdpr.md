@@ -1,6 +1,15 @@
-<p class="text-center">
-<button type="button" class="btn btn-light"><a href="https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf">UL HPC Acceptable Use Policy (AUP) [pdf]</a></button>
-</p>
+
+[:fontawesome-solid-sign-in-alt: UL HPC Acceptable Use Policy (AUP) (pdf)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf){: .md-button .md-button--link }
+
+!!! warning
+    Personal data is/may be visible, accessible or handled:
+
+    * directly on the HPC clusters
+    * through _Resource and Job Management System_ (RJMS) tools (Slurm) and associated monitoring interfaces
+    * through service portals (like [OpenOnDemand](../connect/ood.md))
+    * on code management portals such [GitLab](https://gitlab.uni.lu), [GitHub](https://github.com)
+    * on secondary storage systems used within the University as DropIT, NextCloud etc.
+
 
 ## Data Use
 

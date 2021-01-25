@@ -268,6 +268,23 @@ Identity added: ~/.ssh/id_ed25519 (<login>@<hostname>)
 source ~/.keychain/$(hostname)-sh
 ```
 
+??? note "(Windows only) SSH Agent within MobaXterm"
+
+    * Go in **Settings > SSH Tab**
+    * In **SSH agents** section, check **Use internal SSH agent "MobAgent"**
+
+    ![](images/moba-agent1.png)
+
+    * Click on the `+` button on the right
+    * Select your private key file. If you have several keys, you can add them by doing steps above again.
+    * Click on "Show keys currently loaded in MobAgent". An advertisement window may appear asking if you want to run MobAgent. Click on "Yes".
+    * Check that your key(s) appears in the window.
+
+    ![](images/moba-agent2.png)
+
+    * Close the window.
+    * Click on `OK`. Restart MobaXterm.
+
 ??? note "(deprecated - Windows only) - SSH Agent with PuTTY Pageant"
     To be able to use your PuTTY key in a public-key authentication scheme, it must be loaded by an **SSH agent**.
     You should run [Pageant](http://the.earth.li/~sgtatham/putty/latest/x86/pageant.exe) for that.
