@@ -60,9 +60,9 @@ nav:
     - Project Data Management:    'data/project.md'
     - Scratch Data Management:    'filesystems/lfs.md'
     - Backups:                    'data/backups.md'
-    - Archiving:                  'data/archiving.md'
+    # - Archiving:                  'data/archiving.md'
     - Unix File Permissions:      'filesystems/unix-file-permissions.md'
-    - Version Control with Git:   'workflow/git.md'
+    # - Version Control with Git:   'workflow/git.md'
     - Sensitive Data Protection:  'data/encryption.md'
   ##############
   - Environment:
@@ -281,17 +281,18 @@ nav:
 # Project Information
 site_name: ULHPC Technical Documentation
 site_description: ULHPC Technical Documentation
-site_author: ULHPC Team
+site_author: S. Varrette and Uni.lu HPC (ULHPC) Team
 site_dir: public
 site_url: "https://hpc-docs.uni.lu/"
 
 # Repository
-repo_name: www/ulhpc-docs
-repo_url: https://gitlab.uni.lu/www/ulhpc-docs
+#repo_name: www/ulhpc-docs
+#repo_url: https://gitlab.uni.lu/www/ulhpc-docs
 #edit_uri: blob/master/docs/
 
 # Copyright
-copyright: Copyright &copy; 2007 - __YEAR__ UL HPC Team
+copyright: Copyright &copy; 2007-2021 S. Varrette and Uni.lu HPC (ULHPC) Team
+
 
 # Configuration
 # strict: true
@@ -357,6 +358,8 @@ markdown_extensions:
   - pymdownx.magiclink:
       repo_url_shorthand: true
       social_url_shorthand: true
+  - pymdownx.snippets:
+      base_path: snippets
   - pymdownx.tabbed
   - pymdownx.smartsymbols
   # code blocks with syntax highlighting, graphs
