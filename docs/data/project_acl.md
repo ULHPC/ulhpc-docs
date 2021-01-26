@@ -23,4 +23,25 @@
 
           rsync -avz {--update | --delete} --no-p --no-g [--chmod=ug=rwX] <source> /work/projects/<name>/[...]
 
+For the same reason detailed above, in case you are using a build command or
+more generally any command meant to _write_ data in your project directory
+`/work/projects/<name>`, you want to use the
+[`sg`](https://linux.die.net/man/1/sg) as follows:
+
+```bash
+# /!\ ADAPT <name> accordingly
+sg <name> -c "<command> [...]"
+```
+
+This is particularly important if you are [building dedicated software with
+Easybuild](../development/software/index.md) for members of the project - you typically want to do it as follows:
+
+```bash
+# /!\ ADAPT <name> accordingly
+sg <name> -c "eb [...] -r --rebuild -D"   # Dry-run - enforce using the '<name>' group
+sg <name> -c "eb [...] -r --rebuild"      # Dry-run - enforce using the '<name>' group
+```
+
+
+
 <!--end-warning-clusterusers-->

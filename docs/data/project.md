@@ -26,7 +26,7 @@ Your global projects are daily backuped, according to the policy detailed in the
 
 {%
    include-markdown "project_acl.md"
-   end="<!--start-warning-clusterusers-->"
+   start="<!--start-warning-clusterusers-->"
    end="<!--end-warning-clusterusers-->"
 %}
 
