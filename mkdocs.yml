@@ -81,7 +81,7 @@ nav:
   - Software:
     - Supported Software List:     'software/index.md'
     - Software Set Versioning:     'software/swsets.md'
-    - Compiling/building software: 'development/software/index.md'
+    - Compiling/building software: 'software/build.md'
     - RESIF:                       'software/resif.md'
     - Contributing:                'software/contributing.md'
     - BigData Analytics:           'software/bigdata/index.md'

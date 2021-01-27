@@ -1,8 +1,21 @@
 # ULHPC User Environment
 
-Your journey on the ULHPC facility is illustrated in the below figure.
+{%
+   include-markdown "workflow.md"
+   start="<!--intro-start-->"
+%}
 
-![](../images/ULHPC-simplified-workflow-overview.png)
+For more information:
+
+* [Getting Started](../getting-started.md)
+* [Connecting to ULHPC supercomputers](../getting-started##connecting-to-ulhpc-supercomputers)
+* [ULHPC Storage Systems Overview](../filesystems/overview.md)
+* [ULHPC User Software](../software/index.md)
+
+!!! warning "'-bash: `module`: command not found' on access/login servers"
+    Recall that by default, the `module` command is (_on purpose_) **NOT** available on the [access/login servers](../connect/access.md).
+    You HAVE to be on a computing node (within a [slurm job](../slurm/index.md))
+
 
 ## Home and Directories Layout
 
@@ -120,3 +133,54 @@ To make system specific customizations use the pre-defined environment
                 ;;
         esac
         ```
+
+## Operating Systems
+
+The ULHPC facility runs [RedHat-based Linux Distributions](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives), in particular:
+
+* the [Iris cluster](../systems/iris/index.md) run [CentOS](https://centos.org/) 7  and [RedHat (RHEL)](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/) Linux operating system, version 7
+* the [Aion cluster](../systems/aion/index.md) run [RedHat (RHEL)](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/) Linux operating system, version 8
+* Experimental [Grid5000](https://www.grid5000.fr/w/Luxembourg:Hardware) cluster run [Debian](https://www.debian.org/) Linux, version 10
+
+Thus, you are more than encouraged to become familiar - if not yet - with [Linux commands](http://linuxcommand.org/). We can recommend the following sites and resources:
+
+* [Software Carpentry: The Unix Shell](https://swcarpentry.github.io/shell-novice/)
+* [Unix/Linux Command Reference](https://files.fosswire.com/2007/08/fwunixref.pdf)
+
+??? info "Impact of CentOS project shifting focus starting 2021 from CentOS Linux to CentOS Stream"
+    You may have followed the [official announcement on Dec 8, 2020](https://blog.centos.org/2020/12/future-is-centos-stream/) where [Red Hat announced that it will discontinue CentOS 8](https://www.redhat.com/en/blog/centos-stream-building-innovative-future-enterprise-linux) by the end of 2021 and instead will focus on CentOS Stream going forward. Fortunately CentOS 7 will continue to be updated until 2024 and is therefore not affected by this change.
+
+    While CentOS traditionally has been a rebuild of RHEL, CentOS Stream will be
+    more or less a testing ground for changes that will eventually go into RHEL.
+    Unfortunately this means that CentOS Stream will likely become incompatible
+    with RHEL (e.g. binaries compiled on CentOS Stream will not necessarily run
+    on RHEL and vice versa). It is also questionable whether CentOS Stream is a
+    suitable environment for running production systems.
+
+    **For all these reasons, the migration to CentOS 8 for Iris (initially planned for Q1 2021) has been cancelled**.
+    _Alternative approaches are under investigation_, including an homogeneous
+    setup between Iris and Aion over Redhat 8.
+
+## Discovering, visualizing and reserving UL HPC resources
+
+See [ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/#discovering-visualizing-and-reserving-ul-hpc-resources)
+
+## ULHPC User Software Environment
+
+We use the [`module`](http://lmod.readthedocs.io) utility **on Compute nodes**
+to manage nearly all software.
+There are two advantages of the `module` approach:
+
+1. ULHPC can provide many different versions and/or installations of a
+   single software package on a given machine, including a default
+   version as well as several older and newer version.
+2. Users can easily switch to different versions or installations
+   without having to explicitly specify different paths. With modules,
+   the `MANPATH` and related environment variables are automatically
+   managed.
+3. Users can easily extend the global [ULHPC software
+   set](../software/swsets.md) with their **local** software builds made though
+   [Easybuild](../software/easybuild.md) that generate automatically module
+   files compliant with the ULHPC module setup.
+
+See [Environment modules](modules.md) for more details.
