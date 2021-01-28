@@ -66,8 +66,9 @@ nav:
     - Sensitive Data Protection:  'data/encryption.md'
   ##############
   - Environment:
-    - Overview: 'environment/index.md'
-    - Modules:  'environment/modules.md'
+    - Overview:  'environment/index.md'
+    - Modules:   'environment/modules.md'
+    - Easybuild: 'environment/easybuild.md'
   ###########
   - Policies:
     - Acceptable Use Policy (AUP):               'policies/aup.md'
