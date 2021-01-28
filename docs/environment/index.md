@@ -134,13 +134,18 @@ To make system specific customizations use the pre-defined environment
         esac
         ```
 
-## Operating Systems
+[![CentOS](https://wiki.centos.org/ArtWork/Brand/Logo?action=AttachFile&do=get&target=centos-logo-light.png){: style="width:150px; float: right;"}](https://centos.org/)
+
+## Operating Systems :fontawesome-brands-linux:
+
+[![RedHat](https://www.redhat.com/cms/managed-files/Logo-redhat-color-375.png){: style="width:150px; float: right;"}](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux)
 
 The ULHPC facility runs [RedHat-based Linux Distributions](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives), in particular:
 
-* the [Iris cluster](../systems/iris/index.md) run [CentOS](https://centos.org/) 7  and [RedHat (RHEL)](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/) Linux operating system, version 7
-* the [Aion cluster](../systems/aion/index.md) run [RedHat (RHEL)](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/) Linux operating system, version 8
-* Experimental [Grid5000](https://www.grid5000.fr/w/Luxembourg:Hardware) cluster run [Debian](https://www.debian.org/) Linux, version 10
+* the [Iris cluster](../systems/iris/index.md) run [CentOS](https://centos.org/)  and [RedHat (RHEL)](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/) Linux operating system, **version 7**
+* the [Aion cluster](../systems/aion/index.md) run [RedHat (RHEL)](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/) Linux operating system, **version 8**
+![](https://www.debian.org/logos/openlogo-100.png){: style="width:75px; float: right;"}
+*  Experimental [Grid5000](https://www.grid5000.fr/w/Luxembourg:Hardware) cluster run [Debian](https://www.debian.org/) Linux, version 10
 
 Thus, you are more than encouraged to become familiar - if not yet - with [Linux commands](http://linuxcommand.org/). We can recommend the following sites and resources:
 
@@ -167,20 +172,10 @@ See [ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en
 
 ## ULHPC User Software Environment
 
-We use the [`module`](http://lmod.readthedocs.io) utility **on Compute nodes**
-to manage nearly all software.
-There are two advantages of the `module` approach:
-
-1. ULHPC can provide many different versions and/or installations of a
-   single software package on a given machine, including a default
-   version as well as several older and newer version.
-2. Users can easily switch to different versions or installations
-   without having to explicitly specify different paths. With modules,
-   the `MANPATH` and related environment variables are automatically
-   managed.
-3. Users can easily extend the global [ULHPC software
-   set](../software/swsets.md) with their **local** software builds made though
-   [Easybuild](../software/easybuild.md) that generate automatically module
-   files compliant with the ULHPC module setup.
+{%
+   include-markdown "modules.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
 
 See [Environment modules](modules.md) for more details.

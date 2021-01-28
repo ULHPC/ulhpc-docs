@@ -1,0 +1,344 @@
+# ULHPC Software/Modules Environment
+
+<!--intro-intro-->
+!!! important ""
+    The UL HPC facility provides a large variety of scientific applications to its user community, either domain-specific codes and general purpose development tools which enable research and innovation excellence across a wide set of computational fields. -- see [software list](../software/index.md).
+
+[![](https://lmod.readthedocs.io/en/latest/_static/Lmod-4color@2x.png){: style="width:200px; float: right;"}](https://lmod.readthedocs.io/)
+
+We use the [Environment Modules](http://modules.sourceforge.net/) / [LMod](http://lmod.readthedocs.io/en/latest/) framework which provided the [`module`](http://lmod.readthedocs.io) utility **on Compute nodes**
+to manage nearly all software.
+There are two main advantages of the `module` approach:
+
+1. ULHPC can provide many different versions and/or installations of a
+   single software package on a given machine, including a default
+   version as well as several older and newer version.
+2. Users can easily switch to different versions or installations
+   without having to explicitly specify different paths. With modules,
+   the `MANPATH` and related environment variables are automatically
+   managed.
+
+[![](https://easybuild.readthedocs.io/en/latest/_static/easybuild_logo_alpha.png){:style="width:200px; margin-right:10px; float: left;"}](https://easybuild.readthedocs.io/)
+
+In addition, we rely on [Easybuild](https://docs.easybuild.io/) to [manage User Software](../software/management.md) and generate automatically the module files
+This enables users to easily extend the global
+[ULHPC software set](../software/swsets.md) with their **local** software
+builds, either performed within their [global home
+directory](../data/layout.md#global-home-directory-home) or in [project
+directories](../data/layout.md) though [Easybuild](../software/easybuild.md)
+which generate automatically module files compliant with the ULHPC module setup.
+
+<!--intro-end-->
+
+## Environment modules and LMod
+
+[Environment Modules](http://modules.sourceforge.net/) are a standard and well-established technology across HPC sites, to permit developing and using complex software and libraries build with dependencies, allowing multiple versions of software stacks and combinations thereof to co-exist.
+
+It **brings the `module` command** which is used to manage environment variables such as `PATH`, `LD_LIBRARY_PATH` and `MANPATH`, enabling the easy loading and unloading of application/library profiles and their dependencies.
+
+??? question "Why do you need [Environment] Modules?"
+    When users login to a Linux system, they get a login shell and the [shell](index.md#shell-and-dotfiles) uses Environment variables to run commands and applications. Most common are:
+
+    * [`PATH`](https://en.wikipedia.org/wiki/PATH_(variable)):  colon-separated list of directories in which your system looks for executable files;
+    * [`MANPATH`](https://man7.org/linux/man-pages/man1/manpath.1.html): colon-separated list of directories in which [`man`](https://man7.org/linux/man-pages/man1/man.1.html) searches for the man pages;
+    * [`LD_LIBRARY_PATH`](https://man7.org/linux/man-pages/man8/ld.so.8.html): colon-separated list of directories in which your system looks for for ELF / `*.so` libraries at execution time needed by applications.
+
+    There are also _application specific_ environment variables such as `CPATH`, `LIBRARY_PATH`, `JAVA_HOME`, `LM_LICENSE_FILE`, `MKLROOT` etc.
+
+    A _traditional_ way to setup these Environment variables is by [customizing the shell initialization files](index.md#customizing-shell-environment): _i.e._ `/etc/profile`, `.bash_profile`, and `.bashrc`
+    This proves to be very impractical on multi-user systems with various applications and multiple application versions installed as on an HPC facility.
+
+    To overcome the difficulty of setting and changing the Environment variables, the TCL/C Environment Modules were introduced over 2 decades ago.
+    The [Environment Modules](https://lmod.readthedocs.io/) package is a tool that simplify shell initialization and lets users easily modify their environment during the session with **[modulefiles](https://lmod.readthedocs.io/en/latest/015_writing_modules.html)**.
+
+    * Each modulefile contains the information needed to configure the shell for an application. Once the Modules package is initialized, the environment can be modified on a _per-module_ basis using the `module` command which interprets modulefiles. Typically modulefiles instruct the `module` command to alter or set shell environment variables such as `PATH`, `MANPATH`, etc.
+    * [Modulefiles](https://lmod.readthedocs.io/en/latest/015_writing_modules.html) may be shared by many users on a system (as done on the ULHPC clusters) and users may have their _own_ collection to supplement or replace the shared modulefiles.
+
+    Modules can be loaded and unloaded dynamically and atomically, in an clean fashion. All popular shells are supported, including `bash`, `ksh`, `zsh`, `sh`, `csh`, `tcsh`, `fish`, as well as some scripting languages such as `perl`, `ruby`, `tcl`, `python`, `cmake` and `R`. Modules are useful in managing different versions of applications.
+    Modules can also be bundled into metamodules that will load an entire suite of different applications -- this is precisely the way we [manage the ULHPC Software Set](../software/swsets.md)
+
+??? info "Tcl/C Environment Modules (Tmod) vs. Tcl [Environment Modules](https://modules.readthedocs.io/) vs. [Lmod](https://lmod.readthedocs.io/)"
+    There exists several implementation of the `module` tool:
+
+    * [Tcl/C Environment Modules](http://modules.sourceforge.net/) (3.2.10 $\leq$ version < 4), also called `Tmod`: the _seminal_ (**old**) implementation
+    * Tcl-only variant of [Environment modules](https://modules.readthedocs.io/) (version $\geq$ 4), previously called `Modules-Tcl`
+    * (**recommended**) [Lmod](https://lmod.readthedocs.io/),  a Lua based Environment Module System
+        - Lmod ("L" stands for [Lua](http://www.lua.org/)) provides all of the functionality of TCL/C Environment Modules plus more features:
+            * support for _hierarchical_ module file structure
+            * `MODULEPATH` is dynamically updated when modules are loaded.
+            * makes loaded modules inactive and active to provide sane environment.
+            * supports for _hidden_ modules
+            * support for _optional_ usage tracking (implemented on ULHPC facilities)
+       - In particular, Lmod enforces the following [safety features](https://lmod.readthedocs.io/en/latest/010_user.html#safety-features) that are not always guaranted with the other tools:
+          1. The _One Name Rule_: Users can only have one version active
+          2. Users can only load one compiler or MPI stack at a time (through the `family(...)` directive)
+
+    The ULHPC Facility relies on [Lmod](https://lmod.readthedocs.io/) -- the associated [Modulefiles](https://lmod.readthedocs.io/en/latest/015_writing_modules.html) being automatically generated by [Easybuild](https://docs.easybuild.io/).
+
+The ULHPC Facility relies on [Lmod](https://lmod.readthedocs.io/), a Lua-based Environment module system that easily handles the `MODULEPATH` Hierarchical problem. In this context, the `module` command supports the following subcommands:
+
+| Command                        | Description                                                     |
+|--------------------------------|-----------------------------------------------------------------|
+| `module avail`                 | Lists all the modules which are available to be loaded          |
+| `module spider <pattern>`      | Search for <pattern> among available modules **(Lmod only)**    |
+| `module load <mod1> [mod2...]` | Load a module                                                   |
+| `module unload <module>`       | Unload a module                                                 |
+| `module list`                  | List loaded modules                                             |
+| `module purge`                 | Unload all modules (purge)                                      |
+| `module display <module>`      | Display what a module does                                      |
+| `module use <path>`            | Prepend the directory to the `MODULEPATH` environment variable  |
+| `module unuse <path>`          | Remove the directory from the `MODULEPATH` environment variable |
+
+??? question "What is `module`?"
+    `module` is a shell _function_ that modifies user shell upon load of a modulefile.
+    It is defined as follows
+    ```console
+    $ type module
+    module is a function
+    module ()
+    {
+        eval $($LMOD_CMD bash "$@") && eval $(${LMOD_SETTARG_CMD:-:} -s sh)
+    }
+    ```
+    In particular, **`module` is NOT a program**
+
+At the heart of environment modules interaction resides the following components:
+
+* the `MODULEPATH` environment variable, which defines a colon-separated list of directories to search for modulefiles
+* `modulefile` (see [an example](https://lmod.readthedocs.io/en/latest/100_modulefile_examples.html)) associated to each available software.
+
+??? example "Example of ULHPC `toolchain/foss` (auto-generated) Modulefile"
+    ```console
+    $ module show toolchain/foss
+    -------------------------------------------------------------------------------
+       /opt/apps/resif/iris/2019b/broadwell/modules/all/toolchain/foss/2019b.lua:
+    -------------------------------------------------------------------------------
+    help([[
+    Description
+    ===========
+    GNU Compiler Collection (GCC) based compiler toolchain, including
+     OpenMPI for MPI support, OpenBLAS (BLAS and LAPACK support), FFTW and ScaLAPACK.
+
+    More information
+    ================
+     - Homepage: https://easybuild.readthedocs.io/en/master/Common-toolchains.html#foss-toolchain
+    ]])
+    whatis("Description: GNU Compiler Collection (GCC) based compiler toolchain, including
+     OpenMPI for MPI support, OpenBLAS (BLAS and LAPACK support), FFTW and ScaLAPACK.")
+    whatis("Homepage: https://easybuild.readthedocs.io/en/master/Common-toolchains.html#foss-toolchain")
+    whatis("URL: https://easybuild.readthedocs.io/en/master/Common-toolchains.html#foss-toolchain")
+    conflict("toolchain/foss")
+    load("compiler/GCC/8.3.0")
+    load("mpi/OpenMPI/3.1.4-GCC-8.3.0")
+    load("numlib/OpenBLAS/0.3.7-GCC-8.3.0")
+    load("numlib/FFTW/3.3.8-gompi-2019b")
+    load("numlib/ScaLAPACK/2.0.2-gompi-2019b")
+    setenv("EBROOTFOSS","/opt/apps/resif/iris/2019b/broadwell/software/foss/2019b")
+    setenv("EBVERSIONFOSS","2019b")
+    setenv("EBDEVELFOSS","/opt/apps/resif/iris/2019b/broadwell/software/foss/2019b/easybuild/toolchain-foss-2019b-easybuild-devel")
+    ```
+
+!!! danger ""
+    (_reminder_): **the `module` command is ONLY available on the compute nodes, NOT on the access front-ends.**<br/>
+    In particular, you need to be _within_ a job to load ULHPC or private modules.
+
+## ULHPC `$MODULEPATH`
+
+By default, the `MODULEPATH` environment variable holds a _single_ searched directory holding the optimized builds prepared for you by the ULHPC Team.
+The general format of this directory is as follows:
+
+```
+/opt/apps/resif/<cluster>/<version>/<arch>/modules/all
+```
+
+where:
+
+* `<cluster>` depicts the name of the cluster (`iris` or `aion`)
+* `<version>` corresponds to the ULHPC Software set release (aligned with [Easybuid toolchains release](https://easybuild.readthedocs.io/en/master/Common-toolchains.html#component-versions-in-foss-toolchain)), _i.e._ `2019b`, `2020a` etc.
+* `<arch>` is a lower-case strings that categorize the CPU architecture of the build host, and permits to easyli identify optimized target architecture.
+    - On Intel nodes: `broadwell` (_default_), `skylake`
+    - On AMD nodes: `epyc`
+    - On GPU nodes: `gpu`
+
+| Cluster                          | Arch.                 | `$MODULEPATH` Environment variable                     |
+|----------------------------------|-----------------------|--------------------------------------------------------|
+| [Iris](../systems/iris/index.md) | `broadwell` (default) | `/opt/apps/resif/iris/<version>/broadwell/modules/all` |
+| [Iris](../systems/iris/index.md) | `skylake`             | `/opt/apps/resif/iris/<version>/skylake/modules/all`   |
+| [Iris](../systems/iris/index.md) | `gpu`                 | `/opt/apps/resif/iris/<version>/gpu/modules/all`       |
+| [Aion](../systems/aion/index.md) | `epyc` (default)      | `/opt/apps/resif/aion/<version>/{epyc}/modules/all`    |
+
+* On skylake nodes, you may want to use the optimized modules for `skylake`
+* On GPU nodes, you may want to use the CPU-optimized builds for `skylake` (in addition to the `gpu`-enabled softwares)
+
+## Module Naming Schemes
+
+??? question "What is a Module Naming Scheme?"
+    The full software and module install paths for a particular software package
+    are determined by the _active_ module naming scheme along with the general
+    software and modules install paths specified by the EasyBuild configuration.
+
+    You can list the supported module naming schemes of [Easybuild](https://easybuilders.github.io/easybuild-tutorial/hmns/) using:
+    ```console
+    $ eb --avail-module-naming-schemes
+    List of supported module naming schemes:
+        EasyBuildMNS
+        CategorizedHMNS
+        MigrateFromEBToHMNS
+        HierarchicalMNS
+        CategorizedModuleNamingScheme
+    ```
+    See [Flat vs. Hierarchical module naming scheme](https://easybuilders.github.io/easybuild-tutorial/hmns/#flat-vs-hierarchical)
+    for an illustrated explaination of the difference between two extreme cases: flat or 3-level hierarchical.
+    On ULHPC systems, we selected an intermediate scheme called `CategorizedModuleNamingScheme`.
+
+!!! important "Module Naming Schemes on ULHPC system"
+    **ULHPC modules are organised through the Categorized Naming Scheme** <br/>
+    Format: `<category>/<name>/<version>-<toolchain><versionsuffix>`
+
+This means that the typical module hierarchy has as prefix a **category** level, taken out from one of the supported software category or module _class_:
+```console
+$ eb --show-default-moduleclasses
+Default available module classes:
+
+	base:      Default module class
+	astro:     Astronomy, Astrophysics and Cosmology
+	bio:       Bioinformatics, biology and biomedical
+	cae:       Computer Aided Engineering (incl. CFD)
+	chem:      Chemistry, Computational Chemistry and Quantum Chemistry
+	compiler:  Compilers
+	data:      Data management & processing tools
+	debugger:  Debuggers
+	devel:     Development tools
+	geo:       Earth Sciences
+	ide:       Integrated Development Environments (e.g. editors)
+	lang:      Languages and programming aids
+	lib:       General purpose libraries
+	math:      High-level mathematical software
+	mpi:       MPI stacks
+	numlib:    Numerical Libraries
+	perf:      Performance tools
+	quantum:   Quantum Computing
+	phys:      Physics and physical systems simulations
+	system:    System utilities (e.g. highly depending on system OS and hardware)
+	toolchain: EasyBuild toolchains
+	tools:     General purpose tools
+	vis:       Visualization, plotting, documentation and typesetting
+```
+
+
+
+## ULHPC Toolchains and Software Set Versioning
+
+We offer a **YEARLY** release of the ULHPC Software Set based on Easybuid release of toolchains
+-- see Component versions (_fixed per release_) in the  [foss](https://easybuild.readthedocs.io/en/master/Common-toolchains.html#component-versions-in-foss-toolchain) and [intel](https://easybuild.readthedocs.io/en/master/Common-toolchains.html#component-versions-in-intel-toolchain) toolchains.
+_However_, count at least 6 months of validation/import _after_ EB release before ULHPC release
+
+An overview of the currently available component versions is depicted below:
+
+| __Name__  | __Type__  | 2019[a] (_old_)    | __2019b__ (_prod_) | __2020a__ (devel) |
+|-----------|-----------|--------------------|--------------------|-------------------|
+| `GCCCore` | compiler  | 8.2.0              | 8.3.0              | 9.3.0             |
+| `foss`    | toolchain | 2019a              | 2019b              | 2020a             |
+| `intel`   | toolchain | 2019a              | 2019b              | 2020a             |
+| binutils  |           | 2.31.1             | 2.32               | 2.34              |
+| Python    |           | 3.7.2 (and 2.7.15) | 3.7.4 (and 2.7.16) | 3.8.2             |
+
+If you want to use the non-default ULHPC software set release, proceed as follows:
+
+=== "Iris (default)"
+    ```bash
+    unset MODULEPATH
+    # /!\ ADAPT <version> accordingly - CPU build
+    module use /opt/apps/resif/iris/<version>/default/modules/all
+    ```
+
+=== "Iris (Skylake/GPU optimized)"
+    ```bash
+    unset MODULEPATH
+    # /!\ ADAPT <version> and <arch> accordingly
+    module use /opt/apps/resif/iris/<version>/<arch>/modules/all
+    ```
+
+=== "Aion"
+    ```bash
+    unset MODULEPATH
+    # /!\ ADAPT <version> accordingly - CPU build
+    module use /opt/apps/resif/aion/<version>/epyc/modules/all
+    ```
+
+For instance, assuming your would have wanted to test in advance the **2019b** (or _2020a_ on [Aion](../systems/aion/index.md)) software set:
+
+=== "Iris default (broadwell)"
+    ```bash
+    # (new testing/devel) 2019b software set - iris cluster
+    unset MODULEPATH
+    module use /opt/apps/resif/iris/2019b/broadwell/modules/all
+    ```
+
+=== "Iris skylake-optimized"
+    ```bash
+    # (new testing/devel) 2019b software set - iris cluster
+    unset MODULEPATH
+    module use /opt/apps/resif/iris/2019b/skylake/modules/all
+    ```
+    This only makes sense on a compute node featuring an Intel `skylake` processor, _i.e._ reserved with the corresponding feature `{srun|sbatch|salloc} -C skylake [...]`
+
+=== "Iris GPU-optimized"
+    ```bash
+    # (new testing/devel) 2019b software set - iris cluster
+    unset MODULEPATH
+    # module use /opt/apps/resif/iris/2019b/skylake/modules/all # iff you also want CPU builds
+    module use /opt/apps/resif/iris/2019b/gpu/modules/all
+    ```
+    This only makes sense on a GPU compute node: `{srun|sbatch|salloc} -p gpu  [...]`
+
+=== "Aion default (epyc)"
+    ```bash
+    # (new) 2020a software set - default prod on aion cluster
+    unset MODULEPATH
+    module use /opt/apps/resif/aion/2020a/epyc/modules/all
+    ```
+
+## Using Easybuild to Create Custom Modules
+
+Just like we do, you probably want to use [Easybuild](../software/easybuild.md) to complete the existing
+software set with your own modules and software builds.
+
+See [Building Custom (or missing) software](../software/build.md) documentation
+for more details
+
+
+## Creating a Custom Module Environment
+
+You can modify your environment so that certain modules are loaded
+whenever you log in.
+Use `module save [<name>]` and `module restore [<name>]` for that purpose -- see [Lmod documentation on User collections](https://lmod.readthedocs.io/en/latest/010_user.html#user-collections)
+
+You can also create and install your own modules for your convenience or
+for sharing software among collaborators.
+See the [modulefile documentation](https://lmod.readthedocs.io/en/latest/015_writing_modules.html) for
+details of the required format and available commands.
+These custom modulefiles can be made visible to the `module` command by
+
+```
+module use /path/to/the/custom/modulefiles
+```
+
+!!! warning
+    1. 	Make sure the **UNIX** file permissions grant access to all users who want to use the software.
+    2. Do not give write permissions to your home directory to anyone else.
+
+!!! note
+	The `module use` command adds new directories before
+	other module search paths (defined as `$MODULEPATH`), so modules
+	defined in a custom directory will have precedence if there are
+	other modules with the same name in the module search paths. If
+	you prefer to have the new directory added at the end of
+	`$MODULEPATH`, use `module use -a` instead of `module use`.
+
+## Module FAQ
+
+!!! question "Is there an environment variable that captures loaded modules?"
+    Yes, active modules can be retrieved via `$LOADEDMODULES`, this environment variable is
+automatically changed to reflect active loaded modules that is reflected via `module list`.
+If you want to access modulefile path for loaded modules you can retrieve via `$_LM_FILES`
