@@ -224,10 +224,9 @@ Default available module classes:
 	vis:       Visualization, plotting, documentation and typesetting
 ```
 
-It follows that the ULHPC software builds are structured according to the organization depicted below (_click to enlarge_).
+It follows that the ULHPC software modules are structured according to the organization depicted below (_click to enlarge_).
 
 [![](images/ULHPC-software-stack.png)](images/ULHPC-software-stack.pdf)
-
 
 
 ## ULHPC Toolchains and Software Set Versioning
