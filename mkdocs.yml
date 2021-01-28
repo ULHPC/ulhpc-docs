@@ -81,8 +81,8 @@ nav:
   - Software:
     - Supported Software List:     'software/index.md'
     - Software Set Versioning:     'software/swsets.md'
-    - Compiling/building software: 'development/software/index.md'
-    - RESIF:                       'software/resif.md'
+    - Compiling/building software: 'software/build.md'
+    - Management:                  'software/management.md'
     - Contributing:                'software/contributing.md'
     - BigData Analytics:           'software/bigdata/index.md'
     - Bioinformatics/Life Science: 'software/bio/index.md'
@@ -345,6 +345,7 @@ markdown_extensions:
   - markdown_include.include:
       base_path: docs
   - markdown.extensions.admonition
+  - meta
   - pymdownx.arithmatex
   - pymdownx.details
   # Icons from Emoji extensions, giving access to following icon sets:
