@@ -224,6 +224,10 @@ Default available module classes:
 	vis:       Visualization, plotting, documentation and typesetting
 ```
 
+It follows that the ULHPC software builds are structured according to the organization depicted below (_click to enlarge_).
+
+[![](images/ULHPC-software-stack.png)](images/ULHPC-software-stack.pdf)
+
 
 
 ## ULHPC Toolchains and Software Set Versioning
@@ -297,10 +301,6 @@ For instance, assuming your would have wanted to test in advance the **2019b** (
     unset MODULEPATH
     module use /opt/apps/resif/aion/2020a/epyc/modules/all
     ```
-
-The organization of the ULHPC software builds is illustrated in the below figure (click to enlarge).
-
-[![](images/ULHPC-software-stack.png)](images/ULHPC-software-stack.pdf)
 
 
 ## Using Easybuild to Create Custom Modules
