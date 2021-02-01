@@ -329,11 +329,15 @@ extra:
 extra_css:
   - stylesheets/extra.css
   # - stylesheets/bootstrap.min.css
+
 # Extra javascript
 extra_javascript:
   - javascripts/extra.js
   - javascripts/bootstrap.min.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js
+  # https://squidfunk.github.io/mkdocs-material/reference/data-tables/#sortable-tables
+  - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
+  - javascripts/tables.js
 
 # Extensions
 markdown_extensions:
