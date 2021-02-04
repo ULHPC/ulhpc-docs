@@ -36,7 +36,9 @@ $ fds example.fds
 #!/bin/bash -l
 #SBATCH -J FDS-mpi
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH --ntasks-per-node=28
+#SBATCH --ntasks-per-socket=14
+#SBATCH -c 1
 #SBATCH --time=00:30:00
 #SBATCH -p batch
 

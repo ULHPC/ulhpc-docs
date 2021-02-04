@@ -65,7 +65,7 @@ $ abaqus job=job-name resume
 #!/bin/bash -l
 #SBATCH -J Abaqus
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH --ntasks-per-node=28
 #SBATCH --time=00:30:00
 #SBATCH -p batch
 

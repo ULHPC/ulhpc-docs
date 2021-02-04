@@ -65,7 +65,9 @@ repartition the mesh domain.
 #!/bin/bash -l
 #SBATCH -J OpenFOAM
 #SBATCH -N 1
-#SBATCH --ntasks-per-node=16
+#SBATCH --ntasks-per-node=28
+#SBATCH --ntasks-per-socket=14
+#SBATCH -c 1
 #SBATCH --time=00:30:00
 #SBATCH -p batch
 
