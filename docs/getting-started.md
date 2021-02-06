@@ -108,14 +108,11 @@ A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/colla
 
 ## Acceptable Use Policy (AUP)
 
-There are a number of policies which apply to ULHPC users.
-
-!!! danger "Important"
-    All users of UL HPC resources and PIs must abide by the [UL HPC Acceptable Use Policy (AUP)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf).
-
-<p class="text-center">
-<button type="button" class="btn btn-light"><a href="https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf">UL HPC Acceptable Use Policy (AUP) [pdf]</a></button>
-</p>
+{%
+   include-markdown "policies/aup.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
 
 ## ULHPC Accounts
 
