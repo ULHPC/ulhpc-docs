@@ -114,7 +114,24 @@ In particular, `interactive` jobs are always free-of-charge.
     * a total of $B_\text{rate}\times  T_\text{exec}=  224 \times 30\text{ days}\times 24\text{ hours} =224\times 720$ = **161280 SU**
     * if this job would be billed, it would lead to  $161280 \text{ SU}\times 0,03€/SU$ = _4838,4€ VAT excluded_
 
-## Assigning Charges
+### Data Storage Charging
+
+Each user has a personal [quota](../filesystems/quotas.md) in their home directory free of charge.
+Each project has a [shared quota](../filesystems/quotas.md) on the [GPFS/SpectrumScale Filesystem](../filesystems/gpfs.md#global-project-directory-projecthomeworkprojects).
+A capacity up to 1 TeraByte is created for a given project free of charge.
+
+Capacity extensions are possible and will be charged at the price of **100€ (VAT excluded) per each additional TeraByte per month**
+
+!!! example "6TB Project allocation"
+    Example: 5 additional TeraBytes (for a total of 6TB available) for 36 months will be charged
+
+    5TB $\times$ 36 months $\times$ 100€ = _18000€ VAT excluded_.
+
+ULHPC imposes quotas on space utilization as well as inodes (number of files).
+For more information about these quotas please see the [file system quotas page](../filesystems/quotas.md).
+
+
+## Assigning Computing Charges
 
 To charge to a non-default account such as a project or a specific training, use the `-A <projectname> flag in Slurm, either in the Slurm directives preamble of your script, e.g.,
 
@@ -123,6 +140,8 @@ To charge to a non-default account such as a project or a specific training, use
 ```
 
 or on the command line when you submit your job, _e.g._, `sbatch -A myproject /path/to/launcher.sh`
+
+
 
 ## HPC Resource allocation for UL internal R&D and training
 
@@ -135,7 +154,7 @@ The corresponding accumulated price will be provided even if this amount won't b
 Upon request of the FNR and in collaboration with the rectorate and the accounting department of the University, we have formalized the HPC cost model applicable on the ULHPC Facility.
 On July 7, 2020, this policy was approved by the rectorate and was later validated by the FNR.
 
-[:fontawesome-solid-sign-in-alt:  ULHPC Resource Allocations Policy for Research Projects and External Partners (PDF)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Resource-allocation-policy_budget-guidelines-v1.0.pdf){: .md-button .md-button--link }
+[:fontawesome-solid-sign-in-alt:  ULHPC Resource Allocations Policy for Research Projects (PDF)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Resource-allocation-policy_budget-guidelines-v1.0.pdf){: .md-button .md-button--link }
 
 !!! important "Preparing your budget plan to support HPC costs"
     As a consequence, you (project PI) are entitled to plan your computing costs in your project budget plan.
@@ -161,8 +180,7 @@ The University extends access to its HPC resources (i.e., facility and expert HP
 While a limited amount of computational resources can be allocated in such cases, this can be done through a dedicated service contract enforcing a **1 year commitment with an initial pre-paid forfait covering a share of the total planned usage, whether used or not**.
 Several companies such as [Arcelor Mittal](https://luxembourg.arcelormittal.com/26/87/language/FR) or [Ceratizit](https://www.ceratizit.com/) use or have used the ULHPC facility to serve their internal needs with such service contract agreements.
 
-[:fontawesome-solid-sign-in-alt: Contact us for more details.](mailto:hpc-users@uni.lu){: .md-button .md-button--link }
-[:fontawesome-solid-sign-in-alt:  ULHPC Resource Allocations Policy for External Partners (PDF)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Resource-allocation-policy_budget-guidelines-v1.0.pdf){: .md-button .md-button--link }
+[:fontawesome-solid-sign-in-alt: Contact us for more details.](mailto:hpc-users@uni.lu){: .md-button .md-button--link } [:fontawesome-solid-sign-in-alt:  ULHPC for External Partners Policy (PDF)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Resource-allocation-policy_budget-guidelines-v1.0.pdf){: .md-button .md-button--link }
 
 
 For such pure commercial requests, you may also want to contact [LuxProvide](https://luxprovide.lu/), the national HPC center which also aims at serving the private sector for HPC needs.
