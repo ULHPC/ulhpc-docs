@@ -19,18 +19,18 @@ The ULHPC team  will schedule maintenance in one of three manners:
    ULHPC's goal for these downtimes is to have them completed as fast as possible.
    However, validation and qualification of the full platform takes typically one working day, and unforeseen or unusual circumstances may occur. So **count for such outages a multiple-day downtime**.
 
-### Notifications
+## Notifications
 
 We _normally_ inform users of cluster maintenance **at least 3 weeks in advance** by mail using the HPC User community mailing list (moderated): [`hpc-users@uni.lu`](mailto:hpc-users 'at' uni.lu).
 A second reminder is sent a few days prior to actual downtime.
 
 The news of the downtimes is also posted on the [Live status](https://hpc.uni.lu/live-status/motd/) page.
 
-Finally, a colored ""message of the day" (motd)banner is displayed on all [access/login servers](../connect/login.md) such that you can quickly be informed of any incoming maintenance operation upon connection to the cluster.
+Finally, a colored "_message of the day_" (motd) banner is displayed on all [access/login servers](../connect/login.md) such that you can quickly be informed of any incoming maintenance operation upon connection to the cluster.
 You can see this when you login or (again),any time by issuing the command:
 
 ```console
-$ cat /etc/motd
+cat /etc/motd
 ```
 
 !!! tips "Detecting maintenance... During the maintenance"
@@ -46,7 +46,8 @@ Unscheduled downtimes can occur for any number of reasons, including:
 
 * Loss of cooling and/or power in the data center.
 * Loss of supporting infrastructure (i.e. hardware).
-* Critical need to make changes to hardware or software that negatively impacts performance or access.
+* Critical need to make changes to hardware
+or software that negatively impacts performance or access.
 * Application of critical patches that can't wait until the next scheduled maintenance.
 * For safety or security issues that require immediate action.
 

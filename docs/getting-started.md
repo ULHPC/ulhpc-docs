@@ -206,9 +206,9 @@ We have always maintained an extensive [documentation](https://docs.hpc.uni.lu).
 	are welcome!
 	[Fork this repo](https://gitlab.uni.lu/www/ulhpc-docs-/forks/new)
 
-* [ULHPC Technical Documentation](https://docs.hpc.uni.lu): [docs.hpc.uni.lu](https://docs.hpc.uni.lu)
+* [ULHPC Technical Documentation](https://hpc-docs.uni.lu): [hpc-docs.uni.lu](https://hpc-docs.uni.lu)
 * [ULHPC Tutorials](https://ulhpc-tutorials.readthedocs.io/) - HPC tutorials covering many (many) topics: [ulhpc-tutorials.readthedocs.io](https://ulhpc-tutorials.readthedocs.io/)
-* [Helpdesk / Ticket Portal](https://hpc-tracker.uni.lu) - new and past tickets, may contain detailed instructions to solve past issues.
+* [Helpdesk / Ticket Portal](https://hpc.uni.lu/support) - new and past tickets, may contain detailed instructions to solve past issues.
 
 ### Support
 
