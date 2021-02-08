@@ -108,14 +108,11 @@ A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/colla
 
 ## Acceptable Use Policy (AUP)
 
-There are a number of policies which apply to ULHPC users.
-
-!!! danger "Important"
-    All users of UL HPC resources and PIs must abide by the [UL HPC Acceptable Use Policy (AUP)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf).
-
-<p class="text-center">
-<button type="button" class="btn btn-light"><a href="https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf">UL HPC Acceptable Use Policy (AUP) [pdf]</a></button>
-</p>
+{%
+   include-markdown "policies/aup.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
 
 ## ULHPC Accounts
 
@@ -209,9 +206,9 @@ We have always maintained an extensive [documentation](https://docs.hpc.uni.lu).
 	are welcome!
 	[Fork this repo](https://gitlab.uni.lu/www/ulhpc-docs-/forks/new)
 
-* [ULHPC Technical Documentation](https://docs.hpc.uni.lu): [docs.hpc.uni.lu](https://docs.hpc.uni.lu)
+* [ULHPC Technical Documentation](https://hpc-docs.uni.lu): [hpc-docs.uni.lu](https://hpc-docs.uni.lu)
 * [ULHPC Tutorials](https://ulhpc-tutorials.readthedocs.io/) - HPC tutorials covering many (many) topics: [ulhpc-tutorials.readthedocs.io](https://ulhpc-tutorials.readthedocs.io/)
-* [Helpdesk / Ticket Portal](https://hpc-tracker.uni.lu) - new and past tickets, may contain detailed instructions to solve past issues.
+* [Helpdesk / Ticket Portal](https://hpc.uni.lu/support) - new and past tickets, may contain detailed instructions to solve past issues.
 
 ### Support
 

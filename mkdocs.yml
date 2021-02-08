@@ -71,13 +71,14 @@ nav:
     - Easybuild: 'environment/easybuild.md'
   ###########
   - Policies:
-    - Acceptable Use Policy (AUP):               'policies/aup.md'
-    - Downtime and Maintenance:                  'policies/maintenance.md'
-    - Software Update Policy:                    'policies/software.md'
-    - Job Charging Policy:                       'policies/charging-policy.md'
-    - Resource Allocations for Research Project: 'policies/projects.md'
-    - HPC Service Agreement for Externals:       'policies/externals.md'
-    - Expert-level service:                      'support/professional-services.md'
+    - Acceptable Use Policy (AUP):                   'policies/aup.md'
+    - Downtime and Maintenance:                      'policies/maintenance.md'
+    # - Software Update Policy:                      'policies/software.md'
+    - Usage Charging Policy:                         'policies/usage-charging.md'
+    - HPC Resource Allocations for Research Project: 'policies/usage-charging/#hpc-resource-allocations-for-research-project'
+    - HPC Service Agreement for Externals:           'policies/usage-charging/#hpc-service-contract-for-external-and-private-partners'
+    # - Expert-level service:                        'support/professional-services.md'
+    # - Data Policy: 'policies/data.md
   ###########
   - Software:
     - Supported Software List:     'software/index.md'
