@@ -78,6 +78,7 @@ nav:
     - HPC Resource Allocations for Research Project: 'policies/usage-charging/#hpc-resource-allocations-for-research-project'
     - HPC Service Agreement for Externals:           'policies/usage-charging/#hpc-service-contract-for-external-and-private-partners'
     # - Expert-level service:                        'support/professional-services.md'
+    # - Data Policy: 'policies/data.md
   ###########
   - Software:
     - Supported Software List:     'software/index.md'
