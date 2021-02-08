@@ -177,5 +177,12 @@ See [ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en
    start="<!--intro-start-->"
    end="<!--intro-end-->"
 %}
+{%
+   include-markdown "easybuild.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
 
-See [Environment modules](modules.md) for more details.
+
+[:fontawesome-solid-sign-in-alt: ULHPC Environment modules](modules.md){: .md-button .md-button--link }
+[:fontawesome-solid-sign-in-alt: Using Easybuild on ULHPC Clusters](easybuild.md){: .md-button .md-button--link }

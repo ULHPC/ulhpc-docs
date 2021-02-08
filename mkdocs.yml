@@ -43,7 +43,7 @@ nav:
     - Live status: https://hpc.uni.lu/live-status/motd
   #################
   - Access/Connect:
-    - Access Servers:                'connect/access.md'
+    - Access/Login Servers:          'connect/access.md'
     - SSH:                           'connect/ssh.md'
     - Identity Management (IdM/IPA): 'connect/ipa.md'
     - Open On Demand Portal:         'connect/ood.md'
@@ -79,6 +79,36 @@ nav:
     - HPC Service Agreement for Externals:           'policies/usage-charging/#hpc-service-contract-for-external-and-private-partners'
     # - Expert-level service:                        'support/professional-services.md'
     # - Data Policy: 'policies/data.md
+  ###############
+  - Running Jobs:
+    - Slurm Overview: 'slurm/index.md'
+    - Convenient Slurm Commands: 'slurm/commands.md'
+    - Partition/Queues: 'slurm/partitions.md'
+    - Quality of Service (QOS) Policy: 'slurm/qos.md'
+    - Account Hierarchy: 'slurm/accounts.md'
+    - Job Priority and FairSharing: 'jobs/priority.md'
+    - Job Accounting and Billing: 'slurm/billing.md'
+    - Limits: 'jobs/limits.md'
+    - Interactive Job: 'jobs/interactive.md'
+    - Batch Job Submission: 'jobs/submit.md'
+    - Best-effort Jobs: 'jobs/best-effort.md'
+    - Launcherchec Scripts Examples: 'slurm/launchers.md'
+    - Affinity: 'jobs/affinity.md'
+    - (Multi-)GPU Jobs: 'jobs/gpu.md'
+    - Memory Management: 'jobs/memory.md'
+    - Best Practices: 'jobs/best-practices.md'
+    - Reservations: 'jobs/reservations.md'
+    - Monitoring: 'jobs/monitoring.md'
+    - Licenses Management: 'slurm/licenses.md'
+    - FAQs: 'jobs/faq.md'
+    - Workflow Tools:
+      - Overview: 'jobs/workflow/index.md'
+      - GNU Parallel: 'jobs/workflow/gnuparallel.md'
+      - Parsl: 'jobs/workflow/parsl.md'
+      - Snakemake: 'jobs/workflow/snakemake.md'
+      - Spark Cluster: 'bigdata/spark.md'
+    - Jupyter Notebook: 'services/jupyter.md'
+    - Checkpoint/Restart: 'jobs/checkpoint-restart.md'
   ###########
   - Software:
     - Supported Software List:     'software/index.md'
@@ -122,36 +152,6 @@ nav:
     - Visualization:
       - ParaView:                  'software/visu/paraview.md'
 
-  ###############
-  - Running Jobs:
-    - Slurm Overview: 'slurm/index.md'
-    - Convenient Slurm Commands: 'slurm/commands.md'
-    - Partition/Queues: 'slurm/partitions.md'
-    - Quality of Service (QOS) Policy: 'slurm/qos.md'
-    - Account Hierarchy: 'slurm/accounts.md'
-    - Job Priority and FairSharing: 'jobs/priority.md'
-    - Job Accounting and Billing: 'slurm/billing.md'
-    - Limits: 'jobs/limits.md'
-    - Interactive Job: 'jobs/interactive.md'
-    - Batch Job Submission: 'jobs/submit.md'
-    - Best-effort Jobs: 'jobs/best-effort.md'
-    - Launcherchec Scripts Examples: 'slurm/launchers.md'
-    - Affinity: 'jobs/affinity.md'
-    - (Multi-)GPU Jobs: 'jobs/gpu.md'
-    - Memory Management: 'jobs/memory.md'
-    - Best Practices: 'jobs/best-practices.md'
-    - Reservations: 'jobs/reservations.md'
-    - Monitoring: 'jobs/monitoring.md'
-    - Licenses Management: 'slurm/licenses.md'
-    - FAQs: 'jobs/faq.md'
-    - Workflow Tools:
-      - Overview: 'jobs/workflow/index.md'
-      - GNU Parallel: 'jobs/workflow/gnuparallel.md'
-      - Parsl: 'jobs/workflow/parsl.md'
-      - Snakemake: 'jobs/workflow/snakemake.md'
-      - Spark Cluster: 'bigdata/spark.md'
-    - Jupyter Notebook: 'services/jupyter.md'
-    - Checkpoint/Restart: 'jobs/checkpoint-restart.md'
   ##############
   - Development:
     - Toolchains and Compilers:
@@ -306,8 +306,9 @@ theme:
   palette:
     primary: blue
     accent:  light blue
-  # features:
-  #   - tabs
+  features:
+    - navigation.instant
+  # #   - tabs
 
 plugins:
   - search # necessary for search to work
