@@ -9,7 +9,7 @@ nav:
     - Password Policy:            'policies/passwords.md'
     - Collaboration Accounts:     'accounts/collaboration_accounts.md'
     - Identity Management Portal: 'connect/ipa.md'
-    - Slurm Account Hierarchy:    'accounts/hierarchy.md'
+    - Slurm Account Hierarchy:    'slurm/accounts.md'
   ##############
   - Data Center:
     - Centre de Calcul (CDC): 'data-center/index.md'

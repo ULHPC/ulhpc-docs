@@ -11,16 +11,22 @@ This tool is configured to collect accounting information for every job and job 
 
 ## Meta-account Tree Organization
 
-Accounting records are organized as a hierarchical tree according to 4 layers as depicted in the below figure (click to enlarge):
+Accounting records are organized as a hierarchical tree according to 4 layers as depicted in the below figure (_click to enlarge_):
 
 [![](../images/slurm_account_hierarchy.png)](../images/slurm_account_hierarchy.pdf)
 
-| Level  | Account Type | Description                                                       | Example                    |
-|--------|--------------|-------------------------------------------------------------------|----------------------------|
-| __L1__ | meta-account | Top-level structure / organizations                               | UL, Externals, Projects... |
-| __L2__ | meta-account | Organizational Units, Projects Acronyms                           | FSTM, LCSB, LIST...        |
-| __L3__ | meta-account | Principal investigators (PIs), courses/lectures                   | `firstname.lastname`       |
-| __L4__ | login        | End-users (staff, student):  your [ULHPC account](index.md) | `yourlogin`       |
+| Level  | Account Type | Description                                                              | Example                                           |
+|--------|--------------|--------------------------------------------------------------------------|---------------------------------------------------|
+| __L1__ | meta-account | Top-level structure / organizations                                      | UL, CRP, Externals, Projects, Trainings           |
+| __L2__ | meta-account | Organizational Unit (Faculty, ICs, External partner, Funding program...) | FSTM, LCSB, LIST...                               |
+| __L3__ | meta-account | Principal investigators (PIs), project, courses/lectures                 | `<firstname>.<lastname>`, `<acronym>`, `<course>` |
+| __L4__ | login        | End-users (staff, student):  your [ULHPC/IPA login](../accounts/index.md)              | `yourlogin`                                       |
+
+With regards the [raw share](../slurm/fairsharing.md) associated to each entry in this hierarchy:
+
+* At the L2 level (Organizational Unit), the Raw share depends on the outdegree of the node in the tree and the past year funding
+* At the L3 level (Principal Investigator (PIs), Projects...), the raw share depends on past year funding
+* At the leaf (L4) level (ULHPC/IPA login), the raw share is based on an **efficiency score**
 
 ??? warning "No association, no job!"
     It is mandatory to have your login registered within at least one _association_ toward a meta-account (PI, project name) to be able to schedule jobs on the
@@ -41,11 +47,18 @@ sacctmgr show association tree where account=<account> format=Account,user%30  w
 Every node in the above-mentioned tree hierarchy is associated with a weight defining its **Raw Share** in the [FairSharing](../jobs/fair-sharing.md) mechanism in place.
 Different rules are applied to define these weights/shares depending on the level in the hierarchy:
 
-* __L1__: arbitrary shares to dedicate at least 80% of the platform to serve UL needs and projects
+* __L1__ (Organizational Unit): arbitrary shares to dedicate at least 85% of the platform to serve UL needs and projects
 * __L2__: out-degree of the tree nodes
 * __L3__: a function reflecting the budget contribution of the PI/project (normalized on a per-month basis) for the year in exercise.
 
 More details are given [on this page](../jobs/fair-sharing.md).
+
+With regards the [raw share](../slurm/fairsharing.md) associated to each entry in this hierarchy:
+
+* At the L2 level (Organizational Unit), the Raw share depends on the outdegree of the node in the tree and the past year funding
+* At the L3 level (Principal Investigator (PIs), Projects...), the raw share depends on past year funding
+* At the leaf (L4) level (ULHPC/IPA login), the raw share is based on an **efficiency score**
+
 
 
 ## Default vs. Project accounts
