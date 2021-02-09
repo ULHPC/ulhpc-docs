@@ -9,6 +9,34 @@ This middleware is responsible for allocating resources to users, providing a fr
 
 [![](https://hpc.uni.lu/download/slides/2020-ULHPC-user-guide.png)](https://hpc.uni.lu/download/slides/2020-ULHPC-user-guide.pdf)
 
+## TL;DR Slurm on ULHPC clusters
+
+<!--tldr-start-->
+
+In its concise form, the Slurm configuration in place on [ULHPC
+supercomputers](../systems/index.md) features the following attributes you
+should be aware of when interacting with it:
+
+* Predefined [_Queues/Partitions_](../slurm/partitions.md) depending on node type
+    - `batch`  (Default Dual-CPU nodes) _Max_: 64 nodes, 2 days walltime
+    - `gpu`    (GPU nodes nodes)        _Max_: 4 nodes, 2 days walltime
+    - `bigmem` (Large-Memory nodes)     _Max_: 1 node, 2 days walltime
+    - In addition: `interactive` (for quicks tests)  _Max_: 2 nodes, 2h walltime
+        * for code development, testing, and debugging
+* Queue Policy: _[cross-partition QOS](../slurm/qos.md)_, mainly tied to _priority level_ (`low` $\rightarrow$ `urgent`)
+    - `long` QOS with extended Max walltime (`MaxWall`) set to **14 days**
+    -  special _preemptible QOS_ for [best-effort](../jobs/best-effort.md') jobs: `besteffort`.
+* [Accounts hierarchy](../slurm/accounts.md) associated to supervisors (multiple
+  associations possible), projects or trainings
+    - you **MUST** use the proper account as a [detailed usage
+      tracking](../policies/usage-charging.md) is performed and reported.
+* [Slurm Federation configuration](https://slurm.schedmd.com/federation.html) between `iris` and `aion`
+    - ensures global policy (coherent job ID, global scheduling, etc.) within ULHPC systems
+    - easily submit jobs from one cluster to another\hfill{}`-M, --cluster aion|iris`
+
+<!--tldr-end-->
+
+For more details, see the appropriate pages in the left menu.
 
 ## Jobs
 
@@ -30,6 +58,7 @@ Once a job is assigned a set of nodes, the user is able to initiate parallel wor
 
 When you login to a ULHPC system you land on a [access/login node](../connect/access.md). Login nodes are only for editing and preparing jobs: They are not meant for actually running jobs.
 From the login node you can interact with Slurm to **submit** job scripts or start interactive jobs, which will be further run on the compute nodes.
+
 
 ## Submit Jobs
 
