@@ -84,7 +84,7 @@ nav:
     - Slurm Overview: 'slurm/index.md'
     - Convenient Slurm Commands: 'slurm/commands.md'
     - Partition/Queues: 'slurm/partitions.md'
-    - Quality of Service (QOS) Policy: 'slurm/qos.md'
+    - Quality of Service (QOS): 'slurm/qos.md'
     - Account Hierarchy: 'slurm/accounts.md'
     - Job Priority and FairSharing: 'jobs/priority.md'
     - Job Accounting and Billing: 'slurm/billing.md'
