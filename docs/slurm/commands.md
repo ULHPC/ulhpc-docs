@@ -6,15 +6,24 @@
 
 There are three ways of submitting jobs with slurm, using either [`sbatch`](https://slurm.schedmd.com/sbatch.html), [`srun`](https://slurm.schedmd.com/srun.html) or [`salloc`](https://slurm.schedmd.com/salloc.html):
 
-```bash
-### /!\ Adapt <partition>, <qos>, <account> and <command> accordingly
-# Passive job
-sbatch -p <partition> [--qos <qos>] [-A <account>] [...] <path/to/launcher.sh>
-# Interactive job -
-srun -p <partition> [--qos <qos>] [-A <account>] [...] ---pty bash
-# Request interactive jobs/allocations
-salloc -p <partition> [--qos <qos>] [-A <account>] [...] <command>
-```
+=== "sbatch (passive job)"
+    ```bash
+    ### /!\ Adapt <partition>, <qos>, <account> and <command> accordingly
+    sbatch -p <partition> [--qos <qos>] [-A <account>] [...] <path/to/launcher.sh>
+    ```
+=== "srun (interactive job)"
+    ```bash
+    ### /!\ Adapt <partition>, <qos>, <account> and <command> accordingly
+    srun -p <partition> [--qos <qos>] [-A <account>] [...] ---pty bash
+    ```
+    `srun` is also to be using within your launcher script to initiate a _job step_.
+
+=== "salloc (request allocation)"
+    ```bash
+    # Request interactive jobs/allocations
+    ### /!\ Adapt <partition>, <qos>, <account> and <command> accordingly
+    salloc -p <partition> [--qos <qos>] [-A <account>] [...] <command>
+    ```
 
 ### `sbatch`
 
@@ -268,10 +277,11 @@ If you forgot to specify the expected project account:
 # /!\ ADAPT <jobid>, <account> accordingly
 scontrol update jobid=<jobid> account=<account>
 ```
-!!! note ""
-    The new account must be eligible to run the job.
 
-### Hold and Resume jobs
+!!! note ""
+    The new account must be eligible to run the job. See [Account Hierarchy](hierarchy.md) for more details.
+
+## Hold and Resume jobs
 
 Prevent a pending job from being started:
 
@@ -287,7 +297,7 @@ Allow a held job to accrue priority and run:
 scontrol release <jobid>
 ```
 
-### Cancel jobs
+## Cancel jobs
 
 Cancel a specific job:
 

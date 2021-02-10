@@ -86,6 +86,7 @@ nav:
     - Partition/Queues: 'slurm/partitions.md'
     - Quality of Service (QOS): 'slurm/qos.md'
     - Account Hierarchy: 'slurm/accounts.md'
+    - FairSharing: 'slurm/fairsharing.md'
     - Job Priority and FairSharing: 'jobs/priority.md'
     - Job Accounting and Billing: 'slurm/billing.md'
     - Limits: 'jobs/limits.md'
