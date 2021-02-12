@@ -133,6 +133,7 @@ sacctmgr show association where users=$USER  format=account,User,share,Partition
 ## Impact on FairSharing and Job Accounting
 
 Every node in the above-mentioned tree hierarchy is associated with a weight defining its **Raw Share** in the [FairSharing](../slurm/fairsharing.md) mechanism in place.
+<!--share-rule-per-level-start-->
 Different rules are applied to define these weights/shares depending on the level in the hierarchy:
 
 * __L1__ (Organizational Unit): arbitrary shares to dedicate at least 85% of the platform to serve UL needs and projects
@@ -140,6 +141,7 @@ Different rules are applied to define these weights/shares depending on the leve
 * __L3__: a function reflecting the budget contribution of the PI/project (normalized on a per-month basis) for the year in exercise.
 * __L4__ (ULHPC/IPA login): efficiency score, giving incentives for a more efficient usage of the platform.
 
+<!--share-rule-per-level-end-->
 More details are given [on this page](../jobs/fairsharing.md).
 
 

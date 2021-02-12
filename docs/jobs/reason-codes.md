@@ -110,12 +110,16 @@ running jobs.
 
 ```bash
 # /!\ ADAPT <jobid> accordingly
-$ sacct --jobs=<jobid> [--format=metric1,...]
+$ sacct [-X] --jobs=<jobid> [--format=metric1,...]
 # OR, for a user, eventually between a Start and End date
-$ sacct -u $USER  [-S YYYY-MM-DD] [-E YYYY-MM-DD] [--format=metric1,...]
+$ sacct [-X] -u $USER  [-S YYYY-MM-DD] [-E YYYY-MM-DD] [--format=metric1,...]
 # OR, for an account - ADAPT <account> accordingly
-$ sacct -A <account> [--format=metric1,...]
+$ sacct [-X] -A <account> [--format=metric1,...]
 ```
+
+Use `-X` to _aggregate_ the statistics relevant to the job allocation itself, not
+taking job steps into consideration.
+
 
 The main metrics code you may be interested to review are listed below.
 

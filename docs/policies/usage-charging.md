@@ -23,7 +23,7 @@ In details, a Job is characterized (and thus billed) according to the following 
     * $N_\text{cores}$: number of CPU cores allocated  per node
     * $Mem$: memory size allocated per node, in GB
     * $N_\text{gpus}$: number of GPU allocated per node
-* associated weighted factors $\alpha_{cpu},\alpha_{mem},\alpha_{GPU}$  defined as [`TRESBillingWeight`](https://slurm.schedmd.com/tres.html) in Slurm Trackable RESources accounting. They capture the  consumed resources other than just CPUs and are taken into account in fairshare factor. The following weight are formalized in the definition of the charging factor:
+* associated weighted factors $\alpha_{cpu},\alpha_{mem},\alpha_{GPU}$  defined as [`TRESBillingWeight`](https://slurm.schedmd.com/tres.html) in Slurm Trackable RESources (TRES) accounting. They capture the  consumed resources other than just CPUs and are taken into account in fairshare factor. The following weight are formalized in the definition of the charging factor:
     * $\alpha_{cpu}$: normalized relative perf. of CPU processor core (reference: skylake 73,6 GFlops/core)
     * $\alpha_{mem}$: inverse of the average available memory size per core
     * $\alpha_{GPU}$: weight per GPU accelerator
@@ -58,6 +58,7 @@ _Note_: For a running job, you can also check the `TRES=[...],billing=<Brate>` o
 
 ### Charge Weight Factors for 2021-2022
 
+<!--TRESBillingWeight-table-start-->
 
 | __Cluster__                      | __Node Type__ | __CPU arch__ | __Partition__ | __#Cores/node__ | $\mathbf{\alpha_{cpu}}$ | $\mathbf{\alpha_{mem}}$ | $\mathbf{\alpha_{GPU}}$ |
 |----------------------------------|---------------|--------------|---------------|-----------------|-------------------------|-------------------------|-------------------------|
@@ -66,6 +67,9 @@ _Note_: For a running job, you can also check the `TRES=[...],billing=<Brate>` o
 | [Iris](../systems/iris/index.md) | Regular       | `skylake`    | `batch`       | 28              | 1.0                     | $\frac{1}{4} = 0,25$    | 0                       |
 | [Iris](../systems/iris/index.md) | GPU           | `skylake`    | `gpu`         | 28              | 1.0                     | $\frac{1}{27}$          | 50                      |
 | [Iris](../systems/iris/index.md) | Large-Mem     | `skylake`    | `bigmem`      | 112             | 1.0                     | $\frac{1}{27}$          | 0                       |
+
+<!--TRESBillingWeight-table-end-->
+
 
 In particular, `interactive` jobs are always free-of-charge.
 
