@@ -16,7 +16,9 @@ Charge factors are set by ULHPC to accommodate for the relative power of the arc
 
 ## Computing Job Charges
 
-In details, a Job is characterized (and thus billed) according to the following elements:
+<!--job-charge-start-->
+
+A Job is characterized (and thus billed) according to the following elements:
 
 * $T_\text{exec}$: Execution time (in hours) also called _walltime_
 * $N_\text{Nodes}$: number of computing nodes, and **per node**:
@@ -120,6 +122,8 @@ In particular, `interactive` jobs are always free-of-charge.
 
     * a total of $B_\text{rate}\times  T_\text{exec}=  224 \times 30\text{ days}\times 24\text{ hours} =224\times 720$ = **161280 SU**
     * if this job would be billed, it would lead to  $161280 \text{ SU}\times 0,03€/SU$ = _4838,4€ VAT excluded_
+
+<!--job-charge-end-->
 
 ### Data Storage Charging
 

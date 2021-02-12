@@ -178,6 +178,8 @@ When selecting specific resources allocations, it is crucial to match the
 hardware characteristics of the computing nodes.
 Details are provided below:
 
+<!--table-feature-start-->
+
 | Node (type)                          | #Nodes | #Socket / #Cores | RAM [GB] | Features              |
 |--------------------------------------|--------|-----------------|----------|-----------------------|
 | `aion-[0001-0318]`                   | 318    | 2 / 128    | 256      | `batch,epyc`          |
@@ -197,6 +199,7 @@ sfeatures
 # NODELIST              NODES   CPUS NODES(A/I/O/T)  PARTITION    AVAIL_FEATURES
 # [...]
 ```
+<!--table-feature-end-->
 
 !!! important "Always try to align resource specifications for your jobs with physical characteristics"
     The typical format of your Slurm submission should thus probably be:
