@@ -70,10 +70,12 @@ From the login node you can interact with Slurm to **submit** job scripts or sta
 
 ## Specific Resource Allocation
 
+<!--resource-allocation-start-->
+
 Within a job, you aim at running a certain number of **tasks**, and Slurm allow for a fine-grain control of the resource allocation that must be satisfied for _each_ task.
 
 !!! danger "Beware of Slurm terminology in [Multicore Architecture](https://slurm.schedmd.com/mc_support.html)!"
-    ![](images/slurm_mc_support.png){: style="width:350px; float: right;"}
+    ![](../slurm/images/slurm_mc_support.png){: style="width:350px; float: right;"}
 
     * __Slurm Node = Physical node__, specified with `-N <#nodes>`
         - _Advice_: always explicit number of expected number of tasks _per node_ using `--ntasks-per-node <n>`. This way you control the node footprint of your job.
@@ -94,7 +96,11 @@ This is very convenient to abstract from the job context to run MPI tasks/proces
 srun -n ${SLURM_NTASKS} [...]
 ```
 
+<!--resource-allocation-end-->
+
 ## Job submission options
+
+<!--job-submit-options-start-->
 
 There are several useful [environment variables](https://slurm.schedmd.com/sbatch.html#lbAK) set be Slurm _within_ an allocated job.
 The most important ones are detailed in the below table which summarizes the main job submission options offered with `{sbatch | srun | salloc} [...]`:
@@ -120,6 +126,8 @@ The most important ones are detailed in the below table which summarizes the mai
 At a minimum a job submission script must include number of nodes, time, type of partition and nodes (resource allocation constraint and features), and quality of service (QOS).
 If a script does not specify any of these options then a default may be applied.
 The full list of directives is documented in the man pages for the [`sbatch`](https://slurm.schedmd.com/sbatch.html) command (see. `man sbatch`).
+
+<!--job-submit-options-end-->
 
 ### `#SBATCH` directives vs. CLI options
 

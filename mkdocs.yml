@@ -92,7 +92,7 @@ nav:
     - Job Accounting and Billing: 'jobs/billing.md'
     # - Limits: 'jobs/limits.md'
     - Interactive Job: 'jobs/interactive.md'
-    - Batch Job Submission: 'jobs/submit.md'
+    - Passive/Batch Job: 'jobs/submit.md'
     - Best-effort Jobs: 'jobs/best-effort.md'
     - Launcher Scripts Examples: 'slurm/launchers.md'
     - Affinity: 'jobs/affinity.md'

@@ -84,6 +84,9 @@ implemented in Slurm:
     another user due to loss of precision in calculations.
     * New jobs are immediately assigned a priority.
 
+    [:fontawesome-solid-sign-in-alt: Overview of Fair Tree for End Users](https://slurm.schedmd.com/fair_tree.html#enduser){: .md-button .md-button--link }
+    [:fontawesome-solid-sign-in-alt: Level Fairshare Calculation](https://slurm.schedmd.com/fair_tree.html#fairshare){: .md-button .md-button--link }
+
 ## Trackable RESources (TRES) Billing Weights
 
 Slurm saves accounting data for every job or job step that the user submits.
@@ -149,6 +152,18 @@ Policy](../policies/usage-charging.md){: .md-button .md-button--link }
     ```console
     $ sshare  [-A <account>] -l
     ```
+    It will show the Level Fairshare value as `Level FS`.
+    The field shows the value for each association, thus allowing users to see
+    the results of the fairshare calculation at each level.
+    _Note_: Unlike the Effective Usage, the Norm Usage is **not** used by Fair Tree but is still displayed.
+
+
+### Slurm Parameter Definitions
+
+In this part some of the set slurm parameters are explained which are used to set up the Fair Tree Fairshare Algorithm. For a more detailed explanation please consult the [official documentation](https://slurm.schedmd.com/)
+
+* `PriorityDecayHalfLife=[number of days]-[number of hours]`: The time, of which the resource consumption is taken into account for the Fairshare Algorithm, can be set by this.
+
 
 ## FAQ
 

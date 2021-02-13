@@ -27,6 +27,8 @@ There are three ways of submitting jobs with slurm, using either [`sbatch`](http
 
 ### `sbatch`
 
+<!--sbatch-start-->
+
 [`sbatch`](https://slurm.schedmd.com/sbatch.html) is used to submit a batch _launcher script_ for later execution, corresponding to _batch/passive submission mode_.
 The script will typically contain one or more `srun` commands to launch parallel tasks.
 Upon submission with `sbatch`, Slurm will:
@@ -42,6 +44,7 @@ When you submit the job, Slurm responds with the job's ID, which will be used to
 $ sbatch <path/to/launcher>.sh
 Submitted batch job 864933
 ```
+<!--sbatch-end-->
 
 ### `srun`
 
