@@ -100,8 +100,8 @@ nav:
     - Memory Management: 'jobs/memory.md'
     - Best Practices: 'jobs/best-practices.md'
     - Reservations: 'jobs/reservations.md'
-    - Monitoring: 'jobs/monitoring.md'
-    - Licenses Management: 'slurm/licenses.md'
+    # - Monitoring: 'jobs/monitoring.md'
+    # - Licenses Management: 'slurm/licenses.md'
     - FAQs: 'jobs/faq.md'
     - Workflow Tools:
       - Overview: 'jobs/workflow/index.md'

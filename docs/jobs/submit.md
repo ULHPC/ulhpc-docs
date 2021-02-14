@@ -31,6 +31,15 @@
    end="<!--resource-allocation-end-->"
 %}
 
+### Careful Monitoring of your Jobs
+
+!!! bug
+    **DON'T LEAVE your jobs running WITHOUT monitoring them** and ensure they are not abusing of the computational resources allocated for you!!!
+
+[:fontawesome-solid-sign-in-alt: ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
+
+You will find below several ways to monitor the effective usage of the resources allocated (for running jobs) as well as the general efficiency (Average Walltime Accuracy, CPU/Memory efficiency etc.) for past jobs.
+
 ## Joining/monitoring running jobs
 
 ### `sjoin`
@@ -52,11 +61,20 @@ sjoin <jobid> [-w <node>]    # Use <tab> to automatically complete <jobid> among
      2171206  [...]
     # Connect to your running job, identified by its Job ID
     (access)$> sjoin 2171206     # /!\ ADAPT <jobid> accordingly, use <TAB> to have it autocatically completed
+    # Equivalent of: srun --jobid 2171206  --gres=gpu:0  --pty bash -i
     (node)$> htop # view of all processes
     #               F5: tree view
     #               u <name>: filter by process of <name>
     #               q: quit
     ```
+
+!!! warning "On the [impossibility] to monitor _passive_ GPU jobs over `sjoin`"
+    If you use `sjoin` to join a GPU job, you **WON'T** be able to see the allocated GPU activity with `nvidia-smi` and all the monitoring tools provided by NVidia.
+    The reason is that currently, there is no way to perform an over-allocation of a Slurm [Generic Resource](https://slurm.schedmd.com/gres.html) (GRES) as our GPU cards, that means you can't create (_e.g._ with `sjoin` or `srun --jobid [...]`) job steps with access to GPUs which are bound to another step.
+    **To keep `sjoin` working with gres job, you MUST add "`--gres=none`"**
+
+    You can use a direct connection with `ssh <node>` or `clush -w @job:<jobid>` for that (see below) but be aware that confined context is **NOT** maintained that way and that you will see the GPU processes on _all_ 4 GPU cards.
+
 
 ### ClusterShell
 
@@ -66,6 +84,10 @@ sjoin <jobid> [-w <node>]    # Use <tab> to automatically complete <jobid> among
 
 [ClusterShell](https://clustershell.readthedocs.io/en/latest/intro.html) is a useful Python package for executing arbitrary commands across multiple hosts.
 On the ULHPC clusters, it provides a relatively simple way for you to run commands on nodes your jobs are running on, and collect the results.
+
+!!! info
+    You can only `ssh` to, and therefore run `clush` on, nodes where you have **active/running** jobs.
+
 
 #### `nodeset`
 
@@ -199,16 +221,29 @@ You can use the `-b` option to gather output from nodes with same output into th
     ``` bash
     clush -bw @user:$USER ps -u$USER -o%cpu,rss,cmd
     ```
+    As above, but only for the nodes reserved with your job `<jobid>`
+    ``` bash
+    clush -bw @job:<jobid> ps -u$USER -o%cpu,rss,cmd
+    ```
+
+
 
 === "Monitor GPU usage"
     Show what's running on _all_ the GPUs on the nodes associated with your job `654321`.
     ``` bash
-    clush -bw @job:654321 nvidia-smi --format=csv --query-compute-apps=process_name,used_gpu_memory
+    clush -bw @job:654321 bash -l -c 'nvidia-smi --format=csv --query-compute-apps=process_name,used_gpu_memory'
     ```
-    This may be convenient for passive jobs since the `sjoin` utility does **NOT** permit to run `nvidia-smi`.
+    As above but for all your jobs (assuming you have only GPU nodes with _all_ GPUs)
+    ```bash
+    clush -bw @user:$USER bash -l -c 'nvidia-smi --format=csv --query-compute-apps=process_name,used_gpu_memory'
+    ```
+
+    This may be convenient for passive jobs since the `sjoin` utility does **NOT** permit to run `nvidia-smi` (see [explaination](#sjoin)).
+    **However** that way you will see unfortunately _ALL_ processes running on the 4 GPU cards -- including from other users sharing your nodes. It's a known bug, not a feature.
 
 
-### Monitoring Job CPU/Memory Usage with `pestat`
+### `pestat`: CPU/Mem usage report
+
 
 We have deployed the (excellent) Slurm tool [`pestat`](https://github.com/OleHolmNielsen/Slurm_tools/tree/master/pestat) (Processor Element status) of Ole Holm Nielsen that you can use to quickly check the CPU/Memory usage of your jobs.
 Information deserving investigation (too low/high CPU or Memory usage compared to allocation) will be flagged in Red or Magenta
@@ -220,7 +255,20 @@ pestat [-p <partition>] [-G] [-f]
 ??? example "`pestat` output (official sample output)"
     ![](https://github.com/OleHolmNielsen/Slurm_tools/raw/master/pestat/pestat-example.png)
 
-!!! tips "Always check your node activity (multi-core - single node job)"
+### General Guidelines
+
+As mentionned before, always check your node activity with _at least_ `htop` on the **all** allocated nodes to ensure you use them as expected. Several cases might apply to your job workflow:
+
+=== "Single Node, single core"
+    You are dealing with an [embarrasingly parallel job campaign](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#embarrassingly-gnu-parallel-tasks-across-multiples-nodes) and this approach is **bad** and overload the scheduler unnecessarily.
+    You will also quickly cross the limits set in terms of maximum number of jobs.
+    **You must aggregate multiples tasks within a single job** to exploit fully a complete node.
+    In particular, you **MUST** consider using [GNU Parallel](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/) and our [generic GNU launcher `launcher.parallel.sh`](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/launcher.parallel.sh).
+
+    [:fontawesome-solid-sign-in-alt: ULHPC Tutorial / HPC Management of Embarrassingly Parallel Jobs](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
+
+
+=== "Single Node, multi-core"
     **If you asked for more than a core in your job** (> 1 tasks, `-c <threads>` where `<threads>` > 1), there are 3 typical situations you **MUST** analysed (and `pestat` or `htop` are of great help for that):
 
     1. You cannot see the expected activity (only 1 core seems to be active at 100%), then you should review your workflow as you are _under_-exploiting (and thus probably **waste**) the allocated resources.
@@ -233,16 +281,26 @@ pestat [-p <partition>] [-G] [-f]
 
     3. you have the expected activity on the requested cores and the load match your allocation without harming the system: you're good to go!
 
-!!! warning "On the [impossibility] to monitor passive GPU jobs over `sjoin`"
-    If you use `sjoin` to join a GPU job, you **WON'T** be able to see the allocated GPU activity with `nvidia-smi` and all the monitoring tools provided by NVidia.
+=== "Multi-node"
+    **If you asked for more than ONE node**, ensure that you have consider the following questions.
 
+    1. You are running an **MPI job**: you generally know what you're doing, **YET** ensure your followed the single node monitoring checks (`htop` etc. yet across all nodes) to review your core activity on **ALL** nodes (see 3. below) .
+    Consider also parallel profilers like [Arm Forge](../development/performance-debugging-tools/arm-forge.md)
+    2. You are running an [embarrasingly parallel job campaign](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#embarrassingly-gnu-parallel-tasks-across-multiples-nodes). You should first ensure you correctly exploit a **single node** using [GNU Parallel](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/) before attempting to cross multiple nodes
+    3. You run a distributed framework able to exploit multiple nodes (typically with a master/slave model as for [Spark cluster](https://ulhpc-tutorials.readthedocs.io/en/latest/bigdata/#running-spark-in-standalone-cluster)). You **MUST** assert that your [slave] processes are _really_ run on the over nodes using
 
-## Careful Monitoring of your Jobs Efficiency
+    ```bash
+    # check you running job
+    $ sq
+    # Join **another** node than the first one listed
+    $ sjoin <jobid> -w <node>
+    $ htop  # view of all processes
+    #               F5: tree view
+    #               u <name>: filter by process of <name>
+    #               q: quit
+    ```
 
-!!! bug
-    **DON'T LEAVE your jobs running WITHOUT monitoring them** and ensure they are not abusing of the computational resources allocated for you!!!
-
-[:fontawesome-solid-sign-in-alt: ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/)
+## Monitoring past jobs efficiency
 
 !!! important "Walltime estimation and Job efficiency"
     By default, none of the regular jobs you submit can exceed a walltime of 2 days (`2-00:00:00`).
@@ -254,15 +312,22 @@ pestat [-p <partition>] [-G] [-f]
     1. Short jobs are scheduled faster, and may even be elligible for [backfilling](priority.md#backfill-scheduling)
     2. You will be more likely elligible for a raw share upgrade of your user account -- see [Fairsharing](../slurm/fairsharing.md#q-my-user-fairshare-is-low-what-can-i-do)
 
+The below utilities will help you track the CPU/Memory efficiency (`seff`) or the Average Walltime Accuracy (`susage`, `sacct`) of your past jobs
+
+### `seff`
+
+{%
+   include-markdown "../slurm/commands.md"
+   start="<!--seff-start-->"
+   end="<!--seff-end-->"
+%}
+
+### `susage`
+
+{%
+   include-markdown "../slurm/commands.md"
+   start="<!--susage-start-->"
+   end="<!--susage-end-->"
+%}
+
 In all cases, if you are confident that your jobs will last more than 2 days **while efficiently using the allocated resources**, you can use [`--qos long`](long.md) QOS. Be aware that special restrictions applies for this kind of jobs.
-
-!!! danger "Don't spread across multiple nodes until you validated the single node efficiency!"
-    Check with `htop` for instance on [interactive tests](interactive.md) that you are really using the cores you asked for
-
-    Too often, we see job flooding the scheduler which have obviously not been checked for efficiency
-
-
-## Long jobs
-
-
-The [`long`](#long-qos) QOS can be used if you are confident this is not sufficient, however be aware that in most of the cases, the 2 days limits is compliant with most workflows.

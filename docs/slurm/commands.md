@@ -117,7 +117,7 @@ You can use the `scurrent` (for _current_ interactive job) or (more generally) `
        WorkDir=/mnt/irisgpfs/users/<login>
     ```
 
-### Past job statistics
+### Past job statistics: `slist`, `sreport`
 
 Use the `slist` helper for a given job:
 
@@ -129,7 +129,23 @@ $ slist <jobid>
 # seff <jobid>
 ```
 
-### Job efficiency: `seff`, `susage`
+You can also use [`sreport`](https://slurm.schedmd.com/sreport.html) o generate reports of job usage and cluster utilization for Slurm jobs. For instance, to list your usage in CPU-hours since the beginning of the year:
+
+```console
+$ sreport -t hours cluster UserUtilizationByAccount Users=$USER  Start=$(date +%Y)-01-01
+--------------------------------------------------------------------------------
+Cluster/User/Account Utilization 2021-01-01T00:00:00 - 2021-02-13T23:59:59 (3801600 secs)
+Usage reported in CPU Hours
+----------------------------------------------------------------------------
+  Cluster     Login     Proper Name                Account     Used   Energy
+--------- --------- --------------- ---------------------- -------- --------
+     iris   <login>          <name> <firstname>.<lastname>    [...]
+     iris   <login>          <name>      project_<acronym>    [...]
+```
+
+### Job efficiency: `seff`, `susage` or `sacct`
+
+<!--seff-start-->
 
 Use `seff` to double check a _past_ job CPU/Memory efficiency. Below examples should be self-speaking:
 
@@ -199,7 +215,43 @@ Use `seff` to double check a _past_ job CPU/Memory efficiency. Below examples sh
     ```
      **This is typical of a single-core task** can could be drastically improved via [GNU Parallel](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/).
 
-Use `susage` to check your past _jobs walltime accuracy_ (Timelimit vs. Elapsed)
+<!--seff-end-->
+
+<!--susage-start-->
+
+Use `susage` to check your past _jobs walltime accuracy_ (`Timelimit` vs. `Elapsed`)
+
+```console
+$ susage -h
+Usage: susage [-m] [-Y] [-S YYYY-MM-DD] [-E YYYT-MM-DD]
+  For a specific user (if accounting rights granted):    susage [...] -u <user>
+  For a specific account (if accounting rights granted): susage [...] -A <account>
+Display past job usage summary
+```
+<!--susage-end-->
+<!--sacct-start-->
+
+
+Alternatively, you can use [`sacct`](https://slurm.schedmd.com/sacct.html) (use `sacct --helpformat` to get the list of) for COMPLETED or TIMEOUT jobs (see [Job State Codes](reason-codes.md)).
+
+??? example "using `sacct -X -S <start> [...] --format [...],time,elapsed,[...]`"
+    ADAPT `-S <start>` and `-E <end>` dates accordingly - Format: `YYYY-MM-DD`.
+    _hint_: `$(date +%F)` will return today's date in that format, `$(date +%Y)` return the current year, so the below command will list your completed (or timeout jobs) since the beginning of the month:
+    ```console
+    $ sacct -X -S $(date +%Y)-01-01 -E $(date +%F) --partition batch,gpu,bigmem --state CD,TO --format User,JobID,partition%12,qos,state,time,elapsed,nnodes,ncpus,allocGRES
+         User        JobID    Partition        QOS      State  Timelimit    Elapsed   NNodes      NCPUS    AllocGRES
+    --------- ------------ ------------ ---------- ---------- ---------- ---------- -------- ---------- ------------
+     <login> 2243517             batch     normal    TIMEOUT 2-00:00:00 2-00:00:05        4        112
+     <login> 2243518             batch     normal    TIMEOUT 2-00:00:00 2-00:00:05        4        112
+     <login> 2244056               gpu     normal    TIMEOUT 2-00:00:00 2-00:00:12        1         16        gpu:2
+     <login> 2246094               gpu       high    TIMEOUT 2-00:00:00 2-00:00:29        1         16        gpu:2
+     <login> 2246120               gpu       high  COMPLETED 2-00:00:00 1-02:18:00        1         16        gpu:2
+     <login> 2247278            bigmem     normal  COMPLETED 2-00:00:00 1-05:59:21        1         56
+     <login> 2250178             batch     normal  COMPLETED 2-00:00:00   10:04:32        1          1
+     <login> 2251232               gpu     normal  COMPLETED 1-00:00:00   12:05:46        1          6        gpu:1
+    ```
+
+<!--sacct-end-->
 
 ## Platform Status
 
