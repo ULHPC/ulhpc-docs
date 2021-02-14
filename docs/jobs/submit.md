@@ -1,7 +1,7 @@
 #  Regular Jobs
 
 | __Node Type__ | __Slurm command__                                                                      |
-|---------------|----------------------------------------------------------------------------------------|
+|:-------------:|----------------------------------------------------------------------------------------|
 | regular       | `sbatch [-A <project>] -p batch  [--qos {high,urgent}] [-C {broadwell,skylake}] [...]` |
 | gpu           | `sbatch [-A <project>] -p gpu    [--qos {high,urgent}] [-C volta[32]] -G 1 [...]`      |
 | bigmem        | `sbatch [-A <project>] -p bigmem [--qos {high,urgent}] [...]`                          |
