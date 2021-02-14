@@ -13,17 +13,23 @@ may encounter when using squeue to check on your jobs.
 
 | Status        | Code  | Explaination                                                           |
 | ------------- | :---: | ---------------------------------------------------------------------- |
+| CANCELLED     | `CA`  | The job was explicitly cancelled by the user or system administrator.  |
 | COMPLETED     | `CD`  | The job has completed successfully.                                    |
 | COMPLETING    | `CG`  | The job is finishing but some processes are still active.              |
+| DEADLINE      | `DL`  | The job terminated on deadline                                         |
 | FAILED        | `F`   | The job terminated with a non-zero exit code and failed to execute.    |
+| NODE_FAIL     | `NF`  | The job terminated due to failure of one or more allocated nodes       |
+| OUT_OF_MEMORY | `OOM` | The Job experienced an out of memory error.                            |
 | PENDING       | `PD`  | The job is waiting for resource allocation. It will eventually run.    |
 | PREEMPTED     | `PR`  | The job was terminated because of preemption by another job.           |
 | RUNNING       | `R`   | The job currently is allocated to a node and is running.               |
 | SUSPENDED     | `S`   | A running job has been stopped with its cores released to other jobs.  |
 | STOPPED       | `ST`  | A running job has been stopped with its cores retained.                |
+| TIMEOUT       | `TO`  | Job terminated upon reaching its time limit.                           |
+|               |       |                                                                        |
 
-A full list of these Job State codes can be found in [Slurm’s
-documentation.](https://slurm.schedmd.com/squeue.html#lbAG)
+A full list of these Job State codes can be found in [`squeue`
+documentation.](https://slurm.schedmd.com/squeue.html#lbAG) or [`sacct` documentation](https://slurm.schedmd.com/sacct.html#lbAG).
 
 ### Job Reason Codes
 
