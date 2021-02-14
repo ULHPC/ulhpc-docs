@@ -33,6 +33,8 @@
 
 ## Joining/monitoring running jobs
 
+### `sjoin`
+
 At any moment of time, you can _join_ a running job using the
 [custom helper functions](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh)
 `sjoin` **in another terminal** (or another screen/tmux tab/window). The format is as follows:
@@ -55,6 +57,156 @@ sjoin <jobid> [-w <node>]    # Use <tab> to automatically complete <jobid> among
     #               u <name>: filter by process of <name>
     #               q: quit
     ```
+
+### ClusterShell
+
+!!! danger
+    **Only for VERY Advanced users!!!**.
+    You should know what you are doing when using [ClusterShell](https://clustershell.readthedocs.io/en/latest/intro.html) as you can mistakenly generate a huge amount of remote commands across the cluster which, while they will likely fail, still induce an unexpected load that may disturb the system.
+
+[ClusterShell](https://clustershell.readthedocs.io/en/latest/intro.html) is a useful Python package for executing arbitrary commands across multiple hosts.
+On the ULHPC clusters, it provides a relatively simple way for you to run commands on nodes your jobs are running on, and collect the results.
+
+#### `nodeset`
+
+The [`nodeset`](https://clustershell.readthedocs.io/en/latest/tools/nodeset.html) command enables the easy manipulation of node sets, as well as node groups, at the command line level.
+It uses `sinfo`  underneath but has slightly different syntax. You can use it to ask about node states and nodes your job is running on.
+
+The nice difference is you can ask for **folded** (e.g. `iris-[075,078,091-092]`) or **expanded** (e.g. `iris-075 iris-078 iris-091 iris-092`) forms of the node lists.
+
+| __Command__        | __description__                                      |
+|--------------------|------------------------------------------------------|
+| `nodeset -L[LL]`   | List all groups  available                           |
+| `nodeset -c [...]` | show number of nodes in nodeset(s)                   |
+| `nodeset -e [...]` | expand nodeset(s) to separate nodes                  |
+| `nodeset -f [...]` | fold nodeset(s) (or separate nodes) into one nodeset |
+
+
+??? example "Nodeset expansion and folding"
+    === "nodeset -e (expand)"
+        ```bash
+        # Get list of nodes with issues
+        $ sinfo -R --noheader -o "%N"
+        iris-[005-008,017,161-162]
+        # ... and expand that list
+        $ sinfo -R --noheader -o "%N" | nodeset -e
+        iris-005 iris-006 iris-007 iris-008 iris-017 iris-161 iris-162
+
+        # Actually equivalent of (see below)
+        $ nodeset -e @state:drained
+        ```
+
+    === "nodeset -f (fold)"
+        ```bash
+        # List nodes in IDLE state
+        $> sinfo -t IDLE --noheader
+        interactive    up    4:00:00      4   idle iris-[003-005,007]
+        long           up 30-00:00:0      2   idle iris-[015-016]
+        batch*         up 5-00:00:00      1   idle iris-134
+        gpu            up 5-00:00:00      9   idle iris-[170,173,175-178,181]
+        bigmem         up 5-00:00:00      0    n/a
+
+        # make out a synthetic list
+        $> sinfo -t IDLE --noheader | awk '{ print $6 }' | nodeset -f
+        iris-[003-005,007,015-016,134,170,173,175-178,181]
+
+        # ... actually done when restricting the column to nodelist only
+        $> sinfo -t IDLE --noheader -o "%N"
+        iris-[003-005,007,015-016,134,170,173,175-178,181]
+
+        # Actually equivalent of (see below)
+        $ nodeset -f @state:idle
+        ```
+
+??? example "Exclusion / intersection  of nodeset"
+    | __Option__               | __Description__                                                         |
+    |--------------------------|-------------------------------------------------------------------------|
+    | `-x <nodeset>`           | __exclude__ from working set `<nodeset>`                                |
+    | `-i <nodeset>`           | __intersection__ from working set with `<nodeset>`                      |
+    | `-X <nodeset>` (`--xor`) | elements that are in __exactly one__ of the working set and `<nodeset>` |
+
+    ```bash
+    # Exclusion
+    $> nodeset -f iris-[001-010] -x iris-[003-005,007,015-016]
+    iris-[001-002,006,008-010]
+    # Intersection
+    $> nodeset -f iris-[001-010] -i iris-[003-005,007,015-016]
+    iris-[003-005,007]
+    # "XOR" (one occurrence only)
+    $> nodeset -f iris-[001-010] -x iris-006 -X iris-[005-007]
+    iris-[001-004,006,008-010]
+    ```
+
+The groups useful to you that we have configured are `@user`, `@job` and `@state`.
+
+=== "List available groups"
+    ```bash
+    $ nodeset -LLL
+    # convenient partition groups
+    @batch  iris-[001-168] 168
+    @bigmem iris-[187-190] 4
+    @gpu    iris-[169-186,191-196] 24
+    @interactive iris-[001-196] 196
+    # conveniente state groups
+    @state:allocated [...]
+    @state:idle      [...]
+    @state:mixed     [...]
+    @state:reserved  [...]
+    # your individual jobs
+    @job:2252046 iris-076 1
+    @job:2252050 iris-[191-196] 6
+    # all the jobs under your username
+    @user:svarrette iris-[076,191-196] 7
+    ```
+
+=== "User group"
+    List expanded node names where you have jobs running
+    ```bash
+    # Similar to: squeue -h -u $USER -o "%N"|nodeset -e
+    $ nodeset -e @user:$USER
+    ```
+
+=== "Job group"
+    List folded nodes where your job 1234567 is running (use `sq` to quickly list your jobs):
+    ```bash
+    $ similar to squeue -h -j 1234567 -o "%N"
+    nodeset -f @job:1234567
+    ```
+
+=== "State group"
+    List expanded node names that are idle according to slurm
+    ```bash
+    # Similar to: sinfo -t IDLE -o "%N"
+    nodeset -e @state:idle
+    ```
+
+#### `clush`
+
+[`clush`](https://clustershell.readthedocs.io/en/latest/tools/clush.html) can run commands on multiple nodes at once for instance to monitor you jobs. It uses the node grouping syntax from [`nodeset`]((https://clustershell.readthedocs.io/en/latest/tools/nodeset.html) to allow you to run commands on those nodes.
+
+[`clush`](https://clustershell.readthedocs.io/en/latest/tools/clush.html) uses `ssh` to connect to each of these nodes.
+You can use the `-b` option to gather output from nodes with same output into the same lines. Leaving this out will report on each node separately.
+
+| __Option__      | __Description__                                                          |
+|-----------------|--------------------------------------------------------------------------|
+| `-b`            | gathering output (as when piping to `dshbak -c`)                         |
+| `-w <nodelist>` | specify remote hosts, incl. node groups with `@group` special syntax     |
+| `-g <group>`    | similar to `-w @<group>`, restrict commands to the hosts group `<group>` |
+| `--diff`        | show differences between common outputs                                  |
+
+=== "Monitor CPU usage"
+    Show %cpu, memory usage, and command for all nodes running any of your jobs.
+    ``` bash
+    clush -bw @user:$USER ps -u$USER -o%cpu,rss,cmd
+    ```
+
+=== "Monitor GPU usage"
+    Show what's running on _all_ the GPUs on the nodes associated with your job `654321`.
+    ``` bash
+    clush -bw @job:654321 nvidia-smi --format=csv --query-compute-apps=process_name,used_gpu_memory
+    ```
+    This may be convenient for passive jobs since the `sjoin` utility does **NOT** permit to run `nvidia-smi`.
+
 
 ### Monitoring Job CPU/Memory Usage with `pestat`
 
@@ -80,7 +232,6 @@ pestat [-p <partition>] [-G] [-f]
         ![](images/understanding-cpu-load-1-core.png)
 
     3. you have the expected activity on the requested cores and the load match your allocation without harming the system: you're good to go!
-
 
 !!! warning "On the [impossibility] to monitor passive GPU jobs over `sjoin`"
     If you use `sjoin` to join a GPU job, you **WON'T** be able to see the allocated GPU activity with `nvidia-smi` and all the monitoring tools provided by NVidia.
