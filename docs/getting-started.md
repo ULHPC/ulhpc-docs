@@ -216,7 +216,7 @@ Typical usage of the ULHPC supercomputers involves the reservation and allocatio
 ULHPC also supports interactive computing.
 
 * [Interactive jobs](jobs/interactive.md)
-<!-- * [Jupyter Notebook](services/jupyter.md) -->
+* [Jupyter Notebook](services/jupyter.md)
 <!-- * [Interactive Big Data Analytics with Spark](bigdata/spark.md) -->
 
 

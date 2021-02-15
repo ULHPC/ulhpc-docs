@@ -2,7 +2,7 @@
 
 # Uni.lu HPC Technical Documentation
 
-![](../images/logo_ULHPC.png){: style="width:150px; float: right;"}
+![](images/logo_ULHPC.png){: style="width:150px; float: right;"}
 
 
 <!-- <p align="center"><img src="images/logo_ULHPC.png" alt="UL HPC logo" width="150px"/></p> -->

@@ -26,7 +26,7 @@ A second reminder is sent a few days prior to actual downtime.
 
 The news of the downtimes is also posted on the [Live status](https://hpc.uni.lu/live-status/motd/) page.
 
-Finally, a colored "_message of the day_" (motd) banner is displayed on all [access/login servers](../connect/login.md) such that you can quickly be informed of any incoming maintenance operation upon connection to the cluster.
+Finally, a colored "_message of the day_" (motd) banner is displayed on all [access/login servers](../connect/access.md) such that you can quickly be informed of any incoming maintenance operation upon connection to the cluster.
 You can see this when you login or (again),any time by issuing the command:
 
 ```console

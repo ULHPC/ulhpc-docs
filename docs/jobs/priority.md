@@ -12,7 +12,7 @@ There are several factors enabled on ULHPC supercomputers  that influence job pr
 * _Fairshare_: difference between the portion of the computing resource
 that has been promised and the amount of resources that has been
 consumed - see [Fairsharing](../slurm/fairsharing.md).
-* _Partition_: factor associated with each node [partition](../slurm/partition.md), for instance to privilege `interactive` over `batch` partitions
+* _Partition_: factor associated with each node [partition](../slurm/partitions.md), for instance to privilege `interactive` over `batch` partitions
 * _QOS_ A factor associated with each [Quality Of Service](../slurm/qos.md) (`low` $\longrightarrow$ `urgent`)
 
 The job's priority at any given time will be a weighted sum of all the factors that have been enabled.

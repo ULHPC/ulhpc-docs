@@ -66,7 +66,7 @@ Such restore requests may take a few days to complete.
 ## Purging
 
 !!! note
-    See [Filesystem Quotas and Purging](filesystems/quotas.md) for detailed information about inode,
+    See [Filesystem Quotas and Purging](../filesystems/quotas.md) for detailed information about inode,
     space quotas, and file system purge policies.
 
 !!! warning

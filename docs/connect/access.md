@@ -9,7 +9,7 @@ On access nodes, typical user tasks include
 
 * Transferring and managing files
 * Editing files
-* Submitting [jobs](../jobs/index.md)
+* Submitting [jobs](../jobs/submi.md)
 
 
 !!! warning "Appropriate Use"
@@ -27,9 +27,9 @@ On access nodes, typical user tasks include
 ## Tips
 
 !!! tip "ULHPC provides a wide variety of qos's"
-    * An [interactive qos](../jobs/examples/index.md#interactive) is
+    * An [`interactive` qos](../jobs/interactive.md) is
     available on Iris and Aion for compute- and memory-intensive interactive
-    work. Please, use an interactive job for resource-intensive processes 
+    work. Please, use an interactive job for resource-intensive processes
     instead of running them on access nodes.
 
 !!! tip
@@ -38,4 +38,3 @@ On access nodes, typical user tasks include
 
     * `top -u $USER`
     * `/usr/bin/time -v ./my_command`
-

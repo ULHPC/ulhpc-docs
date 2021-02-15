@@ -64,9 +64,8 @@ See [Acceptable Use Policy](../policies/aup.md) for more details.
 The PI and PI Proxies for the project will be notified when applicable.
 5. Finally, you will need to log into the [HPC IPA](https://***REMOVED***) Portal to set up your initial password and Multi-Factor Authentication (MFA) for your account.
     * **Your new password must adhere to ULHPC's password requirements**
-        - see  [Password policy and guidelines](passwords.md)
-    * [ULHPC Identity Management (IPA portal) documentation](ipa.md)
-
+        - see  [Password policy and guidelines](../policies/passwords.md)
+    * [ULHPC Identity Management (IPA portal) documentation](../connect/ipa.md)
 
 
 ??? warning "UL HPC $\neq$ University credentials"
@@ -99,7 +98,7 @@ Please save any evidence of the break-in and include as many details as possible
 Projects are defined for accounting purposes and are associated to a set of user accounts allowed by the project PI to access its data and submit jobs on behalf of the project account. See [Slurm Account Hierarchy](./slurm/accounts.md).
 
 You can request (or be automatically added) to project accounts for accounting purposes.
-For more information, please see the [Project Account documentation](accounts/projects.md)
+For more information, please see the [Project Account documentation](../accounts/projects.md)
 
 
 ## FAQ
@@ -112,6 +111,6 @@ For more information, please see the [Project Account documentation](accounts/pr
 
 Sharing credentials removes the ability to audit and accountability for the account holder in case of account misuse. Accounts which are in violation of this policy may be disabled or otherwise limited. Accounts knowingly skirting this policy may be banned.
 
-If you find that you need to share resources among multiple individuals, shared [projects](accounts/projects.md) are just the way to go, and remember that the University extends access to its HPC resources (_i.e._, facility and expert HPC consultants) to the scientific staff of national public organizations and external partners for the duration of joint research projects under the conditions defined above.
+If you find that you need to share resources among multiple individuals, shared [projects](../accounts/projects.md) are just the way to go, and remember that the University extends access to its HPC resources (_i.e._, facility and expert HPC consultants) to the scientific staff of national public organizations and external partners for the duration of joint research projects under the conditions defined above.
 
-When in doubt, please [contact us](contact.md) and we will be happy to assist you with finding a safe and secure way to do so.
+When in doubt, please [contact us](../support/index.md) and we will be happy to assist you with finding a safe and secure way to do so.

@@ -43,7 +43,7 @@ filesystem_summary:       919.0T      247.8T      662.0T  28% /mnt/lscratch
 
 ### File striping
 
-**[File striping]((https://en.wikipedia.org/wiki/Data_striping).)** permits to increase the throughput of operations by taking advantage of several OSSs and OSTs, by allowing one or more clients to read/write different parts of the same file in parallel. On the other hand, striping small files can decrease the performance.
+**[File striping](https://en.wikipedia.org/wiki/Data_striping)** permits to increase the throughput of operations by taking advantage of several OSSs and OSTs, by allowing one or more clients to read/write different parts of the same file in parallel. On the other hand, striping small files can decrease the performance.
 
 File striping allows file sizes larger than a single OST, large files **MUST** be striped over several OSTs in order to avoid filling a single OST and harming the performance for all users.
 There is default stripe configuration for ULHPC Lustre filesystems (see below).

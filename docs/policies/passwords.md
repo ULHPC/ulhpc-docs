@@ -28,12 +28,12 @@ Here is a list of recommended applications:
 * _Self-Hosted solutions_:
     - [KeepassXC](https://keepassxc.org/download/)
     - [`pass`: the Standard Unix Password Manager](https://www.passwordstore.org/).
-        * See also [our tutorial on pass setup within the ULHPC team](services/pass.md)
+        <!-- * See also [our tutorial on pass setup within the ULHPC team](services/pass.md) -->
 
 
 ### Forgotten Passwords
 
-If you forget your password or if it has recently expired, you can simply [contact us](contact.md) by email at [`hpc-team@uni.lu`](mailto:hpc-team@uni.lu) for us to initiate the process of resetting your password.
+If you forget your password or if it has recently expired, you can simply [contact us](../support/index.md) by email at [`hpc-team@uni.lu`](mailto:hpc-team 'at' uni.lu) for us to initiate the process of resetting your password.
 
 ### Login Failures
 

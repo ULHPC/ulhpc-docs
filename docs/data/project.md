@@ -13,7 +13,7 @@
 
     You are then **entitled to submit jobs associated to the project using `-A <name>`** such that the HPC usage is reported accurately.
     The ULHPC team will provide to the project PI (Principal Investigator) and the [Research Support](https://wwwen.uni.lu/university/about_the_university/organisation_charts/organisation_chart_rectorate_central_administration/research_support_department) department a regular report detailing the corresponding HPC usage.
-    In all cases, job [billing](../slurm/billing.md) under the conditions defined in the [Job Accounting and Billing](slurm/billing.md) section may apply.
+    In all cases, job [billing](../slurm/billing.md) under the conditions defined in the [Job Accounting and Billing](../slurm/billing.md) section may apply.
 
 ## New project directory
 

@@ -1,6 +1,6 @@
 
 !!! note "Global Project quotas and backup policies"
-    See [quotas](quotas.md) for detailed information about inode,
+    See [quotas](../filesystems/quotas.md) for detailed information about inode,
     space quotas, and file system purge policies.
     Your global projects are daily backuped, according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
 
@@ -34,7 +34,7 @@ sg <name> -c "<command> [...]"
 ```
 
 This is particularly important if you are [building dedicated software with
-Easybuild](../development/software/index.md) for members of the project - you typically want to do it as follows:
+Easybuild](../environment/easybuild.md) for members of the project - you typically want to do it as follows:
 
 ```bash
 # /!\ ADAPT <name> accordingly

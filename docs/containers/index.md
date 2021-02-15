@@ -10,7 +10,7 @@ Many applications and libraries can also be used through container systems, with
 
 
 
-The ULHPC offers the possibilty to run [Singularity containers](https://sylabs.io/singularity/). Singularity is an open source container platform designed to be simple, fast, and secure. Singularity is optimized for EPC and HPC workloads, allowing untrusted users to run untrusted containers in a trusted way. 
+The ULHPC offers the possibilty to run [Singularity containers](https://sylabs.io/singularity/). Singularity is an open source container platform designed to be simple, fast, and secure. Singularity is optimized for EPC and HPC workloads, allowing untrusted users to run untrusted containers in a trusted way.
 
 
 
@@ -32,7 +32,7 @@ To use Singularity, you need to load the corresponding [Lmod](https://lmod.readt
 
 ### Pulling container images
 
-Like [Docker](https://www.docker.com/), Singularity provide a way to pull images from a Hubs such as [DockerHub](https://hub.docker.com/) and [Singuarity Hub](https://singularity-hub.org/). 
+Like [Docker](https://www.docker.com/), Singularity provide a way to pull images from a Hubs such as [DockerHub](https://hub.docker.com/) and [Singuarity Hub](https://singularity-hub.org/).
 
 ```shell
 
@@ -45,10 +45,10 @@ You should see the following output:
     <pre><font color="#3465A4">INFO:   </font> Converting OCI blobs to SIF format
     <font color="#3465A4">INFO:   </font> Starting build...</pre>
     <pre>Getting image source signatures
-    Copying blob d72e567cc804 done  
-    Copying blob 0f3630e5ff08 done  
-    Copying blob b6a83d81d1f4 done  
-    Copying config bbea2a0436 done  
+    Copying blob d72e567cc804 done
+    Copying blob 0f3630e5ff08 done
+    Copying blob b6a83d81d1f4 done
+    Copying config bbea2a0436 done
     Writing manifest to image destination
     Storing signatures
     ...
@@ -81,7 +81,7 @@ You may now test the container by executing some inner commands:
 ### Building container images
 
 Building container images requires to have root privileges. Therefore, users have to build images on their local machine before transfering them to the platform.
-Please refer to the [Data transfer](data/transfer.md) section for this purpose.
+Please refer to the [Data transfer](../data/transfer.md) section for this purpose.
 
 !!! note
     Singularity 3 introduces the ability to build your containers in the cloud, so you can easily and securely create containers for your applications without speci    al privileges or setup on your local system. The Remote Builder can securely build a container for you from a definition file entered here or via the Singularity CLI (see https://cloud.sylabs.io/builder for more details).
@@ -134,9 +134,9 @@ singularity run --nv cuda_samples.sif
 The lastest command should print:
 !!! note "Output"
     <pre>CUDA Device Query (Runtime API) version (CUDART static linking)
-    
+
     Detected 1 CUDA Capable device(s)
-    
+
     Device 0: &quot;Tesla V100-SXM2-16GB&quot;
       CUDA Driver Version / Runtime Version          10.2 / 10.1
       CUDA Capability Major/Minor version number:    7.0
@@ -172,14 +172,14 @@ The lastest command should print:
       Device PCI Domain ID / Bus ID / location ID:   0 / 30 / 0
       Compute Mode:
          &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
-    
+
     deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 10.2, CUDA Runtime Version = 10.1, NumDevs = 1
     Result = PASS
     </pre>
 
 
 ### MPI and Singularity containers
-This section relies on the very excellent documentation from [CSCS](https://user.cscs.ch/tools/containers/singularity/). The following singularity definition file mpi_osu.def can be used to build a container with the osu benchmarks using mpi: 
+This section relies on the very excellent documentation from [CSCS](https://user.cscs.ch/tools/containers/singularity/). The following singularity definition file mpi_osu.def can be used to build a container with the osu benchmarks using mpi:
 
 
 ```shell
@@ -260,4 +260,3 @@ The content of the output file:
     1048576               712.19
     2097152               714.55
     </pre>
-

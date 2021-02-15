@@ -111,7 +111,7 @@ nav:
     #   - Parsl: 'jobs/workflow/parsl.md'
     #   - Snakemake: 'jobs/workflow/snakemake.md'
     #   - Spark Cluster: 'bigdata/spark.md'
-    # - Jupyter Notebook: 'services/jupyter.md'
+    - Jupyter Notebook: 'services/jupyter.md'
     # - Checkpoint/Restart: 'jobs/checkpoint-restart.md'
   ###########
   - Software:
@@ -212,9 +212,9 @@ nav:
         - Intel Inspector: 'development/performance-debugging-tools/inspector.md'
         - Intel Trace Analyzer and Collector: 'development/performance-debugging-tools/itac.md'
         # - LIKWID:          'development/performance-debugging-tools/likwid.md'
-        - Nvidia Nsight:   'development/performance-debugging-tools/nsight.md'
-        - Roofline Performance Model: 'development/performance-debugging-tools/roofline.md'
-        - PAPI:            'development/performance-debugging-tools/papi.md'
+        # - Nvidia Nsight:   'development/performance-debugging-tools/nsight.md'
+        # - Roofline Performance Model: 'development/performance-debugging-tools/roofline.md'
+        # - PAPI:            'development/performance-debugging-tools/papi.md'
         - Scalasca:        'development/performance-debugging-tools/scalasca.md'
         - Valgrind:        'development/performance-debugging-tools/valgrind.md'
         - APS:             'development/performance-debugging-tools/aps.md'

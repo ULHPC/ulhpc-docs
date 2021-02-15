@@ -8,9 +8,9 @@
 For more information:
 
 * [Getting Started](../getting-started.md)
-* [Connecting to ULHPC supercomputers](../getting-started##connecting-to-ulhpc-supercomputers)
+* [Connecting to ULHPC supercomputers](../getting-started.md#connecting-to-ulhpc-supercomputers)
 * [ULHPC Storage Systems Overview](../filesystems/overview.md)
-* [ULHPC User Software](../software/index.md)
+<!-- * [ULHPC User Software](../software/index.md) -->
 
 !!! warning "'-bash: `module`: command not found' on access/login servers"
     Recall that by default, the `module` command is (_on purpose_) **NOT** available on the [access/login servers](../connect/access.md).

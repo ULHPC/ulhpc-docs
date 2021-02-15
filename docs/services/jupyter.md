@@ -13,30 +13,27 @@ While Jupyter runs code in many programming languages, Python is a requirement (
 We strongly recommend to use the Python module provided by the ULHPC and installing `jupyter` inside a virtualenv after upgrading `pip`.
 
 ```shell
->$ si
->$ module load lang/Python #Loading default Python
->$ python -m venv jupyter_env
->$ source jupyter_env/bin/activate
->$ python -m pip install --upgrade pip
->$ python -m pip install jupyter ipykernel
+$ si
+$ module load lang/Python #Loading default Python
+$ python -m venv jupyter_env
+$ source jupyter_env/bin/activate
+$ python -m pip install --upgrade pip
+$ python -m pip install jupyter ipykernel
 ```
 
 !!! warning
-    Modules are not allowed on the access servers. To test interactively Singularity, remember to ask for an interactive job first.
-    ```shell
-    srun -p interactive --qos debug -C batch  --pty bash  # or si 
-    ```
+    Modules are not allowed on the access servers. To test interactively Singularity, remember to ask for an [interactive job](../jobs/interactive.md) first using  for instance the `si` tool.
 
 Once Jupyter is installed along with [IPython](https://ipython.readthedocs.io/en/stable/index.html), you can start to configure your installation setting the environment variables corresponding to your needs:
 
 
-- JUPYTER_CONFIG_DIR: Set this environment variable to use a particular directory, other than the default, for Jupyter config files
-- JUPYTER_PATH: Set this environment variable to provide extra directories for the data search path. JUPYTER_PATH should contain a series of directories, separated by os.pathsep(; on Windows, : on Unix). Directories given in JUPYTER_PATH are searched before other locations. This is used in addition to other entries, rather than replacing any
-- JUPYTER_DATA_DIR: Set this environment variable to use a particular directory, other than the default, as the user data directory
-- JUPYTER_RUNTIME_DIR: Set this to override where Jupyter stores runtime files
-- IPYTHONDIR: If set, this environment variable should be the path to a directory, which IPython will use for user data. IPython will create it if it does not exist.
+- `JUPYTER_CONFIG_DIR`: Set this environment variable to use a particular directory, other than the default, for Jupyter config files
+- `JUPYTER_PATH`: Set this environment variable to provide extra directories for the data search path. `JUPYTER_PATH` should contain a series of directories, separated by os.pathsep(; on Windows, : on Unix). Directories given in JUPYTER_PATH are searched before other locations. This is used in addition to other entries, rather than replacing any
+- `JUPYTER_DATA_DIR`: Set this environment variable to use a particular directory, other than the default, as the user data directory
+- `JUPYTER_RUNTIME_DIR`: Set this to override where Jupyter stores runtime files
+- `IPYTHONDIR`: If set, this environment variable should be the path to a directory, which IPython will use for user data. IPython will create it if it does not exist.
 
-Jupyter Notebook makes sure that the [IPython kernel](https://ipython.readthedocs.io/en/stable/install/kernel_install.html#) is available, but you have to manually add a kernel with a different version of Python or a virtual environment. 
+Jupyter Notebook makes sure that the [IPython kernel](https://ipython.readthedocs.io/en/stable/install/kernel_install.html#) is available, but you have to manually add a kernel with a different version of Python or a virtual environment.
 
 Register the kernel using the following command:
 
@@ -47,30 +44,36 @@ Jupyter and your virtualenv are now installed and ready.
 
 ## Starting a Jupyter Notebook
 
-Jupyter notebooks can be started as a slurm job. The following script is an example how to proceed:
+Jupyter notebooks can be started as a [slurm job](../jobs/submit.md).
+The following script is an example how to proceed:
 
-```slurm
-#!/bin/bash -l
-#SBATCH -J Jupyter
-#SBATCH -N 1 # Nodes
-#SBATCH -n 1 # Tasks
-#SBATCH -c 2 # Cores assigned to each tasks
-#SBATCH --time=0-01:00:00
-#SBATCH -p batch
+!!! example "Slurm Launcher script for Jupyter Notebook"
+    ```slurm
+    #!/bin/bash -l
+    #SBATCH -J Jupyter
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=1
+    #SBATCH -c 2                # Cores assigned to each tasks
+    #SBATCH --time=0-01:00:00
+    #SBATCH -p batch
 
-module load lang/Python
-source jupyter_env/bin/activate
-jupyter notebook --ip $(facter ipaddress) --no-browser  &
-pid=$!
-sleep 5s
-jupyter notebook list
-jupyter --paths
-jupyter kernelspec list
-echo "Enter this command on your laptop: ssh -p 8022 -NL 8888:$(facter ipaddress):8888 ${USER}@access-iris.uni.lu " > notebook.log 
-wait $pid
-```
+    print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
+    module purge || print_error_and_exit "No 'module' command"
+    # Python 3.X by default (also on system)
+    module load lang/Python
+    source jupyter_env/bin/activate
 
-Once your job is running (see `squeue` command), you can use ssh forwarding to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command in the file `notebook.log`.
+    jupyter notebook --ip $(facter ipaddress) --no-browser  &
+    pid=$!
+    sleep 5s
+    jupyter notebook list
+    jupyter --paths
+    jupyter kernelspec list
+    echo "Enter this command on your laptop: ssh -p 8022 -NL 8888:$(facter ipaddress):8888 ${USER}@access-iris.uni.lu " > notebook.log
+    wait $pid
+    ```
+
+Once your job is running (see [Joining/monitoring running jobs](../jobs/submit.md#joiningmonitoring-running-jobs), you can use `ssh` [forwarding](../connect/ssh.md#ssh-port-forwarding) to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command in the file `notebook.log`.
 You should be now able to reach your notebook.
 
 Then open your browser and go to the url: `http://127.0.0.1:8888/`. Jupyter should ask you for a password (see screenshot below). This password can be set before running the jupyter notebook and his part of the initial configuartion detailed at [Jupyter official documentation](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html).
