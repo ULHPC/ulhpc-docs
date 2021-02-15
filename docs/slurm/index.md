@@ -189,13 +189,15 @@ Details are provided below:
 <!--table-feature-start-->
 
 | Node (type)                          | #Nodes | #Socket / #Cores | RAM [GB] | Features              |
-|--------------------------------------|--------|-----------------|----------|-----------------------|
-| `aion-[0001-0318]`                   | 318    | 2 / 128    | 256      | `batch,epyc`          |
-| `iris-[001-108]`                     | 108    | 2 / 28     | 128      | `batch,broadwell`     |
-| `iris-[109-168]`                     | 60     | 2 / 28     | 128      | `batch,skylake`       |
-| `iris-[169-186]`   (GPU)             | 18     | 2 / 28     | 768      | `gpu,skylake,volta`   |
-| `iris-[191-196]`   (GPU)             | 6      | 2 / 28     | 768      | `gpu,skylake,volta32` |
-| `iris-[187-190]` <br/>(Large-Memory) | 4      | 4 / 112    | 3072     | `bigmem,skylake`      |
+|--------------------------------------|--------|------------------|----------|-----------------------|
+| `aion-[0001-0318]`                   | 318    | 2 / 128          | 256      | `batch,epyc`          |
+| `iris-[001-108]`                     | 108    | 2 / 28           | 128      | `batch,broadwell`     |
+| `iris-[109-168]`                     | 60     | 2 / 28           | 128      | `batch,skylake`       |
+| `iris-[169-186]`   (GPU)             | 18     | 2 / 28           | 768      | `gpu,skylake,volta`   |
+| `iris-[191-196]`   (GPU)             | 6      | 2 / 28           | 768      | `gpu,skylake,volta32` |
+| `iris-[187-190]` <br/>(Large-Memory) | 4      | 4 / 112          | 3072     | `bigmem,skylake`      |
+
+<!--table-feature-end-->
 
 As can be seen, Slurm [features] are associated to ULHPC compute nodes and permits to easily filter with the `-C <feature>` option the list of nodes.
 
@@ -207,7 +209,7 @@ sfeatures
 # NODELIST              NODES   CPUS NODES(A/I/O/T)  PARTITION    AVAIL_FEATURES
 # [...]
 ```
-<!--table-feature-end-->
+<!--resource-allocation-match-hw-start-->
 
 !!! important "Always try to align resource specifications for your jobs with physical characteristics"
     The typical format of your Slurm submission should thus probably be:
@@ -280,9 +282,13 @@ sfeatures
         # Total: 4 tasks, each on 28 cores/threads
         ```
 
+<!--resource-allocation-match-hw-end-->
+
 ## Using Slurm Environment variables
 
-The Slurm controller will set several `SLURM_*` variables in the environment of
+
+
+Recall that the Slurm controller will set several `SLURM_*` variables in the environment of
 the batch script.
 The most important are listed in the table below - use them wisely to make your
 launcher script as flexible as possible to abstract and adapt from the
