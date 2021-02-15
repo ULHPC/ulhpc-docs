@@ -8,7 +8,7 @@ The University extends access to its HPC resources (including facilities, servic
 <!--intro-start-->
 There are a number of policies which apply to ULHPC users.
 
-[:fontawesome-solid-sign-in-alt: UL HPC Acceptable Use Policy (AUP) [pdf] ](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf){: .md-button .md-button--link }
+[:fontawesome-solid-download: UL HPC Acceptable Use Policy (AUP) [pdf] ](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf){: .md-button .md-button--link }
 
 !!! danger "Important"
     **All** users of UL HPC resources and PIs must abide by the [UL HPC Acceptable Use Policy (AUP)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf).

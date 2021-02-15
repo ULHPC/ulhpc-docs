@@ -37,6 +37,17 @@ method for contacting ULHPC.
 
 [:fontawesome-solid-hand-holding-medical: Service Now HPC Support Portal](https://hpc.uni.lu/support){: .md-button .md-button--link }
 
+You can make code snippets, shell outputs, etc in your ticket much more readable by inserting a line with:
+```
+[code]<pre>
+```
+before the snippet, and another line with:
+```
+</pre>[/code]
+```
+after it. For a full list of formatting options, see [this ServiceNow article](https://community.servicenow.com/community?id=community_blog&sys_id=4d9ceae1dbd0dbc01dcaf3231f9619e1).
+
+
 !!! warning "Be as precise and complete as possible"
 	ULHPC team handle thousands of support requests per year.
     In order to ensure efficient timely resolution of issues, ensure that:

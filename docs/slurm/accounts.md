@@ -129,7 +129,6 @@ sacctmgr show association where users=$USER  format=account,User,share,Partition
     It is mandatory to have your login registered within at least one _association_ toward a meta-account (PI, project name) to be able to schedule jobs on the
 
 
-
 ## Impact on FairSharing and Job Accounting
 
 Every node in the above-mentioned tree hierarchy is associated with a weight defining its **Raw Share** in the [FairSharing](../slurm/fairsharing.md) mechanism in place.
@@ -158,10 +157,10 @@ In addition, your user account (ULHPC login) may be associated to other meta-acc
 To establish job accounting against these extra specific accounts, use:
 
 ```
-{sbatch|srun} -A <name> [...]
+{sbatch|srun} -A project_<name> [...]
 ```
 
-
+For more details, see [Project accounts](../accounts/projects.md).
 
 
 [^1]: restrictions applies and do not permit to reveal all information for other accounts than yours.

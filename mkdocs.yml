@@ -8,6 +8,7 @@ nav:
     - Get an Account:             'accounts/index.md'
     - Password Policy:            'policies/passwords.md'
     - Collaboration Accounts:     'accounts/collaboration_accounts.md'
+    - Projects Accounts:          'accounts/projects.md'
     - Identity Management Portal: 'connect/ipa.md'
     - Slurm Account Hierarchy:    'slurm/accounts.md'
   ##############
@@ -203,14 +204,14 @@ nav:
     #     - MKL :      'development/libraries/mkl.md'
     #     - NetCDF :   'development/libraries/netcdf.md'
     - Performance/Debugging:
-        - About:           'development/performance-debugging-tools/index.md'
+        # - About:           'development/performance-debugging-tools/index.md'
         - Arm Forge:       'development/performance-debugging-tools/arm-forge.md'
-        - GDB:             'development/performance-debugging-tools/gdb.md'
+        # - GDB:             'development/performance-debugging-tools/gdb.md'
         - Intel VTune:     'development/performance-debugging-tools/vtune.md'
         - Intel Advisor:   'development/performance-debugging-tools/advisor.md'
         - Intel Inspector: 'development/performance-debugging-tools/inspector.md'
         - Intel Trace Analyzer and Collector: 'development/performance-debugging-tools/itac.md'
-        - LIKWID:          'development/performance-debugging-tools/likwid.md'
+        # - LIKWID:          'development/performance-debugging-tools/likwid.md'
         - Nvidia Nsight:   'development/performance-debugging-tools/nsight.md'
         - Roofline Performance Model: 'development/performance-debugging-tools/roofline.md'
         - PAPI:            'development/performance-debugging-tools/papi.md'
@@ -224,12 +225,6 @@ nav:
   # - Applications:
   #   - Overview: 'software/index.md'
   #########################
-  - Help and Support:
-    # - FAQ: 'support/faq.md'
-    # - Guidelines: 'support/index.md'
-    - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
-    # - ULHPC Consulting Services: 'support/professional-services.md'
-  #########################
   - Services: 'services/index.md'
     # - Gitlab: 'services/gitlab.md'
     # - Gforge: 'service/gforge.md'
@@ -237,6 +232,12 @@ nav:
     # - EtherPad: 'services/etherpad.md'
     # - PrivateBin: 'services/privatebin.md'
     # - Databases: 'services/databases.md'
+  #########################
+  - Help and Support:
+    # - FAQ: 'support/faq.md'
+    - Overview: 'support/index.md'
+    - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
+    # - ULHPC Consulting Services: 'support/professional-services.md'
   #########################
   # - DevOps Management:
   #   - Collaborative Development:
@@ -267,9 +268,10 @@ nav:
   - Web Portals:
     - ULHPC Website: https://hpc.uni.lu
     - Technical Documentation: https://hpc-docs.uni.lu
-    # - OpenOn Demand: https://hpc.uni.lu
+    # - OpenOn Demand: https://hpc.uni.lu/ood
     # - Live Platform status: https://hpc.uni.lu/live-status/motd
     - ULHPC Tutorials: https://ulhpc-tutorials.readthedocs.io/
+    - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
   ##############
   # - Acronyms: 'help/acronyms.md'
 

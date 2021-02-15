@@ -8,17 +8,13 @@ In some HPC centers, you may be able to request _Collaboration Accounts_ designe
 * __Collaborative Job Management__
 
 !!! info
-    By default, we **DO NOT** provide Collaboration Accounts and encourage the usage of shared research projects enable members of the group to manipulate project data with the appropriate use of unix groups and file permissions.
+    By default, we **DO NOT** provide Collaboration Accounts and encourage the usage of shared research projects `<name>` stored on the [Global project directory](../filesystems/gpfs.md#global-project-directory-projecthomeworkprojects) to enable the group members to manipulate project data with the appropriate use of unix groups and file permissions.
 
-Note that as a user, your default group is `clusterusers`. To run a command under your username and the group `<group>` (Ex: `myproject`), you can use the [`sg` command](https://linux.die.net/man/1/sg) as follows:
-```bash
-# /!\ ADAPT <group> accordingly
-sg <group> -c "<command>"
-```
-For more details, see [Project Management documentation](accounts/projects.md).
+    For dedicated [job billing and accounting](../jobs/billing.md) purposes, you should also request the creation of a [project account](../slurm/accounts.md#default-vs-project-accounts) (this will be done for all accepted funded projects).
 
-We are aware nevertheless that a problem that often arises is that the files are owned by the collaborator who did the work and if that collaborator changes
-roles the default unix file permissions usually are such that the
+    For more details, see [Project Accounts documentation](../accounts/projects.md).
+
+We are aware nevertheless that a problem that often arises is that the files are owned by the collaborator who did the work and if that collaborator changes roles the default unix file permissions usually are such that the
 files cannot be managed (deleted) by other members of the collaboration and system administrators must be contacted.
 Similarly, for some use cases, Collaboration Accounts would enable members of the team to manipulate jobs submitted by other team members as necessary.
-Justified and argued use cases can be submitted to the HPC team to find the appropriate solution by [opening a ticket](../support/index.md).
+Justified and argued use cases can be submitted to the HPC team to find the appropriate solution by [opening a ticket on the HPC Helpdesk Portal](../support/index.md).
