@@ -179,7 +179,7 @@ Typical usage of the ULHPC supercomputers involves the reservation and allocatio
 * [Slurm overview](slurm/index.md)
 * [Convenient Slurm Commands](slurm/commands.md)
 * [Rich set of launcher scripts examples](slurm/launchers.md)
-* [Fairshare and Job Accounting](slurm/accounting.md)
+* [Fairshare and Job Accounting](slurm/fairsharing.md)
 
 ## Interactive Computing
 

@@ -6,19 +6,16 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 
 ### Acceptable Use Policy (AUP)
 
-There are a number of policies which apply to ULHPC users.
-
-!!! danger "Important"
-    All users of UL HPC resources and PIs must abide by the [UL HPC Acceptable Use Policy (AUP)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf).
-
-<p class="text-center">
-<button type="button" class="btn btn-light"><a href="https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf">UL HPC Acceptable Use Policy (AUP) [pdf]</a></button>
-</p>
+{%
+   include-markdown "../policies/aup.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
 
 Remember that **you are expected to acknowledge ULHPC in your publications**.
 
 ??? warning "ULHPC Platforms are meant for R&D!"
-    Note that the ULHPC facility is made for Research and Development and it is **NOT** a full production computing center -- for such needs, consider using the [national HPC center](https://lxp.lu).
+    Note that the ULHPC facility is made for Research and Development and it is **NOT** a full production computing center -- for such needs, consider using the [national HPC center](https://luxprovide.lu).
 
     In particular, we cannot make any guarantees of cluster availability or timely job completion even if we target a minimum compute node availability above 95% which is typically met - for instance, past KPI statistics in 2019 report a computing node availability above 97%.
 

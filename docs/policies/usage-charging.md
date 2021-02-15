@@ -16,14 +16,16 @@ Charge factors are set by ULHPC to accommodate for the relative power of the arc
 
 ## Computing Job Charges
 
-In details, a Job is characterized (and thus billed) according to the following elements:
+<!--job-charge-start-->
+
+A Job is characterized (and thus billed) according to the following elements:
 
 * $T_\text{exec}$: Execution time (in hours) also called _walltime_
 * $N_\text{Nodes}$: number of computing nodes, and **per node**:
     * $N_\text{cores}$: number of CPU cores allocated  per node
     * $Mem$: memory size allocated per node, in GB
     * $N_\text{gpus}$: number of GPU allocated per node
-* associated weighted factors $\alpha_{cpu},\alpha_{mem},\alpha_{GPU}$  defined as [`TRESBillingWeight`](https://slurm.schedmd.com/tres.html) in Slurm Trackable RESources accounting. They capture the  consumed resources other than just CPUs and are taken into account in fairshare factor. The following weight are formalized in the definition of the charging factor:
+* associated weighted factors $\alpha_{cpu},\alpha_{mem},\alpha_{GPU}$  defined as [`TRESBillingWeight`](https://slurm.schedmd.com/tres.html) in Slurm Trackable RESources (TRES) accounting. They capture the  consumed resources other than just CPUs and are taken into account in fairshare factor. The following weight are formalized in the definition of the charging factor:
     * $\alpha_{cpu}$: normalized relative perf. of CPU processor core (reference: skylake 73,6 GFlops/core)
     * $\alpha_{mem}$: inverse of the average available memory size per core
     * $\alpha_{GPU}$: weight per GPU accelerator
@@ -38,23 +40,27 @@ In details, a Job is characterized (and thus billed) according to the following 
 
     $$B_\text{rate}\times  T_\text{exec} = N_\text{Nodes}\times[\alpha_{cpu}\times N_\text{cores} + \alpha_{mem}\times Mem + \alpha_{gpu}\times N_\text{gpus}]\times T_\text{exec}$$
 
-You can quickly access the billing rate of a given job from its Job ID `<jobID>` with:
+You can quickly access the charging and billing rate of a given job from its Job ID `<jobID>` with the [`sbill`](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh#L477) utility:
 
 ```bash
-#  Billing rate for running job <jobID>
-scontrol show job <jobID>
-[...]
-TRES=cpu=<N_cores>,mem=<Mem>,node=<N_Nodes>,billing=<B_rate>,gres/gpu=<N_gpus>
-[...]
-# OR
-scontrol show job <jobID> | grep -i billing
+$ sbill -h
+Usage: sbill -j <jobid>
+Display job charging / billing summary
 
-# Billing rate for completed job <jobID>
-sacct -X --format=AllocTRES%50,Elapsed -j <jobID>
+$ sbill -j 2240777
+# sacct -X --format=AllocTRES%60,Elapsed -j 2240777
+                                                   AllocTRES    Elapsed
+       ----------------------------------------------------- ----------
+                         billing=448,cpu=224,mem=896G,node=8   11:35:51
+       Total usage: 5195.68 SU (indicative price: 155.87€ HT)
 ```
+
+_Note_: For a running job, you can also check the `TRES=[...],billing=<Brate>` output of `scontrol show job <jobID>`.
+
 
 ### Charge Weight Factors for 2021-2022
 
+<!--TRESBillingWeight-table-start-->
 
 | __Cluster__                      | __Node Type__ | __CPU arch__ | __Partition__ | __#Cores/node__ | $\mathbf{\alpha_{cpu}}$ | $\mathbf{\alpha_{mem}}$ | $\mathbf{\alpha_{GPU}}$ |
 |----------------------------------|---------------|--------------|---------------|-----------------|-------------------------|-------------------------|-------------------------|
@@ -63,6 +69,9 @@ sacct -X --format=AllocTRES%50,Elapsed -j <jobID>
 | [Iris](../systems/iris/index.md) | Regular       | `skylake`    | `batch`       | 28              | 1.0                     | $\frac{1}{4} = 0,25$    | 0                       |
 | [Iris](../systems/iris/index.md) | GPU           | `skylake`    | `gpu`         | 28              | 1.0                     | $\frac{1}{27}$          | 50                      |
 | [Iris](../systems/iris/index.md) | Large-Mem     | `skylake`    | `bigmem`      | 112             | 1.0                     | $\frac{1}{27}$          | 0                       |
+
+<!--TRESBillingWeight-table-end-->
+
 
 In particular, `interactive` jobs are always free-of-charge.
 
@@ -114,6 +123,8 @@ In particular, `interactive` jobs are always free-of-charge.
     * a total of $B_\text{rate}\times  T_\text{exec}=  224 \times 30\text{ days}\times 24\text{ hours} =224\times 720$ = **161280 SU**
     * if this job would be billed, it would lead to  $161280 \text{ SU}\times 0,03€/SU$ = _4838,4€ VAT excluded_
 
+<!--job-charge-end-->
+
 ### Data Storage Charging
 
 Each user has a personal [quota](../filesystems/quotas.md) in their home directory free of charge.
@@ -145,9 +156,11 @@ or on the command line when you submit your job, _e.g._, `sbatch -A myproject /p
 
 ## HPC Resource allocation for UL internal R&D and training
 
-ULHPC resources are free of charge for UL staff for their _internal_ work and training activities.
+ULHPC resources are **free of charge for UL staff for their _internal_ work and training activities**.
 Principal Investigators (PI) will nevertheless receive on a regular basis a usage report of their team activities on the UL HPC platform.
-The corresponding accumulated price will be provided even if this amount won't be charged back.
+The corresponding accumulated price will be provided even if this amount is purely indicative and won't be charged back.
+
+Any other activities will be reviewed with the rectorate and are a priori subjected to be billed.
 
 ## HPC Resource Allocations for Research Project
 

@@ -9,7 +9,7 @@ nav:
     - Password Policy:            'policies/passwords.md'
     - Collaboration Accounts:     'accounts/collaboration_accounts.md'
     - Identity Management Portal: 'connect/ipa.md'
-    - Slurm Account Hierarchy:    'accounts/hierarchy.md'
+    - Slurm Account Hierarchy:    'slurm/accounts.md'
   ##############
   - Data Center:
     - Centre de Calcul (CDC): 'data-center/index.md'
@@ -43,7 +43,7 @@ nav:
     - Live status: https://hpc.uni.lu/live-status/motd
   #################
   - Access/Connect:
-    - Access Servers:                'connect/access.md'
+    - Access/Login Servers:          'connect/access.md'
     - SSH:                           'connect/ssh.md'
     - Identity Management (IdM/IPA): 'connect/ipa.md'
     - Open On Demand Portal:         'connect/ood.md'
@@ -79,15 +79,48 @@ nav:
     - HPC Service Agreement for Externals:           'policies/usage-charging/#hpc-service-contract-for-external-and-private-partners'
     # - Expert-level service:                        'support/professional-services.md'
     # - Data Policy: 'policies/data.md
+  ###############
+  - Running Jobs:
+    - Slurm Overview: 'slurm/index.md'
+    - Convenient Slurm Commands: 'slurm/commands.md'
+    - Partition/Queues: 'slurm/partitions.md'
+    - Quality of Service (QOS): 'slurm/qos.md'
+    - Account Hierarchy: 'slurm/accounts.md'
+    - Job State and Reason Code: 'jobs/reason-codes.md'
+    - Fairshare and Job Accounting: 'slurm/fairsharing.md'
+    - Job Priority and Backfilling: 'jobs/priority.md'
+    - Job Accounting and Billing: 'jobs/billing.md'
+    # - Limits: 'jobs/limits.md'
+    - Interactive Job: 'jobs/interactive.md'
+    - Passive/Batch Job: 'jobs/submit.md'
+    - Long Jobs: 'jobs/long.md'
+    - Best-effort Jobs: 'jobs/best-effort.md'
+    - Launcher Scripts Examples: 'slurm/launchers.md'
+    # - Affinity: 'jobs/affinity.md'
+    # - (Multi-)GPU Jobs: 'jobs/gpu.md'
+    # - Memory Management: 'jobs/memory.md'
+    # - Best Practices: 'jobs/best-practices.md'
+    # - Reservations: 'jobs/reservations.md'
+    # - Monitoring: 'jobs/monitoring.md'
+    # - Licenses Management: 'slurm/licenses.md'
+    # - FAQs: 'jobs/faq.md'
+    # - Workflow Tools:
+    #   - Overview: 'jobs/workflow/index.md'
+    #   - GNU Parallel: 'jobs/workflow/gnuparallel.md'
+    #   - Parsl: 'jobs/workflow/parsl.md'
+    #   - Snakemake: 'jobs/workflow/snakemake.md'
+    #   - Spark Cluster: 'bigdata/spark.md'
+    # - Jupyter Notebook: 'services/jupyter.md'
+    # - Checkpoint/Restart: 'jobs/checkpoint-restart.md'
   ###########
   - Software:
     - Supported Software List:     'software/index.md'
-    - Software Set Versioning:     'software/swsets.md'
-    - Compiling/building software: 'software/build.md'
-    - Management:                  'software/management.md'
-    - Contributing:                'software/contributing.md'
-    - BigData Analytics:           'software/bigdata/index.md'
-    - Bioinformatics/Life Science: 'software/bio/index.md'
+    # - Software Set Versioning:     'software/swsets.md'
+    # - Compiling/building software: 'software/build.md'
+    # - Management:                  'software/management.md'
+    # - Contributing:                'software/contributing.md'
+    # - BigData Analytics:           'software/bigdata/index.md'
+    # - Bioinformatics/Life Science: 'software/bio/index.md'
     - Containers:                  'containers/index.md'
     - Computer Aided Eng. (CAE):
         - ANSYS : 'software/cae/ansys.md'
@@ -108,98 +141,67 @@ nav:
             - NAMD: 'software/computational-chemistry/molecular-dynamics/namd.md'
             - NWCHEM: 'software/computational-chemistry/molecular-dynamics/nwchem.md'
             - Helping Libraries: 'software/computational-chemistry/molecular-dynamics/helping-libraries.md'
-    - Deep and Machine Learning:   'software/ml/index.md'
-    - Earth Sciences:              'software/geo/index.md'
+    # - Deep and Machine Learning:   'software/ml/index.md'
+    # - Earth Sciences:              'software/geo/index.md'
     - Mathematics & Statistics:
           - MATLAB:    'software/maths/matlab.md'
           - MATHEMATICA:    'software/maths/mathematica.md'
           - Julia:    'software/maths/julia.md'
-
     - Optimizers:                  'software/optim/index.md'
-    - Performance/Debugging:       'development/performance-debugging-tools/index.md'
-    - Physics:                     'software/phys/index.md'
-    - Toolchains/Compilers:        'development/toolchains/index.md'
+    # - Performance/Debugging:       'development/performance-debugging-tools/index.md'
+    # - Physics:                     'software/phys/index.md'
+    # - Toolchains/Compilers:        'development/toolchains/index.md'
     - Visualization:
       - ParaView:                  'software/visu/paraview.md'
 
-  ###############
-  - Running Jobs:
-    - Slurm Overview: 'slurm/index.md'
-    - Convenient Slurm Commands: 'slurm/commands.md'
-    - Partition/Queues: 'slurm/partitions.md'
-    - Quality of Service (QOS) Policy: 'slurm/qos.md'
-    - Account Hierarchy: 'slurm/accounts.md'
-    - Job Priority and FairSharing: 'jobs/priority.md'
-    - Job Accounting and Billing: 'slurm/billing.md'
-    - Limits: 'jobs/limits.md'
-    - Interactive Job: 'jobs/interactive.md'
-    - Batch Job Submission: 'jobs/submit.md'
-    - Best-effort Jobs: 'jobs/best-effort.md'
-    - Launcherchec Scripts Examples: 'slurm/launchers.md'
-    - Affinity: 'jobs/affinity.md'
-    - (Multi-)GPU Jobs: 'jobs/gpu.md'
-    - Memory Management: 'jobs/memory.md'
-    - Best Practices: 'jobs/best-practices.md'
-    - Reservations: 'jobs/reservations.md'
-    - Monitoring: 'jobs/monitoring.md'
-    - Licenses Management: 'slurm/licenses.md'
-    - FAQs: 'jobs/faq.md'
-    - Workflow Tools:
-      - Overview: 'jobs/workflow/index.md'
-      - GNU Parallel: 'jobs/workflow/gnuparallel.md'
-      - Parsl: 'jobs/workflow/parsl.md'
-      - Snakemake: 'jobs/workflow/snakemake.md'
-      - Spark Cluster: 'bigdata/spark.md'
-    - Jupyter Notebook: 'services/jupyter.md'
-    - Checkpoint/Restart: 'jobs/checkpoint-restart.md'
   ##############
   - Development:
-    - Toolchains and Compilers:
-        - Overview: 'development/toolchains/index.md'
-        - FOSS:     'development/toolchains/foss.md'
-        - Intel:    'development/toolchains/intel.md'
-        - LLVM:     'development/compilers/llvm.md'
-        - PGI:      'development/compilers/pgi.md'
-    - Build Tools:
-        - Autoconf and Make: 'development/build-tools/autoconf-make.md'
-        - CMake:             'development/build-tools/cmake.md'
-        - EasyBuild:         'development/build-tools/easybuild.md'
-        - Spack:             'https://spack-tutorial.readthedocs.io/en/latest/'
-    - Programming Models:
-        - Overview: 'development/programming-models/index.md'
-        - MPI Stack:
-          - About:   'development/programming-models/mpi/index.md'
-          - OpenMPI: 'development/programming-models/mpi/openmpi.md'
-        - OpenMP:  'development/programming-models/openmp/openmp.md'
-        - CUDA:    'development/programming-models/cuda.md'
-        - Kokkos : 'development/programming-models/kokkos.md'
-        - UPC :    'development/programming-models/upc.md'
-    - Languages:
-        - Go:    'development/languages/go.md'
-        - Java:  'development/languages/java.md'
-        - Julia: 'development/languages/julia.md'
-        - Python:
-            - About:            'development/languages/python/index.md'
-            - Virtual Env.:     'development/languages/python/venv.md'
-            - Best Practices:   'development/languages/python/best-practices.md'
-            - Python on GPU:    'development/languages/python/python-on-gpu.md'
-            - Scaling Up:       'development/languages/python/scaling-up.md'
-            - Multiprocessing:  'development/languages/python/multiprocessing.md'
-            - mpi4py:           'development/languages/python/mpi4py.md'
-            - Notebook:         'development/languages/python/notebook.md'
-            - Python Profiling: 'development/languages/python/profiling.md'
-            - Python FAQ:       'development/languages/python/faq.md'
-        - R:    'development/languages/r.md'
-        - Ruby: 'development/languages/ruby.md'
-        - Rust: 'development/languages/rust.md'
-    - Libraries:
-        - About:     'development/libraries/index.md'
-        - Boost C++: 'development/libraries/boost.md'
-        - FFTW :     'development/libraries/fftw.md'
-        - HDF5 :     'development/libraries/hdf5.md'
-        - LAPACK :   'development/libraries/lapack.md'
-        - MKL :      'development/libraries/mkl.md'
-        - NetCDF :   'development/libraries/netcdf.md'
+    # - Toolchains and Compilers:
+    #     - Overview: 'development/toolchains/index.md'
+    #     - FOSS:     'development/toolchains/foss.md'
+    #     - Intel:    'development/toolchains/intel.md'
+    #     - LLVM:     'development/compilers/llvm.md'
+    #     - PGI:      'development/compilers/pgi.md'
+    # - Build Tools:
+    #     - Autoconf and Make: 'development/build-tools/autoconf-make.md'
+    #     - CMake:             'development/build-tools/cmake.md'
+    #     - EasyBuild:         'development/build-tools/easybuild.md'
+    #     - Spack:             'https://spack-tutorial.readthedocs.io/en/latest/'
+    # - Programming Models:
+    #     - Overview: 'development/programming-models/index.md'
+    #     - MPI Stack:
+    #       - About:   'development/programming-models/mpi/index.md'
+    #       - OpenMPI: 'development/programming-models/mpi/openmpi.md'
+    #     - OpenMP:  'development/programming-models/openmp/openmp.md'
+    #     - CUDA:    'development/programming-models/cuda.md'
+    #     - Kokkos : 'development/programming-models/kokkos.md'
+    #     - UPC :    'development/programming-models/upc.md'
+    # - Languages:
+    #     - Go:    'development/languages/go.md'
+    #     - Java:  'development/languages/java.md'
+    #     - Julia: 'development/languages/julia.md'
+    #     - Python:
+    #         - About:            'development/languages/python/index.md'
+    #         - Virtual Env.:     'development/languages/python/venv.md'
+    #         - Best Practices:   'development/languages/python/best-practices.md'
+    #         - Python on GPU:    'development/languages/python/python-on-gpu.md'
+    #         - Scaling Up:       'development/languages/python/scaling-up.md'
+    #         - Multiprocessing:  'development/languages/python/multiprocessing.md'
+    #         - mpi4py:           'development/languages/python/mpi4py.md'
+    #         - Notebook:         'development/languages/python/notebook.md'
+    #         - Python Profiling: 'development/languages/python/profiling.md'
+    #         - Python FAQ:       'development/languages/python/faq.md'
+    #     - R:    'development/languages/r.md'
+    #     - Ruby: 'development/languages/ruby.md'
+    #     - Rust: 'development/languages/rust.md'
+    # - Libraries:
+    #     - About:     'development/libraries/index.md'
+    #     - Boost C++: 'development/libraries/boost.md'
+    #     - FFTW :     'development/libraries/fftw.md'
+    #     - HDF5 :     'development/libraries/hdf5.md'
+    #     - LAPACK :   'development/libraries/lapack.md'
+    #     - MKL :      'development/libraries/mkl.md'
+    #     - NetCDF :   'development/libraries/netcdf.md'
     - Performance/Debugging:
         - About:           'development/performance-debugging-tools/index.md'
         - Arm Forge:       'development/performance-debugging-tools/arm-forge.md'
@@ -217,16 +219,16 @@ nav:
         - APS:             'development/performance-debugging-tools/aps.md'
     - Containers:
         - About:       'containers/index.md'
-        - Singularity: 'containers/singularity.md'
+        # - Singularity: 'containers/singularity.md'
   ###############
   # - Applications:
   #   - Overview: 'software/index.md'
   #########################
   - Help and Support:
-    - FAQ: 'support/faq.md'
-    - Guidelines: 'support/index.md'
+    # - FAQ: 'support/faq.md'
+    # - Guidelines: 'support/index.md'
     - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
-    - ULHPC Consulting Services: 'support/professional-services.md'
+    # - ULHPC Consulting Services: 'support/professional-services.md'
   #########################
   - Services: 'services/index.md'
     # - Gitlab: 'services/gitlab.md'
@@ -236,28 +238,28 @@ nav:
     # - PrivateBin: 'services/privatebin.md'
     # - Databases: 'services/databases.md'
   #########################
-  - DevOps Management:
-    - Collaborative Development:
-      - SSH: 'tools/ssh.md'
-      - DSH: 'tools/dsh.md'
-      - ClusterShell: 'tools/clustershell.md'
-      - GPG: 'tools/gpg.md'
-      - Git:
-          - Basics: 'git/index.md'
-          - Workflow: 'git/workflow.md'
-      - Password Management: 'tools/password-manager.md'
-    - Configuration Management:
-      - Puppet: 'infra/management/puppet.md'
-      - Ansible: 'infra/management/ansible.md'
-    - Compute Node Provisioning:
-      - FAI: 'infra/deployment/fai.md'
-      - Bright Computing: 'infra/deployment/bright.md'
-      - KickStart: 'infra/deployment/kickstart.md'
-    - Identity Management: 'infra/idm.md'
-    - Resource and Job Management Systems: 'infra/slurm.md'
-    - Monitoring: 'infra/monitoring.md'
-    - Virtualization:
-      - KVM: 'virtualization/kvm/index.md'
+  # - DevOps Management:
+  #   - Collaborative Development:
+  #     - SSH: 'tools/ssh.md'
+  #     - DSH: 'tools/dsh.md'
+  #     - ClusterShell: 'tools/clustershell.md'
+  #     - GPG: 'tools/gpg.md'
+  #     - Git:
+  #         - Basics: 'git/index.md'
+  #         - Workflow: 'git/workflow.md'
+  #     - Password Management: 'tools/password-manager.md'
+  #   - Configuration Management:
+  #     - Puppet: 'infra/management/puppet.md'
+  #     - Ansible: 'infra/management/ansible.md'
+  #   - Compute Node Provisioning:
+  #     - FAI: 'infra/deployment/fai.md'
+  #     - Bright Computing: 'infra/deployment/bright.md'
+  #     - KickStart: 'infra/deployment/kickstart.md'
+  #   - Identity Management: 'infra/idm.md'
+  #   - Resource and Job Management Systems: 'infra/slurm.md'
+  #   - Monitoring: 'infra/monitoring.md'
+  #   - Virtualization:
+  #     - KVM: 'virtualization/kvm/index.md'
   - Contributing:
     - Overview: 'contributing/index.md'
     - Semantic Versioning: 'contributing/versioning.md'
@@ -266,10 +268,10 @@ nav:
     - ULHPC Website: https://hpc.uni.lu
     - Technical Documentation: https://hpc-docs.uni.lu
     # - OpenOn Demand: https://hpc.uni.lu
-    - Live Platform status: https://hpc.uni.lu/live-status/motd
+    # - Live Platform status: https://hpc.uni.lu/live-status/motd
     - ULHPC Tutorials: https://ulhpc-tutorials.readthedocs.io/
   ##############
-  - Acronyms: 'help/acronyms.md'
+  # - Acronyms: 'help/acronyms.md'
 
 # tab Clusters:
 # - Organization: 'layout.md'
@@ -306,8 +308,9 @@ theme:
   palette:
     primary: blue
     accent:  light blue
-  # features:
-  #   - tabs
+  features:
+    - navigation.instant
+  # #   - tabs
 
 plugins:
   - search # necessary for search to work
