@@ -75,7 +75,7 @@ If you are an existing user unable to log in, you can send us an [email](#email-
 
 ## Email support
 
-You can contact us by mail to the [ULHPC Team Email](mailto:hpc-team@uni.lu) (**ONLY** if you cannot login/access the [HPC Support](https://hpc.uni.lu/support) helpdes portal : [`hpc-team@uni.lu`](mailto:hpc-team@uni.lu)
+You can contact us by mail to the [ULHPC Team Email](mailto:hpc-team 'at' uni.lu) (**ONLY** if you cannot login/access the [HPC Support](https://hpc.uni.lu/support) helpdesk portal : [`hpc-team@uni.lu`](mailto:hpc-team 'at' uni.lu)
 
 
-You may also ask the help of other ULHPC users using the HPC User community mailing list: (moderated): [`hpc-users@uni.lu`](mailto:hpc-users@uni.lu)
+You may also ask the help of other ULHPC users using the HPC User community mailing list: (moderated): [`hpc-users@uni.lu`](mailto:hpc-users 'at' uni.lu)

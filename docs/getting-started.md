@@ -139,7 +139,7 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 ## Connecting to ULHPC supercomputers
 
 !!! check "MFA is *strongly encouraged* for all ULHPC users"
-    It will be soon become mandatory- instructions will be provided soon
+    It will be soon become mandatory - detailed instructions will be provided soon.
 
 <!-- * [Multi-Factor Authentication (MFA)](connect/mfa.md)-->
 
@@ -150,12 +150,14 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 
 <!-- * [Live status](https://hpc.uni.lu/live-status/motd/) -->
 
-## Transferring Data
+## Data Management
 
-ULHPC provides several ways to transfer data both inside and outside
+* [Global Directory Structure](data/layout.md)
+* [Transferring data](data/transfer.md): Tools and recommendations to transfer data both inside and outside
 of ULHPC.
+* [Quotas and Purging](filesystems/quotas.md)
+* Understanding [Unix File Permissions](filesystems/unix-file-permissions.md)
 
-* [Transferring data](data/transfer.md): Tools and recommendations.
 
 ## User Environment
 
@@ -166,43 +168,56 @@ of ULHPC.
     * every file/directory pushed or created on the front-end is available on the computing nodes
     * every file/directory pushed or created on the computing nodes is available on the front-end
 
-* [Understanding and customizing your environment](environment/index.md)
-* [ULHPC Modules Environment](environment/modules.md)
+[:fontawesome-solid-sign-in-alt: ULHPC User Environment](environment/index.md){: .md-button .md-button--link }
 
-## ULHPC User Software Management
+<!-- * [Understanding and customizing your environment](environment/index.md) -->
+<!-- * [ULHPC Modules Environment](environment/modules.md) -->
+<!-- * [ULHPC Easybuild Configuration](environment/easybuild.md) -->
+
+<!-- ### User Software Management -->
+
+## Computing Software Environment
 
 The ULHPC Team supplies a large variety of HPC utilities, scientific applications and programming libraries to its user community.
-The user software environment is generated using [Easybuild](https://easybuild.readthedocs.io) (EB) and is made available as environment modules through [LMod](https://lmod.readthedocs.io/). We have developped a specific tool named [RESIF](software/resif.md)
+The user software environment is generated using [Easybuild](https://easybuild.readthedocs.io) (EB) and is made available as environment modules through [LMod](https://lmod.readthedocs.io/). <!-- We have developped a specific tool named [RESIF](software/resif.md) -->
 
+* [ULHPC Modules Environment](environment/modules.md)
 * [ULHPC Supported Software List](./software/index.md).
     - Available [modules](./environment/modules.md) are reachable **from the compute nodes only** via `module avail`
-* [RESIF Architecture-at-a-glance](software/resif.md)
-* [Software Sets, compilers and toolchains at ULHPC](software/swsets.md)
-* [Compiling/building software](development/software/index.md)
-    - [Building missing software with Easybuild](development/software/easybuild.md)
+* [ULHPC Easybuild Configuration](environment/easybuild.md)
+
+<!-- * [RESIF Architecture-at-a-glance](software/resif.md) -->
+<!-- * [Software Sets, compilers and toolchains at ULHPC](software/swsets.md) -->
+<!-- * [Compiling/building software](development/software/index.md) -->
+<!--     - [Building missing software with Easybuild](development/software/easybuild.md) -->
 * [Running Containers](containers/index.md)
-* [Contributing to the ULHPC User Software](development/software/contributing.md)
+<!-- * [Contributing to the ULHPC User Software](development/software/contributing.md) -->
 
 !!! question "Software building support"
-	If you need help to build / develop software, kindly [submit a request](https://hpc-tracker.uni.lu) and
-	we will evaluate the cost and effort required.
+	If you need help to build / develop software, we encourage you to first try using [Easybuild](environment/easybuild.md) as a recipe probably exist for the software you consider.
+    You can then open a ticket on [HPC Help Desk Portal](support/index.md#help-desk) and we will evaluate the cost and effort required.
+    You may also ask the help of other ULHPC users using the HPC User community mailing list: (moderated): [`hpc-users@uni.lu](mailto:hpc-users 'at' uni.lu).
 
 ## Running Jobs
 
 Typical usage of the ULHPC supercomputers involves the reservation and allocation of computing resources for the execution of jobs (submitted via _launcher scripts_) and scheduled on the platform thanks to a Resource and Job Management Systems (RJMS) - [Slurm](https://slurm.schedmd.com/documentation.html) in our case.
 
-* [Slurm overview](slurm/index.md)
-* [Convenient Slurm Commands](slurm/commands.md)
+[:fontawesome-solid-sign-in-alt: Slurm on ULHPC clusters](slurm/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-sign-in-alt: Convenient Slurm Commands](slurm/commands.md){: .md-button .md-button--link }
+
 * [Rich set of launcher scripts examples](slurm/launchers.md)
-* [Fairshare and Job Accounting](slurm/fairsharing.md)
+* [Fairshare](slurm/fairsharing.md)
+* [Job Priority and Backfilling](jobs/priority.md)
+* [Job Accounting and Billing](jobs/billing.md)
+
 
 ## Interactive Computing
 
 ULHPC also supports interactive computing.
 
-* [Interactive jobs](slurm/interactive.md)
-* [Jupyter Notebook](services/jupyter.md)
-* [Interactive Big Data Analytics with Spark](bigdata/spark.md)
+* [Interactive jobs](jobs/interactive.md)
+<!-- * [Jupyter Notebook](services/jupyter.md) -->
+<!-- * [Interactive Big Data Analytics with Spark](bigdata/spark.md) -->
 
 
 ## Getting Help
@@ -236,5 +251,10 @@ We have always maintained an extensive [documentation](https://hpc-docs.uni.lu) 
 
 ### Consulting
 
-Expert-level service and support can be provided by the University HPC staff in the form of pools of 4-hour specialized help, at 480€ VAT excluded (equivalent to 120€ per hour expert rate EA).
-Service and support activities include but are not limited to HPC training on facilities utilization, software installation, HPC workflow development. For more details: see [ULHPC Consulting Services](support/professional-services.md)
+{%
+   include-markdown "support/professional-services.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
+
+For more details: see [ULHPC Consulting Services](support/professional-services.md)

@@ -78,7 +78,7 @@ nav:
     - Usage Charging Policy:                         'policies/usage-charging.md'
     - HPC Resource Allocations for Research Project: 'policies/usage-charging/#hpc-resource-allocations-for-research-project'
     - HPC Service Agreement for Externals:           'policies/usage-charging/#hpc-service-contract-for-external-and-private-partners'
-    # - Expert-level service:                        'support/professional-services.md'
+    - Expert-level HPC services:                     'support/professional-services.md'
     # - Data Policy: 'policies/data.md
   ###############
   - Running Jobs:
@@ -237,7 +237,7 @@ nav:
     # - FAQ: 'support/faq.md'
     - Overview: 'support/index.md'
     - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
-    # - ULHPC Consulting Services: 'support/professional-services.md'
+    - ULHPC Consulting Services: 'support/professional-services.md'
   #########################
   # - DevOps Management:
   #   - Collaborative Development:
