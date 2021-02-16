@@ -1,6 +1,6 @@
 ####################################################################################
 # Makefile (configuration file for GNU make - see http://www.gnu.org/software/make/)
-# Time-stamp: <Sun 2020-10-11 22:46 svarrette>
+# Time-stamp: <Tue 2021-02-16 13:27 svarrette>
 #     __  __       _         __ _ _
 #    |  \/  | __ _| | _____ / _(_) | ___
 #    | |\/| |/ _` | |/ / _ \ |_| | |/ _ \
@@ -50,6 +50,10 @@ GIT_DIRTY    = $(shell git diff --shortstat 2> /dev/null | tail -n1 )
 					 'https://github.com/hpcugent/easybuild-wiki.git'
 GITSTATS     = ./.submodules/gitstats/gitstats
 GITSTATS_DIR = gitstats
+# Below variable is used to sanitize stats by defining the (lowercase) strings to be
+# substituted to aggregate stats from the same author (eventually using different mails)
+# Ex: GITSTATS_SUBSTITUTE_PATTERN_CMD="sed -e 's/<old1>/<new1>/' -e 's/<old2>/<new2>'"
+GITSTATS_SUBSTITUTE_PATTERN_CMD=sed -e '\#'
 
 # Branches to update on 'make up'
 GIT_BRANCHES_TO_UPDATE = $(GITFLOW_BR_DEVELOP) $(GITFLOW_BR_MASTER)
@@ -97,9 +101,10 @@ GIT_CLONE_TARGETS =
 
 ################### Custom Makefile  ###################
 # Local configuration - Kept for compatibity reason
-LOCAL_MAKEFILE = .Makefile.local
+LOCAL_MAKEFILE  = .Makefile.local
 
 # Makefile custom hooks
+MAKEFILE_CUSTOM = .Makefile.custom
 MAKEFILE_BEFORE = .Makefile.before
 MAKEFILE_AFTER  = .Makefile.after
 
@@ -113,6 +118,9 @@ include $(LOCAL_MAKEFILE)
 endif
 ifneq (,$(wildcard $(MAKEFILE_BEFORE)))
 include $(MAKEFILE_BEFORE)
+endif
+ifneq (,$(wildcard $(MAKEFILE_CUSTOM)))
+include $(MAKEFILE_CUSTOM)
 endif
 
 ### Below default could be set in .Makefile.{local,before}
@@ -177,9 +185,9 @@ setup: $(SETUP_TARGETS)
 		echo "=> setup git-lfs"; \
 		$(MAKE) setup-git-lfs; \
 	fi
-	# @if [ -f .envrc ]; then \
-	# 	$(MAKE) setup-direnv; \
-	# fi
+	@if [ -f .envrc ]; then \
+		$(MAKE) setup-direnv; \
+	fi
 
 setup-git:
 	-git fetch origin
@@ -443,17 +451,14 @@ clean-gitstats:
 # Perform various git statistics
 stats:
 	@if [ ! -d $(GITSTATS_DIR) ]; then mkdir -p $(GITSTATS_DIR); fi
-	$(GITSTATS) . $(GITSTATS_DIR)/
-
+	@if [ -x "$(GITSTATS)" ]; then $(GITSTATS) . $(GITSTATS_DIR)/; fi
+	@echo "=> Git commits (based on 'git log --pretty=\"%al\")"
+	@git log --pretty="%al" | tr '[A-Z]' '[a-z]' | $(GITSTATS_SUBSTITUTE_PATTERN_CMD) | tr '.' ' ' | awk '{print toupper(substr($$0,1,1))substr($$1,2),toupper(substr($$2,1,1))substr($$2,2)}' | sort | uniq -c | sort -r
+#        left part mail     force lowercase      replace .    capitalize $1 $1 (doubling $)
 doc:
 	@if [ -n "`which mkdocs`" ]; then \
 		mkdocs serve; \
 	fi
-
-# # force recompilation
-# force :
-# 	@touch $(MAIN_TEX)
-# 	@$(MAKE)
 
 
 # print help message
@@ -466,6 +471,7 @@ help :
 	@echo '|               git-flow at a given level (major, minor or patch bump) |'
 	@echo '| make release: Finalize the release using git-flow                    |'
 	@echo '+----------------------------------------------------------------------+'
+
 
 ifneq (,$(wildcard $(MAKEFILE_AFTER)))
 include $(MAKEFILE_AFTER)
