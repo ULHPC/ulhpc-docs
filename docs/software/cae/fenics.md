@@ -29,7 +29,7 @@ $ cds
 Do you accept the license terms? [yes|no]
 yes
 Anaconda3 will now be installed into this location:
-/home/users/user_name/anaconda3
+/home/users/<login>/anaconda3
 
   - Press ENTER to confirm the location
   - Press CTRL-C to abort the installation
@@ -77,7 +77,8 @@ $ python3 Poisson.py
 #SBATCH -J FEniCS                                                                                        
 #SBATCH -N 1
 ###SBATCH -A <project name>
-#SBATCH --ntasks-per-node=1                                                                                          
+###SBATCH --ntasks-per-node=1
+#SBATCH -c 1
 #SBATCH --time=00:05:00                                                                      
 #SBATCH -p batch
 
