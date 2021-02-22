@@ -13,7 +13,7 @@ The following steps provides information about how to installed
 on your local path. 
 ```bash
 # From your local computer
-$ ssh -X iris-cluster
+$ ssh -X iris-cluster    # OR ssh -Y iris-cluster on Mac
 
 # Reserve the node for interactive computation with grahics view (plots)
 $ si --x11 --ntasks-per-node 1 -c 4
