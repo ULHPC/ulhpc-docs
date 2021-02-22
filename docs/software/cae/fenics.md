@@ -56,7 +56,8 @@ has been installed.
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation with grahics view (plots)
-$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+$ si --ntasks-per-node 1 -c 4 --x11
+# srun -p interactive --qos debug -C batch --x11 --ntasks-per-node 1 -c 4 --pty bash -i
 
 # Activate anaconda  
 $ source /scratch/users/user_name/Anaconda3/bin/activate
