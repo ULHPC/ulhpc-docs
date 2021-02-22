@@ -87,7 +87,7 @@ echo "== Node list: ${SLURM_NODELIST}"
 echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
 
 # activate the anaconda source 
-source /scratch/users/user_name/Anaconda3/bin/activate
+source ${SCRATCH}/Anaconda3/bin/activate
 
 # activate the fenicsproject from anaconda 
 conda activate fenicsproject
