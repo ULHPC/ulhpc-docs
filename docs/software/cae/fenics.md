@@ -16,7 +16,11 @@ on your local path.
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation with grahics view (plots)
-$ si
+$ si --x11 --ntasks-per-node 1 -c 4
+# srun -p interactive --qos debug -C batch --x11 --ntasks-per-node 1 -c 4 --pty bash -i
+
+# Go to scratch directory 
+$ cds
 
 /scratch/users/user_name $ Anaconda3-2020.07-Linux-x86_64.sh
 /scratch/users/user_name $ chmod +x Anaconda3-2020.07-Linux-x86_64.sh
