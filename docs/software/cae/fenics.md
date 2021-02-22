@@ -36,7 +36,7 @@ Anaconda3 will now be installed into this location:
   - Or specify a different location below
 
 # You can choose your path where you want to install it
-[/home/users/user_name/anaconda3] >>> /scratch/users/<login>/Anaconda3
+[/home/users/<login>/anaconda3] >>> /scratch/users/<login>/Anaconda3
 
 # To activate the anaconda 
 /scratch/users/<login> $ source /scratch/users/<login>/Anaconda3/bin/activate
