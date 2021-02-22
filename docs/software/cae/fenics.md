@@ -55,7 +55,7 @@ has been installed.
 ### Interactive mode
 ```bash
 # From your local computer
-$ ssh -X iris-cluster
+$ ssh -X iris-cluster      # or ssh -Y iris-cluster on Mac
 
 # Reserve the node for interactive computation with grahics view (plots)
 $ si --ntasks-per-node 1 -c 4 --x11
