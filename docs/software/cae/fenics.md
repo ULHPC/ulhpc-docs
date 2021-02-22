@@ -62,7 +62,7 @@ $ si --ntasks-per-node 1 -c 4 --x11
 # srun -p interactive --qos debug -C batch --x11 --ntasks-per-node 1 -c 4 --pty bash -i
 
 # Activate anaconda  
-$ source /scratch/users/user_name/Anaconda3/bin/activate
+$ source /${SCRATCH}/Anaconda3/bin/activate
 
 # activate the fenicsproject
 $ conda activate fenicsproject
