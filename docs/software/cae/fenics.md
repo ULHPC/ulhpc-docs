@@ -16,7 +16,6 @@ on your local path.
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation with grahics view (plots)
-$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
 $ si
 
 /scratch/users/user_name $ Anaconda3-2020.07-Linux-x86_64.sh
