@@ -124,6 +124,7 @@ nav:
     # - Bioinformatics/Life Science: 'software/bio/index.md'
     - Containers:                  'containers/index.md'
     - Computer Aided Eng. (CAE):
+        - FEniCS : 'software/cae/fenics.md'
         - ANSYS : 'software/cae/ansys.md'
         - OpenFOAM : 'software/cae/openfoam.md'
         - Abaqus : 'software/cae/abaqus.md'
