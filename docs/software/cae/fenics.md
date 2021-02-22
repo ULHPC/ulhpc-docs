@@ -24,7 +24,7 @@ $ cds
 
 /scratch/users/<login> $ Anaconda3-2020.07-Linux-x86_64.sh
 /scratch/users/<login> $ chmod +x Anaconda3-2020.07-Linux-x86_64.sh
-/scratch/users/user_name $ ./Anaconda3-2020.07-Linux-x86_64.sh
+/scratch/users/<login> $ ./Anaconda3-2020.07-Linux-x86_64.sh
 
 Do you accept the license terms? [yes|no]
 yes
