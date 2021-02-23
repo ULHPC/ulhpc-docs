@@ -82,7 +82,7 @@ Windows and OS X users may wish to transfer files from their systems to the clus
 * [FileZilla Client](https://filezilla-project.org) (Windows, OS X)
 * [Cyberduck](http://cyberduck.ch/) (Windows, OS X)
 
-These applications will need to be configured to connect to the frontends with the same parameters as [discussed on the SSH access page](/connect/ssh.md).
+These applications will need to be configured to connect to the frontends with the same parameters as [discussed on the SSH access page](../connect/ssh.md).
 
 
 

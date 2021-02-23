@@ -13,7 +13,7 @@
     You thus need to ensure you always **write** data in your project directory using the `<name>` group (instead of yoru default one.).
     This can be achieved by ensuring the [setgid bit](https://en.wikipedia.org/wiki/Setuid) is set on all folders in the project directories: `chmod g+s [...]`
 
-    When using `rsync` to transfer file toward the project directory `/work/projects/<name>` as destination, be aware that rsync will **not** use the correct permissions when copying files into your project directory. As indicated in the [Data transfer](data/transfer.md) section, you also need to:
+    When using `rsync` to transfer file toward the project directory `/work/projects/<name>` as destination, be aware that rsync will **not** use the correct permissions when copying files into your project directory. As indicated in the [Data transfer](../data/transfer.md) section, you also need to:
 
     * give new files the destination-default permissions with `--no-p` (`--no-perms`), and
     * use the default group `<name>` of the destination dir with `--no-g` (`--no-group`)

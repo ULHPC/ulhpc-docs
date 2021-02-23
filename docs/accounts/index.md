@@ -95,7 +95,7 @@ Please save any evidence of the break-in and include as many details as possible
 --------------------------------------
 ## How to Get an New Project account?
 
-Projects are defined for accounting purposes and are associated to a set of user accounts allowed by the project PI to access its data and submit jobs on behalf of the project account. See [Slurm Account Hierarchy](./slurm/accounts.md).
+Projects are defined for accounting purposes and are associated to a set of user accounts allowed by the project PI to access its data and submit jobs on behalf of the project account. See [Slurm Account Hierarchy](../slurm/accounts.md).
 
 You can request (or be automatically added) to project accounts for accounting purposes.
 For more information, please see the [Project Account documentation](../accounts/projects.md)

@@ -9,7 +9,7 @@ On access nodes, typical user tasks include
 
 * Transferring and managing files
 * Editing files
-* Submitting [jobs](../jobs/submi.md)
+* Submitting [jobs](../jobs/submit.md)
 
 
 !!! warning "Appropriate Use"

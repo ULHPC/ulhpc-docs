@@ -16,7 +16,7 @@ The ULHPC Team is committed to excellence and support of the University research
 Gitlab is an open source software to collaborate on code, very similar to [Github](https://github..com).
 You can manage git repositories with fine grained access controls that keep your code secure and perform code reviews and enhance collaboration with merge requests. Each project can also have an issue tracker and a wiki.
 
-The GitLab service is available for UL HPC platform users with [their ULHPC account](accounts/index.md) and to their external collaborators that have a GitHub account.
+The GitLab service is available for UL HPC platform users with [their ULHPC account](../accounts/index.md) and to their external collaborators that have a GitHub account.
 
 !!! warning "[Github] External accounts access are BLOCKED by default"
     * By default, external (github) accounts are **denied** and **blocked** on the Gitlab service.

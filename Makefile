@@ -175,7 +175,7 @@ archive: clean
 	tar -C ../ -cvzf ../$(SUPER_DIR)-$(VERSION).tar.gz --exclude ".svn" --exclude ".git"  --exclude "*~" --exclude ".DS_Store" $(SUPER_DIR)/
 
 ############################### Git Bootstrapping rules ################################
-.PHONE: setup setup-git setup-gitflow setup-xdg setup-git-lfs
+.PHONY: setup setup-git setup-gitflow setup-xdg setup-git-lfs
 setup: $(SETUP_TARGETS)
 	@if [ -d "$(GIT_ROOTDIR)/$(SRC_HOOKSDIR)" ]; then \
 		echo "=> setup local git hooks"; \

@@ -5,7 +5,7 @@ This tool is configured to collect accounting information for every job and job 
 
 
 ??? info "ULHPC account (login) vs. Slurm [meta-]account"
-    - Your [ULHPC account](index.md) defines the UNIX **user** you can use to connect to the facility and make you known to our systems. They are managed by [IPA](ipa.md) and define your `login`.
+    - Your [ULHPC account](index.md) defines the UNIX **user** you can use to connect to the facility and make you known to our systems. They are managed by [IPA](../connect/ipa.md) and define your `login`.
 
     - _Slurm accounts_, refered to as **meta-account** in the sequel, are more loosely defined [in Slurm](https://slurm.schedmd.com/accounting.html), and should be seen as something similar to a UNIX group: it may contain other (set of) slurm account(s), multiple users, or just a single user. **A user may belong to multiple slurm accounts, but MUST have a DefaultAccount**, which is set to your line manager or principal investigator meta-account.
 
