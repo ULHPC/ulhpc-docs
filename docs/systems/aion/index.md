@@ -76,7 +76,7 @@ The cooling area in the rack is composed of:
 
 ## Rack Cabinets
 
-The Aion cluster (management compute and interconnect) is installed across the two adjacent server rooms in the premises of the [_Centre de Calcul_](../../data-center-index.md) (CDC), in the CDC-S02-005 server room.
+The Aion cluster (management compute and interconnect) is installed across the two adjacent server rooms in the premises of the [_Centre de Calcul_](../../data-center/index.md) (CDC), in the CDC-S02-005 server room.
 
 | Server Room | Rack ID | Purpose    | Type    | Description                      |
 |-------------|---------|------------|---------|----------------------------------|
