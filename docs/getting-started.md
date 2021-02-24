@@ -2,7 +2,7 @@
 
 ![](../images/logo_ULHPC.png){: style="width:150px; float: right;"}
 
-Welcome to the [High Performance Computing (HPC)](https//hpc.uni.lu) Facility of the University of Luxembourg (ULHPC)!
+Welcome to the [High Performance Computing (HPC)](https://hpc.uni.lu) Facility of the University of Luxembourg (ULHPC)!
 
 !!! success ""
 	This page will guide you through the basics of using ULHPC's
