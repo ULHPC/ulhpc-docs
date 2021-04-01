@@ -34,7 +34,7 @@ or for Gurobi
 !!! warning
     Modules are not allowed on the access servers. To test interactively Singularity, rememerber to ask for an interactive job first.
     ```bash
-    srun -p interactive --pty bash     # OR, use the helper script: si
+    salloc -p interactive     # OR, use the helper script: si
     ```
 
 

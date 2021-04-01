@@ -104,11 +104,11 @@ Iris includes 24 [Dell PowerEdge C4140](https://i.dell.com/sites/doccontent/shar
 
     ```bash
     # Interactive job on 1 GPU nodes with 1 GPU
-    srun -G 1 -p gpu --pty bash -i
+    si-gpu -G 1
     nvidia-smi      # Check allocated GPU
 
     # Interactive job with 4 GPUs on the same node, one task per gpu, 7 cores per task
-    srun -p gpu -N 1 -G 4 --ntasks-per-node 4 --ntasks-per-socket 2 -c 7 --pty bash
+    si-gpu -N 1 -G 4 --ntasks-per-node 4 --ntasks-per-socket 2 -c 7
 
     # Job submission on 2 nodes, 4 GPUs/node and 4 tasks/node:
     sbatch -p gpu -N 2 -G 4 --ntasks-per-node 4 --ntasks-per-socket 2 -c 7 launcher.sh

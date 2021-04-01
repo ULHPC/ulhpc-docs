@@ -17,7 +17,7 @@ To open an MATLAB in the interactive mode, please follow the following steps:
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation
-$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --pty bash -i # OR si [...]
+$ salloc -p interactive --time=00:30:00 --ntasks 1 -c 4 # OR si [...]
 
 # Load the module Julia and needed environment
 $ module purge

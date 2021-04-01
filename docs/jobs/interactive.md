@@ -14,24 +14,24 @@ You can access the different node classes available using the `-C <class>` flag 
         ```bash
         ### Quick interative job for the default time
         $ si
-        # srun -p interactive --qos debug -C batch  --pty bash -i
+        # salloc -p interactive --qos debug -C batch
 
         ### Explicitly ask for a skylake node
         $ si -C skylake
-        # srun -p interactive --qos debug -C batch -C skylake --pty bash -i
+        # salloc -p interactive --qos debug -C batch -C skylake
 
         ### Use 1 full node for 28 tasks
         $ si --ntasks-per-node 28
-        # srun -p interactive --qos debug -C batch --ntasks-per-node 28 --pty bash -i
+        # salloc -p interactive --qos debug -C batch --ntasks-per-node 28
 
         ### interactive job for 2 hours
         $ si -t 02:00:00
-        # srun -p interactive --qos debug -C batch -t 02:00:00 --pty bash -i
+        # salloc -p interactive --qos debug -C batch -t 02:00:00
 
         ### interactive job on 2 nodes, 1 multithreaded tasks per node
         $ si -N 2 --ntasks-per-node 1 -c 4
         si -N 2 --ntasks-per-node 1 -c 4
-        # srun -p interactive --qos debug -C batch -N 2 --ntasks-per-node 1 -c 4 --pty bash -i
+        # salloc -p interactive --qos debug -C batch -N 2 --ntasks-per-node 1 -c 4
         ```
 
 === "GPU node"
@@ -40,7 +40,7 @@ You can access the different node classes available using the `-C <class>` flag 
         ### Quick interative job for the default time
         $ si-gpu
         # /!\ WARNING: append -G 1 to really reserve a GPU
-        # srun -p interactive --qos debug -C gpu  -G 1 --pty bash -i
+        # salloc -p interactive --qos debug -C gpu -G 1
 
         ### (Better) Allocate 1/4 of available CPU cores per GPU to manage
         $ si-gpu -G 1 -c 7
@@ -53,24 +53,24 @@ You can access the different node classes available using the `-C <class>` flag 
         ```bash
         ### Quick interative job for the default time
         $ si-bigmem
-        # srun -p interactive --qos debug -C bigmem  --pty bash -i
+        # salloc -p interactive --qos debug -C bigmem
 
         ### interactive job with 1 multithreaded task per socket available (4 in total)
         $ si-bigmem --ntasks-per-node 4 --ntasks-per-socket 1 -c 28
-        # srun -p interactive --qos debug -C bigmem --ntasks-per-node 4 --ntasks-per-socket 1 -c 4 --pty bash -i
+        # salloc -p interactive --qos debug -C bigmem --ntasks-per-node 4 --ntasks-per-socket 1 -c 4
 
         ### interactive job for 1 task but 512G of memory
         $ si-bigmem --mem 512G
-        # srun -p interactive --qos debug -C bigmem --mem 512G --pty bash -i
+        # salloc -p interactive --qos debug -C bigmem --mem 512G
         ```
 
 If you prefer to rely on the regular [`srun`](https://slurm.schedmd.com/srun.html), the below table proposes the equivalent commands run by the helper scripts `si*`:
 
 | Node Type                    | Slurm command                                                                         |
 |:----------------------------:|---------------------------------------------------------------------------------------|
-| regular<br/>`si [...]`       | `srun -p interactive --qos debug -C batch [...] --pty bash -i`<br/>`srun -p interactive --qos debug -C batch,broadwell [...] --pty bash -i`<br/>`srun -p interactive --qos debug -C batch,skylake [...] --pty bash -i` |
-| gpu<br/>`si-gpu [...]`       | `srun -p interactive --qos debug -C gpu    [-C volta[32]] -G 1 [...] --pty bash -i`      |
-| bigmem<br/>`si-bigmem [...]` | `srun -p interactive --qos debug -C bigmem [...] --pty bash -i`                          |
+| regular<br/>`si [...]`       | `salloc -p interactive --qos debug -C batch [...]`<br/>`salloc -p interactive --qos debug -C batch,broadwell [...]`<br/>`salloc -p interactive --qos debug -C batch,skylake [...]` |
+| gpu<br/>`si-gpu [...]`       | `salloc -p interactive --qos debug -C gpu    [-C volta[32]] -G 1 [...]`      |
+| bigmem<br/>`si-bigmem [...]` | `salloc -p interactive --qos debug -C bigmem [...]`                          |
 
 
 !!! important "Impact of Interactive jobs implementation over a _floating_ partition"

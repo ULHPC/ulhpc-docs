@@ -32,7 +32,7 @@ To open an Abaqus in the interactive mode, please follow the following steps:
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation
-$ srun -p batch --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+$ salloc -p batch --time=00:30:00 --ntasks 1 -c 4 --x11
 
 # Load the required version of Abaqus and needed environment
 $ module purge
