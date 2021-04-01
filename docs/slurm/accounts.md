@@ -141,7 +141,7 @@ Different rules are applied to define these weights/shares depending on the leve
 * __L4__ (ULHPC/IPA login): efficiency score, giving incentives for a more efficient usage of the platform.
 
 <!--share-rule-per-level-end-->
-More details are given [on this page](../jobs/fairsharing.md).
+More details are given [on this page](../slurm/fairsharing.md).
 
 
 ## Default vs. Project accounts
