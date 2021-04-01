@@ -10,10 +10,8 @@ and formatted text in an executable notebook.
 To check available versions of MATLAB at ULHPC type `module spider matlab`.
 The following list shows the available versions of MATLAB in ULHPC. 
 ```bash
-base/MATLAB/2017a
-base/MATLAB/2018a
-base/MATLAB/2019a
-base/MATLAB/2019b
+math/MATLAB/2019b
+math/MATLAB/2020a
 ```
 
 ## Interactive mode
@@ -29,7 +27,7 @@ $ salloc -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11  # OR si --x11 [..
 # Load the module MATLAB and needed environment
 $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
-$ module load base/MATLAB/2019a
+$ module load math/MATLAB/2020a
 
 $ matlab &
 ```
@@ -49,7 +47,7 @@ $ matlab &
 # Load the module Julia and needed environment
 module purge
 module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
-module load base/MATLAB/2019a
+module load math/MATLAB/2020a
 
 srun matlab -nodisplay -r matlab_script_serial_file -logfile output.out
 
@@ -61,7 +59,7 @@ rm -rf /home/users/ur_user_name/.matlab
 rm -rf /home/users/ur_user_name/java*
 ```
 
-!!! exmaple
+!!! example
 
     ```bash
     # example for MATLAB ParFor (matlab_script_serial_file.m)
@@ -89,7 +87,7 @@ rm -rf /home/users/ur_user_name/java*
 # Load the module Julia and needed environment
 module purge
 module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
-module load base/MATLAB/2019b
+module load math/MATLAB/2020a
 
 srun -c $SLURM_CPUS_PER_TASK matlab -nodisplay -r matlab_script_parallel_file -logfile output.out
 
@@ -97,7 +95,7 @@ rm -rf /home/users/ur_user_name/.matlab
 rm -rf /home/users/ur_user_name/java*
 ```
 
-!!! exmaple
+!!! example
 
     ```bash
     # example for MATLAB ParFor (matlab_script_parallel_file.m)
