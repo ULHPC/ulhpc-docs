@@ -61,7 +61,7 @@ sjoin <jobid> [-w <node>]    # Use <tab> to automatically complete <jobid> among
      2171206  [...]
     # Connect to your running job, identified by its Job ID
     (access)$> sjoin 2171206     # /!\ ADAPT <jobid> accordingly, use <TAB> to have it autocatically completed
-    # Equivalent of: srun --jobid 2171206  --gres=gpu:0  --pty bash -i
+    # Equivalent of: srun --jobid 2171206 --gres=gpu:0 --pty bash -i
     (node)$> htop # view of all processes
     #               F5: tree view
     #               u <name>: filter by process of <name>

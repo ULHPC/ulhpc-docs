@@ -26,7 +26,7 @@ To use Singularity, you need to load the corresponding [Lmod](https://lmod.readt
 !!! warning
     Modules are not allowed on the access servers. To test interactively Singularity, rememerber to ask for an interactive job first.
     ```shell
-    srun -p interactive --pty bash
+    salloc -p interactive --pty bash
     ```
 
 
