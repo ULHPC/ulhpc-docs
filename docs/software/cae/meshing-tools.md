@@ -31,7 +31,7 @@ cae/gmsh/4.4.0-intel-2019a
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation
-$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+$ salloc -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11
 
 # Load the module for Gmesh and neeed environment
 $ module purge

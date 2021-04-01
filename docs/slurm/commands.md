@@ -18,7 +18,7 @@ There are three ways of submitting jobs with slurm, using either [`sbatch`](http
     ```
     `srun` is also to be using within your launcher script to initiate a _job step_.
 
-=== "salloc (request allocation)"
+=== "salloc (request allocation/interactive job)"
     ```bash
     # Request interactive jobs/allocations
     ### /!\ Adapt <partition>, <qos>, <account> and <command> accordingly

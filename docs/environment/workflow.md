@@ -27,7 +27,7 @@ Your typical journey on the ULHPC facility is illustrated in the below figure.
         resources of the ULHPC facilities. In particular, it is sufficient to
         exchange data with the access servers to make them available on the
         clusters
-    3. Reserve a few [interactive resources](../jobs/interactive.md) with `srun -p interactive [...]`
+    3. Reserve a few [interactive resources](../jobs/interactive.md) with `salloc -p interactive [...]`
          - recall that the `module` command (used to load the [ULHPC User
        software](../software/index.md)) is **only** available on the compute
        nodes
