@@ -266,7 +266,7 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        module load base/MATLAB
+        module load math/MATLAB
 
         matlab -nodisplay -nosplash < INPUTFILE.m > OUTPUTFILE.out
         ```
