@@ -215,6 +215,10 @@ Use `seff` to double check a _past_ job CPU/Memory efficiency. Below examples sh
     ```
      **This is typical of a single-core task** can could be drastically improved via [GNU Parallel](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/).
 
+**Note however that demonstrating a CPU good efficiency with `seff` may not be enough!**
+You may still induce an _abnormal_ load on the reserved nodes if you spawn more processes than allowed by the Slurm reservation. 
+To avoid that, always try to prefix your executions with `srun` within your launchers. See also [Specific Resource Allocations](../slurm/index.md#specific-resource-allocation).   
+
 <!--seff-end-->
 
 <!--susage-start-->

@@ -94,6 +94,7 @@ nav:
     # - Limits: 'jobs/limits.md'
     - Interactive Job: 'jobs/interactive.md'
     - Passive/Batch Job: 'jobs/submit.md'
+    - GPU Jobs: 'jobs/gpu.md'
     - Long Jobs: 'jobs/long.md'
     - Best-effort Jobs: 'jobs/best-effort.md'
     - Launcher Scripts Examples: 'slurm/launchers.md'

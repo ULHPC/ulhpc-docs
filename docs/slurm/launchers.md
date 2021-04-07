@@ -88,7 +88,7 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 ## Basic Slurm Launcher Examples
 
 === "Single core task"
-    !!! example "1 task per job (Note: prefer GNU Parallel in that case)"
+    !!! example "1 task per job (Note: prefer GNU Parallel in that case - see below)"
         ```bash
         #!/bin/bash -l                # <--- DO NOT FORGET '-l'
         ### Request a single task using one core on one node for 5 minutes in the batch queue
@@ -140,51 +140,40 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
         # [...]
         ```
 
-### Specialized BigData/GPU launchers
+## Embarrassingly Parallel Tasks
 
-=== "BigData/[Large-]memory single-core tasks"
-    !!! example "1 large-memory single-core task per job"
-        ```bash
-        #!/bin/bash -l
-        ### Request one sequential task requiring half the memory of a regular iris node for 1 day
-        #SBATCH -J MyLargeMemorySequentialJob       # Job name
-        #SBATCH --mail-user=Your.Email@Address.lu   # mail me ...
-        #SBATCH --mail-type=end,fail                # ... upon end or failure
-        #SBATCH -N 1
-        #SBATCH --ntasks-per-node=1
-        #SBATCH -c 1
-        #SBATCH --mem=64GB         # if above 112GB: consider bigmem partition (USE WITH CAUTION)
-        #SBATCH --time=1-00:00:00
-        #SBATCH -p batch           # if above 112GB: consider bigmem partition (USE WITH CAUTION)
+![](https://www.gnu.org/software/parallel/logo-gray+black300.png){: style="width:150px; float: right;"}
 
-        print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
-        module purge || print_error_and_exit "No 'module' command"
-        module load <...>
-        # [...]
-        ```
+For many users, the reason to consider (or being encouraged) to offload their computing executions on a (remote) HPC or Cloud facility is tied to the limits reached by their computing devices (laptop or workstation). It is generally motivated by time constraints
 
-=== "AI/DL task  tasks"
-    !!! example "1 ML/DL GPU task"
-        ```bash
-        #!/bin/bash -l
-        ### Request one GPU tasks for 4 hours - dedicate 1/4 of available cores for its management
-        #SBATCH -N 1
-        #SBATCH --ntasks-per-node=1
-        #SBATCH -c 7
-        #SBATCH -G 1
-        #SBATCH --time=00:04:00
-        #SBATCH -p gpu
+> "My computations take several hours/days to complete. On an HPC, it will last a few minutes, no?"
 
-        print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
-        module purge || print_error_and_exit "No 'module' command"
-        # You probably want to use more recent gpu/CUDA-optimized software builds
-        module use /opt/apps/resif/iris/2019b/gpu/modules
-        module load <...>
+or search-space explorations:
 
-        # This should report a single GPU (over 4 available per gpu node)
-        nvidia-smi
-        # [...]
-        ```
+> "I need to check my application against a huge number of input pieces (files) - it worked on a few of them locally but takes ages for a single check. How to proceed on HPC?"
+
+In most of the cases, your favorite Java application or R/python (custom) development scripts, iterated again over multiple input conditions, are **inherently SERIAL**: they are able to use only one core when executed. You thus deal with what is often call a _Bag of (independent) tasks_, also referred to as **embarrassingly parallel tasks**.
+
+In this case, you **MUST NOT** overload the job scheduler with a large number of small (single-core) jobs.
+Instead, you should use [GNU Parallel](http://www.gnu.org/software/parallel/) which permits the effective management of such tasks in a way that optimize both the resource allocation and the completion time.
+
+More specifically, [GNU Parallel](http://www.gnu.org/software/parallel/) is a tool for executing tasks in parallel, typically on a single machine. When coupled with the Slurm command srun, `parallel` becomes a powerful way of distributing a set of tasks amongst a number of workers. This is particularly useful when the number of tasks is significantly larger than the number of available workers (i.e. `$SLURM_NTASKS`), and each tasks is independent of the others.
+
+[:fontawesome-solid-sign-in-alt: ULHPC Tutorial: GNU Parallel launcher for Embarrassingly Parallel Jobs](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#best-launcher-based-on-gnu-parallel-1-job-1-node-n-tasks){: .md-button .md-button--link }
+
+Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/launcher.parallel.sh) that should be straight forward to adapt to your own workflow following [our tutorial](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#best-launcher-based-on-gnu-parallel-1-job-1-node-n-tasks):
+
+1. Create a dedicated script `run_<task>` responsible to run your java/R/Python tasks while taking as argument the parameter of each run. You can inspire from [`run_stressme`](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/run_stressme) for instance.
+    - test it in interactive
+2. rename the generic launcher [`launcher.parallel.sh`](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/launcher.parallel.sh) to `launcher_<task>.sh`,
+    - enable `#SBATCH --dependency singleton`
+    - set the jobname
+    - change TASK to point to the **absolute** path to `run_<task>` script
+ 	- set TASKLISTFILE to point to a files with the parameters to pass to your script for each task
+    - adapt eventually the `#SBATCH --ntasks-per-node [...]` and `#SBATCH -c [...]` to match your needs AND the hardware configs of a single node (28 cores on iris, 128 cores on Aion) -- see [guidelines](#resource-allocation-guidelines)
+
+3. test a batch run -- **stick to a single node** to take the best out of one full node.
+
 
 ## Serial Task script Launcher
 
@@ -207,7 +196,7 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
         TASK=${TASK:=${HOME}/bin/app.exe}
         OPTS=$*
 
-        ${TASK} ${OPTS}
+        srun ${TASK} ${OPTS}
         ```
 
 === "Serial Python"
@@ -230,7 +219,7 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
         source ./<name>/bin/activate
         OPTS=$*
 
-        python [...] ${OPTS}
+        srun python [...] ${OPTS}
         ```
 
 === "R"
@@ -249,7 +238,7 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
         OPTS=$*
 
-        Rscript <script>.R ${OPTS}  |& tee job_${SLURM_JOB_NAME}.out
+        srun Rscript <script>.R ${OPTS}  |& tee job_${SLURM_JOB_NAME}.out
         ```
 
 === "Matlab"
@@ -271,7 +260,58 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
         matlab -nodisplay -nosplash < INPUTFILE.m > OUTPUTFILE.out
         ```
 
+
+## Specialized BigData/GPU launchers
+
+!!! example "BigData/[Large-]memory single-core tasks"
+    ```bash
+	#!/bin/bash -l
+	### Request one sequential task requiring half the memory of a regular iris node for 1 day
+	#SBATCH -J MyLargeMemorySequentialJob		# Job name
+	#SBATCH --mail-user=Your.Email@Address.lu	# mail me ...
+	#SBATCH --mail-type=end,fail				# ... upon end or failure
+	#SBATCH -N 1
+	#SBATCH --ntasks-per-node=1
+	#SBATCH -c 1
+	#SBATCH --mem=64GB		   # if above 112GB: consider bigmem partition (USE WITH CAUTION)
+	#SBATCH --time=1-00:00:00
+	#SBATCH -p batch		   # if above 112GB: consider bigmem partition (USE WITH CAUTION)
+
+	print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
+	module purge || print_error_and_exit "No 'module' command"
+	module load <...>
+	# [...]
+	```
+
+!!! example "AI/DL task  tasks"
+    ```bash
+	#!/bin/bash -l
+	### Request one GPU tasks for 4 hours - dedicate 1/4 of available cores for its management
+	#SBATCH -N 1
+	#SBATCH --ntasks-per-node=1
+	#SBATCH -c 7
+	#SBATCH -G 1
+	#SBATCH --time=00:04:00
+	#SBATCH -p gpu
+
+	print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
+	module purge || print_error_and_exit "No 'module' command"
+	module load <...>    # USE apps compiled against the {foss,intel}cuda toolchain !
+
+	# This should report a single GPU (over 4 available per gpu node)
+	nvidia-smi
+	# [...]
+	```
+
 ## pthreads/OpenMP Launcher
+
+!!! warning "Always set `OMP_NUM_THREADS` to match `${SLURM_CPUS_PER_TASK:-1}`"
+    You **MUST** enforce the use of `-c <threads>` in your launcher to ensure the variable `$SLURM_CPUS_PER_TASK` exists within your launcher scripts.
+    This is the appropriate value to set for [`OMP_NUM_THREAD`](https://www.openmp.org/spec-html/5.0/openmpse50.html), with default to 1 as extra safely which can be obtained with the following affectation:
+
+    ```bash
+    export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
+    ```
 
 === "Aion (default Dual-CPU)"
     !!! example "Single node, threaded (pthreads/OpenMP) application launcher"
@@ -362,6 +402,7 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
         srun -n $SLURM_NTASKS /path/to/your/intel-toolchain-compiled-application ${OPTS}
         ```
 
+You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- use `srun --mpi=list` to list the available implementations (default: pmi2), and `srun --mpi=pmix[_v3] [...]` to use PMIx.
 
 ### OpenMPI Slurm Launchers { .t }
 

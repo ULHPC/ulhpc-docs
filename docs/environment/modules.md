@@ -245,61 +245,30 @@ An overview of the currently available component versions is depicted below:
 | binutils  |           | 2.31.1             | 2.32               | 2.34              |
 | Python    |           | 3.7.2 (and 2.7.15) | 3.7.4 (and 2.7.16) | 3.8.2             |
 
-If you want to use the non-default ULHPC software set release, proceed as follows:
+If you want to use the old/deprecated software set, proceed as follows in your launcher scripts:
 
-=== "Iris (default)"
+```bash 
+export MODULEPATH=$DEPRECATED_MODULEPATH
+```
+Otherwise, the current version of the ULHPC Software Set in production is stored in `$RESIF_VERSION_PROD`
+If you want to use a non-default ULHPC software set release (for instance the `devel` version, stored in `$RESIF_VERSION_PROD`, proceed as follows:
+
+```bash 
+export MODULEPATH=$MODULEPATH_DEVEL
+```
+
+!!! tips "GPU Optimized builds vs. CPU software set on GPU nodes"
+    On GPU nodes, be aware that the default MODULEPATH holds two directories:
+
+    1. GPU Optimized builds (_i.e._ typically against the `{foss,intel}cuda` toolchains) stored under `/opt/apps/resif/<cluster>/<version>/gpu/modules/all`
+    2. CPU Optimized builds (ex: _skylake_ on [Iris](../systems/iris/index.md))) stored under `/opt/apps/resif/<cluster>/<version>/skylake/modules/all`
+
+    You **may want** to exclude CPU builds to ensure you take the most out of the GPU accelerators. In that case, you may want to run: 
+
     ```bash
-    unset MODULEPATH
-    # /!\ ADAPT <version> accordingly - CPU build
-    module use /opt/apps/resif/iris/<version>/default/modules/all
-    ```
-
-=== "Iris (Broadwell/Skylake/GPU optimized)"
-    ```bash
-    unset MODULEPATH
-    # /!\ ADAPT <version> and <arch> (broadwell | skylake |gpu) accordingly
-    module use /opt/apps/resif/iris/<version>/<arch>/modules/all
-    ```
-
-=== "Aion"
-    ```bash
-    unset MODULEPATH
-    # /!\ ADAPT <version> accordingly - CPU build
-    module use /opt/apps/resif/aion/<version>/epyc/modules/all
-    ```
-
-For instance, assuming your would have wanted to test in advance the **2019b** (or _2020a_ on [Aion](../systems/aion/index.md)) software set:
-
-=== "Iris default (broadwell)"
-    ```bash
-    # (new testing/devel) 2019b software set - iris cluster
-    unset MODULEPATH
-    module use /opt/apps/resif/iris/2019b/broadwell/modules/all
-    ```
-
-=== "Iris skylake-optimized"
-    ```bash
-    # (new testing/devel) 2019b software set - iris cluster
-    unset MODULEPATH
-    module use /opt/apps/resif/iris/2019b/skylake/modules/all
-    ```
-    This only makes sense on a compute node featuring an Intel `skylake` processor, _i.e._ reserved with the corresponding feature `{srun|sbatch|salloc} -C skylake [...]`
-
-=== "Iris GPU-optimized"
-    ```bash
-    # (new testing/devel) 2019b software set - iris cluster
-    unset MODULEPATH
-    # module use /opt/apps/resif/iris/2019b/skylake/modules/all # iff you also want CPU builds
-    module use /opt/apps/resif/iris/2019b/gpu/modules/all
-    ```
-    This only makes sense on a GPU compute node: `{srun|sbatch|salloc} -p gpu  [...]`
-
-=== "Aion default (epyc)"
-    ```bash
-    # (new) 2020a software set - default prod on aion cluster
-    unset MODULEPATH
-    module use /opt/apps/resif/aion/2020a/epyc/modules/all
-    ```
+    # /!\ ADAPT <version> accordingly 
+    module unuse /opt/apps/resif/${ULHPC_CLUSTER}/${RESIF_VERSION_PROD}/skylake/modules/all
+    ``` 
 
 
 ## Using Easybuild to Create Custom Modules
