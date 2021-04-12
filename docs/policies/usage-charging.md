@@ -2,6 +2,20 @@
 
 ULHPC allocates time on compute nodes and space on its different file systems to support with the research and development performed on its computational resources.
 
+__When charged__ (see conditions below), ULHPC computing resources are billed according to the following hourly rates (assuming full node utilization):
+
+| __Cluster__                      | __Node Type__ | __#Cores/node [#GPUs]__ | Billing Rate | __Hourly Price [€, HT]__ |
+|----------------------------------|---------------|-------------------------|--------------|--------------------------|
+| [Aion](../systems/aion/index.md) | Regular       |                     128 |       200,96 | 6,03€                    |
+| [Iris](../systems/iris/index.md) | Regular       |                      28 |           56 | 1,68€                    |
+| [Iris](../systems/iris/index.md) | GPU           |     28 [+4 NVidia V100] |          256 | 7,68€                    |
+| [Iris](../systems/iris/index.md) | Large-Mem     |                     112 |          224 | 6,72€                    |
+
+[:fontawesome-solid-download: UL HPC Cost Budget Plans for Project Proposals [xlsx] ](2021_ULHPC_Usage_Charging.xlsx){: .md-button .md-button--link }
+
+In all cases, the ULHPC team will monitor and report for auditing purposes project usage, whether charged or not.
+See below for more details on the way this usage is charged.
+
 ## Service Unit
 
 !!! info "Service Unit (SU)"
@@ -178,9 +192,11 @@ On July 7, 2020, this policy was approved by the rectorate and was later validat
 
 [:fontawesome-solid-sign-in-alt:  ULHPC Resource Allocations Policy for Research Projects (PDF)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Resource-allocation-policy_budget-guidelines-v1.0.pdf){: .md-button .md-button--link }
 
+[:fontawesome-solid-download: UL HPC Cost Estimates for Project Proposals [xlsx] ](../policies/2021_ULHPC_Usage_Charging.xlsx){: .md-button .md-button--link }
+
 <!--resource-allocation-project-end-->
 
-!!! important "Preparing your budget plan to support HPC costs"
+!!! important "Preparing your budget plan to support HPC costs within your FNR project proposals"
     As a consequence, you (project PI) are entitled to plan your computing costs in your project budget plan.
     While the research support department of the University will help you in this process, we consider three
     cases:
@@ -195,6 +211,14 @@ On July 7, 2020, this policy was approved by the rectorate and was later validat
         - Budget for 1 funded PostDoc (24PM):         11059,2€ (VAT excluded)
 
     3. You don't know and you don't plan to use ULHPC resources. Then you are "safe" but be aware that any outsourced computing expense (whether cloud or HPC) should be budgeted.
+
+    In all cases, we provide an [Excel sheet helper](2021_ULHPC_Usage_Charging.xlsx) to better size your projected HPC Costs on the ULHPC Facility.
+
+    Example of justification for your proposal:
+
+    > we are estimating the corresponding expenses from the ULHPC cost model policy elaborated in cooperation with the FNR and approved by the Rectorate on July 7, 2020.
+    > As advised, the amount of PMs to be hired on the project is used as a basis for this estimated usage, i.e., 5529,60€ for every 12 PM of funded personnel.
+    Therefore, the total HPC cost for the project is estimated to [...]
 
 Note that even if you plan for large-scale experiments on [PRACE/EuroHPC supercomputers](https://eurohpc-ju.europa.eu/discover-eurohpc) through computing credits granted by [Call for Proposals for Project Access](https://pracecalls.eu/), you should plan for ULHPC costs since you will have to demonstrate the scalability of your code -- the University's facility is ideal for that.
 
