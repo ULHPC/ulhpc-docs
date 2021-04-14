@@ -61,7 +61,6 @@ rm -rf /home/users/ur_user_name/java*
 
 !!! example
 
-    ```bash
     # example for MATLAB ParFor (matlab_script_serial_file.m)
     tic
     n = 500;
@@ -70,8 +69,8 @@ rm -rf /home/users/ur_user_name/java*
     for i = 1:n
     a(i) = max(abs(eig(rand(A))));
     end
-    toc  
-     ```
+    toc
+    
 
 ### An example for parallel case
 
