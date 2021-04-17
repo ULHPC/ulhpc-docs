@@ -22,7 +22,7 @@ reduce costs and inefficiencies, and gain a competitive advantage
      in [Modules](ulhpc-docs/docs/environment
      /modules.md). For example, if your module path is set to deprecated modules
      `export MODULEPATH=$DEPRECATED_MODULEPATH` then the
-     folloawing versions of Abaqus are available in ULHPC:
+     following versions of Abaqus are available in ULHPC:
 
 ```bash
 # Available versions
