@@ -29,7 +29,6 @@ Gaussian functions used in modern atomic and molecular theory.
 
 ### Available versions of Libint in ULHPC:
 
-
 ??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
      /modules.md)
      For the user's convenience, we are maintaining the old
@@ -52,7 +51,6 @@ The aim is to provide a portable, well tested and reliable set of exchange and
 correlation functionals that can be used by all the ETSF codes and also other codes.
 
 ### Available versions of Libxc in ULHPC:
-
 
 ??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
      /modules.md)
