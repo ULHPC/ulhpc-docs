@@ -36,9 +36,7 @@ $ salloc -p batch --time=00:30:00 --ntasks 1 -c 4 --x11
 
 # Load the required version of Abaqus and needed environment
 $ module purge
-$ module load swenv/default-env/v0.1-20170602-production
-$ module load cae/ABAQUS/2017-hotfix-1803
-$ module load vis/libGLU/9.0.0-intel-2017a
+$ module load cae/ABAQUS/2018-hotfix-1806
 # /!\ IMPORTANT: ADAPT the url to point to YOUR licence server!!!
 $ export LM_LICENSE_FILE=xyz
 # Check License server token available
@@ -46,6 +44,7 @@ $ abaqus licensing lmstat -a
 lmutil - Copyright (c) 1989-2015 Flexera Software LLC. All Rights Reserved.
 Flexible License Manager status on Wed 4/8/2020 14:25
 [...]
+$ unset SLURM_GTIDS
 $ abaqus job=job-name input=input.inp cpus=n gpus=n
 ```
 where `n=number of cores` and for gpus `n=number of GPUs`.
