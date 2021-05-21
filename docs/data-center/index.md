@@ -1,11 +1,16 @@
 # ULHPC Data Center - Centre de Calcul (CDC)
 
+[![](images/data-center-bt1.jpg){: style="width:400px;float: right;margin-right:10px" }](https://hpc.uni.lu/infrastructure/datacenter)
+
 The ULHPC facilities are hosted within the University's "_Centre de Calcul_" (CDC) data center located in the Belval Campus.
 
 ## Power and Cooling Capacities
 
 Established over two floors underground (CDC-S01 and CDC-S02) of ~1000~100m<sup>2</sup> each, the CDC features five server rooms per level (each of them offering ~100m<sup>2</sup> as IT rooms surface).
 When the first level CDC-S01 is hosting administrative IT and research equipment, the second floor (__CDC-S02__) is primarily targeting the __hosting of HPC equipment (compute, storage and interconnect)__.
+
+
+![](https://hpc.uni.lu/assets/img/pages/infrastructure/datacenter/sas_cdc.jpg){: style="width:350px;float: left;margin-right:10px" }
 
 A power generation station supplies the HPC floor with up to __3 MW of electrical power, and 3 MW of cold water__ at a 12-18°C regime used for traditional Airflow with In-Row cooling.
 A separate hot water circuit (between 30 and 40°C) allow to implement Direct Liquid Cooling (DLC) solutions as for the [Aion](../systems/aion/index.md) supercomputer in two dedicated server rooms.
