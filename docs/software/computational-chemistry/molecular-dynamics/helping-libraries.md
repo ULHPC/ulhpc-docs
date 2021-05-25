@@ -10,7 +10,7 @@ For more information about libctl, please refer to [libctl Documentation](https:
      version and new version of each software that are available at
      the ULHPC. To work with different software sets and how to
      load them to your environment is clearly
-     explained in [Modules](ulhpc-docs/docs/environment
+     explained in [Modules](../../environment
      /modules.md). For example, if your module path is set to deprecated modules
      `export MODULEPATH=$DEPRECATED_MODULEPATH` then the following versions of
      libctl are available in ULHPC:

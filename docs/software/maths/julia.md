@@ -9,7 +9,7 @@ To check available versions of Julia at ULHPC type `module spider julia`.
      version and new version of each software that are available at
      the ULHPC. To work with different software sets and how to
      load them to your environment is
-     clearly explained in [Modules](ulhpc-docs/docs/environment
+     clearly explained in [Modules](../../environment
      /modules.md). For example, if your module path is set to deprecated modules
      `export MODULEPATH=$DEPRECATED_MODULEPATH` then
      the following list shows the available versions of Julia in ULHPC.
