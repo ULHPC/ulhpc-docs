@@ -39,8 +39,17 @@ Most server rooms are designed for traditional airflow-based cooling and impleme
 
 ### [Direct] Liquid Cooling
 
-Traditional solutions implemented in most data centers use air as a medium to remove the heat from the servers and computing equipment and are not well suited to cutting-edge high-density HPC environments due to the limited thermal capacity of air.
-The replacement of air with a liquid cooling medium allows to drastically improve the energy-efficiency as well as the density of the implemented solution, especially with __Direct Liquid Cooling (DLC)__ where the heat from the IT components is directly transferred to a liquid cooling medium through liquid-cooled plates.
+Traditional solutions implemented in most data centers use air as a
+medium to remove the heat from the servers and computing equipment
+and are not well suited to cutting-edge high-density HPC environments
+due to the limited thermal capacity of air. Liquids’ thermal
+conductivity is higher than the air, thus concludes the
+liquid can absorb (through conductivity) more heat than the air.
+The replacement of air with a liquid cooling medium allows to
+drastically improve the energy-efficiency as well as the density
+of the implemented solution, especially with __Direct Liquid Cooling (DLC)__ where
+the heat from the IT components is directly
+transferred to a liquid cooling medium through liquid-cooled plates.
 
 
 The [Aion](../systems/aion/index.md) supercomputer based on the fan-less Atos [BullSequana XH2000](https://atos.net/en/solutions/high-performance-computing-hpc/bullsequana-x-supercomputer) DLC cell design relies on this water-cooled configuration.
