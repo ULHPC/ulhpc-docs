@@ -21,9 +21,12 @@ Thus your typical GPU launcher would match the [AI/DL launcher](../slurm/launche
 #SBATCH --ntasks-per-node=1
 #SBATCH -c 7
 #SBATCH -G 1
-#SBATCH --time=00:04:00
+#SBATCH --time=04:00:00
 #SBATCH -p gpu
 
+print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
+module purge || print_error_and_exit "No 'module' command"
+module load numlib/cuDNN   # Example with cuDNN
 [...]
 ```
 

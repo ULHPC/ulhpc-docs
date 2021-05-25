@@ -1,5 +1,7 @@
 # Aion Overview
 
+[![](images/aion_compute_racks.jpg){: style="width:400px;float: right;margin-right:10px" }](BullSequanaXH2000_Features_Atos_supercomputers.pdf)
+
 Aion is a [Atos/Bull](https://atos.net/en/solutions/high-performance-computing-hpc)/AMD supercomputer which consists of **318 compute nodes, totaling 40704 compute cores** and 81408 GB RAM,
 with a peak performance of about **1,693 PetaFLOP/s**.
 
@@ -22,8 +24,6 @@ For more information: see [ULHPC slurm docs](../../slurm/index.md).
 ## Cluster Organization
 
 ### Data Center Configuration
-
-[![](images/aion_compute_racks.png){: style="width:300px;float: left;margin-right:10px" }](BullSequanaXH2000_Features_Atos_supercomputers.pdf)
 
 The Aion cluster is based on a cell made of 4 [BullSequana XH2000](https://atos.net/en/solutions/high-performance-computing-hpc/bullsequana-x-supercomputers) adjacent racks installed in the [CDC (_Centre de Calcul_) data center of the University](../../data-center/index.md) within one of the DLC-enabled server room (CDC S-02-004) adjacent to the room hosting the [Iris](../iris/index.md) cluster and the [global storage](../../filesystems/index.md).
 

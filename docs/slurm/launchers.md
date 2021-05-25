@@ -291,16 +291,19 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 	#SBATCH --ntasks-per-node=1
 	#SBATCH -c 7
 	#SBATCH -G 1
-	#SBATCH --time=00:04:00
+	#SBATCH --time=04:00:00
 	#SBATCH -p gpu
 
 	print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
 	module purge || print_error_and_exit "No 'module' command"
 	module load <...>    # USE apps compiled against the {foss,intel}cuda toolchain !
+    # Ex: 
+    # module load numlib/cuDNN
 
 	# This should report a single GPU (over 4 available per gpu node)
 	nvidia-smi
 	# [...]
+    srun [...]
 	```
 
 ## pthreads/OpenMP Launcher
@@ -381,6 +384,7 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
         srun -n $SLURM_NTASKS /path/to/your/intel-toolchain-compiled-application ${OPTS}
         ```
+        Recall to use [`si-bigmem`](../jobs/interactive.md) to request an [interactive](../jobs/interactive.md) job when testing your script. 
 
 === "Iris (default Dual-CPU)"
     !!! example "Multi-node parallel application IntelMPI launcher"
@@ -401,6 +405,7 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
         srun -n $SLURM_NTASKS /path/to/your/intel-toolchain-compiled-application ${OPTS}
         ```
+        Recall to use [`si-gpu`](../jobs/interactive.md) to request an [interactive](../jobs/interactive.md) job when testing your script on a GPU node. 
 
 You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- use `srun --mpi=list` to list the available implementations (default: pmi2), and `srun --mpi=pmix[_v3] [...]` to use PMIx.
 
