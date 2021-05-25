@@ -11,8 +11,7 @@ and several schools and workshops are organized each year.
 ## Available versions of ABINIT in ULHPC
 To check available versions of ABINIT at ULHPC type `module spider abinit`.
 
-??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
-     /modules.md)     
+??? info [ULHPC Software/Modules Environment](../../environment/modules.md)     
      For the user's convenience, we are maintaining the old
      version and new version of each software that are available at
      the ULHPC. To work with different software sets and how to

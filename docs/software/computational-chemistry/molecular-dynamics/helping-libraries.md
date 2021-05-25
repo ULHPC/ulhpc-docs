@@ -5,8 +5,7 @@ For more information about libctl, please refer to [libctl Documentation](https:
 
 ### Available versions of libctl in ULHPC:
 
-??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
-     /modules.md)
+??? info [ULHPC Software/Modules Environment](../../environment/modules.md)
      For the user's convenience, we are maintaining the old
      version and new version of each software that are available at
      the ULHPC. To work with different software sets and how to

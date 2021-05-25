@@ -12,8 +12,7 @@ Our tutorials show you how to use NAMD and VMD for biomolecular modeling.
 ## Available versions of NAMD in ULHPC
 To check available versions of NAMD at ULHPC type `module spider namd`.
 
-??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
-     /modules.md)
+??? info [ULHPC Software/Modules Environment](../../environment/modules.md)
      For the user's convenience, we are maintaining the old
      version and new version of each software that are available at
      the ULHPC. To work with different software sets and how to

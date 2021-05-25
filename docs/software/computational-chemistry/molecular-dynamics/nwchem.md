@@ -7,8 +7,7 @@ high-performance parallel supercomputers to conventional workstation clusters.
 ## Available versions of NWChem in ULHPC
 To check available versions of NWChem at ULHPC type `module spider nwchem`.
 
-??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
-     /modules.md)
+??? info [ULHPC Software/Modules Environment](../../environment/modules.md)
      For the user's convenience, we are maintaining the old
      version and new version of each software that are available at
      the ULHPC. To work with different software sets and how to
