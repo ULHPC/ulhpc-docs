@@ -6,7 +6,7 @@ Aion is a [Atos/Bull](https://atos.net/en/solutions/high-performance-computing-h
 with a peak performance of about **1,693 PetaFLOP/s**.
 
 All nodes are interconnected through a **Fast InfiniBand (IB) HDR100 network**[^1], configured over a ** [Fat-Tree](https://clusterdesign.org/fat-trees/) Topology** (blocking factor 1:2).
-Iris nodes are equipped with [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) processors.
+Aion nodes are equipped with [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) processors.
 
 [^1]: Infiniband (IB) HDR networks offer a 200 Gb/s throughput with a very low latency (0,6$\mu$s). The HDR100 technology allows one 200Gbps HDR port (aggregation 4x 50Gbps) to be divided into 2 HDR100 ports with 100Gbps (2x 50Gbps) bandwidth using an [optical] ["_splitter_" cable](https://www.mellanox.com/related-docs/prod_cables/PB_MFS1S50-HxxxE_200Gbps_QSFP56_to_2x100Gbps_QSFP56_AOC.pdf).
 
@@ -42,7 +42,7 @@ For more details: [:fontawesome-solid-sign-in-alt: BullSequana XH2000 SpecSheet 
 
 ### Cooling
 
-The BullSequana XH2000 is a fan less innovative cooling solution which is ultra-energy-efficient (targetting a PUE very close to 1) using an enhanced version of the Bull [Direct Liquid Cooling (DLC)](../../data-center/index.md#direct-liquid-cooling) technology.
+The BullSequana XH2000 is a fan less innovative cooling solution which is ultra-energy-efficient (targeting a PUE very close to 1) using an enhanced version of the Bull [Direct Liquid Cooling (DLC)](../../data-center/index.md#direct-liquid-cooling) technology.
 A separate **hot**-water circuit minimizes the total energy consumption of a system. For more information: see [[Direct] Liquid Cooling](../../data-center/index.md#direct-liquid-cooling).
 
 The illustration on the right shows an exploded view of a compute blade with the cold plate and heat spreaders.
