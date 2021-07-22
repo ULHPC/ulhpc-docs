@@ -49,7 +49,7 @@ Paste in the Base 64-encoded public key string, and click **Set**.
 ![](https://access.redhat.com/webassets/avalon/d/Red_Hat_Enterprise_Linux-7-Linux_Domain_Identity_Authentication_and_Policy_Guide-en-US/images/fbb26af5fd8a911253a61cde7240d3b4/sshkeys-user3.png)
 
 Click **Save** at the top of the page.
-You [key fingerprint](ssh.md##key-fingerprints) should be listed now.
+Your [key fingerprint](ssh.md##key-fingerprints) should be listed now.
 
 ![IPA user portal](images/ipa.png)
 
