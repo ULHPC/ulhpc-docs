@@ -331,7 +331,6 @@ to confirm the current fingerprints.
     With regards `access-iris.uni.lu`:
 
     ```
-    256 SHA256:BzLVnnTO2NcPqAyUepwYkbNJWnfAYEgiUCDInJHwpdw /etc/ssh/ssh_host_ecdsa_key.pub (ECDSA)
     256 SHA256:tkhRD9IVo04NPw4OV/s2LSKEwe54LAEphm7yx8nq1pE /etc/ssh/ssh_host_ed25519_key.pub (ED25519)
     2048 SHA256:WDWb2hh5uPU6RgaSotxzUe567F3scioJWy+9iftVmhI /etc/ssh/ssh_host_rsa_key.pub (RSA)
 	```
@@ -344,7 +343,7 @@ to confirm the current fingerprints.
 !!! info "Get SSH key fingerprint"
     The ssh fingerprints can be obtained via:
     ```
-    ssh-keygen -lf <(ssh-keyscan -t rsa,ed25519,ecdsa $(hostname) 2>/dev/null)
+    ssh-keygen -lf <(ssh-keyscan -t rsa,ed25519 $(hostname) 2>/dev/null)
     ```
 
 ??? tips "Putty key fingerprint format"
@@ -377,7 +376,7 @@ These are the entries in `~/.ssh/known_hosts`.
     The known host SSH entry for the [Iris cluster](../systems/iris/index.md)  should be as follows:
 
     ```
-    [access-iris.uni.lu]:8022 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOazFRMcdqEn6MpG4H5viEkImw0WwbqZ5SbOlAbZOCrVRA43cNwHkYg5q0RaqeNPEwGHxwTEZ7ACRgReNEo2iGs=
+    [access-iris.uni.lu]:8022 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOP1eF8uJ37h5jFQQShn/NHRGD/d8KsMMUTHkoPRANLn
     ```
 
 ===  "Aion"
@@ -385,7 +384,7 @@ These are the entries in `~/.ssh/known_hosts`.
     The known host SSH entry for the [Aion cluster](../systems/aion/index.md) should be as follows:
 
     ```
-    [access-aion.uni.lu]:8022 TODO
+    [access-aion.uni.lu]:8022 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmcYJ7T6A1wOvIQaohgwVCrKLqIrzpQZAZrlEKx8Vsy
     ```
 
 ## Troubleshooting
