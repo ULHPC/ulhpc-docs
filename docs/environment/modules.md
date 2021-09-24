@@ -237,13 +237,15 @@ _However_, count at least 6 months of validation/import _after_ EB release befor
 
 An overview of the currently available component versions is depicted below:
 
-| __Name__  | __Type__  | 2019[a] (_old_)    | __2019b__ (_prod_) | __2020a__ (devel) |
-|-----------|-----------|--------------------|--------------------|-------------------|
-| `GCCCore` | compiler  | 8.2.0              | 8.3.0              | 9.3.0             |
-| `foss`    | toolchain | 2019a              | 2019b              | 2020a             |
-| `intel`   | toolchain | 2019a              | 2019b              | 2020a             |
-| binutils  |           | 2.31.1             | 2.32               | 2.34              |
-| Python    |           | 3.7.2 (and 2.7.15) | 3.7.4 (and 2.7.16) | 3.8.2             |
+| __Name__  | __Type__  | 2019(a) (_deprecated_) | __2019b__ (`legacy`)|  __2020a__       | __2020b__ (`prod`) | __2021a__ (`devel`) |
+|-----------|-----------|------------------------|---------------------|------------------|--------------------|---------------------|
+| `GCCCore` | compiler  |                  8.2.0 |               8.3.0 |            9.3.0 |             10.2.0 |              10.3.0 |
+| `foss`    | toolchain |                  2019a |               2019b |            2020a |              2020b |               2021a |
+| `intel`   | toolchain |                  2019a |               2019b |            2020a |              2020b |               2021a |
+| binutils  |           |                 2.31.1 |                2.32 |             2.34 |               2.35 |                2.36 |
+| Python    |           |     3.7.2 (and 2.7.15) | 3.7.4 (and 2.7.16)  |3.8.2 (and 2.7.18)|              3.8.6 |               3.9.2 |
+| LLVM      | compiler  |                  8.0.0 |               9.0.1 |           10.0.1 |             11.0.0 |              11.1.0 |
+| OpenMPI   | MPI       |                  3.1.4 |               3.1.4 |            4.0.3 |              4.0.5 |               4.1.1 |
 
 If you want to use the old/deprecated software set, proceed as follows in your launcher scripts:
 
@@ -251,11 +253,13 @@ If you want to use the old/deprecated software set, proceed as follows in your l
 export MODULEPATH=$DEPRECATED_MODULEPATH
 ```
 Otherwise, the current version of the ULHPC Software Set in production is stored in `$RESIF_VERSION_PROD`
-If you want to use a non-default ULHPC software set release (for instance the `devel` version, stored in `$RESIF_VERSION_PROD`, proceed as follows:
+If on the contrary, you want to use a non-default ULHPC software set release (for instance the `devel` version, stored in `$RESIF_VERSION_DEVEL`, proceed as follows:
 
 ```bash 
 export MODULEPATH=$MODULEPATH_DEVEL
 ```
+
+before loading any modules. 
 
 !!! tips "GPU Optimized builds vs. CPU software set on GPU nodes"
     On GPU nodes, be aware that the default MODULEPATH holds two directories:
