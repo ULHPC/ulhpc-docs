@@ -71,12 +71,18 @@ Consequently, if you want to connect to the Iris cluster, open a terminal and ru
 
     (your_workstation)$> ssh -p 8022 yourlogin@access-iris.uni.lu
 
+For the Aion cluster, the access server host name is `access-aion.uni.lu`:
+
+    (your_workstation)$> ssh -p 8022 yourlogin@access-aion.uni.lu
 
 Alternatively, you may want to save the configuration of this connection (and create an alias for it) by editing the file `~/.ssh/config` (create it if it does not already exist) and adding the following entries:
 
     Host iris-cluster
         Hostname access-iris.uni.lu
-    
+
+    Host aion-cluster
+        Hostname access-aion.uni.lu
+
     Host *-cluster
         User yourlogin
         Port 8022

@@ -88,7 +88,7 @@ MobaXterm allows you to launch remote sessions. You just have to click on the "S
 
  Enter the following parameters:
 
-* Remote host: `access-iris.uni.lu`
+* Remote host: `access-iris.uni.lu` or `access-aion.uni.lu`
 * Check the **Specify username** box
 * Username: `yourlogin`
   - as was sent to you in the Welcome e-mail once your HPC account was created
@@ -206,7 +206,7 @@ The port on which the SSH servers are listening is not the default one (*i.e.* 2
 Consequently, if you want to connect to the Iris cluster, open Putty and enter the following settings:
 
 * In _Category:Session_ :
-  * Host Name: `access-iris.uni.lu`
+  * Host Name: `access-iris.uni.lu` or `access-aion.uni.lu`
   * Port: `8022`
   * Connection Type: `SSH` (leave as default)
 * In _Category:Connection:Data_ :
@@ -271,7 +271,7 @@ You should run [Pageant](http://the.earth.li/~sgtatham/putty/latest/x86/pageant.
 Open `Putty.exe` (connection type: `SSH`)
 
 * In _Category:Session_:
- * Host Name: `access-iris.uni.lu`
+ * Host Name: `access-iris.uni.lu` or `access-aion.uni.lu`
  * Port: 8022
  * Saved session: `Iris`
 * In _Category:Connection:Data_:
