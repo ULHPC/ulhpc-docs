@@ -79,8 +79,8 @@ _Note_: For a running job, you can also check the `TRES=[...],billing=<Brate>` o
 | __Cluster__                      | __Node Type__ | __CPU arch__ | __Partition__ | __#Cores/node__ | $\mathbf{\alpha_{cpu}}$ | $\mathbf{\alpha_{mem}}$ | $\mathbf{\alpha_{GPU}}$ |
 |----------------------------------|---------------|--------------|---------------|-----------------|-------------------------|-------------------------|-------------------------|
 | [Aion](../systems/aion/index.md) | Regular       | `epyc`       | `batch`       | 128             | 0.57                    | $\frac{1}{1.75}$        | 0                       |
-| [Iris](../systems/iris/index.md) | Regular       | `broadwell`  | `batch`       | 28              | 1.0*                    | $\frac{1}{4} = 0,25$    | 0                       |
-| [Iris](../systems/iris/index.md) | Regular       | `skylake`    | `batch`       | 28              | 1.0                     | $\frac{1}{4} = 0,25$    | 0                       |
+| [Iris](../systems/iris/index.md) | Regular       | `broadwell`  | `batch`       | 28              | 1.0*                    | $\frac{1}{4} = 0.25$    | 0                       |
+| [Iris](../systems/iris/index.md) | Regular       | `skylake`    | `batch`       | 28              | 1.0                     | $\frac{1}{4} = 0.25$    | 0                       |
 | [Iris](../systems/iris/index.md) | GPU           | `skylake`    | `gpu`         | 28              | 1.0                     | $\frac{1}{27}$          | 50                      |
 | [Iris](../systems/iris/index.md) | Large-Mem     | `skylake`    | `bigmem`      | 112             | 1.0                     | $\frac{1}{27}$          | 0                       |
 
