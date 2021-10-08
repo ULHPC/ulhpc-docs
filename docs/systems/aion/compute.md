@@ -14,7 +14,7 @@ Each processor has the following performance:
 
 | Processor Model                                                         | #cores | TDP(*) | CPU Freq. | $R_\text{peak}$<br/><small>[TFlops]</small> | $R_\text{max}$<br/><small>[TFlops]</small> |
 |-------------------------------------------------------------------------|--------|--------|-----------|---------------------------------------------|--------------------------------------------|
-| [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) |     64 | 280W   | 2.6 GHz   | 2,66 TF                                     | 2,13 TF                                    |
+| [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) |     64 | 280W   | 2.6 GHz   | 2.66 TF                                     | 2.13 TF                                    |
 
 <small>(*) The _Thermal Design Power_ (TDP) represents the average power, in watts, the processor dissipates when operating at Base Frequency with all cores active under an Intel-defined, high-complexity workload.</small>
 

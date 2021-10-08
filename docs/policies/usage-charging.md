@@ -6,10 +6,10 @@ __When charged__ (see conditions below), ULHPC computing resources are billed ac
 
 | __Cluster__                      | __Node Type__ | __#Cores/node [#GPUs]__ | Billing Rate | __Hourly Price [€, HT]__ |
 |----------------------------------|---------------|-------------------------|--------------|--------------------------|
-| [Aion](../systems/aion/index.md) | Regular       |                     128 |       200,96 | 6,03€                    |
-| [Iris](../systems/iris/index.md) | Regular       |                      28 |           56 | 1,68€                    |
-| [Iris](../systems/iris/index.md) | GPU           |     28 [+4 NVidia V100] |          256 | 7,68€                    |
-| [Iris](../systems/iris/index.md) | Large-Mem     |                     112 |          224 | 6,72€                    |
+| [Aion](../systems/aion/index.md) | Regular       |                     128 |       200.96 | 6.03€                    |
+| [Iris](../systems/iris/index.md) | Regular       |                      28 |           56 | 1.68€                    |
+| [Iris](../systems/iris/index.md) | GPU           |     28 [+4 NVidia V100] |          256 | 7.68€                    |
+| [Iris](../systems/iris/index.md) | Large-Mem     |                     112 |          224 | 6.72€                    |
 
 [:fontawesome-solid-download: UL HPC Cost Budget Plans for Project Proposals [xlsx] ](2021_ULHPC_Usage_Charging.xlsx){: .md-button .md-button--link }
 
@@ -22,7 +22,7 @@ See below for more details on the way this usage is charged.
     The utilization of the university's computational resources is charged in **Service Unit** (SU)
 
     * 1 SU _routhly_ correspond to 1 hour on 1 physical processor core on regular computing node
-    * Depending on the usage profile, 1 SU is charged _0,03€ per SU (VAT excluded)_
+    * Depending on the usage profile, 1 SU is charged _0.03€ per SU (VAT excluded)_
         - this applies in particular to external partners or funded projects, details below
 
 The total number of Service Units a job costs is a function of the number of nodes, the walltime used by the job, and the "charge factor" for the type of resources (amount of cores, memory and GPU) upon which the job was run.
@@ -78,7 +78,7 @@ _Note_: For a running job, you can also check the `TRES=[...],billing=<Brate>` o
 
 | __Cluster__                      | __Node Type__ | __CPU arch__ | __Partition__ | __#Cores/node__ | $\mathbf{\alpha_{cpu}}$ | $\mathbf{\alpha_{mem}}$ | $\mathbf{\alpha_{GPU}}$ |
 |----------------------------------|---------------|--------------|---------------|-----------------|-------------------------|-------------------------|-------------------------|
-| [Aion](../systems/aion/index.md) | Regular       | `epyc`       | `batch`       | 128             | 0,57                    | $\frac{1}{1.75}$        | 0                       |
+| [Aion](../systems/aion/index.md) | Regular       | `epyc`       | `batch`       | 128             | 0.57                    | $\frac{1}{1.75}$        | 0                       |
 | [Iris](../systems/iris/index.md) | Regular       | `broadwell`  | `batch`       | 28              | 1.0*                    | $\frac{1}{4} = 0,25$    | 0                       |
 | [Iris](../systems/iris/index.md) | Regular       | `skylake`    | `batch`       | 28              | 1.0                     | $\frac{1}{4} = 0,25$    | 0                       |
 | [Iris](../systems/iris/index.md) | GPU           | `skylake`    | `gpu`         | 28              | 1.0                     | $\frac{1}{27}$          | 50                      |
@@ -204,11 +204,11 @@ On July 7, 2020, this policy was approved by the rectorate and was later validat
     1. You __know__ relatively precisely your computing needs.
     Then use the [above charging guidelines](#charge-weight-factors-for-2021-2022) to estimate from the forseen required resources the billing rates and total walltime the corresponding amount that will be charged.
     2. You are __not able to anticipate the type and amount of resources needed__, but you know ULHPC resources will be required.
-    In this case, we suggest you to apply a simple rule based on the total number of funded persons: **account 5529,60€ for every 12 PM of funded personnel** (i.e., 1 month of continuous usage on the most expensive type of resource).
+    In this case, we suggest you to apply a simple rule based on the total number of funded persons: **account 5529.60€ for every 12 PM of funded personnel** (i.e., 1 month of continuous usage on the most expensive type of resource).
     In particular, account by default:
 
-        - Budget for 1 funded PhD student (36+12PM):  22118,4€ (VAT excluded)
-        - Budget for 1 funded PostDoc (24PM):         11059,2€ (VAT excluded)
+        - Budget for 1 funded PhD student (36+12PM):  22118.4€ (VAT excluded)
+        - Budget for 1 funded PostDoc (24PM):         11059.2€ (VAT excluded)
 
     3. You don't know and you don't plan to use ULHPC resources. Then you are "safe" but be aware that any outsourced computing expense (whether cloud or HPC) should be budgeted.
 
@@ -217,7 +217,7 @@ On July 7, 2020, this policy was approved by the rectorate and was later validat
     Example of justification for your proposal:
 
     > we are estimating the corresponding expenses from the ULHPC cost model policy elaborated in cooperation with the FNR and approved by the Rectorate on July 7, 2020.
-    > As advised, the amount of PMs to be hired on the project is used as a basis for this estimated usage, i.e., 5529,60€ for every 12 PM of funded personnel.
+    > As advised, the amount of PMs to be hired on the project is used as a basis for this estimated usage, i.e., 5529.60€ for every 12 PM of funded personnel.
     Therefore, the total HPC cost for the project is estimated to [...]
 
 Note that even if you plan for large-scale experiments on [PRACE/EuroHPC supercomputers](https://eurohpc-ju.europa.eu/discover-eurohpc) through computing credits granted by [Call for Proposals for Project Access](https://pracecalls.eu/), you should plan for ULHPC costs since you will have to demonstrate the scalability of your code -- the University's facility is ideal for that.
