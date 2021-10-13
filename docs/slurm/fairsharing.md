@@ -103,7 +103,7 @@ usage according to _weights_ defined as follows:
 
 | __Weight__     | __Description__                                                                       |
 |----------------|---------------------------------------------------------------------------------------|
-| $\alpha_{cpu}$ | Normalized relative performance of CPU processor core (ref.: skylake 73,6 GFlops/core) |
+| $\alpha_{cpu}$ | Normalized relative performance of CPU processor core (ref.: skylake 73.6 GFlops/core) |
 | $\alpha_{mem}$ | Inverse of the average available memory size per core                                 |
 | $\alpha_{GPU}$ | Weight per GPU accelerator                                                          |
 

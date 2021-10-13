@@ -96,7 +96,7 @@ Acquired [as part of RFP 170035](../systems/iris/timeline.md#october-2017), the 
     - 1x DDN SS8460 disk expansion enclosure (84-slot drive enclosures)
 * OSTs: 160x SEAGATE disks (7.2K RPM HDD, 8TB, Self Encrypted Disks (SED))
     - configured over 16 RAID6 (8+2) pools and extra disks in spare pools
-* MDTs: 18x  HGST disks (10K RPM HDD, 1,8TB,  Self Encrypted Disks (SED))
+* MDTs: 18x  HGST disks (10K RPM HDD, 1.8TB,  Self Encrypted Disks (SED))
     - configured over 8 RAID1 pools and extra disks in spare pools
 * Two redundant MDS servers
     - Dell R630,   2x Intel Xeon E5-2667v4 @ 3.20GHz [8c], 128GB RAM
