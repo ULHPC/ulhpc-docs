@@ -339,6 +339,10 @@ to confirm the current fingerprints.
 
     With regards `access-aion.uni.lu`:
 
+    ```
+    256 SHA256:jwbW8pkfCzXrh1Xhf9n0UI+7hd/YGi4FlyOE92yxxe0 [access-aion.uni.lu]:8022 (ED25519)
+    3072 SHA256:L9n2gT6aV9KGy0Xdh1ks2DciE9wFz7MDRBPGWPFwFK4 [access-aion.uni.lu]:8022 (RSA)
+    ```
 
 !!! info "Get SSH key fingerprint"
     The ssh fingerprints can be obtained via:
