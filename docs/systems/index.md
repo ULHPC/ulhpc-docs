@@ -1,7 +1,7 @@
 # HPC @ Uni.lu
 
-![](../images/plots/plot_piechart_compute_cluster_2020.png){: style="width:300px;"}
-![](../images/plots/plot_piechart_storage_fs_2020.png){: style="width:300px;"}
+![](../images/plots/plot_piechart_compute_cluster.png){: style="width:300px;"}
+![](../images/plots/plot_piechart_storage_fs.png){: style="width:300px;"}
 
 
 ## Chronological Evolution
