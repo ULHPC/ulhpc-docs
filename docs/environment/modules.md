@@ -247,19 +247,35 @@ An overview of the currently available component versions is depicted below:
 | LLVM      | compiler  |                  8.0.0 |               9.0.1 |           10.0.1 |             11.0.0 |              11.1.0 |
 | OpenMPI   | MPI       |                  3.1.4 |               3.1.4 |            4.0.3 |              4.0.5 |               4.1.1 |
 
-If you want to use the old/deprecated software set, proceed as follows in your launcher scripts:
+Once on a node, the current version of the ULHPC Software Set in production is stored in `$RESIF_VERSION_PROD`. 
+You can use the variables `$MODULEPATH_{LEGACY,PROD,DEVEL}` to access or set the `MODULEPATH` command with the appropriate value. Yet we have define utility scripts to facilitate your quick reset of the module environment, _i.e.,_ `resif-load-swset-{legacy,prod,devel}` and `resif-reset-swset`
+
+For instance, if you want to use the legacy software set, proceed as follows in your launcher scripts:
 
 ```bash 
-export MODULEPATH=$DEPRECATED_MODULEPATH
+resif-load-swset-legacy   # Eq. of export MODULEPATH=$MODULEPATH_LEGACY
+# [...]
+# Restore production settings
+resif-load-swset-prod     # Eq. of export MODULEPATH=$MODULEPATH_PROD
 ```
-Otherwise, the current version of the ULHPC Software Set in production is stored in `$RESIF_VERSION_PROD`
-If on the contrary, you want to use a non-default ULHPC software set release (for instance the `devel` version, stored in `$RESIF_VERSION_DEVEL`, proceed as follows:
+
+If on the contrary you want to test the (new) development software set, _i.e.,_ the `devel` version, stored in `$RESIF_VERSION_DEVEL`:
 
 ```bash 
-export MODULEPATH=$MODULEPATH_DEVEL
+resif-load-swset-devel  # Eq. of export MODULEPATH=$MODULEPATH_DEVEL
+# [...]
+# Restore production settings
+resif-reset-swset         # As resif-load-swset-prod
 ```
 
-before loading any modules. 
+??? tips "(iris only) Skylake Optimized builds"
+    Skylake optimized build can be loaded on **regular** nodes using 
+    ```bash 
+    resif-load-swset-skylake  # Eq. of export MODULEPATH=$MODULEPATH_PROD_SKYLAKE
+    ```
+    You **MUST** obviously be on a Skylake node (`sbatch -C skylake [...]`) to take benefit from it.
+    Note that this action is **not** required on **GPU** nodes. 
+
 
 !!! tips "GPU Optimized builds vs. CPU software set on GPU nodes"
     On GPU nodes, be aware that the default MODULEPATH holds two directories:
