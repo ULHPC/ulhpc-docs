@@ -14,7 +14,7 @@ This was made possible through an ambitious funding strategy enabled from the ea
 
 For more details[^1]: [:fontawesome-solid-sign-in-alt: hpc.uni.lu](https://hpc.uni.lu){: .md-button .md-button--link }
 
-[^1]: The facility is managed and operated by an expert team lead by  Dr. [S. Varrette](https://varrette.gforge.uni.lu). Contacts: [hpc-team@uni.lu](mailto:hpc-team@uni.lu)
+[^1]: The facility is [managed and operated by an expert team](https://hpc.uni.lu/about/team#hpc-ops) led by  Dr. [S. Varrette](https://varrette.gforge.uni.lu). Contacts: [hpc-team@uni.lu](mailto:hpc-team@uni.lu)
 
 ## Capacity evolution
 
