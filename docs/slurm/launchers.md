@@ -40,13 +40,13 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 %}
 
 === "Aion (default Dual-CPU)"
-    64 cores per socket and 2 sockets (physical CPUs) per `aion` node. Examples:
+    16 cores per socket and 8 (virtual) sockets (CPUs) per `aion` node. Examples:
     ```bash
     #SBATCH -p batch                 #SBATCH -p batch                #SBATCH -p batch
     #SBATCH -N 1                     #SBATCH -N 1                    #SBATCH -N 1
-    #SBATCH --ntasks-per-node=128    #SBATCH --ntasks-per-node 16    #SBATCH --ntasks-per-node 4
-    #SBATCH --ntasks-per-socket 64   #SBATCH --ntasks-per-socket 8   #SBATCH --ntasks-per-socket 2
-    #SBATCH -c 1                     #SBATCH -c 8                    #SBATCH -c 32
+    #SBATCH --ntasks-per-node=128    #SBATCH --ntasks-per-node 16    #SBATCH --ntasks-per-node 8
+    #SBATCH --ntasks-per-socket 16   #SBATCH --ntasks-per-socket 2   #SBATCH --ntasks-per-socket 1
+    #SBATCH -c 1                     #SBATCH -c 8                    #SBATCH -c 16
     ```
 
 === "Iris (default Dual-CPU)"
