@@ -273,7 +273,7 @@ sfeatures
         ### Example 3 - use all cores available
         {sbatch|srun|salloc} -N 1 --ntasks-per-node 8 --ntasks-per-socket 1 -c 16 [...]
         # Total: 8 tasks, each on 16 cores/threads
-        ```
+
         ### Example 4 - use all cores available
         {sbatch|srun|salloc} -N 1 --ntasks-per-node 2 -c 64 [...]
         # Total: 2 tasks, each on 64 cores/threads
