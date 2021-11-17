@@ -220,7 +220,7 @@ Details are provided below:
 
 | Node (type)                          | #Nodes | #Socket / #Cores | RAM [GB] | Features              |
 |--------------------------------------|--------|------------------|----------|-----------------------|
-| `aion-[0001-0318]`                   | 318    | 2 / 128          | 256      | `batch,epyc`          |
+| `aion-[0001-0318]`                   | 318    | 8 / 128          | 256      | `batch,epyc`          |
 | `iris-[001-108]`                     | 108    | 2 / 28           | 128      | `batch,broadwell`     |
 | `iris-[109-168]`                     | 60     | 2 / 28           | 128      | `batch,skylake`       |
 | `iris-[169-186]`   (GPU)             | 18     | 2 / 28           | 768      | `gpu,skylake,volta`   |
@@ -258,20 +258,24 @@ sfeatures
     number of cores _per socket_ available on the target computing node (second form).
 
     === "Aion (default Dual-CPU)"
-        64 cores per socket and 2 sockets (physical CPUs) per `aion` node.
+        16 cores per socket and 8 virtual sockets (CPUs) per `aion` node.
         Depending on the selected form, you **MUST** ensure that either
-        `<n>`$\times$`<thread>`=128, or that `<n>`=2`<s>` and `<s>`$\times$`<thread>`=64.
+        `<n>`$\times$`<thread>`=128, or that `<n>`=8`<s>` and `<s>`$\times$`<thread>`=16.
         ```bash
         ### Example 1 - use all cores available
-        {sbatch|srun|salloc} -N 2 --ntasks-per-node 32 --ntasks-per-socket 16 -c 4 [...]
-        # Total: 64 tasks (spread across 2 nodes), each on 2 cores/threads
+        {sbatch|srun|salloc} -N 2 --ntasks-per-node 32 --ntasks-per-socket 4 -c 4 [...]
+        # Total: 64 tasks (spread across 2 nodes), each on 4 cores/threads
 
         ### Example 2 - use all cores available
         {sbatch|srun|salloc} --ntasks-per-node 128 -c 1  [...]
         # Total; 128 (single-core) tasks
 
         ### Example 3 - use all cores available
-        {sbatch|srun|salloc} -N 1 --ntasks-per-node 2 --ntasks-per-socket 1 -c 64 [...]
+        {sbatch|srun|salloc} -N 1 --ntasks-per-node 8 --ntasks-per-socket 1 -c 16 [...]
+        # Total: 8 tasks, each on 16 cores/threads
+        ```
+        ### Example 4 - use all cores available
+        {sbatch|srun|salloc} -N 1 --ntasks-per-node 2 -c 64 [...]
         # Total: 2 tasks, each on 64 cores/threads
         ```
 
