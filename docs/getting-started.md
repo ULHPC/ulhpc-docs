@@ -47,7 +47,7 @@ The UL HPC platform has kept growing over time thanks to the continuous efforts 
 
 ??? question "How big is 1 PetaFlops? 1 PetaByte?"
     * 1 PetaFlops = 10<sup>15</sup> floating-point operations per second (PFlops or PF for short), corresponds to the cumulative performance of more than 3510 Macbook Pro 13" laptops [^1], or 7420 iPhone XS [^2]
-    * 1 PetaByte = 10<sup>15</sup> bytes = 8*10<sup>15</sup> bits, corresponding to the cumulative raw capacity of more than 975 SSDs 512GB.
+    * 1 PetaByte = 10<sup>15</sup> bytes = 8*10<sup>15</sup> bits, corresponding to the cumulative raw capacity of more than 1950 SSDs 512GB.
 
 ![](images/plots/plot_piechart_compute_cluster.png){: style="width:325px;"}
 ![](images/plots/plot_piechart_storage_fs.png){: style="width:325px;"}
