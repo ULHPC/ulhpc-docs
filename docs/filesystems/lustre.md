@@ -9,7 +9,7 @@ The [Lustre](http://lustre.org/) file system is an open-source, parallel file sy
 It is available as a global _high_-performance file system on all ULHPC computational systems through a [DDN ExaScaler](https://www.ddn.com/products/lustre-file-system-exascaler/) system.
 
 It is meant to host **temporary scratch data** within your jobs.
-In terms of raw storage capacities, it represents more than **1.6TB**.
+In terms of raw storage capacities, it represents more than **1.6PB**.
 
 * [Live status](https://hpc.uni.lu/live-status/motd/)
 
