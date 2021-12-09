@@ -140,7 +140,7 @@ The most important ones are detailed in the below table which summarizes the mai
 | `-N <N>`                  | **`<N>` Nodes** request                              | `-N 2`                   |
 | `--ntasks-per-node=<n>`   | `<n>` Tasks-per-node request                         | `--ntasks-per-node=28`   |
 | `--ntasks-per-socket=<s>` | `<s>` Tasks-per-socket request                       | `--ntasks-per-socket=14` |
-| `-c=<c>`                  | `<c>` Cores-per-task request (multithreading)        | `-c 1`                   |
+| `-c <c>`                  | `<c>` Cores-per-task request (multithreading)        | `-c 1`                   |
 | `--mem=<m>GB`             | **`<m>`GB memory per node** request                  | `--mem 0`                |
 | `-t [DD-]HH[:MM:SS]>`     | **Walltime** request                                 | `-t 4:00:00`             |
 | `-G <gpu>`                | `<gpu>` GPU(s) request                               | `-G 4`                   |
@@ -334,5 +334,5 @@ submitted.
 | `-N <N>`                  | `SLURM_JOB_NUM_NODES` or<br/> `SLURM_NNODES`   |                                          |
 | `--ntasks-per-node=<n>`   | `SLURM_NTASKS_PER_NODE`                   |                                          |
 | `--ntasks-per-socket=<s>` | `SLURM_NTASKS_PER_SOCKET`                 |                                          |
-| `-c=<c>`                  | `SLURM_CPUS_PER_TASK`                     | `OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}` |
+| `-c <c>`                  | `SLURM_CPUS_PER_TASK`                     | `OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}` |
 |                           | `SLURM_NTASKS`<br/> Total number of tasks | `srun -n $SLURM_NTASKS [...]`            |
