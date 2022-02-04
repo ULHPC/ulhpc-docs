@@ -57,6 +57,8 @@ def get_catlongname(cat):
 
 def collect(lst):
     softwares={}
+    all_sw_versions=set()
+    all_bundles=set()
     with open(lst,'r') as fd:
         for cnt, line in enumerate(fd):
             if not re.match(r'^#',line):
@@ -64,19 +66,26 @@ def collect(lst):
                 row = line.split("/")
                 software_version=row[-1].split(".lua")[0]
                 software_name="<p><a href={0}>{1}</a></p>".format(url,row[-2])
+                if row[-2].startswith("ULHPC"):
+                    all_bundles.add(software_name)
                 software_categorie="<p>{0}</p>".format(get_catlongname(row[-3]))
                 software_cluster=row[4]
+                
                 software_swset=row[5]
+                all_sw_versions.add(software_swset)
+
+
                 software_archi=row[6]
-                if softwares.get(software_name,None) is None:
-                    softwares[software_name]=["<p>{0}</p>".format(software_version),"<p>{0}</p>".format(software_swset),"<p>{0}</p>".format(software_archi),software_categorie,"<p>{0}</p>".format(software_cluster),software_description]
-                else:
-                    softwares[software_name][0] = softwares[software_name][0].replace("</p>","<br>{0}</p>".format(software_version))  
-                    softwares[software_name][1] = softwares[software_name][1].replace("</p>","<br>{0}</p>".format(software_swset))  
-                    softwares[software_name][2] = softwares[software_name][2].replace("</p>","<br>{0}</p>".format(software_archi))  
+                #if softwares.get(software_name,None) is None:
+                softwares[software_name]=["<p>{0}</p>".format(software_version),"<p>{0}</p>".format(software_swset),"<p>{0}</p>".format(software_archi),software_categorie,"<p>{0}</p>".format(software_cluster),software_description]
+                #else:
+                #    softwares[software_name][0] = softwares[software_name][0].replace("</p>","<br>{0}</p>".format(software_version))  
+                #    softwares[software_name][1] = softwares[software_name][1].replace("</p>","<br>{0}</p>".format(software_swset))  
+                #    softwares[software_name][2] = softwares[software_name][2].replace("</p>","<br>{0}</p>".format(software_archi))  
     df=pd.DataFrame.from_dict(softwares,orient="index",columns=['Version','Swset','Architecture','Category','Clusters','Description'])
     df.index.name="Software"
-    df.sort_values(['Category','Software'], ascending=[False, True], inplace=True)
+    df.sort_values(['Software','Version'], ascending=[False,True], inplace=True)
+
 
     folder=pathlib.Path("/tmp/software_list")
     if not folder.exists():
@@ -87,13 +96,17 @@ def collect(lst):
         df.to_markdown(fd)
         
     all_categories=get_catlongname(None)
-    for cat in all_categories:
-        cat_softwares = folder / "{0}.md".format(cat)
-        with cat_softwares.open("w") as fd:
-            df[df['Category']=="<p>{0}</p>".format(all_categories[cat])].to_markdown(fd)
+    for version in all_sw_versions: 
+     folder_version = folder / "{0}".format(version)
+     if not folder_version.exists():
+        folder_version.mkdir(parents=True)
+     for cat in all_categories:
+         cat_softwares = folder_version / "{0}-{1}.md".format(version,cat)
+         with cat_softwares.open("w") as fd:
+             df[(df['Category']=="<p>{0}</p>".format(all_categories[cat])) &  (df['Swset']=="<p>{0}</p>".format(version))].to_markdown(fd)
 
+    
 
-                
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog="resif3_module2markdown.py")
