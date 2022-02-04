@@ -103,7 +103,9 @@ def collect(lst):
      for cat in all_categories:
          cat_softwares = folder_version / "{0}-{1}.md".format(version,cat)
          with cat_softwares.open("w") as fd:
-             df[(df['Category']=="<p>{0}</p>".format(all_categories[cat])) &  (df['Swset']=="<p>{0}</p>".format(version))].to_markdown(fd)
+             subset=df[(df['Category']=="<p>{0}</p>".format(all_categories[cat])) &  (df['Swset']=="<p>{0}</p>".format(version))]
+             subset=subset.loc[:,~subset.columns.isin(['Version','Swset'])]
+             subset.to_markdown(fd)
 
     
 

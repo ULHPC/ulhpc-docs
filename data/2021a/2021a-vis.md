@@ -1,2 +1,2 @@
-| Software   | Version   | Swset   | Architecture   | Category   | Clusters   | Description   |
-|------------|-----------|---------|----------------|------------|------------|---------------|
+| Software   | Architecture   | Category   | Clusters   | Description   |
+|------------|----------------|------------|------------|---------------|

@@ -1,4 +1,4 @@
-| Software                                                         | Version                    | Swset        | Architecture   | Category         | Clusters    | Description                             |
-|:-----------------------------------------------------------------|:---------------------------|:-------------|:---------------|:-----------------|:------------|:----------------------------------------|
-| <p><a href=https://www.gnu.org/software/gdb/gdb.html>GDB</a></p> | <p>10.1-GCCcore-10.2.0</p> | <p>2020b</p> | <p>epyc</p>    | <p>Debugging</p> | <p>aion</p> | The GNU Project Debugger                |
-| <p><a href=https://valgrind.org>Valgrind</a></p>                 | <p>3.16.1-gompi-2020b</p>  | <p>2020b</p> | <p>epyc</p>    | <p>Debugging</p> | <p>aion</p> | Valgrind: Debugging and profiling tools |
+| Software                                                         | Architecture   | Category         | Clusters    | Description                             |
+|:-----------------------------------------------------------------|:---------------|:-----------------|:------------|:----------------------------------------|
+| <p><a href=https://www.gnu.org/software/gdb/gdb.html>GDB</a></p> | <p>epyc</p>    | <p>Debugging</p> | <p>aion</p> | The GNU Project Debugger                |
+| <p><a href=https://valgrind.org>Valgrind</a></p>                 | <p>epyc</p>    | <p>Debugging</p> | <p>aion</p> | Valgrind: Debugging and profiling tools |
