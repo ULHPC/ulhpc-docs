@@ -96,16 +96,22 @@ def collect(lst):
         df.to_markdown(fd)
         
     all_categories=get_catlongname(None)
-    for version in all_sw_versions: 
-     folder_version = folder / "{0}".format(version)
-     if not folder_version.exists():
-        folder_version.mkdir(parents=True)
-     for cat in all_categories:
-         cat_softwares = folder_version / "{0}-{1}.md".format(version,cat)
-         with cat_softwares.open("w") as fd:
-             subset=df[(df['Category']=="<p>{0}</p>".format(all_categories[cat])) &  (df['Swset']=="<p>{0}</p>".format(version))]
-             subset=subset.loc[:,~subset.columns.isin(['Version','Swset'])]
-             subset.to_markdown(fd)
+    soft_yml = folder / "softwares.yml"
+    with soft_yml.open("w") as yml_fd:
+     yml_fd.write("    - Supported Software List: \'software/all_softwares.md\'\n")  
+     yml_fd.write("    - Software Sets:\n")  
+     for version in sorted(all_sw_versions): 
+      yml_fd.write("        - {0}:\n".format(version))  
+      folder_version = folder / "{0}".format(version)
+      if not folder_version.exists():
+         folder_version.mkdir(parents=True)
+      for cat in all_categories:
+          cat_softwares = folder_version / "{0}-{1}.md".format(version,cat)
+          yml_fd.write("            - {0}: \'{1}\'\n".format(get_catlongname(cat),"software/{0}/{0}-{1}.md".format(version,cat)))  
+          with cat_softwares.open("w") as fd:
+              subset=df[(df['Category']=="<p>{0}</p>".format(all_categories[cat])) &  (df['Swset']=="<p>{0}</p>".format(version))]
+              subset=subset.loc[:,~subset.columns.isin(['Version','Swset'])]
+              subset.to_markdown(fd)
 
     
 

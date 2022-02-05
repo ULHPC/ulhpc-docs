@@ -1,0 +1,3 @@
+| Software                                          | Architecture   | Category                     | Clusters    | Description                                                                                                        |
+|:--------------------------------------------------|:---------------|:-----------------------------|:------------|:-------------------------------------------------------------------------------------------------------------------|
+| <p><a href=https://www.rust-lang.org>Rust</a></p> | <p>epyc</p>    | <p>Programming Languages</p> | <p>aion</p> | Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety. |
