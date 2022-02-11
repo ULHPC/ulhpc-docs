@@ -4,6 +4,17 @@ for supporting flexible control files in scientific simulations.
 For more information about libctl, please refer to [libctl Documentation](https://libctl.readthedocs.io/en/latest/).
 
 ### Available versions of libctl in ULHPC:
+
+??? info "[ULHPC Software/Modules Environment](../../environment/modules.md)"
+     For the user's convenience, we are maintaining the old
+     version and new version of each software that are available at
+     the ULHPC. To work with different software sets and how to
+     load them to your environment is clearly
+     explained in [Modules](../../environment/modules.md).
+     For example, if your module path is set to deprecated modules
+     `export MODULEPATH=$DEPRECATED_MODULEPATH` then the following versions of
+     libctl are available in ULHPC:
+     
 ```bash
 chem/libctl/3.2.2-intel-2017a
 chem/libctl/4.0.0-intel-2018a
@@ -16,6 +27,18 @@ certain novel two-body matrix elements (integrals) over Cartesian
 Gaussian functions used in modern atomic and molecular theory.
 
 ### Available versions of Libint in ULHPC:
+
+??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
+     /modules.md)
+     For the user's convenience, we are maintaining the old
+     version and new version of each software that are available at
+     the ULHPC. To work with different software sets and how to
+     load them to your environment is
+     clearly explained in [Modules](ulhpc-docs/docs/environment
+     /modules.md). For example, if your module path is set to deprecated modules
+     `export MODULEPATH=$DEPRECATED_MODULEPATH` then the following versions of Libint
+     are available in ULHPC:
+     
 ```bash
 chem/Libint/1.1.6-GCC-8.2.0-2.31.1
 chem/Libint/1.2.1-intel-2018a
@@ -27,6 +50,18 @@ The aim is to provide a portable, well tested and reliable set of exchange and
 correlation functionals that can be used by all the ETSF codes and also other codes.
 
 ### Available versions of Libxc in ULHPC:
+
+??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
+     /modules.md)
+     For the user's convenience, we are maintaining the old
+     version and new version of each software that are available at
+     the ULHPC. To work with different software sets and how to
+     load them to your environment is clearly
+     explained in [Modules](ulhpc-docs/docs/environment
+     /modules.md). For example, if your module path is set to deprecated modules
+     `export MODULEPATH=$DEPRECATED_MODULEPATH` then the following versions of
+     libxc are available at ULHPC:
+     
 ```bash
 chem/libxc/3.0.0-intel-2017a
 chem/libxc/3.0.1-intel-2018a
@@ -50,6 +85,18 @@ and is thus compatible with the majority of the codes used in the community.
 The PLUMED license (L-GPL) also allows it to be interfaced with proprietary software.
 
 ### Available versions of PLUMED in ULHPC:
+
+??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
+     /modules.md)
+     For the user's convenience, we are maintaining the old
+     version and new version of each software that are available at
+     the ULHPC. To work with different software sets and how to
+     load them to your environment is
+     clearly explained in [Modules](ulhpc-docs/docs/environment
+     /modules.md). For example, if your module path is set to deprecated modules
+     `export MODULEPATH=$DEPRECATED_MODULEPATH` then the
+     following versions of PLUMED are available at ULHPC:   
+     
 ```bash
 chem/PLUMED/2.4.2-intel-2018a
 chem/PLUMED/2.5.1-foss-2019a
@@ -75,6 +122,18 @@ The parallel code is controlled via the scripting language Python,
 which gives the software its great flexibility.
 
 ### Available versions of ESPResSo in ULHPC:
+
+??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
+     /modules.md)
+     For the user's convenience, we are maintaining the old
+     version and new version of each software that are available at
+     the ULHPC. To work with different software sets and how to
+     load them to your environment is
+     clearly explained in [Modules](ulhpc-docs/docs/environment
+     /modules.md). For example, if your module path is set to deprecated modules
+     `export MODULEPATH=$DEPRECATED_MODULEPATH` then the following
+     versions of EEPResSO are available at the ULHPC:
+     
 ```bash
 phys/ESPResSo/3.3.1-intel-2017a-parallel
 phys/ESPResSo/3.3.1-intel-2018a-parallel
@@ -94,6 +153,18 @@ which is in XML format and user-extendable. The package also contains a
 command-line utility for investigating units and converting values.
 
 ### Available version of UDUNITS in ULHPC:
+
+??? info [ULHPC Software/Modules Environment](ulhpc-docs/docs/environment
+     /modules.md)
+     For the user's convenience, we are maintaining the old
+     version and new version of each software that are available at
+     the ULHPC. To work with different software sets and how to
+     load them to your environment is clearly
+     explained in [Modules](ulhpc-docs/docs/environment
+     /modules.md). For example, if your module path is set to deprecated modules
+     `export MODULEPATH=$DEPRECATED_MODULEPATH` then the following versions of
+     UDUNITS are available at the ULHPC:
+     
 ```bash
 phys/UDUNITS/2.2.26-GCCcore-8.2.0
 ```

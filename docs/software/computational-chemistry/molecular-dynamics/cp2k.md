@@ -13,7 +13,17 @@ It is therefore easy to give the code a try, and to make modifications as needed
 
 ## Available versions of CP2K in ULHPC
 To check available versions of CP2K at ULHPC type `module spider cp2k`.
-The following list shows the available versions of CP2K in ULHPC. 
+
+??? info "[ULHPC Software/Modules Environment](../../environment/modules.md)"
+     For the user's convenience, we are maintaining the old
+     version and new version of each software that are available at
+     the ULHPC. To work with different software sets and how to
+     load them to your environment is
+     clearly explained in [Modules](../../environment/modules.md).
+     For example, if your module path is set to deprecated modules
+     export MODULEPATH=$DEPRECATED_MODULEPATH then
+     the following list shows the available versions of CP2K in ULHPC.
+     
 ```bash
 chem/CP2K/6.1-foss-2019a
 chem/CP2K/6.1-intel-2018a

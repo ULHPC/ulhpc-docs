@@ -6,7 +6,16 @@ high-performance parallel supercomputers to conventional workstation clusters.
 
 ## Available versions of NWChem in ULHPC
 To check available versions of NWChem at ULHPC type `module spider nwchem`.
-The following list shows the available versions of NWChem in ULHPC.
+
+??? info "[ULHPC Software/Modules Environment](../../environment/modules.md)"
+     For the user's convenience, we are maintaining the old
+     version and new version of each software that are available at
+     the ULHPC. To work with different software sets and how to
+     load them to your environment is
+     clearly explained in [Modules](../../environment/modules.md).
+     For example, if your module path is set to deprecated modules
+     `export MODULEPATH=$DEPRECATED_MODULEPATH` then
+     the following list shows the available versions of NWChem in ULHPC.
 
 ```bash
 chem/NWChem/6.6.revision27746-intel-2017a-2015-10-20-patches-20170814-Python-2.7.13
