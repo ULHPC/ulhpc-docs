@@ -84,12 +84,14 @@ echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
 # Load the required version of Abaqus and needed environment
 module purge
 module load cae/ABAQUS/2018-hotfix-1806
+module load toolchain/intel/2019b
 # /!\ IMPORTANT: ADAPT the url to point to YOUR licence server!!!
 export LM_LICENSE_FILE=xyz
 # check licenses available
 abaqus licensing lmstat -a
 unset SLURM_GTIDS
-abaqus-mpi job=job input=input.inp cpus=$SLURM_NTASKS interactive
+# abaqus-mpi job=job input=input.inp cpus=$SLURM_NTASKS interactive
+abaqus mp_mode=mpi job=job input=input.inp cpus=$SLURM_NTASKS interactive
 ```
 
 ## Additional information
