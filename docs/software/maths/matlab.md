@@ -15,7 +15,7 @@ math/MATLAB/<version>
 
 ## Interactive mode
 
-To open an MATLAB in the interactive mode, please follow the following steps:
+To open MATLAB in the interactive mode, please follow the following steps:
 
 (_eventually_) [connect](../../connect/access.md) to the ULHPC login node with the `-X` (or `-Y`) option:
 

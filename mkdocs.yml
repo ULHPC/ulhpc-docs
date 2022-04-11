@@ -149,6 +149,7 @@ nav:
     - Mathematics & Statistics:
           - MATLAB:    'software/maths/matlab.md'
           - MATHEMATICA:    'software/maths/mathematica.md'
+          - Stata: 'software/maths/stata.md'
           - Julia:    'software/maths/julia.md'
     - Optimizers:                  'software/optim/index.md'
     # - Performance/Debugging:       'development/performance-debugging-tools/index.md'
