@@ -216,16 +216,17 @@ Stata dir:  /mnt/irisgpfs/apps/resif/iris/2020b/broadwell/software/Stata/17/stat
 (1978 automobile data)
 
 . parallel, by(foreign): egen maxp = max(price)
+Small workload/num groups. Temporarily setting number of child processes to 2
 --------------------------------------------------------------------------------
 Parallel Computing with Stata
 Child processes: 2
-pll_id         : jr7k2z8d51
+pll_id         : bcrpvqtoi1
 Running at     : /mnt/irisgpfs/users/svarrette
 Randtype       : datetime
 
 Waiting for the child processes to finish...
-child process 0001 has exited without error...
 child process 0002 has exited without error...
+child process 0001 has exited without error...
 --------------------------------------------------------------------------------
 Enter -parallel printlog #- to checkout logfiles.
 --------------------------------------------------------------------------------
