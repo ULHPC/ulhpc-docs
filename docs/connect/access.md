@@ -3,6 +3,31 @@
 Opening an [SSH connection](ssh.md) to ULHPC systems results in a
 connection to an access node.
 
+=== "Iris"
+    ```bash
+    ssh iris-cluster
+    ```
+
+=== "Aion"
+    ```bash
+    ssh aion-cluster
+    ```
+=== "Iris (X11)"
+    To be able to further run GUI applications within your [interactive] jobs:
+    ```bash
+    ssh -X iris-cluster   # OR on Mac OS: ssh -Y iris-cluster
+    ```
+=== "Aion (X11)"
+    To be able to further run GUI applications within your [interactive] jobs:
+    ```bash
+    ssh -X aion-cluster   # OR on Mac OS: ssh -Y aion-cluster
+    ```
+
+!!! important
+    Recall that you **SHOULD NOT** run any HPC application on the login nodes.
+
+    That's why the `module` command is **NOT** available on them.
+
 ## Usage
 
 On access nodes, typical user tasks include
@@ -38,3 +63,15 @@ On access nodes, typical user tasks include
 
     * `top -u $USER`
     * `/usr/bin/time -v ./my_command`
+
+!!! tip "Running GUI Application over X11"
+    If you intend to run GUI applications (MATLAB, Stata, ParaView etc.), you **MUST** connect by SSH to the login nodes with the `-X` (or `-Y` on Mac OS) option:
+
+    === "Iris"
+        ```bash
+        ssh -X iris-cluster   # OR on Mac OS: ssh -Y iris-cluster
+        ```
+    === "Aion"
+        ```bash
+        ssh -X aion-cluster   # OR on Mac OS: ssh -Y aion-cluster
+        ```
