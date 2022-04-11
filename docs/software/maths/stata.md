@@ -39,7 +39,7 @@ To open a Stata session in [interactive](../../jobs/interactive.md) mode, please
     ssh -X aion-cluster   # OR on Mac OS: ssh -Y aion-cluster
     ```
 
-Then you can reserve an [interactive job](../../jobs/interactive.md), for instance with 4 cores. **Don't forget to use the `--x11` option if you intend to use the GUI**.
+Then you can reserve an [interactive job](../../jobs/interactive.md), for instance with 2 cores. **Don't forget to use the `--x11` option if you intend to use the GUI**.
 
 ```bash
 $ si --x11 -c2      # You CANNOT use more than 2 cores
