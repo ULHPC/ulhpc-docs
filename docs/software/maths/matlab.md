@@ -8,32 +8,76 @@ and formatted text in an executable notebook.
 
 ## Available versions of MATLAB in ULHPC
 To check available versions of MATLAB at ULHPC type `module spider matlab`.
-The following list shows the available versions of MATLAB in ULHPC. 
+The following list shows the available versions of MATLAB in ULHPC.
 ```bash
-math/MATLAB/2019b
-math/MATLAB/2020a
+math/MATLAB/<version>
 ```
 
 ## Interactive mode
+
 To open an MATLAB in the interactive mode, please follow the following steps:
 
-```bash
-# From your local computer
-$ ssh -X iris-cluster
+(_eventually_) [connect](../../connect/access.md) to the ULHPC login node with the `-X` (or `-Y`) option:
 
-# Reserve the node for interactive computation
-$ salloc -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11  # OR si --x11 [...]
+=== "Iris"
+    ```bash
+    ssh -X iris-cluster   # OR on Mac OS: ssh -Y iris-cluster
+    ```
+=== "Aion"
+    ```bash
+    ssh -X aion-cluster   # OR on Mac OS: ssh -Y aion-cluster
+    ```
+
+Then you can reserve an [interactive job](../../jobs/interactive.md), for instance with 4 cores. **Don't forget to use the `--x11` option if you intend to use the GUI**.
+
+```bash
+$ si --x11 -c4
 
 # Load the module MATLAB and needed environment
-$ module purge
-$ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
-$ module load math/MATLAB/2020a
+(node)$ module purge
+(node)$ module load math/MATLAB
 
-$ matlab &
+# Non-Graphical version (CLI)
+(node)$ matlab -nodisplay -nosplash
+                  < M A T L A B (R) >
+        Copyright 1984-2021 The MathWorks, Inc.
+        R2021a (9.10.0.1602886) 64-bit (glnxa64)
+                   February 17, 2021
+To get started, type doc.
+For product information, visit www.mathworks.com.
+>> version()
+ans =
+    '9.10.0.1602886 (R2021a)'
+# List of installed add-ons
+>>  matlab.addons.installedAddons
+ans =
+  96x4 table
+            Name           Version     Enabled    Identifier
+    ___________________    ________    _______    __________
+
+    "Mapping Toolbox"      "5.1"        true         "MG"
+    "Simulink Test"        "3.4"        true         "SZ"
+    [...]
+>> quit()
+
+# To run the GUI version, over X11
+(node)$ matlab &
 ```
 
 ## Batch mode
-### An example for serial case
+
+For non-interactive or long executions, MATLAB can be ran in [passive or batch mode](../../jobs/submit.md), reading all commands from an input file (with `.m` extension) you provide (Ex: `inputfile.m`) and saving the results into an output file, for instance `outputfile.out`).
+You have two ways to proceed:
+
+=== "using redirection operators"
+    ```bash
+    matlab -nodisplay -nosplash < inputfile.m > outputfile.out
+    ```
+=== "Use command-line options `-r` and `-logfile`"
+    ```bash
+    # /!\ IMPORTANT: notice the **missing** '.m' extension on -r !!!
+    matlab -nodisplay -nosplash -r inputfile -logfile outputfile.out
+    ```
 
 ```bash
 #!/bin/bash -l
@@ -41,59 +85,28 @@ $ matlab &
 ###SBATCH -A <project_name>
 #SBATCH --ntasks-per-node 1
 #SBATCH -c 1
-#SBATCH --time=00:15:00
+#SBATCH --time=00:30:00
 #SBATCH -p batch
 
-# Load the module Julia and needed environment
+# Load the module MATLAB
 module purge
-module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
-module load math/MATLAB/2020a
+module load math/MATLAB
 
-srun matlab -nodisplay -r matlab_script_serial_file -logfile output.out
+# second form with CLI options '-r <input>' and '-logfile <output>.out'
+srun -c $SLURM_CPUS_PER_TASK matlab -nodisplay -r my_matlab_script -logfile output.out
 
 # example for if you need to have a input parameters for the computations
 # matlab_script_serial_file(x,y,z)
-srun matlab -nodisplay -r 'matlab_script_serial_file(2,2,1)' -logfile output.out
+srun matlab -nodisplay -r my_matlab_script(2,2,1)' -logfile output.out
 
-rm -rf /home/users/ur_user_name/.matlab
-rm -rf /home/users/ur_user_name/java*
+# safeguard (!) afterwards
+rm -rf $HOME/.matlab
+rm -rf $HOME/java*
 ```
 
-!!! example
-    ```bash
-    # example for MATLAB ParFor (matlab_script_serial_file.m)
-    tic
-    n = 500;
-    A = 500;
-    a = zeros(1,n);
-    for i = 1:n
-    a(i) = max(abs(eig(rand(A))));
-    end
-    toc
-    ```
-    
+In matlab, you can create a parallel pool of thread workers on the local computing node by using the [parpool](https://mathworks.com/help/parallel-computing/parallel.threadpool.html) function.
+After you create the pool, parallel pool features, such as [`parfor`](https://mathworks.com/help/parallel-computing/parallel-for-loops-parfor.html) or [`parfeval`](https://fr.mathworks.com/help/matlab/ref/parfeval.html?searchHighlight=parfeval&s_tid=srchtitle_parfeval_1), run on the workers. With the ThreadPool object, you can interact with the parallel pool.
 
-### An example for parallel case
-
-```bash
-#!/bin/bash -l
-#SBATCH -J MATLAB
-###SBATCH -A <project_name>
-#SBATCH -N 1
-#SBATCH -c 28
-#SBATCH --time=00:10:00
-#SBATCH -p batch
-
-# Load the module Julia and needed environment
-module purge
-module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
-module load math/MATLAB/2020a
-
-srun -c $SLURM_CPUS_PER_TASK matlab -nodisplay -r matlab_script_parallel_file -logfile output.out
-
-rm -rf /home/users/ur_user_name/.matlab
-rm -rf /home/users/ur_user_name/java*
-```
 
 !!! example
 
@@ -112,7 +125,9 @@ rm -rf /home/users/ur_user_name/java*
     delete(gcp); % you have to delete the parallel region after the work is done
     exit;
     ```
+
 ## Additional information
+
 To know more information about MATLAB tutorial and documentation,
 please refer to [MATLAB tutorial](https://nl.mathworks.com/academia/books.html).
 
