@@ -8,7 +8,7 @@ and formatted text in an executable notebook.
 
 ## Available versions of MATLAB in ULHPC
 To check available versions of MATLAB at ULHPC type `module spider matlab`.
-The following list shows the available versions of MATLAB in ULHPC.
+It will list the available versions:
 ```bash
 math/MATLAB/<version>
 ```
