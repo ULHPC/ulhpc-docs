@@ -189,7 +189,7 @@ abaqus job=<jobname> resume
     [ ! -f "${INPUTFILE}" ] && print_error_and_exit "Unable to find input file ${INPUTFILE}"
 
     abaqus job="${SLURM_JOB_NAME}" verbose=2 interactive \
-        input=${INPUTFILE} cpus=${SLURM_NTASK} mp_mode=mpi
+        input=${INPUTFILE} cpus=${SLURM_NTASKS} mp_mode=mpi
     ```
 
 === "Shared memory with GPU"
