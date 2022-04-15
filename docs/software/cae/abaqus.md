@@ -162,7 +162,7 @@ abaqus job=<jobname> resume
     # export LM_LICENSE_FILE=[...]
     unset SLURM_GTIDS
 
-    INPUTFILE=s4d.ind
+    INPUTFILE=s4d.inp
     [ ! -f "${INPUTFILE}" ] && print_error_and_exit "Unable to find input file ${INPUTFILE}"
 
     abaqus job="${SLURM_JOB_NAME}" verbose=2 interactive \
@@ -185,7 +185,7 @@ abaqus job=<jobname> resume
     # export LM_LICENSE_FILE=[...]
     unset SLURM_GTIDS
 
-    INPUTFILE=s4d.ind
+    INPUTFILE=s4d.inp
     [ ! -f "${INPUTFILE}" ] && print_error_and_exit "Unable to find input file ${INPUTFILE}"
 
     abaqus job="${SLURM_JOB_NAME}" verbose=2 interactive \
@@ -210,7 +210,7 @@ abaqus job=<jobname> resume
     # export LM_LICENSE_FILE=[...]
     unset SLURM_GTIDS
 
-    INPUTFILE=s4d.ind
+    INPUTFILE=s4d.inp
     [ ! -f "${INPUTFILE}" ] && print_error_and_exit "Unable to find input file ${INPUTFILE}"
 
     abaqus job="${SLURM_JOB_NAME}" verbose=2 interactive \
