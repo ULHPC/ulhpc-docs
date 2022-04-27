@@ -13,15 +13,26 @@ from functools import reduce
 # HELPERS
 ###
 def get_catlongname(cat):
-
         ''' Return a long name (if known) for a given category. '''
-        knowncats = {'bio':"Biology", 'cae':"CFD/Finite element modelling",
-                     'chem':"Chemistry", 'compiler':"Compilers", 'data':"Data processing",
-                     'debugger':"Debugging", 'devel':"Development", 'geo':"Weather modelling", 
-                     'lang': "Programming Languages", 'lib':"Libraries",  'math':"Mathematics",
-                     'mpi': "MPI", 'numlib':"Numerical libraries", 'perf':"Performance measurements",
-                     'phys':"Physics", 'system':"System-level software", 'toolchain':"Toolchains (software stacks)",
-                     'tools':"Utilities", 'vis':"Visualisation"}
+        knowncats = {'bio':       "Biology",
+                     'cae':       "CFD/Finite element modelling",
+                     'chem':      "Chemistry",
+                     'compiler':  "Compilers",
+                     'data':      "Data processing",
+                     'debugger':  "Debugging",
+                     'devel':     "Development",
+                     'geo':       "Weather modelling",
+                     'lang':      "Programming Languages",
+                     'lib':       "Libraries",
+                     'math':      "Mathematics",
+                     'mpi':       "MPI",
+                     'numlib':    "Numerical libraries",
+                     'perf':      "Performance measurements",
+                     'phys':      "Physics",
+                     'system':    "System-level software",
+                     'toolchain': "Toolchains (software stacks)",
+                     'tools':     "Utilities",
+                     'vis':       "Visualisation"}
         if cat is None: return knowncats
         if cat in knowncats.keys(): return knowncats[cat]
         else: return cat.upper()
@@ -86,7 +97,7 @@ def get_module_details_from_file(mfpath, filters):
 
         if "/opt/apps/resif/" not in mfpath:
             raise Exception('File provided does not come from /opt/apps/resif')
-        
+
         path_splitted = mfpath.split('/')
         path_splitted.pop(0)
 
@@ -113,7 +124,7 @@ def get_module_details_from_file(mfpath, filters):
         for line in raw:
             line = line.strip()
             if line.startswith("whatis([[Description:") or line.startswith("whatis([==[Description:"): isDescLine = True
-            if line.startswith("whatis([[Homepage:") or line.startswith("whatis([==[Homepage:"): 
+            if line.startswith("whatis([[Homepage:") or line.startswith("whatis([==[Homepage:"):
                 isDescLine = False    # description ends before www whatis block
                 match_homepage = line
             if isDescLine and (line != ''): desc.append(line)
@@ -151,7 +162,7 @@ def get_module_details_from_file(mfpath, filters):
                 return False
 
         return module_details
-    
+
     except Exception as e:
         print(e)
         return False
@@ -178,7 +189,7 @@ def collect_softwares(paths, filters=None):
 # /swset.md will contains all software and version included into the current software set (can contain multiple line for a single software, but with different versions)
 # /category/software.md contains all versions and software set available for this specific software
 ###
-def render_markdown_from_collect(collected_softwares, output_path="./software_list"):
+def render_markdown_from_collect(collected_softwares, output_path="./docs/software_list"):
 
     output_folder = create_output_path(output_path)
     all_softwares={}
