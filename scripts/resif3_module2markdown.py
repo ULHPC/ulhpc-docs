@@ -371,7 +371,7 @@ if __name__ == "__main__":
         pprint.pprint(collect_softwares(paths, filters))
 
     if args.command == 'render':
-        output_path = './software_list'
+        output_path = './docs/software_list'
         if args.output:
             output_path = args.output[0]
         render_markdown_from_collect(collect_softwares(paths, filters), output_path)
