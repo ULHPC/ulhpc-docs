@@ -102,6 +102,8 @@ See also [:fontawesome-solid-sign-in-alt: Atos Press Release](https://atos.net/e
 * Delivery of remaining equipment (incl. Lot 1 sequana racks and compute nodes) 
 * Compute rack (Lot 1 DLC) installation start
 
+## 2021
+
 ### Jan - Feb 2021
 
 * The 4 DDN expansion enclosure shipped with the lifting tools and pressure tools
@@ -118,10 +120,19 @@ See also [:fontawesome-solid-sign-in-alt: Atos Press Release](https://atos.net/e
 
 ### Mar - Apr 2021
 
-* Penalities letter planned with Marie Bourcy / Christine Isolano and sent
 * Start GS7990 and NAS server installation
 
 ### May - June 2021
 
-* IB EDR cables delivered
+* IB EDR cables delivered and installed
+
+### Jul - Aug - Sept 2021
+
+* Slurm Federation between both clusters `Iris` and `Aion`
+* Benchmark performance
+* Acceptance list reviewed 
+
+### Oct 2021
+
+* Official release
 
