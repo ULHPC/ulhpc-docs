@@ -29,7 +29,7 @@ will be used:
     once you think about it.
     The scheduler needs some way to adjudicate who gets what resources when
     different groups on the cluster have been granted different resources and shares
-    for various reasons (see [Account Hierarchy](accounts.md).
+    for various reasons (see [Account Hierarchy](accounts.md)).
 
     In order to serve the great variety of groups and needs on the cluster, a
     method of fairly adjudicating job priority is required.
@@ -44,6 +44,7 @@ will be used:
     how big or small the group is**.
 
 
+## FairTree Algorithm
 
 There exists several [fairsharing
 algorithms](https://slurm.schedmd.com/priority_multifactor.html#fairshare)
@@ -55,7 +56,7 @@ implemented in Slurm:
   ULHPC since Oct 2020)
 
 
-??? question "What is Fair Tree?"
+!!! question "What is Fair Tree?"
     The [Fair Tree](https://slurm.schedmd.com/fair_tree.html) algorithm
     prioritizes users such that if accounts A and B are siblings and A has a
     higher fairshare factor than B, then all children of A will have higher
@@ -87,39 +88,7 @@ implemented in Slurm:
     [:fontawesome-solid-sign-in-alt: Overview of Fair Tree for End Users](https://slurm.schedmd.com/fair_tree.html#enduser){: .md-button .md-button--link }
     [:fontawesome-solid-sign-in-alt: Level Fairshare Calculation](https://slurm.schedmd.com/fair_tree.html#fairshare){: .md-button .md-button--link }
 
-## Trackable RESources (TRES) Billing Weights
 
-Slurm saves accounting data for every job or job step that the user submits.
-On ULHPC facilities, Slurm [Trackable RESources
-(TRES)](https://slurm.schedmd.com/tres.html) is enabled to allow for
-the scheduler to charge back users for how much they have used of different
-features (i.e. not only CPU) on the cluster.
-This is important as the usage of the cluster factors into the Fairshare
-calculation.
-
-As explained in the [ULHPC Usage Charging
-Policy](../policies/usage-charging.md), we set TRES for CPU, GPU, and Memory
-usage according to _weights_ defined as follows:
-
-| __Weight__     | __Description__                                                                       |
-|----------------|---------------------------------------------------------------------------------------|
-| $\alpha_{cpu}$ | Normalized relative performance of CPU processor core (ref.: skylake 73.6 GFlops/core) |
-| $\alpha_{mem}$ | Inverse of the average available memory size per core                                 |
-| $\alpha_{GPU}$ | Weight per GPU accelerator                                                          |
-
-Each [partition](partitions.md) has its own weights
-(combined into [`TRESBillingWeight`](https://slurm.schedmd.com/tres.html)) you can check with
-
-```bash
-# /!\ ADAPT <partition> accordingly
-scontrol show partition <partition>
-```
-
-{%
-   include-markdown "../policies/usage-charging.md"
-   start="<!--TRESBillingWeight-table-start-->"
-   end="<!--TRESBillingWeight-table-end-->"
-%}
 
 ## Shares
 
@@ -144,26 +113,84 @@ Policy](../policies/usage-charging.md){: .md-button .md-button--link }
 %}
 
 
-!!! info "Fairshare score"
-    The _Fairshare score_ is the value Slurm calculates based off of user's
-    usage reflecting the difference between the portion of the computing resource
-    that has been promised (share) and the amount of resources that has been
-    consumed. You can quickly see your score with
-    ```console
-    $ sshare  [-A <account>] -l
-    ```
-    It will show the Level Fairshare value as `Level FS`.
-    The field shows the value for each association, thus allowing users to see
-    the results of the fairshare calculation at each level.
-    _Note_: Unlike the Effective Usage, the Norm Usage is **not** used by Fair Tree but is still displayed.
 
+
+## Fair Share Factor
+
+The _Fairshare score_ is the value Slurm calculates based off of user's
+usage reflecting the difference between the portion of the computing resource
+that has been promised (share) and the amount of resources that has been
+consumed.
+It thus influences the order in which a user's queued jobs are scheduled to run based on the portion of the computing resources they have been allocated and the resources their jobs have already consumed.
+
+In practice, Slurm's fair-share factor is a floating point number between 0.0 and 1.0 that reflects the shares of a computing resource that a user has been allocated and the amount of computing resources the user's jobs have consumed.
+
+* The higher the value, the higher is the placement in the queue of jobs waiting to be scheduled.
+* Reciprocally, the more resources the users is consuming, the lower the fair share factor will be which will result in lower priorities.
+
+### `ulhpcshare` helper
+
+!!! important "Listing the ULHPC shares: `ulhpcshare` helper"
+    [`sshare`](https://slurm.schedmd.com/sshare.html) can be used to view the fair share factors and corresponding promised and actual usage for all users.
+    **However**, you are encouraged to use the `ulhpcshare` helper function:
+    ```bash
+    # your current shares and fair-share factors among your associations
+    ulhpcshare
+    # as above, but for user '<login>'
+    ulhpcshare -u <login>
+    # as above, but for account '<account>'
+    ulhpcshare -A <account>
+    ```
+    The column that contains the actual factor is called "FairShare".
+
+### Official `sshare` utility
+
+`ulhpcshare` is a wrapper around the official [`sshare`](https://slurm.schedmd.com/sshare.html) utility.
+You can quickly see your score with
+```console
+$ sshare  [-A <account>] [-l] [--format=Account,User,RawShares,NormShares,EffectvUsage,LevelFS,FairShare]
+```
+It will show the Level Fairshare value as `Level FS`.
+The field shows the value for each association, thus allowing users to see the results of the fairshare calculation at each level.
+
+_Note_: Unlike the Effective Usage, the Norm Usage is **not** used by Fair Tree but is still displayed in this case.
 
 ### Slurm Parameter Definitions
 
 In this part some of the set slurm parameters are explained which are used to set up the Fair Tree Fairshare Algorithm. For a more detailed explanation please consult the [official documentation](https://slurm.schedmd.com/)
 
-* `PriorityDecayHalfLife=[number of days]-[number of hours]`: The time, of which the resource consumption is taken into account for the Fairshare Algorithm, can be set by this.
+* `PriorityCalcPeriod=HH:MM::SS`: frequency in minutes that job half-life decay and Fair Tree calculations are performed.
+* `PriorityDecayHalfLife=[number of days]-[number of hours]`: the time, of which the resource consumption is taken into account for the Fairshare Algorithm, can be set by this.
+* `PriorityMaxAge=[number of days]-[number of hours]`: the maximal queueing time which counts for the priority calculation. Note that queueing times above are possible but do not contribute to the priority factor.
 
+A quick way to check the currently running configuration is:
+
+```bash
+scontrol show config | grep -i priority
+```
+
+
+## Trackable RESources (TRES) Billing Weights
+
+Slurm saves accounting data for every job or job step that the user submits.
+On ULHPC facilities, Slurm [Trackable RESources
+(TRES)](https://slurm.schedmd.com/tres.html) is enabled to allow for
+the scheduler to charge back users for how much they have used of different
+features (i.e. not only CPU) on the cluster -- see [Job Accounting and Billing](../jobs/billing.md).
+This is important as the usage of the cluster factors into the Fairshare
+calculation.
+
+{%
+   include-markdown "../jobs/billing.md"
+   start="<!--TRESBillingWeight-start-->"
+   end="<!--TRESBillingWeight-end-->"
+%}
+
+{%
+   include-markdown "../policies/usage-charging.md"
+   start="<!--TRESBillingWeight-table-start-->"
+   end="<!--TRESBillingWeight-table-end-->"
+%}
 
 ## FAQ
 

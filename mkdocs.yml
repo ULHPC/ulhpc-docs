@@ -88,7 +88,7 @@ nav:
     - Quality of Service (QOS): 'slurm/qos.md'
     - Account Hierarchy: 'slurm/accounts.md'
     - Job State and Reason Code: 'jobs/reason-codes.md'
-    - Fairshare and Job Accounting: 'slurm/fairsharing.md'
+    - Fairsharing: 'slurm/fairsharing.md'
     - Job Priority and Backfilling: 'jobs/priority.md'
     - Job Accounting and Billing: 'jobs/billing.md'
     # - Limits: 'jobs/limits.md'
