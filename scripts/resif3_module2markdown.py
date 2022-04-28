@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Time-stamp: <Thu 2022-04-28 18:39 svarrette>
+# Time-stamp: <Thu 2022-04-28 19:22 svarrette>
 ###############################################################################
 
 """
@@ -479,9 +479,10 @@ def collect(ctx,
     if swset   is not None: filters['swsets'] = swset
     log.debug(f'Filters to apply: {  pprint.pformat(filters) }')
     result = collect_softwares(lualist, filters)
+    pprint.pprint(type(result))
     log.info(f'Resulting collected dict: \n{ pprint.pformat(result) }')
     if output is not None:
-        yaml.dump(result, output)
+        yaml.dump(result, output, allow_unicode=True, default_flow_style=False)
         output.close()
 
 if __name__ == "__main__":
