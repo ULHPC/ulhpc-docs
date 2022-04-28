@@ -38,12 +38,12 @@ You can use the [`sprio`](https://slurm.schedmd.com/sprio.html) to view the fact
 
 !!! example "sprio Utility usage"
     Show current weights
-    ```console
+    ```
     sprio -w
     ```
     List pending jobs, sorted by jobid
-    ```
-    sprio [-n]
+    ```bash
+    sprio [-n]     # OR: sp
     ```
     List pending jobs, sorted by priority
     ```
@@ -58,7 +58,6 @@ Getting the priority given to a job can be done either with [`squeue`](https://s
 # /!\ ADAPT <jobid> accordingly
 squeue -o %Q -j <jobid>
 ```
-
 
 ## Backfill Scheduling
 
