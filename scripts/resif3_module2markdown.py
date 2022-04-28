@@ -1,17 +1,79 @@
 #!/usr/bin/env python3
+# Time-stamp: <Thu 2022-04-28 18:39 svarrette>
+###############################################################################
+
+"""
+Collect and analyse the current RESIF3 software set available on the ULHPC
+platform -- see https://github.com/ULHPC/sw
+
+Render (i.e.) generate output markdown files reflecting the available software
+and modules to be integrated into the current hpc-docs.uni.lu site.
+"""
 
 import subprocess
 import re
 import pandas as pd
+import click    # prefered for CLI
+import confuse
+import sys
+import os
+import logging
+import logging.config
 import argparse
 import pathlib
 import pprint
+import socket
 import itertools
+import yaml
 from functools import reduce
 
+APPNAME = 'resif3_module2markdown'
+__version__ = '1.0.0'
+
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+
 ###
-# HELPERS
+# GENERIC SETTINGS / LOGS Management
 ###
+## settings management with confuse
+class ConfigValueNotFound(Exception):
+    pass
+confuse.NotFoundError = ConfigValueNotFound
+settings = confuse.Configuration(APPNAME, __name__)
+
+## logging
+FORMATTER = logging.Formatter("[%(name)s] %(asctime)s — %(levelname)s: %(message)s")
+def get_console_handler():
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setFormatter(FORMATTER)
+    return console_handler
+# def get_file_handler():
+#    file_handler = TimedRotatingFileHandler(LOG_FILE, when='midnight')
+#    file_handler.setFormatter(FORMATTER)
+#    return file_handler
+def get_logger(logger_name):
+   logger = logging.getLogger(logger_name)
+   logger.setLevel(logging.INFO)
+   logger.addHandler(get_console_handler())
+   # logger.addHandler(get_file_handler())
+   # with this pattern, it's rarely necessary to propagate the error up to parent
+   logger.propagate = False
+   return logger
+
+log = get_logger(APPNAME)
+
+###
+# UTILS HELPERS
+###
+def dump_yaml(obj, stream):
+    """Attempt to dump `obj` to a YAML file"""
+    return yaml.dump(obj, stream=stream, default_flow_style=False)
+def load_yaml(path):
+    """Load a yaml file from `path`"""
+    return parse_yaml(_load(path))
+def parse_yaml(data):
+    return yaml.safe_load(data)
+
 def get_catlongname(cat):
         ''' Return a long name (if known) for a given category. '''
         knowncats = {'bio':       "Biology",
@@ -39,7 +101,6 @@ def get_catlongname(cat):
 
 # Deep Dictionary Merge from https://gist.github.com/angstwad/bf22d1822c38a92ec0a9
 def dict_merge(dct, merge_dct):
-
     dct = dct.copy()
 
     for k, v in merge_dct.items():
@@ -184,10 +245,12 @@ def collect_softwares(paths, filters=None):
 
 
 ###
-# Write into markdown files software details, usaully given by the collect command
-# /all_software.md will contains generic informations, 1 line per software
-# /swset.md will contains all software and version included into the current software set (can contain multiple line for a single software, but with different versions)
-# /category/software.md contains all versions and software set available for this specific software
+# Write into markdown files software details, usaully given by the collect
+# command /all_software.md will contains generic informations, 1 line per
+# software /swset.md will contains all software and version included into the
+# current software set (can contain multiple line for a single software, but
+# with different versions) /category/software.md contains all versions and
+# software set available for this specific software
 ###
 def render_markdown_from_collect(collected_softwares, output_path="./docs/software_list"):
 
@@ -336,42 +399,129 @@ def render_markdown_from_collect(collected_softwares, output_path="./docs/softwa
         df.to_markdown(fd)
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(prog="resif3_module2markdown.py")
-    subparser = parser.add_subparsers(dest='command')
+###############################################################################
+# Command line interface with click
+@click.group(invoke_without_command=True, context_settings=CONTEXT_SETTINGS)
+@click.pass_context
+@click.option('-V', '--version', flag_value=True, help='Return the version of this script.')
+@click.option('-v', '--verbose', count=True,      help='Verbosity level')
+@click.option('--debug', is_flag=True, default=False, help='Debug mode')
+@click.option('--noop', '--dry-run', is_flag=True, default=False, help='Dry run mode')
+def cli(ctx, version, verbose, debug, noop):
+    """
+    Main command line interface
+    """
+    if noop: settings['noop'] = True
+    if debug:
+        settings['debug'] = True
+        log.setLevel(logging.DEBUG)
+    if (verbose > 0): log.setLevel(logging.DEBUG)
+    if ctx.invoked_subcommand is None:
+        if version:
+            click.echo("This is " + os.path.basename(__file__) + " version " + __version__)
+        else:
+            click.echo(ctx.get_help())
 
-    parser_collect = subparser.add_parser('collect', help='Generate a (filtered) map of ULHPC SWSet')
-
-    parser_render = subparser.add_parser('render', help='Generate software informations files (example: ./resif3_module2markdown.py render --output $(pwd)/software_list --clusters iris --swsets 2019b 2020b --arch gpu)')
-    parser_render.add_argument('--output', type=str, nargs=1, help='Secify the output folder for your generated markdown files ($(pwd)/software_list/ by default).', required=False)
-
-    for p in [parser_collect, parser_render]:
-        p.add_argument('--clusters', type=str, nargs='+', help='Filter output by cluster (example: "iris"). All clusters will be displayed by default.)', required=False)
-        p.add_argument('--archs', type=str, nargs='+', help='Filter output by arch (example: "gpu"). All archs will be displayed by default.)', required=False)
-        p.add_argument('--swsets', type=str, nargs='+', help='Filter output by software set (example: "2020b"). All swset will be displayed by default.)', required=False)
-        p.add_argument('--paths', type=str, nargs='+', help='Path to modules\' LUA definition files, files in /opt/apps/resif/[iris,aion] are used by default', required=False)
-
-    args = parser.parse_args()
+# sub command 'collect'
+@cli.command(short_help='Collect meta-data dict of the RESIF3 modules installed and (eventually) export them as YAML')
+@click.pass_context
+@click.option('-a', '--arch', type=click.Choice(['broadwell','skylake','gpu','epyc'], case_sensitive=False),
+              help='Filter output by RESIF architecture')
+@click.option('-c', '--cluster', type=click.Choice(['iris','aion'], case_sensitive=False),
+              help='Filter output by cluster')
+@click.option('-s', '--swset', multiple=True, metavar='YYYY{a|b}', default=['2019b', '2020b'],
+              help='Filter output by RESIF software set version (Ex: 2020b)')
+@click.option('-p', '--resif-root-path', type=click.Path(exists=True), default='/opt/apps/resif',
+              help='set RESIF root path. In particular, modules and software installed by RESIF' +
+              'can be found under PATH/<cluster>/<version>/<arch>/{software,modules}')
+@click.option('-o', '--output', type=click.File('w'), metavar='YAMLFILE',
+              default=None, help="Set output file for the dict (Default output to STDOUT)")
+def collect(ctx,
+            arch,      # type: Union['broadwell','skylake','gpu','epyc']
+            cluster,   # type: Union['iris', 'aion']
+            swset,    # type: Array[str]
+            resif_root_path,  # type: str (directory path)
+            output     # type: Union[None, str] (writable file path)
+            ):
+    """
+    Collect the meta data of the RESIFs modules available on the cluster
+    """
+    log.info('Collect meta-data for the available RESIF modules')
+    log.debug(f'click context:\n {  pprint.pformat(ctx.params) } ')
+    log.info(f'RESIF root path: { resif_root_path }')
+    if bool(re.match('.*(iris|aion)-cluster\.uni\.lux$', socket.getfqdn())):
+        default_search_paths = "%s/iris %s/aion" % (resif_root_path, resif_root_path)
+    else:
+        default_search_paths = "%s" % resif_root_path
+    log.info(f'default searched path: { default_search_paths }')
+    find_cmd = [
+        "find",
+        default_search_paths,
+        " -type d",
+        "\( -name ebfiles_repo -o -name software \)",
+        "-prune",
+        "-false",
+        "-o",
+        "-type f  \( -iname '*.lua'  ! -iname '.*' \)"
+    ]
+    log.info(f'Find command to collect lua module files in production:\n     { " ".join(find_cmd) }')
+    # Python 3.6 on iris/aion -- starting 3.7, it is recommended to use
+    #        subprocess.run([ ... ], capture_output=True)
+    if sys.version_info < (3, 7):
+        lualist = subprocess.check_output(f'{ " ".join(find_cmd) }',  shell=True).decode('utf-8').split()
+    else:
+        lualist = subprocess.run(f'{ " ".join(find_cmd) }', capture_output=True).stdout.decode('utf-8').split()
+    # log.debug(f'List of LUA files to analyse:\n    { pprint.pformat(lualist) }')
 
     filters = {}
-    paths = ''
-    if args.paths:
-        paths = args.paths
-    else:
-        # Get all released swset definition file if no path is specified
-        paths = subprocess.check_output("""find /opt/apps/resif/iris /opt/apps/resif/aion -type d \( -iname ebfiles_repo -o -iname software \) -prune -false -o -type f \( -iname '*.lua'  ! -iname '.*' \)""", shell=True).decode('utf-8').split()
-    if args.clusters:
-        filters['clusters'] = args.clusters
-    if args.archs:
-        filters['archs'] = args.archs
-    if args.swsets:
-        filters['swsets'] = args.swsets
+    if arch    is not None: filters['archs'] = arch
+    if cluster is not None: filters['clusters'] = cluster
+    if swset   is not None: filters['swsets'] = swset
+    log.debug(f'Filters to apply: {  pprint.pformat(filters) }')
+    result = collect_softwares(lualist, filters)
+    log.info(f'Resulting collected dict: \n{ pprint.pformat(result) }')
+    if output is not None:
+        yaml.dump(result, output)
+        output.close()
 
-    if args.command == 'collect':
-        pprint.pprint(collect_softwares(paths, filters))
+if __name__ == "__main__":
+    cli()
 
-    if args.command == 'render':
-        output_path = './docs/software_list'
-        if args.output:
-            output_path = args.output[0]
-        render_markdown_from_collect(collect_softwares(paths, filters), output_path)
+    # parser = argparse.ArgumentParser(prog="resif3_module2markdown.py")
+    # subparser = parser.add_subparsers(dest='command')
+
+    # parser_collect = subparser.add_parser('collect', help='Generate a (filtered) map of ULHPC SWSet')
+
+    # parser_render = subparser.add_parser('render', help='Generate software informations files (example: ./resif3_module2markdown.py render --output $(pwd)/software_list --clusters iris --swsets 2019b 2020b --arch gpu)')
+    # parser_render.add_argument('--output', type=str, nargs=1, help='Secify the output folder for your generated markdown files ($(pwd)/software_list/ by default).', required=False)
+
+    # for p in [parser_collect, parser_render]:
+    #     p.add_argument('--clusters', type=str, nargs='+', help='Filter output by cluster (example: "iris"). All clusters will be displayed by default.)', required=False)
+    #     p.add_argument('--archs', type=str, nargs='+', help='Filter output by arch (example: "gpu"). All archs will be displayed by default.)', required=False)
+    #     p.add_argument('--swsets', type=str, nargs='+', help='Filter output by software set (example: "2020b"). All swset will be displayed by default.)', required=False)
+    #     p.add_argument('--paths', type=str, nargs='+', help='Path to modules\' LUA definition files, files in /opt/apps/resif/[iris,aion] are used by default', required=False)
+
+    # args = parser.parse_args()
+
+    # filters = {}
+    # paths = ''
+    # if args.paths:
+    #     paths = args.paths
+    # else:
+    #     # Get all released swset definition file if no path is specified
+    #     paths = subprocess.check_output("""find /opt/apps/resif/iris /opt/apps/resif/aion -type d \( -iname ebfiles_repo -o -iname software \) -prune -false -o -type f \( -iname '*.lua'  ! -iname '.*' \)""", shell=True).decode('utf-8').split()
+    # if args.clusters:
+    #     filters['clusters'] = args.clusters
+    # if args.archs:
+    #     filters['archs'] = args.archs
+    # if args.swsets:
+    #     filters['swsets'] = args.swsets
+
+    # if args.command == 'collect':
+    #     pprint.pprint(collect_softwares(paths, filters))
+
+    # if args.command == 'render':
+    #     output_path = './docs/software_list'
+    #     if args.output:
+    #         output_path = args.output[0]
+    #     render_markdown_from_collect(collect_softwares(paths, filters), output_path)
