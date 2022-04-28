@@ -1,3 +1,0 @@
-| Software                                        | Architecture   | Category                     | Clusters    | Description                                                                                                             |
-|:------------------------------------------------|:---------------|:-----------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------|
-| <p><a href=https://hpc.uni.lu/>ULHPC-dl</a></p> | <p>epyc</p>    | <p>System-level software</p> | <p>aion</p> | Generic Module bundle for (CPU-version) of AI / Deep Learning / Machine Learning software in use on the UL HPC Facility |

@@ -1,3 +1,0 @@
-| Software                                                       | Architecture   | Category         | Clusters    | Description                                                                                                        |
-|:---------------------------------------------------------------|:---------------|:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------|
-| <p><a href=https://www.ks.uiuc.edu/Research/namd/>NAMD</a></p> | <p>epyc</p>    | <p>Chemistry</p> | <p>aion</p> | NAMD is a parallel molecular dynamics code designed for high-performance simulation of large biomolecular systems. |
