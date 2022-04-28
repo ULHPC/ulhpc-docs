@@ -1,0 +1,136 @@
+[![](https://pbs.twimg.com/profile_images/1041686882915155968/qw90wxxo.jpg){: style="width:300px;float: right;" }](https://nl.mathworks.com/)
+[MATLAB®](https://nl.mathworks.com/products/matlab.html) combines
+a desktop environment tuned for iterative analysis and design processes
+with a programming language that expresses matrix and array mathematics directly.
+It includes the Live Editor for creating scripts that combine code, output,
+and formatted text in an executable notebook.
+
+
+## Available versions of MATLAB in ULHPC
+To check available versions of MATLAB at ULHPC type `module spider matlab`.
+It will list the available versions:
+```bash
+math/MATLAB/<version>
+```
+
+## Interactive mode
+
+To open MATLAB in the interactive mode, please follow the following steps:
+
+(_eventually_) [connect](../../connect/access.md) to the ULHPC login node with the `-X` (or `-Y`) option:
+
+=== "Iris"
+    ```bash
+    ssh -X iris-cluster   # OR on Mac OS: ssh -Y iris-cluster
+    ```
+=== "Aion"
+    ```bash
+    ssh -X aion-cluster   # OR on Mac OS: ssh -Y aion-cluster
+    ```
+
+Then you can reserve an [interactive job](../../jobs/interactive.md), for instance with 4 cores. **Don't forget to use the `--x11` option if you intend to use the GUI**.
+
+```bash
+$ si --x11 -c4
+
+# Load the module MATLAB and needed environment
+(node)$ module purge
+(node)$ module load math/MATLAB
+
+# Non-Graphical version (CLI)
+(node)$ matlab -nodisplay -nosplash
+                  < M A T L A B (R) >
+        Copyright 1984-2021 The MathWorks, Inc.
+        R2021a (9.10.0.1602886) 64-bit (glnxa64)
+                   February 17, 2021
+To get started, type doc.
+For product information, visit www.mathworks.com.
+>> version()
+ans =
+    '9.10.0.1602886 (R2021a)'
+# List of installed add-ons
+>>  matlab.addons.installedAddons
+ans =
+  96x4 table
+            Name           Version     Enabled    Identifier
+    ___________________    ________    _______    __________
+
+    "Mapping Toolbox"      "5.1"        true         "MG"
+    "Simulink Test"        "3.4"        true         "SZ"
+    [...]
+>> quit()
+
+# To run the GUI version, over X11
+(node)$ matlab &
+```
+
+## Batch mode
+
+For non-interactive or long executions, MATLAB can be ran in [passive or batch mode](../../jobs/submit.md), reading all commands from an input file (with `.m` extension) you provide (Ex: `inputfile.m`) and saving the results into an output file, for instance `outputfile.out`).
+You have two ways to proceed:
+
+=== "using redirection operators"
+    ```bash
+    matlab -nodisplay -nosplash < inputfile.m > outputfile.out
+    ```
+=== "Use command-line options `-r` and `-logfile`"
+    ```bash
+    # /!\ IMPORTANT: notice the **missing** '.m' extension on -r !!!
+    matlab -nodisplay -nosplash -r inputfile -logfile outputfile.out
+    ```
+
+```bash
+#!/bin/bash -l
+#SBATCH -J MATLAB
+###SBATCH -A <project_name>
+#SBATCH --ntasks-per-node 1
+#SBATCH -c 1
+#SBATCH --time=00:30:00
+#SBATCH -p batch
+
+# Load the module MATLAB
+module purge
+module load math/MATLAB
+
+# second form with CLI options '-r <input>' and '-logfile <output>.out'
+srun -c $SLURM_CPUS_PER_TASK matlab -nodisplay -r my_matlab_script -logfile output.out
+
+# example for if you need to have a input parameters for the computations
+# matlab_script_serial_file(x,y,z)
+srun matlab -nodisplay -r my_matlab_script(2,2,1)' -logfile output.out
+
+# safeguard (!) afterwards
+rm -rf $HOME/.matlab
+rm -rf $HOME/java*
+```
+
+In matlab, you can create a parallel pool of thread workers on the local computing node by using the [parpool](https://mathworks.com/help/parallel-computing/parallel.threadpool.html) function.
+After you create the pool, parallel pool features, such as [`parfor`](https://mathworks.com/help/parallel-computing/parallel-for-loops-parfor.html) or [`parfeval`](https://fr.mathworks.com/help/matlab/ref/parfeval.html?searchHighlight=parfeval&s_tid=srchtitle_parfeval_1), run on the workers. With the ThreadPool object, you can interact with the parallel pool.
+
+
+!!! example
+
+    ```bash
+    # example for MATLAB ParFor (matlab_script_parallel_file.m)
+    parpool('local', str2num(getenv('SLURM_CPUS_PER_TASK'))) % set the default cores
+    %as number of threads
+    tic
+    n = 50;
+    A = 50;
+    a = zeros(1,n);
+    parfor i = 1:n
+    a(i) = max(abs(eig(rand(A))));
+    end
+    toc
+    delete(gcp); % you have to delete the parallel region after the work is done
+    exit;
+    ```
+
+## Additional information
+
+To know more information about MATLAB tutorial and documentation,
+please refer to [MATLAB tutorial](https://nl.mathworks.com/academia/books.html).
+
+!!! tip
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

@@ -1,5 +1,7 @@
 # Data Transfer to/from/within UL HPC Clusters
 
+## Introduction
+
 Directories such as `$HOME`, `$WORK` or `$SCRATCH` are shared among the nodes of the cluster that you are using (including the login node) via shared filesystems (SpectrumScale, Lustre) meaning that:
 
 * every file/directory pushed or created on the login node is available on the computing nodes
@@ -80,7 +82,7 @@ Windows and OS X users may wish to transfer files from their systems to the clus
 * [FileZilla Client](https://filezilla-project.org) (Windows, OS X)
 * [Cyberduck](http://cyberduck.ch/) (Windows, OS X)
 
-These applications will need to be configured to connect to the frontends with the same parameters as [discussed on the SSH access page](/connect/ssh.md).
+These applications will need to be configured to connect to the frontends with the same parameters as [discussed on the SSH access page](../connect/ssh.md).
 
 
 
@@ -153,33 +155,25 @@ $> rsync -avzu aion-cluster:experiments/parallel_run /path/to/local/directory
 
 As always, see the [man page](https://linux.die.net/man/1/rsync) or `man rsync` for more details.
 
+### Data Transfer within Project directories
+
+The ULHPC facility features a [Global Project directory `$PROJECTHOME`](../filesystems/gpfs.md#global-project-directory-projecthomeworkprojects) hosted within the [GPFS/SpecrumScale](../filesystems/gpfs.md) file-system.
+You have to pay a particular attention when using `rsync` to transfer data within your project directory as depicted below.
+
+{%
+   include-markdown "../data/project_acl.md"
+   start="<!--start-warning-clusterusers-->"
+   end="<!--end-warning-clusterusers-->"
+%}
+
+
 
 ## Using MobaXterm (Windows)
 
-If you are under Windows and you have MobaXterm installed and configured, you probably want to use it to transfer your files to the clusters. Here are the steps to use `rsync` *inside* MobaXterm in Windows.
+If you are under Windows and you have [MobaXterm installed and configured](../connect/ssh.md#ssh-configuration), you probably want to use it to transfer your files to the clusters. Here are the steps to use `rsync` *inside* MobaXterm in Windows.
 
-### Enable MobaXterm SSH Agent
-MobaXterm SSH Agent will manage the SSH keys for you.
-
-* Go in **Settings > SSH Tab**
-
-* In **SSH agents** section, check **Use internal SSH agent "MobAgent"**
-
-![](images/filetransfer/MobAgent1.png)
-
-* Click on the `+` button on the right
-
-* Select your private key file. If you have several keys, you can add them by doing steps above again.
-
-* Click on "Show keys currently loaded in MobAgent". An advertisement window may appear asking if you want to run MobAgent. Click on "Yes".
-
-* Check that your key(s) appears in the window.
-
-![](images/filetransfer/MobAgent2.png)
-
-* Close the window.
-
-* Click on `OK`. Restart MobaXterm.
+!!! warning
+    Be aware that you **SHOULD enable MobaXterm SSH Agent** -- see [SSH Agent instructions](../connect/ssh.md#ssh-agent) for more instructions.
 
 ### Using a local bash, transfer your files
 
@@ -217,7 +211,59 @@ You can also consider alternative approaches to synchronize data with the cluste
 
 * rely on a versioning system such as [GIT](http://git-scm.com); this approach works well for source code trees.
 * mount your remote homedir by [SSHFS](http://en.wikipedia.org/wiki/SSHFS). On Mac OS X, you should consider installing [MacFusion](http://macfusionapp.org) for this purpose - on classical Linux system, just use the command-line `sshfs` or, `mc`.
+    - see [below](#sshfs) for details
+* you can also rely on GUI tools like [FileZilla](https://filezilla-project.org/), [Cyberduck](https://cyberduck.io/) or [WindSCP](https://winscp.net/eng/download.php) or any paid alternative (like [ExpanDrive](https://www.expandrive.com/) or [ForkLift 3](https://binarynights.com/))
 
+### SSHFS
+
+=== "Linux"
+    ```bash
+    # Debian-like
+    sudo apt-get install sshfs
+    # RHEL-like
+    sudo yum install sshfs
+    ```
+    You may need to add yourself to the `fuse` group.
+
+=== "Mac OS X"
+    ```bash
+    # Assuming HomeBrew -- see https://brew.sh
+    brew install osxfuse sshfs
+    ```
+    You can also directly install macFUSE from <https://osxfuse.github.io/>
+    You must reboot for the installation of osxfuse to take effect.
+    You can then update to the latest version
+
+
+SSHFS allows any user to remotely mount their ULHPC home directory onto a local workstation through an ssh connection.
+The CLI format is as follows:
+```
+sshfs [user@]host:[dir] mountpoint [options]
+```
+
+Proceed as follows (_assuming_ you have a working [SSH connection](../connect/ssh.md)):
+
+```bash
+# Create a local directory hosting the mountng point
+mkdir -p ~/ulhpc        # /!\ ADAPT accordingly to match your taste
+sshfs iris-cluster: ~/ulhpc   -o allow_other,defer_permissions,follow_symlinks,reconnect -ocache=no -onolocalcaches
+# General options:
+#   allow_other:  Allow other users than the mounter (i.e. root) to access the share
+#   reconnect:    try to reconnnect
+# Optional options to be more "Mac-like":
+#   -ocache=no
+#   -onolocalcaches
+#   -o volname=ulhpc_home   Name of the volume in Finder
+```
+
+Later on (once you no longer need it), you **MUST** unmount your remote FS
+
+```bash
+# Linux
+fusermount -u ~/ulhpc
+# Mac OS X
+diskutil umount ~/ulhpc
+```
 
 ## Special transfers
 

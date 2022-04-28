@@ -1,7 +1,12 @@
 # Aion Timeline
 
 This page records a brief timeline of significant events and user environment changes on Aion.
-The **Aion** cluster exists since the end of 2020 as the flagship HPC supercomputer within the [University of Luxembourg](http://www.uni.lu) until 2024.
+
+![](images/aion-timeline-part-I.png)
+
+![](images/aion-timeline-part-II.png)
+
+Details are provided below.
 
 ## 2019
 
@@ -69,5 +74,77 @@ See also [:fontawesome-solid-sign-in-alt: Atos Press Release](https://atos.net/e
     - Preparation work within the CDC server room by the UL external partners _slowly_ restarted
         * target finalization of the CDC-S02-004 server room by end of September
     - Assembly and factory Burn tests completed
+       *_Lot 1_: DLC ready for shipment to University
+          - Target date: Sept 14, 2020 in practice postponed above Oct 19, 2020 to allow for the CDC preparation work to be completed by the University and its patners.
     - ULHPC maintenance with physical intervention of external expert support team by DDN
         * preparation work for iris storage (HW upgrade, GPFS/SpectrumScale Metadata pool extension, Lustre upgrade)
+
+    - Start and complete the first Statement of Work for DDN Lot 2 installation
+
+### Aug 2020
+
+* Consolidated work by ULHPC team on Slurm configuration
+    - Updated model for Fairshare, Account Hierarchy and limits
+
+* Pre-shipment of [Part of] Ethernet network equipment (Lot 3)
+
+### Sept - Oct 2020
+
+* Delivery Lot 1 (Aion DLC) and Lot 3 (Ethernet) equipment
+    - Ethernet network installation done by ULHPC between Sept 3 - 24, 2020
+
+*  CDC S02-004 preparation work (hydraulic part)
+    - supposed to be completed by Sept 15, 2020 has been delayed and was finally completed on Oct 19, 2020
+
+### Nov 2020
+
+* Partial Delivery of equipment (servers, core switches)
+    - Service servers and remaining network equipments were racked by ULHPC team
+
+### Dec 2020
+
+* Confinement restriction lifted in France, allowing for a french team from Atos to come onsite
+* Delivery of remaining equipment (incl. Lot 1 sequana racks and compute nodes)
+* Compute rack (Lot 1 DLC) installation start
+
+## 2021
+
+### Jan - Feb 2021
+
+* The 4 DDN expansion enclosure shipped with the lifting tools and pressure tools
+
+    * _Lot 1_: Sequana racks and compute nodes finally postionned and internal Infiniband cabling done
+
+    * _Lot 2_: DDN disk enclosure racked
+        - the rack was adapted to be able to close the rear door
+
+    * _Lot 3_: Ethernet and IB Network
+        - ULHPC cables were used to cable service servers to make progress on the software configuration
+
+* Service servers and compute nodes deployment start remotely
+
+### Mar - Apr 2021
+
+* Start GS7990 and NAS server installation (Lot 2)
+* Start installtion of Lot 3 (ethernet side)
+
+### May - June 2021
+
+* IB EDR cables delivered and installed
+* Merge of the Iris/Aion Infiniband island
+
+### Jul - Aug - Sept 2021
+
+* Slurm Federation between both clusters `Iris` and `Aion`
+* Benchmark performance results submitted (HPL, HPCG, Green500, Graph500, IOR, IO500)
+* Pre-Acceptance validated and **release of the Aion supercomputer for beta testers**
+
+### Oct - Nov 2021
+
+* [Official production release of Aion supercomputer](https://hpc.uni.lu/blog/2021-10-03-official-production-release-of-the-aion-supercomputer)
+* [Inauguration](https://wwwen.uni.lu/university/news/slideshow/university_inaugurates_its_aion_supercomputer) of Aion Supercomputer
+
+[![](https://hpc.uni.lu/download/slides/2021-11-10_Aion-inauguration_keynote_svarrette.png)](https://hpc.uni.lu/download/slides/2021-11-10_Aion-inauguration_keynote_svarrette.pdf)
+
+* 11<sup>th</sup> [ULHPC School 2021](https://hpc.uni.lu/education/hpcschool)
+    - relies in Aion for its [practical sessions](https://hpc.uni.lu/education/hpcschool#program)

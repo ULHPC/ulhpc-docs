@@ -1,8 +1,6 @@
 # Intel Inspector
-
-## Introduction
-
-Intel Inspector is a memory and threading error checking tool for users
+[![](https://software.intel.com/content/dam/develop/public/us/en/images/screenshots/screen-intel-inspector-16x9.png.rendition.intel.web.720.405.png){: style="width:300px;float: right;" }](https://software.intel.com/content/www/us/en/develop/tools/inspector.html)
+[Intel Inspector](https://software.intel.com/content/www/us/en/develop/tools/inspector.html) is a memory and threading error checking tool for users
 developing serial and multithreaded applications on Windows and Linux operating
 systems. The essential features of Intel Inspector for Linux are:
 
@@ -83,6 +81,7 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J Inspector
 #SBATCH -N 1
+###SBATCH -A <project_name>
 #SBATCH -c 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -118,7 +117,8 @@ Example for batch script:
 #!/bin/bash -l
 #SBATCH -J Inspector
 #SBATCH -N 2
-#SBATCH -c 56
+###SBATCH -A <project_name>
+#SBATCH --ntasks-per-node 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 
@@ -128,7 +128,7 @@ module load toolchain/intel/2019a
 module load tools/Inspector/2019_update4
 module load vis/GTK+/3.24.8-GCCcore-8.2.0
 
-srun -n 56 inspxe-cl -collect=ti2 -r result ./a.out
+srun -n {SLURM_NTASKS} inspxe-cl -collect=ti2 -r result ./a.out
 ```
 
 To see result output:
@@ -141,3 +141,6 @@ $ cat inspxe-cl.txt
 === End: [2020/04/08 16:41:56] ===
 ```
 
+!!! tip
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

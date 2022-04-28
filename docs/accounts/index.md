@@ -6,45 +6,55 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 
 ### Acceptable Use Policy (AUP)
 
-There are a number of policies which apply to ULHPC users.
-
-!!! danger "Important"
-    All users of UL HPC resources and PIs must abide by the [UL HPC Acceptable Use Policy (AUP)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf).
-
-<p class="text-center">
-<button type="button" class="btn btn-light"><a href="https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf">UL HPC Acceptable Use Policy (AUP) [pdf]</a></button>
-</p>
+{%
+   include-markdown "../policies/aup.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
 
 Remember that **you are expected to acknowledge ULHPC in your publications**.
+See [Acceptable Use Policy](../policies/aup.md) for more details.
 
-??? warning "ULHPC Platforms are meant for R&D!"
-    Note that the ULHPC facility is made for Research and Development and it is **NOT** a full production computing center -- for such needs, consider using the [national HPC center](https://lxp.lu).
+??? warning "ULHPC Platforms are meant ONLY for R&D!"
+    The ULHPC facility is made for Research and Development and it is **NOT** a full production computing center -- for such needs, consider using the [National HPC center](https://luxprovide.lu).
 
     In particular, we cannot make any guarantees of cluster availability or timely job completion even if we target a minimum compute node availability above 95% which is typically met - for instance, past KPI statistics in 2019 report a computing node availability above 97%.
 
-### General conditions for UL staff
+### Resource allocation policies
 
-As soon as you belong to the [University of Luxembourg](https://www.uni.lu) and that you accept to conform to the IT rules of the university as well as the [UL HPC Acceptable Use Policy (AUP)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf), you are eligible for having an HPC account.
+[:fontawesome-solid-sign-in-alt: ULHPC Usage Charging and Resource allocation policy](../policies/usage-charging.md){: .md-button .md-button--link }
 
-### HPC Resource Allocations for Research Projects and External Partners
+#### UL internal R&D and training
 
-The University extends access to its HPC resources (_i.e._, facility and expert HPC consultants) to the scientific staff of national public organizations and external partners for the duration of joint research projects under the conditions defined in the [below document](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Resource Allocations_for_Research_Projects_and_External_Partners.pdf)
+{%
+   include-markdown "../policies/usage-charging.md"
+   start="<!--resource-allocation-ul-start-->"
+   end="<!--resource-allocation-ul-end-->"
+%}
 
-<p class="text-center">
-<button type="button" class="btn btn-light"><a href="https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Resource Allocations_for_Research_Projects_and_External_Partners.pdf">Resource Allocations for Research Projects and External Partners [pdf]</a></button>
-</p>
+#### Research Projects
 
+{%
+   include-markdown "../policies/usage-charging.md"
+   start="<!--resource-allocation-project-start-->"
+   end="<!--resource-allocation-project-end-->"
+%}
+
+
+#### Externals and private partners
+
+{%
+   include-markdown "../policies/usage-charging.md"
+   start="<!--resource-allocation-externals-start-->"
+   end="<!--resource-allocation-externals-end-->"
+%}
 
 ----------------------------------
 ## How to Get an New User account?
 
-<p class="text-center">
-<button type="button" class="btn btn-light">
-   <a href="http://ulsurvey.uni.lu/index.php/723213?lang=en">
-   <strong>Account Request Form</strong>
-   </a>
-</button>
-</p>
+
+[:fontawesome-solid-file-signature: Account Request Form](http://ulsurvey.uni.lu/index.php/723213?lang=en){: .md-button .md-button--link }
+
 
 1. You can submit a request for a new ULHPC account by using the
 [Create a ULHPC account form](http://ulsurvey.uni.lu/index.php/723213?lang=en) form.
@@ -54,9 +64,8 @@ The University extends access to its HPC resources (_i.e._, facility and expert 
 The PI and PI Proxies for the project will be notified when applicable.
 5. Finally, you will need to log into the [HPC IPA](https://***REMOVED***) Portal to set up your initial password and Multi-Factor Authentication (MFA) for your account.
     * **Your new password must adhere to ULHPC's password requirements**
-        - see  [Password policy and guidelines](passwords.md)
-    * [ULHPC Identity Management (IPA portal) documentation](ipa.md)
-
+        - see  [Password policy and guidelines](../policies/passwords.md)
+    * [ULHPC Identity Management (IPA portal) documentation](../connect/ipa.md)
 
 
 ??? warning "UL HPC $\neq$ University credentials"
@@ -69,17 +78,15 @@ The PI and PI Proxies for the project will be notified when applicable.
 
 [^1]: [PrivateBin](https://privatebin.info/) is a minimalist, open source online [pastebin](https://pastebin.com/) where the server has zero knowledge of pasted data. Data is encrypted / decrypted in the browser using 256bit AES in Galois Counter mode.
 
---------------------------
 ## Managing User Accounts
 
-ULHPC user accounts are managed in through the [HPC IPA web portal](https://***REMOVED***).
-For more information on how to use it, please see the [IPA documentation](accounts/ipa.md).
+ULHPC user accounts are managed in through the [HPC IPA web portal](../connect/ipa.md).
 
 ## Security Incidents
 
-If you think there has been a computer security incident you should contact the ULHPC Team and the [University CISO](https://wwwen.uni.lu/university/about_the_university/organisation_charts/organisation_chart_rectorate_central_administration/le_service_informatique_de_l_universite/ciso) team as soon as possible:
+If you think there has been a computer security incident you should contact the ULHPC Team and the [University CISO](https://wwwen.uni.lu/universite/presentation/organigrammes/organigramme_rectorat_administration_centrale/service_informatique_de_l_universite/ciso) team as soon as possible:
 
-> To: [hpc-team@uni.lu,christian.hutter@uni.lu](mailto:hpc-team@uni.lu,christian.hutter@uni.lu)
+> To: [hpc-team@uni.lu,niek.nigg@uni.lu](mailto:hpc-team@uni.lu,niek.nigg@uni.lu)
 
 > Subject: Security Incident for HPC account '`<login>`' (**ADAPT accordingly**)
 
@@ -88,9 +95,10 @@ Please save any evidence of the break-in and include as many details as possible
 --------------------------------------
 ## How to Get an New Project account?
 
-Projects are defined for accounting purposes and are associated to a set of user accounts allowed by the project PI to access its data and submit jobs on behalf of the project account.
+Projects are defined for accounting purposes and are associated to a set of user accounts allowed by the project PI to access its data and submit jobs on behalf of the project account. See [Slurm Account Hierarchy](../slurm/accounts.md).
 
-For more information, please see the [Project Management documentation](accounts/projects.md)
+You can request (or be automatically added) to project accounts for accounting purposes.
+For more information, please see the [Project Account documentation](../accounts/projects.md)
 
 
 ## FAQ
@@ -103,6 +111,6 @@ For more information, please see the [Project Management documentation](accounts
 
 Sharing credentials removes the ability to audit and accountability for the account holder in case of account misuse. Accounts which are in violation of this policy may be disabled or otherwise limited. Accounts knowingly skirting this policy may be banned.
 
-If you find that you need to share resources among multiple individuals, shared [projects](accounts/projects.md) are just the way to go, and remember that the University extends access to its HPC resources (_i.e._, facility and expert HPC consultants) to the scientific staff of national public organizations and external partners for the duration of joint research projects under the conditions defined above.
+If you find that you need to share resources among multiple individuals, shared [projects](../accounts/projects.md) are just the way to go, and remember that the University extends access to its HPC resources (_i.e._, facility and expert HPC consultants) to the scientific staff of national public organizations and external partners for the duration of joint research projects under the conditions defined above.
 
-When in doubt, please [contact us](contact.md) and we will be happy to assist you with finding a safe and secure way to do so.
+When in doubt, please [contact us](../support/index.md) and we will be happy to assist you with finding a safe and secure way to do so.

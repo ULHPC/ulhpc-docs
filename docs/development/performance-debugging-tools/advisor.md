@@ -1,8 +1,6 @@
 # Intel Advisor
-
-## Introduction
-
-Intel Advisor provides two workflows to help ensure that Fortran, C, and C++
+[![](https://software.intel.com/content/dam/develop/public/us/en/images/diagrams-infographics/all-tools-16x9.png.rendition.intel.web.978.550.png){: style="width:300px;float: right;" }](https://software.intel.com/content/www/us/en/develop/tools/advisor.html)
+[Intel Advisor](https://software.intel.com/content/www/us/en/develop/tools/advisor.html) provides two workflows to help ensure that Fortran, C, and C++
 applications can make the most of modern Intel processors. Advisor contains
 three key capabilities:
 
@@ -61,6 +59,7 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J Advisor
 #SBATCH -N 1
+###SBATCH -A <project_name>
 #SBATCH -c 28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
@@ -85,7 +84,8 @@ Example for the batch script:
 #!/bin/bash -l
 #SBATCH -J Advisor
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+###SBATCH -A <project_name>
+#SBATCH --ntasks-per-node=28
 #SBATCH --time=00:10:00
 #SBATCH -p batch
 
@@ -95,7 +95,7 @@ module load toolchain/intel/2019a
 module load perf/Advisor/2019_update4
 module load vis/GTK+/3.24.8-GCCcore-8.2.0
 
-srun -n 56 advixe-cl --collect survey --project-dir result -- ./a.out
+srun -n ${SLURM_NTASKS} advixe-cl --collect survey --project-dir result -- ./a.out
 ```
 To collect the result and see the result in GUI use the below commands
 ```bash
@@ -108,3 +108,7 @@ $ advixe-gui result
 The below figure shows the hybrid(MPI+OpenMP) programming analysis results:
 
 ![VTune MPI result](images/MPI-VTune.png)
+
+!!! tip
+    If you find some issues with the instructions above,
+    please report it to us using [support ticket](https://hpc.uni.lu/support).

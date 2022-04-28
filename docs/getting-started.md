@@ -1,9 +1,11 @@
 # Getting Started on ULHPC Facilities
 
-Welcome to the High Performance Computing (HPC) Facility of the University of Luxembourg (ULHPC)!
+![](../images/logo_ULHPC.png){: style="width:150px; float: right;"}
 
-!!! success "About this page"
-	This document will guide you through the basics of using ULHPC's
+Welcome to the [High Performance Computing (HPC)](https://hpc.uni.lu) Facility of the University of Luxembourg (ULHPC)!
+
+!!! success ""
+	This page will guide you through the basics of using ULHPC's
 	supercomputers, storage systems, and services.
 
 ## What is ULHPC ?
@@ -23,7 +25,8 @@ All world-class universities require this type of facility to accelerate its res
 
 Since 2007, the [University of Luxembourg](https://www.uni.lu) (UL) has invested tens of millions of euro into its own HPC facilities to responds to the growing needs for increased computing and storage.
 [ULHPC](https://hpc.uni.lu) (sometimes referred to as Uni.lu HPC) is the entity  providing High Performance Computing and Big Data Storage services and support for UL researchers and its external partners.
-Led by Prof. [Pascal Bouvry](https://wwwen.uni.lu/research/fstm/dcs/members/pascal_bouvry) and Dr. [Sébastien Varrette](https://varrette.gforge.uni.lu), the [ULHPC](https://hpc.uni.lu) staff and facilities are located on the [Belval campus](https://wwwen.uni.lu/contact/campus_de_belval), offering a **cutting-edge research infrastructure to Luxembourg public research** while serving as _edge_ access to the Euro-HPC Luxembourg supercomputer "MeluXina" operated by [LuxProvide S.A](https://lxp.lu), the National HPC center.
+
+Led by Dr. [Varrette](https://varrette.gforge.uni.lu), the [ULHPC team](https://hpc.uni.lu/about/team.html) manages several research computing facilities located on the [Belval campus](https://wwwen.uni.lu/contact/campus_de_belval), offering a **cutting-edge research infrastructure to Luxembourg public research** while serving as _edge_ access to bigger systems from PRACE or EuroHPC, such as the Euro-HPC Luxembourg supercomputer "[MeluXina](https://luxprovide.lu)".
 
 !!! warning
     In particular, the [ULHPC](https://hpc.uni.lu) is **NOT** the national HPC center of Luxembourg, but simply one of its strategic partner operating the second largest HPC facility of the country.
@@ -34,30 +37,28 @@ The HPC facility is one element of the extensive digital research infrastructure
 ## Supercomputing and Storage Resources at a glance
 
 
-![](images/plots/plot_piechart_compute_cluster_2020.png){: style="width:250px;float: right;"}
-
 [ULHPC](https://hpc.uni.lu) is a strategic asset of the university and an important factor for the scientific and therefore also economic competitiveness of the Grand Duchy of Luxembourg.
-
 We provide a key research infrastructure featuring state-of-the-art computing and storage resources serving the UL HPC community primarily composed by UL researchers.
 
-The UL HPC platform has kept growing over time thanks to the continuous efforts of the core HPC team (Dr. S. Varrette, S. Peter, H. Cartiaux, Dr. F. Pinel, Dr. E. Kieffer, Dr. E. Krishnasamy, T. Valette, A. Olloh) - contact: [hpc-team@uni.lu](mailto:hpc-team@uni.lu).
+The UL HPC platform has kept growing over time thanks to the continuous efforts of the core HPC team (Dr. S. Varrette, S. Peter, H. Cartiaux, Dr. F. Pinel, Dr. E. Kieffer, Dr. E. Krishnasamy, T. Valette, A. Olloh) - contact: [hpc-team@uni.lu](mailto:hpc-team@uni.lu), recently completed with the [EuroHPC Competence Center](https://www.eurocc-project.eu/) Task force (A. Vandeventer (Project Manager), L. Koutsantonis).
 
-!!! info "ULHPC Computing and Storage Capacity (2020)"
-    Installed in the premises of the University’s _Centre de Calcul_ (CDC), the UL HPC facilities provides in 2020 a total computing capacity of __2.76 PetaFlops__ and a shared storage capacity of around **10 PetaBytes**.
+!!! info "ULHPC Computing and Storage Capacity (2021)"
+    Installed in the premises of the University’s _Centre de Calcul_ (CDC), the UL HPC facilities provides a total computing capacity of __2.76 PetaFlops__ and a shared storage capacity of around **10 PetaBytes**.
 
 ??? question "How big is 1 PetaFlops? 1 PetaByte?"
     * 1 PetaFlops = 10<sup>15</sup> floating-point operations per second (PFlops or PF for short), corresponds to the cumulative performance of more than 3510 Macbook Pro 13" laptops [^1], or 7420 iPhone XS [^2]
-    * 1 PetaByte = 10<sup>15</sup> bytes = 8*10<sup>15</sup> bits, corresponding to the cumulative raw capacity of more than 975 SSDs 512GB.
+    * 1 PetaByte = 10<sup>15</sup> bytes = 8*10<sup>15</sup> bits, corresponding to the cumulative raw capacity of more than 1950 SSDs 512GB.
 
-![](images/plots/plot_piechart_storage_fs_2020.png){: style="width:250px;float: right;"}
+![](images/plots/plot_piechart_compute_cluster.png){: style="width:325px;"}
+![](images/plots/plot_piechart_storage_fs.png){: style="width:325px;"}
 
 This places the HPC center of the University of Luxembourg as one of the major actors in HPC and Big Data for the Greater Region Saar-Lor-Lux.
 
 In practice, the UL HPC Facility features 3 types of computing resources:
 
-* "regular" nodes: Dual CPU, no accelerators, 128 to 256 GB of RAM
-* "gpu" nodes:     Dual CPU, 4 Nvidia accelerators, 768 GB RAM
-* "bigmem" nodes:  Quad-CPU, no accelerators, 3072 GB RAM
+* "__regular__" nodes: Dual CPU, no accelerators, 128 to 256 GB of RAM
+* "__gpu__" nodes:     Dual CPU, 4 Nvidia accelerators, 768 GB RAM
+* "__bigmem__" nodes:  Quad-CPU, no accelerators, 3072 GB RAM
 
 These resources can be reserved and allocated for the execution of jobs scheduled on the platform thanks to a Resource and Job Management Systems (RJMS) - [Slurm](https://slurm.schedmd.com/documentation.html) in practice. This tool allows for a fine-grain analysis and accounting of the used resources, facilitating the generation of activity reports for a given time period.
 
@@ -71,15 +72,16 @@ These resources can be reserved and allocated for the execution of jobs schedule
 
 [`iris`](systems/iris/index.md), in production since June 2017, is a Dell/Intel supercomputer with a theoretical peak performance of **1082 TFlop/s**, featuring 196 computing nodes (totalling 5824 computing cores) and 96 GPU accelerators (NVidia V100).
 
-* [Detailed system specifications](systems/iris/index.md)
-* [Live status](https://hpc.uni.lu/live-status/motd/)
+[:fontawesome-solid-sign-in-alt: Iris Detailed system specifications](systems/iris/index.md){: .md-button .md-button--link }
+<!-- [:fontawesome-solid-tachometer-alt: Live status](https://hpc.uni.lu/live-status/motd/){: .md-button .md-button--link } -->
 
 ### Aion
 
 [`aion`](systems/aion/index.md), in production since October 2020, is a [Bull Sequana XH2000](https://atos.net/en/solutions/high-performance-computing-hpc/bullsequana-x-supercomputers)/AMD supercomputer offering a peak performance of **1692 TFlop/s**, featuring 318 compute nodes (totalling 40704 computing cores).
 
-* [Detailed system specifications](systems/aion/index.md)
-* [Live status](https://hpc.uni.lu/live-status/motd/)
+[:fontawesome-solid-sign-in-alt: Aion Detailed system specifications](systems/aion/index.md){: .md-button .md-button--link }
+<!-- [:fontawesome-solid-tachometer-alt: Live status](https://hpc.uni.lu/live-status/motd/){: .md-button .md-button--link } -->
+
 
 ### GPFS/SpectrumScale File System (`$HOME`, project)
 
@@ -87,64 +89,75 @@ These resources can be reserved and allocated for the execution of jobs schedule
 
 It allows sharing **homedirs and project data** between users, systems, and eventually (i.e. if needed) with the "outside world".
 
-* [Detailed specifications](filesystems/gpfs.md)
-* [Live status](https://hpc.uni.lu/live-status/motd/)
+[:fontawesome-solid-sign-in-alt: GPFS/Spectrumscale Detailed specifications](filesystems/gpfs.md){: .md-button .md-button--link }
+<!-- [:fontawesome-solid-tachometer-alt: Live status](https://hpc.uni.lu/live-status/motd/){: .md-button .md-button--link } -->
 
 ### Lustre File System (`$SCRATCH`)
 
 The [Lustre](http://lustre.org/) file system is an open-source, parallel file system that supports many requirements of leadership class HPC simulation environments. It is available as a global _high_-performance file system on all ULHPC computational systems through a [DDN ExaScaler](https://www.ddn.com/products/lustre-file-system-exascaler/)
 and is meant to host **temporary scratch data**.
 
-* [Detailed specifications](filesystems/lustre.md)
-* [Live status](https://hpc.uni.lu/live-status/motd/)
+[:fontawesome-solid-sign-in-alt: Lustre Detailed specifications](filesystems/lustre.md){: .md-button .md-button--link }
+<!-- [:fontawesome-solid-tachometer-alt: Live status](https://hpc.uni.lu/live-status/motd/){: .md-button .md-button--link } -->
 
 ### OneFS File System (project, backup, archival)
 
 In 2014, the SIU, the UL HPC and the LCSB join their forces (and their funding) to acquire a scalable and modular NAS solution able to sustain the need for an internal big data storage, i.e. provides space for centralized data and backups of all devices used by the UL staff and all research-related data, including the one proceed on the UL HPC platform.
-A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) system is available on all ULHPC computational systems. It is intended for long term storage of data that is not frequently accessed.
+A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) system is available on all ULHPC computational systems. It is intended for long term storage of data that is not frequently accessed. For more details, see [Isilon specifications](filesystems/isilon.md).
 
-* [Detailed specifications](filesystems/isilon.md)
-* [Live status](https://hpc.uni.lu/live-status/motd/)
+<!-- [:fontawesome-solid-tachometer-alt: Live status](https://hpc.uni.lu/live-status/motd/){: .md-button .md-button--link } -->
+
+### Fast Infiniband Network
+
+High Performance Computing (HPC) encompasses advanced computation over parallel processing, enabling faster execution of highly compute intensive tasks. The execution time of a given simulation depends upon many factors, such as the number of CPU/GPU cores and their utilisation factor and the interconnect performance, efficiency, and scalability.
+[InfiniBand](https://en.wikipedia.org/wiki/InfiniBand) is the fast interconnect technology implemented within all [ULHPC supercomputers](interconnect/ib.md), more specifically:
+
+* [Iris](systems/iris/interconnect.md) relies on a **EDR** Infiniband (IB) Fabric in a **Fat-Tree** Topology
+* [Aion](systems/iris/interconnect.md) relies on a **HDR100** Infiniband (IB) Fabric in a **Fat-Tree** Topology
+
+For more details, see [ULHPC IB Network Detailed specifications](interconnect/ib.md).
 
 
 ## Acceptable Use Policy (AUP)
 
-There are a number of policies which apply to ULHPC users.
-
-!!! danger "Important"
-    All users of UL HPC resources and PIs must abide by the [UL HPC Acceptable Use Policy (AUP)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf).
-
-<p class="text-center">
-<button type="button" class="btn btn-light"><a href="https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf">UL HPC Acceptable Use Policy (AUP) [pdf]</a></button>
-</p>
+{%
+   include-markdown "policies/aup.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
 
 ## ULHPC Accounts
 
 In order to use the ULHPC facilities, you need to have a user account with an associated user login name (also called username) placed under an account hierarchy.
 
 * [Get a ULHPC account](accounts/index.md)
-* [Understanding account hierarchy and accounting rules](accounts/hierarchy.md)
-* [ULHPC Identity Management (IPA portal)](accounts/ipa.md)
-* [Password policy](accounts/passwords.md)
+* [Understanding Slurm account hierarchy and accounting rules](slurm/accounts.md)
+* [ULHPC Identity Management (IPA portal)](connect/ipa.md)
+* [Password policy](policies/passwords.md)
+* [Usage Charging Policy](policies/usage-charging.md)
 
 ## Connecting to ULHPC supercomputers
 
 !!! check "MFA is *strongly encouraged* for all ULHPC users"
-    It will be soon become mandatory
+    It will be soon become mandatory - detailed instructions will be provided soon.
 
-* [Multi-Factor Authentication (MFA)](connect/mfa.md)
+<!-- * [Multi-Factor Authentication (MFA)](connect/mfa.md)-->
+
 * [SSH](connect/ssh.md)
 * [Open On Demand Portal](connect/ood.md)
 * [ULHPC Login/Access servers](connect/access.md)
-* [Troubleshooting connection problems](./connect/troubleshooting.md)
-* [Live status](https://www.nersc.gov/live-status/motd/)
+* [Troubleshooting connection problems](connect/troubleshooting.md)
 
-## Transferring Data
+<!-- * [Live status](https://hpc.uni.lu/live-status/motd/) -->
 
-ULHPC provides several ways to transfer data both inside and outside
+## Data Management
+
+* [Global Directory Structure](data/layout.md)
+* [Transferring data](data/transfer.md): Tools and recommendations to transfer data both inside and outside
 of ULHPC.
+* [Quotas and Purging](filesystems/quotas.md)
+* Understanding [Unix File Permissions](filesystems/unix-file-permissions.md)
 
-* [Transferring data](./data/transfer.md): Tools and recommendations.
 
 ## User Environment
 
@@ -155,43 +168,56 @@ of ULHPC.
     * every file/directory pushed or created on the front-end is available on the computing nodes
     * every file/directory pushed or created on the computing nodes is available on the front-end
 
-* [Understanding and customizing your environment](environment/index.md)
-* [ULHPC Modules Environment](environment/modules.md)
+[:fontawesome-solid-sign-in-alt: ULHPC User Environment](environment/index.md){: .md-button .md-button--link }
 
-## ULHPC User Software Management
+<!-- * [Understanding and customizing your environment](environment/index.md) -->
+<!-- * [ULHPC Modules Environment](environment/modules.md) -->
+<!-- * [ULHPC Easybuild Configuration](environment/easybuild.md) -->
+
+<!-- ### User Software Management -->
+
+## Computing Software Environment
 
 The ULHPC Team supplies a large variety of HPC utilities, scientific applications and programming libraries to its user community.
-The user software environment is generated using [Easybuild](https://easybuild.readthedocs.io) (EB) and is made available as environment modules through [LMod](https://lmod.readthedocs.io/). We have developped a specific tool named [RESIF](software/resif.md)
+The user software environment is generated using [Easybuild](https://easybuild.readthedocs.io) (EB) and is made available as environment modules through [LMod](https://lmod.readthedocs.io/). <!-- We have developped a specific tool named [RESIF](software/resif.md) -->
 
+* [ULHPC Modules Environment](environment/modules.md)
 * [ULHPC Supported Software List](./software/index.md).
     - Available [modules](./environment/modules.md) are reachable **from the compute nodes only** via `module avail`
-* [RESIF Architecture-at-a-glance](software/resif.md)
-* [Software Sets, compilers and toolchains at ULHPC](software/swsets.md)
-* [Compiling/building software](development/software/index.md)
-    - [Building missing software with Easybuild](development/software/easybuild.md)
+* [ULHPC Easybuild Configuration](environment/easybuild.md)
+
+<!-- * [RESIF Architecture-at-a-glance](software/resif.md) -->
+<!-- * [Software Sets, compilers and toolchains at ULHPC](software/swsets.md) -->
+<!-- * [Compiling/building software](development/software/index.md) -->
+<!--     - [Building missing software with Easybuild](development/software/easybuild.md) -->
 * [Running Containers](containers/index.md)
-* [Contributing to the ULHPC User Software](development/software/contributing.md)
+<!-- * [Contributing to the ULHPC User Software](development/software/contributing.md) -->
 
 !!! question "Software building support"
-	If you need help to build / develop software, kindly [submit a request](https://hpc-tracker.uni.lu) and
-	we will evaluate the cost and effort required.
+	If you need help to build / develop software, we encourage you to first try using [Easybuild](environment/easybuild.md) as a recipe probably exist for the software you consider.
+    You can then open a ticket on [HPC Help Desk Portal](support/index.md#help-desk) and we will evaluate the cost and effort required.
+    You may also ask the help of other ULHPC users using the HPC User community mailing list: (moderated): [`hpc-users@uni.lu](mailto:hpc-users 'at' uni.lu).
 
 ## Running Jobs
 
 Typical usage of the ULHPC supercomputers involves the reservation and allocation of computing resources for the execution of jobs (submitted via _launcher scripts_) and scheduled on the platform thanks to a Resource and Job Management Systems (RJMS) - [Slurm](https://slurm.schedmd.com/documentation.html) in our case.
 
-* [Slurm overview](slurm/index.md)
-* [Convenient Slurm Commands](slurm/commands.md)
+[:fontawesome-solid-sign-in-alt: Slurm on ULHPC clusters](slurm/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-sign-in-alt: Convenient Slurm Commands](slurm/commands.md){: .md-button .md-button--link }
+
 * [Rich set of launcher scripts examples](slurm/launchers.md)
-* [Fairshare and Job Accounting](slurm/accounting.md)
+* [Fairshare](slurm/fairsharing.md)
+* [Job Priority and Backfilling](jobs/priority.md)
+* [Job Accounting and Billing](jobs/billing.md)
+
 
 ## Interactive Computing
 
 ULHPC also supports interactive computing.
 
-* [Interactive jobs](slurm/interactive.md)
+* [Interactive jobs](jobs/interactive.md)
 * [Jupyter Notebook](services/jupyter.md)
-* [Interactive Big Data Analytics with Spark](bigdata/spark.md)
+<!-- * [Interactive Big Data Analytics with Spark](bigdata/spark.md) -->
 
 
 ## Getting Help
@@ -199,34 +225,36 @@ ULHPC also supports interactive computing.
 ULHPC places a very strong emphasis on enabling science and providing
 user-oriented systems and services.
 
+
+
 ### Documentation
 
-We have always maintained an extensive [documentation](https://docs.hpc.uni.lu).
+We have always maintained an extensive [documentation](https://hpc-docs.uni.lu) and [HPC tutorials](https://ulhpc-tutorials.readthedocs.io) available online, which aims at being the most up-to-date and comprehensive while covering many (many) topics.
 
-!!! tip "The ULHPC Team welcomes your contributions"
-	These pages are hosted from a
-	[git repository](https://gitlab.uni.lu/www/ulhpc-docs) and
-	[contributions](https://gitlab.uni.lu/www/ulhpc-docs/docs/contributing)
-	are welcome!
-	[Fork this repo](https://gitlab.uni.lu/www/ulhpc-docs-/forks/new)
+[:fontawesome-solid-sign-in-alt: ULHPC Technical Documentation](https://hpc-docs.uni.lu/support){: .md-button .md-button--link }
+[:fontawesome-solid-chalkboard-teacher: ULHPC Tutorials](ttps://ulhpc-tutorials.readthedocs.io/){: .md-button .md-button--link }
 
-* [ULHPC Technical Documentation](https://docs.hpc.uni.lu): [docs.hpc.uni.lu](https://docs.hpc.uni.lu)
-* [ULHPC Tutorials](https://ulhpc-tutorials.readthedocs.io/) - HPC tutorials covering many (many) topics: [ulhpc-tutorials.readthedocs.io](https://ulhpc-tutorials.readthedocs.io/)
-* [Helpdesk / Ticket Portal](https://hpc-tracker.uni.lu) - new and past tickets, may contain detailed instructions to solve past issues.
+<!-- !!! tip "The ULHPC Team welcomes your contributions" -->
+<!-- 	These pages are hosted from a -->
+<!-- 	[git repository](https://gitlab.uni.lu/www/ulhpc-docs) and -->
+<!-- 	[contributions](https://gitlab.uni.lu/www/ulhpc-docs/docs/contributing) -->
+<!-- 	are welcome! -->
+<!-- 	[Fork this repo](https://gitlab.uni.lu/www/ulhpc-docs-/forks/new) -->
 
 ### Support
 
-* [ULHPC Support Overview](support/index.md)
-* [Helpdesk - HPC Ticketing Service](https://hpc-tracker.uni.lu) (preferred, login required)
-* [ULHPC Team Email](mailto:hpc-team@uni.lu) (if you cannot login): [`hpc-team@uni.lu`](mailto:hpc-team@uni.lu)
-* HPC User community mailing list: (moderated): [`hpc-users@uni.lu`](mailto:hpc-users@uni.lu)
+[:fontawesome-solid-sign-in-alt: ULHPC Support Overview](support/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-hand-holding-medical: Service Now HPC Support Portal](https://hpc.uni.lu/support){: .md-button .md-button--link }
 
 !!! info "Availability and Response Time"
     HPC support is provided on a volunteer basis by UL HPC staff and associated UL experts working at normal business hours. We offer **no guarantee** on response time except with paid support contracts.
 
 ### Consulting
 
-Expert-level service and support can be provided by the University HPC staff in the form of pools of 4-hour specialized help, at 480€ VAT excluded (equivalent to 120€ per hour expert rate EA).
-Service and support activities include but are not limited to HPC training on facilities utilization, software installation, HPC workflow development.
+{%
+   include-markdown "support/professional-services.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
 
-* [ULHPC Consulting Services](support/professional-services.md)
+For more details: see [ULHPC Consulting Services](support/professional-services.md)

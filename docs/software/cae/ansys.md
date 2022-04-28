@@ -23,7 +23,7 @@ To open an ANSYS in the interactive mode, please follow the following steps:
 $ ssh -X iris-cluster
 
 # Reserve the node for interactive computation
-$ srun -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 --pty bash -i
+$ salloc -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 
 
 # Load the required version of ANSYS and needed environment
 $ module purge
@@ -40,7 +40,9 @@ $ runwb2
 #!/bin/bash -l
 #SBATCH -J ANSYS-CFX
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=56
+#SBATCH --ntasks-per-node=28
+#SBATCH --ntasks-per-socket=14
+#SBATCH -c 1
 #SBATCH --time=00:30:00
 #SBATCH -p batch
 

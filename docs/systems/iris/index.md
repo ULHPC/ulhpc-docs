@@ -37,7 +37,7 @@ For more information: see [ULHPC slurm docs](../../slurm/index.md).
 
 ## Rack Cabinets
 
-The Iris cluster (management, compute and interconnect) is installed across 7 racks within a row of cabinets in the premises of the [_Centre de Calcul_](../../data-center-index.md) (CDC), in the CDC-S02-005 server room.
+The Iris cluster (management, compute and interconnect) is installed across 7 racks within a row of cabinets in the premises of the [_Centre de Calcul_](../../data-center/index.md) (CDC), in the CDC-S02-005 server room.
 
 | Server Room | Rack ID | Purpose    | Type        | Description                                             |
 |-------------|---------|------------|-------------|---------------------------------------------------------|
