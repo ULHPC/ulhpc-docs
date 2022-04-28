@@ -85,10 +85,11 @@ You can thus extend the [ULHPC Software set](modules.md#ulhpc-toolchains-and-sof
     # ... eventually complemented with cluster
     [ -n "${ULHPC_CLUSTER}" ] && _EB_PREFIX="${_EB_PREFIX}/${ULHPC_CLUSTER}"
     # ... eventually complemented with software set version
-    _EB_PREFIX="${_EB_PREFIX}/2019b"
+    _EB_PREFIX="${_EB_PREFIX}/${RESIF_VERSION_PROD}"
     # ... eventually complemented with arch
     [ -n "${RESIF_ARCH}" ] && _EB_PREFIX="${_EB_PREFIX}/${RESIF_ARCH}"
     export EASYBUILD_PREFIX="${_EB_PREFIX}"
+    export LOCAL_MODULES=${EASYBUILD_PREFIX}/modules/all
     ```
 
 ## Installation / Update local Easybuild

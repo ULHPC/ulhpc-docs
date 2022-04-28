@@ -9,7 +9,7 @@ The [Lustre](http://lustre.org/) file system is an open-source, parallel file sy
 It is available as a global _high_-performance file system on all ULHPC computational systems through a [DDN ExaScaler](https://www.ddn.com/products/lustre-file-system-exascaler/) system.
 
 It is meant to host **temporary scratch data** within your jobs.
-In terms of raw storage capacities, it represents more than **1.6TB**.
+In terms of raw storage capacities, it represents more than **1.6PB**.
 
 * [Live status](https://hpc.uni.lu/live-status/motd/)
 
@@ -96,7 +96,7 @@ Acquired [as part of RFP 170035](../systems/iris/timeline.md#october-2017), the 
     - 1x DDN SS8460 disk expansion enclosure (84-slot drive enclosures)
 * OSTs: 160x SEAGATE disks (7.2K RPM HDD, 8TB, Self Encrypted Disks (SED))
     - configured over 16 RAID6 (8+2) pools and extra disks in spare pools
-* MDTs: 18x  HGST disks (10K RPM HDD, 1,8TB,  Self Encrypted Disks (SED))
+* MDTs: 18x  HGST disks (10K RPM HDD, 1.8TB,  Self Encrypted Disks (SED))
     - configured over 8 RAID1 pools and extra disks in spare pools
 * Two redundant MDS servers
     - Dell R630,   2x Intel Xeon E5-2667v4 @ 3.20GHz [8c], 128GB RAM

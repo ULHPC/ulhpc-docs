@@ -33,7 +33,7 @@ Here is a list of recommended applications:
 
 ### Forgotten Passwords
 
-If you forget your password or if it has recently expired, you can simply [contact us](../support/index.md) by email at [`hpc-team@uni.lu`](mailto:hpc-team 'at' uni.lu) for us to initiate the process of resetting your password.
+If you forget your password or if it has recently expired, you can simply [contact us](../support/index.md) to initiate the process of resetting your password.
 
 ### Login Failures
 

@@ -80,7 +80,10 @@ Within a job, you aim at running a certain number of **tasks**, and Slurm allow 
     * __Slurm Node = Physical node__, specified with `-N <#nodes>`
         - _Advice_: always explicit number of expected number of tasks _per node_ using `--ntasks-per-node <n>`. This way you control the node footprint of your job.
     * __Slurm Socket = Physical Socket/CPU/Processor__
-        - _Advice_: if possible, explicit also the number of expected number of tasks _per socket_ (processor) using `--ntasks-per-socket <n>`
+        - _Advice_: if possible, explicit also the number of expected number of tasks _per socket_ (processor) using `--ntasks-per-socket <s>`. 
+            * relations between `<s>` and `<n>` must be aligned with the physical NUMA characteristics of the node. 
+            * For instance on aion nodes, `<n> = 8*<s>`
+            * For instance on iris regular nodes, `<n>=2*<s>` when on iris bigmem nodes, `<n>=4*<s>`. 
     * (_the most confusing_): __Slurm CPU = Physical CORE__
         - use `-c <#threads>` to specify the number of cores reserved per task.
         - Hyper-Threading (HT) Technology is _disabled_ on all ULHPC compute nodes. In particular:
@@ -89,12 +92,39 @@ Within a job, you aim at running a certain number of **tasks**, and Slurm allow 
             OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1} # Default to 1 if SLURM_CPUS_PER_TASK not set
             ```
             to automatically abstract from the job context
+            * you have interest to match the physical NUMA characteristics of the compute node you're running at (Ex: target 16 threads per socket on Aion nodes (as there are 8 virtual sockets per nodes, 14 threads per socket on Iris regular nodes).
 
 The total number of tasks defined in a given job is stored in the `$SLURM_NTASKS` environment variable.
 This is very convenient to abstract from the job context to run MPI tasks/processes in parallel using for instance:
 ```bash
 srun -n ${SLURM_NTASKS} [...]
 ```
+
+We encourage you to **always** explicitly specify upon resource allocation the number of tasks you want _per_ node/socket (`--ntasks-per-node <n> --ntasks-per-socket <s>`), to easily scale on multiple nodes with `-N <N>`. Adapt the number of threads and the settings to match the physical NUMA characteristics of the nodes 
+
+=== "Aion"
+    16 cores per socket and 8 (virtual) sockets (CPUs) per `aion` node. 
+
+    * `{sbatch|srun|salloc|si} [-N <N>] --ntasks-per-node <8n> --ntasks-per-socket <n> -c <thread>` 
+        - _Total_: `<N>`$\times 8\times$`<n>` tasks, each on `<thread>` threads
+        - **Ensure** `<n>`$\times$`<thread>`= 16
+        - Ex: `-N 2 --ntasks-per-node 32 --ntasks-per-socket 4 -c 4` (_Total_: 64 tasks)
+
+=== "Iris (default Dual-CPU)"
+    14 cores per socket and 2 sockets (physical CPUs) per _regular_ `iris`. 
+
+    * `{sbatch|srun|salloc|si} [-N <N>] --ntasks-per-node <2n> --ntasks-per-socket <n> -c <thread>` 
+        - _Total_: `<N>`$\times 2\times$`<n>` tasks, each on `<thread>` threads
+        - **Ensure** `<n>`$\times$`<thread>`= 14
+        - Ex: `-N 2 --ntasks-per-node 4 --ntasks-per-socket 2  -c 7` (_Total_: 8 tasks)
+
+=== "Iris (Bigmem)"
+    28 cores per socket and 4 sockets (physical CPUs) per _bigmem_ `iris`
+
+    * `{sbatch|srun|salloc|si} [-N <N>] --ntasks-per-node <4n> --ntasks-per-socket <n> -c <thread>` 
+        - _Total_: `<N>`$\times 4\times$`<n>` tasks, each on `<thread>` threads
+        - **Ensure** `<n>`$\times$`<thread>`= 28
+        - Ex: `-N 2 --ntasks-per-node 8 --ntasks-per-socket 2  -c 14` (_Total_: 16 tasks)
 
 <!--resource-allocation-end-->
 
@@ -110,7 +140,7 @@ The most important ones are detailed in the below table which summarizes the mai
 | `-N <N>`                  | **`<N>` Nodes** request                              | `-N 2`                   |
 | `--ntasks-per-node=<n>`   | `<n>` Tasks-per-node request                         | `--ntasks-per-node=28`   |
 | `--ntasks-per-socket=<s>` | `<s>` Tasks-per-socket request                       | `--ntasks-per-socket=14` |
-| `-c=<c>`                  | `<c>` Cores-per-task request (multithreading)        | `-c 1`                   |
+| `-c <c>`                  | `<c>` Cores-per-task request (multithreading)        | `-c 1`                   |
 | `--mem=<m>GB`             | **`<m>`GB memory per node** request                  | `--mem 0`                |
 | `-t [DD-]HH[:MM:SS]>`     | **Walltime** request                                 | `-t 4:00:00`             |
 | `-G <gpu>`                | `<gpu>` GPU(s) request                               | `-G 4`                   |
@@ -190,7 +220,7 @@ Details are provided below:
 
 | Node (type)                          | #Nodes | #Socket / #Cores | RAM [GB] | Features              |
 |--------------------------------------|--------|------------------|----------|-----------------------|
-| `aion-[0001-0318]`                   | 318    | 2 / 128          | 256      | `batch,epyc`          |
+| `aion-[0001-0318]`                   | 318    | 8 / 128          | 256      | `batch,epyc`          |
 | `iris-[001-108]`                     | 108    | 2 / 28           | 128      | `batch,broadwell`     |
 | `iris-[109-168]`                     | 60     | 2 / 28           | 128      | `batch,skylake`       |
 | `iris-[169-186]`   (GPU)             | 18     | 2 / 28           | 768      | `gpu,skylake,volta`   |
@@ -228,20 +258,24 @@ sfeatures
     number of cores _per socket_ available on the target computing node (second form).
 
     === "Aion (default Dual-CPU)"
-        64 cores per socket and 2 sockets (physical CPUs) per `aion` node.
+        16 cores per socket and 8 virtual sockets (CPUs) per `aion` node.
         Depending on the selected form, you **MUST** ensure that either
-        `<n>`$\times$`<thread>`=128, or that `<n>`=2`<s>` and `<s>`$\times$`<thread>`=64.
+        `<n>`$\times$`<thread>`=128, or that `<n>`=8`<s>` and `<s>`$\times$`<thread>`=16.
         ```bash
         ### Example 1 - use all cores available
-        {sbatch|srun|salloc} -N 2 --ntasks-per-node 32 --ntasks-per-socket 16 -c 4 [...]
-        # Total: 64 tasks (spread across 2 nodes), each on 2 cores/threads
+        {sbatch|srun|salloc} -N 2 --ntasks-per-node 32 --ntasks-per-socket 4 -c 4 [...]
+        # Total: 64 tasks (spread across 2 nodes), each on 4 cores/threads
 
         ### Example 2 - use all cores available
         {sbatch|srun|salloc} --ntasks-per-node 128 -c 1  [...]
         # Total; 128 (single-core) tasks
 
         ### Example 3 - use all cores available
-        {sbatch|srun|salloc} -N 1 --ntasks-per-node 2 --ntasks-per-socket 1 -c 64 [...]
+        {sbatch|srun|salloc} -N 1 --ntasks-per-node 8 --ntasks-per-socket 1 -c 16 [...]
+        # Total: 8 tasks, each on 16 cores/threads
+
+        ### Example 4 - use all cores available
+        {sbatch|srun|salloc} -N 1 --ntasks-per-node 2 -c 64 [...]
         # Total: 2 tasks, each on 64 cores/threads
         ```
 
@@ -300,5 +334,5 @@ submitted.
 | `-N <N>`                  | `SLURM_JOB_NUM_NODES` or<br/> `SLURM_NNODES`   |                                          |
 | `--ntasks-per-node=<n>`   | `SLURM_NTASKS_PER_NODE`                   |                                          |
 | `--ntasks-per-socket=<s>` | `SLURM_NTASKS_PER_SOCKET`                 |                                          |
-| `-c=<c>`                  | `SLURM_CPUS_PER_TASK`                     | `OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}` |
+| `-c <c>`                  | `SLURM_CPUS_PER_TASK`                     | `OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}` |
 |                           | `SLURM_NTASKS`<br/> Total number of tasks | `srun -n $SLURM_NTASKS [...]`            |

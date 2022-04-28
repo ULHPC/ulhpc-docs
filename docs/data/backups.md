@@ -15,8 +15,8 @@ More precisions can be requested via a support request.
 
 | Directory        | Path           | Backup location | Frequency | Retention                                                    |
 |------------------|----------------|-----------------|-----------|--------------------------------------------------------------|
-| home directories | `$HOME`        | CDC, Belval     | Daily     | last 7 backups, at least one per month for the last 2 months |
-| projects         | `$PROJECTWORK` | CDC, Belval     | Daily     | one backup per week of the backup directory (`$PROJECT/backup/`) |
+| home directories | `$HOME`        | CDC, Belval     | Weekly    | last 7 backups, at least one per month for the last 2 months |
+| projects         | `$PROJECTWORK` | CDC, Belval     | Weekly    | one backup per week of the backup directory (`$PROJECT/backup/`) |
 | scratch          | `$SCRATCH`     | not backed up   |           |                                                              |
 
 
@@ -49,7 +49,6 @@ Each project directory, in `/mnt/isilon/projects/` contains a hidden sub-directo
 
 | Name                         | Backup location | Frequency | Retention                                                 |
 |------------------------------|-----------------|-----------|-----------------------------------------------------------|
-| gforge.uni.lu                | CS43, Kirchberg | Daily     | last 7 daily backups, one per month for the last 6 months |
 | gitlab.uni.lu                | CDC, Belval     | Daily     | last 7 daily backups, one per month for the last 6 months |
 | hpc-nextcloud.uni.lu         | CDC, Belval     | Daily     | last 7 daily backups, one per month for the last 6 months |
 | hpc.uni.lu (pad, privatebin) | CDC, Belval     | Daily     | last 7 daily backups, one per month for the last 6 months |

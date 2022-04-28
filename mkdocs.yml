@@ -88,7 +88,7 @@ nav:
     - Quality of Service (QOS): 'slurm/qos.md'
     - Account Hierarchy: 'slurm/accounts.md'
     - Job State and Reason Code: 'jobs/reason-codes.md'
-    - Fairshare and Job Accounting: 'slurm/fairsharing.md'
+    - Fairsharing: 'slurm/fairsharing.md'
     - Job Priority and Backfilling: 'jobs/priority.md'
     - Job Accounting and Billing: 'jobs/billing.md'
     # - Limits: 'jobs/limits.md'
@@ -149,6 +149,7 @@ nav:
     - Mathematics & Statistics:
           - MATLAB:    'software/maths/matlab.md'
           - MATHEMATICA:    'software/maths/mathematica.md'
+          - Stata: 'software/maths/stata.md'
           - Julia:    'software/maths/julia.md'
     - Optimizers:                  'software/optim/index.md'
     # - Performance/Debugging:       'development/performance-debugging-tools/index.md'

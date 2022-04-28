@@ -84,9 +84,9 @@ ULHPC user accounts are managed in through the [HPC IPA web portal](../connect/i
 
 ## Security Incidents
 
-If you think there has been a computer security incident you should contact the ULHPC Team and the [University CISO](https://wwwen.uni.lu/university/about_the_university/organisation_charts/organisation_chart_rectorate_central_administration/le_service_informatique_de_l_universite/ciso) team as soon as possible:
+If you think there has been a computer security incident you should contact the ULHPC Team and the [University CISO](https://wwwen.uni.lu/universite/presentation/organigrammes/organigramme_rectorat_administration_centrale/service_informatique_de_l_universite/ciso) team as soon as possible:
 
-> To: [hpc-team@uni.lu,christian.hutter@uni.lu](mailto:hpc-team@uni.lu,christian.hutter@uni.lu)
+> To: [hpc-team@uni.lu,niek.nigg@uni.lu](mailto:hpc-team@uni.lu,niek.nigg@uni.lu)
 
 > Subject: Security Incident for HPC account '`<login>`' (**ADAPT accordingly**)
 

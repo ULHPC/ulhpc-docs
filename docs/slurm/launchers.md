@@ -12,7 +12,7 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 ## Resource allocation Guidelines
 
 !!! important "General guidelines"
-    Always try to align resource specifications for your jobs with physical characteristics.
+    Always try to align [resource specifications](index.md#specific-resource-allocation) for your jobs with physical characteristics.
     Always prefer the use of `--ntasks-per-{node,socket}` over `-n` when defining your tasks allocation request to automatically scale appropriately upon multi-nodes submission with for instance `sbatch -N 2 <launcher>`. Launcher template:
     ```bash
     #!/bin/bash -l # <--- DO NOT FORGET '-l' to facilitate further access to ULHPC modules
@@ -40,13 +40,13 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 %}
 
 === "Aion (default Dual-CPU)"
-    64 cores per socket and 2 sockets (physical CPUs) per `aion` node. Examples:
+    16 cores per socket and 8 (virtual) sockets (CPUs) per `aion` node. Examples:
     ```bash
     #SBATCH -p batch                 #SBATCH -p batch                #SBATCH -p batch
     #SBATCH -N 1                     #SBATCH -N 1                    #SBATCH -N 1
-    #SBATCH --ntasks-per-node=128    #SBATCH --ntasks-per-node 16    #SBATCH --ntasks-per-node 4
-    #SBATCH --ntasks-per-socket 64   #SBATCH --ntasks-per-socket 8   #SBATCH --ntasks-per-socket 2
-    #SBATCH -c 1                     #SBATCH -c 8                    #SBATCH -c 32
+    #SBATCH --ntasks-per-node=128    #SBATCH --ntasks-per-node 16    #SBATCH --ntasks-per-node 8
+    #SBATCH --ntasks-per-socket 16   #SBATCH --ntasks-per-socket 2   #SBATCH --ntasks-per-socket 1
+    #SBATCH -c 1                     #SBATCH -c 8                    #SBATCH -c 16
     ```
 
 === "Iris (default Dual-CPU)"
@@ -462,12 +462,12 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
     !!! example "Multi-node hybrid parallel application IntelMPI/OpenMP launcher"
         ```bash
         #!/bin/bash -l
-        # Multi-node hybrid application IntelMPI+OpenMP launcher, using 64 threads per socket(CPU) on 2 nodes (256 cores):
+        # Multi-node hybrid application IntelMPI+OpenMP launcher, using 16 threads per socket(CPU) on 2 nodes (256 cores):
 
         #SBATCH -N 2
-        #SBATCH --ntasks-per-node   2    # MPI processes per node
-        #SBATCH --ntasks-per-socket 1    # MPI processes per processor
-        #SBATCH -c 64
+        #SBATCH --ntasks-per-node   8    # MPI processes per node
+        #SBATCH --ntasks-per-socket 1    # MPI processes per (virtual) processor
+        #SBATCH -c 16
         #SBATCH --time=0-01:00:00
         #SBATCH -p batch
 
@@ -508,12 +508,12 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
     !!! example "Multi-node hybrid parallel application OpenMPI/OpenMP launcher"
         ```bash
         #!/bin/bash -l
-        # Multi-node hybrid application OpenMPI+OpenMP launcher, using 64 threads per socket(CPU) on 2 nodes (256 cores):
+        # Multi-node hybrid application OpenMPI+OpenMP launcher, using 16 threads per socket(CPU) on 2 nodes (256 cores):
 
         #SBATCH -N 2
-        #SBATCH --ntasks-per-node   2    # MPI processes per node
+        #SBATCH --ntasks-per-node   8    # MPI processes per node
         #SBATCH --ntasks-per-socket 1    # MPI processes per processor
-        #SBATCH -c 64
+        #SBATCH -c 16
         #SBATCH --time=0-01:00:00
         #SBATCH -p batch
 
