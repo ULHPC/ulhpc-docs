@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Time-stamp: <Fri 2022-04-29 18:38 svarrette>
+# Time-stamp: <Fri 2022-04-29 19:13 svarrette>
 ###############################################################################
 
 """
@@ -32,12 +32,44 @@ __version__ = '1.0.0'
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 DEFAULT_SETTINGS = {
-    'clusters': ['iris','aion'],
-    'archs':    ['broadwell','skylake','gpu','epyc'],
-    'swsets_versions':  [ '2019b', '2020b'],
+    'clusters': [
+        'iris',
+        'aion'
+    ],
+    'archs':    [
+        'broadwell',
+        'skylake',
+        'gpu',
+        'epyc'
+    ],
+    'swsets_versions':  [
+        '2019b',
+        '2020b'
+    ],
     'resif_root_path': '/opt/apps/resif',
     'yamlfile':   'resif_modules.yaml',
-    'output_dir': 'docs/software/swsets'
+    'output_dir': 'docs/software/swsets',
+    'categories': {
+        'bio':       "Biology",
+        'cae':       "CFD/Finite element modelling",
+        'chem':      "Chemistry",
+        'compiler':  "Compilers",
+        'data':      "Data processing",
+        'debugger':  "Debugging",
+        'devel':     "Development",
+        'geo':       "Weather modelling",
+        'lang':      "Programming Languages",
+        'lib':       "Libraries",
+        'math':      "Mathematics",
+        'mpi':       "MPI",
+        'numlib':    "Numerical libraries",
+        'perf':      "Performance measurements",
+        'phys':      "Physics",
+        'system':    "System-level software",
+        'toolchain': "Toolchains (software stacks)",
+        'tools':     "Utilities",
+        'vis':       "Visualisation"
+    }
 }
 
 def dict_merge(dct, merge_dct):
@@ -134,25 +166,7 @@ def get_catlongname(cat):
         """
         Return a long name (if known) for a given category.
         """
-        knowncats = {'bio':       "Biology",
-                     'cae':       "CFD/Finite element modelling",
-                     'chem':      "Chemistry",
-                     'compiler':  "Compilers",
-                     'data':      "Data processing",
-                     'debugger':  "Debugging",
-                     'devel':     "Development",
-                     'geo':       "Weather modelling",
-                     'lang':      "Programming Languages",
-                     'lib':       "Libraries",
-                     'math':      "Mathematics",
-                     'mpi':       "MPI",
-                     'numlib':    "Numerical libraries",
-                     'perf':      "Performance measurements",
-                     'phys':      "Physics",
-                     'system':    "System-level software",
-                     'toolchain': "Toolchains (software stacks)",
-                     'tools':     "Utilities",
-                     'vis':       "Visualisation"}
+        knowncats = settings['categories']
         if cat is None: return knowncats
         if cat in knowncats.keys(): return knowncats[cat]
         else: return cat.upper()
@@ -163,12 +177,17 @@ def get_catlongname(cat):
 
 #################### COLLECT #####################
 
-###
-# Get module information based on its LUA filepath
-# Return module dictionary with description, category, ... if succesfully retrieved
-# Return False is failed
-###
 def get_module_details_from_file(mfpath, filters):
+    """
+    Get module information based on its LUA filepath
+
+    Args:
+       mfpath  (str):  path to resif root directory
+       filters (dict): eventual filters to apply
+
+    Return module dictionary with description, category, ... if succesfully retrieved
+    Return False is failed
+    """
 
     try:
 
@@ -244,11 +263,18 @@ def get_module_details_from_file(mfpath, filters):
         print(e)
         return False
 
-###
-# Iterate and deepmerge over list of module filepath to generate a map
-###
-def collect_softwares(paths, filters=None):
 
+def collect_softwares(paths, filters=None):
+    """
+    Iterate and deepmerge over list of module filepath to generate a map
+
+    Args:
+       paths   (str): resif root path to analyse
+       filters (dict): eventual list of filters to apply ('archs','clusters' or 'swsets')
+                       Default: None
+
+    Return dict of collected software
+    """
     collected_softwares = {}
 
     for filepath in paths:
@@ -261,12 +287,12 @@ def collect_softwares(paths, filters=None):
 
 #################### RENDER #####################
 
-
 ###
 # Render markdown files from collected software list
 ##
 def render_markdown_from_collect(collected_softwares,
-                                 output_path="./docs/software_list"):
+                                 output_path='docs/software/swsets',
+                                 filters=None):
     """
     Write into markdown files software details taken out from the available
     software modules analysed by the 'collect' action (invoking
@@ -285,7 +311,11 @@ def render_markdown_from_collect(collected_softwares,
     .   ├── <software>.md
     .   └── [...]
 
-
+    Args:
+       collected_softwares (dict): dictionnary of all collected software (typically loaded
+                                   from a yaml file)
+       output_path (str): where to store the generated markdown files
+       filters (dict): eventual filters to apply
     """
     output_folder = create_output_path(output_path)
     all_softwares={}
@@ -558,17 +588,26 @@ def collect(ctx,
 @click.option('-o', '--output-dir', type=click.Path(exists=True), metavar='DIR',
               default=settings['output_dir'], show_default=True,
               help="Set output directory where to generate the markdown files")
-def render(ctx, input, output_dir):
+@click.option('-s', '--swset', multiple=True, metavar='YYYY{a|b}', default=None,
+              help='generate only markdown for the specified software set (Ex: 2020b)')
+@click.option('-c', '--category', multiple=True, metavar='NAME',
+              type=click.Choice(settings['categories'].keys())
+              help='generate only markdown for the specified category (Ex: bio)')
+def render(ctx, input, output_dir, swset, category):
     """
     Generate/Render markdown files summarizing the available software modules
     under <output_path>/
     """
     log.info('Render meta-data for the available RESIF modules')
     log.debug(f'click context:\n {  pprint.pformat(ctx.params) } ')
+
     log.info(f'Load input resif module information from file { input }')
     resif_modules = yaml.load(input, Loader=yaml.SafeLoader)
     # pprint.pprint(resif_modules)
-    render_markdown_from_collect(resif_modules, output_dir)
+    filters = {}
+    if swset    is not None: filters['swsets'] = swset
+    if category is not None: filters['category'] = category
+    render_markdown_from_collect(resif_modules, output_dir, filters)
 
 
 if __name__ == "__main__":
