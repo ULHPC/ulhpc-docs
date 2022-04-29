@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Time-stamp: <Fri 2022-04-29 15:16 svarrette>
+# Time-stamp: <Fri 2022-04-29 18:38 svarrette>
 ###############################################################################
 
 """
@@ -33,10 +33,10 @@ __version__ = '1.0.0'
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 DEFAULT_SETTINGS = {
     'clusters': ['iris','aion'],
-    'archs': ['broadwell','skylake','gpu','epyc'],
+    'archs':    ['broadwell','skylake','gpu','epyc'],
     'swsets_versions':  [ '2019b', '2020b'],
     'resif_root_path': '/opt/apps/resif',
-    'yamlfile': 'resif_modules.yaml',
+    'yamlfile':   'resif_modules.yaml',
     'output_dir': 'docs/software/swsets'
 }
 
@@ -399,26 +399,29 @@ def render_markdown_from_collect(collected_softwares,
                     ]
 
             # Writing into category/software.md information we gathered
+            log.info(f'Generating markdown file { software_file }')
             df = pd.DataFrame(detailed_software_array, columns=['Version','Swset','Architectures','Clusters'])
             with software_file.open("w") as fd:
-                lines = [
-                    '# ' + software_key,
-                    '- **Description**: ' + software_details['desc'],
-                    '- **Category**: ' + get_catlongname(category_name)
-                ]
-                fd.write('\n'.join(lines))
-                fd.write('\n')
-
+                fd.write("### %s\n" % software_key)
+                fd.write("\n")
+                fd.write("* [official website](%s)\n" % software_details['www'])
+                fd.write("* __Category__: %s (%s)\n" %  (get_catlongname(category_name), category_name))
+                fd.write("\n")
+                fd.write("Available versions of %s on ULHPC platforms:\n" % software_key)
+                fd.write("\n")
             with software_file.open("a") as fd:
                 df.to_markdown(fd)
+            with software_file.open("a") as fd:
+                fd.write("\n\n")
+                fd.write("> %s\n" % software_details['desc'])
+
 
             # Make sure we keep generic information for all_softwares.md
             all_softwares = {**all_softwares, **software_without_details}
 
-
-
     # Write into SWSET.md (example: 2020b.md) all included softwares information
     for swset_label, swset_list_softwares in softwares_swset.items():
+        log.info(f'Generating markdown file { output_folder }/{ swset_label }.md')
         df = pd.DataFrame.from_dict(swset_list_softwares, orient="index", columns=['Architectures','Clusters','Category','Description'])
         df.index.name='Software'
         df.sort_values(by=['Software'], inplace=True)
@@ -426,11 +429,30 @@ def render_markdown_from_collect(collected_softwares,
             df.to_markdown(fd)
 
     # Write generic software information we gathered in all_software.md
+    log.info(f'Generating markdown file { output_folder }/all_software.md')
     df = pd.DataFrame.from_dict(all_softwares, orient="index", columns=['Versions','Swsets','Architectures','Clusters','Category','Description'])
     df.index.name='Software'
     df.sort_values(by=['Software'], inplace=True)
     with (output_folder / "all_softwares.md").open("w") as fd:
         df.to_markdown(fd)
+
+    # restart focusing on software category
+    # Write into <category>.md (Ex: bio.md) all associated softwares information
+    df.sort_values(by=['Category'], inplace=True)
+    for category_name in collected_softwares.keys():
+        category_df = df[df['Category'] ==  get_catlongname(category_name)]
+        #pprint.pprint(category_df)
+        category_file = output_folder / (category_name + ".md")
+        if not category_df.empty:
+            log.info(f'Generating markdown file { category_file }')
+            with (category_file).open("w") as fd:
+                fd.write("## %s (%s)\n" % (get_catlongname(category_name), category_name))
+                fd.write("\n")
+                fd.write("Alphabetical list of available ULHPC software ")
+                fd.write("belonging to the '%s' category\n" % category_name)
+                fd.write("\n")
+            with (category_file).open("a") as fd:
+                category_df.sort_values(by=['Software']).to_markdown(fd)
 
 
 ###############################################################################
