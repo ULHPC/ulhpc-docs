@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Time-stamp: <Fri 2022-04-29 00:04 svarrette>
+# Time-stamp: <Fri 2022-04-29 15:16 svarrette>
 ###############################################################################
 
 """
@@ -32,9 +32,31 @@ __version__ = '1.0.0'
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 DEFAULT_SETTINGS = {
-    'swsets_versions':  [ '2019b', '2020b']
+    'clusters': ['iris','aion'],
+    'archs': ['broadwell','skylake','gpu','epyc'],
+    'swsets_versions':  [ '2019b', '2020b'],
+    'resif_root_path': '/opt/apps/resif',
+    'yamlfile': 'resif_modules.yaml',
+    'output_dir': 'docs/software/swsets'
 }
 
+def dict_merge(dct, merge_dct):
+    """
+    Deep Dictionary Merge
+    see https://gist.github.com/angstwad/bf22d1822c38a92ec0a9
+    """
+    dct = dct.copy()
+
+    for k, v in merge_dct.items():
+        if (k in dct and isinstance(dct[k], dict) and isinstance(merge_dct[k], dict)):
+            dct[k] = dict_merge(dct[k], merge_dct[k])
+        else:
+            if (bool(dct) and k in dct.keys() and isinstance(dct[k], list)):
+                dct[k] = list(set(dct[k] + merge_dct[k]))
+            else:
+                dct[k] = merge_dct[k]
+
+    return dct
 
 ###
 # GENERIC SETTINGS / LOGS Management
@@ -43,7 +65,8 @@ DEFAULT_SETTINGS = {
 class ConfigValueNotFound(Exception):
     pass
 confuse.NotFoundError = ConfigValueNotFound
-settings = confuse.Configuration(APPNAME, __name__)
+settings = dict_merge(confuse.Configuration(APPNAME, __name__).get(),
+                      DEFAULT_SETTINGS)
 
 ## logging
 FORMATTER = logging.Formatter("[%(name)s] %(asctime)s — %(levelname)s: %(message)s")
@@ -70,58 +93,11 @@ log = get_logger(APPNAME)
 ###
 # UTILS HELPERS
 ###
-def dump_yaml(obj, stream):
-    """Attempt to dump `obj` to a YAML file"""
-    return yaml.dump(obj, stream=stream, default_flow_style=False)
-def load_yaml(path):
-    """Load a yaml file from `path`"""
-    return parse_yaml(_load(path))
-def parse_yaml(data):
-    return yaml.safe_load(data)
 
-def get_catlongname(cat):
-        ''' Return a long name (if known) for a given category. '''
-        knowncats = {'bio':       "Biology",
-                     'cae':       "CFD/Finite element modelling",
-                     'chem':      "Chemistry",
-                     'compiler':  "Compilers",
-                     'data':      "Data processing",
-                     'debugger':  "Debugging",
-                     'devel':     "Development",
-                     'geo':       "Weather modelling",
-                     'lang':      "Programming Languages",
-                     'lib':       "Libraries",
-                     'math':      "Mathematics",
-                     'mpi':       "MPI",
-                     'numlib':    "Numerical libraries",
-                     'perf':      "Performance measurements",
-                     'phys':      "Physics",
-                     'system':    "System-level software",
-                     'toolchain': "Toolchains (software stacks)",
-                     'tools':     "Utilities",
-                     'vis':       "Visualisation"}
-        if cat is None: return knowncats
-        if cat in knowncats.keys(): return knowncats[cat]
-        else: return cat.upper()
-
-# Deep Dictionary Merge from https://gist.github.com/angstwad/bf22d1822c38a92ec0a9
-def dict_merge(dct, merge_dct):
-    dct = dct.copy()
-
-    for k, v in merge_dct.items():
-        if (k in dct and isinstance(dct[k], dict) and isinstance(merge_dct[k], dict)):
-            dct[k] = dict_merge(dct[k], merge_dct[k])
-        else:
-            if (bool(dct) and k in dct.keys() and isinstance(dct[k], list)):
-                dct[k] = list(set(dct[k] + merge_dct[k]))
-            else:
-                dct[k] = merge_dct[k]
-
-    return dct
-
-# Deep dictionary searching with filters
 def dict_contains(dct, fkey, fvalue):
-
+    """
+    Deep dictionary searching with filters
+    """
     for k, v in dct.items():
         if k == fkey:
             # Simple check if the key is present (no value comparison)
@@ -145,12 +121,47 @@ def dict_contains(dct, fkey, fvalue):
 
     return False
 
-# Create and return the created path/folder object
 def create_output_path(path):
+    """
+    Create and return the created path/folder object
+    """
     folder = pathlib.Path(path)
     if not folder.exists():
         folder.mkdir(parents=True)
     return folder
+
+def get_catlongname(cat):
+        """
+        Return a long name (if known) for a given category.
+        """
+        knowncats = {'bio':       "Biology",
+                     'cae':       "CFD/Finite element modelling",
+                     'chem':      "Chemistry",
+                     'compiler':  "Compilers",
+                     'data':      "Data processing",
+                     'debugger':  "Debugging",
+                     'devel':     "Development",
+                     'geo':       "Weather modelling",
+                     'lang':      "Programming Languages",
+                     'lib':       "Libraries",
+                     'math':      "Mathematics",
+                     'mpi':       "MPI",
+                     'numlib':    "Numerical libraries",
+                     'perf':      "Performance measurements",
+                     'phys':      "Physics",
+                     'system':    "System-level software",
+                     'toolchain': "Toolchains (software stacks)",
+                     'tools':     "Utilities",
+                     'vis':       "Visualisation"}
+        if cat is None: return knowncats
+        if cat in knowncats.keys(): return knowncats[cat]
+        else: return cat.upper()
+
+
+
+
+
+#################### COLLECT #####################
 
 ###
 # Get module information based on its LUA filepath
@@ -248,17 +259,34 @@ def collect_softwares(paths, filters=None):
 
     return collected_softwares
 
+#################### RENDER #####################
+
 
 ###
-# Write into markdown files software details, usaully given by the collect
-# command /all_software.md will contains generic informations, 1 line per
-# software /swset.md will contains all software and version included into the
-# current software set (can contain multiple line for a single software, but
-# with different versions) /category/software.md contains all versions and
-# software set available for this specific software
-###
-def render_markdown_from_collect(collected_softwares, output_path="./docs/software_list"):
+# Render markdown files from collected software list
+##
+def render_markdown_from_collect(collected_softwares,
+                                 output_path="./docs/software_list"):
+    """
+    Write into markdown files software details taken out from the available
+    software modules analysed by the 'collect' action (invoking
+    collect_softwares(...)) aimed to be displayed in the mkdocs[-material]
+    website
+    This will typically generate the following file structure:
 
+    <output_path>/all_softwares.md
+    ├── all_softwares.md   list of all software ever built
+    ├── <version>.md       software list in RESIF swset <version>
+    ├── <category>.md      list of all software belonging to category '<category>'
+    ├── <category>/        list of all software belonging to category 'bio'
+    │   ├── <software>.md     short summary and available version for software <software>
+    │   └── [...]
+    └── vis          list of all software belonging to category 'bio'
+    .   ├── <software>.md
+    .   └── [...]
+
+
+    """
     output_folder = create_output_path(output_path)
     all_softwares={}
     category={}
@@ -388,6 +416,7 @@ def render_markdown_from_collect(collected_softwares, output_path="./docs/softwa
             all_softwares = {**all_softwares, **software_without_details}
 
 
+
     # Write into SWSET.md (example: 2020b.md) all included softwares information
     for swset_label, swset_list_softwares in softwares_swset.items():
         df = pd.DataFrame.from_dict(swset_list_softwares, orient="index", columns=['Architectures','Clusters','Category','Description'])
@@ -426,18 +455,19 @@ def cli(ctx, version, verbose, debug, noop):
             click.echo("This is " + os.path.basename(__file__) + " version " + __version__)
         else:
             click.echo(ctx.get_help())
+    # pprint.pprint(settings)
 
 # sub command 'collect'
-@cli.command(short_help='Collect meta-data dict of the RESIF3 modules installed and (eventually) export them as YAML')
+@cli.command()
 @click.pass_context
-@click.option('-a', '--arch', type=click.Choice(['broadwell','skylake','gpu','epyc'], case_sensitive=False),
+@click.option('-a', '--arch', type=click.Choice(settings['archs'], case_sensitive=False),
               help='Filter output by RESIF architecture')
-@click.option('-c', '--cluster', type=click.Choice(['iris','aion'], case_sensitive=False),
+@click.option('-c', '--cluster', type=click.Choice(settings['clusters'], case_sensitive=False),
               help='Filter output by cluster')
 @click.option('-s', '--swset', multiple=True, metavar='YYYY{a|b}',
-              default=DEFAULT_SETTINGS['swsets_versions'], show_default=True,
+              default=settings['swsets_versions'], show_default=True,
               help='Filter output by RESIF software set version (Ex: 2020b)')
-@click.option('-p', '--resif-root-path', type=click.Path(exists=True), default='/opt/apps/resif',
+@click.option('-p', '--resif-root-path', type=click.Path(exists=True), default=settings['resif_root_path'],
               help='set RESIF root path. In particular, modules and software installed by RESIF' +
               'can be found under PATH/<cluster>/<version>/<arch>/{software,modules}')
 @click.option('-o', '--output', type=click.File('w'), metavar='YAMLFILE',
@@ -450,7 +480,13 @@ def collect(ctx,
             output     # type: Union[None, str] (writable file path)
             ):
     """
-    Collect the meta data of the RESIFs modules available on the cluster
+    Collect meta-data dict of the RESIF3 modules installed and
+    (eventually) export them as YAML
+
+    /!\ IMPORTANT: you probably want to run this operation on the cluster
+    to access the resif directories
+
+    Use 'make resif-collect' for that purpose
     """
     log.info('Collect meta-data for the available RESIF modules')
     log.debug(f'click context:\n {  pprint.pformat(ctx.params) } ')
@@ -495,14 +531,15 @@ def collect(ctx,
 @cli.command(short_help='Generate markdown files summarizing available ULHPC modules')
 @click.pass_context
 @click.option('-i', '--input', type=click.File('r'), metavar='YAMLFILE',
-              default='data/resif_modules.yaml', show_default=True,
+              default='data/%s' % settings['yamlfile'], show_default=True,
               help="Set YAML input file for the dict storing resif module informations (generated by the 'collect' subcommand)")
 @click.option('-o', '--output-dir', type=click.Path(exists=True), metavar='DIR',
-              default="docs/software/resif/", show_default=True,
+              default=settings['output_dir'], show_default=True,
               help="Set output directory where to generate the markdown files")
 def render(ctx, input, output_dir):
     """
     Generate/Render markdown files summarizing the available software modules
+    under <output_path>/
     """
     log.info('Render meta-data for the available RESIF modules')
     log.debug(f'click context:\n {  pprint.pformat(ctx.params) } ')
