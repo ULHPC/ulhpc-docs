@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Time-stamp: <Fri 2022-04-29 22:14 svarrette>
+# Time-stamp: <Fri 2022-04-29 23:49 svarrette>
 ###############################################################################
 
 """
@@ -300,7 +300,7 @@ def render_markdown_from_collect(collected_softwares,
     website
     This will typically generate the following file structure:
 
-    <output_path>/all_softwares.md
+    <output_path>/
     ├── all_softwares.md   list of all software ever built
     ├── <version>.md       software list in RESIF swset <version>
     ├── <category>.md      list of all software belonging to category '<category>'
@@ -433,8 +433,9 @@ def render_markdown_from_collect(collected_softwares,
             with software_file.open("w") as fd:
                 fd.write("### %s\n" % software_key)
                 fd.write("\n")
-                fd.write("* [official website](%s)\n" % software_details['www'])
+                fd.write("* [Official website](%s)\n" % software_details['www'])
                 fd.write("* __Category__: %s (%s)\n" %  (get_catlongname(category_name), category_name))
+                fd.write("    -  `module load %s/%s[/<version>]`\n" %  (category_name, software_name))
                 fd.write("\n")
                 fd.write("Available versions of %s on ULHPC platforms:\n" % software_key)
                 fd.write("\n")
@@ -445,18 +446,29 @@ def render_markdown_from_collect(collected_softwares,
                 fd.write("> %s\n" % software_details['desc'])
 
 
+
             # Make sure we keep generic information for all_softwares.md
             all_softwares = {**all_softwares, **software_without_details}
 
     # Write into SWSET.md (example: 2020b.md) all included softwares information
     for swset_label, swset_list_softwares in softwares_swset.items():
-        if (not filter) or (filters['swsets'] and swset_label in filters['swsets']):
-            log.info(f'Generating markdown file { output_folder }/{ swset_label }.md')
-            df = pd.DataFrame.from_dict(swset_list_softwares, orient="index", columns=['Architectures','Clusters','Category','Description'])
-            df.index.name='Software'
-            df.sort_values(by=['Software'], inplace=True)
-            with (output_folder / (swset_label + ".md")).open("w") as fd:
-                df.to_markdown(fd)
+        if filters['swsets'] and (swset_label not in filters['swsets']): continue
+        swset_file = output_folder / (swset_label + ".md")
+        log.info(f'Generating markdown file { swset_file }')
+        df = pd.DataFrame.from_dict(swset_list_softwares, orient="index", columns=['Architectures','Clusters','Category','Description'])
+        df.index.name='Software'
+        df.sort_values(by=['Software'], inplace=True)
+        with (swset_file).open("w") as fd:
+            fd.write("Alphabetical list of available ULHPC software ")
+            fd.write("belonging to the '%s' software set.\n" % swset_label)
+            fd.write("To load a software of this set, use:\n")
+            fd.write("```bash\n")
+            fd.write("# Eventually: resif-load-swset-[...]\n")
+            fd.write("module load <category>/<software>[/<version>]\n")
+            fd.write("```\n")
+            fd.write("\n")
+        with (swset_file).open("a") as fd:
+            df.to_markdown(fd)
 
     df = pd.DataFrame.from_dict(all_softwares, orient="index",
                                 columns=['Versions',
@@ -468,27 +480,30 @@ def render_markdown_from_collect(collected_softwares,
     df.index.name='Software'
     df.sort_values(by=['Software'], inplace=True)
     # Write generic software information we gathered in all_software.md
-    if (not filter):
-        log.info(f'Generating markdown file { output_folder }/all_software.md')
-        with (output_folder / "all_softwares.md").open("w") as fd:
-            df.to_markdown(fd)
+    #if (not filters):
+    log.info(f'Generating markdown file { output_folder }/all_software.md')
+    with (output_folder / "all_softwares.md").open("w") as fd:
+        df.to_markdown(fd)
 
     # restart focusing on software category
     # Write into <category>.md (Ex: bio.md) all associated softwares information
     df.sort_values(by=['Category'], inplace=True)
     for category_name in collected_softwares.keys():
-        if filters['categories'] and category_name not in filters['categories']:
+        if filters['categories'] and (category_name not in filters['categories']):
             continue
         category_df = df[df['Category'] ==  get_catlongname(category_name)]
+        category_df = category_df.drop('Category', 1)
         #pprint.pprint(category_df)
         category_file = output_folder / (category_name + ".md")
         if not category_df.empty:
             log.info(f'Generating markdown file { category_file }')
             with (category_file).open("w") as fd:
-                fd.write("## %s (%s)\n" % (get_catlongname(category_name), category_name))
-                fd.write("\n")
+                #fd.write("## %s (%s)\n" % (get_catlongname(category_name), category_name))
+                #fd.write("\n")
                 fd.write("Alphabetical list of available ULHPC software ")
-                fd.write("belonging to the '%s' category\n" % category_name)
+                fd.write("belonging to the '%s' category.\n" % category_name)
+                fd.write("To load a software of this category, use: ")
+                fd.write("` module load %s/<software>[/<version>]`\n" % category_name)
                 fd.write("\n")
             with (category_file).open("a") as fd:
                 category_df.sort_values(by=['Software']).to_markdown(fd)
