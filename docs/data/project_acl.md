@@ -2,7 +2,7 @@
 !!! note "Global Project quotas and backup policies"
     See [quotas](../filesystems/quotas.md) for detailed information about inode,
     space quotas, and file system purge policies.
-    Your projects backup directories are daily backuped, according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
+    Your projects backup directories are backuped weekly, according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
 
 <!--start-warning-clusterusers-->
 

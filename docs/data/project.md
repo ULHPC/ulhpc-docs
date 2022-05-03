@@ -22,7 +22,7 @@ You can request a new project directory under [ServiceNow](https://hpc.uni.lu/su
 ## Quotas and Backup Policies
 
 See [quotas](../filesystems/quotas.md) for detailed information about inode, space quotas, and file system purge policies.
-Your global projects are daily backuped, according to the policy detailed in the [ULHPC backup policies](backups.md).
+Your projects backup directories are backuped weekly, according to the policy detailed in the [ULHPC backup policies](backups.md).
 
 {%
    include-markdown "project_acl.md"
