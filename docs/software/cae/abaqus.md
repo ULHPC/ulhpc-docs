@@ -84,8 +84,10 @@ echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
 
 # Load the required version of Abaqus and needed environment
 module purge
-module load cae/ABAQUS/2018-hotfix-1806
-module load toolchain/intel/2019b
+# module load cae/ABAQUS/2018-hotfix-1806
+module load cae/ABAQUS/2021-hotfix-2207
+# module load toolchain/intel/2019b
+module load toolchain/intel/2020b
 # /!\ IMPORTANT: ADAPT the url to point to YOUR licence server!!!
 export LM_LICENSE_FILE=xyz
 # check licenses available
