@@ -8,7 +8,7 @@
     * through _Resource and Job Management System_ (RJMS) tools (Slurm) and associated monitoring interfaces
     * through service portals (like [OpenOnDemand](../connect/ood.md))
     * on code management portals such [GitLab](https://gitlab.uni.lu), [GitHub](https://github.com)
-    * on secondary storage systems used within the University as DropIT, NextCloud etc.
+    * on secondary storage systems used within the University such as Atlas, DropIT, etc.
 
 
 ## Data Use
