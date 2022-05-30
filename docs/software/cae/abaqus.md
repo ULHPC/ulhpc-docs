@@ -16,12 +16,13 @@ To check available versions of Abaqus at ULHPC type `module spider abaqus`.
 The following versions of Abaqus are available in ULHPC:
 ```bash
 # Available versions
- cae/ABAQUS/6.14.2
- cae/ABAQUS/2017-hotfix-1729
- cae/ABAQUS/2017-hotfix-1740
- cae/ABAQUS/2017-hotfix-1745
- cae/ABAQUS/2017-hotfix-1803
- cae/ABAQUS/2018-hotfix-1806
+ # cae/ABAQUS/6.14.2
+ # cae/ABAQUS/2017-hotfix-1729
+ # cae/ABAQUS/2017-hotfix-1740
+ # cae/ABAQUS/2017-hotfix-1745
+ # cae/ABAQUS/2017-hotfix-1803
+ # cae/ABAQUS/2018-hotfix-1806
+ cae/ABAQUS/2021-hotfix-2207
 ```
 
 ## Interactive mode
