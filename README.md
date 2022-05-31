@@ -1,4 +1,4 @@
-![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg) [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE) [![GitHub issues](https://img.shields.io/github/issues/ULHPC/ulhpc-docs)](https://github.com/ULHPC/ulhpc-docs/issues) [![Github](https://img.shields.io/badge/sources-github-green.svg)](https://github.com/ULHPC/ulhpc-docs/) ![Build Status](https://img.shields.io/github/workflow/status/ULHPC/ulhpc-docs/deploy) [![GitHub forks](https://img.shields.io/github/forks/ULHPC/ulhpc-docs?style=social)](https://github.com/ULHPC/ulhpc-docs) [![Github Stars](https://img.shields.io/github/stars/ULHPC/ulhpc-docs?style=social)](https://github.com/ULHPC/ulhpc-docs)
+[![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg)](https://hpc.uni.lu) [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE) [![GitHub issues](https://img.shields.io/github/issues/ULHPC/ulhpc-docs)](https://github.com/ULHPC/ulhpc-docs/issues) [![Github](https://img.shields.io/badge/sources-github-green.svg)](https://github.com/ULHPC/ulhpc-docs/) ![Build Status](https://img.shields.io/github/workflow/status/ULHPC/ulhpc-docs/deploy) [![GitHub forks](https://img.shields.io/github/forks/ULHPC/ulhpc-docs?style=social)](https://github.com/ULHPC/ulhpc-docs) [![Github Stars](https://img.shields.io/github/stars/ULHPC/ulhpc-docs?style=social)](https://github.com/ULHPC/ulhpc-docs)
 
          _    _ _      _    _ _____   _____   _______        _           _           _   _____
         | |  | | |    | |  | |  __ \ / ____| |__   __|      | |         (_)         | | |  __ \
@@ -176,3 +176,5 @@ In order to get started, check out the [Contributing Guide](docs/contributing/RE
 ## License
 
 Unless otherwise specified, this project and the sources proposed within this repository are released under the terms of the [CC BY-NC-SA 4.0](LICENSE) licence.
+
+[![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Cc-by-nc-sa_icon.svg/176px-Cc-by-nc-sa_icon.svg.png)](LICENSE)
