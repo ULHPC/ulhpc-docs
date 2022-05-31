@@ -36,9 +36,9 @@ This flow is ideal for organizations that need simplicity, and roll out frequent
 
 In details:
 
-* As preliminaries (to be done only once),  __[Fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the `ULHPC/docs` repository under `<YOUR-USERNAME>/ulhpc-docs`__
+* As preliminaries (to be done only once),  __[Fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the `ULHPC/ulhpc-docs` repository under `<YOUR-USERNAME>/ulhpc-docs`__
     - A _fork_ is a copy of a repository placed under your Github namespace. Forking a repository allows you to freely experiment with changes without affecting the original project.
-    - In the top-right corner of the  `ULHPC/docs` repository, click "Fork" button.
+    - In the top-right corner of the  `ULHPC/ulhpc-docs` repository, click "Fork" button.
     - Under Settings, change the repository name from `docs` to `ulhpc-docs`
     - Once done, you can clone your __copy__ (forked) repository: select the SSH url under the "Code" button:
     ```bash
@@ -51,7 +51,7 @@ In details:
     $> cd ulhpc-docs
     $> make setup
     ```
-    - Configure your working forked copy to sync with the original `ULHPC/docs` repository through a dedicated `upstream` [remote](https://git-scm.com/docs/git-remote)
+    - Configure your working forked copy to sync with the original `ULHPC/ulhpc-docs` repository through a dedicated `upstream` [remote](https://git-scm.com/docs/git-remote)
     ```bash
     # Check current remote: only 'origin' should be listed
     $> git remote -v
@@ -60,13 +60,13 @@ In details:
     # Add upstream
     $> make setup-upstream
     # OR, manually:
-    $> git remote add upstream https://github.com/ULHPC/docs.git
+    $> git remote add upstream https://github.com/ULHPC/ulhpc-docs.git
     # Check the new remote
     $> git remote -v
     origin  git@github.com:YOUR-USERNAME/ulhpc-docs.git (fetch)
     origin  git@github.com:YOUR-USERNAME/ulhpc-docs.git (push)
-    upstream https://github.com/ULHPC/docs.git (fetch)
-    upstream https://github.com/ULHPC/docs.git (push)
+    upstream https://github.com/ULHPC/ulhpc-docs.git (fetch)
+    upstream https://github.com/ULHPC/ulhpc-docs.git (push)
     ```
 
     - At this level, you probably want to follow the [setup](../setup.md) instructions to configure your `ulhpc-docs` python virtualenv and deploy locally the documentation with `make doc`
@@ -144,7 +144,7 @@ The main concepts inherited from both advanced workflows ([Git-flow](http://nvie
 
 * The central repository holds **two main branches** with an infinite lifetime:
     - `production`: the *production-ready* branch, used for the deployed version of the documentation.
-    - `devel | master` (`master` in this case): the main (master) branch where the latest developments intervene (name depends on repository purpose). This is the *default* branch you get when you clone the repository.
+    - `devel | master | main` (`master` in this case): the main (master) branch where the latest developments intervene (name depends on repository purpose). This is the *default* branch you get when you clone the repository.
 * You should **always setup** your local copy of the repository with `make setup`
     - ensure also you have installed the `gitflow` extension
     - ensure you are properly made the initial configuration of git -- see also [sample `.gitconfig`](https://github.com/Falkor/dotfiles/blob/master/git/.gitconfig)
