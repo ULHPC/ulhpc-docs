@@ -1,17 +1,8 @@
-![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg) <!-- [![gitlab](https://img.shields.io/badge/git-gitlab-lightgray.svg)](https://gitlab.uni.lu/www/ulhpc-docs) [![Issues](https://img.shields.io/badge/issues-gitlab-green.svg)](https://gitlab.uni.lu/www/ulhpc-docs/issues) -->
+[![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg)](https://hpc.uni.lu)
 
 # Uni.lu HPC Technical Documentation
 
 ![](images/logo_ULHPC.png){: style="width:150px; float: right;"}
-
-
-<!-- <p align="center"><img src="images/logo_ULHPC.png" alt="UL HPC logo" width="150px"/></p> -->
-<!-- !!! tip "The ULHPC Team welcomes your contributions" -->
-<!-- 	These pages are hosted from a -->
-<!-- 	[git repository](https://gitlab.uni.lu/www/ulhpc-docs) and -->
-<!-- 	[contributions](https://gitlab.uni.lu/www/ulhpc-docs/docs/contributing) -->
-<!-- 	are welcome! -->
-<!-- 	[Fork this repo](https://gitlab.uni.lu/www/ulhpc-docs-/forks/new) -->
 
 **[hpc-docs.uni.lu](https://hpc-docs.uni.lu)** is a resource with the
 **technical details** for users to make _effective_ use
@@ -47,3 +38,4 @@ Consider our latest **[ULHPC User Guide (PDF)](https://hpc.uni.lu/download/slide
 
 ??? info "About this site"
     The [ULHPC Technical Documentation](https://docs.hpc.uni.lu) is based on [MkDocs](http://www.mkdocs.org/) and the [mkdocs-material](https://squidfunk.github.io/mkdocs-material) theme, and inspired by the (excellent) [NERSC](https://docs.nersc.gov) documentation site.
+    These pages are hosted from a [git repository](https://github.com/ULHPC/ulhpc-docs) and [contributions](contributing/) are welcome!
