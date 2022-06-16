@@ -7,7 +7,7 @@ This middleware is responsible for allocating resources to users, providing a fr
 [:fontawesome-solid-sign-in-alt: Official FAQ](https://slurm.schedmd.com/faq.html){: .md-button .md-button--link }
 [:fontawesome-solid-sign-in-alt: ULHPC Tutorial/Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
 
-[![](https://hpc.uni.lu/download/slides/2020-ULHPC-user-guide.png)](https://hpc.uni.lu/download/slides/2020-ULHPC-user-guide.pdf)
+[![](https://hpc.uni.lu/download/slides/2021-ULHPC-user-guide.png)](https://hpc.uni.lu/download/slides/2021-ULHPC-user-guide.pdf)
 
 ## TL;DR Slurm on ULHPC clusters
 
