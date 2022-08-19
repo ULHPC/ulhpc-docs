@@ -1,4 +1,4 @@
 
 # List of all softwares
 
-{!../data/all_softwares.md!}
+{!software/swsets/all_softwares.md!}

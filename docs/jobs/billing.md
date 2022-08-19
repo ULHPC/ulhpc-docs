@@ -28,7 +28,7 @@ usage according to _weights_ defined as follows:
 | $\alpha_{mem}$ | Inverse of the average available memory size per core                                 |
 | $\alpha_{GPU}$ | Weight per GPU accelerator                                                          |
 
-Each [partition](partitions.md) has its own weights
+Each [partition](../slurm/partitions.md) has its own weights
 (combined into [`TRESBillingWeight`](https://slurm.schedmd.com/tres.html)) you can check with
 
 ```bash

@@ -1,4 +1,4 @@
-![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg) [![gitlab](https://img.shields.io/badge/git-gitlab-lightgray.svg)](https://gitlab.uni.lu/www/ulhpc-docs) [![Issues](https://img.shields.io/badge/issues-gitlab-green.svg)](https://gitlab.uni.lu/www/ulhpc-docs/issues)
+[![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg)](https://hpc.uni.lu) [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE) [![GitHub issues](https://img.shields.io/github/issues/ULHPC/ulhpc-docs)](https://github.com/ULHPC/ulhpc-docs/issues) [![Github](https://img.shields.io/badge/sources-github-green.svg)](https://github.com/ULHPC/ulhpc-docs/) ![Build Status](https://img.shields.io/github/workflow/status/ULHPC/ulhpc-docs/deploy) [![GitHub forks](https://img.shields.io/github/forks/ULHPC/ulhpc-docs?style=social)](https://github.com/ULHPC/ulhpc-docs) [![Github Stars](https://img.shields.io/github/stars/ULHPC/ulhpc-docs?style=social)](https://github.com/ULHPC/ulhpc-docs)
 
          _    _ _      _    _ _____   _____   _______        _           _           _   _____
         | |  | | |    | |  | |  __ \ / ____| |__   __|      | |         (_)         | | |  __ \
@@ -8,22 +8,20 @@
          \____/|______|_|  |_|_|     \_____|    |_|\___|\___|_| |_|_| |_|_|\___\__,_|_| |_____/ \___/ \___|___/
 
 
-       Copyright (c) 2020 UL HPC Team <hpc-team@uni.lu>
+       Copyright (c) 2020-2022 S. Varrette and UL HPC Team <hpc-team@uni.lu>
 
-ULHPC Technical Documentation, based on the [mkdocs-material](https://squidfunk.github.io/mkdocs-material/getting-started/) theme and the [PyMdown Extensions](https://facelessuser.github.io/pymdown-extensions/).
-Inspired by the _excellent_ [NERSC Technical documentation](https://docs.nersc.gov/)
+This repository holds the [ULHPC Technical Documentation](https://hpc-docs.uni.lu), based on the [mkdocs-material](https://squidfunk.github.io/mkdocs-material/getting-started/) theme and the [PyMdown Extensions](https://facelessuser.github.io/pymdown-extensions/).
+Inspired by the _excellent_ [NERSC Technical documentation](https://docs.nersc.gov/).
+
 
 ## Installation / Repository Setup
 
-This repository is hosted on [Gitlab @ Uni.lu](https://gitlab.uni.lu/www/ulhpc-docs).
-
-* Git interactions with this repository (push, pull etc.) are performed over SSH using the port 8022
-* To clone this repository, proceed as follows (adapt accordingly):
+This repository is hosted on [Github](https://github.com/ULHPC/ulhpc-docs). To clone it, proceed as follows (adapt accordingly):
 
 ```bash
-$> mkdir -p ~/git/gitlab.uni.lu/www/
-$> cd ~/git/gitlab.uni.lu/www/
-$> git clone ssh://git@gitlab.uni.lu:8022/www/ulhpc-docs.git
+mkdir -p ~/git/github.com/ULHPC/
+cd ~/git/github.com/ULHPC
+git clone https://github.com/ULHPC/ulhpc-docs.git # or for SSH interactions: git clone git@github.com:ULHPC/ulhpc-docs.git
 ```
 
 **`/!\ IMPORTANT`**: Once cloned, initiate your local copy of the repository by running:
@@ -37,13 +35,13 @@ This will initiate the [Git submodules of this repository](.gitmodules) and setu
 
 Later on, you can update your local branches by running:
 
-     $> make up
+      make up
 
 If upon pulling the repository, you end in a state where another collaborator have upgraded the Git submodules for this repository, you'll end in a dirty state (as reported by modifications within the `.submodules/` directory). In that case, just after the pull, you **have to run** `make up` to ensure consistency with regards the Git submodules:
 
 Finally, you can upgrade the [Git submodules](.gitmodules) to the latest version by running:
 
-    $> make upgrade
+      make upgrade
 
 
 ## Python Virtualenv / Pyenv and Direnv
@@ -128,56 +126,55 @@ mkdocs serve    # OR make doc
 
 Then visit with your favorite browser the URL `http://localhost:8000`. Alternatively, you can run `make doc` at the root of the repository.
 
+## Reporting Issues / Feature request
 
-## Issues / Feature request
-
-You can submit bug / issues / feature request using the [`ULHPC/ulhpc-docs` Project Tracker](https://gitlab.uni.lu/www/ulhpc-docs/issues)
-
+You can submit bug / issues / feature request with our documentation using the [`ULHPC/ulhpc-docs` Issue Tracker](https://github.com/ULHPC/ulhpc-docs/issues).
 
 
-## Misc.
+## Software list
 
-### [Git-flow](https://github.com/petervanderdoes/gitflow-avh)
+Several markdown files under `docs/software/swsets/` reflect the state of the software modules available on the ULHPC platform. They respect the following directory structure:
 
-The Git branching model for this repository follows the guidelines of
-[gitflow](http://nvie.com/posts/a-successful-git-branching-model/).
-In particular, the central repository holds two main branches with an infinite lifetime:
+```
+docs/software/swsets/
+    ├── all_softwares.md   list of all software ever built
+    ├── <version>.md       software list in RESIF swset <version>
+    ├── <category>.md      list of all software belonging to category '<category>'
+    └── <category>/
+    .   ├── <software>.md    short summary and available version for software <software>
+    .   └── [...]            belonging to category <category>
+```
 
-* `production`: the *production-ready* branch
-* `master`: the main branch where the latest developments interviene. This is the *default* branch you get when you clone the repository.
+These files are **automatically** generated by the Python script [`scripts/resif3_module2markdown.py`](scripts/resif3_module2markdown.py):
 
-Thus you are more than encouraged to install the [git-flow](https://github.com/petervanderdoes/gitflow-avh) (AVH Edition, as the traditional one is no longer supported) extensions following the [installation procedures](https://github.com/petervanderdoes/gitflow-avh/wiki/Installation) to take full advantage of the proposed operations. The associated [bash completion](https://github.com/bobthecow/git-flow-completion) might interest you also.
+```bash
+$ ./scripts/resif3_module2markdown.py -h
+Usage: resif3_module2markdown.py [OPTIONS] COMMAND [ARGS]...
+[...]
+Commands:
+  collect  Collect meta-data dict of the RESIF3 modules installed and...
+  render   Generate markdown files summarizing available ULHPC modules
+```
 
-### Releasing mechanism
+* `./scripts/resif3_module2markdown.py collect [...]` is **expected to by run on one of the cluster** to access the RESIF root path `/opt/apps/resif`
+     - use **`make resif-collect`** to perform the following operations:
+          * upload the script and the necessary files on the cluster access frontend (see `RESIF_COLLECT_HOST` variable in [`.Makefile.local`](.Makefile.local))
+          * generate a virtualenv under `RESIF_COLLECT_TMPDIR`
+          * invoke the script in `collect` mode to generate the YAML file `RESIF_COLLECT_YAML`
+          * download the generated yaml and store it under [`data/resif_modules.yaml`](data/resif_modules.yaml)
+*  `./scripts/resif3_module2markdown.py render [...]` can be used locally to render/generate the markdown files **based on the data stored in [`data/resif_modules.yaml`](data/resif_modules.yam)**
+    - use **`make resif-render`** to perform this action
 
-The operation consisting of releasing a new version of this repository is automated by a set of tasks within the root `Makefile`.
 
-In this context, a version number have the following format:
+## Contributors
 
-      <major>.<minor>.<patch>[-b<build>]
+See <https://github.com/ULHPC/ulhpc-docs/graphs/contributors>
 
-where:
+You are more than welcome to contribute to the development of this project.
+In order to get started, check out the [Contributing Guide](docs/contributing/README.md)
 
-* `< major >` corresponds to the major version number
-* `< minor >` corresponds to the minor version number
-* `< patch >` corresponds to the patching version number
-* (eventually) `< build >` states the build number _i.e._ the total number of commits within the `master` branch.
+## License
 
-Example: \`1.0.0-b28\`
+Unless otherwise specified, this project and the sources proposed within this repository are released under the terms of the [CC BY-NC-SA 4.0](LICENSE) licence.
 
-The current version number is stored in the root file `VERSION`. __/!\ NEVER MAKE ANY MANUAL CHANGES TO THIS FILE__
-
-For more information on the version, run:
-
-     $> make versioninfo
-
-If a new version number such be bumped, you simply have to run:
-
-      $> make start_bump_{major,minor,patch}
-
-This will start the release process for you using `git-flow`.
-Once you have finished to commit your last changes, make the release effective by running:
-
-      $> make release
-
-It will finish the release using `git-flow`, create the appropriate tag in the `production` branch and merge all things the way they should be.
+[![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Cc-by-nc-sa_icon.svg/176px-Cc-by-nc-sa_icon.svg.png)](LICENSE)

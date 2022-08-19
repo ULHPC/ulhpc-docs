@@ -76,8 +76,11 @@ You can thus extend the [ULHPC Software set](modules.md#ulhpc-toolchains-and-sof
     the cluster `$ULHPC_CLUSTER` ("iris" or "aion"), the
     toolchain version `<version>` (Ex: 2019b, 2020a etc.) you build upon and
     eventually the architecture `<arch>`.
-    In that case, you can proceed as follows:
-
+    In that case, you can use the following helper scripts:
+    ```bash 
+    resif-load-home-swset-prod 
+    ``` 
+    which is roughly equivalent to the following code: 
     ```bash
     # EASYBUILD_PREFIX: [basedir]/<cluster>/<environment>/<arch>
     # Ex: Default EASYBUILD_PREFIX in your home - Adapt to project directory if needed
@@ -91,6 +94,11 @@ You can thus extend the [ULHPC Software set](modules.md#ulhpc-toolchains-and-sof
     export EASYBUILD_PREFIX="${_EB_PREFIX}"
     export LOCAL_MODULES=${EASYBUILD_PREFIX}/modules/all
     ```
+
+    For a shared project directory `<name>` located under `$PROJECTHOME/<name>`, you can use the following following helper scripts:
+    ```bash 
+    resif-load-project-swset-prod $PROJECTHOME/<name>
+    ``` 
 
 ## Installation / Update local Easybuild
 

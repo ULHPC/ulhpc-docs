@@ -50,7 +50,6 @@ Each project directory, in `/mnt/isilon/projects/` contains a hidden sub-directo
 | Name                         | Backup location | Frequency | Retention                                                 |
 |------------------------------|-----------------|-----------|-----------------------------------------------------------|
 | gitlab.uni.lu                | CDC, Belval     | Daily     | last 7 daily backups, one per month for the last 6 months |
-| hpc-nextcloud.uni.lu         | CDC, Belval     | Daily     | last 7 daily backups, one per month for the last 6 months |
 | hpc.uni.lu (pad, privatebin) | CDC, Belval     | Daily     | last 7 daily backups, one per month for the last 6 months |
 
 

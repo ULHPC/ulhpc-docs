@@ -116,7 +116,33 @@ nav:
     # - Checkpoint/Restart: 'jobs/checkpoint-restart.md'
   ###########
   - Software:
-    - Supported Software List:     'software/index.md'
+    ### BEGIN GENERATED CONTENT
+    - Supported Software List:
+        - Overview: 'software/swsets/index.md'
+        - Full List (alphabetical order): 'software/swsets/all_softwares.md'
+        - Biology: 'software/swsets/bio.md'
+        - CFD/Finite element modelling: 'software/swsets/cae.md'
+        - Chemistry: 'software/swsets/chem.md'
+        - Compilers: 'software/swsets/compiler.md'
+        - Data processing: 'software/swsets/data.md'
+        - Debugging: 'software/swsets/debugger.md'
+        - Development: 'software/swsets/devel.md'
+        # - Weather modelling: 'software/swsets/geo.md'
+        - Programming Languages: 'software/swsets/lang.md'
+        - Libraries: 'software/swsets/lib.md'
+        - Mathematics: 'software/swsets/math.md'
+        - MPI: 'software/swsets/mpi.md'
+        - Numerical libraries: 'software/swsets/numlib.md'
+        - Performance measurements: 'software/swsets/perf.md'
+        - Physics: 'software/swsets/phys.md'
+        - System-level software: 'software/swsets/system.md'
+        - Toolchains (software stacks): 'software/swsets/toolchain.md'
+        - Utilities: 'software/swsets/tools.md'
+        - Visualisation: 'software/swsets/vis.md'
+    - Software Sets:
+        - 2019b: 'software/swsets/2019b.md'
+        - 2020a: 'software/swsets/2020b.md'
+    ### END GENERATED CONTENT
     # - Software Set Versioning:     'software/swsets.md'
     # - Compiling/building software: 'software/build.md'
     # - Management:                  'software/management.md'
@@ -295,12 +321,12 @@ site_dir: public
 site_url: "https://hpc-docs.uni.lu/"
 
 # Repository
-#repo_name: www/ulhpc-docs
-#repo_url: https://gitlab.uni.lu/www/ulhpc-docs
-#edit_uri: blob/master/docs/
+repo_name: ULHPC/ulhpc-docs
+repo_url: https://github.com/ULHPC/ulhpc-docs
+edit_uri: blob/master/docs/
 
 # Copyright
-copyright: Copyright &copy; 2007-2021 S. Varrette and Uni.lu HPC (ULHPC) Team
+copyright: Copyright &copy; 2007-2022 S. Varrette and Uni.lu HPC (ULHPC) Team
 
 
 # Configuration
@@ -329,8 +355,6 @@ extra:
   social:
     - icon: fontawesome/brands/github-alt
       link: https://github.com/ULHPC
-    - icon: fontawesome/brands/gitlab
-      link: https://gitlab.uni.lu/ULHPC
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/ULHPC
 

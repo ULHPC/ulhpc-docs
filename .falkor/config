@@ -7,16 +7,16 @@
   - :pyenv
   - :python
   :by: ULHPC
-  :author: UL HPC Team
+  :author: S. Varrette and UL HPC Team
   :mail: hpc-team@uni.lu
   :summary: ULHPC Technical Documentation, based on mkdocs
   :description: ULHPC Technical Documentation, based on mkdocs
-  :forge: :gitlab
-  :source: https://gitlab.uni.lu/www/ulhpc-docs
-  :project_page: https://gitlab.uni.lu/www/ulhpc-docs
-  :origin: ssh://git@gitlab.uni.lu:8022/www/ulhpc-docs.git
-  :license: none
-  :issues_url: https://gitlab.uni.lu/www/ulhpc-docs/issues
+  :forge: :github
+  :source: https://github.com/ULHPC/ulhpc-docs
+  :project_page: https://github.com/ULHPC/ulhpc-docs
+  :origin: https://github.com/ULHPC/ulhpc-docs.git
+  :license: cc-by-nc-sa
+  :issues_url: https://github.com/ULHPC/ulhpc-docs/issues
   :tags: []
 :gitflow:
   :branches:

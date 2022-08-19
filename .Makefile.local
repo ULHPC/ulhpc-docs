@@ -1,0 +1,72 @@
+# -*- mode: makefile; -*-
+# Time-stamp: <Wed 2022-06-01 01:24 svarrette>
+################################################################################
+# .Makefile.local - Local custom directives for the root Makefile
+#
+# Copyright (c) 2020 UL HPC Team <hpc-team@uni.lu>
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+################################################################################
+
+SETUP_TARGETS += setup-direnv setup-pyenv setup-upstream
+UPSTREAM_URL=https://github.com/ULHPC/ulhpc-docs.git
+GITSTATS_SUBSTITUTE_PATTERN_CMD=sed -e 's/krishsnasamy/krishnasamy/'
+
+SCRIPTDIR = scripts
+DATADIR   = data
+SOFTDIR   = docs/software
+
+RESIF_COLLECT_HOST    = iris-cluster
+RESIF_COLLECT_TMPDIR  = /tmp/$(shell whoami)/resif3_collect_sw
+RESIF_COLLECT_VENVDIR = $(RESIF_COLLECT_TMPDIR)/venv
+RESIF_COLLECT_SCRIPT  = resif3_module2markdown.py
+
+RESIF_COLLECT_YAML = resif_modules.yaml
+
+.PHONY: build
+build:
+	@if [ -n "`which mkdocs`" ]; then \
+		mkdocs build; \
+	fi
+
+
+###### RESIF 3 collection
+resif-collect-script-upload:
+	@echo "=> upload necessary scripts and files"
+	ssh $(RESIF_COLLECT_HOST) "mkdir -p $(RESIF_COLLECT_VENVDIR)"
+	$(RSYNC) -avzu $(SCRIPTDIR)/$(RESIF_COLLECT_SCRIPT) $(RESIF_COLLECT_HOST):$(RESIF_COLLECT_TMPDIR)/
+	$(RSYNC) -avzu requirements.txt $(RESIF_COLLECT_HOST):$(RESIF_COLLECT_TMPDIR)/
+
+resif-collect-script-venv: resif-collect-script-upload
+	@echo "=> setup remote virtual environment for resif collect operations"
+	ssh $(RESIF_COLLECT_HOST) "python3 -m venv $(RESIF_COLLECT_VENVDIR); source $(RESIF_COLLECT_VENVDIR)/bin/activate;pip install --upgrade pip; pip install click confuse pandas tabulate"  # pip install -r $(RESIF_COLLECT_TMPDIR)/requirements.txt"
+
+resif-collect: resif-collect-script-venv
+	@echo "=> remote run: $(SCRIPTDIR)/$(RESIF_COLLECT_SCRIPT) [--debug] collect -o $(RESIF_COLLECT_YAML)"
+	ssh $(RESIF_COLLECT_HOST) "source $(RESIF_COLLECT_VENVDIR)/bin/activate; python3 $(RESIF_COLLECT_TMPDIR)/$(RESIF_COLLECT_SCRIPT) --debug collect -o $(RESIF_COLLECT_TMPDIR)/$(RESIF_COLLECT_YAML)"
+	@echo "=> download the generated YAML file $(RESIF_COLLECT_TMPDIR)/$(RESIF_COLLECT_YAML)"
+	$(RSYNC) -avzu $(RESIF_COLLECT_HOST):$(RESIF_COLLECT_TMPDIR)/$(RESIF_COLLECT_YAML) $(DATADIR)/$(RESIF_COLLECT_YAML)
+
+resif-collect-clean:
+	ssh $(RESIF_COLLECT_HOST) "rm -rf /tmp/$(shell whoami)/resif3_collect_sw"   # DON't use \$(RESIF_COLLECT_TMPDIR) here to avoid incidents...
+
+
+resif-render:
+	@echo "=> generate/render markdown files for the available software"
+	$(SCRIPTDIR)/$(RESIF_COLLECT_SCRIPT) render -i $(DATADIR)/$(RESIF_COLLECT_YAML)
+
+setup-upstream:
+	-git remote add upstream $(UPSTREAM_URL)
+
+sync-upstream:
+	$(if $(GIT_DIRTY), $(error "Unable to pull latest commits from the 'upstream' remote: Dirty Git repository"))
+	git fetch -va --prune
+	-git fetch -va --prune upstream
+	$(MAKE) up
+	@for br in $(GIT_BRANCHES_TO_UPDATE); do \
+		echo -e "\n=> Pulling and updating  from upstream the local branch '$$br'\n"; \
+		git checkout $$br; \
+		git pull upstream $$br; \
+		echo -e "\n=> Pushing local branch '$$br'\n"; \
+		git push origin $$br; \
+	done
+	git checkout $(CURRENT_BRANCH)

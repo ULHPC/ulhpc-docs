@@ -1,5 +1,5 @@
 
-[:fontawesome-solid-sign-in-alt: UL HPC Acceptable Use Policy (AUP) (pdf)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.0.pdf){: .md-button .md-button--link }
+[:fontawesome-solid-sign-in-alt: UL HPC Acceptable Use Policy (AUP) (pdf)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.1.pdf){: .md-button .md-button--link }
 
 !!! warning
     Personal data is/may be visible, accessible or handled:
@@ -8,7 +8,7 @@
     * through _Resource and Job Management System_ (RJMS) tools (Slurm) and associated monitoring interfaces
     * through service portals (like [OpenOnDemand](../connect/ood.md))
     * on code management portals such [GitLab](https://gitlab.uni.lu), [GitHub](https://github.com)
-    * on secondary storage systems used within the University as DropIT, NextCloud etc.
+    * on secondary storage systems used within the University such as Atlas, DropIT, etc.
 
 
 ## Data Use

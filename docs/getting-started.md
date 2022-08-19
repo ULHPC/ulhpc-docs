@@ -1,6 +1,6 @@
 # Getting Started on ULHPC Facilities
 
-![](../images/logo_ULHPC.png){: style="width:150px; float: right;"}
+![](images/logo_ULHPC.png){: style="width:150px; float: right;"}
 
 Welcome to the [High Performance Computing (HPC)](https://hpc.uni.lu) Facility of the University of Luxembourg (ULHPC)!
 
@@ -26,7 +26,7 @@ All world-class universities require this type of facility to accelerate its res
 Since 2007, the [University of Luxembourg](https://www.uni.lu) (UL) has invested tens of millions of euro into its own HPC facilities to responds to the growing needs for increased computing and storage.
 [ULHPC](https://hpc.uni.lu) (sometimes referred to as Uni.lu HPC) is the entity  providing High Performance Computing and Big Data Storage services and support for UL researchers and its external partners.
 
-Led by Dr. [Varrette](https://varrette.gforge.uni.lu), the [ULHPC team](https://hpc.uni.lu/about/team.html) manages several research computing facilities located on the [Belval campus](https://wwwen.uni.lu/contact/campus_de_belval), offering a **cutting-edge research infrastructure to Luxembourg public research** while serving as _edge_ access to bigger systems from PRACE or EuroHPC, such as the Euro-HPC Luxembourg supercomputer "[MeluXina](https://luxprovide.lu)".
+Led by Dr. [Varrette](https://varrette.gforge.uni.lu) for 15 years (until Aug 31, 2022), the [ULHPC team](https://hpc.uni.lu/about/team.html) (recently renamed "Digital Platform" and headed by Hyacinthe Cartiaux starting Sept 1st, 2022) manages several research computing facilities located on the [Belval campus](https://wwwen.uni.lu/contact/campus_de_belval), offering a **cutting-edge research infrastructure to Luxembourg public research** while serving as _edge_ access to bigger systems from PRACE or EuroHPC, such as the Euro-HPC Luxembourg supercomputer "[MeluXina](https://luxprovide.lu)".
 
 !!! warning
     In particular, the [ULHPC](https://hpc.uni.lu) is **NOT** the national HPC center of Luxembourg, but simply one of its strategic partner operating the second largest HPC facility of the country.
@@ -40,9 +40,9 @@ The HPC facility is one element of the extensive digital research infrastructure
 [ULHPC](https://hpc.uni.lu) is a strategic asset of the university and an important factor for the scientific and therefore also economic competitiveness of the Grand Duchy of Luxembourg.
 We provide a key research infrastructure featuring state-of-the-art computing and storage resources serving the UL HPC community primarily composed by UL researchers.
 
-The UL HPC platform has kept growing over time thanks to the continuous efforts of the core HPC team (Dr. S. Varrette, S. Peter, H. Cartiaux, Dr. F. Pinel, Dr. E. Kieffer, Dr. E. Krishnasamy, T. Valette, A. Olloh) - contact: [hpc-team@uni.lu](mailto:hpc-team@uni.lu), recently completed with the [EuroHPC Competence Center](https://www.eurocc-project.eu/) Task force (A. Vandeventer (Project Manager), L. Koutsantonis).
+The UL HPC platform has kept growing over time thanks to the continuous efforts of the core HPC / Digital Platform team - contact: [hpc-team@uni.lu](mailto:hpc-team@uni.lu), recently completed with the [EuroHPC Competence Center](https://www.eurocc-project.eu/) Task force (A. Vandeventer (Project Manager), L. Koutsantonis).
 
-!!! info "ULHPC Computing and Storage Capacity (2021)"
+!!! info "ULHPC Computing and Storage Capacity (2022)"
     Installed in the premises of the University’s _Centre de Calcul_ (CDC), the UL HPC facilities provides a total computing capacity of __2.76 PetaFlops__ and a shared storage capacity of around **10 PetaBytes**.
 
 ??? question "How big is 1 PetaFlops? 1 PetaByte?"
@@ -234,12 +234,10 @@ We have always maintained an extensive [documentation](https://hpc-docs.uni.lu) 
 [:fontawesome-solid-sign-in-alt: ULHPC Technical Documentation](https://hpc-docs.uni.lu/support){: .md-button .md-button--link }
 [:fontawesome-solid-chalkboard-teacher: ULHPC Tutorials](ttps://ulhpc-tutorials.readthedocs.io/){: .md-button .md-button--link }
 
-<!-- !!! tip "The ULHPC Team welcomes your contributions" -->
-<!-- 	These pages are hosted from a -->
-<!-- 	[git repository](https://gitlab.uni.lu/www/ulhpc-docs) and -->
-<!-- 	[contributions](https://gitlab.uni.lu/www/ulhpc-docs/docs/contributing) -->
-<!-- 	are welcome! -->
-<!-- 	[Fork this repo](https://gitlab.uni.lu/www/ulhpc-docs-/forks/new) -->
+!!! tip "The ULHPC Team welcomes your contributions"
+	These pages are hosted from a [git repository](https://github.com/ULHPC/ulhpc-docs) and [contributions](contributing/)
+	are welcome!
+	[Fork this repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
 
 ### Support
 

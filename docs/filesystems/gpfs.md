@@ -18,7 +18,7 @@ In terms of raw storage capacities, it represents more than **4PB**.
 !!! note "`$HOME` quotas and backup policies"
     See [quotas](quotas.md) for detailed information about inode,
     space quotas, and file system purge policies.
-    Your HOME is daily backuped, according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
+    Your HOME is backuped weekly, according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
 
 {%
    include-markdown "projecthome.md"

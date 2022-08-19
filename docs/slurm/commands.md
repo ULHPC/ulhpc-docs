@@ -71,7 +71,7 @@ parallel tasks.
 
 You should use the helper functions `si`, `si-gpu`, `si-bigmem` to submit an _interactive_ job.
 
-For more details, see [interactive jobs](interactive.md).
+For more details, see [interactive jobs](../jobs/interactive.md).
 
 
 ## Collect Job Information
@@ -241,7 +241,7 @@ Display past job usage summary
 <!--sacct-start-->
 
 
-Alternatively, you can use [`sacct`](https://slurm.schedmd.com/sacct.html) (use `sacct --helpformat` to get the list of) for COMPLETED or TIMEOUT jobs (see [Job State Codes](reason-codes.md)).
+Alternatively, you can use [`sacct`](https://slurm.schedmd.com/sacct.html) (use `sacct --helpformat` to get the list of) for COMPLETED or TIMEOUT jobs (see [Job State Codes](../jobs/reason-codes.md)).
 
 ??? example "using `sacct -X -S <start> [...] --format [...],time,elapsed,[...]`"
     ADAPT `-S <start>` and `-E <end>` dates accordingly - Format: `YYYY-MM-DD`.
@@ -343,7 +343,7 @@ scontrol update jobid=<jobid> account=<account>
 ```
 
 !!! note ""
-    The new account must be eligible to run the job. See [Account Hierarchy](hierarchy.md) for more details.
+    The new account must be eligible to run the job. See [Account Hierarchy](accounts.md) for more details.
 
 ## Hold and Resume jobs
 

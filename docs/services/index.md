@@ -3,9 +3,6 @@
 The ULHPC Team is committed to excellence and support of the University research community through several side services:
 
 * __[ULHPC Gitlab](https://gitlab.uni.lu)__, a comprehensive version control and collaboration (VC&C) solution to deliver better software faster.
-* __[Gforge @ Uni.lu](https://gforge.uni.lu/)__, based on FusionForge, is the seminal web-based project management and collaboration system deployed at the university.
-    - **:fontawesome-solid-exclamation-triangle: This service will be decommissioned by end of 2020**
-
 * __[Etherpad](https://hpc.uni.lu/pad/)__ - a  web-based collaborative real-time editor
 * __[Privatebin](https://hpc.uni.lu/privatebin/)__ - secured textual data sharing
 
@@ -23,8 +20,21 @@ The GitLab service is available for UL HPC platform users with [their ULHPC acco
          - Access can be granted **on-demand** after careful review of the ULHPC team and attached to the project indicated by the UL[HPC] PI in charge of the external.
     * _Note_: externals cannot create groups nor projects.
 
-## Gforge @ Uni.lu
+## EtherPad
 
+[![](https://upload.wikimedia.org/wikipedia/commons/f/ff/Logo_Etherpad.png){ align=right }](https://hpc.uni.lu/pad/)
+
+Etherpad is a web-based collaborative real-time editor, allowing authors to simultaneously edit a text document, and see all of the participants' edits in real-time, with the ability to display each author's text in their own color.
+
+## PrivateBin
+
+[![](https://privatebin.info/img/logo.png){: style="width:300px; float:right;" }](https://hpc.uni.lu/privatebin/)
+
+PrivateBin is a minimalist, open source online [pastebin](https://en.wikipedia.org/wiki/Pastebin) where the server has zero knowledge of pasted data.
+<br/>
+Data is encrypted and decrypted in the browser using 256bit AES in Galois Counter mode.
+
+## Gforge @ Uni.lu (DEPRECATED)
 
 [![](https://gforge.uni.lu/images/fusionforge-resized.png){: style="width:250px; float:right;" }](https://gforge.uni.lu)
 
@@ -40,7 +50,7 @@ Access to GForge is through dedicated accounts, (requested by mail: [admin@gforg
 | [GForge](https://gforge.uni.lu) | :material-check: | :material-check: | :material-check: | :material-check:                                 | :material-check:          |
 | [GitLab](https://gitlab.uni.lu) | :material-check: | :material-close: | :material-check: | :material-close: <br/><small>(restricted use)</small> | :material-close:          |
 
-!!! danger "Gforge service will be decommissioned EOY 2020"
+!!! danger "Gforge service is decommissioned since 2020"
     * __Situation__: the [Gforge @ Uni.lu](https://gforge.uni.lu) service has been in production since 2008 and kept up-to-date until now.
     Nevertheless, the underground product line (Gforge, moved to FusionForge after the a break-up of the original open source project in february 2009) proved to be hard to maintained, security fixes takes time to be integrated and the few unique features of the service (SVN support, static website hosting) no longer justify the maintenance effort as more recent and sustainable alternatives emerged.
 
@@ -71,17 +81,3 @@ Access to GForge is through dedicated accounts, (requested by mail: [admin@gforg
             * [Github pages](https://pages.github.com/)
             * [Read the docs](https://readthedocs.org/)
             * Ask the University IT service for a website host
-
-## EtherPad
-
-[![](https://upload.wikimedia.org/wikipedia/commons/f/ff/Logo_Etherpad.png){ align=right }](https://hpc.uni.lu/pad/)
-
-Etherpad is a web-based collaborative real-time editor, allowing authors to simultaneously edit a text document, and see all of the participants' edits in real-time, with the ability to display each author's text in their own color.
-
-## PrivateBin
-
-[![](https://privatebin.info/img/logo.png){: style="width:300px; float:right;" }](https://hpc.uni.lu/privatebin/)
-
-PrivateBin is a minimalist, open source online [pastebin](https://en.wikipedia.org/wiki/Pastebin) where the server has zero knowledge of pasted data.
-<br/>
-Data is encrypted and decrypted in the browser using 256bit AES in Galois Counter mode.
