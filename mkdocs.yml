@@ -127,7 +127,7 @@ nav:
         - Data processing: 'software/swsets/data.md'
         - Debugging: 'software/swsets/debugger.md'
         - Development: 'software/swsets/devel.md'
-        - Weather modelling: 'software/swsets/geo.md'
+        # - Weather modelling: 'software/swsets/geo.md'
         - Programming Languages: 'software/swsets/lang.md'
         - Libraries: 'software/swsets/lib.md'
         - Mathematics: 'software/swsets/math.md'

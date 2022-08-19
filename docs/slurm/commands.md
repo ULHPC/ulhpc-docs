@@ -71,7 +71,7 @@ parallel tasks.
 
 You should use the helper functions `si`, `si-gpu`, `si-bigmem` to submit an _interactive_ job.
 
-For more details, see [interactive jobs](interactive.md).
+For more details, see [interactive jobs](../jobs/interactive.md).
 
 
 ## Collect Job Information
@@ -343,7 +343,7 @@ scontrol update jobid=<jobid> account=<account>
 ```
 
 !!! note ""
-    The new account must be eligible to run the job. See [Account Hierarchy](hierarchy.md) for more details.
+    The new account must be eligible to run the job. See [Account Hierarchy](accounts.md) for more details.
 
 ## Hold and Resume jobs
 

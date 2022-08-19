@@ -1,6 +1,6 @@
 # ULHPC GPU Nodes
 
-Each GPU node provided as part of the [`gpu` partition](../slurm/partition.md) feature **4x Nvidia V100 SXM2** (with either 16G or 32G memory) interconnected by the [NVLink 2.0](https://www.nvidia.com/en-us/data-center/nvlink/) architecture
+Each GPU node provided as part of the [`gpu` partition](../slurm/partitions.md) feature **4x Nvidia V100 SXM2** (with either 16G or 32G memory) interconnected by the [NVLink 2.0](https://www.nvidia.com/en-us/data-center/nvlink/) architecture
 
 NVlink was designed as an alternative solution to PCI Express with higher bandwidth and additional features (e.g., shared memory) specifically designed to be compatible with Nvidia's own GPU ISA for multi-GPU systems -- see [wikichip article](https://en.wikichip.org/wiki/nvidia/nvlink).
 

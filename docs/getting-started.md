@@ -1,6 +1,6 @@
 # Getting Started on ULHPC Facilities
 
-![](../images/logo_ULHPC.png){: style="width:150px; float: right;"}
+![](images/logo_ULHPC.png){: style="width:150px; float: right;"}
 
 Welcome to the [High Performance Computing (HPC)](https://hpc.uni.lu) Facility of the University of Luxembourg (ULHPC)!
 
