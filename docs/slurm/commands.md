@@ -241,7 +241,7 @@ Display past job usage summary
 <!--sacct-start-->
 
 
-Alternatively, you can use [`sacct`](https://slurm.schedmd.com/sacct.html) (use `sacct --helpformat` to get the list of) for COMPLETED or TIMEOUT jobs (see [Job State Codes](reason-codes.md)).
+Alternatively, you can use [`sacct`](https://slurm.schedmd.com/sacct.html) (use `sacct --helpformat` to get the list of) for COMPLETED or TIMEOUT jobs (see [Job State Codes](../jobs/reason-codes.md)).
 
 ??? example "using `sacct -X -S <start> [...] --format [...],time,elapsed,[...]`"
     ADAPT `-S <start>` and `-E <end>` dates accordingly - Format: `YYYY-MM-DD`.

@@ -321,9 +321,9 @@ site_dir: public
 site_url: "https://hpc-docs.uni.lu/"
 
 # Repository
-# repo_name: ULHPC/ulhpc-docs
-# repo_url: https://github.com/ULHPC/ulhpc-docs
-# edit_uri: blob/master/docs/
+repo_name: ULHPC/ulhpc-docs
+repo_url: https://github.com/ULHPC/ulhpc-docs
+edit_uri: blob/master/docs/
 
 # Copyright
 copyright: Copyright &copy; 2007-2022 S. Varrette and Uni.lu HPC (ULHPC) Team
@@ -355,8 +355,6 @@ extra:
   social:
     - icon: fontawesome/brands/github-alt
       link: https://github.com/ULHPC
-    - icon: fontawesome/brands/gitlab
-      link: https://gitlab.uni.lu/ULHPC
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/ULHPC
 
