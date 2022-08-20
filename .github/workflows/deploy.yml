@@ -1,5 +1,5 @@
 # -*- mode: yaml; -*-
-# Time-stamp: <Sat 2022-08-20 14:10 svarrette>
+# Time-stamp: <Sat 2022-08-20 14:34 svarrette>
 ################################################################################
 # documentation: https://help.github.com/en/articles/workflow-syntax-for-github-actions
 #
@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.7'
           cache: 'pip'
       - name: Install dependencies
         run: |
