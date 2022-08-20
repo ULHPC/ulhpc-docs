@@ -1,24 +1,28 @@
 # -*- mode: yaml; -*-
-# Time-stamp: <Wed 2022-06-01 00:07 svarrette>
+# Time-stamp: <Sat 2022-08-20 14:10 svarrette>
 ################################################################################
 # documentation: https://help.github.com/en/articles/workflow-syntax-for-github-actions
 #
-name: deploy-prod
+name: deploy
 on:
   push:
     branches:
+      - master
       - production
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.7
-      - name: install mkdocs
+          python-version: '3.x'
+          cache: 'pip'
+      - name: Install dependencies
         run: |
-          pip install mkdocs mkdocs-material mkdocs-material-extensions mkdocs-git-revision-date-localized-plugin mkdocs-include-markdown-plugin mkdocs-minify-plugin mkdocs-plugin-progress pymdown-extensions
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
           mkdocs --version
       - name: build ULHPC documentation
         run: mkdocs build --strict && mkdocs gh-deploy --force
