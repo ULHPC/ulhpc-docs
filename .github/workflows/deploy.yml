@@ -1,5 +1,5 @@
 # -*- mode: yaml; -*-
-# Time-stamp: <Sat 2022-08-20 14:34 svarrette>
+# Time-stamp: <Sun 2022-08-21 18:33 svarrette>
 ################################################################################
 # documentation: https://help.github.com/en/articles/workflow-syntax-for-github-actions
 #
@@ -25,4 +25,5 @@ jobs:
           pip install -r requirements.txt
           mkdocs --version
       - name: build ULHPC documentation
-        run: mkdocs build --strict && mkdocs gh-deploy --force
+        run: mkdocs build && mkdocs gh-deploy --force
+        # run: mkdocs build --strict && mkdocs gh-deploy --force

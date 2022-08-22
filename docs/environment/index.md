@@ -185,4 +185,4 @@ See [ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en
 
 
 [:fontawesome-solid-sign-in-alt: ULHPC Environment modules](modules.md){: .md-button .md-button--link }
-[:fontawesome-solid-sign-in-alt: Using Easybuild on ULHPC Clusters](easybuild.md){: .md-button .md-button--link }
+[:fontawesome-solid-sign-in-alt: Using Easybuild on ULHPC Clusters](../environment/easybuild.md){: .md-button .md-button--link }
