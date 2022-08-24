@@ -230,3 +230,5 @@ eb --new-pr <ebfile>
 ```
 
 You can can also consider using the script `PR-create` provided as part of the [RESIF 3](https://github.com/ULHPC/sw) project.
+
+Once the pull request is merged, you can inform the ULHPC team to consider adding the submitted Easyconfig as part of the ULHPC bundles and see it deployed within the next [ULHPC software set release](../environment/modules.md#ulhpc-toolchains-and-software-set-versioning).
