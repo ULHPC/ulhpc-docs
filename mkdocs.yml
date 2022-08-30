@@ -76,8 +76,8 @@ nav:
     - Downtime and Maintenance:                      'policies/maintenance.md'
     # - Software Update Policy:                      'policies/software.md'
     - Usage Charging Policy:                         'policies/usage-charging.md'
-    - HPC Resource Allocations for Research Project: 'policies/usage-charging/#hpc-resource-allocations-for-research-project'
-    - HPC Service Agreement for Externals:           'policies/usage-charging/#hpc-service-contract-for-external-and-private-partners'
+    - HPC Resource Allocations for Research Project: 'policies/usage-charging.md#hpc-resource-allocations-for-research-project'
+    - HPC Service Agreement for Externals:           'policies/usage-charging.md#hpc-service-contract-for-external-and-private-partners'
     - Expert-level HPC services:                     'support/professional-services.md'
     # - Data Policy: 'policies/data.md
   ###############
@@ -144,7 +144,7 @@ nav:
         - 2020a: 'software/swsets/2020b.md'
     ### END GENERATED CONTENT
     # - Software Set Versioning:     'software/swsets.md'
-    # - Compiling/building software: 'software/build.md'
+    - Compiling/building your own software: 'software/build.md'
     # - Management:                  'software/management.md'
     # - Contributing:                'software/contributing.md'
     # - BigData Analytics:           'software/bigdata/index.md'

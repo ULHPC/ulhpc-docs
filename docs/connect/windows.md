@@ -1,4 +1,4 @@
-In this page, we cover two different SSH client software: MobaXterm and Putty.  
+In this page, we cover two different SSH client software: MobaXterm and Putty.
 Choose your preferred tool.
 
 ## MobaXterm
@@ -29,7 +29,7 @@ Choose the method you prefer: either the graphical interface MobaKeyGen or comma
 
 #### With MobaKeyGen tool
 
-Go onto **Tools > Network > MobaKeyGen (SSH key generator)**. Choose **RSA** as the type of key to generate and change "Number of bits in a generated key" to 4096. Click on the **Generate** button. Move your mouse to generate some randomness. 
+Go onto **Tools > Network > MobaKeyGen (SSH key generator)**. Choose **RSA** as the type of key to generate and change "Number of bits in a generated key" to 4096. Click on the **Generate** button. Move your mouse to generate some randomness.
 
 !!! Warning
     To ensure the security of the platform and your data stored on it, you must protect your SSH keys with a passphrase!
@@ -39,7 +39,7 @@ Select a strong passphrase in the **Key passphrase** field for your key. Save th
 Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
 
 ![MobaKeyGen (SSH key generator)](images/moba-ssh-key-gen.png)
-  
+
 ![IPA user portal](images/ipa.png)
 
 #### With local terminal
@@ -115,7 +115,7 @@ Click on **Connect**. The following text appears.
                  | ||___|_|  |_|___/  \____|_|\__,_|___/\__\___|_|  | |
                   \_\                                              /_/
     ==================================================================================
-    
+
     === Computing Nodes ========================================= #RAM/n === #Cores ==
      iris-[001-108] 108 Dell C6320 (2 Xeon E5-2680v4@2.4GHz [14c/120W]) 128GB  3024
      iris-[109-168]  60 Dell C6420 (2 Xeon Gold 6132@2.6GHz [14c/140W]) 128GB  1680
@@ -126,10 +126,10 @@ Click on **Connect**. The following text appears.
                     +24 GPU  (4 Tesla V100 [5120c CUDA + 640c Tensor])   32GB +122880
     ==================================================================================
       *** TOTAL: 196 nodes, 5824 cores + 491520 CUDA cores + 61440 Tensor cores ***
-    
+
      Fast interconnect using InfiniBand EDR 100 Gb/s technology
      Shared Storage (raw capacity): 2180 TB (GPFS) + 1300 TB (Lustre) = 3480 TB
-    
+
      Support (in this order!)                       Platform notifications
        - User DOC ........ https://hpc.uni.lu/docs    - Twitter: @ULHPC
        - FAQ ............. https://hpc.uni.lu/faq
@@ -141,7 +141,7 @@ Click on **Connect**. The following text appears.
          First reserve your nodes (using srun/sbatch(1))
     Linux access2.iris-cluster.uni.lux 3.10.0-957.21.3.el7.x86_64 x86_64
      15:51:56 up 6 days,  2:32, 39 users,  load average: 0.59, 0.68, 0.54
-    [yourlogin@access2 ~]$ 
+    [yourlogin@access2 ~]$
 
 
 ## Putty
@@ -165,15 +165,15 @@ The simplest method is probably to download and run the [latest Putty installer]
 
 The different steps involved in the installation process are illustrated below (**REMEMBER to tick the option "Associate .PPK files (PuTTY Private Key) with Pageant and PuTTYGen"**):
 
-![Windows security warning](images/screen-1.png)
+![Windows security warning](./images/screen-1.png)
 
-![Putty Setup Screen #1](images/screen-2.png)
+![Putty Setup Screen #1](./images/screen-2.png)
 
-![Putty Setup Screen #2](images/screen-3.png)
+![Putty Setup Screen #2](./images/screen-3.png)
 
-![Putty Setup Screen #3](images/screen-4.png)
+![Putty Setup Screen #3](./images/screen-4.png)
 
-![Putty Setup Screen #4](images/screen-5.png)
+![Putty Setup Screen #4](./images/screen-5.png)
 
 
 Now you should have all the [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/) programs available in `Start / All Programs / Putty `.
@@ -185,15 +185,15 @@ Here you can use the [PuTTYgen](http://the.earth.li/~sgtatham/putty/latest/x86/p
 
 The main steps for the generation of the keys are illustrated below:
 
-![Putty Key Generator interface](images/screen-6.png)
+![Putty Key Generator interface](./images/screen-6.png)
 
-![Key generation in progress](images/screen-7.png)
+![Key generation in progress](./images/screen-7.png)
 
-![Configuring a passphrase](images/screen-8.png)
+![Configuring a passphrase](./images/screen-8.png)
 
-![Saving the private key](images/screen-9.png)
+![Saving the private key](./images/screen-9.png)
 
-![Saving the public key](images/screen-10.png)
+![Saving the public key](./images/screen-10.png)
 
 
 ### Configuration
@@ -237,7 +237,7 @@ Now you'll be able to  obtain the welcome banner:
                  | ||___|_|  |_|___/  \____|_|\__,_|___/\__\___|_|  | |
                   \_\                                              /_/
     ==================================================================================
-    
+
     === Computing Nodes ========================================= #RAM/n === #Cores ==
      iris-[001-108] 108 Dell C6320 (2 Xeon E5-2680v4@2.4GHz [14c/120W]) 128GB  3024
      iris-[109-168]  60 Dell C6420 (2 Xeon Gold 6132@2.6GHz [14c/140W]) 128GB  1680
@@ -248,10 +248,10 @@ Now you'll be able to  obtain the welcome banner:
                     +24 GPU  (4 Tesla V100 [5120c CUDA + 640c Tensor])   32GB +122880
     ==================================================================================
       *** TOTAL: 196 nodes, 5824 cores + 491520 CUDA cores + 61440 Tensor cores ***
-    
+
      Fast interconnect using InfiniBand EDR 100 Gb/s technology
      Shared Storage (raw capacity): 2180 TB (GPFS) + 1300 TB (Lustre) = 3480 TB
-    
+
      Support (in this order!)                       Platform notifications
        - User DOC ........ https://hpc.uni.lu/docs    - Twitter: @ULHPC
        - FAQ ............. https://hpc.uni.lu/faq

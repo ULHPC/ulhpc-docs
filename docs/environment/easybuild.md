@@ -7,8 +7,8 @@
 [EasyBuild](https://docs.easybuild.io/) (EB for short) is a software build and installation framework that allows you to manage (scientific) software on High Performance Computing (HPC) systems in an efficient way.
 A large number of scientific software are supported (**at least [2175 supported software packages](https://docs.easybuild.io/en/latest/version-specific/Supported_software.html)** since the 4.3.2 release) - see also [What is EasyBuild?](https://docs.easybuild.io/en/latest/Introduction.html).
 
-For several years now, [Easybuild](https://docs.easybuild.io/) is used to [manage the ULHPC User Software Set](../software/swsets.md) and generate automatically the module files available to you on our computational resources in either `prod` (default) or `devel` (early development/testing) environment -- see [ULHPC Toolchains and Software Set Versioning](../environment/modules.md#ulhpc-toolchains-and-software-set-versioning).
-This enables users to easily _extend_ the global [Software Set](../software/swsets.md) with their own **local** software
+For several years now, [Easybuild](https://docs.easybuild.io/) is used to [manage the ULHPC User Software Set](modules.md#ulhpc-toolchains-and-software-set-versioning) and generate automatically the module files available to you on our computational resources in either `prod` (default) or `devel` (early development/testing) environment -- see [ULHPC Toolchains and Software Set Versioning](../environment/modules.md#ulhpc-toolchains-and-software-set-versioning).
+This enables users to easily _extend_ the global [Software Set](modules.md#ulhpc-toolchains-and-software-set-versioning) with their own **local** software
 builds, either performed within their [global home
 directory](../data/layout.md#global-home-directory-home) or (_better_) in a shared [project
 directory](../data/layout.md) though [Easybuild](../environment/easybuild.md), which generate automatically module files compliant with the [ULHPC module setup](../environment/modules.md).
@@ -77,10 +77,10 @@ You can thus extend the [ULHPC Software set](modules.md#ulhpc-toolchains-and-sof
     toolchain version `<version>` (Ex: 2019b, 2020a etc.) you build upon and
     eventually the architecture `<arch>`.
     In that case, you can use the following helper scripts:
-    ```bash 
-    resif-load-home-swset-prod 
-    ``` 
-    which is roughly equivalent to the following code: 
+    ```bash
+    resif-load-home-swset-prod
+    ```
+    which is roughly equivalent to the following code:
     ```bash
     # EASYBUILD_PREFIX: [basedir]/<cluster>/<environment>/<arch>
     # Ex: Default EASYBUILD_PREFIX in your home - Adapt to project directory if needed
@@ -96,9 +96,9 @@ You can thus extend the [ULHPC Software set](modules.md#ulhpc-toolchains-and-sof
     ```
 
     For a shared project directory `<name>` located under `$PROJECTHOME/<name>`, you can use the following following helper scripts:
-    ```bash 
+    ```bash
     resif-load-project-swset-prod $PROJECTHOME/<name>
-    ``` 
+    ```
 
 ## Installation / Update local Easybuild
 

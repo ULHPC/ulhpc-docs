@@ -1,4 +1,4 @@
-[![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg)](https://hpc.uni.lu) [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE) [![GitHub issues](https://img.shields.io/github/issues/ULHPC/ulhpc-docs)](https://github.com/ULHPC/ulhpc-docs/issues) [![Github](https://img.shields.io/badge/sources-github-green.svg)](https://github.com/ULHPC/ulhpc-docs/) ![Build Status](https://img.shields.io/github/workflow/status/ULHPC/ulhpc-docs/deploy) [![GitHub forks](https://img.shields.io/github/forks/ULHPC/ulhpc-docs?style=social)](https://github.com/ULHPC/ulhpc-docs) [![Github Stars](https://img.shields.io/github/stars/ULHPC/ulhpc-docs?style=social)](https://github.com/ULHPC/ulhpc-docs)
+[![By ULHPC](https://img.shields.io/badge/by-ULHPC-blue.svg)](https://hpc.uni.lu) [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE) [![GitHub issues](https://img.shields.io/github/issues/ULHPC/ulhpc-docs)](https://github.com/ULHPC/ulhpc-docs/issues) [![Github](https://img.shields.io/badge/sources-github-green.svg)](https://github.com/ULHPC/ulhpc-docs/) ![Build Status](https://img.shields.io/github/workflow/status/ULHPC/ulhpc-docs/deploy) [![GitHub forks](https://img.shields.io/github/forks/ULHPC/ulhpc-docs?style=social)](https://github.com/ULHPC/ulhpc-docs) [![Github Stars](https://img.shields.io/github/stars/ULHPC/ulhpc-docs?style=social)](https://github.com/ULHPC/ulhpc-docs) [![deploy](https://github.com/ULHPC/ulhpc-docs/actions/workflows/deploy.yml/badge.svg)](https://github.com/ULHPC/ulhpc-docs/actions/workflows/deploy.yml) [![pages-build-deployment](https://github.com/ULHPC/ulhpc-docs/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/ULHPC/ulhpc-docs/actions/workflows/pages/pages-build-deployment)
 
          _    _ _      _    _ _____   _____   _______        _           _           _   _____
         | |  | | |    | |  | |  __ \ / ____| |__   __|      | |         (_)         | | |  __ \
@@ -168,9 +168,14 @@ Commands:
 
 ## Contributors
 
-See <https://github.com/ULHPC/ulhpc-docs/graphs/contributors>
+The project was setup and populated by Sebastien Varrette, and received contributions from multiples persons -- see [`CONTRIBUTORS.md`](CONTRIBUTORS.md). 
+To get up-to-date statistics, use
 
-You are more than welcome to contribute to the development of this project.
+```bash 
+make stats
+````
+
+In all cases, you are more than welcome to contribute to the development of this project.
 In order to get started, check out the [Contributing Guide](docs/contributing/README.md)
 
 ## License
