@@ -1,16 +1,12 @@
 # -*- mode: yaml; -*-
-# Time-stamp: <Tue 2022-08-30 14:59 svarrette>
+# Time-stamp: <Tue 2022-08-30 14:58 svarrette>
 ################################################################################
 # documentation: https://help.github.com/en/articles/workflow-syntax-for-github-actions
 #
-name: deploy
-on:
-  push:
-    branches:
-      - master
-      - production
+name: Test Build ULHPC Technical Documention
+on: [push, pull_request]
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,5 +21,5 @@ jobs:
           pip install -r requirements.txt
           mkdocs --version
       - name: build ULHPC documentation
-        run: mkdocs build && mkdocs gh-deploy --force
-        # run: mkdocs build --strict && mkdocs gh-deploy --force
+        run: mkdocs build
+        # run: mkdocs build --strict
