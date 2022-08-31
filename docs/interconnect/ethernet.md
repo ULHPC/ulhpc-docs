@@ -18,7 +18,6 @@ An overview of this topology is provided in the below figure.
 ![](images/iris-aion_Ethernet-network_overview.png)
 
 !!! important "ACM PEARC'22 article"
-    If you are interested to get more details on the implemented Ethernet network, you can refer to the following article published to the [ACM PEARC'22](https://pearc.acm.org/pearc22) conference (Practice and Experience in Advanced Research Computing) in Boston, USA on July 13, 2022.<br/>
-    [ULHPC blog post](https://hpc.uni.lu/blog/2022-07-13-acm-pearc22) | [slides](https://hpc.uni.lu/download/slides/2022-07-13-ACM-PEARC22.pdf)
-    > __ACM Reference Format__ (see also [ORBilu entry](https://orbilu.uni.lu/handle/10993/51828) or [OpenAccess](https://dl.acm.org/doi/10.1145/3491418.3535159)): <br/>
+    If you are interested to get more details on the implemented Ethernet network, you can refer to the following article published to the [ACM PEARC'22](https://hpc.uni.lu/blog/2022-07-13-acm-pearc22) conference (Practice and Experience in Advanced Research Computing) in Boston, USA on July 13, 2022.<br/>
+    > __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/51828) | [OpenAccess](https://dl.acm.org/doi/10.1145/3491418.3535159) | [ULHPC blog post](https://hpc.uni.lu/blog/2022-07-13-acm-pearc22) | [slides](https://hpc.uni.lu/download/slides/2022-07-13-ACM-PEARC22.pdf) <br/>
     > Sebastien Varrette, Hyacinthe Cartiaux, Teddy Valette, and Abatcha Olloh. 2022. Aggregating and Consolidating two High Performant Network Topologies: The ULHPC Experience. _In Practice and Experience in Advanced Research Computing (PEARC '22)_. Association for Computing Machinery, New York, NY, USA, Article 61, 1–6. https://doi.org/10.1145/3491418.3535159
