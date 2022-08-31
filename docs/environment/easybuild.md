@@ -74,7 +74,7 @@ You can thus extend the [ULHPC Software set](modules.md#ulhpc-toolchains-and-sof
     `EASYBUILD_PREFIX=/opt/apps/resif/<cluster>/<version>/<arch>`](modules.md#ulhpc-modulepath)),
     you may want to isolate your local builds to take into account
     the cluster `$ULHPC_CLUSTER` ("iris" or "aion"), the
-    toolchain version `<version>` (Ex: 2019b, 2020a etc.) you build upon and
+    toolchain version `<version>` (Ex: 2019b, 2020b etc.) you build upon and
     eventually the architecture `<arch>`.
     In that case, you can use the following helper scripts:
     ```bash
@@ -99,6 +99,11 @@ You can thus extend the [ULHPC Software set](modules.md#ulhpc-toolchains-and-sof
     ```bash
     resif-load-project-swset-prod $PROJECTHOME/<name>
     ```
+
+!!! important "ACM PEARC'21: RESIF 3.0"
+    For more details on the way we setup and deploy the User Software Environment on ULHPC systems through the RESIF 3 framework, see the [ACM PEARC'21](https://hpc.uni.lu/blog/2021-05-11-resif-3) conference paper presented on July 22, 2021.
+    > __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/47115) | [OpenAccess](https://dl.acm.org/doi/10.1145/3437359.3465600) | [ULHPC blog post](https://hpc.uni.lu/blog/2021-05-11-resif-3) | [slides](https://hpc.uni.lu/download/slides/2021-07-22-ACM-PEARC21_resif3.pdf) | [Github](https://github.com/ULHPC/sw): <br/>
+    > Sebastien Varrette, Emmanuel Kieffer, Frederic Pinel, Ezhilmathi Krishnasamy, Sarah Peter, Hyacinthe Cartiaux, and Xavier Besseron. 2021. RESIF 3.0: Toward a Flexible & Automated Management of User Software Environment on HPC facility. _In Practice and Experience in Advanced Research Computing (PEARC '21)_. Association for Computing Machinery (ACM), New York, NY, USA, Article 33, 1–4. https://doi.org/10.1145/3437359.3465600
 
 ## Installation / Update local Easybuild
 

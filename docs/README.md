@@ -35,6 +35,8 @@ Consider our latest **[ULHPC User Guide (PDF)](https://hpc.uni.lu/download/slide
 * [Slurm overview](slurm/index.md) - Slurm commands, job script basics, submitting, updating jobs
 * [Join and Monitor Jobs](jobs/submit.md#joiningmonitoring-running-jobs)
 * [File permissions](filesystems/unix-file-permissions.md) - Unix file permissions
+* [ULHPC Software/Modules Environment](environment/modules.md)
+* [Compiling/Building your own software](software/build.md)
 
 ??? info "About this site"
     The [ULHPC Technical Documentation](https://docs.hpc.uni.lu) is based on [MkDocs](http://www.mkdocs.org/) and the [mkdocs-material](https://squidfunk.github.io/mkdocs-material) theme, and inspired by the (excellent) [NERSC](https://docs.nersc.gov) documentation site.

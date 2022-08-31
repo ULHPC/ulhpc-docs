@@ -33,6 +33,13 @@ Led by Dr. [Varrette](https://varrette.gforge.uni.lu) for 15 years (until Aug 31
 
 The HPC facility is one element of the extensive digital research infrastructure and expertise developed by the University over the last years. It also supports the University’s ambitious digital strategy and in particular the creation of a Facility for Data and HPC Sciences. This facility aims to provide a world-class user-driven digital infrastructure and services for fostering the development of collaborative activities related to frontier research and teaching in the fields of Computational and Data Sciences, including High Performance Computing, Data Analytics, Big Data Applications, Artificial Intelligence and Machine Learning.
 
+!!! important "Reference ULHPC Article to cite"
+    If you want to get a good overview of the way our facility is setup, managed and evaluated, you can refer to the [reference article](https://orbilu.uni.lu/handle/10993/51857) you are in all cases entitled to refer to when crediting the ULHPC facility as per [AUP](https://hpc.uni.lu/users/aup/) (see also the [publication page instructions](https://hpc.uni.lu/about/publications#ul-hpc-reference-article)).
+    > __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/51857) | [ULHPC blog post](https://hpc.uni.lu/blog/2022-07-10-acm-hpcct22) | [slides](https://hpc.uni.lu/download/slides/2022-07-10-ACM-HPCCT22.pdf) :<br/>
+    > Sebastien Varrette, Hyacinthe Cartiaux, Sarah Peter, Emmanuel Kieffer, Teddy Valette, and Abatcha Olloh. 2022. Management of an Academic HPC & Research Computing Facility: The ULHPC Experience 2.0. In 6th High Performance Computing and Cluster Technologies Conference (HPCCT 2022), July 08-10, 2022, Fuzhou, China. ACM, New York, NY, USA, 14 pages.
+    > https://doi.org/10.1145/3560442.3560445
+
+
 --------------------------------------------------------
 ## Supercomputing and Storage Resources at a glance
 

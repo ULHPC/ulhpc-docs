@@ -32,11 +32,14 @@ should be aware of when interacting with it:
       tracking](../policies/usage-charging.md) is performed and reported.
 * [Slurm Federation configuration](https://slurm.schedmd.com/federation.html) between `iris` and `aion`
     - ensures global policy (coherent job ID, global scheduling, etc.) within ULHPC systems
-    - easily submit jobs from one cluster to another\hfill{}`-M, --cluster aion|iris`
+    - easily submit jobs from one cluster to another using `-M, --cluster aion|iris`
 
 <!--tldr-end-->
 
-For more details, see the appropriate pages in the left menu.
+For more details, see the appropriate pages in the left menu or refer to the [IEEE ISPDC22](https://hpc.uni.lu/blog/2022-07-14-ieee-ispdc22) conference paper (21<sup>st</sup> IEEE Int. Symp. on Parallel and Distributed Computing) presented in Basel (Switzerland) on July 13, 2022.
+
+> __IEEE Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/51494) | [ULHPC blog post](https://hpc.uni.lu/blog/2022-07-14-ieee-ispdc22) | [slides](https://hpc.uni.lu/download/slides/2022-07-13-IEEE-ISPDC22.pdf) <br/>
+> Sebastien Varrette, Emmanuel Kieffer, and Frederic Pinel, "Optimizing the Resource and Job Management System of an Academic HPC and Research Computing Facility". _In 21st IEEE Intl. Symp. on Parallel and Distributed Computing (ISPDC’22)_, Basel, Switzerland, 2022.
 
 ## Jobs
 
