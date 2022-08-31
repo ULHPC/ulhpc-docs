@@ -11,9 +11,13 @@ of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'
 [:fontawesome-solid-sign-in-alt: ULHPC Supercomputers](systems/index.md){: .md-button .md-button--link }
 [:fontawesome-solid-sign-in-alt: Getting Started](getting-started.md){: .md-button .md-button--link }
 
-Consider our latest **[ULHPC User Guide (PDF)](https://hpc.uni.lu/download/slides/2021-ULHPC-user-guide.pdf)**
+Consider our latest **[ULHPC User Guide (PDF)](https://hpc.uni.lu/download/slides/2022-ULHPC-user-guide.pdf)**
 
-[![](https://hpc.uni.lu/download/slides/2021-ULHPC-user-guide.png)](https://hpc.uni.lu/download/slides/2021-ULHPC-user-guide.pdf)
+<!--ULHPC-User-Guilde-slides-start-->
+
+[![](https://hpc.uni.lu/download/slides/2022-ULHPC-user-guide.png)](https://hpc.uni.lu/download/slides/2022-ULHPC-user-guide.pdf)
+
+<!--ULHPC-User-Guilde-slides-end-->
 
 ## ULHPC Web Portals
 
