@@ -349,6 +349,27 @@ plugins:
       type: date
   - progress
   - include-markdown
+  - exclude:
+      glob:
+        -  software/swsets/base/*.md
+        -  software/swsets/bio/*.md
+        -  software/swsets/cae/*.md
+        -  software/swsets/chem/*.md
+        -  software/swsets/compiler/*.md
+        -  software/swsets/data/*.md
+        -  software/swsets/debugger/*.md
+        -  software/swsets/devel/*.md
+        -  software/swsets/lang/*.md
+        -  software/swsets/lib/*.md
+        -  software/swsets/math/*.md
+        -  software/swsets/mpi/*.md
+        -  software/swsets/numlib/*.md
+        -  software/swsets/perf/*.md
+        -  software/swsets/phys/*.md
+        -  software/swsets/system/*.md
+        -  software/swsets/toolchain/*.md
+        -  software/swsets/tools/*.md
+        -  software/swsets/vis/*.md
 
 # Extras
 extra:

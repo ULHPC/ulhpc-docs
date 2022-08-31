@@ -3,6 +3,13 @@
 ![](../images/plots/plot_piechart_compute_cluster.png){: style="width:300px;"}
 ![](../images/plots/plot_piechart_storage_fs.png){: style="width:300px;"}
 
+For more details, see the [reference ULHPC Article](https://hpc.uni.lu/about/publications#ul-hpc-reference-article):
+
+> __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/51857) | [ULHPC blog post](https://hpc.uni.lu/blog/2022-07-10-acm-hpcct22) | [slides](https://hpc.uni.lu/download/slides/2022-07-10-ACM-HPCCT22.pdf):<br/>
+> Sebastien Varrette, Hyacinthe Cartiaux, Sarah Peter, Emmanuel Kieffer, Teddy Valette, and Abatcha Olloh. 2022. Management of an Academic HPC & Research Computing Facility: The ULHPC Experience 2.0. In 6th High Performance Computing and Cluster Technologies Conference (HPCCT 2022), July 08-10, 2022, Fuzhou, China. ACM, New York, NY, USA, 14 pages.
+> https://doi.org/10.1145/3560442.3560445
+
+
 
 ## Chronological Evolution
 
