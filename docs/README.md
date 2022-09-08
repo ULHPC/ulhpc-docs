@@ -21,10 +21,10 @@ Consider our latest **[ULHPC User Guide (PDF)](https://hpc.uni.lu/download/slide
 
 ## ULHPC Web Portals
 
-
 * [ULHPC Home page](https://hpc.uni.lu) - center news and information: [hpc.uni.lu](https://hpc.uni.lu)
 * [Helpdesk / Ticket Portal](https://hpc.uni.lu/support) - open tickets, make requests
       - Uni.lu Service Now Portal - use your Uni.lu credentials to access.
+* **NEW!** [ULHPC Discourse](https://hpc-discourse.uni.lu/) - Forum-like community portal
 * [ULHPC Tutorials](https://ulhpc-tutorials.readthedocs.io/) - HPC tutorials covering many (many) topics: [ulhpc-tutorials.readthedocs.io](https://ulhpc-tutorials.readthedocs.io/)
 * [Trainings and HPC School](https://hpc.uni.lu/hpc-school/)
 
