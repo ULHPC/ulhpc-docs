@@ -11,9 +11,7 @@ nav:
     - Projects Accounts:          'accounts/projects.md'
     - Identity Management Portal: 'connect/ipa.md'
     - Slurm Account Hierarchy:    'slurm/accounts.md'
-  ##############
-  - Data Center:
-    - Centre de Calcul (CDC): 'data-center/index.md'
+
   #######################
   - ULHPC Supercomputers:
     - Overview: 'systems/index.md'
@@ -30,6 +28,7 @@ nav:
     #  - Storage:       'filesystems/index.md'
       - Timeline:      'systems/iris/timeline.md'
     - Live status: https://hpc.uni.lu/live-status/motd
+    - Centre de Calcul (CDC): 'data-center/index.md'
   #######################
   - Interconnect:
     # - Overview:                     'interconnect/index.md'
