@@ -30,15 +30,16 @@ nav:
     - Interconnect:
       - Fast Infiniband Interconnect: 'interconnect/ib.md'
       - Ethernet Interconnect:        'interconnect/ethernet.md'
+  - Storage Systems:
+      - Overview:                   'filesystems/index.md'
+      - GPFS/SpectrumScale:         'filesystems/gpfs.md'
+      - Lustre:                     'filesystems/lustre.md'
+      - OneFS Isilon:               'filesystems/isilon.md'
     - Live status: https://hpc.uni.lu/live-status/motd
     - Centre de Calcul (CDC): 'data-center/index.md'
 
   #######################
-  - Storage Systems:
-    - Overview:                   'filesystems/index.md'
-    - GPFS/SpectrumScale:         'filesystems/gpfs.md'
-    - Lustre:                     'filesystems/lustre.md'
-    - OneFS Isilon:               'filesystems/isilon.md'
+
 
   #################
   - Access/Connect:
