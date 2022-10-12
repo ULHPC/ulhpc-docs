@@ -11,6 +11,7 @@ nav:
     - Projects Accounts:          'accounts/projects.md'
     - Identity Management Portal: 'connect/ipa.md'
     - Slurm Account Hierarchy:    'slurm/accounts.md'
+  - Teaching with the ULHPC: 'teaching-with-the-ulhpc.md'
   ##############
   - Data Center:
     - Centre de Calcul (CDC): 'data-center/index.md'
