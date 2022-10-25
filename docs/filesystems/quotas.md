@@ -6,7 +6,7 @@
 | ---------------------- | ------------------- | ------------------- | ---------- |
 | `$HOME`                | 500 GB              | 1 M                 | -          |
 | `$SCRATCH`             | 10 TB               | 1 M                 | 60 days    |
-| `/work/projects/...`   | 16 MB               | 0                   | -          |
+| `/work/projects/...`   | 1 TB                | 1 M                 | -          |
 | `/mnt/isilon/projects/...` | 1.14 PB globally | -                   | -          |
 
 ## Quotas
