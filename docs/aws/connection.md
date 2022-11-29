@@ -1,16 +1,5 @@
 # Connection to the AWS Cluster
 
-## Pre-requisites
-
-Once your R&D project has been accepted, please submit to hpc@uni.lu the following information:
-
-* Your project Acronyms;
-
-* The owner of the project;
-
-* A list of users which should have access to the project.
-
-
 ## Access to the frontend
 
 **The ULHPC team will create specific access for the AWS Cluster and send to all project members a ssh key in order to connect to the cluster frontend.**
