@@ -11,14 +11,20 @@ The official ULHPC swsets are not available on the AWS cluster. If you prefer to
 
 * You may wish to change the location of the` SPACK_ROOT` to fit your specific cluster configuration.
 
-* Here, we consider the latest release of Spack from the releases/v0.18 branch, however, you may wish to checkout the develop branch for the latest packages.
+* Here, we consider the release v0.19 of Spack from the releases/v0.19 branch, however, you may wish to checkout the develop branch for the latest packages.
 
 ```bash
-export SPACK_ROOT="/shared/projects/<project_id>/spack"
-git clone -c feature.manyFiles=true -b releases/v0.18 https://github.com/spack/spack $SPACK_ROOT
-echo "export SPACK_ROOT=/shared/projects/<project_id>/spack" >> $HOME/.bashrc
-echo "source \$SPACK_ROOT/share/spack/setup-env.sh" >> $HOME/.bashrc
-source $HOME/.bashrc
+git clone -c feature.manyFiles=true -b releases/v0.19 https://github.com/spack/spack $SPACK_ROOT
+```
+
+* Then, add the following lines in your .bashrc
+
+```bash
+export PROJECT="/shared/projects/<project_id>"
+export SPACK_ROOT="${PROJECT}/spack"
+if [[ -f "${SPACK_ROOT}/share/spack/setup-env.sh" ]];then
+    source ${SPACK_ROOT}/share/spack/setup-env.sh" 
+fi
 ```
 
 !!! danger "Adapt accordingly"
@@ -38,7 +44,7 @@ The binary cache is periodically updated with the latest versions of packages, a
 
 ```bash
 spack mirror add binary_mirror https://binaries.spack.io/develop
-spack buildcache keys --install –trust
+spack buildcache keys -it
 ```
 
 ## Installing packages
