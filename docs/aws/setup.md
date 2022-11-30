@@ -16,7 +16,7 @@ The official ULHPC swsets are not available on the AWS cluster. If you prefer to
 ```bash
 export SPACK_ROOT=/shared/projects/<project_id>
 git clone -c feature.manyFiles=true -b releases/v0.18 https://github.com/spack/spack $SPACK_ROOT
-echo "export SPACK_ROOT=/shared/projects/<project_id>" >> $HOME/.bashrc
+echo "export SPACK_ROOT=/shared/projects/<project_id>/spack" >> $HOME/.bashrc
 echo "source \$SPACK_ROOT/share/spack/setup-env.sh" >> $HOME/.bashrc
 source $HOME/.bashrc
 ```
