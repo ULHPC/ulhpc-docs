@@ -22,7 +22,7 @@ git clone -c feature.manyFiles=true -b releases/v0.19 https://github.com/spack/s
 ```bash
 export PROJECT="/shared/projects/<project_id>"
 export SPACK_ROOT="${PROJECT}/spack"
-if [[ -f "${SPACK_ROOT}/share/spack/setup-env.sh" ]];then
+if [[ -f "${SPACK_ROOT}/share/spack/setup-env.sh" && -n ${SLURM_JOB_ID} ]];then
     source ${SPACK_ROOT}/share/spack/setup-env.sh" 
 fi
 ```
