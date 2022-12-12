@@ -18,7 +18,7 @@ Alternatively, you may want to save the configuration of this connection (and cr
 Host aws-ulhpc-access
   User username
   Hostname ec2-44-209-227-16.compute-1.amazonaws.com
-  IdentityFile ~/.ssh/aws_admin.pem
+  IdentityFile ~/.ssh/id_rsa
   IdentitiesOnly yes
 ```
 
