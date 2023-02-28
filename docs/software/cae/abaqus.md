@@ -26,7 +26,7 @@ cae/ABAQUS/<version>[-hotfix-<hotfix>]
     ```
     Failure to do so will cause Abaqus to get stuck due to the MPI that Abaqus ships witch is not supporting the SLURM scheduler.
 
-When using a general compute node for Abaqus 2018 or 2021, please run:
+When using a general compute node for Abaqus 2021, please run:
 
 * `abaqus cae -mesa` to launch the GUI without support for hardware-accelerated graphics rendering.
     - the option `-mesa` disables hardware-accelerated graphics rendering within Abaqus’s GUI.
