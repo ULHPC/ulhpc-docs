@@ -63,13 +63,13 @@ The following script is an example how to proceed:
     module load lang/Python
     source jupyter_env/bin/activate
 
-    jupyter notebook --ip $(facter ipaddress) --no-browser  &
+    jupyter notebook --ip $(hostname -i) --no-browser  &
     pid=$!
     sleep 5s
     jupyter notebook list
     jupyter --paths
     jupyter kernelspec list
-    echo "Enter this command on your laptop: ssh -p 8022 -NL 8888:$(facter ipaddress):8888 ${USER}@access-iris.uni.lu " > notebook.log
+    echo "Enter this command on your laptop: ssh -p 8022 -NL 8888:$(hostname -i):8888 ${USER}@access-iris.uni.lu " > notebook.log
     wait $pid
     ```
 
