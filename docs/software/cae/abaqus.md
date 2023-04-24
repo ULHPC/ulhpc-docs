@@ -87,6 +87,9 @@ $ si --x11 -c 8               # Abaqus mp_mode=threads test
 # OR
 $ si --x11 --ntask-per-node 8 # abaqus mp_mode=mpi test
 
+# Propagate Slurm "cpus-per-task / -c" to srun
+export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
+
 # Load the module ABAQUS and needed environment
 (node)$ module purge
 (node)$ module load cae/ABAQUS
@@ -158,6 +161,7 @@ abaqus job=<jobname> resume
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
+    export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
     module load cae/ABAQUS
     # export LM_LICENSE_FILE=[...]
     unset SLURM_GTIDS
@@ -181,6 +185,7 @@ abaqus job=<jobname> resume
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
+    export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
     module load cae/ABAQUS
     # export LM_LICENSE_FILE=[...]
     unset SLURM_GTIDS
@@ -206,6 +211,7 @@ abaqus job=<jobname> resume
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
+    export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
     module load cae/ABAQUS
     # export LM_LICENSE_FILE=[...]
     unset SLURM_GTIDS

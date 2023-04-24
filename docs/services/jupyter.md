@@ -59,6 +59,8 @@ The following script is an example how to proceed:
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
+    export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
+    
     # Python 3.X by default (also on system)
     module load lang/Python
     source jupyter_env/bin/activate

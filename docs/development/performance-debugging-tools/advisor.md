@@ -70,6 +70,7 @@ module load toolchain/intel/2019a
 module load perf/Advisor/2019_update4
 module load vis/GTK+/3.24.8-GCCcore-8.2.0
 
+export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 export OMP_NUM_THREADS=16
 advixe-cl -collect survey -project-dir my_result -- ./a.out
 

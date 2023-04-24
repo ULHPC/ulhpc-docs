@@ -36,6 +36,8 @@ $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/CRYSTAL/17-intel-2019a-1.0.2
 
+$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
+
 $ Pcrystal >& log.out
 ```
 

@@ -27,6 +27,8 @@ Thus your typical GPU launcher would match the [AI/DL launcher](../slurm/launche
 print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
 module purge || print_error_and_exit "No 'module' command"
 module load numlib/cuDNN   # Example with cuDNN
+
+export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK # Propagate Slurm 'cpus-per-task' to srun
 [...]
 ```
 

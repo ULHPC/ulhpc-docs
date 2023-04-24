@@ -29,6 +29,7 @@ $ module load swenv/default-env/v1.1-20180716-production
 $ module load cae/OpenFOAM/v1712-intel-2018a
 
 # Load the OpenFOAM environment
+$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 $ source $FOAM_BASH
 
 $ mkdir OpenFOAM
@@ -90,6 +91,7 @@ module load swenv/default-env/v1.1-20180716-production
 module load cae/OpenFOAM/v1712-intel-2018a
 
 # Load the OpenFOAM environment
+export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 source $FOAM_BASH
 
 srun interFoam -parallel

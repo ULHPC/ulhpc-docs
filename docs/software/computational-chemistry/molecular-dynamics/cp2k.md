@@ -33,7 +33,9 @@ $ salloc -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 # OR si --x11 [...
 $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/CP2K/6.1-intel-2018a
-        
+
+$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
+ 
 $ cp2k.popt -i example.inp 
 ```
 

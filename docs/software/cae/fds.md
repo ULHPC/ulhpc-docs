@@ -24,6 +24,7 @@ $ salloc -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11
 $ module purge
 $ module load swenv/default-env/devel
 $ module load phys/FDS/6.7.3-intel-2019a
+$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 
 # Example in fds 
 $ fds example.fds
@@ -60,6 +61,7 @@ module purge
 module load swenv/default-env/devel
 module load phys/FDS/6.7.3-intel-2019a
 
+export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 srun fds example.fds
 ```
 
@@ -91,7 +93,7 @@ module purge
 module load swenv/default-env/devel
 module load phys/FDS/6.7.3-intel-2019a
 
-srun fds_hyb example.fds
+srun --cpus-per-task=2 fds_hyb example.fds
 ```
 
 ## Additional information
