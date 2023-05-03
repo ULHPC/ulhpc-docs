@@ -230,7 +230,7 @@ Details are provided below:
 
 | Node (type)                          | #Nodes | #Socket / #Cores | RAM [GB] | Features              |
 |--------------------------------------|--------|------------------|----------|-----------------------|
-| `aion-[0001-0318]`                   | 318    | 8 / 128          | 256      | `batch,epyc`          |
+| `aion-[0001-0354]`                   | 354    | 8 / 128          | 256      | `batch,epyc`          |
 | `iris-[001-108]`                     | 108    | 2 / 28           | 128      | `batch,broadwell`     |
 | `iris-[109-168]`                     | 60     | 2 / 28           | 128      | `batch,skylake`       |
 | `iris-[169-186]`   (GPU)             | 18     | 2 / 28           | 768      | `gpu,skylake,volta`   |
