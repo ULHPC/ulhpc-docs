@@ -3,7 +3,7 @@
 [![](images/aion_compute_racks.jpg){: style="width:400px;float: right;margin-right:10px" }](BullSequanaXH2000_Features_Atos_supercomputers.pdf)
 
 Aion is a [Atos/Bull](https://atos.net/en/solutions/high-performance-computing-hpc)/AMD supercomputer which consists of **354 compute nodes, totaling 45312 compute cores** and 90624 GB RAM,
-with a peak performance of about **1,70 PetaFLOP/s**.
+with a peak performance of about **1,88 PetaFLOP/s**.
 
 All nodes are interconnected through a **Fast InfiniBand (IB) HDR100 network**[^1], configured over a ** [Fat-Tree](https://clusterdesign.org/fat-trees/) Topology** (blocking factor 1:2).
 Aion nodes are equipped with [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) processors.
