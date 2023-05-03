@@ -41,7 +41,7 @@ Each project directory, in `/mnt/isilon/projects/` contains a hidden sub-directo
 
 | Source                 | Backup location | Frequency | Retention                                          |
 |------------------------|-----------------|-----------|----------------------------------------------------|
-| Gitlab infrastructure  | CS43, Kirchberg | Weekly    | last 5 weekly snapshots                            |
+| Gitlab infrastructure  | CDC, Belval     | Weekly    | last 5 weekly snapshots                            |
 | Iris infrastructure    | CDC, Belval     | Weekly    | last 5 weekly snapshots                            |
 
 
