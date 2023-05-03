@@ -36,7 +36,7 @@ The full solution with 4 racks (total dimension: dimensions: HxWxD (mm) = 2030x3
 | __#X2410 Rome Blade__        |        30 |        29 |        29 |        30 | __118__        |
 | __#Compute Nodes__           |        90 |        87 |        87 |        90 | __354__        |
 | __#Compute Cores__           |     11520 |     11136 |     11136 |     11520 | __45312__      |
-| __$R_\text{peak}$ [TFlops]__ | 447,28 TF | 415,33 TF | 415,33 TF | 415,33 TF | __1693.29 TF__ |
+| __$R_\text{peak}$ [TFlops]__ | 479,23 TF | 463,25 TF | 463,25 TF | 479,23 TF | __1884.96 TF__ |
 
 For more details: [:fontawesome-solid-sign-in-alt: BullSequana XH2000 SpecSheet (PDF)](BullSequanaXH2000_Features_Atos_supercomputers.pdf){: .md-button .md-button--link }
 
