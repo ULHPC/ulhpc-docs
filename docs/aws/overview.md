@@ -19,7 +19,7 @@ After initial project selection by a steering committee that includes representa
 
 ## System description and environment 
 
-The AWS Parallel Cluster based on the new Graviton3 (all instances and storage located in US-EAST-1) will provide cloud computing services to Uni.lu that will support the development, design, and testing of numerical codes, which traditionally demands a lot of compute power. This will give researchers an accessible, easy-to-use, end-to-end environment in which they can validate their simulation codes on ARM64 architectures, including servers, personal computers, and Internet of Things (IoT). The cluster will consist in two main partitions and jobs will be submitted using the [Slurm scheduler](https://slurm.schedmd.com/documentation.html) :
+The AWS Parallel Cluster based on the new [HPC-based Graviton3 instances](https://aws.amazon.com/ec2/instance-types/hpc7g/) (all instances and storage located in US-EAST-1) will provide cloud computing services to Uni.lu that will support the development, design, and testing of numerical codes, which traditionally demands a lot of compute power. This will give researchers an accessible, easy-to-use, end-to-end environment in which they can validate their simulation codes on ARM64 architectures, including servers, personal computers, and Internet of Things (IoT). The cluster will consist in two main partitions and jobs will be submitted using the [Slurm scheduler](https://slurm.schedmd.com/documentation.html) :
 
 
 
