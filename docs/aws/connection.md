@@ -8,7 +8,7 @@ Once your account has been enabled, you can connect to the cluster using ssh. Co
 To create a direct connection, use the command below (using your specific cluster name if it differs from workshop-cluster).
 
 ```bash
-ssh -i sshkey.pem username@ec2-44-209-227-16.compute-1.amazonaws.com
+ssh -i id_rsa username@ec2-52-5-167-162.compute-1.amazonaws.com 
 ```
 This will open a direct, non-graphical connection in the terminal. To exit the remote terminal session, use the standard Linux command “exit”.
 
@@ -17,7 +17,7 @@ Alternatively, you may want to save the configuration of this connection (and cr
 ```bash
 Host aws-ulhpc-access
   User username
-  Hostname ec2-44-209-227-16.compute-1.amazonaws.com
+  Hostname ec2-52-5-167-162.compute-1.amazonaws.com 
   IdentityFile ~/.ssh/id_rsa
   IdentitiesOnly yes
 ```
