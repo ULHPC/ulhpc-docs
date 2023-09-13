@@ -71,6 +71,7 @@ nav:
     - Overview:  'environment/index.md'
     - Modules:   'environment/modules.md'
     - Easybuild: 'environment/easybuild.md'
+    - Conda: 'environment/conda.md'
   ###########
   - Policies:
     - Acceptable Use Policy (AUP):                   'policies/aup.md'
