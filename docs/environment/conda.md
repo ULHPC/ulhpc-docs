@@ -195,7 +195,7 @@ ${HOME}/micromamba/envs/mkdocs
 and will not interfere with system packages.
 
 !!! important ""
-    **Do not install packages with pip as a user:** User packages are installed in the same directory for all environments, and can interfere with other versions of the same package.
+    **Do not install packages in Conda environments with pip as a user:** User packages are installed in the same directory for all environments, and can interfere with other versions of the same package.
 
 ### Combining Conda with project environment management tools
 
