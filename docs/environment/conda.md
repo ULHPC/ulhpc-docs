@@ -146,7 +146,7 @@ _Useful scripting resources_
 
 - [Formatting submission scripts for R (and other systems)](../slurm/launchers.md#serial-task-script-launcher)
 
-## Combining Conda with package and environment management tools
+## Combining Conda with other package and environment management tools
 
 Quite often it may be desirable to use Conda to manage environments but a different tool to manage packages. For instance we may want to install some packages that are not available in a Conda channel with Pip. We may also want to manage sub-environments with a different tool. For instance we may want to setup some project in a directory with Pipenv. Conda integrates well with any such tool given that each package is managed by a unique tool. Some of the most frequent cases are described bellow.
 
@@ -197,7 +197,7 @@ and will not interfere with system packages.
 !!! important ""
     **Do not install packages with pip as a user:** User packages are installed in the same directory for all environments, and can interfere with other versions of the same package.
 
-### Combining Conda with other environment and package management tools
+### Combining Conda with project environment management tools
 
 Quite often the user may want to create subenvironments, for instance tools such as `pipenv` and `poetry` manage environment and packages as project files, which an be stored in a project directory and version controlled as part of a project. Using such tools with Conda is relatively straight forward. Create an environment where only the tool that you require is installed, and manage the project subenvironments using the installed tool.
 
