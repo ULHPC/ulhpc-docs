@@ -1,7 +1,7 @@
 # Self management of Conda work environments in UL HPC facilities
 
 !!! important ""
-    **TL;DR:** [install and use the Micromamba package manager](#The Micromamba package manager).
+    **TL;DR:** install and use the [Micromamba package manager](#the-micromamba-package-manager).
 
 <!--intro-start-->
 
