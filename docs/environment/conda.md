@@ -154,13 +154,25 @@ _Useful scripting resources_
 
 ## Combining Conda with other package and environment management tools
 
-Quite often it may be desirable to use Conda to manage environments but a different tool to manage packages. For instance we may want to install some packages that are not available in a Conda channel with Pip. We may also want to manage sub-environments with a different tool. For instance we may want to setup some project in a directory with Pipenv. Conda integrates well with any such tool given that each package is managed by a unique tool. Some of the most frequent cases are described bellow.
+It may be desirable to use Conda to manage environments but a different tool to manage packages, such as [`pip`](https://pip.pypa.io/en/stable/getting-started/). Or sub-environments may need to be used inside a Conda environment, as for instance with tools for creating and managing isolated Python installation, such as [`virtualenv`](https://virtualenv.pypa.io/en/latest/), or with tools for integrating managed Python installations or packages in project directories, such as [Pipenv](https://pipenv.pypa.io/en/latest) and [Poetry](https://python-poetry.org/).
 
-### Managing packages with different tools
+Conda integrates well with any such tool. Some of the most frequent cases are described bellow.
+
+### Managing packages with external tools
+
+Quite often a package that is required in an environment is not available in a Conda channel, but it is available though some other distributions, such as the [Python Package Index (PyPI)](https://pypi.org/). In these cases makes sense to create a Conda environment and install the required packages with `pip` from the Python Package Index.
+
+Conda installs links to package components in an environment directory. When using the package tool, packages components are installed in the same directory where Conda installs links. Thus, there tools integrate seamlessly with Conda, however there are a couple of caveats:
+
+- each package must be managed by one tool, otherwise package components will get overwritten, and
+- packages installed by the package tool are specific to an environment and cannot be shared as with Conda, since components are installed directly and not with links.
+
+!!! important ""
+    Installing the same package in multiple environments with an external package tool consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), so prefer Conda when possible.
 
 #### Pip
 
-Many less popular Python packages are available through Pip but they are not found in any Conda channel. For instance, to manage an environment with `mkdocs` packages from Pip, create and environment
+In this example `pip` is used to manage packages in a Conda environment with [MkDocs](https://www.mkdocs.org/) related packages. To install the packages, create an environment
 ```bash
 micromamba env create --name mkdocs
 ```
@@ -168,40 +180,43 @@ activate the environment,
 ```bash
 micromamba activate mkdocs
 ```
-and install `pip`:
+and install `pip`
 ```bash
 micromamba install --channel conda-forge pip
 ```
+which will be used to install the remaining packages.
 
 The `pip` will be the only package that will be managed with Conda. For instance, to update Pip activate the environment,
 ```bash
 micromamba activate mkdocs
 ```
-and run:
+and run
 ```bash
 micromaba update --all
 ```
-All other packages are now managed by `pip`.
+to update all installed packaged (only `pip` in our case). All other packages are managed by `pip`.
 
 For instance, assume that a `mkdocs` project requires the following packages:
+
 - `mkdocs`
 - `mkdocs-minify-plugin`
-The package `mkdocs-minify-plugin` is not available in Conda, but is available with Pip. To install it, activate the `mkdocs` environment
+
+The package `mkdocs-minify-plugin` is less popular and thus is is not available though a Conda channel, but it is available in PyPI. To install it, activate the `mkdocs` environment
 ```bash
 micromamba activate mkdocs
 ```
-and install the required packages with `pip`:
+and install the required packages with `pip`
 ```bash
-pip install mkdocs mkdocs-minify-plugin
+pip install --upgrade mkdocs mkdocs-minify-plugin
 ```
-The packages will be installed inside the micromamba directory, for instance
+inside the environment. The packages will be installed inside a directory that `micromamba` created for the Conda enviroment, for instance
 ```
 ${HOME}/micromamba/envs/mkdocs
 ```
-and will not interfere with system packages.
+along side packages installed by `micromamba`. As a results, 'system-wide' installations with `pip` inside a Conda environment do not interfere with system packages.
 
 !!! important ""
-    **Do not install packages in Conda environments with pip as a user:** User packages are installed in the same directory for all environments, and can interfere with other versions of the same package.
+    **Do not install packages in Conda environments with pip as a user:** User installed packages (e.g.`pip install --user --upgrade mkdocs-minify-plugin`) are installed in the same directory for all environments, typically in `~/.local/`, and can interfere with other versions of the same package installed from other Conda environments.
 
 ### Combining Conda with project environment management tools
 
