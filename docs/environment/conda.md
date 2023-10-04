@@ -154,7 +154,7 @@ _Useful scripting resources_
 
 ## Combining Conda with other package and environment management tools
 
-It may be desirable to use Conda to manage environments but a different tool to manage packages, such as [`pip`](https://pip.pypa.io/en/stable/getting-started/). Or sub-environments may need to be used inside a Conda environment, as for instance with tools for creating and managing isolated Python installation, such as [`virtualenv`](https://virtualenv.pypa.io/en/latest/), or with tools for integrating managed Python installations or packages in project directories, such as [Pipenv](https://pipenv.pypa.io/en/latest) and [Poetry](https://python-poetry.org/).
+It may be desirable to use Conda to manage environments but a different tool to manage packages, such as [`pip`](https://pip.pypa.io/en/stable/getting-started/). Or subenvironments may need to be used inside a Conda environment, as for instance with tools for creating and managing isolated Python installation, such as [`virtualenv`](https://virtualenv.pypa.io/en/latest/), or with tools for integrating managed Python installations and packages in project directories, such as [Pipenv](https://pipenv.pypa.io/en/latest) and [Poetry](https://python-poetry.org/).
 
 Conda integrates well with any such tool. Some of the most frequent cases are described bellow.
 
@@ -218,12 +218,14 @@ along side packages installed by `micromamba`. As a results, 'system-wide' insta
 !!! important ""
     **Do not install packages in Conda environments with pip as a user:** User installed packages (e.g.`pip install --user --upgrade mkdocs-minify-plugin`) are installed in the same directory for all environments, typically in `~/.local/`, and can interfere with other versions of the same package installed from other Conda environments.
 
-### Combining Conda with project environment management tools
+### Combining Conda with external environment management tools
 
-Quite often the user may want to create subenvironments, for instance tools such as `pipenv` and `poetry` manage environment and packages as project files, which an be stored in a project directory and version controlled as part of a project. Using such tools with Conda is relatively straight forward. Create an environment where only the tool that you require is installed, and manage the project subenvironments using the installed tool.
+Quite often it is required to create isolated environments using external tools. For instance, tools such as [`virtualenv`](https://virtualenv.pypa.io/en/latest/) can install and manage a Python distribution in a given directory and export and import environment descriptions from text files. This functionalities allows for instance the shipping of a description the Python environment as part of a project. Higher level tools such as [`pipenv`](https://pipenv.pypa.io/en/latest) automate the process of managing Python project environments whereas [`poetry`](https://python-poetry.org/) is a wholistic project management tool with integrated management of Python environments.
+
+Installing and using in Conda environments tools that create isolated environments is relatively straight forward. Create an environment where only the required that tool is installed, and manage any project subenvironments using the installed tool.
 
 !!! important ""
-    **Create a different environment for each tool:** While this is not a requirement it is a good practice. For instance, `pipenv` and `poetry` used to and may still have conflicting dependencies.
+    **Create a different environment for each tool:** While this is not a requirement it is a good practice. For instance, `pipenv` and `poetry` used to and may still have conflicting dependencies; Conda detects the dependency and aborts the conflicting installation.
 
 #### Pipenv
 
@@ -235,16 +237,16 @@ activate it
 ```bash
 micromamba activate pipenv
 ```
-and install the `pipenv` package as the only package in this environment:
+and install the `pipenv` package
 ```bash
 micromamba install --channel conda-forge pipenv
 ```
-Now the `pipenv` is managed with Conda, for instance to update `pipenv` activate the environment
+ as the only package in this environment. Now the `pipenv` is managed with Conda, for instance to update `pipenv` activate the environment
 ```bash
 micromamba activate pipenv
 ```
-and call:
+and call
 ```bash
 micromamba update --all
 ```
-Inside the environment use `pipenv` as usual to create and manage project environments.
+to update the single installed package. Inside the environment use `pipenv` as usual to create and manage project environments.
