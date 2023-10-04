@@ -215,8 +215,8 @@ ${HOME}/micromamba/envs/mkdocs
 ```
 along side packages installed by `micromamba`. As a results, 'system-wide' installations with `pip` inside a Conda environment do not interfere with system packages.
 
-!!! important ""
-    **Do not install packages in Conda environments with pip as a user:** User installed packages (e.g.`pip install --user --upgrade mkdocs-minify-plugin`) are installed in the same directory for all environments, typically in `~/.local/`, and can interfere with other versions of the same package installed from other Conda environments.
+!!! warning "Do not install packages in Conda environments with pip as a user"
+    User installed packages (e.g.`pip install --user --upgrade mkdocs-minify-plugin`) are installed in the same directory for all environments, typically in `~/.local/`, and can interfere with other versions of the same package installed from other Conda environments.
 
 ### Combining Conda with external environment management tools
 
@@ -224,8 +224,8 @@ Quite often it is required to create isolated environments using external tools.
 
 Installing and using in Conda environments tools that create isolated environments is relatively straight forward. Create an environment where only the required that tool is installed, and manage any project subenvironments using the installed tool.
 
-!!! important ""
-    **Create a different environment for each tool:** While this is not a requirement it is a good practice. For instance, `pipenv` and `poetry` used to and may still have conflicting dependencies; Conda detects the dependency and aborts the conflicting installation.
+!!! important "Create a different environment for each tool"
+    While this is not a requirement it is a good practice. For instance, `pipenv` and `poetry` used to and may still have conflicting dependencies; Conda detects the dependency and aborts the conflicting installation.
 
 #### Pipenv
 
