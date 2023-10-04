@@ -87,33 +87,39 @@ To setup the environment log-out and log-in again. Now you can use `micromamba`,
 
 As an example, the creation and use of an environment for R jobs is presented. The command,
 ```bash
-micromamba create --name R-project_name
+micromamba create --name R-project
 ```
-creates an environment named `R-project_name`. The environment is activated with the command:
+creates an environment named `R-project`. The environment is activated with the command
 ```bash
-micromamba activate R-project_name
+micromamba activate R-project
 ```
-The environment is deactivated with the command:
-```bash
-micromamba deactivate
-```
+anywhere in the file system.
 
-The next step is the installation of the base R environment that contains the R program, and any R packages required by the project. To install packages the environment is first activated with `micromamba activate R-project_name`, and then packages are installed with the command:
+Next, install the base R environment package that contains the R program, and any R packages required by the project. To install packages, first ensure that the `R-project` environment is active, and then install any package with the command
 ```bash
 micromamba install <package_name>
 ```
-Quite often, the channel name must also be specified:
+all the required packages. Quite often, the channel name must also be specified:
 ```bash
 micromamba install --chanell <chanell_name> <package_name>
 ```
+Packages can be found by searching the [conda-forge channel](https://anaconda.org/conda-forge).
 
-Packages can be searched in the [conda-forge channel](https://anaconda.org/conda-forge). For instance, to install R:
+For instance, the basic functionality of the R software environment is contained in the `r-base` package. Calling
 ```bash
 micromamba install --channel conda-forge r-base
 ```
-The R packages are prepended with a prefix 'r-'. Thus, `plm` becomes `r-plm` and so on. Packages in the conda-forge channel come with instructions for their installation. Quite often the channel is specified in the installation instructions, `-c conda-forge` or `--channel conda-forge`. While the Micromamba installer sets-up `conda-forge` as the default channel, latter modification in `~/.condarc` may change the channel priority. Thus it is a good practice to explicitly specify the source channel when installing a package.
+will install all the components required to run standalone R scripts. More involved scripts use functionality defined in various packages. The R packages are prepended with a prefix 'r-'. Thus, `plm` becomes `r-plm` and so on. After all the required packages have been installed, the environment is ready for use.
 
-After all the required packages have been installed, work in the environment can continue, or the environment can be deactivated and used later. Micromamba supports almost all the subcommands of Conda. For more details see the [official documentation](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
+Packages in the conda-forge channel come with instructions for their installation. Quite often the channel is specified in the installation instructions, `-c conda-forge` or `--channel conda-forge`. While the Micromamba installer sets-up `conda-forge` as the default channel, latter modification in `~/.condarc` may change the channel priority. Thus it is a good practice to explicitly specify the source channel when installing a package.
+
+After work in an environment is complete, deactivate the environment,
+```bash
+micromamba deactivate
+```
+to ensure that it does not interfere with any other operations. In contrast to [modules](modules.md), Conda is designed to operate with a single environment active at a time. Create one environment for each project, and Conda will ensure that any package that is shared between multiple environments is installed once.
+
+Micromamba supports almost all the subcommands of Conda. For more details see the [official documentation](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
 
 ### Using environments in submission scripts
 
@@ -133,7 +139,7 @@ echo "Node list: ${SLURM_NODELIST}"
 echo "Submit dir.: ${SLURM_SUBMIT_DIR}"
 echo "Numb. of cores: ${SLURM_CPUS_PER_TASK}"
 
-micromamba activate R-project_name
+micromamba activate R-project
 
 export SRUN_CPUS_PER_TASK="${SLURM_CPUS_PER_TASK}"
 export OMP_NUM_THREADS=1
