@@ -1,7 +1,7 @@
 # Self management of Conda work environments in UL HPC facilities
 
 !!! important ""
-    **TL;DR:** [install and use the Micromamba package manager](#The Micromamba package manager).
+    **TL;DR:** install and use the [Micromamba package manager](#the-micromamba-package-manager).
 
 <!--intro-start-->
 
@@ -47,7 +47,7 @@ The situation is similar in the [Mamba](https://mamba.readthedocs.io/en/latest/i
 
 [![](https://mamba.readthedocs.io/en/latest/_static/logo.png){: style="width:200px; margin-right:10px; float: left;"}](https://mamba.readthedocs.io/en/latest/index.html)
 
-The [Micromaba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) package manager is a minimal but complete implementation of the Conda interface in C++, that is shipped as a standalone executable. The package manager operates strictly on the user-space and thus it requires no special permissions are required to install packages. It maintains all its files in a couple of places, so uninstalling the package manager itself is also easy. Finally, the package manager is also lightweight and fast.
+The [Micromaba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) package manager is a minimal yet fairly complete implementation of the Conda interface in C++, that is shipped as a standalone executable. The package manager operates strictly on the user-space and thus it requires no special permissions are required to install packages. It maintains all its files in a couple of places, so uninstalling the package manager itself is also easy. Finally, the package manager is also lightweight and fast.
 
 !!! important ""
     **UL HPC provides support only for the Micromamba package manager.**
@@ -87,33 +87,39 @@ To setup the environment log-out and log-in again. Now you can use `micromamba`,
 
 As an example, the creation and use of an environment for R jobs is presented. The command,
 ```bash
-micromamba create --name R-project_name
+micromamba create --name R-project
 ```
-creates an environment named `R-project_name`. The environment is activated with the command:
+creates an environment named `R-project`. The environment is activated with the command
 ```bash
-micromamba activate R-project_name
+micromamba activate R-project
 ```
-The environment is deactivated with the command:
-```bash
-micromamba deactivate
-```
+anywhere in the file system.
 
-The next step is the installation of the base R environment that contains the R program, and any R packages required by the project. To install packages the environment is first activated with `micromamba activate R-project_name`, and then packages are installed with the command:
+Next, install the base R environment package that contains the R program, and any R packages required by the project. To install packages, first ensure that the `R-project` environment is active, and then install any package with the command
 ```bash
 micromamba install <package_name>
 ```
-Quite often, the channel name must also be specified:
+all the required packages. Quite often, the channel name must also be specified:
 ```bash
 micromamba install --chanell <chanell_name> <package_name>
 ```
+Packages can be found by searching the [conda-forge channel](https://anaconda.org/conda-forge).
 
-Packages can be searched in the [conda-forge channel](https://anaconda.org/conda-forge). For instance, to install R:
+For instance, the basic functionality of the R software environment is contained in the `r-base` package. Calling
 ```bash
 micromamba install --channel conda-forge r-base
 ```
-The R packages are prepended with a prefix 'r-'. Thus, `plm` becomes `r-plm` and so on. Packages in the conda-forge channel come with instructions for their installation. Quite often the channel is specified in the installation instructions, `-c conda-forge` or `--channel conda-forge`. While the Micromamba installer sets-up `conda-forge` as the default channel, latter modification in `~/.condarc` may change the channel priority. Thus it is a good practice to explicitly specify the source channel when installing a package.
+will install all the components required to run standalone R scripts. More involved scripts use functionality defined in various packages. The R packages are prepended with a prefix 'r-'. Thus, `plm` becomes `r-plm` and so on. After all the required packages have been installed, the environment is ready for use.
 
-After all the required packages have been installed, work in the environment can continue, or the environment can be deactivated and used later. Micromamba supports almost all the subcommands of Conda. For more details see the [official documentation](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
+Packages in the conda-forge channel come with instructions for their installation. Quite often the channel is specified in the installation instructions, `-c conda-forge` or `--channel conda-forge`. While the Micromamba installer sets-up `conda-forge` as the default channel, latter modification in `~/.condarc` may change the channel priority. Thus it is a good practice to explicitly specify the source channel when installing a package.
+
+After work in an environment is complete, deactivate the environment,
+```bash
+micromamba deactivate
+```
+to ensure that it does not interfere with any other operations. In contrast to [modules](modules.md), Conda is designed to operate with a single environment active at a time. Create one environment for each project, and Conda will ensure that any package that is shared between multiple environments is installed once.
+
+Micromamba supports almost all the subcommands of Conda. For more details see the [official documentation](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
 
 ### Using environments in submission scripts
 
@@ -133,7 +139,7 @@ echo "Node list: ${SLURM_NODELIST}"
 echo "Submit dir.: ${SLURM_SUBMIT_DIR}"
 echo "Numb. of cores: ${SLURM_CPUS_PER_TASK}"
 
-micromamba activate R-project_name
+micromamba activate R-project
 
 export SRUN_CPUS_PER_TASK="${SLURM_CPUS_PER_TASK}"
 export OMP_NUM_THREADS=1
@@ -146,15 +152,27 @@ _Useful scripting resources_
 
 - [Formatting submission scripts for R (and other systems)](../slurm/launchers.md#serial-task-script-launcher)
 
-## Combining Conda with package and environment management tools
+## Combining Conda with other package and environment management tools
 
-Quite often it may be desirable to use Conda to manage environments but a different tool to manage packages. For instance we may want to install some packages that are not available in a Conda channel with Pip. We may also want to manage sub-environments with a different tool. For instance we may want to setup some project in a directory with Pipenv. Conda integrates well with any such tool given that each package is managed by a unique tool. Some of the most frequent cases are described bellow.
+It may be desirable to use Conda to manage environments but a different tool to manage packages, such as [`pip`](https://pip.pypa.io/en/stable/getting-started/). Or subenvironments may need to be used inside a Conda environment, as for instance with tools for creating and managing isolated Python installation, such as [`virtualenv`](https://virtualenv.pypa.io/en/latest/), or with tools for integrating managed Python installations and packages in project directories, such as [Pipenv](https://pipenv.pypa.io/en/latest) and [Poetry](https://python-poetry.org/).
 
-### Managing packages with different tools
+Conda integrates well with any such tool. Some of the most frequent cases are described bellow.
+
+### Managing packages with external tools
+
+Quite often a package that is required in an environment is not available in a Conda channel, but it is available though some other distributions, such as the [Python Package Index (PyPI)](https://pypi.org/). In these cases makes sense to create a Conda environment and install the required packages with `pip` from the Python Package Index.
+
+Conda installs links to package components in an environment directory. When using the package tool, packages components are installed in the same directory where Conda installs links. Thus, there tools integrate seamlessly with Conda, however there are a couple of caveats:
+
+- each package must be managed by one tool, otherwise package components will get overwritten, and
+- packages installed by the package tool are specific to an environment and cannot be shared as with Conda, since components are installed directly and not with links.
+
+!!! important ""
+    Installing the same package in multiple environments with an external package tool consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), so prefer Conda when possible.
 
 #### Pip
 
-Many less popular Python packages are available through Pip but they are not found in any Conda channel. For instance, to manage an environment with `mkdocs` packages from Pip, create and environment
+In this example `pip` is used to manage packages in a Conda environment with [MkDocs](https://www.mkdocs.org/) related packages. To install the packages, create an environment
 ```bash
 micromamba env create --name mkdocs
 ```
@@ -162,47 +180,52 @@ activate the environment,
 ```bash
 micromamba activate mkdocs
 ```
-and install `pip`:
+and install `pip`
 ```bash
 micromamba install --channel conda-forge pip
 ```
+which will be used to install the remaining packages.
 
 The `pip` will be the only package that will be managed with Conda. For instance, to update Pip activate the environment,
 ```bash
 micromamba activate mkdocs
 ```
-and run:
+and run
 ```bash
 micromaba update --all
 ```
-All other packages are now managed by `pip`.
+to update all installed packaged (only `pip` in our case). All other packages are managed by `pip`.
 
 For instance, assume that a `mkdocs` project requires the following packages:
+
 - `mkdocs`
 - `mkdocs-minify-plugin`
-The package `mkdocs-minify-plugin` is not available in Conda, but is available with Pip. To install it, activate the `mkdocs` environment
+
+The package `mkdocs-minify-plugin` is less popular and thus is is not available though a Conda channel, but it is available in PyPI. To install it, activate the `mkdocs` environment
 ```bash
 micromamba activate mkdocs
 ```
-and install the required packages with `pip`:
+and install the required packages with `pip`
 ```bash
-pip install mkdocs mkdocs-minify-plugin
+pip install --upgrade mkdocs mkdocs-minify-plugin
 ```
-The packages will be installed inside the micromamba directory, for instance
+inside the environment. The packages will be installed inside a directory that `micromamba` created for the Conda enviroment, for instance
 ```
 ${HOME}/micromamba/envs/mkdocs
 ```
-and will not interfere with system packages.
+along side packages installed by `micromamba`. As a results, 'system-wide' installations with `pip` inside a Conda environment do not interfere with system packages.
 
-!!! important ""
-    **Do not install packages with pip as a user:** User packages are installed in the same directory for all environments, and can interfere with other versions of the same package.
+!!! warning "Do not install packages in Conda environments with pip as a user"
+    User installed packages (e.g.`pip install --user --upgrade mkdocs-minify-plugin`) are installed in the same directory for all environments, typically in `~/.local/`, and can interfere with other versions of the same package installed from other Conda environments.
 
-### Combining Conda with other environment and package management tools
+### Combining Conda with external environment management tools
 
-Quite often the user may want to create subenvironments, for instance tools such as `pipenv` and `poetry` manage environment and packages as project files, which an be stored in a project directory and version controlled as part of a project. Using such tools with Conda is relatively straight forward. Create an environment where only the tool that you require is installed, and manage the project subenvironments using the installed tool.
+Quite often it is required to create isolated environments using external tools. For instance, tools such as [`virtualenv`](https://virtualenv.pypa.io/en/latest/) can install and manage a Python distribution in a given directory and export and import environment descriptions from text files. This functionalities allows for instance the shipping of a description the Python environment as part of a project. Higher level tools such as [`pipenv`](https://pipenv.pypa.io/en/latest) automate the process of managing Python project environments whereas [`poetry`](https://python-poetry.org/) is a wholistic project management tool with integrated management of Python environments.
 
-!!! important ""
-    **Create a different environment for each tool:** While this is not a requirement it is a good practice. For instance, `pipenv` and `poetry` used to and may still have conflicting dependencies.
+Installing and using in Conda environments tools that create isolated environments is relatively straight forward. Create an environment where only the required that tool is installed, and manage any project subenvironments using the installed tool.
+
+!!! important "Create a different environment for each tool"
+    While this is not a requirement it is a good practice. For instance, `pipenv` and `poetry` used to and may still have conflicting dependencies; Conda detects the dependency and aborts the conflicting installation.
 
 #### Pipenv
 
@@ -214,16 +237,16 @@ activate it
 ```bash
 micromamba activate pipenv
 ```
-and install the `pipenv` package as the only package in this environment:
+and install the `pipenv` package
 ```bash
 micromamba install --channel conda-forge pipenv
 ```
-Now the `pipenv` is managed with Conda, for instance to update `pipenv` activate the environment
+ as the only package in this environment. Now the `pipenv` is managed with Conda, for instance to update `pipenv` activate the environment
 ```bash
 micromamba activate pipenv
 ```
-and call:
+and call
 ```bash
 micromamba update --all
 ```
-Inside the environment use `pipenv` as usual to create and manage project environments.
+to update the single installed package. Inside the environment use `pipenv` as usual to create and manage project environments.
