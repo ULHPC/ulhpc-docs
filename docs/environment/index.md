@@ -186,3 +186,13 @@ See [ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en
 
 [:fontawesome-solid-sign-in-alt: ULHPC Environment modules](modules.md){: .md-button .md-button--link }
 [:fontawesome-solid-sign-in-alt: Using Easybuild on ULHPC Clusters](../environment/easybuild.md){: .md-button .md-button--link }
+
+## Self management of work environments in ULHPC with Conda
+
+{%
+   include-markdown "conda.md"
+   start="<!--intro-start-->"
+   end="<!--intro-end-->"
+%}
+
+[:fontawesome-solid-sign-in-alt: Management of work environments with Conda](conda.md){: .md-button .md-button--link }

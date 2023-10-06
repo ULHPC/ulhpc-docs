@@ -1,9 +1,14 @@
 # Self management of Conda work environments in UL HPC facilities
 
 !!! important ""
-    **TL;DR:** install and use the [Micromamba package manager](#the-micromamba-package-manager).
+    **TL;DR:** install and use the [Micromamba package manager](conda.md#the-micromamba-package-manager).
 
 <!--intro-start-->
+
+In some cases rare or rarely used packages are not available through the standard options such as [modules](modules.md). In such cases it may make sense to install the package locally with an environment manager such as Conda.
+
+!!! warning "Contact the ULHPC before installing any software with Conda"
+    Installing packages locally with Conda consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), in your or your project's account. Contact the ULHPC High Level Support Team in the [service portal](https://service.uni.lu/sp?id=index) [Home > Research > HPC > Software environment > Request expertise] to discuss possible options before installing any software.
 
 [Conda](https://docs.conda.io/en/latest/) is an open source environment and package management system. With Conda you can create independent environments, where you can install applications such as python and R, together with any packages which will be used by these applications. The environments are independent with the Conda package manager resolving dependencies and ensuring that packages used in multiple environments are stored only once. In a typical setting, each user has their own installation of a Conda and a set of personal environments.
 
