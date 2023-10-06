@@ -160,15 +160,15 @@ Conda integrates well with any such tool. Some of the most frequent cases are de
 
 ### Managing packages with external tools
 
-Quite often a package that is required in an environment is not available in a Conda channel, but it is available though some other distributions, such as the [Python Package Index (PyPI)](https://pypi.org/). In these cases makes sense to create a Conda environment and install the required packages with `pip` from the Python Package Index.
+Quite often a package that is required in an environment is not available through a Conda channel, but it is available through some other distribution channel, such as the [Python Package Index (PyPI)](https://pypi.org/). In these cases the only solution is to create a Conda environment and install the required packages with `pip` from the Python Package Index.
 
-Conda installs links to package components in an environment directory. When using the package tool, packages components are installed in the same directory where Conda installs links. Thus, there tools integrate seamlessly with Conda, however there are a couple of caveats:
+Using an external packaging tool is possible because of the method that Conda uses to install packages. Conda installs package versions in a central directory (e.g. `~/micromamba/pkgs`). Any environment that requires a package links to the central directory with _hard links_. Links are added to the home directory (e.g. `~/micromamba/envs/R-project` for the `R-project` environment) of any environment that requires them. When using an external package tool, package components are installed in the same directory where Conda would install the corresponding link. Thus, external package management tools integrate seamlessly with Conda, with a couple of caveats:
 
 - each package must be managed by one tool, otherwise package components will get overwritten, and
 - packages installed by the package tool are specific to an environment and cannot be shared as with Conda, since components are installed directly and not with links.
 
-!!! important ""
-    Installing the same package in multiple environments with an external package tool consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), so prefer Conda when possible.
+!!! important "Prefer Conda over external package managers"
+    Installing the same package in multiple environments with an external package tool consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), so prefer Conda when possible. This is particularly important for the `inode` limit, since some packages install a large number of files, and the hard links used by Conda do not consume inodes.
 
 #### Pip
 
