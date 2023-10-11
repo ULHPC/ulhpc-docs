@@ -5,7 +5,7 @@
 
 ## Context
 
-The University of Luxembourg announced a [collaboration](https://wwwen.uni.lu/universite/actualites/diaporama/des_processeurs_d_aws_pour_la_recherche_en_calcul_haute_performance) with Amazon Web Services (AWS) to deploy Amazon Elastic Compute Cloud (Amazon EC2) cloud computing infrastructure in order to accelerate strategic high-performance computing (HPC) research and development in Europe.
+The University of Luxembourg announced a [collaboration](https://www.uni.lu/en/news/university-of-luxembourg-to-use-aws-processors-in-hpc-research/) with Amazon Web Services (AWS) to deploy Amazon Elastic Compute Cloud (Amazon EC2) cloud computing infrastructure in order to accelerate strategic high-performance computing (HPC) research and development in Europe.
 
 University of Luxembourg will be among the first European universities to provide research and development communities with access to compute environments that use an architecture similar to the European Processor Initiative (EPI), which will be the basis for Europe’s future exascale computing architecture.
 

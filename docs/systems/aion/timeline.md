@@ -142,7 +142,7 @@ See also [:fontawesome-solid-sign-in-alt: Atos Press Release](https://atos.net/e
 ### Oct - Nov 2021
 
 * [Official production release of Aion supercomputer](https://hpc.uni.lu/blog/2021-10-03-official-production-release-of-the-aion-supercomputer)
-* [Inauguration](https://wwwen.uni.lu/university/news/slideshow/university_inaugurates_its_aion_supercomputer) of Aion Supercomputer
+* [Inauguration](https://www.uni.lu/en/news/university-of-luxembourg-strengthens-its-computing-capacities/) of Aion Supercomputer
 
 [![](https://hpc.uni.lu/download/slides/2021-11-10_Aion-inauguration_keynote_svarrette.png)](https://hpc.uni.lu/download/slides/2021-11-10_Aion-inauguration_keynote_svarrette.pdf)
 
