@@ -159,6 +159,35 @@ _Useful scripting resources_
 
 - [Formatting submission scripts for R (and other systems)](../slurm/launchers.md#serial-task-script-launcher)
 
+### Cleaning up package data
+
+The Conda environment managers download and store a sizable amount of data to provided packages to the various environments. Even though the package data are shared between the various environments, they still consume space in your or your project's account. There are [limits in the storage space and number of files](../../filesystems/quotas/#current-usage) that are available to projects and users in the cluster. Since Conda packages are self managed, **you need to clear unused data yourself**.
+
+There are two main sources of unused data, the compressed archives of the packages that Conda stores in its cache when downloading a package, and the data of removed packages. All unused data in Micromoamba can be removed with the command
+```bash
+micromamba clean --all
+```
+that opens up an interactive dialogue with details about the operations performed. You can follow the default option, unless you have manually edited any files in you package data directory (default location `${HOME}/micromamba`).
+
+??? info "Updating environments to remove old package versions"
+	As we create new environments, we often install the latest version of each package. However, if the environments are not updated regularly, we may end up with different versions of the same package across multiple environments. If we have the same version of a package installed in all environments, we can save space by removing unused older versions.
+	
+	To update a package across all environments, use the command
+	```bash
+	for e in $(micromamba env list | awk 'FNR>2 {print $1}'); do micromamba update --name $e <package name>; done
+	```
+	and to update all packages across all environments
+	```bash
+	for e in $(micromamba env list | awk 'FNR>2 {print $1}'); do micromamba update --name $e --all; done
+	```
+	where `FNR>2` removes the headers in the output of `micromamba env list`, and is thus sensitive to changes in the user interface of Micromamba.
+	
+	After updating packages, the `clean` command can be called to removed the data of unused older package versions.
+
+_Sources_
+
+- [Understanding Conda `clean`](https://saturncloud.io/blog/understanding-conda-clean-where-does-it-remove-packages-from/)
+
 ## Combining Conda with other package and environment management tools
 
 It may be desirable to use Conda to manage environments but a different tool to manage packages, such as [`pip`](https://pip.pypa.io/en/stable/getting-started/). Or subenvironments may need to be used inside a Conda environment, as for instance with tools for creating and managing isolated Python installation, such as [`virtualenv`](https://virtualenv.pypa.io/en/latest/), or with tools for integrating managed Python installations and packages in project directories, such as [Pipenv](https://pipenv.pypa.io/en/latest) and [Poetry](https://python-poetry.org/).
