@@ -173,7 +173,7 @@ Using an external packaging tool is possible because of the method that Conda us
 - packages installed by the package tool are specific to an environment and cannot be shared as with Conda, since components are installed directly and not with links.
 
 !!! important "Prefer Conda over external package managers"
-    Installing the same package in multiple environments with an external package tool consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), so prefer Conda when possible. This is particularly important for the `inode` limit, since some packages install a large number of files, and the hard links used by Conda do not consume inodes.
+    Installing the same package in multiple environments with an external package tool consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), so prefer Conda when possible. This is particularly important for the `inode` limit, since some packages install a large number of files, and the hard links used by Conda do not consume inodes or [disk space](https://saturncloud.io/blog/understanding-conda-clean-where-does-it-remove-packages-from/).
 
 #### Pip
 
@@ -214,7 +214,7 @@ and install the required packages with `pip`
 ```bash
 pip install --upgrade mkdocs mkdocs-minify-plugin
 ```
-inside the environment. The packages will be installed inside a directory that `micromamba` created for the Conda enviroment, for instance
+inside the environment. The packages will be installed inside a directory that `micromamba` created for the Conda environment, for instance
 ```
 ${HOME}/micromamba/envs/mkdocs
 ```
