@@ -254,6 +254,77 @@ along side packages installed by `micromamba`. As a results, 'system-wide' insta
 !!! warning "Do not install packages in Conda environments with pip as a user"
     User installed packages (e.g.`pip install --user --upgrade mkdocs-minify-plugin`) are installed in the same directory for all environments, typically in `~/.local/`, and can interfere with other versions of the same package installed from other Conda environments.
 
+#### Pkg
+
+The Julia programming language comes with, Pkg, its own package manager. The package manage of Julia provides many useful capabilities and it is recommended that Pkg is used with Julia projects. Please read the [documentation](https://pkgdocs.julialang.org/v1/) for more details.
+
+The Pkg package manage comes packages with Julia. Start by creating an environment,
+```bash
+mocromamba env create --name Julia
+```
+activate the environment,
+```bash
+micromamba activate julia
+```
+and install Julia,
+```bash
+micromamba install --channel conda-forge julia
+```
+to start using Pkg.
+
+In order to install a package, activate the Julia environment, and start an interactive REPL session
+```bash
+$ julia
+julia>
+```
+with the `julia` command.
+
+- Enter the Pkg package manager by pressing `]`.
+- Exit the package manager by clearing all the input from the line with backspace, and then pressing backspace one more time.
+
+In the package manager you can see the status of the current environment,
+```julia
+(@julia) pkg> status
+Status `~/micromamba/envs/julia/share/julia/environments/julia/Project.toml` (empty project)
+```
+add and remove packages,
+```julia
+(@julia) pkg> add Example
+(@julia) pkg> remove Example
+```
+update the environment,
+```julia
+(@julia) pkg> update
+```
+and perform many other operations such as exporting and importing environments from plain text files describing the environment setup, and pinning packages to specific versions. The Pkg package manager maintains a global environment, but also supports the creation of local environments that can be stored within a project directory. The use of local environments is highly recommended, please read the [documentation](https://pkgdocs.julialang.org/v1/environments/) for more information.
+
+After installing the Julia language in a Conda environment, the language distribution itself should be managed with `micromamba` and all packages with the Pkg package manager. To update Julia activate the Conda environment where Julia is stored and call
+```bash
+micromamba update julia
+```
+where as to update packages installed with Pgk use the `update` command of Pkg. The packages for local and global environments are stored in the Julia installation directory, typically in
+```
+${HOME}/micromamba/envs/julia/share
+```
+which is the default location.
+
+??? info "Advanced management of package data"
+	Julia packages will consume [storage and number of files quota](../../filesystems/quotas/#current-usage). Pkg uses automatic garbage collection to cleanup packages that are no longer is use. In general you don't need to manage then package data, simply remove the package and its data will be deleted automatically after some time. However, when you exceed your quota you need to delete files immediately.
+	
+	The _immediate removal_ of the data of uninstalled packages can be forced with the command:
+	```julia
+	using Pkg
+	using Dates
+	Pkg.gc(;collect_delay=Dates.Day(0))
+	```
+	Make sure that the packages have been removed from all the environments that use them
+	
+	_Sources_: [Immediate package data clean up](https://discourse.julialang.org/t/packages-clean-up-general-julia-data-consumption/56198)
+
+_Useful resources_
+
+- [Pkg documentation](https://pkgdocs.julialang.org/v1/)
+
 ### Combining Conda with external environment management tools
 
 Quite often it is required to create isolated environments using external tools. For instance, tools such as [`virtualenv`](https://virtualenv.pypa.io/en/latest/) can install and manage a Python distribution in a given directory and export and import environment descriptions from text files. This functionalities allows for instance the shipping of a description of the Python environment as part of a project. Higher level tools such as [`pipenv`](https://pipenv.pypa.io/en/latest) automate the process by managing the Python environment as part of a project directory. The description of the environment is stored in version controlled files, and the Python packages are stored in a non-tracked directory within the project directory. Some wholistic project management tools, such as [`poetry`](https://python-poetry.org/), further integrate the management of the Python environment withing the project management workflow.
