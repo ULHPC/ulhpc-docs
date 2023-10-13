@@ -11,7 +11,7 @@ of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'
 [:fontawesome-solid-sign-in-alt: ULHPC Supercomputers](systems/index.md){: .md-button .md-button--link }
 [:fontawesome-solid-sign-in-alt: Getting Started](getting-started.md){: .md-button .md-button--link }
 
-**New:** monthly HPC trainings for beginners, see [our dedicated page](hpc-schools.md)
+**New:** monthly HPC trainings for beginners, see [our dedicated page](hpc-schools.md).
 
 ## ULHPC Web Portals
 
