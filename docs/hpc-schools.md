@@ -12,7 +12,7 @@ Next planned sessions:
 - Nov. 13th and 14th, MNO - Belval campus
 - Dec. 11th and 12th, MNO - Belval campus
 
-Feel free to only attend the second day session if you:
+Feel free to only attend the second day session if:
 
 - You can connect to the ULHPC
 - You are confortable with the command line interface
