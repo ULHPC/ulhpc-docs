@@ -19,7 +19,7 @@ of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'
 * [Helpdesk / Ticket Portal](https://hpc.uni.lu/support) - open tickets, make requests
 * [ULHPC Discourse](https://hpc-discourse.uni.lu/) - forum-like community portal
 * [ULHPC Home page](https://hpc.uni.lu) - center news and information: [hpc.uni.lu](https://hpc.uni.lu)
-* [Yearly HPC School](https://hpc.uni.lu/hpc-school/) - our big ULHPC event
+* [Yearly HPC School](https://hpc.uni.lu/education/hpcschool) - our big ULHPC event
 
 
 ## Popular documentation pages
