@@ -1,20 +1,20 @@
-# Self management of Conda work environments in UL HPC facilities
-
-!!! important ""
-    **TL;DR:** install and use the [Micromamba package manager](conda.md#the-micromamba-package-manager).
+# Self management of work environments in UL HPC with Conda
 
 <!--intro-start-->
 
-In some cases rare or rarely used packages are not available through the standard options such as [modules](modules.md). In such cases it may make sense to install the package locally with an environment manager such as Conda.
+Packages provided through the standard channels of [modules](modules.md) and [containers](../../containers/) are optimized for the ULHPC clusters to ensure their performance and stability. However, many packages where performance is not critical and are used by few users are not provided through the standard channels. These packages can still be installed locally by the users through an environment management system such as Conda.
 
 !!! warning "Contact the ULHPC before installing any software with Conda"
-	Conda installs binaries that may not be optimal for the configuration of the ULHPC clusters. Prefer binaries provided through [modules](modules.md) or [containers](../../containers/), as these have been compiled with better optimized options for out clusters. Furthermore, installing packages locally with Conda consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), in your or your project's account.
+	Prefer binaries provided through [modules](modules.md) or [containers](../../containers/). Conda installs generic binaries that may be suboptimal for the configuration of the ULHPC clusters. Furthermore, installing packages locally with Conda consumes quotas in your or your project's account in terms of [storage space and number of files](../../filesystems/quotas/#current-usage).
 	
 	Contact the ULHPC High Level Support Team in the [service portal](https://service.uni.lu/sp?id=index) [Home > Research > HPC > Software environment > Request expertise] to discuss possible options before installing any software.
 
-[Conda](https://docs.conda.io/en/latest/) is an open source environment and package management system. With Conda you can create independent environments, where you can install applications such as python and R, together with any packages which will be used by these applications. The environments are independent with the Conda package manager resolving dependencies and ensuring that packages used in multiple environments are stored only once. In a typical setting, each user has their own installation of a Conda and a set of personal environments.
+[Conda](https://docs.conda.io/en/latest/) is an open source environment and package management system. With Conda you can create independent environments, where you can install applications such as python and R, together with any packages which will be used by these applications. The environments are independent, with the Conda package manager managing the binaries, resolving dependencies, and ensuring that package used in multiple environments are stored only once. In a typical setting, each user has their own installation of a Conda and a set of personal environments.
 
 <!--intro-end-->
+
+!!! important ""
+    **TL;DR:** install and use the [Micromamba package manager](conda.md#the-micromamba-package-manager).
 
 ## A brief introduction to Conda
 
@@ -48,7 +48,7 @@ Quite often, the package manager is not distributed on its own, but with a set o
 
 [![](images/Miniconda-vs-Anaconda.jpg)](images/Miniconda-vs-Anaconda.jpg)
 
-The situation is similar in the [Mamba](https://mamba.readthedocs.io/en/latest/index.html) distributions. These distributions are supported by Conda-Forge, and by default they set-up `conda-forge` as the default and only channel during installation. The `defaults` or its mirror `anaconda` must be explicitly added if required. There is the [Mamba distribution](https://mamba.readthedocs.io/en/latest/user_guide/mamba.html) that comes with a minimal set of python packages required by the package manager, and the [Micromamba distribution](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) that is distributed with no accompanying packages, as it is a standalone executable with no dependencies. Micromamba is using [`libmamba`](https://mamba.readthedocs.io/en/latest/index.html), a a C++ library implementing the Conda API.
+The situation is similar in the [Mamba](https://mamba.readthedocs.io/en/latest/index.html) distributions. These distributions are supported by Conda-Forge, and by default they set-up `conda-forge` as the default and only channel during installation. The `defaults` or its mirror `anaconda` must be explicitly added if required. There is the [Mamba distribution](https://mamba.readthedocs.io/en/latest/user_guide/mamba.html) that comes with a minimal set of python packages required by the package manager, and the [Micromamba distribution](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) that is distributed with no accompanying packages, as it is a standalone executable with no dependencies. Micromamba is using [`libmamba`](https://mamba.readthedocs.io/en/latest/index.html), a C++ library implementing the Conda API.
 
 ## The Micromamba package manager
 
