@@ -11,22 +11,15 @@ of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'
 [:fontawesome-solid-sign-in-alt: ULHPC Supercomputers](systems/index.md){: .md-button .md-button--link }
 [:fontawesome-solid-sign-in-alt: Getting Started](getting-started.md){: .md-button .md-button--link }
 
-Consider our latest **[ULHPC User Guide (PDF)](https://hpc.uni.lu/download/slides/2022-ULHPC-user-guide.pdf)**
-
-<!--ULHPC-User-Guilde-slides-start-->
-
-[![](https://hpc.uni.lu/download/slides/2022-ULHPC-user-guide.png)](https://hpc.uni.lu/download/slides/2022-ULHPC-user-guide.pdf)
-
-<!--ULHPC-User-Guilde-slides-end-->
+**New:** monthly HPC trainings for beginners, see [our dedicated page](hpc-schools.md).
 
 ## ULHPC Web Portals
 
-* [ULHPC Home page](https://hpc.uni.lu) - center news and information: [hpc.uni.lu](https://hpc.uni.lu)
+* [ULHPC Tutorials](https://ulhpc-tutorials.readthedocs.io/) - tutorials for many HPC topics
 * [Helpdesk / Ticket Portal](https://hpc.uni.lu/support) - open tickets, make requests
-      - Uni.lu Service Now Portal - use your Uni.lu credentials to access.
-* **NEW!** [ULHPC Discourse](https://hpc-discourse.uni.lu/) - Forum-like community portal
-* [ULHPC Tutorials](https://ulhpc-tutorials.readthedocs.io/) - HPC tutorials covering many (many) topics: [ulhpc-tutorials.readthedocs.io](https://ulhpc-tutorials.readthedocs.io/)
-* [Trainings and HPC School](https://hpc.uni.lu/hpc-school/)
+* [ULHPC Discourse](https://hpc-discourse.uni.lu/) - forum-like community portal
+* [ULHPC Home page](https://hpc.uni.lu) - center news and information: [hpc.uni.lu](https://hpc.uni.lu)
+* [Yearly HPC School](https://hpc.uni.lu/education/hpcschool) - our big ULHPC event
 
 
 ## Popular documentation pages
