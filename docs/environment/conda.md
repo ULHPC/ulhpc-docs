@@ -256,11 +256,11 @@ along side packages installed by `micromamba`. As a results, 'system-wide' insta
 
 #### Pkg
 
-The Julia programming language comes with, Pkg, its own package manager. The package manage of Julia provides many useful capabilities and it is recommended that Pkg is used with Julia projects. Please read the [documentation](https://pkgdocs.julialang.org/v1/) for more details.
+The Julia programming language provides its own package and environment manager, Pkg. The package manager of Julia provides many useful capabilities and it is recommended that it is used with Julia projects. Details about the use of Pkg can be found in the official [documentation](https://pkgdocs.julialang.org/v1/).
 
-The Pkg package manage comes packages with Julia. Start by creating an environment,
+The Pkg package manager comes packages with Julia. Start by creating an environment,
 ```bash
-mocromamba env create --name Julia
+mocromamba env create --name julia
 ```
 activate the environment,
 ```bash
@@ -272,12 +272,12 @@ micromamba install --channel conda-forge julia
 ```
 to start using Pkg.
 
-In order to install a package, activate the Julia environment, and start an interactive REPL session
+In order to install a Julia package, activate the Julia environment, and start an interactive REPL session,
 ```bash
 $ julia
 julia>
 ```
-with the `julia` command.
+by just calling `julia` without any input files.
 
 - Enter the Pkg package manager by pressing `]`.
 - Exit the package manager by clearing all the input from the line with backspace, and then pressing backspace one more time.
@@ -287,26 +287,26 @@ In the package manager you can see the status of the current environment,
 (@julia) pkg> status
 Status `~/micromamba/envs/julia/share/julia/environments/julia/Project.toml` (empty project)
 ```
-add and remove packages,
+add or remove packages,
 ```julia
 (@julia) pkg> add Example
 (@julia) pkg> remove Example
 ```
-update the environment,
+update the packages in the environment,
 ```julia
 (@julia) pkg> update
 ```
-and perform many other operations such as exporting and importing environments from plain text files describing the environment setup, and pinning packages to specific versions. The Pkg package manager maintains a global environment, but also supports the creation of local environments that can be stored within a project directory. The use of local environments is highly recommended, please read the [documentation](https://pkgdocs.julialang.org/v1/environments/) for more information.
+and perform many other operations, such as exporting and importing environments from plain text files which describe the environment setup, and pinning packages to specific versions. The Pkg package manager maintains a global environment, but also supports the creation and use of local environments that are used within a project directory. The use of local environments is highly recommended, please read the [documentation](https://pkgdocs.julialang.org/v1/environments/) for more information.
 
-After installing the Julia language in a Conda environment, the language distribution itself should be managed with `micromamba` and all packages with the Pkg package manager. To update Julia activate the Conda environment where Julia is stored and call
+After installing the Julia language in a Conda environment, the language distribution itself should be managed with `micromamba` and all packages in global or local environments with the Pkg package manager. To update Julia activate the Conda environment where Julia is stored and call
 ```bash
 micromamba update julia
 ```
-where as to update packages installed with Pgk use the `update` command of Pkg. The packages for local and global environments are stored in the Julia installation directory, typically in
+where as to update packages installed with Pgk use the `update` command of Pkg. The packages for local and global environments are stored in the Julia installation directory, typically
 ```
 ${HOME}/micromamba/envs/julia/share
 ```
-which is the default location.
+if the default location for the Micromamba environment directory is used.
 
 ??? info "Advanced management of package data"
 	Julia packages will consume [storage and number of files quota](../../filesystems/quotas/#current-usage). Pkg uses automatic garbage collection to cleanup packages that are no longer is use. In general you don't need to manage then package data, simply remove the package and its data will be deleted automatically after some time. However, when you exceed your quota you need to delete files immediately.
