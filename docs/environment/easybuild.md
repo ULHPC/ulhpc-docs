@@ -23,7 +23,7 @@ directory](../data/layout.md) though [Easybuild](../environment/easybuild.md), w
 
     In this context,  software build and installation frameworks like [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/) helps to facilitate the building task in a _consistent_ and _automatic_ way, while generating also the LMod modulefiles.
 
-    We select [Easybuild]((https://docs.easybuild.io) as primary building tool to ensure the best optimized builds.
+    We select [Easybuild](https://docs.easybuild.io) as primary building tool to ensure the best optimized builds.
     Some HPC sites use both -- see [this talk from William Lucas at EPCC](https://www.archer2.ac.uk/training/courses/200617-spack-easybuild/) for instance.
 
     It does not prevent from maintaining your own [build instructions notes](https://github.com/hpc-uk/build-instructions).
