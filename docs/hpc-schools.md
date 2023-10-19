@@ -9,8 +9,9 @@ This event aims to equip you with essential skills and knowledge to embark on yo
 
 Next planned sessions:
 
-- Nov. 13th and 14th, MNO - Belval campus
-- Dec. 11th and 12th, MNO - Belval campus
+- Nov. 2023, 13th and 14th, MNO - Belval campus
+- Dec. 2023, 11th and 12th, MNO - Belval campus
+- Jan. 2024, 15th and 16th, MNO - Belval campus
 
 Feel free to only attend the second day session if:
 
