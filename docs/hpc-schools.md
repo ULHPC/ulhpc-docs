@@ -36,7 +36,7 @@ The workshop is designed for individuals who are interested in advancing their s
 
 ### Next planned sessions
 
-- Nov. 2023, 17th and 20th, MNO - Belval campus
+- Nov. 2023, 17th and 21st, MNO - Belval campus
 - Dec. 2023, 7th and 8th, MNO - Belval campus
 - Jan. 2024, 18th and 19th, MNO - Belval campus
 - Additional dates will soon be announced
