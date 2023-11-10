@@ -47,6 +47,17 @@ Check free space on current file system:
 df -h .
 ```
 
+To detect the exact source of inode usage, you can use the command
+```bash
+du --max-depth=<depth> --human-readable --inodes <directory>
+```
+where
+
+- _depth_: the inode usage for any file from _depth_ and bellow is summed in the report for the directory in level _depth_ in which the file belongs, and
+- _directory_: the directory for which the analysis is curried out; leaving empty performs the analysis in the current working directory.
+
+For a more graphical approach, use `ncdu`, with the `c` option to display the aggregate inode number for the directories in the current working directory.
+
 ### Increases
 
 If you or your project needs additional space or inodes for your scratch or project directory you may request it via [ServiceNow](https://hpc.uni.lu/support/) (HPC &rarr; Storage & projects &rarr; Extend quota).
