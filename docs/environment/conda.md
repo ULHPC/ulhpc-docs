@@ -186,7 +186,8 @@ that opens up an interactive dialogue with details about the operations performe
 
 _Sources_
 
-- [Understanding Conda `clean`](https://saturncloud.io/blog/understanding-conda-clean-where-does-it-remove-packages-from/)
+- [Oficial documentation](https://docs.conda.io/projects/conda/en/latest/commands/clean.html)
+- [Understanding Conda `clean`](https://stackoverflow.com/questions/51960539/where-does-conda-clean-remove-packages-from)
 
 ## Combining Conda with other package and environment management tools
 
@@ -204,7 +205,7 @@ Using an external packaging tool is possible because of the method that Conda us
 - packages installed by the package tool are specific to an environment and cannot be shared as with Conda, since components are installed directly and not with links.
 
 !!! important "Prefer Conda over external package managers"
-    Installing the same package in multiple environments with an external package tool consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), so prefer Conda when possible. This is particularly important for the `inode` limit, since some packages install a large number of files, and the hard links used by Conda do not consume inodes or [disk space](https://saturncloud.io/blog/understanding-conda-clean-where-does-it-remove-packages-from/).
+    Installing the same package in multiple environments with an external package tool consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), so prefer Conda when possible. This is particularly important for the `inode` limit, since some packages install a large number of files, and the hard links used by Conda do not consume inodes or [disk space](https://stackoverflow.com/questions/55566419/why-are-packages-installed-rather-than-just-linked-to-a-specific-environment).
 
 #### Pip
 
