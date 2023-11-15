@@ -186,7 +186,7 @@ that opens up an interactive dialogue with details about the operations performe
 
 _Sources_
 
-- [Oficial documentation](https://docs.conda.io/projects/conda/en/latest/commands/clean.html)
+- [Oficial Conda `clean` documentation](https://docs.conda.io/projects/conda/en/latest/commands/clean.html)
 - [Understanding Conda `clean`](https://stackoverflow.com/questions/51960539/where-does-conda-clean-remove-packages-from)
 
 ## Combining Conda with other package and environment management tools
