@@ -1,4 +1,4 @@
-# On-site HPC trainings
+docs/hpc-schools.md# On-site HPC trainings
 
 We propose periodical on-site events for our users. They are free of charge and can be attended by anyone from the University of Luxembourg faculties and interdisciplinary centers. 
 Additionally, we also accept users from LIST and LIH. If you are part of another public research center, please [contact us](mailto:hpc-school-for-beginners@uni.lu).
@@ -9,7 +9,6 @@ This event aims to equip you with essential skills and knowledge to embark on yo
 
 Next planned sessions:
 
-- Nov. 2023, 13th and 14th, MNO - Belval campus
 - Dec. 2023, 11th and 12th, MNO - Belval campus
 - Jan. 2024, 15th and 16th, MNO - Belval campus
 
@@ -36,7 +35,6 @@ The workshop is designed for individuals who are interested in advancing their s
 
 ### Next planned sessions
 
-- Nov. 2023, 17th and 21st, MNO - Belval campus
 - Dec. 2023, 7th and 8th, MNO - Belval campus
 - Jan. 2024, 18th and 19th, MNO - Belval campus
 - Additional dates will soon be announced
