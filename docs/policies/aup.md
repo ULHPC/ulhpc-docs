@@ -29,9 +29,9 @@ One of the requirements stemming from the [AUP](https://hpc.uni.lu/download/docu
 You are also requested to tag the publication(s) you have produced thanks to the usage of the UL HPC platform upon their registration on [Orbilu](https://orbilu.uni.lu):
 
 * Login on [MyOrbiLu](https://orbilu.uni.lu/login)
-* Select your publication entry and select the "Modify/review the reference" icon ![](https://hpc.uni.lu/images/logo/orbilu_edit.gif)
-* Select the "2. Additional info" section in the "Research Center" field, enter ULHPC
-    - select the "University of Luxembourg: High Performance Computing (ULHPC)" entry in the proposed list.
+* Select your publication entry and click on the "Edit" button
+* Select the "2. Enrich" category at the top of the page
+* In the "Research center" field, enter "ulhpc" and select the proposition![](https://hpc.uni.lu/images/logo/orbilu_edit.gif)
 
 ![](images/orbilu_ulhpc_research_center.png)
 
