@@ -27,6 +27,22 @@ Note that ULHPC price list has been updated, see below.
 | CPU - big mem    | 112 cores, 3 TB RAM          | 6.00€                         |
 | GPU              | 4 V100, 28 cores, 768 GB RAM | 5.00€                         |
 
+The prices above correspond to a full-node cost. However, jobs can use a fraction of a node and the price of the job will be computed based on that fraction. Please find below the core-hour / GPU-hour costs and how we compute how much to charge:
+
+| __Compute type__ | __Unit__                     | __€ (excl. VAT)__             | 
+|------------------|------------------------------|-------------------------------|
+| CPU - small      | Core-hour                    | 0.0089€                       |
+| CPU - regular    | Core-hour                    | 0.0097€                       |
+| CPU - big mem    | Core-hour                    | 0.0535€                       |
+| GPU              | GPU-hour                     | 1.25€                         |
+
+For CPU nodes, the fraction correspond to the number of requested cores, e.g. 64 cores on a CPU - regular node corresponds to 50% of the available cores and thus will be charged 50% of 1.25€. 
+
+Regarding the RAM of a job, if you do not override the default behaviour, you will receive a percentage of the RAM corresponding to the amount of requested cores, e.g, 128G of RAM for the 64 cores example from above (50% of a CPU - regular node). If you override the default behaviour and request more RAM, we will re-compute the equivalent number of cores, e.g. if you request 256G of RAM and 64 cores, we will charge 128 cores.
+
+For GPU nodes, the fraction considers the number of GPUs. There are 4 GPUs, 28 cores and 768G of RAM on one machine. This means that for each GPU, you can have up to 7 cores and 192G of RAM. If you request more than those default, we will re-compute the GPU equivalent, e.g. if you request 1 GPU and 8 cores, we will charge 2 GPUs.
+
+
 ### Storage
 
 | __Storage type__ | __€ (excl. VAT) / GB / Month__ | __Additional information__ |
@@ -35,6 +51,7 @@ Note that ULHPC price list has been updated, see below.
 | Project          | 0.02€                          | 1 TB free                  |
 | Scratch          | Free                           | 10 TB                      |
 
+Note that for project storage, we charge **the quota and not the used storage**.
 
 ## HPC Resource allocation for UL internal R&D and training
 
