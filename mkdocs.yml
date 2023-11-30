@@ -4,7 +4,7 @@ nav:
 #  - General:
   - Home: 'index.md'
   - Getting Started: 'getting-started.md'
-  - HPC Schools: 'hpc-schools.md'
+  - HPC Trainings and Tutorials: 'hpc-schools.md'
   - Accounts:
     - Get an Account:             'accounts/index.md'
     - Password Policy:            'policies/passwords.md'
