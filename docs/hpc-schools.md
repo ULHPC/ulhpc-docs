@@ -1,7 +1,7 @@
-docs/hpc-schools.md# On-site HPC trainings
+# On-site HPC trainings
 
 We propose periodical on-site events for our users. They are free of charge and can be attended by anyone from the University of Luxembourg faculties and interdisciplinary centers. 
-Additionally, we also accept users from LIST and LIH. If you are part of another public research center, please [contact us](mailto:hpc-school-for-beginners@uni.lu).
+Additionally, we also accept users from LIST, LISER and LIH. If you are part of another public research center, please [contact us](mailto:hpc-school-for-beginners@uni.lu).
 
 ## HPC School for beginners
 
