@@ -485,10 +485,12 @@ packages:
         externals:
         - spec: openmpi@4.1.1 %gcc@7.3.1
           prefix: /opt/amazon/openmpi
+        buildable: False
     pmix:
         externals:
           - spec: pmix@3.2.3 ~pmi_backwards_compatibility
             prefix: /opt/pmix
+        buildable: False
     slurm:
         variants: +pmix sysconfdir=/opt/slurm/etc
         externals:
@@ -499,6 +501,7 @@ packages:
         externals:
         - spec: armpl@21.0.0%gcc@9.3.0
           prefix: /opt/arm/armpl/21.0.0/armpl_21.0_gcc-9.3/
+        buildable: False
 EOF
 ```
 
