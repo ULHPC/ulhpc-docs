@@ -8,7 +8,7 @@ Traditionally, this part is rather time-consuming and frustrating, especially wh
 And when it comes to have a build adapted to an HPC system, you are somehow _forced_ to make a custom build performed on the target machine to ensure you will get the best possible performances.
 [EasyBuild](https://github.com/easybuilders/easybuild) is one approach to facilitate this step.
 
-[<img width='150px' src='http://easybuild.readthedocs.io/en/latest/_static/easybuild_logo_alpha.png'/>](https://easybuilders.github.io/easybuild/)
+[<img width='150px' src='https://docs.easybuild.io/img/easybuild_logo_2022_vertical_dark_bg_transparent.png#only-dark'/>](https://easybuild.io/)
 
 EasyBuild is a tool that allows to perform automated and reproducible compilation and installation of software. A large number of scientific software are supported (**[1504 supported software packages](http://easybuild.readthedocs.io/en/latest/version-specific/Supported_software.html)** in the last release 3.6.1) -- see also [What is EasyBuild?](http://easybuild.readthedocs.io/en/latest/Introduction.html)
 
