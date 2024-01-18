@@ -78,15 +78,20 @@ $> echo $EASYBUILD_PREFIX
 /home/users/<login>/.local/easybuild
 ```
 
-Now let's install Easybuild following the [boostrapping procedure](http://easybuild.readthedocs.io/en/latest/Installation.html#bootstrapping-easybuild):
+Now let's install EasyBuild following the [official procedure](https://docs.easybuild.io/installation/#eb_as_module). Install EasyBuild in a temporary directory and use this temporary installation to build an EasyBuild module in your `$EASYBUILD_PREFIX`:
 
 ```bash
-$> cd
-# download script
-$> curl -o bootstrap_eb.py  https://raw.githubusercontent.com/easybuilders/easybuild-framework/develop/easybuild/scripts/bootstrap_eb.py
+# pick installation prefix, and install EasyBuild into it
+export EB_TMPDIR=/tmp/$USER/eb_tmp
+python3 -m pip install --ignore-installed --prefix $EB_TMPDIR easybuild
 
-# install Easybuild
-$> python bootstrap_eb.py $EASYBUILD_PREFIX
+# update environment to use this temporary EasyBuild installation
+export PATH=$EB_TMPDIR/bin:$PATH
+export PYTHONPATH=$(/bin/ls -rtd -1 $EB_TMPDIR/lib*/python*/site-packages | tail -1):$PYTHONPATH
+export EB_PYTHON=python3
+
+# install Easybuild in your $EASYBUILD_PREFIX
+eb --install-latest-eb-release --prefix $EASYBUILD_PREFIX
 ```
 
 Now you can use your freshly built software. The main EasyBuild command is `eb`:
