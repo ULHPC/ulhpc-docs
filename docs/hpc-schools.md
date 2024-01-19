@@ -3,7 +3,7 @@
 We propose periodical on-site events for our users. They are free of charge and can be attended by anyone from the University of Luxembourg faculties and interdisciplinary centers. 
 Additionally, we also accept users from LIST, LISER and LIH. If you are part of another public research center, please [contact us](mailto:hpc-school-for-beginners@uni.lu).
 
-## Next events 
+## Forthcoming events
 
 - Introduction to Numerical Libraries with BLAS - Jan. 2024, 29th 09h00-13h00, 1.010 MNO - Belval campus
 - Large Language Model on HPC - Jan. 2024, 29th at 15h00-17h00, 2.380 MSA - Belval campus
@@ -19,9 +19,9 @@ Feel free to only attend the second day session if:
 
 Limited spots available per session (usually 30 max).
 
-Next planned sessions:
+### Upcoming sessions:
 
-- No planed sessions at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
+- No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
 ### Morning 1 - Accessing the Cluster and Command Line Introduction 
 Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
@@ -37,11 +37,11 @@ In this workshop, we will explore the process of improving Python code for effic
 ### Target Audience Description 
 The workshop is designed for individuals who are interested in advancing their skills and knowledge in Python-based scientific and data computing. The ideal participants would typically possess basic to intermediate Python and Numpy skills, along with some familiarity with parallel programming. This workshop will give a good starting point to leverage the usage of the HPC computing power to speed up your Python programs. 
 
-### Next planned sessions
+### Upcoming sessions
 
 Limited spots available per session (usually 30 max).
 
-- No planed sessions at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
+- No session are planed at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
 ### First day – Jupyter notebook on ULHPC / profiling efficient usage of Numpy
 
@@ -92,9 +92,8 @@ The topics that will be covered include:
 - when a Conda environment is required for a project, and
 - what tools are available for the creation of Conda environments.
 
-### Next planned session
+### Upcoming sessions
 
-- Dec. 2023, 18th 10:00 - 12:00, MSA - Belval campus - CB-MAI-SAVOIR 2.240
 - Mar. 2024 (please await further announcements regarding specific dates)
 
 ## Introduction to numerical methods with BLAS
@@ -110,6 +109,6 @@ Overall in this seminar you learn how to:
 - understand the effects of caches in numerical library performance, and
 - exploit caches to leverage better performance.
 
-### Next planned session
+### Upcoming sessions
 
 - Jan. 2024, 29th 09:00 - 13:00, MNO - Belval campus - CB-MAI-NOMBRE 1.010
