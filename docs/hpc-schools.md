@@ -16,6 +16,7 @@ Next planned sessions:
 
 - Dec. 2023, 11th and 12th, MSA - Belval campus - CB-MAI-SAVOIR 4.010
 - Jan. 2024, 15th and 16th, MNO - Belval campus - CB-MAI-NOMBRE 1.020
+- Currently there are no other sessions planned. Future sessions will be announced here. Please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
 Feel free to only attend the second day session if:
 
@@ -44,9 +45,9 @@ The workshop is designed for individuals who are interested in advancing their s
 	- Dec 7th - CB-MAI-SAVOIR 3.180 (morning) and 3.190 (afternoon)
 	- Dec 8th - CB-MAI-NOMBRE 1.010
 - Jan. 2024, 18th and 19th, MNO - Belval campus - CB-MAI-NOMBRE 1.010
-- Additional dates will soon be announced
+- Currently there are no other sessions planned. Future sessions will be announced here. Please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
-Limited spots available (usually 30 max). Please register by [emailing us](mailto:hpc-school-for-beginners@uni.lu)
+Limited spots available (usually 30 max).
 
 ### First day – Jupyter notebook on ULHPC / profiling efficient usage of Numpy
 
