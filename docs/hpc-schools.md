@@ -5,7 +5,7 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 ## Next events 
 
-- Introduction to Numerical Linraries with BLAS - Jan. 2024, 29th 09h00-13h00, 1.010 MNO - Belval campus
+- Introduction to Numerical Libraries with BLAS - Jan. 2024, 29th 09h00-13h00, 1.010 MNO - Belval campus
 - Large Language Model on HPC - Jan. 2024, 29th at 15h00-17h00, 2.380 MSA - Belval campus
 
 ## HPC School for beginners
@@ -15,7 +15,7 @@ This event aims to equip you with essential skills and knowledge to embark on yo
 Feel free to only attend the second day session if:
 
 - You can connect to the ULHPC
-- You are confortable with the command line interface
+- You are comfortable with the command line interface
 
 Limited spots available per session (usually 30 max).
 
