@@ -12,18 +12,16 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 This event aims to equip you with essential skills and knowledge to embark on your High-Performance Computing journey. The event is organized monthly and is composed of two half days (usually 9am-12pm).
 
-Next planned sessions:
-
-- Dec. 2023, 11th and 12th, MSA - Belval campus - CB-MAI-SAVOIR 4.010
-- Jan. 2024, 15th and 16th, MNO - Belval campus - CB-MAI-NOMBRE 1.020
-- Currently there are no other sessions planned. Future sessions will be announced here. Please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
-
 Feel free to only attend the second day session if:
 
 - You can connect to the ULHPC
 - You are confortable with the command line interface
 
-Limited spots available (usually 30 max). Please register by [emailing us](mailto:hpc-school-for-beginners@uni.lu)
+Limited spots available per session (usually 30 max).
+
+Next planned sessions:
+
+- No planed sessions at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
 ### Morning 1 - Accessing the Cluster and Command Line Introduction 
 Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
@@ -41,13 +39,9 @@ The workshop is designed for individuals who are interested in advancing their s
 
 ### Next planned sessions
 
-- Dec. 2023, 7th and 8th, MSA and MNO Belval campus 
-	- Dec 7th - CB-MAI-SAVOIR 3.180 (morning) and 3.190 (afternoon)
-	- Dec 8th - CB-MAI-NOMBRE 1.010
-- Jan. 2024, 18th and 19th, MNO - Belval campus - CB-MAI-NOMBRE 1.010
-- Currently there are no other sessions planned. Future sessions will be announced here. Please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
+Limited spots available per session (usually 30 max).
 
-Limited spots available (usually 30 max).
+- No planed sessions at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
 ### First day – Jupyter notebook on ULHPC / profiling efficient usage of Numpy
 
