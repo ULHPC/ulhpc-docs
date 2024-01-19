@@ -5,9 +5,7 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 ## Next events 
 
-- Python HPC School - Dec. 2023, 7th and 8th, MNO - Belval campus
-- HPC School for beginners - Dec. 2023, 11th and 12th, MNO - Belval campus
-- Conda to manage Python and R projects - Dec. 2023, 18th, MSA - Belval campus
+- Introduction to Numerical Linraries with BLAS - Jan. 2024, 29th 09h00-13h00, 1.010 MNO - Belval campus
 - Large Language Model on HPC - Jan. 2024, 29th at 15h00-17h00, 2.380 MSA - Belval campus
 
 ## HPC School for beginners
