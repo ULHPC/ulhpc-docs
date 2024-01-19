@@ -101,4 +101,21 @@ The topics that will be covered include:
 ### Next planned session
 
 - Dec. 2023, 18th 10:00 - 12:00, MSA - Belval campus - CB-MAI-SAVOIR 2.240
+- Mar. 2024 (please await further announcements regarding specific dates)
 
+## Introduction to numerical methods with BLAS
+
+This seminar covers basic principles of numerical library usage with BLAS as an example. The library mechanisms for organizing software are studied in detail, covering topics such as the differences between static and dynamic libraries. The practical sessions will demonstrate the generation of library files from source code, and how programs can use library functions.
+
+After an overview of software libraries, the BLAS library is presented, including the available operations and the organization of the code. The attendees will have the opportunity to use functions of BLAS in a few practical examples. The effects of caches in numerical library performance are then studied in detail. In the practical sessions the attendees will have the opportunity to try cache aware programming techniques that better exploit the performance of the available hardware.
+
+Overall in this seminar you learn how to:
+
+- compile libraries from source code,
+- compile and link code that uses numerical libraries,
+- understand the effects of caches in numerical library performance, and
+- exploit caches to leverage better performance.
+
+### Next planned session
+
+- Jan. 2024, 29th 09:00 - 13:00, MNO - Belval campus - CB-MAI-NOMBRE 1.010
