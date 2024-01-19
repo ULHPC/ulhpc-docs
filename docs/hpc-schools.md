@@ -5,26 +5,23 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 ## Next events 
 
-- Python HPC School - Dec. 2023, 7th and 8th, MNO - Belval campus
-- HPC School for beginners - Dec. 2023, 11th and 12th, MNO - Belval campus
-- Conda to manage Python and R projects - Dec. 2023, 18th, MSA - Belval campus
+- Introduction to Numerical Libraries with BLAS - Jan. 2024, 29th 09h00-13h00, 1.010 MNO - Belval campus
 - Large Language Model on HPC - Jan. 2024, 29th at 15h00-17h00, 2.380 MSA - Belval campus
 
 ## HPC School for beginners
 
 This event aims to equip you with essential skills and knowledge to embark on your High-Performance Computing journey. The event is organized monthly and is composed of two half days (usually 9am-12pm).
 
-Next planned sessions:
-
-- Dec. 2023, 11th and 12th, MSA - Belval campus - CB-MAI-SAVOIR 4.010
-- Jan. 2024, 15th and 16th, MNO - Belval campus - CB-MAI-NOMBRE 1.020
-
 Feel free to only attend the second day session if:
 
 - You can connect to the ULHPC
-- You are confortable with the command line interface
+- You are comfortable with the command line interface
 
-Limited spots available (usually 30 max). Please register by [emailing us](mailto:hpc-school-for-beginners@uni.lu)
+Limited spots available per session (usually 30 max).
+
+Next planned sessions:
+
+- No planed sessions at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
 ### Morning 1 - Accessing the Cluster and Command Line Introduction 
 Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
@@ -42,13 +39,9 @@ The workshop is designed for individuals who are interested in advancing their s
 
 ### Next planned sessions
 
-- Dec. 2023, 7th and 8th, MSA and MNO Belval campus 
-	- Dec 7th - CB-MAI-SAVOIR 3.180 (morning) and 3.190 (afternoon)
-	- Dec 8th - CB-MAI-NOMBRE 1.010
-- Jan. 2024, 18th and 19th, MNO - Belval campus - CB-MAI-NOMBRE 1.010
-- Additional dates will soon be announced
+Limited spots available per session (usually 30 max).
 
-Limited spots available (usually 30 max). Please register by [emailing us](mailto:hpc-school-for-beginners@uni.lu)
+- No planed sessions at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
 ### First day – Jupyter notebook on ULHPC / profiling efficient usage of Numpy
 
@@ -102,4 +95,21 @@ The topics that will be covered include:
 ### Next planned session
 
 - Dec. 2023, 18th 10:00 - 12:00, MSA - Belval campus - CB-MAI-SAVOIR 2.240
+- Mar. 2024 (please await further announcements regarding specific dates)
 
+## Introduction to numerical methods with BLAS
+
+This seminar covers basic principles of numerical library usage with BLAS as an example. The library mechanisms for organizing software are studied in detail, covering topics such as the differences between static and dynamic libraries. The practical sessions will demonstrate the generation of library files from source code, and how programs can use library functions.
+
+After an overview of software libraries, the BLAS library is presented, including the available operations and the organization of the code. The attendees will have the opportunity to use functions of BLAS in a few practical examples. The effects of caches in numerical library performance are then studied in detail. In the practical sessions the attendees will have the opportunity to try cache aware programming techniques that better exploit the performance of the available hardware.
+
+Overall in this seminar you learn how to:
+
+- compile libraries from source code,
+- compile and link code that uses numerical libraries,
+- understand the effects of caches in numerical library performance, and
+- exploit caches to leverage better performance.
+
+### Next planned session
+
+- Jan. 2024, 29th 09:00 - 13:00, MNO - Belval campus - CB-MAI-NOMBRE 1.010
