@@ -7,6 +7,7 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 - Introduction to Numerical Libraries with BLAS - Jan. 2024, 29th 09h00-13h00, 1.010 MNO - Belval campus
 - Large Language Model on HPC - Jan. 2024, 29th at 15h00-17h00, 2.380 MSA - Belval campus
+- Python HPC School - March 2024, 27-28th, 1.030 MNO - Belval Campus
 
 ## HPC School for beginners
 
@@ -41,7 +42,9 @@ The workshop is designed for individuals who are interested in advancing their s
 
 Limited spots available per session (usually 30 max).
 
-- No session are planed at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
+- March, 2024, 27th and 28th.
+  - Schedule: 10h to 12h and 14h to 16h (both days).
+  - Where: MNO 1.030. - Belval campus
 
 ### First day – Jupyter notebook on ULHPC / profiling efficient usage of Numpy
 
@@ -64,8 +67,8 @@ Limited spots available per session (usually 30 max).
 
 #### Program
 
-- Use case understanding and Python implementation - 9:30am to 10am
-- Numpy implementation - 10am to 11am
+- Use case understanding and Python implementation - 10am to 10:30am
+- Numpy implementation - 10:30am to 11am
 - Python’s Multiprocessing - 11am to 12pm
 - Lunch break - 12pm to 2pm
 - PyMP - 2pm to 2:30pm
@@ -74,7 +77,7 @@ Limited spots available per session (usually 30 max).
 
 #### Requirements
 
-- Having an HPC account to access the cluster. 
+- **Having an HPC account to access the cluster.**
 - Basic knowledge on SLURM (beginners HPC school). 
 - A basic understanding of Python programming. 
 - Familiarity with Jupyter Notebook (installed and configured). 
@@ -106,7 +109,7 @@ Overall in this seminar you learn how to:
 
 - compile libraries from source code,
 - compile and link code that uses numerical libraries,
-- understand the effects of caches in numerical library performance, and
+- understand the effe cts of caches in numerical library performance, and
 - exploit caches to leverage better performance.
 
 ### Upcoming sessions
