@@ -12,7 +12,7 @@ In particular, once connected, you have access to several different _File System
     - _Networked FS_, such as `NFS`, `CIFS`/`SMB`, `AFP`, allowing to access a remote storage system as a NAS (Network Attached Storage)
     - _Parallel and Distributed FS_: such as `SpectrumScale/GPFS` or `Lustre`. Those are typical FileSystems you meet on HPC or HTC (High Throughput Computing) facility as they exhibit several unique capabilities:
         * data is spread across multiple storage nodes for redundancy and performance.
-        * the global capacity **AND** the global performances are increased with every systems added to the storage infrastructure.
+        * the global capacity **AND** the global performance levels are increased with every systems added to the storage infrastructure.
 
 ## Storage Systems Overview
 

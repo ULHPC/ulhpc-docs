@@ -5,7 +5,7 @@
 Indeed, as researchers involved in many cutting-edge and hot topics, you probably have access to many theoretical resources to understand the surrounding concepts. Yet it should _normally_ give you a wish to test the corresponding software.
 Traditionally, this part is rather time-consuming and frustrating, especially when the developers did not rely on a "regular" building framework such as [CMake](https://cmake.org/) or the [autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) (_i.e._ with build instructions as `configure --prefix <path> && make && make install`).
 
-And when it comes to have a build adapted to an HPC system, you are somehow _forced_ to make a custom build performed on the target machine to ensure you will get the best possible performances.
+And when it comes to have a build adapted to an HPC system, you are somehow _forced_ to make a custom build performed on the target machine to ensure you will get the best possible performance.
 [EasyBuild](https://github.com/easybuilders/easybuild) is one approach to facilitate this step.
 
 [<img width='150px' src='https://docs.easybuild.io/img/easybuild_logo_2022_vertical_dark_bg_transparent.png#only-dark'/>](https://easybuild.io/)
@@ -44,7 +44,7 @@ Additional details are available on EasyBuild website:
 
 * [the official instructions](http://easybuild.readthedocs.io/en/latest/Installation.html).
 
-What is important for the installation of Easybuild are the following variables:
+What is important for the installation of EasyBuild are the following variables:
 
 * `EASYBUILD_PREFIX`: where to install **local** modules and software, _i.e._ `$HOME/.local/easybuild`
 * `EASYBUILD_MODULES_TOOL`: the type of [modules](http://modules.sourceforge.net/) tool you are using, _i.e._ `LMod` in this case

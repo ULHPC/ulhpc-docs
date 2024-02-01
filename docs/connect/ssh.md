@@ -28,7 +28,7 @@ The way SSH handles the keys and the configuration files is illustrated in the f
 * OpenSSH is natively supported on Linux / Mac OS / Unix / WSL (see below)
 * On Windows, you are thus encouraged to install [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (WSL) and setup an Ubuntu subsystem from  [Microsoft Store](https://aka.ms/wslstore).
     - You probably want to also install [Windows Terminal](https://github.com/microsoft/terminal) and  [MobaXterm](http://mobaxterm.mobatek.net/)
-    - Better performances of your Linux subsystem can be obtained by migrating to WSL 2
+    - Better performance of your Linux subsystem can be obtained by migrating to WSL 2
     - Follow the [ULHPC Tutorial: Setup Pre-Requisites / Windows](https://ulhpc-tutorials.readthedocs.io/en/latest/setup/preliminaries/#microsoft-windows) for detailed instructions.
 
 ## SSH Key Generation
