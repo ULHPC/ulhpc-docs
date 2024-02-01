@@ -26,7 +26,7 @@ cae/ABAQUS/<version>[-hotfix-<hotfix>]
     ```
     Failure to do so will cause Abaqus to get stuck due to the MPI that Abaqus ships witch is not supporting the SLURM scheduler.
 
-When using a general compute node for Abaqus 2018 or 2021, please run:
+When using a general compute node for Abaqus 2021, please run:
 
 * `abaqus cae -mesa` to launch the GUI without support for hardware-accelerated graphics rendering.
     - the option `-mesa` disables hardware-accelerated graphics rendering within Abaqus’s GUI.
@@ -86,6 +86,9 @@ Then you can reserve an [interactive job](../../jobs/interactive.md), for instan
 $ si --x11 -c 8               # Abaqus mp_mode=threads test
 # OR
 $ si --x11 --ntask-per-node 8 # abaqus mp_mode=mpi test
+
+# Propagate Slurm "cpus-per-task / -c" to srun
+export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 
 # Load the module ABAQUS and needed environment
 (node)$ module purge
@@ -158,6 +161,7 @@ abaqus job=<jobname> resume
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
+    export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
     module load cae/ABAQUS
     # export LM_LICENSE_FILE=[...]
     unset SLURM_GTIDS
@@ -181,6 +185,7 @@ abaqus job=<jobname> resume
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
+    export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
     module load cae/ABAQUS
     # export LM_LICENSE_FILE=[...]
     unset SLURM_GTIDS
@@ -206,6 +211,7 @@ abaqus job=<jobname> resume
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
+    export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
     module load cae/ABAQUS
     # export LM_LICENSE_FILE=[...]
     unset SLURM_GTIDS

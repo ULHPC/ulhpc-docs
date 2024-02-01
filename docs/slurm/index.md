@@ -101,9 +101,13 @@ Within a job, you aim at running a certain number of **tasks**, and Slurm allow 
             * you have interest to match the physical NUMA characteristics of the compute node you're running at (Ex: target 16 threads per socket on Aion nodes (as there are 8 virtual sockets per nodes, 14 threads per socket on Iris regular nodes).
 
 The total number of tasks defined in a given job is stored in the `$SLURM_NTASKS` environment variable.
+
+!!! note "--cpus-per-task in srun since Slurm 22.05"
+    Beginning with Slurm 22.05, srun will not inherit the --cpus-per-task value requested by salloc or sbatch. It must be requested again with the call to srun or set with the SRUN_CPUS_PER_TASK environment variable if desired for the task(s).
+
 This is very convenient to abstract from the job context to run MPI tasks/processes in parallel using for instance:
 ```bash
-srun -n ${SLURM_NTASKS} [...]
+srun -c ${SLURM_CPUS_PER_TASK} -n ${SLURM_NTASKS} [...]
 ```
 
 We encourage you to **always** explicitly specify upon resource allocation the number of tasks you want _per_ node/socket (`--ntasks-per-node <n> --ntasks-per-socket <s>`), to easily scale on multiple nodes with `-N <N>`. Adapt the number of threads and the settings to match the physical NUMA characteristics of the nodes
@@ -226,7 +230,7 @@ Details are provided below:
 
 | Node (type)                          | #Nodes | #Socket / #Cores | RAM [GB] | Features              |
 |--------------------------------------|--------|------------------|----------|-----------------------|
-| `aion-[0001-0318]`                   | 318    | 8 / 128          | 256      | `batch,epyc`          |
+| `aion-[0001-0354]`                   | 354    | 8 / 128          | 256      | `batch,epyc`          |
 | `iris-[001-108]`                     | 108    | 2 / 28           | 128      | `batch,broadwell`     |
 | `iris-[109-168]`                     | 60     | 2 / 28           | 128      | `batch,skylake`       |
 | `iris-[169-186]`   (GPU)             | 18     | 2 / 28           | 768      | `gpu,skylake,volta`   |
@@ -340,5 +344,5 @@ submitted.
 | `-N <N>`                  | `SLURM_JOB_NUM_NODES` or<br/> `SLURM_NNODES`   |                                          |
 | `--ntasks-per-node=<n>`   | `SLURM_NTASKS_PER_NODE`                   |                                          |
 | `--ntasks-per-socket=<s>` | `SLURM_NTASKS_PER_SOCKET`                 |                                          |
-| `-c <c>`                  | `SLURM_CPUS_PER_TASK`                     | `OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}` |
+| `-c <c>`                  | `SLURM_CPUS_PER_TASK`                     | `OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}` and `SRUN_CPUS_PER_TASK=${SLURM_CPUS_PER_TASK}` |
 |                           | `SLURM_NTASKS`<br/> Total number of tasks | `srun -n $SLURM_NTASKS [...]`            |

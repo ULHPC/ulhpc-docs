@@ -59,17 +59,19 @@ The following script is an example how to proceed:
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
+    export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
+    
     # Python 3.X by default (also on system)
     module load lang/Python
     source jupyter_env/bin/activate
 
-    jupyter notebook --ip $(facter ipaddress) --no-browser  &
+    jupyter notebook --ip $(hostname -i) --no-browser  &
     pid=$!
     sleep 5s
     jupyter notebook list
     jupyter --paths
     jupyter kernelspec list
-    echo "Enter this command on your laptop: ssh -p 8022 -NL 8888:$(facter ipaddress):8888 ${USER}@access-iris.uni.lu " > notebook.log
+    echo "Enter this command on your laptop: ssh -p 8022 -NL 8888:$(hostname -i):8888 ${USER}@access-iris.uni.lu " > notebook.log
     wait $pid
     ```
 

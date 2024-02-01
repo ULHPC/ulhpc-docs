@@ -173,6 +173,8 @@ From that point, the compiled software and associated module is available in you
 #SBATCH -c <thread>
 
 print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
+# Propagate Slurm "cpus-per-task" to srun
+export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 # Safeguard for NOT running this launcher on access/login nodes
 module purge || print_error_and_exit "No 'module' command"
 
@@ -208,7 +210,9 @@ From that point, the compiled software and associated module is available in the
 #SBATCH --ntasks-per-socket <s>
 #SBATCH -c <thread>
 
-print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }demonstrate
+print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
+# Propagate Slurm "cpus-per-task" to srun
+export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 # Safeguard for NOT running this launcher on access/login nodes
 module purge || print_error_and_exit "No 'module' command"
 

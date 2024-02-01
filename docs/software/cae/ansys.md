@@ -25,6 +25,9 @@ $ ssh -X iris-cluster
 # Reserve the node for interactive computation
 $ salloc -p interactive --time=00:30:00 --ntasks 1 -c 4 --x11 
 
+# Propagate Slurm "cpus-per-task / -c" to srun
+export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
+
 # Load the required version of ANSYS and needed environment
 $ module purge
 $ module load toolchain/intel/2019a
@@ -67,6 +70,7 @@ module load tools/ANSYS/19.4
 # The Input file
 defFile=Benchmark.def
 
+export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 MYHOSTLIST=$(srun hostname | sort | uniq -c | awk '{print $2 "*" $1}' | paste -sd, -)
 echo $MYHOSTLIST
 cfx5solve -double -def $defFile -start-method "Platform MPI Distributed Parallel" -par-dist $MYHOSTLIST

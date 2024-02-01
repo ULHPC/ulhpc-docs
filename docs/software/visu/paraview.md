@@ -44,6 +44,8 @@ $ module purge
 $ module load swenv/default-env/latest
 $ module load vis/ParaView/5.6.2-intel-2019a-mpi
 
+$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
+
 $ paraview &
 ```
 

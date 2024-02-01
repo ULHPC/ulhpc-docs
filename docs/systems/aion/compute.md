@@ -1,11 +1,11 @@
 # Aion Compute Nodes
 
 Aion is a cluster of x86-64 AMD-based compute nodes.
-More precisely, Aion consists of 318 "_regular_" computational nodes named `aion-[0001-0318]` as follows:
+More precisely, Aion consists of 354 "_regular_" computational nodes named `aion-[0001-0354]` as follows:
 
 | Hostname           (#Nodes)  | #cores | type                        | Processors                                                                                     | RAM    | $R_\text{peak}$<br/><small>[TFlops]</small>  |
 |------------------------------|--------|-----------------------------|------------------------------------------------------------------------------------------------|--------|----------------------------------------------|
-| `aion-[0001-0318]`     (318) |  40704 | Regular <small>Epyc</small> | 2 [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) @ 2.6 GHz [64c/280W] | 256 GB | 5.32 TF                                      |
+| `aion-[0001-0354]`     (354) |  45312 | Regular <small>Epyc</small> | 2 [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) @ 2.6 GHz [64c/280W] | 256 GB | 5.32 TF                                      |
 
 Aion compute nodes compute nodes **MUST** be seen as **8 (virtual) processors of 16 cores each**, even if physically the nodes are hosting 2 physical sockets of [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) processors having 64 cores each (total: 128 cores per node).
 
@@ -57,5 +57,5 @@ Characteristics of each blade and associated compute nodes are depicted in the b
 | Cooling                 | Cooling by direct contact                                                                      |
 | Physical specs. (HxWxD) | 44.45 x 600 x 540 mm                                                                           |
 
-The four compute racks of Aion (one XH2000 Cell) holds a total of 106 blades _i.e.,_ 318 [AMD Epyc](https://www.amd.com/en/products/epyc) compute nodes, totalling 40704 computing core  -- see [Aion configuration](index.md#data-center-configuration).
+The four compute racks of Aion (one XH2000 Cell) holds a total of 118 blades _i.e.,_ 354 [AMD Epyc](https://www.amd.com/en/products/epyc) compute nodes, totalling 45312 computing core  -- see [Aion configuration](index.md#data-center-configuration).
 

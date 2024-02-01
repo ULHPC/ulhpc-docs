@@ -29,6 +29,8 @@ $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load phys/VASP/5.4.4-intel-2019a
 
+$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
+
 $ vasp_[std/gam/ncl]
 ```
 

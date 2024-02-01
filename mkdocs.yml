@@ -4,6 +4,7 @@ nav:
 #  - General:
   - Home: 'index.md'
   - Getting Started: 'getting-started.md'
+  - HPC Trainings and Tutorials: 'hpc-schools.md'
   - Accounts:
     - Get an Account:             'accounts/index.md'
     - Password Policy:            'policies/passwords.md'
@@ -11,6 +12,7 @@ nav:
     - Projects Accounts:          'accounts/projects.md'
     - Identity Management Portal: 'connect/ipa.md'
     - Slurm Account Hierarchy:    'slurm/accounts.md'
+  - Teaching with the ULHPC: 'teaching-with-the-ulhpc.md'
   ##############
   - Data Center:
     - Centre de Calcul (CDC): 'data-center/index.md'
@@ -70,6 +72,7 @@ nav:
     - Overview:  'environment/index.md'
     - Modules:   'environment/modules.md'
     - Easybuild: 'environment/easybuild.md'
+    - Conda: 'environment/conda.md'
   ###########
   - Policies:
     - Acceptable Use Policy (AUP):                   'policies/aup.md'
@@ -145,6 +148,7 @@ nav:
     ### END GENERATED CONTENT
     # - Software Set Versioning:     'software/swsets.md'
     - Compiling/building your own software: 'software/build.md'
+    - EESSI software stack: 'software/eessi.md'
     # - Management:                  'software/management.md'
     # - Contributing:                'software/contributing.md'
     # - BigData Analytics:           'software/bigdata/index.md'
@@ -303,6 +307,12 @@ nav:
     - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
   ##############
   # - Acronyms: 'help/acronyms.md'
+  ##############
+  - AWS cluster:
+    - Overview: aws/overview.md
+    - Connect to cluster: aws/connection.md
+    - Environment Setup: aws/setup.md
+    
 
 # tab Clusters:
 # - Organization: 'layout.md'

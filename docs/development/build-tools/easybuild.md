@@ -5,10 +5,10 @@
 Indeed, as researchers involved in many cutting-edge and hot topics, you probably have access to many theoretical resources to understand the surrounding concepts. Yet it should _normally_ give you a wish to test the corresponding software.
 Traditionally, this part is rather time-consuming and frustrating, especially when the developers did not rely on a "regular" building framework such as [CMake](https://cmake.org/) or the [autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) (_i.e._ with build instructions as `configure --prefix <path> && make && make install`).
 
-And when it comes to have a build adapted to an HPC system, you are somehow _forced_ to make a custom build performed on the target machine to ensure you will get the best possible performances.
+And when it comes to have a build adapted to an HPC system, you are somehow _forced_ to make a custom build performed on the target machine to ensure you will get the best possible performance.
 [EasyBuild](https://github.com/easybuilders/easybuild) is one approach to facilitate this step.
 
-[<img width='150px' src='http://easybuild.readthedocs.io/en/latest/_static/easybuild_logo_alpha.png'/>](https://easybuilders.github.io/easybuild/)
+[<img width='150px' src='https://docs.easybuild.io/img/easybuild_logo_2022_vertical_dark_bg_transparent.png#only-dark'/>](https://easybuild.io/)
 
 EasyBuild is a tool that allows to perform automated and reproducible compilation and installation of software. A large number of scientific software are supported (**[1504 supported software packages](http://easybuild.readthedocs.io/en/latest/version-specific/Supported_software.html)** in the last release 3.6.1) -- see also [What is EasyBuild?](http://easybuild.readthedocs.io/en/latest/Introduction.html)
 
@@ -44,7 +44,7 @@ Additional details are available on EasyBuild website:
 
 * [the official instructions](http://easybuild.readthedocs.io/en/latest/Installation.html).
 
-What is important for the installation of Easybuild are the following variables:
+What is important for the installation of EasyBuild are the following variables:
 
 * `EASYBUILD_PREFIX`: where to install **local** modules and software, _i.e._ `$HOME/.local/easybuild`
 * `EASYBUILD_MODULES_TOOL`: the type of [modules](http://modules.sourceforge.net/) tool you are using, _i.e._ `LMod` in this case
@@ -78,15 +78,20 @@ $> echo $EASYBUILD_PREFIX
 /home/users/<login>/.local/easybuild
 ```
 
-Now let's install Easybuild following the [boostrapping procedure](http://easybuild.readthedocs.io/en/latest/Installation.html#bootstrapping-easybuild):
+Now let's install EasyBuild following the [official procedure](https://docs.easybuild.io/installation/#eb_as_module). Install EasyBuild in a temporary directory and use this temporary installation to build an EasyBuild module in your `$EASYBUILD_PREFIX`:
 
 ```bash
-$> cd
-# download script
-$> curl -o bootstrap_eb.py  https://raw.githubusercontent.com/easybuilders/easybuild-framework/develop/easybuild/scripts/bootstrap_eb.py
+# pick installation prefix, and install EasyBuild into it
+export EB_TMPDIR=/tmp/$USER/eb_tmp
+python3 -m pip install --ignore-installed --prefix $EB_TMPDIR easybuild
 
-# install Easybuild
-$> python bootstrap_eb.py $EASYBUILD_PREFIX
+# update environment to use this temporary EasyBuild installation
+export PATH=$EB_TMPDIR/bin:$PATH
+export PYTHONPATH=$(/bin/ls -rtd -1 $EB_TMPDIR/lib*/python*/site-packages | tail -1):$PYTHONPATH
+export EB_PYTHON=python3
+
+# install Easybuild in your $EASYBUILD_PREFIX
+eb --install-latest-eb-release --prefix $EASYBUILD_PREFIX
 ```
 
 Now you can use your freshly built software. The main EasyBuild command is `eb`:

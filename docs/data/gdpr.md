@@ -18,7 +18,7 @@ Use of UL HPC data storage resources (file systems, data storage tiers, backup, 
 The UL HPC Team maintains up-to-date documentation on its data storage resources and their proper use, and provides regular training and support to users.
 Users assume the responsibility for following the documentation, training sessions and best practice guides in order to understand the proper and considerate use of the UL HPC data storage resources.
 
-Authors/generators/owners of information or data are responsible for its correct categorization as sensitive or non-sensitive. Owners of sensitive information are responsible for its secure handling, transmission, processing, storage, and disposal on the UL HPC systems. The UL HPC Team recommends use of encryption to protect the data from unauthorized access. Data Protection inquiries, especially as regards sensitive information processing can be directed to the Data Protection Officer: https://wwwen.uni.lu/university/data_protection/data_protection_officer.
+Authors/generators/owners of information or data are responsible for its correct categorization as sensitive or non-sensitive. Owners of sensitive information are responsible for its secure handling, transmission, processing, storage, and disposal on the UL HPC systems. The UL HPC Team recommends use of encryption to protect the data from unauthorized access. Data Protection inquiries, especially as regards sensitive information processing can be directed to [the Data Protection Officer](https://www.uni.lu/en/about/organisation/administration/data-protection/).
 
 Users are prohibited from intentionally accessing, modifying or deleting data they do not own or have not been granted explicit permission to access.
 
@@ -36,8 +36,6 @@ Users agree that this data may be processed to extract information contributing 
 
 Users agree that their name, surname, email address, affiliation, work place and phone numbers are processed by the UL HPC Team in order to provide HPC and associated services.
 
-Further information about Data Protection can be found at:
+Data Protection inquiries can be directed to the Data Protection Officer. Further information about Data Protection can be found at:
 https://wwwen.uni.lu/university/data_protection
 
-Data Protection inquiries can be directed to the Data Protection Officer:
-https://wwwen.uni.lu/university/data_protection/data_protection_officer

@@ -23,7 +23,7 @@ directory](../data/layout.md) though [Easybuild](../environment/easybuild.md), w
 
     In this context,  software build and installation frameworks like [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/) helps to facilitate the building task in a _consistent_ and _automatic_ way, while generating also the LMod modulefiles.
 
-    We select [Easybuild]((https://docs.easybuild.io) as primary building tool to ensure the best optimized builds.
+    We select [Easybuild](https://docs.easybuild.io) as primary building tool to ensure the best optimized builds.
     Some HPC sites use both -- see [this talk from William Lucas at EPCC](https://www.archer2.ac.uk/training/courses/200617-spack-easybuild/) for instance.
 
     It does not prevent from maintaining your own [build instructions notes](https://github.com/hpc-uk/build-instructions).
@@ -108,22 +108,9 @@ You can thus extend the [ULHPC Software set](modules.md#ulhpc-toolchains-and-sof
 ## Installation / Update local Easybuild
 
 You can of course use the _default_ Easubuild that comes with the ULHPC software
-setwith `module load tools/EasyBuild`.
+set with `module load tools/EasyBuild`.
 But as soon as you want to install your local builds, you have interest to
 install the up-to-date release of [EasyBuild](https://docs.easybuild.io/) in
 your local `$EASYBUILD_PREFIX`.
-You can later update any time [EasyBuild](https://docs.easybuild.io/) in
-`$EASYBUILD_PREFIX` via the same [bootstrapping procedure](https://docs.easybuild.io/en/latest/Installation.html#bootstrapping-easybuild):
 
-```bash
-### /!\ IMPORTANT: You need to be on a computing node to access the module
-###                command and permit the installation
-# download script
-curl -o /tmp/bootstrap_eb.py https://raw.githubusercontent.com/easybuilders/easybuild-framework/develop/easybuild/scripts/bootstrap_eb.py
-# double check the installation prefix
-echo $EASYBUILD_PREFIX
-# install Easybuild
-python /tmp/bootstrap_eb.py $EASYBUILD_PREFIX
-```
-
-Repeat when you need to update your local installation.
+For this purpose, you can follow the [official instructions](https://docs.easybuild.io/installation/#eb_as_module).

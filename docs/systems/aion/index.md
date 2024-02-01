@@ -2,8 +2,8 @@
 
 [![](images/aion_compute_racks.jpg){: style="width:400px;float: right;margin-right:10px" }](BullSequanaXH2000_Features_Atos_supercomputers.pdf)
 
-Aion is a [Atos/Bull](https://atos.net/en/solutions/high-performance-computing-hpc)/AMD supercomputer which consists of **318 compute nodes, totaling 40704 compute cores** and 81408 GB RAM,
-with a peak performance of about **1,70 PetaFLOP/s**.
+Aion is a [Atos/Bull](https://atos.net/en/solutions/high-performance-computing-hpc)/AMD supercomputer which consists of **354 compute nodes, totaling 45312 compute cores** and 90624 GB RAM,
+with a peak performance of about **1,88 PetaFLOP/s**.
 
 All nodes are interconnected through a **Fast InfiniBand (IB) HDR100 network**[^1], configured over a ** [Fat-Tree](https://clusterdesign.org/fat-trees/) Topology** (blocking factor 1:2).
 Aion nodes are equipped with [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) processors.
@@ -33,10 +33,10 @@ The full solution with 4 racks (total dimension: dimensions: HxWxD (mm) = 2030x3
 |                              |    Rack 1 |    Rack 2 |    Rack 3 |    Rack 4 | __TOTAL__      |
 |------------------------------|-----------|-----------|-----------|-----------|----------------|
 | __Weight [kg]__              |    1872,4 |    1830,2 |    1830,2 |    1824,2 | __7357 kg__    |
-| __#X2410 Rome Blade__        |        28 |        26 |        26 |        26 | __106__        |
-| __#Compute Nodes__           |        84 |        78 |        78 |        78 | __318__        |
-| __#Compute Cores__           |     10752 |      9984 |      9984 |      9984 | __40704__      |
-| __$R_\text{peak}$ [TFlops]__ | 447,28 TF | 415,33 TF | 415,33 TF | 415,33 TF | __1693.29 TF__ |
+| __#X2410 Rome Blade__        |        30 |        29 |        29 |        30 | __118__        |
+| __#Compute Nodes__           |        90 |        87 |        87 |        90 | __354__        |
+| __#Compute Cores__           |     11520 |     11136 |     11136 |     11520 | __45312__      |
+| __$R_\text{peak}$ [TFlops]__ | 479,23 TF | 463,25 TF | 463,25 TF | 479,23 TF | __1884.96 TF__ |
 
 For more details: [:fontawesome-solid-sign-in-alt: BullSequana XH2000 SpecSheet (PDF)](BullSequanaXH2000_Features_Atos_supercomputers.pdf){: .md-button .md-button--link }
 
@@ -78,13 +78,13 @@ The cooling area in the rack is composed of:
 
 The Aion cluster (management compute and interconnect) is installed across the two adjacent server rooms in the premises of the [_Centre de Calcul_](../../data-center/index.md) (CDC), in the CDC-S02-005 server room.
 
-| Server Room | Rack ID | Purpose    | Type    | Description                      |
-|-------------|---------|------------|---------|----------------------------------|
-| CDC-S02-005 | D02     | Network    |         | Interconnect equipment           |
-| CDC-S02-005 | A04     | Management |         | Management servers, Interconnect |
-| CDC-S02-004 | A01     | Compute    | regular | `aion-[0001-0084]`, interconnect |
-| CDC-S02-004 | A02     | Compute    | regular | `aion-[0085-0162]`, interconnect |
-| CDC-S02-004 | A03     | Compute    | regular | `aion-[0163-0240]`, interconnect |
-| CDC-S02-004 | A04     | Compute    | regular | `aion-[0241-0318]`, interconnect |
+| Server Room | Rack ID | Purpose    | Type    | Description                                |
+|-------------|---------|------------|---------|--------------------------------------------|
+| CDC-S02-005 | D02     | Network    |         | Interconnect equipment                     |
+| CDC-S02-005 | A04     | Management |         | Management servers, Interconnect           |
+| CDC-S02-004 | A01     | Compute    | regular | `aion-[0001-0084,0319-0324]`, interconnect |
+| CDC-S02-004 | A02     | Compute    | regular | `aion-[0085-0162,0325-0333]`, interconnect |
+| CDC-S02-004 | A03     | Compute    | regular | `aion-[0163-0240,0334-0342]`, interconnect |
+| CDC-S02-004 | A04     | Compute    | regular | `aion-[0241-0318,0343-0354]`, interconnect |
 
 In addition, the global storage equipment ([GPFS/SpectrumScale](../../filesystems/gpfs.md) and [Lustre](../../filesystems/lustre.md), common to both Iris and [Aion](../aion/index.md) clusters) is installed in another row of cabinets of the same server room.

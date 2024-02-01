@@ -28,7 +28,7 @@ The way SSH handles the keys and the configuration files is illustrated in the f
 * OpenSSH is natively supported on Linux / Mac OS / Unix / WSL (see below)
 * On Windows, you are thus encouraged to install [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (WSL) and setup an Ubuntu subsystem from  [Microsoft Store](https://aka.ms/wslstore).
     - You probably want to also install [Windows Terminal](https://github.com/microsoft/terminal) and  [MobaXterm](http://mobaxterm.mobatek.net/)
-    - Better performances of your Linux subsystem can be obtained by migrating to WSL 2
+    - Better performance of your Linux subsystem can be obtained by migrating to WSL 2
     - Follow the [ULHPC Tutorial: Setup Pre-Requisites / Windows](https://ulhpc-tutorials.readthedocs.io/en/latest/setup/preliminaries/#microsoft-windows) for detailed instructions.
 
 ## SSH Key Generation
@@ -36,7 +36,7 @@ The way SSH handles the keys and the configuration files is illustrated in the f
 To generate an RSA SSH keys **of 4096-bit length**, just use the `ssh-keygen` command [as follows](https://explainshell.com/explain?cmd=ssh-keygen+-t+rsa+-o+-a+100):
 
 ```bash
-ssh-keygen -t rsa -b 4096 -o -a 100
+ssh-keygen -t rsa -b 4096 -a 100
 ```
 
 After the execution of this command, the generated keys are stored in the following files:
@@ -53,7 +53,7 @@ After the execution of this command, the generated keys are stored in the follow
 You may want to generate also **ED25519** Key Pairs (which is the most recommended public-key algorithm available today) -- see [explaination](https://explainshell.com/explain?cmd=ssh-keygen+-t+ed25519+-o+-a+100)
 
 ```
-ssh-keygen -t ed25519 -o -a 100
+ssh-keygen -t ed25519 -a 100
 ```
 
 Your key pairs will be located under `~/.ssh/` and follow the following format -- the `.pub` extension indicated the **public** key part and is the **ONLY one SAFE to distribute**:
