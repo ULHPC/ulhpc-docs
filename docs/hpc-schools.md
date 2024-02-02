@@ -5,7 +5,6 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 ## Forthcoming events
 
-- Introduction to Numerical Libraries with BLAS - Jan. 2024, 29th 09h00-13h00, 1.010 MNO - Belval campus
 - Large Language Model on HPC - Jan. 2024, 29th at 15h00-17h00, 2.380 MSA - Belval campus
 - Python HPC School - March 2024, 27-28th, 1.030 MNO - Belval Campus
 
@@ -109,9 +108,9 @@ Overall in this seminar you learn how to:
 
 - compile libraries from source code,
 - compile and link code that uses numerical libraries,
-- understand the effe cts of caches in numerical library performance, and
+- understand the effects of caches in numerical library performance, and
 - exploit caches to leverage better performance.
 
 ### Upcoming sessions
 
-- Jan. 2024, 29th 09:00 - 13:00, MNO - Belval campus - CB-MAI-NOMBRE 1.010
+- No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
