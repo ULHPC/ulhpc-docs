@@ -5,7 +5,7 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 ## Forthcoming events
 
-- Large Language Model on HPC - Jan. 2024, 29th at 15h00-17h00, 2.380 MSA - Belval campus
+- HPC School for beginners - March 2024, 24-25th, 1.030, MNO - Belval Campus
 - Python HPC School - March 2024, 27-28th, 1.030 MNO - Belval Campus
 
 ## HPC School for beginners
@@ -21,7 +21,9 @@ Limited spots available per session (usually 30 max).
 
 ### Upcoming sessions:
 
-- No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
+- Date: March 2024, 24th and 25th
+- Time: 9am to 12pm (both days).
+- Location: CB-MNO 01 3 6 020 (CB-MAI-NOMBRE 1.030) Belval Campus.
 
 ### Morning 1 - Accessing the Cluster and Command Line Introduction 
 Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
@@ -41,9 +43,9 @@ The workshop is designed for individuals who are interested in advancing their s
 
 Limited spots available per session (usually 30 max).
 
-- March, 2024, 27th and 28th.
-  - Schedule: 10h to 12h and 14h to 16h (both days).
-  - Where: MNO 1.030. - Belval campus
+- Date: March, 2024, 27th and 28th.
+- Time: 10h to 12h and 14h to 16h (both days).
+- Location: MNO 1.030. - Belval campus
 
 ### First day – Jupyter notebook on ULHPC / profiling efficient usage of Numpy
 
