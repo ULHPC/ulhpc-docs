@@ -69,10 +69,10 @@ The PI and PI Proxies for the project will be notified when applicable.
 
 
 ??? warning "UL HPC $\neq$ University credentials"
-    Be aware that the source of authentication for the HPC services (**including [gitlab.uni.lu](https://gitlab.uni.lu)**), based on [RedHat IdM/IPA](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/linux_domain_identity_authentication_and_policy_guide/index) **DIFFERS** from the University credentials (based on UL Active Directory).
+    Be aware that the source of authentication for the HPC services based on [RedHat IdM/IPA](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/linux_domain_identity_authentication_and_policy_guide/index) **DIFFERS** from the University credentials (based on UL Active Directory).
 
     * ULHPC credentials are maintained by the HPC team; associated portal: <https://***REMOVED***>
-        - authentication service for: UL HPC, Gitlab
+        - authentication service for: UL HPC
     * University credentials are maintained by the IT team of the University
         - authentication service for Service Now and all other UL services
 
