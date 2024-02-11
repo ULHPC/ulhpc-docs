@@ -19,99 +19,40 @@ Inspired by the _excellent_ [NERSC Technical documentation](https://docs.nersc.g
 This repository is hosted on [Github](https://github.com/ULHPC/ulhpc-docs). To clone it, proceed as follows (adapt accordingly):
 
 ```bash
-mkdir -p ~/git/github.com/ULHPC/
-cd ~/git/github.com/ULHPC
 git clone https://github.com/ULHPC/ulhpc-docs.git # or for SSH interactions: git clone git@github.com:ULHPC/ulhpc-docs.git
 ```
 
-**`/!\ IMPORTANT`**: Once cloned, initiate your local copy of the repository by running:
-
-```bash
-$> cd ulhpc-docs
-$> make setup
+To use the repository, you need to install some Python packages along with a compatible version of Python. If your system Python is compatible, simply install the packages in `requirements.txt`, ideally in a `venv`. For instance:
+```
+$ python3 -m venv "${HOME}/environments/ulhpc-docs"
+$ source ~/environments/ulhpc-docs/bin/activate
+$ pip install --upgrade pip
+$ pip install --requirement requirements.txt
 ```
 
-This will initiate the [Git submodules of this repository](.gitmodules) and setup the [git flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) layout for this repository. It will also ensure python components ([direnv](https://direnv.net/), [pyenv](https://github.com/pyenv/pyenv) and [`pyenv-virtualenv`](https://github.com/pyenv/pyenv-virtualenv)) are installed.
+If your system Python is not compatible the with require packages, we suggest that you install Python in a Conda environment using the [Micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) package manager for Conda.
 
-Later on, you can update your local branches by running:
-
-      make up
-
-If upon pulling the repository, you end in a state where another collaborator have upgraded the Git submodules for this repository, you'll end in a dirty state (as reported by modifications within the `.submodules/` directory). In that case, just after the pull, you **have to run** `make up` to ensure consistency with regards the Git submodules:
-
-Finally, you can upgrade the [Git submodules](.gitmodules) to the latest version by running:
-
-      make upgrade
-
-
-## Python Virtualenv / Pyenv and Direnv
-
-You will have to ensure you have installed [direnv](https://direnv.net/), configured by [`.envrc`](.envrc)), [pyenv](https://github.com/pyenv/pyenv) and [`pyenv-virtualenv`](https://github.com/pyenv/pyenv-virtualenv). This assumes also the presence of `~/.config/direnv/direnvrc` from [this page](https://github.com/Falkor/dotfiles/blob/master/direnv/direnvrc) - for more details, see [this blog post](https://varrette.gforge.uni.lu/blog/2019/09/10/using-pyenv-virtualenv-direnv/).
-
-```bash
-### TL;DR; installation
-# Mac OS
-brew install direnv pyenv pyenv-virtualenv
-# Linux/WSL
-sudo { apt-get | yum | ... } install direnv
-curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
-export PATH="$HOME/.pyenv/bin:$PATH"
-pyenv root     # Should return $HOME/.pyenv
+- Begin by [installing the Micromamba package manager](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html).
+- Install Python 3.8 in a new environment.
+```
+$ micromamba env create --name ulhpc-docs-python
+$ micromamba install python=3.8 --channel conda-forge --name ulhpc-docs-python
+```
+- You now have 2 options. First options is to install the required python packages directly in the Conda environment.
+```
+$ micromamba activate ulhpc-docs-python
+$ pip install --upgrade pip
+$ pip install --requirement requirements.txt
+```
+- Alternatively, you can create a `venv` environment in which you install the packages.
+```
+$ micromamba run --name ulhpc-docs-python python -m venv "${HOME}/environments/ulhpc-docs"
+$ source ~/environments/ulhpc-docs/bin/activate
+$ pip install --upgrade pip
+$ pip install --requirement requirements.txt
 ```
 
-**Assuming** you have configured the [XDG Base Directories](https://specifications.freedesktop.org/basedir-spec/latest/) in your favorite shell configuration (`~/.bashrc`, `~/.zshrc` or `~/.profile`), you can enable direnv and pyenv as follows
-
-```bash
-# XDG  Base Directory Specification
-# See https://specifications.freedesktop.org/basedir-spec/latest/
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
-# [...]
-# Direnv - see https://direnv.net/
-if [ -f "$HOME/.config/direnv/init.sh" ]; then
-	. $HOME/.config/direnv/init.sh
-fi
-# - pyenv: https://github.com/pyenv/pyenv
-# - pyenv-virtualenv: https://github.com/pyenv/pyenv-virtualenv
-export PYENV_ROOT=$HOME/.pyenv
-export PATH="${PYENV_ROOT}/bin:${PYENV_ROOT}/plugins/pyenv-virtualenv/bin:$PATH"
-if [ -n "$(which pyenv)" ]; then
-   eval "$(pyenv init -)"
-   eval "$(pyenv virtualenv-init -)"
-   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-fi
-```
-
-Source your shell configuration file.
-You can now run the following command to setup your local machine in a compliant way (this was normally done as part of the `make setup` step) :
-
-```bash
-# Global Direnv Setup (to be done only once)
-make setup-direnv
-make setup-pyenv
-```
-
-
-Running `direnv allow` (this will have to be done only once), you should automatically enable the virtualenv `ulhpc-docs` based on the python version specified in [`.python-version`](.python-version). You'll eventually need to install the appropriate Python version with `pyenv`:
-
-```bash
-pyenv versions   # Plural: show all versions
-pyenv install $(head .python-version)
-# Activate the virtualenv by reentering into the directory
-direnv allow .
-pyenv version # check current pyenv[-virtualenv] version. MUST return the vurtualenv 'ulhpc-docs'
-```
-
-From that point, you should install the required packages using:
-
-``` bash
-make setup-python
-
-# OR (manually)
-pip install --upgrade pip
-pip install -r requirements.txt
-```
+The `ulhpc-docs` `venv` environment will automatically use the Python installed in the Conda environment `ulhpc-docs-python`. In the later case you will no longer need to interact with the Conda environment, except perhaps for updating the Python executable.
 
 # Documentation
 
