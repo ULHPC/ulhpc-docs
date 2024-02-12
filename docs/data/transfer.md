@@ -265,6 +265,73 @@ fusermount -u ~/ulhpc
 diskutil umount ~/ulhpc
 ```
 
+## Transfers between log term storage and the HPC facilities
+
+The university provides central data storage services for all employees and students. The data are stored securely on the university campus and are **managed by the IT department**. The storage servers most commonly used at the university are
+
+- Atlas (atlas.uni.lux) for staff members, and
+- Poseidon (poseidon.uni.lux) for students.
+
+For more details on the university central storage, you can have a look at
+
+- [Usage of Atlas and Poseidon](https://hpc.uni.lu/accessing_central_university_storage), and
+- [Backup of your files on Atlas](https://hpc.uni.lu/moving_files_to_the_central_university_storage).
+
+!!! info "Connecting to data storage services from a personal machine"
+    The examples presented here are targeted to the university HPC machines. To connect to a university central data storage with a (Linux) personal machine from outside of the university network, you need to start first a VPN connection.
+
+The following commands are for Atlas, but Poseidon commands are similar.
+
+You can connect to your Atlas and browse you personal directories with the command,
+```
+$ smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu
+```
+and you can access project directories with the command
+```
+$ smbclient //atlas.uni.lux/name_of_your_project_shared_directory --user=name.surname@uni.lu
+```
+given that you have the rights to access the root of the project directory.
+
+Type `help` to get a list of all available commands or `help (command_name)` to get more information for a specific command. Some useful commands are
+
+- `ls` to list all the files in a directory,
+- `mkdir (directory_name)` to create a directory,
+- `rm (file_name)` to remove a file,
+- `rmdir (directory_name)` to remove a directory,
+- `scopy (source_full_path) (destination_full_path)` to move a file _within_ the SAMBA shared directory,
+- `get (file_name) [destination]` to move a file _from_ Atlas to the local machine (placed in the working directory, if the destination is not specified), and
+- `put (file_name) [destination]` to move a file _to_ Atlas from the local machine (placed in the working directory, if a full path is not specified),
+- `mget (file name pattern) [destination]` to download multiple files, and
+- `mput (file name pattern) [destination]` to upload multiple files.
+
+The patterns used in `mget`/`mput` are either normal file names, or globular expressions (e.g. `*.txt`). 
+
+Connecting into an interactive SAMBA session means that you will have to maintain a shell session dedicated to SAMBA. However, it saves you from entering your password for every operation. If you would like to perform a single operation and exit, you can avoid the interactive session with the `--command` flag. For instance,
+```
+$ smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='get "full path/to/remote file.txt" "full path/to/local file.txt"'
+```
+copies a file from the SAMBA directory to the local machine. Notice the use of double quotes to handle file names with spaces. Similarly,
+```
+$ smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='put "full path/to/local file.txt" "full path/to/remote file.txt"'
+```
+
+Moving whole directories is a bit more involved, as it requires setting some state variables for the session, both for interactive and non-interactive sessions. To download a directory for instance, use
+```bash
+$ smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='recurse ON; prompt OFF; mget "full path/to/remote directory" "full path/to/local directory"'
+```
+and to upload a directory use
+```bash
+$ smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='recurse ON; prompt OFF; mput "full path/to/remote local" "full path/to/remote directory"'
+```
+respectively. The session option
+
+- `recurse ON` enables recursion into directories, and the option
+- `prompt OFF` disables prompting for confirmation before moving each file.
+
+_Sources_
+
+- [Cheat-sheet for SMB access from linux](https://www.thegeekdiary.com/smbclient-command-examples-in-linux/)
+
 ## Special transfers
 
 Sometimes you may have the case that a lot of files need to go from point A to B over a Wide Area Network (eg. across the Atlantic). Since packet latency and other factors on the network will naturally slow down the transfers, you need to find workarounds, typically with either rsync or tar.
