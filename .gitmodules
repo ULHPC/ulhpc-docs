@@ -1,4 +1,0 @@
-[submodule ".submodules/Makefiles"]
-	path = .submodules/Makefiles
-	url = https://github.com/Falkor/Makefiles.git
-	branch = devel
