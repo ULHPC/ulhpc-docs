@@ -30,7 +30,7 @@ $ pip install --upgrade pip
 $ pip install --requirement requirements.txt
 ```
 
-If your system Python is not compatible the with require packages, we suggest that you install Python in a Conda environment using the [Micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) package manager for Conda.
+If your system Python is not compatible with the required packages, we suggest that you install Python in a Conda environment using the [Micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) package manager for Conda.
 
 - Begin by [installing the Micromamba package manager](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html).
 - Install Python 3.8 in a new environment.
