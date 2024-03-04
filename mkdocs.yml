@@ -161,6 +161,8 @@ nav:
         - Abaqus : 'software/cae/abaqus.md'
         - FDS : 'software/cae/fds.md'
         - Meshing-Tools : 'software/cae/meshing-tools.md'
+    - Physics:
+        - WRF: 'software/physics/wrf.md'
     - Computational Chemistry:
         - Electronics:
             - ABINIT:              'software/computational-chemistry/electronics/abinit.md'
