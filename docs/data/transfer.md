@@ -265,7 +265,7 @@ fusermount -u ~/ulhpc
 diskutil umount ~/ulhpc
 ```
 
-## Transfers between log term storage and the HPC facilities
+## Transfers between long term storage and the HPC facilities
 
 The university provides central data storage services for all employees and students. The data are stored securely on the university campus and are **managed by the IT department**. The storage servers most commonly used at the university are
 
