@@ -102,8 +102,8 @@ Within a job, you aim at running a certain number of **tasks**, and Slurm allow 
 
 The total number of tasks defined in a given job is stored in the `$SLURM_NTASKS` environment variable.
 
-!!! note "--cpus-per-task in `srun` in Slurm 23.11 and later"
-    In the latest versions of Slurm `srun` inherits the --cpus-per-task value requested by salloc or sbatch by reading the value of `SLURM_CPUS_PER_TASK`.
+!!! note "The --cpus-per-task option of srun in Slurm 23.11 and later"
+    In the latest versions of Slurm `srun` inherits the `--cpus-per-task` value requested by `salloc` or `sbatch` by reading the value of `SLURM_CPUS_PER_TASK`, as for any other option. _This behavior may differ from some older versions where special handling was required to propagate the `--cpus-per-task` option to `srun`._
 
 In case you would like to launch multiple programs in a single allocation/batch script, divide the resources accordingly by requesting resources with `srun` when launching the process, for instance:
 ```bash
