@@ -19,8 +19,6 @@ $ ssh -X iris-cluster    # OR ssh -Y iris-cluster on Mac
 $ si --x11 --ntasks-per-node 1 -c 4
 # salloc -p interactive --qos debug -C batch --x11 --ntasks-per-node 1 -c 4
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 # Go to scratch directory 
 $ cds
 
@@ -63,8 +61,6 @@ $ ssh -X iris-cluster      # or ssh -Y iris-cluster on Mac
 $ si --ntasks-per-node 1 -c 4 --x11
 # salloc -p interactive --qos debug -C batch --x11 --ntasks-per-node 1 -c 4
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 # Activate anaconda  
 $ source /${SCRATCH}/Anaconda3/bin/activate
 
@@ -98,7 +94,6 @@ source ${SCRATCH}/Anaconda3/bin/activate
 conda activate fenicsproject
 
 # execute the poisson.py through python
-export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 srun python3 Poisson.py  
 ```
 

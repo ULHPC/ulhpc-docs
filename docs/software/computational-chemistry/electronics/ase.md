@@ -33,8 +33,6 @@ $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/ASE/3.17.0-intel-2019a-Python-3.7.2
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 $ python3 example.py
 ```
 

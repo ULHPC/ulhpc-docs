@@ -38,7 +38,6 @@ $ module purge
 $ module load swenv/default-env/v1.2-20191021-production
 $ module load cae/gmsh/4.4.0-intel-2019a
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 $ gmsh example.geo
 ```
 ## Salome
@@ -74,7 +73,6 @@ $ module purge
 $ module load swenv/default-env/v1.2-20191021-production
 $ module load cae/Salome/8.5.0-intel-2019a
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 $ salome start
 ```
 

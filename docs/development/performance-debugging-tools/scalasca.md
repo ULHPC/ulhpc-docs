@@ -52,7 +52,6 @@ module load toolchain/foss/2018a
 module load perf/Scalasca/2.3.1-foss-2018a
 module load perf/Score-P/3.1-foss-2018a
 
-export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 export OMP_NUM_THREADS=16
 
 # analyze

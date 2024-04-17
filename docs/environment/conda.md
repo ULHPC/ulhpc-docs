@@ -148,7 +148,6 @@ echo "Numb. of cores: ${SLURM_CPUS_PER_TASK}"
 
 micromamba activate R-project
 
-export SRUN_CPUS_PER_TASK="${SLURM_CPUS_PER_TASK}"
 export OMP_NUM_THREADS=1
 srun Rscript --no-save --no-restore script.R
 

@@ -33,8 +33,6 @@ $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/NAMD/2.12-intel-2018a-mpi
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 $ namd2 +setcpuaffinity +p4 config_file > output_file
 ```
 

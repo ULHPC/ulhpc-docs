@@ -34,8 +34,6 @@ $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/CP2K/6.1-intel-2018a
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
- 
 $ cp2k.popt -i example.inp 
 ```
 

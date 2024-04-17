@@ -34,8 +34,6 @@ $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load bio/GROMACS/2019.2-intel-2019a
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 $ gmx_mpi mdrun <all your GMX job specification options in here>
 ```
 

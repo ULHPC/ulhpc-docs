@@ -29,8 +29,6 @@ $ module load swenv/default-env/devel # Eventually (only relevant on 2019a softw
 $ module load toolchain/intel/2019a
 $ module load phys/Meep/1.4.3-intel-2019a
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 $ meep example.ctl > result_output
 ```
 
