@@ -91,7 +91,6 @@ module load swenv/default-env/v1.2-20191021-production
 module load tools/VTune/2019_update4
 module load toolchain/intel/2019a
 
-export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 export OMP_NUM_THREADS=16
 aps --collection-mode=all -r report_output ./a.out
 ```
@@ -116,7 +115,6 @@ module load swenv/default-env/v1.2-20191021-production
 module load tools/VTune/2019_update4
 module load toolchain/intel/2019a
 
-export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 # To collect all the results
 export MPS_STAT_LEVEL=${SLURM_CPUS_PER_TASK:-1}
 # An option for the OpenMP+MPI application

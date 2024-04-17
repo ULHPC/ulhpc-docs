@@ -102,12 +102,12 @@ Within a job, you aim at running a certain number of **tasks**, and Slurm allow 
 
 The total number of tasks defined in a given job is stored in the `$SLURM_NTASKS` environment variable.
 
-!!! note "--cpus-per-task in srun since Slurm 22.05"
-    Beginning with Slurm 22.05, srun will not inherit the --cpus-per-task value requested by salloc or sbatch. It must be requested again with the call to srun or set with the SRUN_CPUS_PER_TASK environment variable if desired for the task(s).
+!!! note "--cpus-per-task in `srun` in Slurm 23.11 and later"
+    In the latest versions of Slurm `srun` inherits the --cpus-per-task value requested by salloc or sbatch by reading the value of `SLURM_CPUS_PER_TASK`.
 
-This is very convenient to abstract from the job context to run MPI tasks/processes in parallel using for instance:
+In case you would like to launch multiple programs in a single allocation/batch script, divide the resources accordingly by requesting resources with `srun` when launching the process, for instance:
 ```bash
-srun -c ${SLURM_CPUS_PER_TASK} -n ${SLURM_NTASKS} [...]
+srun --cpus-per-task <some of the SLURM_CPUS_PER_TASK> --ntasks <some of the SLURM_NTASKS> [...] <program>
 ```
 
 We encourage you to **always** explicitly specify upon resource allocation the number of tasks you want _per_ node/socket (`--ntasks-per-node <n> --ntasks-per-socket <s>`), to easily scale on multiple nodes with `-N <N>`. Adapt the number of threads and the settings to match the physical NUMA characteristics of the nodes
@@ -344,5 +344,5 @@ submitted.
 | `-N <N>`                  | `SLURM_JOB_NUM_NODES` or<br/> `SLURM_NNODES`   |                                          |
 | `--ntasks-per-node=<n>`   | `SLURM_NTASKS_PER_NODE`                   |                                          |
 | `--ntasks-per-socket=<s>` | `SLURM_NTASKS_PER_SOCKET`                 |                                          |
-| `-c <c>`                  | `SLURM_CPUS_PER_TASK`                     | `OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}` and `SRUN_CPUS_PER_TASK=${SLURM_CPUS_PER_TASK}` |
+| `-c <c>`                  | `SLURM_CPUS_PER_TASK`                     | `OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}` |
 |                           | `SLURM_NTASKS`<br/> Total number of tasks | `srun -n $SLURM_NTASKS [...]`            |

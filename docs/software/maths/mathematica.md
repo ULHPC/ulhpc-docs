@@ -30,8 +30,6 @@ $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load math/Mathematica/12.0.0
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 $ math
 ```
 
@@ -52,8 +50,6 @@ $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load math/Mathematica/12.0.0
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 $ srun -n ${SLURM_NTASKS} math -run < {mathematica-script-file}.m
 ```
 
@@ -72,8 +68,6 @@ $ srun -n ${SLURM_NTASKS} math -run < {mathematica-script-file}.m
 $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load math/Mathematica/12.0.0
-
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 
 $ srun -n ${SLURM_NTASKS} math -run < {mathematica-script-file}.m
 ```

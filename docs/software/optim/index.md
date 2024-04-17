@@ -105,8 +105,6 @@ The below launcher is an example showing how to reserve ressources on multiple n
 #SBATCH --qos=normal
 module load math/CPLEX
 
-export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 # Some variables
 MPS_FILE=$1
 RES_FILE=$2
@@ -152,8 +150,6 @@ The script below allows you to start multi-threaded MIP optimization with Gurobi
 # Load Gurobi 
 module load math/Gurobi
 
-export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 # Some variable
 MPS_FILE=$1
 RES_FILE=$2
@@ -183,8 +179,6 @@ Using the script ```gurobi_mtt.slurm ```, you can launch a batch job with the ``
 mu
 # Load gurobi
 module load math/Gurobi
-
-export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 
 export MASTER_PORT=61000
 export SLAVE_PORT=61000

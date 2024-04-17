@@ -92,7 +92,6 @@ module load toolchain/intel/2019a
 module load tools/Inspector/2019_update4
 module load vis/GTK+/3.24.8-GCCcore-8.2.0
 
-export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 inspxe-cl -collect mi1 -result-dir mi1 -- ./a.out`
 ```
 To see the result:

@@ -29,8 +29,6 @@ $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load chem/NWChem/6.8.revision47-intel-2019a-Python-2.7.15
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 $ nwchem example
 ```
 

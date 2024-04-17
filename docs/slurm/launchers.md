@@ -103,8 +103,6 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
         module purge || print_error_and_exit "No 'module' command"
         # List modules required for execution of the task
         module load <...>
-        # Propagate Slurm "-c" option to srun
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         # [...]
         ```
 
@@ -121,7 +119,6 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load <...>
         # [...]
         ```
@@ -139,7 +136,6 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load <...>
         # [...]
         ```
@@ -193,7 +189,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         # C/C++: module load toolchain/intel # OR: module load toolchain/foss
         # Java:  module load lang/Java/1.8
         # Ruby/Perl/Rust...:  module load lang/{Ruby,Perl,Rust...}
@@ -216,7 +211,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         # Python 3.X by default (also on system)
         module load lang/Python
         # module load lang/SciPy-bundle
@@ -240,7 +234,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load lang/R
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
         OPTS=$*
@@ -262,7 +255,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load math/MATLAB
 
         matlab -nodisplay -nosplash < INPUTFILE.m > OUTPUTFILE.out
@@ -287,7 +279,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
 	print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
 	module purge || print_error_and_exit "No 'module' command"
-    export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 	module load <...>
 	# [...]
 	```
@@ -305,7 +296,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
 	print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
 	module purge || print_error_and_exit "No 'module' command"
-    export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 	module load <...>    # USE apps compiled against the {foss,intel}cuda toolchain !
     # Ex: 
     # module load numlib/cuDNN
@@ -339,7 +329,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load toolchain/foss
 
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
@@ -361,7 +350,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load toolchain/foss
 
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
@@ -391,7 +379,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load toolchain/intel
         OPTS=$*
 
@@ -413,7 +400,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load toolchain/intel
         OPTS=$*
 
@@ -442,7 +428,6 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load toolchain/foss
         module load mpi/OpenMPI
         OPTS=$*
@@ -464,7 +449,6 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load toolchain/foss
         module load mpi/OpenMPI
         OPTS=$*
@@ -489,7 +473,6 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load toolchain/intel
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
         OPTS=$*
@@ -512,7 +495,6 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load toolchain/intel
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
         OPTS=$*
@@ -537,7 +519,6 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load toolchain/foss
         module load mpi/OpenMPI
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
@@ -561,7 +542,6 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
-        export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
         module load toolchain/foss
         module load mpi/OpenMPI
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}

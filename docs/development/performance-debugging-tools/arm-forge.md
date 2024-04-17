@@ -54,7 +54,6 @@ module load toolchain/intel/2019a
 module load tools/ArmForge/19.1
 module load tools/ArmReports/19.1
 
-export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 # for debugging

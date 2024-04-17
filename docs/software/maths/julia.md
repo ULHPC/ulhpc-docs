@@ -24,8 +24,6 @@ $ module purge
 $ module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 $ module load lang/Julia/1.3.0
 
-$ export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
-
 $ julia
 ```
 
@@ -45,8 +43,6 @@ $ julia
 module purge
 module load swenv/default-env/devel # Eventually (only relevant on 2019a software environment) 
 module load lang/Julia/1.3.0
-
-export SRUN_CPUS_PER_TASK=$SLURM_CPUS_PER_TASK
 
 julia {example}.jl
 ```
