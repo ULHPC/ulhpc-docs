@@ -5,28 +5,27 @@
     a regular basis.  **Ultimately, it is your responsibility to
     protect yourself from data loss.**
 
-ULHPC has 3 different backup targets, with different rotation policies and physical locations.
-
-The backups are only accessible by HPC staff, for disaster recovery purposes.
+The backups are only accessible by HPC staff, for disaster recovery purposes only.
 
 More precisions can be requested via a support request.
 
-## User directories on the ULHPC clusters
+## Directories on the ULHPC clusters infrastructure
+
+For computation purposes, ULHPC users can use multiple storages: home, scratch and projects. Note however that the HPC Platform does not have the infrastructure to backup all of them, see details below.
 
 | Directory        | Path           | Backup location | Frequency | Retention                                                    |
 |------------------|----------------|-----------------|-----------|--------------------------------------------------------------|
-| home directories | `$HOME`        | CDC, Belval     | Weekly    | last 7 backups, at least one per month for the last 2 months |
-| projects         | `$PROJECTWORK` | CDC, Belval     | Weekly    | one backup per week of the backup directory (`$PROJECT/backup/`) |
+| home directories | `$HOME`        | not backed up     |     |
 | scratch          | `$SCRATCH`     | not backed up   |           |                                                              |
+| projects         | `$PROJECTWORK` | CDC, Belval     | Weekly    | one backup per week of the backup directory ONLY (`$PROJECT/backup/`) |
 
 
-## Isilon project directories snapshots
+## Directories on the SIU Isilon infrastructure
 
 Projects stored on the Isilon filesystem are *snapshotted* weekly, the snapshots are kept for 10 days.
 
 !!! danger
     Snapshots are **not a real backup**. It does not protect you against a system failure, it will only permit to recover some files in case of accidental deletion
-
 
 Each project directory, in `/mnt/isilon/projects/` contains a hidden sub-directory `.snapshot`:
 
@@ -37,19 +36,10 @@ Each project directory, in `/mnt/isilon/projects/` contains a hidden sub-directo
 * files can *only* be copied *out* of a snapshot
 
 
-## Virtual machines
-
-| Source                 | Backup location | Frequency | Retention                                          |
-|------------------------|-----------------|-----------|----------------------------------------------------|
-| Gitlab infrastructure  | CDC, Belval     | Weekly    | last 5 weekly snapshots                            |
-| Iris infrastructure    | CDC, Belval     | Weekly    | last 5 weekly snapshots                            |
-
-
 ## Services
 
 | Name                         | Backup location | Frequency | Retention                                                 |
 |------------------------------|-----------------|-----------|-----------------------------------------------------------|
-| gitlab.uni.lu                | CDC, Belval     | Daily     | last 7 daily backups, one per month for the last 6 months |
 | hpc.uni.lu (pad, privatebin) | CDC, Belval     | Daily     | last 7 daily backups, one per month for the last 6 months |
 
 
@@ -60,16 +50,6 @@ snapshots capability, please create a new request on [Service Now portal](https:
 with pathnames and timestamps of the missing data.
 
 Such restore requests may take a few days to complete.
-
-## Purging
-
-!!! note
-    See [Filesystem Quotas and Purging](../filesystems/quotas.md) for detailed information about inode,
-    space quotas, and file system purge policies.
-
-!!! warning
-	`$SCRATCH` directories are **not** backed up
-
 
 ## Backup Tools
 
