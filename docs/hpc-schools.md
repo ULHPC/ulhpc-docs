@@ -5,7 +5,7 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 ## Forthcoming events
 
-- HPC School for beginners - May 2024, 13-14th, 1.010, MNO - Belval Campus
+- HPC School for beginners - May 2024, 13-14th, 1.010, MNO - Belval Campus **CANCELLED DUE TO HPC MAINTENANCE**
 - Python HPC School - March 2024, 27-28th, 1.030 MNO - Belval Campus
 
 ## HPC School for beginners
@@ -21,7 +21,7 @@ Limited spots available per session (usually 30 max).
 
 ### Upcoming sessions:
 
-- Date: May 2024, 13th and 14th
+- Date: May 2024, 13th and 14th **CANCELLED DUE TO HPC MAINTENANCE**
 - Time: 9am to 12pm (both days).
 - Location: 1.010, MNO - Belval Campus.
 
