@@ -284,11 +284,11 @@ The following commands are for Atlas, but Poseidon commands are similar.
 
 You can connect to your Atlas and browse you personal directories with the command,
 ```
-$ smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu
+smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu
 ```
 and you can access project directories with the command
 ```
-$ smbclient //atlas.uni.lux/name_of_your_project_shared_directory --user=name.surname@uni.lu
+smbclient //atlas.uni.lux/name_of_your_project_shared_directory --user=name.surname@uni.lu
 ```
 given that you have the rights to access the root of the project directory.
 
@@ -308,20 +308,20 @@ The patterns used in `mget`/`mput` are either normal file names, or globular exp
 
 Connecting into an interactive SAMBA session means that you will have to maintain a shell session dedicated to SAMBA. However, it saves you from entering your password for every operation. If you would like to perform a single operation and exit, you can avoid the interactive session with the `--command` flag. For instance,
 ```
-$ smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='get "full path/to/remote file.txt" "full path/to/local file.txt"'
+smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='get "full path/to/remote file.txt" "full path/to/local file.txt"'
 ```
 copies a file from the SAMBA directory to the local machine. Notice the use of double quotes to handle file names with spaces. Similarly,
 ```
-$ smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='put "full path/to/local file.txt" "full path/to/remote file.txt"'
+smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='put "full path/to/local file.txt" "full path/to/remote file.txt"'
 ```
 
 Moving whole directories is a bit more involved, as it requires setting some state variables for the session, both for interactive and non-interactive sessions. To download a directory for instance, use
 ```bash
-$ smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='recurse ON; prompt OFF; mget "full path/to/remote directory" "full path/to/local directory"'
+smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='recurse ON; prompt OFF; mget "full path/to/remote directory" "full path/to/local directory"'
 ```
 and to upload a directory use
 ```bash
-$ smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='recurse ON; prompt OFF; mput "full path/to/remote local" "full path/to/remote directory"'
+smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='recurse ON; prompt OFF; mput "full path/to/remote local" "full path/to/remote directory"'
 ```
 respectively. The session option
 
