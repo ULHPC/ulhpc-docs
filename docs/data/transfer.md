@@ -278,7 +278,7 @@ For more details on the university central storage, you can have a look at
 - [Backup of your files on Atlas](https://hpc.uni.lu/moving_files_to_the_central_university_storage).
 
 !!! info "Connecting to data storage services from a personal machine"
-    The examples presented here are targeted to the university HPC machines. To connect to a university central data storage with a (Linux) personal machine from outside of the university network, you need to start first a VPN connection.
+    The examples presented here are targeted to the university HPC machines. To connect to the university central data storage with a (Linux) personal machine from outside of the university network, you need to start first a VPN connection.
 
 The following commands are for Atlas, but Poseidon commands are similar.
 
