@@ -166,6 +166,8 @@ You have to pay a particular attention when using `rsync` to transfer data withi
    end="<!--end-warning-clusterusers-->"
 %}
 
+??? info "Debugging quota issues"
+    Sometimes when working with filer from projects that have run out of quota you may encounter errors due to insufficient space. Note that even if a single directory is copied from a project without changing its group, all future files created in the copied directory will count towards the group quota (unless if specified otherwise explicitly). In such cases just set the correct ownership using `chown -R <username>:<groupname> <directory>`.
 
 
 ## Using MobaXterm (Windows)
