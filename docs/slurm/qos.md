@@ -50,9 +50,9 @@ Use the `sqos` utility function to list the existing QOS limits.
     \# sacctmgr show qos  format="name%20,preempt,priority,GrpTRES,MaxTresPerJob,MaxJobsPerUser,MaxWall,flags"
                     Name    Preempt   Priority       GrpTRES       MaxTRES MaxJobsPU     MaxWall                Flags
     -------------------- ---------- ---------- ------------- ------------- --------- ----------- --------------------
-                  normal besteffort        100                                    50                      DenyOnLimit
-              besteffort                     1                                   100                        NoReserve
-                     low besteffort         10                                     2                      DenyOnLimit
+                  normal besteffort        100                                   100                      DenyOnLimit
+              besteffort                     1                                   300                        NoReserve
+                     low besteffort         10                                     4                      DenyOnLimit
                     high besteffort        200                                    50                      DenyOnLimit
                   urgent besteffort       1000                                   100                      DenyOnLimit
                    debug besteffort        150        node=8                      10                      DenyOnLimit
