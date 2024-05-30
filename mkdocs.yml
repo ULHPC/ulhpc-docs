@@ -310,11 +310,11 @@ nav:
   ##############
   # - Acronyms: 'help/acronyms.md'
   ##############
-  - AWS cluster:
-    - Overview: aws/overview.md
-    - Connect to cluster: aws/connection.md
-    - Environment Setup: aws/setup.md
-    
+  # - AWS cluster:
+  #   - Overview: aws/overview.md
+  #   - Connect to cluster: aws/connection.md
+  #   - Environment Setup: aws/setup.md
+
 
 # tab Clusters:
 # - Organization: 'layout.md'
