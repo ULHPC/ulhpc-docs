@@ -155,6 +155,10 @@ $> rsync -avzu aion-cluster:experiments/parallel_run /path/to/local/directory
 
 As always, see the [man page](https://linux.die.net/man/1/rsync) or `man rsync` for more details.
 
+!!! warning "Windows Subsystem for Linux (WSL)"
+    In WSL, the home directory in Linux virtual machines is not your home directory in Windows. If you want to access the files that you downloaded with `rsync` inside a Linux virtual machine, please consult the [WSL documentation](https://learn.microsoft.com/en-us/windows/wsl/) and the [file system](https://learn.microsoft.com/en-us/windows/wsl/filesystems) section in particular.
+
+
 ### Data Transfer within Project directories
 
 The ULHPC facility features a [Global Project directory `$PROJECTHOME`](../filesystems/gpfs.md#global-project-directory-projecthomeworkprojects) hosted within the [GPFS/SpecrumScale](../filesystems/gpfs.md) file-system.
