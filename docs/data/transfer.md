@@ -273,7 +273,7 @@ diskutil umount ~/ulhpc
 
 ## Transfers between long term storage and the HPC facilities
 
-The university provides central data storage services for all employees and students. The data are stored securely on the university campus and are **managed by the IT department**. The storage servers most commonly used at the university are
+The university provides **central data storage** services for all employees and students. The data are stored securely on the university campus and are **managed by the IT department**. The storage servers most commonly used at the university are
 
 - Atlas (atlas.uni.lux) for staff members, and
 - Poseidon (poseidon.uni.lux) for students.
@@ -283,12 +283,67 @@ For more details on the university central storage, you can have a look at
 - [Usage of Atlas and Poseidon](https://hpc.uni.lu/accessing_central_university_storage), and
 - [Backup of your files on Atlas](https://hpc.uni.lu/moving_files_to_the_central_university_storage).
 
-!!! info "Connecting to data storage services from a personal machine"
+!!! info "Connecting to central data storage services from a personal machine"
     The examples presented here are targeted to the university HPC machines. To connect to the university central data storage with a (Linux) personal machine from outside of the university network, you need to start first a VPN connection.
 
-The following commands are for Atlas, but Poseidon commands are similar.
+The SMB shares exported for directories in the central data storage are meant to be accesses interactively. Unlike mounting with `sshfs`, you will always need to enter your password to access a directory from the central data storage, so you cannot use SMB share in job scripts at login nodes. Transfer your data manually after your job has finished. You can mount directories from the central data storage in the login nodes, and access the central data storage through the interface of `smbclient` from both the login nodes and the compute nodes in interactive jobs.
 
-You can connect to your Atlas and browse you personal directories with the command,
+The following commands are for Atlas, but commands for Poseidon are similar.
+
+### Mounting an SMB share to a login node
+
+The UL HPC team provides the `smb-storage` script to mount SMB shares in login nodes.
+
+- To mount your default user directory from the default `users` share (only for staff members) call in an shell session
+```bash
+smb-storage mount name.surname
+```
+and your directory will be mounted to the default mount location:
+```
+~/atlas.uni.lux-users-name.surname
+```
+- To mount a project share `project_name` call in a shell session
+```bash
+smb-storage mount name.surname --project project_name
+```
+and the share will be mounted in the default mount location:
+```
+~/atlas.uni.lux-project_name
+```
+- To unmount any share, simply call the `unmount` subcommand with the mount point path, for instance
+```bash
+smb-storage unmount ~/atlas.uni.lux-users-name.surname
+```
+or:
+```bash
+smb-storage unmount ~/atlas.uni.lux-project_name
+```
+
+The `smb-storage` script provides a optional flags to modify the default options:
+
+- `--help` or `-h` prints information about the usage and options of he script,
+- `--server <server url>` or `-s <server url>` specifies the server from which the SMB share is mounted (use `--server poseidon.uni.lux` to mount a share from Poseidon),
+- `--project <project name>` or `-p <project name>` mounts the share `<project name>` (the default project `users` is mounted),
+- `--mountpoint <path>` or `-m <path>` selects the path where the share will be mounted (the default location is `~/<server url>-<project name>-<linked directory>`),
+- `--debug` of `-d` print details of the operations performed by the mount script.
+
+!!! info "Best practices"
+
+    Mounted SMB shares will be available in the login node, the mount point will appear as a dead symbolic link in compute nodes. This is be design, you can only mount SMB shares in login nodes because SMB shares are meant to be used in interactive sections.
+
+    Mounted shares will remain available as long as the login session where the share was mounted remains active. You can mount shares in a `tmux` session in a login node, and access the share from any other session in the login node.
+
+??? info "Details of the mounting process"
+    There exists a default SMB share `users` where all staff member have a directory named after their user name (`name.surname`). If no share is specified with the `--project` flag, the default share `users` is mounted in a specially named directory in `/run/user/${UID}/gvfs`, and a symbolic link to the user folder is created in the mount location by the `smb-storage` script.
+
+    All projects have a share named after the project name. If a project is specified with the `--project` flag, the project share is mounted in a specially named directory in `/run/user/${UID}/gvfs`, and a symbolic link to the whole project directory is created in the mount location by the `smb-storage` script.
+
+    During unmounting, the symbolic links are deleted by the `smb-storage` script, and the shares mounted in `/run/user/${UID}/gvfs` are unmounted and their mount points are removed. **If a session with mounted SMB shares terminates without unmounting the shares, the shares in `/run/user/${UID}/gvfs` will be unmounted and their mount points deleted, but the symbolic links created by `smb-storage` must be removed manually.**
+
+
+### Accessing SMB shares with `smbclient`
+
+The `smbclient` program is available in both login and compute nodes. In compute nodes the only way to access SMB shares is through the client program. You can connect to your Atlas and browse you personal directories with the command,
 ```
 smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu
 ```
