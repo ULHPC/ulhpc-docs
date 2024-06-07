@@ -343,15 +343,14 @@ The `smb-storage` script provides a optional flags to modify the default options
 
 ### Accessing SMB shares with `smbclient`
 
-The `smbclient` program is available in both login and compute nodes. In compute nodes the only way to access SMB shares is through the client program. You can connect to your Atlas and browse you personal directories with the command,
+The `smbclient` program is available in both login and compute nodes. In compute nodes the only way to access SMB shares is through the client program. With the SMC client one can connect to the `users` share and browse their personal directory with the command:
 ```
 smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu
 ```
-and you can access project directories with the command
+Project directories are accessed with the command:
 ```
-smbclient //atlas.uni.lux/name_of_your_project_shared_directory --user=name.surname@uni.lu
+smbclient //atlas.uni.lux/project_name --user=name.surname@uni.lu
 ```
-given that you have the rights to access the root of the project directory.
 
 Type `help` to get a list of all available commands or `help (command_name)` to get more information for a specific command. Some useful commands are
 
@@ -367,7 +366,7 @@ Type `help` to get a list of all available commands or `help (command_name)` to 
 
 The patterns used in `mget`/`mput` are either normal file names, or globular expressions (e.g. `*.txt`). 
 
-Connecting into an interactive SAMBA session means that you will have to maintain a shell session dedicated to SAMBA. However, it saves you from entering your password for every operation. If you would like to perform a single operation and exit, you can avoid the interactive session with the `--command` flag. For instance,
+Connecting into an interactive SAMBA session means that you will have to maintain a shell session dedicated to SAMBA. However, it saves you from entering your password for every operation. If you would like to perform a single operation and exit, you can avoid maintaining an interactive session with the `--command` flag. For instance,
 ```
 smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='get "full path/to/remote file.txt" "full path/to/local file.txt"'
 ```
