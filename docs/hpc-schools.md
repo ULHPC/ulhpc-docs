@@ -5,7 +5,7 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 ## Forthcoming events
 
-- HPC School for beginners - May 2024, 13-14th, 1.010, MNO - Belval Campus **CANCELLED DUE TO HPC MAINTENANCE**
+- HPC School for beginners - July 2024, 1st-2nd, 1.040, MNO - Belval Campus 
 - Python HPC School - March 2024, 27-28th, 1.030 MNO - Belval Campus
 
 ## HPC School for beginners
@@ -21,9 +21,9 @@ Limited spots available per session (usually 30 max).
 
 ### Upcoming sessions:
 
-- Date: May 2024, 13th and 14th **CANCELLED DUE TO HPC MAINTENANCE**
+- Date: July 2024, 1st-2nd
 - Time: 9am to 12pm (both days).
-- Location: 1.010, MNO - Belval Campus.
+- Location: 1.040, MNO - Belval Campus.
 
 ### Morning 1 - Accessing the Cluster and Command Line Introduction 
 Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
