@@ -50,18 +50,15 @@ See [Acceptable Use Policy](../policies/aup.md) for more details.
 %}
 
 ----------------------------------
-## How to Get an New User account?
+## How to Get a New User account?
 
 
 [:fontawesome-solid-file-signature: Account Request Form](https://service.uni.lu/sp?id=sc_cat_item&sys_id=358906c98776c610aa6d65740cbb35e6&sysparm_category=9c992749db8f84109aa59ee3db96196f){: .md-button .md-button--link }
 
 
-1. You can submit a request for a new ULHPC account by using the [ServiceNow portal (Research > HPC > User access & accounts > New HPC account request)](https://service.uni.lu/sp?id=sc_cat_item&sys_id=358906c98776c610aa6d65740cbb35e6&sysparm_category=9c992749db8f84109aa59ee3db96196f).
-
-1bis. If you are external, a University staff member must request the account for you, using the section [New HPC account for external](https://service.uni.lu/sp?id=sc_cat_item&sys_id=b12bce4d8776c610aa6d65740cbb3536&sysparm_category=9c992749db8f84109aa59ee3db96196f). Enter the professional data (organization and institutional email address). Specify the line manager / project PI if needed.
-
+1. University staff - you can submit a request for a new ULHPC account by using the [ServiceNow portal (Research > HPC > User access & accounts > New HPC account request)](https://service.uni.lu/sp?id=sc_cat_item&sys_id=358906c98776c610aa6d65740cbb35e6&sysparm_category=9c992749db8f84109aa59ee3db96196f).  
+Externals - a University staff member must request the account for you, using the section [New HPC account for external](https://service.uni.lu/sp?id=sc_cat_item&sys_id=b12bce4d8776c610aa6d65740cbb3536&sysparm_category=9c992749db8f84109aa59ee3db96196f). Enter the professional data (organization and institutional email address). Specify the line manager / project PI if needed.
 2. If you need to access a specific project directory, ask the project directory owner to open a ticket using the section [Add user within project](https://service.uni.lu/sp?id=sc_cat_item&sys_id=47f37b09dbcf84109aa59ee3db9619a5&sysparm_category=9c992749db8f84109aa59ee3db96196f).
-
 3. Your account will undergo user checks, in accordance with ULHPC policies, to verify your identity and the information proposed. Under some circumstances, there could be a delay while this vetting takes place.
 4. After vetting has completed, you will receive a welcome email with your login information, and a unique link to a [PrivateBin](https://privatebin.info/) [^1] holding a random temporary password. That link will expire if not used within 24 hours.
 The PI and PI Proxies for the project will be notified when applicable.
@@ -96,7 +93,7 @@ If you think there has been a computer security incident, you should contact the
 Please save any evidence of the break-in and include as many details as possible in your communication with us.
 
 --------------------------------------
-## How to Get an New Project account?
+## How to Get a New Project account?
 
 Projects are defined for accounting purposes and are associated to a set of user accounts allowed by the project PI to access its data and submit jobs on behalf of the project account. See [Slurm Account Hierarchy](../slurm/accounts.md).
 
