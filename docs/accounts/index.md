@@ -57,6 +57,7 @@ See [Acceptable Use Policy](../policies/aup.md) for more details.
 
 
 1. University staff - you can submit a request for a new ULHPC account by using the [ServiceNow portal (Research > HPC > User access & accounts > New HPC account request)](https://service.uni.lu/sp?id=sc_cat_item&sys_id=358906c98776c610aa6d65740cbb35e6&sysparm_category=9c992749db8f84109aa59ee3db96196f).  
+Students - submit your account request on the [Student Service Portal](https://service.uni.lu/ssp).  
 Externals - a University staff member must request the account for you, using the section [New HPC account for external](https://service.uni.lu/sp?id=sc_cat_item&sys_id=b12bce4d8776c610aa6d65740cbb3536&sysparm_category=9c992749db8f84109aa59ee3db96196f). Enter the professional data (organization and institutional email address). Specify the line manager / project PI if needed.
 2. If you need to access a specific project directory, ask the project directory owner to open a ticket using the section [Add user within project](https://service.uni.lu/sp?id=sc_cat_item&sys_id=47f37b09dbcf84109aa59ee3db9619a5&sysparm_category=9c992749db8f84109aa59ee3db96196f).
 3. Your account will undergo user checks, in accordance with ULHPC policies, to verify your identity and the information proposed. Under some circumstances, there could be a delay while this vetting takes place.
