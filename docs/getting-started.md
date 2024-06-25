@@ -254,12 +254,3 @@ We have always maintained an extensive [documentation](https://hpc-docs.uni.lu) 
 !!! info "Availability and Response Time"
     HPC support is provided on a volunteer basis by UL HPC staff and associated UL experts working at normal business hours. We offer **no guarantee** on response time except with paid support contracts.
 
-### Consulting
-
-{%
-   include-markdown "support/professional-services.md"
-   start="<!--intro-start-->"
-   end="<!--intro-end-->"
-%}
-
-For more details: see [ULHPC Consulting Services](support/professional-services.md)

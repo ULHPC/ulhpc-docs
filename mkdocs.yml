@@ -272,7 +272,6 @@ nav:
     # - FAQ: 'support/faq.md'
     - Overview: 'support/index.md'
     - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
-    - ULHPC Consulting Services: 'support/professional-services.md'
   #########################
   # - DevOps Management:
   #   - Collaborative Development:
