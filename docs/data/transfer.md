@@ -374,6 +374,7 @@ copies a file from the SAMBA directory to the local machine. Notice the use of d
 ```
 smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='put "full path/to/local file.txt" "full path/to/remote file.txt"'
 ```
+copies a file from the local machine to the SMB directory.
 
 Moving whole directories is a bit more involved, as it requires setting some state variables for the session, both for interactive and non-interactive sessions. To download a directory for instance, use
 ```bash
