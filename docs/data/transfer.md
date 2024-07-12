@@ -286,9 +286,12 @@ For more details on the university central storage, you can have a look at
 !!! info "Connecting to central data storage services from a personal machine"
     The examples presented here are targeted to the university HPC machines. To connect to the university central data storage with a (Linux) personal machine from outside of the university network, you need to start first a VPN connection.
 
-The SMB shares exported for directories in the central data storage are meant to be accesses interactively. Unlike mounting with `sshfs`, you will always need to enter your password to access a directory from the central data storage, so you cannot use SMB share in job scripts at login nodes. Transfer your data manually after your job has finished. You can mount directories from the central data storage in the login nodes, and access the central data storage through the interface of `smbclient` from both the login nodes and the compute nodes in interactive jobs.
+The SMB shares exported for directories in the central data storage are meant to be accessed interactively. Transfer your data manually before and after your jobs are run. You can mount directories from the central data storage in the login nodes, and access the central data storage through the interface of `smbclient` from both the compute nodes during interactive jobs and the login nodes.
 
-The following commands are for Atlas, but commands for Poseidon are similar.
+!!! danger "Never store your password in plain text"
+    Unlike mounting with `sshfs`, you will always need to enter your password to access a directory in an SMB share. Avoid, storing your password in any manner that it makes it recoverable from plain text. For instance, **do not** create job scripts that contain your password in plain text just to move data to Atlas within a job.
+
+The following commands target Atlas, but commands for Poseidon are similar.
 
 ### Mounting an SMB share to a login node
 
