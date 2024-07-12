@@ -251,7 +251,7 @@ Proceed as follows (_assuming_ you have a working [SSH connection](../connect/ss
 ```bash
 # Create a local directory for the mounting point
 mkdir -p ~/ulhpc # Your prefered mount point
-sshfs iris-cluster:~/ulhpc -o follow_symlinks -o reconnect -o dir_cache=no
+sshfs iris-cluster: ~/ulhpc -o follow_symlinks -o reconnect -o dir_cache=no
 ```
 Options used:
 
