@@ -343,7 +343,7 @@ The `smb-storage` script provides a optional flags to modify the default options
 
 ### Accessing SMB shares with `smbclient`
 
-The `smbclient` program is available in both login and compute nodes. In compute nodes the only way to access SMB shares is through the client program. With the SMC client one can connect to the `users` share and browse their personal directory with the command:
+The `smbclient` program is available in both login and compute nodes. In compute nodes the only way to access SMB shares is through the client program. With the SMB client one can connect to the `users` share and browse their personal directory with the command:
 ```
 smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu
 ```
@@ -358,7 +358,7 @@ Type `help` to get a list of all available commands or `help (command_name)` to 
 - `mkdir (directory_name)` to create a directory,
 - `rm (file_name)` to remove a file,
 - `rmdir (directory_name)` to remove a directory,
-- `scopy (source_full_path) (destination_full_path)` to move a file _within_ the SAMBA shared directory,
+- `scopy (source_full_path) (destination_full_path)` to move a file _within_ the SMN shared directory,
 - `get (file_name) [destination]` to move a file _from_ Atlas to the local machine (placed in the working directory, if the destination is not specified), and
 - `put (file_name) [destination]` to move a file _to_ Atlas from the local machine (placed in the working directory, if a full path is not specified),
 - `mget (file name pattern) [destination]` to download multiple files, and
@@ -366,11 +366,11 @@ Type `help` to get a list of all available commands or `help (command_name)` to 
 
 The patterns used in `mget`/`mput` are either normal file names, or globular expressions (e.g. `*.txt`). 
 
-Connecting into an interactive SAMBA session means that you will have to maintain a shell session dedicated to SAMBA. However, it saves you from entering your password for every operation. If you would like to perform a single operation and exit, you can avoid maintaining an interactive session with the `--command` flag. For instance,
+Connecting into an interactive SMB session means that you will have to maintain a shell session dedicated to SMB. However, it saves you from entering your password for every operation. If you would like to perform a single operation and exit, you can avoid maintaining an interactive session with the `--command` flag. For instance,
 ```
 smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='get "full path/to/remote file.txt" "full path/to/local file.txt"'
 ```
-copies a file from the SAMBA directory to the local machine. Notice the use of double quotes to handle file names with spaces. Similarly,
+copies a file from the SMB directory to the local machine. Notice the use of double quotes to handle file names with spaces. Similarly,
 ```
 smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='put "full path/to/local file.txt" "full path/to/remote file.txt"'
 ```
