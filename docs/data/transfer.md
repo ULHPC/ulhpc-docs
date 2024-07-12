@@ -297,7 +297,7 @@ The following commands target Atlas, but commands for Poseidon are similar.
 
 The UL HPC team provides the `smb-storage` script to mount SMB shares in login nodes.
 
-- To mount your default user directory from the default `users` share (only for staff members) call in an shell session
+- There exists an SMB share `users` where all staff member have a directory named after their user name (`name.surname`). To mount your directory in an shell session at a login node execute the command
 ```bash
 smb-storage mount name.surname
 ```
@@ -305,7 +305,7 @@ and your directory will be mounted to the default mount location:
 ```
 ~/atlas.uni.lux-users-name.surname
 ```
-- To mount a project share `project_name` call in a shell session
+- To mount a project share `project_name` in a shell session at a login node execute the command
 ```bash
 smb-storage mount name.surname --project project_name
 ```
@@ -322,27 +322,25 @@ or:
 smb-storage unmount ~/atlas.uni.lux-project_name
 ```
 
-The `smb-storage` script provides a optional flags to modify the default options:
+The `smb-storage` script provides optional flags to modify the default options:
 
-- `--help` or `-h` prints information about the usage and options of he script,
-- `--server <server url>` or `-s <server url>` specifies the server from which the SMB share is mounted (use `--server poseidon.uni.lux` to mount a share from Poseidon),
-- `--project <project name>` or `-p <project name>` mounts the share `<project name>` (the default project `users` is mounted),
-- `--mountpoint <path>` or `-m <path>` selects the path where the share will be mounted (the default location is `~/<server url>-<project name>-<linked directory>`),
-- `--debug` of `-d` print details of the operations performed by the mount script.
+- `--help` prints information about the usage and options of he script;
+- `--server <server url>` specifies the server from which the SMB share is mounted (defaults to `--server atlas.uni.lux` if not specified, use `--server poseidon.uni.lux` to mount a share from Poseidon);
+- `--project <project name> [<directory in project>]` mounts the share `<project name>` and creates a symbolic link to the optionally provided location `<directory in project>`, or to the project root directory if a location is not provided (defaults to `--project users name.surname` if not specified);
+- `--mountpoint <path>` selects the path where the share directory will be available (defaults to `~/<server url>-<project name>-<directory in project>` if nbot specified);
+- `--debug` prints details of the operations performed by the mount script.
 
 !!! info "Best practices"
-
-    Mounted SMB shares will be available in the login node, the mount point will appear as a dead symbolic link in compute nodes. This is be design, you can only mount SMB shares in login nodes because SMB shares are meant to be used in interactive sections.
+    Mounted SMB shares will be available in the login node, and he mount point will appear as a dead symbolic link in compute nodes. This is be design, you can only mount SMB shares in login nodes because SMB shares are meant to be used in interactive sections.
 
     Mounted shares will remain available as long as the login session where the share was mounted remains active. You can mount shares in a `tmux` session in a login node, and access the share from any other session in the login node.
 
 ??? info "Details of the mounting process"
-    There exists a default SMB share `users` where all staff member have a directory named after their user name (`name.surname`). If no share is specified with the `--project` flag, the default share `users` is mounted in a specially named directory in `/run/user/${UID}/gvfs`, and a symbolic link to the user folder is created in the mount location by the `smb-storage` script.
+    There exists an SMB share `users` where all staff member have a directory named after their user name (`name.surname`). All other projects have an SMB share named after the project name (in lowercase characters).
 
-    All projects have a share named after the project name. If a project is specified with the `--project` flag, the project share is mounted in a specially named directory in `/run/user/${UID}/gvfs`, and a symbolic link to the whole project directory is created in the mount location by the `smb-storage` script.
+    The `smb-storage` scripts uses `gio mount` to mount SMB shares. Shares are mounted in a specially named mount point in `/run/user/${UID}/gvfs`. Then, `smb-storage` creates a symbolic link to the requested `directory in project` in the path specified in the `--mountpoint` option.
 
-    During unmounting, the symbolic links are deleted by the `smb-storage` script, and the shares mounted in `/run/user/${UID}/gvfs` are unmounted and their mount points are removed. **If a session with mounted SMB shares terminates without unmounting the shares, the shares in `/run/user/${UID}/gvfs` will be unmounted and their mount points deleted, but the symbolic links created by `smb-storage` must be removed manually.**
-
+    During unmounting, the symbolic links are deleted by the `smb-storage` script and then the shares mounted in `/run/user/${UID}/gvfs` are unmounted and their mount points are removed using `gio mount --unmount`. **If a session with mounted SMB shares terminates without unmounting the shares**, the shares in `/run/user/${UID}/gvfs` will be unmounted and their mount points deleted, but **the symbolic links created by `smb-storage` must be removed manually**.
 
 ### Accessing SMB shares with `smbclient`
 
