@@ -248,22 +248,18 @@ sshfs [user@]host:[dir] mountpoint [options]
 ```
 
 Proceed as follows (_assuming_ you have a working [SSH connection](../connect/ssh.md)):
-
 ```bash
-# Create a local directory hosting the mountng point
-mkdir -p ~/ulhpc        # /!\ ADAPT accordingly to match your taste
-sshfs iris-cluster: ~/ulhpc   -o allow_other,defer_permissions,follow_symlinks,reconnect -ocache=no -onolocalcaches
-# General options:
-#   allow_other:  Allow other users than the mounter (i.e. root) to access the share
-#   reconnect:    try to reconnnect
-# Optional options to be more "Mac-like":
-#   -ocache=no
-#   -onolocalcaches
-#   -o volname=ulhpc_home   Name of the volume in Finder
+# Create a local directory for the mounting point
+mkdir -p ~/ulhpc # Your prefered mount point
+sshfs iris-cluster:~/ulhpc -o follow_symlinks -o reconnect -o dir_cache=no
 ```
+Options used:
 
-Later on (once you no longer need it), you **MUST** unmount your remote FS
+- `follow_symlinks` presents symbolic links in the remote files system as regular files in the local file system, useful when the symbolic link points outside the mounted directory;
+- `reconnect` allows the SSHFS client to automatically reconnect to server if connection is interrupted;
+- `dir_cache` enables or disables the directory cache which holds the names of directory entries (can be slow for mounted remote directories with many files).
 
+When you no longer need the mounted remote directory, you **must** unmount your remote file system:
 ```bash
 # Linux
 fusermount -u ~/ulhpc
@@ -286,15 +282,18 @@ For more details on the university central storage, you can have a look at
 !!! info "Connecting to central data storage services from a personal machine"
     The examples presented here are targeted to the university HPC machines. To connect to the university central data storage with a (Linux) personal machine from outside of the university network, you need to start first a VPN connection.
 
-The SMB shares exported for directories in the central data storage are meant to be accesses interactively. Unlike mounting with `sshfs`, you will always need to enter your password to access a directory from the central data storage, so you cannot use SMB share in job scripts at login nodes. Transfer your data manually after your job has finished. You can mount directories from the central data storage in the login nodes, and access the central data storage through the interface of `smbclient` from both the login nodes and the compute nodes in interactive jobs.
+The SMB shares exported for directories in the central data storage are meant to be accessed interactively. Transfer your data manually before and after your jobs are run. You can mount directories from the central data storage in the login nodes, and access the central data storage through the interface of `smbclient` from both the compute nodes during interactive jobs and the login nodes.
 
-The following commands are for Atlas, but commands for Poseidon are similar.
+!!! danger "Never store your password in plain text"
+    Unlike mounting with `sshfs`, you will always need to enter your password to access a directory in an SMB share. Avoid, storing your password in any manner that it makes it recoverable from plain text. For instance, **do not** create job scripts that contain your password in plain text just to move data to Atlas within a job.
+
+The following commands target Atlas, but commands for Poseidon are similar.
 
 ### Mounting an SMB share to a login node
 
 The UL HPC team provides the `smb-storage` script to mount SMB shares in login nodes.
 
-- To mount your default user directory from the default `users` share (only for staff members) call in an shell session
+- There exists an SMB share `users` where all staff member have a directory named after their user name (`name.surname`). To mount your directory in an shell session at a login node execute the command
 ```bash
 smb-storage mount name.surname
 ```
@@ -302,7 +301,7 @@ and your directory will be mounted to the default mount location:
 ```
 ~/atlas.uni.lux-users-name.surname
 ```
-- To mount a project share `project_name` call in a shell session
+- To mount a project share `project_name` in a shell session at a login node execute the command
 ```bash
 smb-storage mount name.surname --project project_name
 ```
@@ -319,31 +318,29 @@ or:
 smb-storage unmount ~/atlas.uni.lux-project_name
 ```
 
-The `smb-storage` script provides a optional flags to modify the default options:
+The `smb-storage` script provides optional flags to modify the default options:
 
-- `--help` or `-h` prints information about the usage and options of he script,
-- `--server <server url>` or `-s <server url>` specifies the server from which the SMB share is mounted (use `--server poseidon.uni.lux` to mount a share from Poseidon),
-- `--project <project name>` or `-p <project name>` mounts the share `<project name>` (the default project `users` is mounted),
-- `--mountpoint <path>` or `-m <path>` selects the path where the share will be mounted (the default location is `~/<server url>-<project name>-<linked directory>`),
-- `--debug` of `-d` print details of the operations performed by the mount script.
+- `--help` prints information about the usage and options of he script;
+- `--server <server url>` specifies the server from which the SMB share is mounted (defaults to `--server atlas.uni.lux` if not specified, use `--server poseidon.uni.lux` to mount a share from Poseidon);
+- `--project <project name> [<directory in project>]` mounts the share `<project name>` and creates a symbolic link to the optionally provided location `<directory in project>`, or to the project root directory if a location is not provided (defaults to `--project users name.surname` if not specified);
+- `--mountpoint <path>` selects the path where the share directory will be available (defaults to `~/<server url>-<project name>-<directory in project>` if nbot specified);
+- `--debug` prints details of the operations performed by the mount script.
 
 !!! info "Best practices"
-
-    Mounted SMB shares will be available in the login node, the mount point will appear as a dead symbolic link in compute nodes. This is be design, you can only mount SMB shares in login nodes because SMB shares are meant to be used in interactive sections.
+    Mounted SMB shares will be available in the login node, and he mount point will appear as a dead symbolic link in compute nodes. This is be design, you can only mount SMB shares in login nodes because SMB shares are meant to be used in interactive sections.
 
     Mounted shares will remain available as long as the login session where the share was mounted remains active. You can mount shares in a `tmux` session in a login node, and access the share from any other session in the login node.
 
 ??? info "Details of the mounting process"
-    There exists a default SMB share `users` where all staff member have a directory named after their user name (`name.surname`). If no share is specified with the `--project` flag, the default share `users` is mounted in a specially named directory in `/run/user/${UID}/gvfs`, and a symbolic link to the user folder is created in the mount location by the `smb-storage` script.
+    There exists an SMB share `users` where all staff member have a directory named after their user name (`name.surname`). All other projects have an SMB share named after the project name (in lowercase characters).
 
-    All projects have a share named after the project name. If a project is specified with the `--project` flag, the project share is mounted in a specially named directory in `/run/user/${UID}/gvfs`, and a symbolic link to the whole project directory is created in the mount location by the `smb-storage` script.
+    The `smb-storage` scripts uses `gio mount` to mount SMB shares. Shares are mounted in a specially named mount point in `/run/user/${UID}/gvfs`. Then, `smb-storage` creates a symbolic link to the requested `directory in project` in the path specified in the `--mountpoint` option.
 
-    During unmounting, the symbolic links are deleted by the `smb-storage` script, and the shares mounted in `/run/user/${UID}/gvfs` are unmounted and their mount points are removed. **If a session with mounted SMB shares terminates without unmounting the shares, the shares in `/run/user/${UID}/gvfs` will be unmounted and their mount points deleted, but the symbolic links created by `smb-storage` must be removed manually.**
-
+    During unmounting, the symbolic links are deleted by the `smb-storage` script and then the shares mounted in `/run/user/${UID}/gvfs` are unmounted and their mount points are removed using `gio mount --unmount`. **If a session with mounted SMB shares terminates without unmounting the shares**, the shares in `/run/user/${UID}/gvfs` will be unmounted and their mount points deleted, but **the symbolic links created by `smb-storage` must be removed manually**.
 
 ### Accessing SMB shares with `smbclient`
 
-The `smbclient` program is available in both login and compute nodes. In compute nodes the only way to access SMB shares is through the client program. With the SMC client one can connect to the `users` share and browse their personal directory with the command:
+The `smbclient` program is available in both login and compute nodes. In compute nodes the only way to access SMB shares is through the client program. With the SMB client one can connect to the `users` share and browse their personal directory with the command:
 ```
 smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu
 ```
@@ -358,7 +355,7 @@ Type `help` to get a list of all available commands or `help (command_name)` to 
 - `mkdir (directory_name)` to create a directory,
 - `rm (file_name)` to remove a file,
 - `rmdir (directory_name)` to remove a directory,
-- `scopy (source_full_path) (destination_full_path)` to move a file _within_ the SAMBA shared directory,
+- `scopy (source_full_path) (destination_full_path)` to move a file _within_ the SMN shared directory,
 - `get (file_name) [destination]` to move a file _from_ Atlas to the local machine (placed in the working directory, if the destination is not specified), and
 - `put (file_name) [destination]` to move a file _to_ Atlas from the local machine (placed in the working directory, if a full path is not specified),
 - `mget (file name pattern) [destination]` to download multiple files, and
@@ -366,14 +363,15 @@ Type `help` to get a list of all available commands or `help (command_name)` to 
 
 The patterns used in `mget`/`mput` are either normal file names, or globular expressions (e.g. `*.txt`). 
 
-Connecting into an interactive SAMBA session means that you will have to maintain a shell session dedicated to SAMBA. However, it saves you from entering your password for every operation. If you would like to perform a single operation and exit, you can avoid maintaining an interactive session with the `--command` flag. For instance,
+Connecting into an interactive SMB session means that you will have to maintain a shell session dedicated to SMB. However, it saves you from entering your password for every operation. If you would like to perform a single operation and exit, you can avoid maintaining an interactive session with the `--command` flag. For instance,
 ```
 smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='get "full path/to/remote file.txt" "full path/to/local file.txt"'
 ```
-copies a file from the SAMBA directory to the local machine. Notice the use of double quotes to handle file names with spaces. Similarly,
+copies a file from the SMB directory to the local machine. Notice the use of double quotes to handle file names with spaces. Similarly,
 ```
 smbclient //atlas.uni.lux/users --directory='name.surname' --user=name.surname@uni.lu --command='put "full path/to/local file.txt" "full path/to/remote file.txt"'
 ```
+copies a file from the local machine to the SMB directory.
 
 Moving whole directories is a bit more involved, as it requires setting some state variables for the session, both for interactive and non-interactive sessions. To download a directory for instance, use
 ```bash
