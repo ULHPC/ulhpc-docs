@@ -248,22 +248,18 @@ sshfs [user@]host:[dir] mountpoint [options]
 ```
 
 Proceed as follows (_assuming_ you have a working [SSH connection](../connect/ssh.md)):
-
 ```bash
-# Create a local directory hosting the mountng point
-mkdir -p ~/ulhpc        # /!\ ADAPT accordingly to match your taste
-sshfs iris-cluster: ~/ulhpc   -o allow_other,defer_permissions,follow_symlinks,reconnect -ocache=no -onolocalcaches
-# General options:
-#   allow_other:  Allow other users than the mounter (i.e. root) to access the share
-#   reconnect:    try to reconnnect
-# Optional options to be more "Mac-like":
-#   -ocache=no
-#   -onolocalcaches
-#   -o volname=ulhpc_home   Name of the volume in Finder
+# Create a local directory for the mounting point
+mkdir -p ~/ulhpc # Your prefered mount point
+sshfs iris-cluster:~/ulhpc -o follow_symlinks -o reconnect -o dir_cache=no
 ```
+Options used:
 
-Later on (once you no longer need it), you **MUST** unmount your remote FS
+- `follow_symlinks` presents symbolic links in the remote files system as regular files in the local file system, useful when the symbolic link points outside the mounted directory;
+- `reconnect` allows the SSHFS client to automatically reconnect to server if connection is interrupted;
+- `dir_cache` enables or disables the directory cache which holds the names of directory entries (can be slow for mounted remote directories with many files).
 
+When you no longer need the mounted remote directory, you **must** unmount your remote file system:
 ```bash
 # Linux
 fusermount -u ~/ulhpc
