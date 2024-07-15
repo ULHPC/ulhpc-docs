@@ -89,7 +89,7 @@ The following script is an example how to proceed:
     wait $pid
     ```
 
-Once your job is running (see [Joining/monitoring running jobs](../jobs/submit.md#joiningmonitoring-running-jobs)), you can use `ssh` [forwarding](../connect/ssh.md#ssh-port-forwarding) to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command in the file `notebook.log`.
+Once your job is running (see [Joining/monitoring running jobs](../jobs/submit.md#joiningmonitoring-running-jobs)), you can use `ssh` [forwarding](../connect/ssh.md#ssh-port-forwarding) and an [ssh jump](../connect/ssh.md#ssh-jumps) through the login node to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command in the file `notebook.log`.
 You should be now able to reach your notebook.
 
 Then open your browser and go to the url: `http://127.0.0.1:8888/`. Jupyter should ask you for a password (see screenshot below). This password can be set before running the jupyter notebook and his part of the initial configuartion detailed at [Jupyter official documentation](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html).
