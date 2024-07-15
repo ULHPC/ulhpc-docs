@@ -500,6 +500,26 @@ You can forward a remote port back to a host protected by your firewall.
 By using the `-g` parameter, you allow connections from other hosts than localhost to use your SSH tunnels. Be warned that anybody within your network may access the tunnelized host this way, which may be a security issue.
 
 
+### SSH jumps
+
+Compute nodes are not directly accessible through the network. To login into a cluster node you will need to jump through a login node. The ssh agent is [not configured in the login nodes](#on-ulhpc-clusters) for security reasons. To configure a jump to a compute node, you will need to install a key in your ssh configuration. Create a key in your local machine,
+```bash
+ssh-keygen -a 127 -t ed25519 -f ~/.ssh/hpc_id_ed25519
+```
+and then copy both the private and public keys in your HPC account,
+```bash
+scp ~/.ssh/hpc_id_ed25519* aion-cluster:~/.ssh/
+```
+where the command assumes that you have setup your [SSH configuration file](#ssh-configuration). Finally, add the key to the list of authorized keys:
+```bash
+ssh-copy-id -i ~/.ssh/hpc_id_ed25519 aion-cluster
+```
+Then you can connect to any compute node to which you have a job running with the command:
+```bash
+ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-aion.uni.lu:8022 ${USER}@<node address>
+```
+
+ Usually the node address can be the node IP of the node name. You can combine this command with other options, such as [port forwarding](#ssh-port-forwarding), for instance to access a web server running in a compute node.
 
 ## Extras Tools around SSH
 
