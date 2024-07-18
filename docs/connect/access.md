@@ -48,6 +48,12 @@ On access nodes, typical user tasks include
     interval such as 5 minutes (=300 sec), e.g., `watch -n 300
     <your_command>`.
 
+!!! warning "Avoid `Visual Studio Code`"
+    Avoid using `Visual Studio Code` to connect to the HPC, as it is heavy and bloats
+    the servers. Heavy development shouldn't be done directly on the HPC.
+    For most tasks using a terminal based editor should be enough like:
+    `Vim` or `Emacs`. If you want to have some more advanced features try [`Neovim`](https://neovim.io/)
+    where you can add plugins to meet your specific needs.
 
 ## Tips
 
@@ -75,3 +81,14 @@ On access nodes, typical user tasks include
         ```bash
         ssh -X aion-cluster   # OR on Mac OS: ssh -Y aion-cluster
         ```
+
+!!! tip "Install Neovim using Micormamba"
+    Neovim is not installed by default on the HPC but you can install it using [Micromamba](../environment/conda.md#Installation).
+    
+    ```bash
+    micromamba install conda-forge::nvim
+    ```
+    After installation create a alias under `.bashrc` like this:
+    ```bash 
+    alias nvim='micromamba run -n nvim nvim'
+    ```
