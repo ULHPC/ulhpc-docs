@@ -63,7 +63,7 @@ Externals - a University staff member must request the account for you, using th
 3. Your account will undergo user checks, in accordance with ULHPC policies, to verify your identity and the information proposed. Under some circumstances, there could be a delay while this vetting takes place.
 4. After vetting has completed, you will receive a welcome email with your login information, and a unique link to a [PrivateBin](https://privatebin.info/) [^1] holding a random temporary password. That link will expire if not used within 24 hours.
 The PI and PI Proxies for the project will be notified when applicable.
-5. Finally, you will need to log into the [HPC IPA](https://***REMOVED***) Portal to set up your initial password and Multi-Factor Authentication (MFA) for your account.
+5. Finally, you will need to log into the [HPC IPA](https://hpc-ipa.uni.lu/ipa/ui/) Portal to set up your initial password and Multi-Factor Authentication (MFA) for your account.
     * **Your new password must adhere to ULHPC's password requirements**
         - see  [Password policy and guidelines](../policies/passwords.md)
     * [ULHPC Identity Management (IPA portal) documentation](../connect/ipa.md)
@@ -72,7 +72,7 @@ The PI and PI Proxies for the project will be notified when applicable.
 ??? warning "UL HPC $\neq$ University credentials"
     Be aware that the source of authentication for the HPC services based on [RedHat IdM/IPA](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/linux_domain_identity_authentication_and_policy_guide/index) **DIFFERS** from the University credentials (based on UL Active Directory).
 
-    * ULHPC credentials are maintained by the HPC team; associated portal: <https://***REMOVED***>
+    * ULHPC credentials are maintained by the HPC team; associated portal: <https://hpc-ipa.uni.lu/ipa/ui/>
         - authentication service for: UL HPC
     * University credentials are maintained by the IT team of the University
         - authentication service for Service Now and all other UL services
