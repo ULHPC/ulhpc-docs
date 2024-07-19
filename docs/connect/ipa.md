@@ -1,6 +1,6 @@
 # ULHPC Identity Management Portal (IdM/IPA)
 
-* [Reference Redhat 7 Documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Linux_Domain_Identity_Authentication_and_Policy_Guide/introduction.html)
+[:fontawesome-solid-link: ULHPC Identity Management Portal](https://hpc-ipa.uni.lu/ipa/ui/){: .md-button .md-button--link }
 
 Red Hat Identity Management (IdM), formally referred to as IPA ("Identity, Policy, and Audit" -- see also
 <https://www.freeipa.org>),  provides a centralized and unified way to manage
@@ -18,8 +18,11 @@ highly redundant setup involving several Redhat IdM/IPA server.
     **Be aware that the ULHPC team review on a periodical basis the compliance to the policy, as well as the security of your keys.**
     See also the [note on deprecated/weak DSA/RSA keys](troubleshooting.md#access-denied-or-permission-denied-publickey)
 
+_References_
+
+* [Redhat 7 Documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Linux_Domain_Identity_Authentication_and_Policy_Guide/introduction.html)
+
 ## Upload your SSH key on the ULHPC Identity Management Portal
-[:fontawesome-solid-link: ULHPC Identity Management Portal](https://hpc-ipa.uni.lu/ipa/ui/){: .md-button .md-button--link }
 
 You should upload your public SSH key(s) `*.pub` to your user entry on the  ULHPC Identity Management Portal.
 For that, connect to the ULHPC IdM portal (use the URL communicated to you by the UL HPC team in your "welcome" mail) and enter your **ULHPC** credentials.
