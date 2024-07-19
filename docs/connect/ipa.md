@@ -19,6 +19,7 @@ highly redundant setup involving several Redhat IdM/IPA server.
     See also the [note on deprecated/weak DSA/RSA keys](troubleshooting.md#access-denied-or-permission-denied-publickey)
 
 ## Upload your SSH key on the ULHPC Identity Management Portal
+[:fontawesome-solid-link: ULHPC Identity Management Portal](https://hpc-ipa.uni.lu/ipa/ui/){: .md-button .md-button--link }
 
 You should upload your public SSH key(s) `*.pub` to your user entry on the  ULHPC Identity Management Portal.
 For that, connect to the ULHPC IdM portal (use the URL communicated to you by the UL HPC team in your "welcome" mail) and enter your **ULHPC** credentials.
