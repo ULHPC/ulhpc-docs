@@ -49,8 +49,8 @@ On access nodes, typical user tasks include
     <your_command>`.
 
 !!! warning "Avoid `Visual Studio Code`"
-    Avoid using `Visual Studio Code` to connect to the HPC, as it is heavy and bloats
-    the servers. Heavy development shouldn't be done directly on the HPC.
+    Avoid using `Visual Studio Code` to connect to the HPC, as it consumes a lot of resources
+    in the login nodes. Heavy development shouldn't be done directly on the HPC.
     For most tasks using a terminal based editor should be enough like:
     `Vim` or `Emacs`. If you want to have some more advanced features try [`Neovim`](https://neovim.io/)
     where you can add plugins to meet your specific needs.
@@ -86,9 +86,10 @@ On access nodes, typical user tasks include
     Neovim is not installed by default on the HPC but you can install it using [Micromamba](../environment/conda.md#Installation).
     
     ```bash
-    micromamba install conda-forge::nvim
+    micromamba create --name editor-env
+    micromamba install --name editor-env conda-forge::nvim
     ```
-    After installation create a alias under `.bashrc` like this:
+    After installation you can create a alias in your `.bashrc` for easy access:
     ```bash 
-    alias nvim='micromamba run -n nvim nvim'
+    alias nvim='micromamba run --name editor-env nvim'
     ```
