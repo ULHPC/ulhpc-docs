@@ -222,6 +222,8 @@ You can also consider alternative approaches to synchronize data with the cluste
 
 ### SSHFS
 
+Install the requires packages if they are not already available in your system.
+
 === "Linux"
     ```bash
     # Debian-like
@@ -249,23 +251,27 @@ sshfs [user@]host:[dir] mountpoint [options]
 
 Proceed as follows (_assuming_ you have a working [SSH connection](../connect/ssh.md)):
 ```bash
-# Create a local directory for the mounting point
-mkdir -p ~/ulhpc # Your prefered mount point
-sshfs iris-cluster: ~/ulhpc -o follow_symlinks -o reconnect -o dir_cache=no
+# Create a local directory for the mounting point, e.g. ~/ulhpc
+mkdir -p ~/ulhpc
+# Mount the remote file system
+sshfs iris-cluster: ~/ulhpc -o follow_symlinks,reconnect,dir_cache=no
 ```
-Options used:
+Note the leaving the `[dir]` argument blanck, mounts the user's home directory by default. The options (`-o`) used are:
 
 - `follow_symlinks` presents symbolic links in the remote files system as regular files in the local file system, useful when the symbolic link points outside the mounted directory;
 - `reconnect` allows the SSHFS client to automatically reconnect to server if connection is interrupted;
 - `dir_cache` enables or disables the directory cache which holds the names of directory entries (can be slow for mounted remote directories with many files).
 
 When you no longer need the mounted remote directory, you **must** unmount your remote file system:
-```bash
-# Linux
-fusermount -u ~/ulhpc
-# Mac OS X
-diskutil umount ~/ulhpc
-```
+
+=== "Linux"
+    ```bash
+    fusermount -u ~/ulhpc
+    ```
+=== "Mac OS X"
+    ```
+    diskutil umount ~/ulhpc
+    ```
 
 ## Transfers between long term storage and the HPC facilities
 
