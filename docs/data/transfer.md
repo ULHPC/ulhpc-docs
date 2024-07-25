@@ -215,14 +215,15 @@ rsync -avzpP -e "ssh -p 8022" /drives/c/Users/janedoe/Downloads/ yourlogin@acces
 
 You can also consider alternative approaches to synchronize data with the cluster login node:
 
-* rely on a versioning system such as [GIT](http://git-scm.com); this approach works well for source code trees.
-* mount your remote homedir by [SSHFS](http://en.wikipedia.org/wiki/SSHFS). On Mac OS X, you should consider installing [MacFusion](http://macfusionapp.org) for this purpose - on classical Linux system, just use the command-line `sshfs` or, `mc`.
-    - see [below](#sshfs) for details
-* you can also rely on GUI tools like [FileZilla](https://filezilla-project.org/), [Cyberduck](https://cyberduck.io/) or [WindSCP](https://winscp.net/eng/download.php) or any paid alternative (like [ExpanDrive](https://www.expandrive.com/) or [ForkLift 3](https://binarynights.com/))
+- rely on a versioning system such as [Git](http://git-scm.com); this approach works well for source code trees;
+- mount your remote homedir by [SSHFS](#sshfs):
+    - on Mac OS X, you should consider installing [MacFusion](http://macfusionapp.org) for this purpose, where as
+    - on Linux, just use the command-line `sshfs` or, `mc`;
+- use GUI tools like [FileZilla](https://filezilla-project.org/), [Cyberduck](https://cyberduck.io/), or [WindSCP](https://winscp.net/eng/download.php) (or proprietary options like [ExpanDrive](https://www.expandrive.com/) or [ForkLift 3](https://binarynights.com/)).
 
 ### SSHFS
 
-Install the requires packages if they are not already available in your system.
+[SSHFS (SSH Filesystem)](https://en.wikipedia.org/wiki/SSHFS) is a file system client that mounts directories located on a remote server onto a local directory over a normal ssh connection. Install the requires packages if they are not already available in your system.
 
 === "Linux"
     ```bash
@@ -238,13 +239,9 @@ Install the requires packages if they are not already available in your system.
     # Assuming HomeBrew -- see https://brew.sh
     brew install osxfuse sshfs
     ```
-    You can also directly install macFUSE from <https://osxfuse.github.io/>
-    You must reboot for the installation of osxfuse to take effect.
-    You can then update to the latest version
+    You can also directly install macFUSE from: <https://osxfuse.github.io/>. You must reboot for the installation of osxfuse to take effect. You can then update to the latest version.
 
-
-SSHFS allows any user to remotely mount their ULHPC home directory onto a local workstation through an ssh connection.
-The CLI format is as follows:
+With SSHFS any user can mount their ULHPC home directory onto a local workstation through an ssh connection. The CLI format is as follows:
 ```
 sshfs [user@]host:[dir] mountpoint [options]
 ```
