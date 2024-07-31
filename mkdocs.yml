@@ -48,6 +48,7 @@ nav:
   - Access/Connect:
     - Access/Login Servers:          'connect/access.md'
     - SSH:                           'connect/ssh.md'
+    - Work on HPC:                   'connect/work.md'
     - Identity Management (IdM/IPA): 'connect/ipa.md'
     - Open On Demand Portal:         'connect/ood.md'
     - Troubleshooting:               'connect/troubleshooting.md'
