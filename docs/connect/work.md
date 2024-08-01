@@ -419,7 +419,7 @@ shortcuts you can create new windows and panes. Tmux will have a small status ba
 
 Example Picture of TMUX
 ![tmux](./images/tmux.png)
-as you can see in the picture there are 3 panes and 3 windows in the session.
+as you can see in the picture there are 3 panes in the session.
 
 Default keybindings:
 
