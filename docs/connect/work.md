@@ -172,9 +172,9 @@ Emacs is a powerful and extensible text editor that is popular among programmers
 
 Emacs has a wide range of features and modes that can be customized to suit your workflow. It is highly extensible and can be used for programming, writing, and more.
 
-### Nvim
+### NeoVim
 
-Nvim is a fork of Vim that aims to improve the user experience and add new features. It is compatible with Vim plugins and configurations but offers additional functionality and performance improvements.
+NeoVim is a fork of Vim that aims to improve the user experience and add new features. It is compatible with Vim plugins and configurations but offers additional functionality and performance improvements.
 
 <!--neovin-install-start-->
 
@@ -242,7 +242,7 @@ Do not install to many plugins as it can slow down the editor and make it harder
 There are many distributions of NeoVim that come pre-configured with plugins and settings but they will be limited on the HPC due to the lack of other required software.
 Create and maintain your own configuration to have full control over the editor and to learn more about how it works.
 
-## NeoVim Configuration Step by Step
+### NeoVim Configuration Step by Step
 In this section, we will go through the steps to configure NeoVim on the HPC. We will install NeoVim using conda/micromamba and create a basic configuration file to get started. This will allow you to customize the editor to your liking and add plugins and settings as needed. The configuration will be in Lua format, which is the recommended way to configure NeoVim.
 
 
