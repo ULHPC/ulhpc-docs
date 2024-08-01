@@ -406,3 +406,31 @@ Don't forget to create an alias for the editor-env in your `.bashrc` file.
 alias ripgrep='micromamba run -n editor-env ripgrep'
 alias fd='micromamba run -n editor-env fd'
 ```
+
+## TMUX
+[Tmux](https://github.com/tmux/tmux/wiki) is a terminal multiplexer that allows you to run multiple terminal sessions in a single window. It is useful for managing multiple tasks and keeping them organized. Tmux is pre-installed on most Linux systems and can be used to create and manage multiple terminal windows and panes. It is also available on the HPC and can be used to work more efficiently.
+
+### How to use TMUX
+To start a new tmux session, simply type `tmux` in the terminal. This will create a new tmux session with a single window. Now with the help of 
+shortcuts you can create new windows and panes. Tmux will have a small status bar at the bottom of the terminal that shows the current session, window, and pane.
+
+Example Picture of TMUX
+![tmux](./images/tmux.png)
+as you can see in the picture there are 3 panes and 3 windows in the session.
+
+Default keybindings:
+```
+- `Ctrl + b` followed by:
+    - `c`: Create a new window.
+    - `n`: Move to the next window.
+    - `p`: Move to the previous window.
+    - `0-9`: Move to the window number.
+    - `%`: Split the current pane vertically.
+    - `"`: Split the current pane horizontally.
+    - `x`: Close the current pane.
+    - `d`: Detach from the current session.
+    - `s`: List all sessions.
+    - `$`: Rename the current session.
+    - `?`: Show all keybindings.
+```
+They can be changed in the `~/.tmux.conf` file.
