@@ -15,14 +15,14 @@ To use it, you can run:
 uploadhpc file.txt /path/to/destinationOnHPC
 ```
 
-If the connection is successful, you should see something like this:
-![Successful-login](./images/success_connect.png)
-
 ## Connection to HPC
 
 When using a supercomputer, you will usually first connect to a front-end or access node. From this machine, you can check your files, disk quota and computing usage. It is intended to be used by the user to prepare his computing job and scripts and then submit them to the job scheduler.
 
 Because the access node is shared by all the users of the platform, it should not be used to compile and install your software and it should definitely not be used to run any memory or computing-intensive task.
+
+If the connection is successful, you should see something like this:
+![Successful-login](./images/success_connect.png)
 
 ## Linux Command Cheat Sheet
 
