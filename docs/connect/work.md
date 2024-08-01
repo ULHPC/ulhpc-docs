@@ -176,6 +176,21 @@ Emacs has a wide range of features and modes that can be customized to suit your
 
 Nvim is a fork of Vim that aims to improve the user experience and add new features. It is compatible with Vim plugins and configurations but offers additional functionality and performance improvements.
 
+<!--neovin-install-start-->
+
+!!! tip "Install Neovim using Micormamba"
+    Neovim is not installed by default on the HPC but you can install it using [Micromamba](../environment/conda.md#Installation).
+    
+    ```bash
+    micromamba create --name editor-env
+    micromamba install --name editor-env conda-forge::nvim
+    ```
+    After installation you can create a alias in your `.bashrc` for easy access:
+    ```bash 
+    alias nvim='micromamba run --name editor-env nvim'
+    ```
+<!--neovin-install-end-->
+
 NeoVim is not installed by default on most systems, but you can install it using conda/micromamba.
 
 - Open a file: `nvim [file]`
