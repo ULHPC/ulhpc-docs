@@ -413,6 +413,8 @@ alias ripgrep='micromamba run -n editor-env ripgrep'
 alias fd='micromamba run -n editor-env fd'
 ```
 
+There are many different ways of how to create a NeoVim config everyone does it differently. This is just one way of how to do it. The most important is that you understand how it works and how to configure it to your liking.
+
 ## TMUX
 [Tmux](https://github.com/tmux/tmux/wiki) is a terminal multiplexer that allows you to run multiple terminal sessions in a single window. It is useful for managing multiple tasks and keeping them organized. Tmux is pre-installed on most Linux systems and can be used to create and manage multiple terminal windows and panes. It is also available on the HPC and can be used to work more efficiently.
 
