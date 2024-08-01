@@ -382,6 +382,9 @@ require('lazy').setup('plugins')
 Plugins will be loaded form the `~/.config/nvim/lua/plugins/` directory. This is where you can add the configuration for the plugins you want to use. The `lazy.nvim` plugin manager is used to manage plugins and make it easier to install and update them.
 
 Example of a plugin configuration file for `Telescope.nvim`:
+```bash
+touch ~/.config/nvim/lua/plugins/telescope.lua
+```
 ```lua
 return {
     {
