@@ -399,7 +399,7 @@ This configuration file will install the `Telescope.nvim` plugin and its depende
 Most plugins will have a example configuration file for `lazy.nvim` that you can use to configure the plugin to your liking. Simply copy the configuration file to the `~/.config/nvim/lua/plugins/` directory and adjust the settings as needed.
 
 Some plugins like `telecope.nvim` will require additional software to be installed on the HPC to work properly. In this case
-the dependencies can be installed using conda/micromamba.
+the dependencies can be installed using conda/micromamba. The dependencies are [`ripgrep`](https://github.com/BurntSushi/ripgrep) and [`fd`](https://github.com/sharkdp/fd) and can be installed like this:
 ```bash
 micromamba install --name editor-env ripgrep
 micromamba install --name editor-env fd
