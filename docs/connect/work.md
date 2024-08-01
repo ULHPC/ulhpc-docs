@@ -419,8 +419,9 @@ Example Picture of TMUX
 as you can see in the picture there are 3 panes and 3 windows in the session.
 
 Default keybindings:
-```
+
 - `Ctrl + b` followed by:
+
     - `c`: Create a new window.
     - `n`: Move to the next window.
     - `p`: Move to the previous window.
@@ -432,5 +433,5 @@ Default keybindings:
     - `s`: List all sessions.
     - `$`: Rename the current session.
     - `?`: Show all keybindings.
-```
+
 They can be changed in the `~/.tmux.conf` file.
