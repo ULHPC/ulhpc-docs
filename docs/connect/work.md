@@ -1,9 +1,9 @@
 # Working on the HPC
 
-Now that the SSH is setup, you can start working on the HPC. Working on the HPC is done through the command line and its not recommended to use
-heavy IDEAS to connect to the HPC. If you want to use an IDE like visual studio code, work on your local machine and use git or scp/rsync to transfer the files to the HPC.
+Now that the [SSH](./ssh.md) is setup, you can start working on the HPC. Working on the HPC is done through the command line and its not recommended to use
+heavy IDEs to connect to the HPC. If you want to use an IDEs like Visual Studio Code, work on your local machine and use git or scp/rsync to transfer the files to the HPC.
 
-To use rsync, you can add the following line to your `.bashrc` file:
+To use [rsync](../data/transfer.md#using-rsync), you can add the following line to your `.bashrc` file:
 ```bash
 uploadhpc() {
   rsync --rsh='ssh -p 8022' -avzu $1 aion-cluster:$2
@@ -138,7 +138,7 @@ More information about the commands can be found in ...
 
 ## Text Editors
 
-When working on the HPC, you will need to edit files and scripts. The most common text editors on Linux are `nano`, `vim`, and `emacs`. Here is a brief overview of each:
+When working on the HPC, you will need to edit files and scripts. The most common text editors on Linux are [`nano`](https://www.nano-editor.org/git.php), [`vim`](https://github.com/vim/vim), and [`emacs`](https://www.gnu.org/software/emacs/). Here is a brief overview of each:
 
 ### Nano
 
@@ -174,7 +174,7 @@ Emacs has a wide range of features and modes that can be customized to suit your
 
 ### NeoVim
 
-NeoVim is a fork of Vim that aims to improve the user experience and add new features. It is compatible with Vim plugins and configurations but offers additional functionality and performance improvements.
+[NeoVim](https://neovim.io/) is a fork of Vim that aims to improve the user experience and add new features. It is compatible with Vim plugins and configurations but offers additional functionality and performance improvements.
 
 <!--neovin-install-start-->
 
