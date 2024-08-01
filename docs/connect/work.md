@@ -217,21 +217,21 @@ There are many ways to configure NeoVim. The most common way is to create a `ini
 like this:
 ```bash
 .
-├── init.lua
-├── lazy-lock.json
-├── lazyvim.json
-├── lua
-│   ├── config
-│   │   ├── init.lua
-│   │   ├── mappings.lua
-│   │   ├── options.lua
-│   │   ├── pluginlist.lua
-│   │   └── plugins.lua
-│   └── plugins
-│       ├── cmp.lua
-│       ├── lsp.lua
-│       ├── telescope.lua
-│       └── treesitter.lua
+|-- init.lua
+|-- lazy-lock.json
+`-- lua
+    |-- config
+    |   |-- init.lua
+    |   |-- mappings.lua
+    |   |-- options.lua
+    |   `-- plugins.lua
+    `-- plugins
+        |-- cmp.lua
+        |-- lualine.lua
+        |-- nvim-tree.lua
+        |-- telescope.lua
+        |-- theme.lua
+        `-- treesitter.lua
 ```
 
 This makes it easier to manage and update your configuration. Consider using a plugin manager that is popular to make it easier to install and manage plugins like `lazy.nvim`.
@@ -242,7 +242,7 @@ Do not install to many plugins as it can slow down the editor and make it harder
 There are many distributions of NeoVim that come pre-configured with plugins and settings but they will be limited on the HPC due to the lack of other required software.
 Create and maintain your own configuration to have full control over the editor and to learn more about how it works.
 
-# NeoVim Configuration Step by Step
+## NeoVim Configuration Step by Step
 In this section, we will go through the steps to configure NeoVim on the HPC. We will install NeoVim using conda/micromamba and create a basic configuration file to get started. This will allow you to customize the editor to your liking and add plugins and settings as needed. The configuration will be in Lua format, which is the recommended way to configure NeoVim.
 
 
@@ -287,3 +287,115 @@ It is not required to have a `init.lua` file in the `config` directory, it is po
 require('config.mappings') -- directory/file.lua
 ```
 
+8. Add the following code to the `~/.config/nvim/lua/config/init.lua` file to load the other configuration files.
+```lua
+local modules = {
+    'dir.file',
+    -- all the files you want to load
+    -- example: 'config.mappings',
+    -- example: 'config.options',
+    -- example: 'config.plugins',
+}
+
+for _, mod in ipairs(modules) do
+    local ok, err = pcall(require, mod)
+    if not ok then
+        error(("Error loading %s...\n\n%s"):format(mod, err))
+    end
+end
+```
+This code will load all the files in the `config` directory. You can add more files to the `modules` table to load additional configuration files.
+
+9. Add the following code to the `~/.config/nvim/lua/config/options.lua` file to set some basic options.
+```lua
+vim.g.mapleader = ' ' -- Leader Key space this will be used for most 
+                      --keybindings
+vim.g.maplocalleader = ' '
+
+vim.o.clipboard = 'unnamedplus' -- Use the system clipboard
+
+vim.o.number = true -- Show line numbers
+-- vim.o.relativenumber = true -- Show relative line numbers
+
+vim.o.signcolumn = 'yes' -- Show the sign column
+
+vim.o.tabstop = 4   -- Number of spaces that a <Tab> in the file counts for
+vim.o.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
+
+vim.o.updatetime = 300 -- Faster completion
+
+vim.o.termguicolors = true -- Enable true colors
+
+--vim.o.mouse = 'a' -- Enable mouse support
+```
+There are many options that can be set in NeoVim. The options above are just a few examples of common options that can be set. You can find more options in the NeoVim documentation.
+
+10. Add the following code to the `~/.config/nvim/lua/config/mappings.lua` file to set some basic keybindings.
+```lua
+-- Shorten function name
+local keymap = vim.keymap.set
+
+-- keymap('mode', 'keybinding', 'command', {options})
+
+-- Native keybindings
+keymap("n","<leader>s", ":vsp<CR>", {})
+keymap("n","<leader>q", ":q<CR>", {})
+
+-- Plugin keybindings
+-- NvimTree open/close
+keymap("n", "<C-n>", ":NvimTreeToggle<CR>", {})
+-- Telescope find files
+keymap("n", "<leader>ff", ":Telescope find_files<CR>", {}) 
+-- Telescope find word
+keymap("n", "<leader>fw", ":Telescope live_grep<CR>", {}) 
+```
+In this file, you can define custom keybindings for NeoVim. The `keymap` function is used to set keybindings for different modes (normal, insert, visual, etc.). The keybindings above are just a few examples of common keybindings that can be set. 
+
+11. Add the following code to the `~/.config/nvim/lua/config/plugins.lua` file to install and configure plugins.
+In this example config LazyNvim is used to manage plugins.
+```lua
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+require('lazy').setup('plugins')
+```
+
+Plugins will be loaded form the `~/.config/nvim/lua/plugins/` directory. This is where you can add the configuration for the plugins you want to use. The `lazy.nvim` plugin manager is used to manage plugins and make it easier to install and update them.
+
+Example of a plugin configuration file for `Telescope.nvim`:
+```lua
+return {
+    {
+        'nvim-telescope/telescope.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    },
+    {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+    }
+}
+```
+This configuration file will install the `Telescope.nvim` plugin and its dependencies. The `telescope-fzf-native.nvim` plugin is a native extension for `Telescope.nvim` that improves performance.
+
+Most plugins will have a example configuration file for LazyNvim that you can use to configure the plugin to your liking. Simply copy the configuration file to the `~/.config/nvim/lua/plugins/` directory and adjust the settings as needed.
+
+Some plugins like `telecope.nvim` will require additional software to be installed on the HPC to work properly. In this case
+the dependencies can be installed using conda/micromamba.
+```bash
+micromamba install --name editor-env ripgrep
+micromamba install --name editor-env fd
+```
+Don't forget to create an alias for the editor-env in your `.bashrc` file.
+```bash
+alias ripgrep='micromamba run -n nvim ripgrep'
+alias fd='micromamba run -n nvim fd'
+```
