@@ -150,7 +150,7 @@ Nano is a simple and user-friendly text editor that is easy to use for beginners
 
 ## Vim
 
-Vim is a powerful and highly configurable text editor that is popular among developers and system administrators. It has a steep learning curve but offers advanced features and customization options.
+Vim is a powerful and highly configurable text editor that is popular among developers and system administrators. It has a steep learning curve but offers advanced features and customization options. It is pre-installed on most Linux systems.
 
 - Open a file: `vim [file]`
 - Save a file: `:w`
@@ -160,7 +160,7 @@ Vim is different from most text editors in that it has different modes (normal, 
 
 In normal mode, you can navigate the file using the arrow keys or `hjkl` (left, down, up, right). You can also use commands like `dd` to delete a line, `yy` to copy a line, and `p` to paste.
 
-It is recommended to learn the basics of Vim to be more productive when working on the HPC.
+It is recommended to learn the basics of Vim also called vim motions to be more productive when working on the HPC.
 
 ## Emacs
 
@@ -172,7 +172,7 @@ Emacs is a powerful and extensible text editor that is popular among programmers
 
 Emacs has a wide range of features and modes that can be customized to suit your workflow. It is highly extensible and can be used for programming, writing, and more.
 
-## Nvim
+## NeoVim
 
 Nvim is a fork of Vim that aims to improve the user experience and add new features. It is compatible with Vim plugins and configurations but offers additional functionality and performance improvements.
 
@@ -200,7 +200,90 @@ NeoVim is not installed by default on most systems, but you can install it using
 Nvim is designed to be more user-friendly and modern than Vim while maintaining compatibility with existing Vim configurations. It is a good choice for users who want a more modern text editor with Vim-like keybindings.
 
 It offers a lot of plugins and themes to customize the editor to your liking.
-Consider watching videos on youtube to learn more about the text editors and the many features they offer.
+Consider watching videos or reading about it to learn more about the text editors and the many features they offer.
+
+### Recommended Plugins for NeoVim
+
+- `telescope.nvim` for fuzzy file finding and live grep.
+- `nvim-treesitter` for syntax highlighting and code analysis.
+- `nvim-tree` for file explorer.
+
+#### Not Tested
+- `nvim-lspconfig`  for language server protocol support. Most of them will probably not work on the HPC due to npm requirements.
 
 
+### How to configure NeoVim
+There are many ways to configure NeoVim. The most common way is to create a `init.vim` file in the `~/.config/nvim/` directory. This file can contain your custom settings, keybindings, and plugins. It is possible to everything in one file, but it is recommended to split the configuration into multiple files for better organization.
+like this:
+```bash
+.
+├── init.lua
+├── lazy-lock.json
+├── lazyvim.json
+├── lua
+│   ├── config
+│   │   ├── init.lua
+│   │   ├── mappings.lua
+│   │   ├── options.lua
+│   │   ├── pluginlist.lua
+│   │   └── plugins.lua
+│   └── plugins
+│       ├── cmp.lua
+│       ├── lsp.lua
+│       ├── telescope.lua
+│       └── treesitter.lua
+```
+
+This makes it easier to manage and update your configuration. Consider using a plugin manager that is popular to make it easier to install and manage plugins like `lazy.nvim`.
+
+Do not install to many plugins as it can slow down the editor and make it harder to maintain. Only install plugins that you need and use regularly. The 3 plugins mentioned above are a good starting point and cover most of the features you will need or want to work on the HPC.
+
+#### NeoVim distributions
+There are many distributions of NeoVim that come pre-configured with plugins and settings but they will be limited on the HPC due to the lack of other required software.
+Create and maintain your own configuration to have full control over the editor and to learn more about how it works.
+
+# NeoVim Configuration Step by Step
+In this section, we will go through the steps to configure NeoVim on the HPC. We will install NeoVim using conda/micromamba and create a basic configuration file to get started. This will allow you to customize the editor to your liking and add plugins and settings as needed. The configuration will be in Lua format, which is the recommended way to configure NeoVim.
+
+
+1. Install NeoVim using conda/micromamba.
+...
+
+2. Create the `~/.config/nvim/` directory.
+```bash
+mkdir -p ~/.config/nvim
+```
+
+3. Create the `init.lua` file in the `~/.config/nvim/` directory.
+```bash
+touch ~/.config/nvim/init.lua
+```
+
+4. Create the `lua` directory in the `~/.config/nvim/` directory.
+```bash
+mkdir -p ~/.config/nvim/lua
+```
+Every file in the `lua` directory can be loaded by NeoVim and will be used to configure the editor.
+
+5. Create the `config` directory in the `~/.config/nvim/lua/` directory.
+```bash
+mkdir -p ~/.config/nvim/lua/config
+```
+This directory can be called anything you want, but it is recommended to use a descriptive name to organize your configuration files.
+
+6. Create the `init.lua` file in the `~/.config/nvim/lua/config/` directory.
+```bash
+touch ~/.config/nvim/lua/config/init.lua
+```
+This file will be automatically loaded by NeoVim and can contain your custom settings and keybindings.
+
+7. Add the following code to the `~/.config/nvim/init.lua` file to load the configuration files.
+```lua
+require('config')
+```
+Since the `config` directory is in the `lua` directory and has a `init.lua` file in it, NeoVim will automatically load the `init.lua` file in the `config` directory.
+It is not required to have a `init.lua` file in the `config` directory, it is possible to specify the file to load like this:
+```lua
+require('config.mappings') -- directory/file.lua
+```
 
