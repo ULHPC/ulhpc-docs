@@ -204,12 +204,12 @@ Consider watching videos or reading about it to learn more about the text editor
 
 ### Recommended Plugins for NeoVim
 
-- `telescope.nvim` for fuzzy file finding and live grep.
-- `nvim-treesitter` for syntax highlighting and code analysis.
-- `nvim-tree` for file explorer.
+- [`telescope.nvim`](https://github.com/nvim-telescope/telescope.nvim) for fuzzy file finding and live grep.
+- [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter) for syntax highlighting and code analysis.
+- [`nvim-tree`](https://github.com/nvim-tree/nvim-tree.lua) for file explorer.
 
 #### Not Tested
-- `nvim-lspconfig`  for language server protocol support. Most of them will probably not work on the HPC due to npm requirements.
+- [`nvim-lspconfig`](nvim-lspconfig)  for language server protocol support. Most of them will probably not work on the HPC due to npm requirements.
 
 
 ### How to configure NeoVim
@@ -247,7 +247,14 @@ In this section, we will go through the steps to configure NeoVim on the HPC. We
 
 
 1. Install NeoVim using conda/micromamba.
-...
+<!-- tip about installing NeoVim  -->
+{%
+   include-markdown "work.md"
+   start="<!--neovin-install-start-->"
+   end="<!--neovin-install-end-->"
+%}
+
+
 
 2. Create the `~/.config/nvim/` directory.
 ```bash
@@ -396,6 +403,6 @@ micromamba install --name editor-env fd
 ```
 Don't forget to create an alias for the editor-env in your `.bashrc` file.
 ```bash
-alias ripgrep='micromamba run -n nvim ripgrep'
-alias fd='micromamba run -n nvim fd'
+alias ripgrep='micromamba run -n editor-env ripgrep'
+alias fd='micromamba run -n editor-env fd'
 ```
