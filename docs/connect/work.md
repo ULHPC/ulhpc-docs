@@ -186,7 +186,7 @@ Nvim is a fork of Vim that aims to improve the user experience and add new featu
     micromamba install --name editor-env conda-forge::nvim
     ```
     After installation you can create a alias in your `.bashrc` for easy access:
-    ```bash 
+    ```bash
     alias nvim='micromamba run --name editor-env nvim'
     ```
 <!--neovin-install-end-->
