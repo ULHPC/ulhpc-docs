@@ -359,7 +359,7 @@ keymap("n", "<leader>fw", ":Telescope live_grep<CR>", {})
 In this file, you can define custom keybindings for NeoVim. The `keymap` function is used to set keybindings for different modes (normal, insert, visual, etc.). The keybindings above are just a few examples of common keybindings that can be set. 
 
 11. Add the following code to the `~/.config/nvim/lua/config/plugins.lua` file to install and configure plugins.
-In this example config LazyNvim is used to manage plugins.
+In this example config lazy.nvim is used to manage plugins.
 ```lua
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -393,7 +393,7 @@ return {
 ```
 This configuration file will install the `Telescope.nvim` plugin and its dependencies. The `telescope-fzf-native.nvim` plugin is a native extension for `Telescope.nvim` that improves performance.
 
-Most plugins will have a example configuration file for LazyNvim that you can use to configure the plugin to your liking. Simply copy the configuration file to the `~/.config/nvim/lua/plugins/` directory and adjust the settings as needed.
+Most plugins will have a example configuration file for `lazy.nvim` that you can use to configure the plugin to your liking. Simply copy the configuration file to the `~/.config/nvim/lua/plugins/` directory and adjust the settings as needed.
 
 Some plugins like `telecope.nvim` will require additional software to be installed on the HPC to work properly. In this case
 the dependencies can be installed using conda/micromamba.
