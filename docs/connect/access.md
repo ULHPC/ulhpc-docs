@@ -82,14 +82,10 @@ On access nodes, typical user tasks include
         ssh -X aion-cluster   # OR on Mac OS: ssh -Y aion-cluster
         ```
 
-!!! tip "Install Neovim using Micormamba"
-    Neovim is not installed by default on the HPC but you can install it using [Micromamba](../environment/conda.md#Installation).
-    
-    ```bash
-    micromamba create --name editor-env
-    micromamba install --name editor-env conda-forge::nvim
-    ```
-    After installation you can create a alias in your `.bashrc` for easy access:
-    ```bash 
-    alias nvim='micromamba run --name editor-env nvim'
-    ```
+<!-- tip about installing NeoVim  -->
+{%
+   include-markdown "work.md"
+   start="<!--neovin-install-start-->"
+   end="<!--neovin-install-end-->"
+%}
+
