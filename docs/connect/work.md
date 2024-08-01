@@ -19,7 +19,11 @@ uploadhpc file.txt /path/to/destinationOnHPC
 
 When using a supercomputer, you will usually first connect to a front-end or access node. From this machine, you can check your files, disk quota and computing usage. It is intended to be used by the user to prepare his computing job and scripts and then submit them to the job scheduler.
 
-Because the access node is shared by all the users of the platform, it should not be used to compile and install your software and it should definitely not be used to run any memory or computing-intensive task.
+Because the access node is shared by all the users of the platform, it should not be used to compile and install your software and it should definitely not be used to run any memory or computing-intensive task. 
+
+!!! Warning "Running jobs on the access node"
+    Running jobs on the access node is not allowed and can lead to your account being suspended. Always use the job scheduler to run your jobs on the computing nodes.
+
 
 If the connection is successful, you should see something like this:
 ![Successful-login](./images/success_connect.png)
@@ -209,7 +213,7 @@ Consider watching videos or reading about it to learn more about the text editor
 - [`nvim-tree`](https://github.com/nvim-tree/nvim-tree.lua) for file explorer.
 
 #### Not Tested
-- [`nvim-lspconfig`](nvim-lspconfig)  for language server protocol support. Most of them will probably not work on the HPC due to npm requirements.
+- [`nvim-lspconfig`](nvim-lspconfig)  for language server protocol support. Most of them will probably not work on the HPC due to npm requirements or other requirements.
 
 
 ### How to configure NeoVim
@@ -297,7 +301,6 @@ require('config.mappings') -- directory/file.lua
 8. Add the following code to the `~/.config/nvim/lua/config/init.lua` file to load the other configuration files.
 ```lua
 local modules = {
-    'dir.file',
     -- all the files you want to load
     -- example: 'config.mappings',
     -- example: 'config.options',
@@ -435,3 +438,6 @@ Default keybindings:
     - `?`: Show all keybindings.
 
 They can be changed in the `~/.tmux.conf` file.
+
+## Personalizing the Terminal
+There are many ways to personalize the terminal to make it more user-friendly and efficient. You can change the color scheme, add custom prompts, and set up aliases and functions to make common tasks easier. Do those configurations at your own risk and make sure to backup the original files before making any changes.
