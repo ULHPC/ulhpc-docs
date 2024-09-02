@@ -11,7 +11,7 @@ Note however that we are not here to make your PhD at your place ;)
 * [Connection issues](../connect/troubleshooting.md)
 * [File Permissions](../filesystems/unix-file-permissions.md)
     - [Access rights to project directory](../data/transfer.md#data-transfer-within-project-directories)
-    - [Quotas and Purging](../filesystems/quotas.md#troubleshooting)
+    - [Quotas](../filesystems/quotas.md#troubleshooting)
 
 ## Read the Friendly Manual
 

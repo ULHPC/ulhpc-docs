@@ -37,6 +37,6 @@ In addition, the following file-systems complete the ULHPC storage infrastructur
 %}
 
 * [ULHPC backup policies](../data/backups.md)
-* [Quotas and purging policies](quotas.md)
+* [Quotas](quotas.md)
 * ULHPC [GPFS/SpectrumScale](gpfs.md) and [Lustre](lustre.md) filesystems
 * UL [Isilon/OneFS](isilon.md) filesystems

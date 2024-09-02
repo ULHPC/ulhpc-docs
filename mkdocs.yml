@@ -59,7 +59,7 @@ nav:
     - Data Sharing:               'data/sharing.md'
     - Data Transfer:              'data/transfer.md'
     - GDPR Compliance:            'data/gdpr.md'
-    - Quotas and Purging:         'filesystems/quotas.md'
+    - Quotas:                     'filesystems/quotas.md'
     - Project Data Management:    'data/project.md'
     - Scratch Data Management:    'filesystems/lfs.md'
     - Backups:                    'data/backups.md'

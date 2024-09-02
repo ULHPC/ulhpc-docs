@@ -19,10 +19,10 @@ In terms of raw storage capacities, it represents more than **1.6PB**.
 %}
 
 
-!!! warning "ULHPC `$SCRATCH` quotas, backup and purging policies"
+!!! warning "ULHPC `$SCRATCH` quotas and backup"
     Extended ACLs are provided for sharing data with other users using fine-grained control.
-    See [quotas](quotas.md) for detailed information about inode, space quotas, and file system purge policies.
-    In particular, your SCRATCH directory **[purged on a regular basis](quotas.md#purging)**, and is [**NOT** backuped](../data/backups.md) according to the policy detailed in the [ULHPC backup  policies](../data/backups.md).
+    See [quotas](quotas.md) for detailed information about inode, space quotas, and file system policies.
+    In particular, your SCRATCH directory is [**NOT** backuped](../data/backups.md) according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
 
 ??? info "A short history of Lustre"
     [Lustre](http://lustre.org/) was initiated & funded by the U.S. Department of Energy Office of Science & National Nuclear Security Administration laboratories in mid 2000s. Developments continue through the Cluster File Systems (ClusterFS) company founded in 2001.

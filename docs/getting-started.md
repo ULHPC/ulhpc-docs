@@ -162,7 +162,7 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 * [Global Directory Structure](data/layout.md)
 * [Transferring data](data/transfer.md): Tools and recommendations to transfer data both inside and outside
 of ULHPC.
-* [Quotas and Purging](filesystems/quotas.md)
+* [Quotas](filesystems/quotas.md)
 * Understanding [Unix File Permissions](filesystems/unix-file-permissions.md)
 
 
