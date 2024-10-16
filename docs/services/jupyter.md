@@ -151,7 +151,12 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
     wait ${lab_pid}
     ```
 
-Once your job is running (see [Joining/monitoring running jobs](../jobs/submit.md#joiningmonitoring-running-jobs)), you can use `ssh` [forwarding](../connect/ssh.md#ssh-port-forwarding) and an [ssh jump](../connect/ssh.md#ssh-jumps) through the login node to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command contained in the file `connection_instructions.log`, and then navigate to the webpage link provided.
+Once your job is running (see [Joining/monitoring running jobs](/jobs/submit.md#joiningmonitoring-running-jobs)), you can combine 
+
+- [`ssh` forwarding](/connect/ssh.md#ssh-port-forwarding), and
+- an [`ssh` jump](/connect/ssh.md#port-forwarding-over-ssh-jumps) through the login node,
+
+to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command contained in the file `connection_instructions.log`, and then navigate to the webpage link provided.
 
 !!! example "Example content  of `connection_instructions.log`"
     ```shell
@@ -168,11 +173,11 @@ Once your job is running (see [Joining/monitoring running jobs](../jobs/submit.m
     http://127.0.0.1:8888/?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
     ```
 
-As the instructions suggest, you should be able to access the node by calling
+As the instructions suggest, you access the jupyter lab server in the compute node by calling
 ```shell
 ssh -J gkafanas@access-aion.uni.lu:8022 -L 8888:172.21.12.29:8888 gkafanas@172.21.12.29
 ```
-a command that
+an SSH command that
 
 - opens a connection to your allocated cluster node jumping through the login node (`-J gkafanas@access-aion.uni.lu:8022 gkafanas@172.21.12.29`), and
 - exports the port to the jupyter server in the local machine (`-L 8888:172.21.12.29:888`).
@@ -185,7 +190,7 @@ http://127.0.0.1:8888/?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
 The link provides the access token, so you should be able to login without a password.
 
 !!! warning
-    Do not forget to click on the `quit` button when finished to stop the jupyter server and release the resources. Note that in the last line of the submission script the job waits for your Jupyter service to finish. 
+    Do not forget to click on the `quit` button when finished to stop the Jupyter server and release the resources. Note that in the last line of the submission script the job waits for your Jupyter service to finish. 
 
 If you encounter any issues, have a look in the debug output in `Jupyter_<job id>.out`.
 
