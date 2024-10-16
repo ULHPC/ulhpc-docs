@@ -61,7 +61,7 @@ Your key pairs will be located under `~/.ssh/` and follow the following format -
 ```bash
 $ ls -l ~/.ssh/id_*
 -rw------- username groupname ~/.ssh/id_rsa
--rw-r--r-- username groupname ~/.ssh/id_rsa.pub		# Public  RSA key
+-rw-r--r-- username groupname ~/.ssh/id_rsa.pub     # Public  RSA key
 -rw------- username groupname ~/.ssh/id_ed25519
 -rw-r--r-- username groupname ~/.ssh/id_ed25519.pub # Public ED25519 key
 ```
@@ -485,7 +485,7 @@ This is useful if you run a server on one of the cluster nodes (let's say listen
 
 ```bash
 # Here targeting iris cluster
-(laptop)$ ssh iris-cluster -L 1111:iris-014:2222
+(laptop) $ ssh iris-cluster -L 1111:iris-014:2222
 ```
 
 #### Forwarding a remote port
@@ -494,6 +494,12 @@ You can forward a remote port back to a host protected by your firewall.
 
 ![SSH forward of a remote port](images/SshR.png)
 
+This is useful when you want the HPC node to access some local service. For instance is your local machine runs a service that is listening at some local port, say 2222, and you have some service in the HPC node that listens to some local port, say 1111, then the you'll run:
+
+```bash
+# Here targeting the iris cluster
+(local machine) $ ssh iris-cluster -R 1111:$(hostname -i):2222
+```
 
 #### Tunnelling for others
 
@@ -502,7 +508,19 @@ By using the `-g` parameter, you allow connections from other hosts than localho
 
 ### SSH jumps
 
-Compute nodes are not directly accessible through the network. To login into a cluster node you will need to jump through a login node. The ssh agent is [not configured in the login nodes](#on-ulhpc-clusters) for security reasons. To configure a jump to a compute node, you will need to install a key in your ssh configuration. Create a key in your local machine,
+Compute nodes are not directly accessible from the outside network. To login into a cluster node you will need to jump through a login node. Remember, you need a job running in a node before you can ssh into it. Assume that you have some job running on `aion-0014` for instance. Then, connect to `aion-0014` with:
+
+```bash
+ssh -J ${USER}@access-aion.uni.lu:8022 ${USER}@aion-0014
+```
+
+The domain resolution in the login node will determine the IP of the `aion-0014`. You can always use the IP address if the node directly if you know it.
+
+#### Passwordless SSH jumps
+
+The ssh agent is [not configured in the login nodes](#on-ulhpc-clusters) for security reasons. As a result, compute nodes will request your password. To configure a passwordless jump to a compute node, you will need to install the same key in your ssh configuration of your local machine and the login node.
+
+To avoid exposing your keys at your personal machine, create and share a new key. Create a key in your local machine,
 ```bash
 ssh-keygen -a 127 -t ed25519 -f ~/.ssh/hpc_id_ed25519
 ```
@@ -514,12 +532,20 @@ where the command assumes that you have setup your [SSH configuration file](#ssh
 ```bash
 ssh-copy-id -i ~/.ssh/hpc_id_ed25519 aion-cluster
 ```
-Then you can connect to any compute node to which you have a job running with the command:
+Then you can connect without a password to any compute node at which you have a job running with the command:
 ```bash
 ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-aion.uni.lu:8022 ${USER}@<node address>
 ```
 
- Usually the node address can be the node IP of the node name. You can combine this command with other options, such as [port forwarding](#ssh-port-forwarding), for instance to access a web server running in a compute node.
+In the `<node address>` option you can use the node IP address or the node name.
+
+#### Port forwarding over SSH jumps
+
+You can combine the jump command with other options, such as [port forwarding](#ssh-port-forwarding), for instance to access from you local machine a web server running in a compute node. Assume for instance you have a server running in `iris-014` and listens at port `2222`, and that you would like to forward the port `2222` to the `2222` port of you local machine. The, call the port forwarding command with a jump though the login node:
+
+```bash
+ssh -J iris-cluster -L 1111:iris-014:2222 <cluster username>@iris-014
+```
 
 ## Extras Tools around SSH
 
