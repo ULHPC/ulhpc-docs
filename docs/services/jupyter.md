@@ -70,8 +70,7 @@ will make your conda environment, `conda_env`, available in the kernel launched 
 
 ## Starting a Jupyter Notebook
 
-Jupyter notebooks can be started as a [slurm job](../jobs/submit.md).
-The following script is an example how to proceed:
+Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The following script is a template for Jupyter submission scripts that will rarely need modifications. Most often you will need to modify the session duration (`--time` SBATCH option).
 
 !!! example "Slurm Launcher script for Jupyter Notebook"
     ```slurm
@@ -82,21 +81,26 @@ The following script is an example how to proceed:
     #SBATCH --cpus-per-task=2   # Note that ~1.7GB RAM is proivisioned per core
     #SBATCH --partition=batch
     #SBATCH --qos=normal
-    #SBATCH --time=0-01:00:00
     #SBATCH --output=%x_%j.out  # Print messages in 'Jupyter_<job id>.out'
+    #SBATCH --time=0-01:00:00   # Change maximum allowable jupyter server uptime here
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
     
-    # Python 3.X by default (also on system)
+    # Load the default Python 3 module
     module load lang/Python
     source "${HOME}/environments/jupyter_env/bin/activate"
 
     jupyter lab --ip $(hostname -i) --no-browser &
-    pid=$!
+    declare pid=$!
 
-    echo "Enter this command on your laptop: ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-iris.uni.lu:8022 -L 8888:$(hostname -i):8888 ${USER}@$(hostname -i)" > notebook.log
+    declare connection_instructions="connection_instructions.log"
+    echo "To access the jupyter notebook execute on your personal machine:" > "${connection_instructions}"
+    echo "ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L 8888:$(hostname -i):8888 ${USER}@$(hostname -i)" >> "${connection_instructions}"
+    echo "" >> "${connection_instructions}"
+    echo "Then navigate to:" >> "${connection_instructions}"
 
+    # Wait for the lab to start
     sleep 5s
 
     echo -e '\n===\n'
@@ -104,6 +108,12 @@ The following script is an example how to proceed:
     echo "AVAILABLE LABS"
     echo ""
     jupyter lab list
+    # Add connection instruction
+    jupyter lab list 2>&1 \
+        | grep -E '\?token=' \
+        |  awk 'BEGIN {FS="::"} {gsub("[ \t]*","",$1); print $1}' \
+        | sed -r 's/([0-9]{1,3}\.){3}[0-9]{1,3}/127\.0\.0\.1/g' \
+        >> "${connection_instructions}"
 
     echo -e '\n===\n'
 
@@ -117,13 +127,15 @@ The following script is an example how to proceed:
     echo ""
     jupyter kernelspec list
 
-    wait $pid
+    wait ${pid}
     ```
 
-Once your job is running (see [Joining/monitoring running jobs](../jobs/submit.md#joiningmonitoring-running-jobs)), you can use `ssh` [forwarding](../connect/ssh.md#ssh-port-forwarding) and an [ssh jump](../connect/ssh.md#ssh-jumps) through the login node to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command in the file `notebook.log`.
+Once your job is running (see [Joining/monitoring running jobs](../jobs/submit.md#joiningmonitoring-running-jobs)), you can use `ssh` [forwarding](../connect/ssh.md#ssh-port-forwarding) and an [ssh jump](../connect/ssh.md#ssh-jumps) through the login node to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command in the file `connection_instructions.log`, and then navigate to the webpage link provided.
+
+
 You should be now able to reach your notebook.
 
-Then open your browser and go to the url: `http://127.0.0.1:8888/`. Jupyter should ask you for a password (see screenshot below). This password can be set before running the jupyter notebook and his part of the initial configuartion detailed at [Jupyter official documentation](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html).
+Then open your browser and go to the url: `http://127.0.0.1:8888/`. Jupyter should ask you for a password (see screenshot below). This password can be set before running the jupyter notebook and his part of the initial configuration detailed at [Jupyter official documentation](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html).
 
 ![](./images/jupyter_login.png)
 
