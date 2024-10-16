@@ -64,13 +64,14 @@ The following script is an example how to proceed:
 
 !!! example "Slurm Launcher script for Jupyter Notebook"
     ```slurm
-    #!/bin/bash -l
-    #SBATCH -J Jupyter
-    #SBATCH -N 1
+    #!/usr/bin/bash --login
+    #SBATCH --job-name=Jupyter
+    #SBATCH --nodes=1
     #SBATCH --ntasks-per-node=1
-    #SBATCH -c 2                # Cores assigned to each tasks
+    #SBATCH --cpus-per-task=2 # Note that ~1.7GB RAM is proivisioned per core
+    #SBATCH --partition=batch
+    #SBATCH --qos=normal
     #SBATCH --time=0-01:00:00
-    #SBATCH -p batch
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
