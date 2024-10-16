@@ -79,10 +79,11 @@ The following script is an example how to proceed:
     #SBATCH --job-name=Jupyter
     #SBATCH --nodes=1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=2 # Note that ~1.7GB RAM is proivisioned per core
+    #SBATCH --cpus-per-task=2   # Note that ~1.7GB RAM is proivisioned per core
     #SBATCH --partition=batch
     #SBATCH --qos=normal
     #SBATCH --time=0-01:00:00
+    #SBATCH --output=%x_%j.out  # Print messages in 'Jupyter_<job id>.out'
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
@@ -93,11 +94,29 @@ The following script is an example how to proceed:
 
     jupyter lab --ip $(hostname -i) --no-browser &
     pid=$!
-    sleep 5s
-    jupyter lab list
-    jupyter --paths
-    jupyter kernelspec list
+
     echo "Enter this command on your laptop: ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-iris.uni.lu:8022 -L 8888:$(hostname -i):8888 ${USER}@$(hostname -i)" > notebook.log
+
+    sleep 5s
+
+    echo -e '\n===\n'
+
+    echo "AVAILABLE LABS"
+    echo ""
+    jupyter lab list
+
+    echo -e '\n===\n'
+
+    echo "CONFIGURATION PATHS"
+    echo ""
+    jupyter --paths
+
+    echo -e '\n===\n'
+
+    echo "KERNEL SPECIFICATIONS"
+    echo ""
+    jupyter kernelspec list
+
     wait $pid
     ```
 
