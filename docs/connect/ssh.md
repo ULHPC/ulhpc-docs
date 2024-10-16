@@ -61,7 +61,7 @@ Your key pairs will be located under `~/.ssh/` and follow the following format -
 ```bash
 $ ls -l ~/.ssh/id_*
 -rw------- username groupname ~/.ssh/id_rsa
--rw-r--r-- username groupname ~/.ssh/id_rsa.pub		# Public  RSA key
+-rw-r--r-- username groupname ~/.ssh/id_rsa.pub     # Public  RSA key
 -rw------- username groupname ~/.ssh/id_ed25519
 -rw-r--r-- username groupname ~/.ssh/id_ed25519.pub # Public ED25519 key
 ```
