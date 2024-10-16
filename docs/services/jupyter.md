@@ -78,10 +78,11 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
     #SBATCH --job-name=Jupyter
     #SBATCH --nodes=1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=2   # Note that ~1.7GB RAM is proivisioned per core
+    #SBATCH --cpus-per-task=2   # Change accordingly, note that ~1.7GB RAM is proivisioned per core
     #SBATCH --partition=batch
     #SBATCH --qos=normal
-    #SBATCH --output=%x_%j.out  # Print messages in 'Jupyter_<job id>.out'
+    #SBATCH --output=%x_%j.out  # Print messages to 'Jupyter_<job id>.out
+    #SBATCH --error=%x_%j.err   # Print debug messages to 'Jupyter_<job id>.err
     #SBATCH --time=0-01:00:00   # Change maximum allowable jupyter server uptime here
 
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
@@ -101,10 +102,10 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
     echo "# Connection instructions" > "${connection_instructions}"
     echo "" >> "${connection_instructions}"
     echo "To access the jupyter notebook execute on your personal machine:" >> "${connection_instructions}"
-    echo "ssh -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L 8888:$(hostname -i):8888 ${USER}@$(hostname -i)" >> "${connection_instructions}"
+    echo "ssh -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:$(hostname -i):${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
     echo "" >> "${connection_instructions}"
     echo "To access the jupyter notebook if you have setup a key to connect to cluster nodes execute on your personal machine:" >> "${connection_instructions}"
-    echo "ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L 8888:$(hostname -i):8888 ${USER}@$(hostname -i)" >> "${connection_instructions}"
+    echo "ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:$(hostname -i):${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
     echo "" >> "${connection_instructions}"
     echo "Then navigate to:" >> "${connection_instructions}"
 
