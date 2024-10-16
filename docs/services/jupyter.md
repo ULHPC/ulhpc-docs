@@ -44,18 +44,29 @@ JupyterLab is now installed and ready.
     python -m pip install jupyter ipykernel
     ```
 
-??? info "Managing multiple kernels"
-    JupyterLab makes sure that a default [IPython kernel](https://ipython.readthedocs.io/en/stable/install/kernel_install.html#) is available, with the environment (and the Python version) with which the lab was created.
+### Providing access to kernels of other environments
 
-    You can [setup kernels with different environments on the same notebook](https://ipython.readthedocs.io/en/stable/install/kernel_install.html). Create the environment with the Python version and the packages you require, and then register the kernel in any environment with Jupyter (lab or classic notebook) installed. For instance, if we have installed Jupyter in `~/environments/jupyter_env`:
-    ```shell
-    source ~/environments/other_python_env/bins/activate
-    python -m pip install ipykernel
-    python -m ipykernel install --prefix=~/environments/jupyter_env --name "Other Python env"
-    ```
-    Then all kernels and their associated environment can be start from the same Jupyter instance.
+JupyterLab makes sure that a default [IPython kernel](https://ipython.readthedocs.io/en/stable/install/kernel_install.html#) is available, with the environment (and the Python version) with which the lab was created. Other environments can export a _kernel_ to a JupyterLab instance, allowing the instance to launch interactive session inside environments others from the environment where JupyterLab is installed.
 
-    You can also use the flag `--user` instead of `--prefix` to install the kernel in the default system location available to all Jupyter environments.
+You can [setup kernels with different environments on the same notebook](https://ipython.readthedocs.io/en/stable/install/kernel_install.html). Create the environment with the Python version and the packages you require, and then register the kernel in any environment with Jupyter (lab or classic notebook) installed. For instance, if we have installed Jupyter in `~/environments/jupyter_env`:
+```shell
+source ~/environments/other_python_venv/bins/activate
+python -m pip install ipykernel
+python -m ipykernel install --prefix=~/environments/jupyter_env --name "Other Python env"
+deactivate
+```
+Then all kernels and their associated environment can be started from the same Jupyter instance in the `~/environments/jupyter_env` Python venv.
+
+You can also use the flag `--user` instead of `--prefix` to install the kernel in the default system location available to all Jupyter environments for a user.
+
+### Kernels for Conda environments
+
+If you would like to install a kernel in a Conda environment, install the `ipykernel` from the `conda-forge` channel. For instance,
+```bash
+micromamba install --name conda_env conda-forge::ipykernel
+micromamba run --name conda_env python -m ipykernel install --prefix=~/environments/jupyter_env --name "Other Python env"
+```
+will make your conda environment, `conda_env`, available in the kernel launched from the `~/environments/jupyter_env` Python venv.
 
 ## Starting a Jupyter Notebook
 
@@ -147,4 +158,4 @@ Available kernels:
 Jupyter provides you a token to connect to the lab. You can also notice the available kernels.
 
 !!! warning
-    Do not forget to click on the `quit` button when finished to stop the jupyter server and release the ressources.
+    Do not forget to click on the `quit` button when finished to stop the jupyter server and release the resources.
