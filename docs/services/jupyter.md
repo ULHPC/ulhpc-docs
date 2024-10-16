@@ -52,7 +52,7 @@ You can [setup kernels with different environments on the same notebook](https:/
 ```shell
 source ~/environments/other_python_venv/bins/activate
 python -m pip install ipykernel
-python -m ipykernel install --prefix=~/environments/jupyter_env --name "Other Python env"
+python -m ipykernel install --prefix=~/environments/jupyter_env --name other_python_env --display-name "Other Python env"
 deactivate
 ```
 Then all kernels and their associated environment can be started from the same Jupyter instance in the `~/environments/jupyter_env` Python venv.
@@ -64,7 +64,7 @@ You can also use the flag `--user` instead of `--prefix` to install the kernel i
 If you would like to install a kernel in a Conda environment, install the `ipykernel` from the `conda-forge` channel. For instance,
 ```bash
 micromamba install --name conda_env conda-forge::ipykernel
-micromamba run --name conda_env python -m ipykernel install --prefix=~/environments/jupyter_env --name "Other Python env"
+micromamba run --name conda_env python -m ipykernel install --prefix=~/environments/jupyter_env --name other_python_env --display-name "Other Python env"
 ```
 will make your conda environment, `conda_env`, available in the kernel launched from the `~/environments/jupyter_env` Python venv.
 
