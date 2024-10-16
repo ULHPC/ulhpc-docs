@@ -1,0 +1,3214 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ULHPC Technical Documentation">
+      
+      
+        <link rel="canonical" href="https://hpc-docs.uni.lu/data/encryption/">
+      
+      
+        <meta name="author" content="S. Varrette and Uni.lu HPC (ULHPC) Team">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.3">
+    
+    
+      
+        <title>Sensitive Data Protection - ULHPC Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.62d34fff.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.c8acc6db.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sensitive-data-protection" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-header-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            ULHPC Technical Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Sensitive Data Protection
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    ULHPC Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../hpc-schools/" title="HPC Trainings and Tutorials" class="md-nav__link">
+      HPC Trainings and Tutorials
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Accounts
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Accounts" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Accounts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/" title="Get an Account" class="md-nav__link">
+      Get an Account
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/passwords/" title="Password Policy" class="md-nav__link">
+      Password Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/collaboration_accounts/" title="Collaboration Accounts" class="md-nav__link">
+      Collaboration Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/projects/" title="Projects Accounts" class="md-nav__link">
+      Projects Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ipa/" title="Identity Management Portal" class="md-nav__link">
+      Identity Management Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/accounts/" title="Slurm Account Hierarchy" class="md-nav__link">
+      Slurm Account Hierarchy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../teaching-with-the-ulhpc/" title="Teaching with the ULHPC" class="md-nav__link">
+      Teaching with the ULHPC
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Data Center
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Center" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Center
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data-center/" title="Centre de Calcul (CDC)" class="md-nav__link">
+      Centre de Calcul (CDC)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      ULHPC Supercomputers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="ULHPC Supercomputers" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        ULHPC Supercomputers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Aion
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Aion" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Aion
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/" title="Aion System" class="md-nav__link">
+      Aion System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-3" type="checkbox" id="nav-7-3">
+    
+    <label class="md-nav__link" for="nav-7-3">
+      Iris
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Iris" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Iris
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/" title="Iris System" class="md-nav__link">
+      Iris System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/live-status/motd" title="Live status" class="md-nav__link">
+      Live status
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Interconnect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Interconnect" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Interconnect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interconnect/ib/" title="Fast Infiniband Interconnect" class="md-nav__link">
+      Fast Infiniband Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interconnect/ethernet/" title="Ethernet Interconnect" class="md-nav__link">
+      Ethernet Interconnect
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Storage Systems
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Storage Systems" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Storage Systems
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/gpfs/" title="GPFS/SpectrumScale" class="md-nav__link">
+      GPFS/SpectrumScale
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/lustre/" title="Lustre" class="md-nav__link">
+      Lustre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/isilon/" title="OneFS Isilon" class="md-nav__link">
+      OneFS Isilon
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/live-status/motd" title="Live status" class="md-nav__link">
+      Live status
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Access/Connect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Access/Connect" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Access/Connect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/access/" title="Access/Login Servers" class="md-nav__link">
+      Access/Login Servers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ssh/" title="SSH" class="md-nav__link">
+      SSH
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ipa/" title="Identity Management (IdM/IPA)" class="md-nav__link">
+      Identity Management (IdM/IPA)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ood/" title="Open On Demand Portal" class="md-nav__link">
+      Open On Demand Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
+    
+    <label class="md-nav__link" for="nav-11">
+      Data Management
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Management" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../layout/" title="Global Directory Structure" class="md-nav__link">
+      Global Directory Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sharing/" title="Data Sharing" class="md-nav__link">
+      Data Sharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../transfer/" title="Data Transfer" class="md-nav__link">
+      Data Transfer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gdpr/" title="GDPR Compliance" class="md-nav__link">
+      GDPR Compliance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/quotas/" title="Quotas" class="md-nav__link">
+      Quotas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../project/" title="Project Data Management" class="md-nav__link">
+      Project Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/lfs/" title="Scratch Data Management" class="md-nav__link">
+      Scratch Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../backups/" title="Backups" class="md-nav__link">
+      Backups
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/unix-file-permissions/" title="Unix File Permissions" class="md-nav__link">
+      Unix File Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Sensitive Data Protection
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Sensitive Data Protection" class="md-nav__link md-nav__link--active">
+      Sensitive Data Protection
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gpg" class="md-nav__link">
+    GPG
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-encryption-frameworks-encfs-gocryptfs" class="md-nav__link">
+    File Encryption Frameworks (EncFS, GoCryptFS...)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-encryption-using-ssh-rsa-key-pairs" class="md-nav__link">
+    File Encryption using SSH [RSA] Key Pairs
+  </a>
+  
+    <nav class="md-nav" aria-label="File Encryption using SSH [RSA] Key Pairs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encrypt-a-file-using-a-public-ssh-key" class="md-nav__link">
+    Encrypt a file using a public SSH key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decrypt-a-file-encrypted-with-a-public-ssh-key" class="md-nav__link">
+    Decrypt a file encrypted with a public SSH key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misc-qd-for-small-files" class="md-nav__link">
+    Misc Q&amp;D for small files
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-encryption-in-git-repository-with-git-crypt" class="md-nav__link">
+    Data Encryption in Git Repository with git-crypt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#petasuite-protect" class="md-nav__link">
+    PetaSuite Protect
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+    
+    <label class="md-nav__link" for="nav-12">
+      Environment
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Environment" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Environment
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/modules/" title="Modules" class="md-nav__link">
+      Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/easybuild/" title="Easybuild" class="md-nav__link">
+      Easybuild
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/conda/" title="Conda" class="md-nav__link">
+      Conda
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+    
+    <label class="md-nav__link" for="nav-13">
+      Policies
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Policies" data-md-level="1">
+      <label class="md-nav__title" for="nav-13">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Policies
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/aup/" title="Acceptable Use Policy (AUP)" class="md-nav__link">
+      Acceptable Use Policy (AUP)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/maintenance/" title="Downtime and Maintenance" class="md-nav__link">
+      Downtime and Maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging/" title="Usage Charging Policy" class="md-nav__link">
+      Usage Charging Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging.md#hpc-resource-allocations-for-research-project" title="HPC Resource Allocations for Research Project" class="md-nav__link">
+      HPC Resource Allocations for Research Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging.md#hpc-service-contract-for-external-and-private-partners" title="HPC Service Agreement for Externals" class="md-nav__link">
+      HPC Service Agreement for Externals
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/professional-services.md" title="Expert-level HPC services" class="md-nav__link">
+      Expert-level HPC services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+    
+    <label class="md-nav__link" for="nav-14">
+      Running Jobs
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Running Jobs" data-md-level="1">
+      <label class="md-nav__title" for="nav-14">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Running Jobs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/" title="Slurm Overview" class="md-nav__link">
+      Slurm Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/commands/" title="Convenient Slurm Commands" class="md-nav__link">
+      Convenient Slurm Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/partitions/" title="Partition/Queues" class="md-nav__link">
+      Partition/Queues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/qos/" title="Quality of Service (QOS)" class="md-nav__link">
+      Quality of Service (QOS)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/accounts/" title="Account Hierarchy" class="md-nav__link">
+      Account Hierarchy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/reason-codes/" title="Job State and Reason Code" class="md-nav__link">
+      Job State and Reason Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/fairsharing/" title="Fairsharing" class="md-nav__link">
+      Fairsharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/priority/" title="Job Priority and Backfilling" class="md-nav__link">
+      Job Priority and Backfilling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/billing/" title="Job Accounting and Billing" class="md-nav__link">
+      Job Accounting and Billing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/interactive/" title="Interactive Job" class="md-nav__link">
+      Interactive Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/submit/" title="Passive/Batch Job" class="md-nav__link">
+      Passive/Batch Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/gpu/" title="GPU Jobs" class="md-nav__link">
+      GPU Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/long/" title="Long Jobs" class="md-nav__link">
+      Long Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/best-effort/" title="Best-effort Jobs" class="md-nav__link">
+      Best-effort Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/launchers/" title="Launcher Scripts Examples" class="md-nav__link">
+      Launcher Scripts Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/jupyter/" title="Jupyter Notebook" class="md-nav__link">
+      Jupyter Notebook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
+    
+    <label class="md-nav__link" for="nav-15">
+      Software
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software" data-md-level="1">
+      <label class="md-nav__title" for="nav-15">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-1" type="checkbox" id="nav-15-1">
+    
+    <label class="md-nav__link" for="nav-15-1">
+      Supported Software List
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Supported Software List" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Supported Software List
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/all_softwares/" title="Full List (alphabetical order)" class="md-nav__link">
+      Full List (alphabetical order)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/bio/" title="Biology" class="md-nav__link">
+      Biology
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/cae/" title="CFD/Finite element modelling" class="md-nav__link">
+      CFD/Finite element modelling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/chem/" title="Chemistry" class="md-nav__link">
+      Chemistry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/compiler/" title="Compilers" class="md-nav__link">
+      Compilers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/data/" title="Data processing" class="md-nav__link">
+      Data processing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/debugger/" title="Debugging" class="md-nav__link">
+      Debugging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/devel/" title="Development" class="md-nav__link">
+      Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/lang/" title="Programming Languages" class="md-nav__link">
+      Programming Languages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/lib/" title="Libraries" class="md-nav__link">
+      Libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/math/" title="Mathematics" class="md-nav__link">
+      Mathematics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/mpi/" title="MPI" class="md-nav__link">
+      MPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/numlib/" title="Numerical libraries" class="md-nav__link">
+      Numerical libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/perf/" title="Performance measurements" class="md-nav__link">
+      Performance measurements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/phys/" title="Physics" class="md-nav__link">
+      Physics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/system/" title="System-level software" class="md-nav__link">
+      System-level software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/toolchain/" title="Toolchains (software stacks)" class="md-nav__link">
+      Toolchains (software stacks)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/tools/" title="Utilities" class="md-nav__link">
+      Utilities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/vis/" title="Visualisation" class="md-nav__link">
+      Visualisation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-2" type="checkbox" id="nav-15-2">
+    
+    <label class="md-nav__link" for="nav-15-2">
+      Software Sets
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/2019b/" title="2019b" class="md-nav__link">
+      2019b
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/2020b/" title="2020a" class="md-nav__link">
+      2020a
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/build/" title="Compiling/building your own software" class="md-nav__link">
+      Compiling/building your own software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/eessi/" title="EESSI software stack" class="md-nav__link">
+      EESSI software stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../containers/" title="Containers" class="md-nav__link">
+      Containers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-6" type="checkbox" id="nav-15-6">
+    
+    <label class="md-nav__link" for="nav-15-6">
+      Computer Aided Eng. (CAE)
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computer Aided Eng. (CAE)" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computer Aided Eng. (CAE)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/fenics/" title="FEniCS" class="md-nav__link">
+      FEniCS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/ansys/" title="ANSYS" class="md-nav__link">
+      ANSYS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/openfoam/" title="OpenFOAM" class="md-nav__link">
+      OpenFOAM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/abaqus/" title="Abaqus" class="md-nav__link">
+      Abaqus
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/fds/" title="FDS" class="md-nav__link">
+      FDS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/meshing-tools/" title="Meshing-Tools" class="md-nav__link">
+      Meshing-Tools
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-7" type="checkbox" id="nav-15-7">
+    
+    <label class="md-nav__link" for="nav-15-7">
+      Physics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Physics" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Physics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/physics/wrf/" title="WRF" class="md-nav__link">
+      WRF
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8" type="checkbox" id="nav-15-8">
+    
+    <label class="md-nav__link" for="nav-15-8">
+      Computational Chemistry
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computational Chemistry" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computational Chemistry
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8-1" type="checkbox" id="nav-15-8-1">
+    
+    <label class="md-nav__link" for="nav-15-8-1">
+      Electronics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Electronics" data-md-level="3">
+      <label class="md-nav__title" for="nav-15-8-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Electronics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/abinit/" title="ABINIT" class="md-nav__link">
+      ABINIT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/ase/" title="ASE" class="md-nav__link">
+      ASE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/meep/" title="MEEP" class="md-nav__link">
+      MEEP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/quantum-espresso/" title="Quantum Espresso" class="md-nav__link">
+      Quantum Espresso
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/vasp/" title="VASP" class="md-nav__link">
+      VASP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8-2" type="checkbox" id="nav-15-8-2">
+    
+    <label class="md-nav__link" for="nav-15-8-2">
+      Molecular Dynamics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Molecular Dynamics" data-md-level="3">
+      <label class="md-nav__title" for="nav-15-8-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Molecular Dynamics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/cp2k/" title="CP2K" class="md-nav__link">
+      CP2K
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/gromacs/" title="GROMACS" class="md-nav__link">
+      GROMACS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/namd/" title="NAMD" class="md-nav__link">
+      NAMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/nwchem/" title="NWCHEM" class="md-nav__link">
+      NWCHEM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/helping-libraries/" title="Helping Libraries" class="md-nav__link">
+      Helping Libraries
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-9" type="checkbox" id="nav-15-9">
+    
+    <label class="md-nav__link" for="nav-15-9">
+      Mathematics & Statistics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Mathematics & Statistics" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Mathematics & Statistics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/matlab/" title="MATLAB" class="md-nav__link">
+      MATLAB
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/mathematica/" title="MATHEMATICA" class="md-nav__link">
+      MATHEMATICA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/stata/" title="Stata" class="md-nav__link">
+      Stata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/julia/" title="Julia" class="md-nav__link">
+      Julia
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/optim/" title="Optimizers" class="md-nav__link">
+      Optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-11" type="checkbox" id="nav-15-11">
+    
+    <label class="md-nav__link" for="nav-15-11">
+      Visualization
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Visualization" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Visualization
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/visu/paraview/" title="ParaView" class="md-nav__link">
+      ParaView
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16" type="checkbox" id="nav-16">
+    
+    <label class="md-nav__link" for="nav-16">
+      Development
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Development" data-md-level="1">
+      <label class="md-nav__title" for="nav-16">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Development
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16-1" type="checkbox" id="nav-16-1">
+    
+    <label class="md-nav__link" for="nav-16-1">
+      Performance/Debugging
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Performance/Debugging" data-md-level="2">
+      <label class="md-nav__title" for="nav-16-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Performance/Debugging
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/arm-forge/" title="Arm Forge" class="md-nav__link">
+      Arm Forge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/vtune/" title="Intel VTune" class="md-nav__link">
+      Intel VTune
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/advisor/" title="Intel Advisor" class="md-nav__link">
+      Intel Advisor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/inspector/" title="Intel Inspector" class="md-nav__link">
+      Intel Inspector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/itac/" title="Intel Trace Analyzer and Collector" class="md-nav__link">
+      Intel Trace Analyzer and Collector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/scalasca/" title="Scalasca" class="md-nav__link">
+      Scalasca
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/valgrind/" title="Valgrind" class="md-nav__link">
+      Valgrind
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/aps/" title="APS" class="md-nav__link">
+      APS
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16-2" type="checkbox" id="nav-16-2">
+    
+    <label class="md-nav__link" for="nav-16-2">
+      Containers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Containers" data-md-level="2">
+      <label class="md-nav__title" for="nav-16-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Containers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../containers/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-18" type="checkbox" id="nav-18">
+    
+    <label class="md-nav__link" for="nav-18">
+      Help and Support
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Help and Support" data-md-level="1">
+      <label class="md-nav__title" for="nav-18">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Help and Support
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-19" type="checkbox" id="nav-19">
+    
+    <label class="md-nav__link" for="nav-19">
+      Contributing
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Contributing" data-md-level="1">
+      <label class="md-nav__title" for="nav-19">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Contributing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/versioning/" title="Semantic Versioning" class="md-nav__link">
+      Semantic Versioning
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-20" type="checkbox" id="nav-20">
+    
+    <label class="md-nav__link" for="nav-20">
+      Web Portals
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Web Portals" data-md-level="1">
+      <label class="md-nav__title" for="nav-20">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Web Portals
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu" title="ULHPC Website" class="md-nav__link">
+      ULHPC Website
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc-docs.uni.lu" title="Technical Documentation" class="md-nav__link">
+      Technical Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://ulhpc-tutorials.readthedocs.io/" title="ULHPC Tutorials" class="md-nav__link">
+      ULHPC Tutorials
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gpg" class="md-nav__link">
+    GPG
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-encryption-frameworks-encfs-gocryptfs" class="md-nav__link">
+    File Encryption Frameworks (EncFS, GoCryptFS...)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-encryption-using-ssh-rsa-key-pairs" class="md-nav__link">
+    File Encryption using SSH [RSA] Key Pairs
+  </a>
+  
+    <nav class="md-nav" aria-label="File Encryption using SSH [RSA] Key Pairs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encrypt-a-file-using-a-public-ssh-key" class="md-nav__link">
+    Encrypt a file using a public SSH key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decrypt-a-file-encrypted-with-a-public-ssh-key" class="md-nav__link">
+    Decrypt a file encrypted with a public SSH key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misc-qd-for-small-files" class="md-nav__link">
+    Misc Q&amp;D for small files
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-encryption-in-git-repository-with-git-crypt" class="md-nav__link">
+    Data Encryption in Git Repository with git-crypt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#petasuite-protect" class="md-nav__link">
+    PetaSuite Protect
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/ULHPC/ulhpc-docs/blob/master/docs/data/encryption.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="sensitive-data-protection">Sensitive Data Protection<a class="headerlink" href="#sensitive-data-protection" title="Permanent link">&para;</a></h1>
+<p>The advent of the EU <a href="http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.L_.2016.119.01.0001.01.ENG&amp;toc=OJ:L:2016:119:TOC">General Data Protection Regulation</a> (<em>GDPR</em>) permitted to highlight the need to protect sensitive information from leakage.</p>
+<h2 id="gpg">GPG<a class="headerlink" href="#gpg" title="Permanent link">&para;</a></h2>
+<p>A basic approach relies on GPG to encrypt single files -- see <a href="https://varrette.gforge.uni.lu/blog/2017/03/14/tutorial-gpg-gnu-privacy-guard/">this tutorial for more details</a></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># File encryption</span>
+$ gpg --encrypt <span class="o">[</span>-r &lt;recipient&gt;<span class="o">]</span> &lt;file&gt;     <span class="c1"># =&gt; produces &lt;file&gt;.gpg</span>
+$ rm -f &lt;file&gt;    <span class="c1"># /!\ WARNING: encryption DOES NOT delete the input (clear-text) file</span>
+$ gpg --armor --detach-sign &lt;file&gt;          <span class="c1"># Generate signature file &lt;file&gt;.asc</span>
+
+<span class="c1"># Decryption</span>
+$ gpg --verify &lt;file&gt;.asc           <span class="c1"># (eventually but STRONGLY encouraged) verify signature file</span>
+$ gpg --decrypt &lt;file&gt;.gpg          <span class="c1"># Decrypt PGP encrypted file</span>
+</code></pre></div>
+
+<p>One drawback is that files need to be completely decrypted for processing</p>
+<p><a class="md-button md-button--link" href="https://varrette.gforge.uni.lu/tutorials/gpg.html"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"/></svg></span> Tutorial: Using GnuPG aka Gnu Privacy Guard aka GPG</a></p>
+<h2 id="file-encryption-frameworks-encfs-gocryptfs">File Encryption Frameworks (EncFS, GoCryptFS...)<a class="headerlink" href="#file-encryption-frameworks-encfs-gocryptfs" title="Permanent link">&para;</a></h2>
+<p>In contrast to disk-encryption software that operate on whole disks (TrueCrypt, dm-crypt etc), file encryption operates on individual files that can be backed up or synchronised easily, especially within a Git repository.</p>
+<ul>
+<li><a href="https://nuetzlich.net/gocryptfs/comparison/">Comparison matrix</a></li>
+<li><a href="https://nuetzlich.net/gocryptfs/">gocryptfs</a>, aspiring successor of EncFS written in Go</li>
+<li><a href="https://github.com/vgough/encfs">EncFS</a>, mature with known security issues</li>
+<li><a href="http://ecryptfs.org/">eCryptFS</a>, integrated into the Linux kernel</li>
+<li><a href="https://cryptomator.org/">Cryptomator</a>, strong cross-platform support through Java and WebDAV</li>
+<li><a href="https://github.com/netheril96/securefs">securefs</a>, a cross-platform project implemented in C++.</li>
+<li><a href="https://www.cryfs.org/">CryFS</a>, result of a master thesis at the KIT University that uses chunked storage to obfuscate file sizes.</li>
+</ul>
+<p>Assuming you are working from <code>/path/to/my/project</code>, your workflow (mentionned below for EncFS, but it can be adpated to all the other tools) operated on encrypted <em>vaults</em> and would be as follows:</p>
+<ul>
+<li>(<em>eventually</em>) if operating within a working copy of a git repository, you should ignore the mounting directory (ex: <code>vault/*</code>) in the root <code>.gitignore</code> of the repository<ul>
+<li>this ensures neither you nor a collaborator will commit any unencrypted version of a file by mistake</li>
+<li>you commit only the EncFS / GocryptFS / eCryptFS / Cryptomator / securefs / CryFS raw directory (ex: <code>.crypt/</code>) in your repository. Thus only encrypted form or your files are commited</li>
+</ul>
+</li>
+<li>You create the EncFS / GocryptFS / eCryptFS / Cryptomator / securefs / CryFS encrypted vault</li>
+<li>You prepare macros/scripts/Makefile/Rakefile tasks to lock/unlock the vault on demand</li>
+</ul>
+<p>Here are for instance a few example of these operations in live to <strong>create</strong> a encrypted vault:</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">EncFS</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ <span class="nb">cd</span> /path/to/my/project
+$ <span class="nv">rawdir</span><span class="o">=</span>.crypt      <span class="c1"># /!\ ADAPT accordingly</span>
+$ <span class="nv">mountdir</span><span class="o">=</span>vault     <span class="c1"># /!\ ADAPT accordingly</span>
+<span class="c1">#</span>
+<span class="c1"># (eventually) Ignore the mount dir</span>
+$ <span class="nb">echo</span> <span class="nv">$mountdir</span> &gt;&gt; .gitignore
+<span class="c1">### EncFS: Creation of an EncFS vault (only once)</span>
+$ encfs --standard <span class="nv">$rawdir</span> <span class="nv">$mountdir</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">GoCryptFS</label><div class="tabbed-content">
+<p>you SHOULD be on a computing node to use <a href="https://nuetzlich.net/gocryptfs/">GoCryptFS</a>.</p>
+<div class="highlight"><pre><span></span><code>$ <span class="nb">cd</span> /path/to/my/project
+$ <span class="nv">rawdir</span><span class="o">=</span>.crypt      <span class="c1"># /!\ ADAPT accordingly</span>
+$ <span class="nv">mountdir</span><span class="o">=</span>vault     <span class="c1"># /!\ ADAPT accordingly</span>
+<span class="c1">#</span>
+<span class="c1"># (eventually) Ignore the mount dir</span>
+$ <span class="nb">echo</span> <span class="nv">$mountdir</span> &gt;&gt; .gitignore
+<span class="c1">### GoCryptFS: load the module - you SHOULD be on a computing node</span>
+$ module load tools/gocryptfs
+<span class="c1"># Creation of a GoCryptFS vault (only once)</span>
+$&gt; gocryptfs -init <span class="nv">$rawdir</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>Then you can mount/unmount the vault as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>OS</th>
+<th>Opening/Unlocking the vault</th>
+<th>Closing/locking the vault</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EncFS</td>
+<td>Linux</td>
+<td><code>encfs -o nonempty  --idle=60  $rawdir $mountdir</code></td>
+<td><code>fusermount -u $mountdir</code></td>
+</tr>
+<tr>
+<td>EncFS</td>
+<td>Mac OS</td>
+<td><code>encfs  --idle=60  $rawdir $mountdir</code></td>
+<td><code>umount $mountdir</code></td>
+</tr>
+<tr>
+<td>GocryptFS</td>
+<td></td>
+<td><code>gocryptfs $rawdir $mountdir</code></td>
+<td>as above</td>
+</tr>
+</tbody>
+</table>
+<p>The fact that <a href="https://nuetzlich.net/gocryptfs/">GoCryptFS</a> is available as a module brings the advantage that it can be mounted in a <em>view</em> folder (<code>vault/</code>) where you can read and write the unencrypted files, which is <em>Automatically</em> unmounted upon job termination.</p>
+<h2 id="file-encryption-using-ssh-rsa-key-pairs">File Encryption using SSH [RSA] Key Pairs<a class="headerlink" href="#file-encryption-using-ssh-rsa-key-pairs" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Man pages: <a href="https://www.openssl.org/docs/manmaster/man1/openssl-rsa.html"><code>openssl rsa</code></a>, <a href="https://www.openssl.org/docs/manmaster/man1/openssl-rsautl.html"><code>openssl rsautl</code></a> and <a href="https://www.openssl.org/docs/manmaster/man1/openssl-enc.html"><code>openssl enc</code></a></li>
+<li><a href="http://krisjordan.com/essays/encrypting-with-rsa-key-pairs">Tutorial: Encryption with RSA Key Pairs</a></li>
+<li><a href="https://www.czeskis.com/random/openssl-encrypt-file.html">Tutorial: How to encrypt a big file using OpenSSL and someone's public key</a></li>
+<li><a href="https://www.madboa.com/geek/openssl/">OpenSSL Command-Line HOWTO</a>, in particular the section <a href="https://www.madboa.com/geek/openssl/#encrypt-simple">'How do I simply encrypt a file?'</a></li>
+</ul>
+<p>If you encrypt/decrypt files or messages on more than a one-off occasion, you should really use GnuPGP as that is a much better suited tool for this kind of operations.
+But if you already have someone's public SSH key, it can be convenient to use it, and it is safe.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The below instructions are <em>NOT</em> compliant with the <em>new OpenSSH format</em> which is used for storing encrypted (or unencrypted) RSA, EcDSA and Ed25519 keys (among others) when you use the <code>-o</code> option of <code>ssh-keygen</code>.
+You can recognize these keys by the fact that the private SSH key <code>~/.ssh/id_rsa</code> starts with <code>-
+----BEGIN OPENSSH PRIVATE KEY-----</code></p>
+</div>
+<h3 id="encrypt-a-file-using-a-public-ssh-key">Encrypt a file using a public SSH key<a class="headerlink" href="#encrypt-a-file-using-a-public-ssh-key" title="Permanent link">&para;</a></h3>
+<p><strong>(eventually) SSH RSA public key conversion to PEM PKCS8</strong></p>
+<p>OpenSSL encryption/decryption operations performed  using the RSA algorithm relies on keys following the PEM format <sup id="fnref:pem"><a class="footnote-ref" href="#fn:pem">1</a></sup> (ideally in the  PKCS#8 format).
+It is possible to convert OpenSSH <em>public</em> keys (private ones are already compliant) to the PEM PKCS8 format (a more secure format).
+For that one can either use the <a href="https://man.openbsd.org/ssh-keygen.1"><code>ssh-keygen</code></a> or the <a href="https://www.openssl.org/"><code>openssl</code></a> commands, the first one being recomm
+ended.</p>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># Convert the public key of your collaborator to the PEM PKCS8 format (a more secure format)</span>
+$ ssh-keygen -f id_dst_rsa.pub -e -m pkcs8 &gt; id_dst_rsa.pkcs8.pub
+<span class="c1"># OR use OpenSSL for that...</span>
+$ openssl rsa -in id_dst_rsa -pubout -outform PKCS8 &gt; id_dst_rsa.pkcs8.pub
+</code></pre></div>
+Note that you don't actually need to save the PKCS#8 version of his public key file -- the below command will make this conversion on demand.</p>
+<p><strong>Generate a 256 bit (32 byte) random symmetric key</strong></p>
+<p>There is a limit to the maximum length of a message <em>i.e.</em> size of a file  that can be encrypted using asymmetric RSA public key encryption keys (which is what SSH ke
+ys are).
+For this reason, you should better rely on a 256 bit key to use for symmetric AES encryption and then encrypt/decrypt that symmetric AES key with the asymmetric RSA k
+eys
+This is how encrypted connections usually work, by the way.</p>
+<p>Generate the <em>unique</em> symmetric key <code>key.bin</code> of 32 bytes (<em>i.e.</em> 256 bit) as follows:</p>
+<div class="highlight"><pre><span></span><code>openssl rand -base64 32 -out key.bin
+</code></pre></div>
+
+<p>You should only use this key <strong>once</strong>. If you send something else to the recipient at another time, you should regenerate another key.</p>
+<p><strong>Encrypt the (potentially big) file with the symmetric key</strong></p>
+<div class="highlight"><pre><span></span><code>openssl enc -aes-256-cbc -salt -in bigdata.dat -out bigdata.dat.enc  -pass file:./key.bin
+</code></pre></div>
+
+<details class="info"><summary>Indicative performance of OpenSSL Encryption time</summary><p>You can quickly generate random files of 1 or 10 GiB size as follows:
+<div class="highlight"><pre><span></span><code><span class="c1"># Random generation of a 1GiB file</span>
+$ dd <span class="k">if</span><span class="o">=</span>/dev/urandom <span class="nv">of</span><span class="o">=</span>bigfile_1GiB.dat  <span class="nv">bs</span><span class="o">=</span>64M <span class="nv">count</span><span class="o">=</span><span class="m">16</span>  <span class="nv">iflag</span><span class="o">=</span>fullblock
+<span class="c1"># Random generation of a 1GiB file</span>
+$ dd <span class="k">if</span><span class="o">=</span>/dev/urandom <span class="nv">of</span><span class="o">=</span>bigfile_10GiB.dat <span class="nv">bs</span><span class="o">=</span>64M <span class="nv">count</span><span class="o">=</span><span class="m">160</span> <span class="nv">iflag</span><span class="o">=</span>fullblock
+</code></pre></div>
+An indicated encryption time taken for above generated random file on a local laptop (Mac OS X, local filesystem over SSD) is proposed in the below table, using
+<div class="highlight"><pre><span></span><code>openssl enc -aes-256-cbc -salt -in bigfile_&lt;N&gt;GiB.dat -out bigfile_&lt;N&gt;GiB.dat.enc  -pass file:./key.bin
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>size</th>
+<th>Encryption time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bigfile_1GiB.dat</code></td>
+<td>1 GiB</td>
+<td>0m5.395s</td>
+</tr>
+<tr>
+<td><code>bigfile_10GiB.dat</code></td>
+<td>10 GiB</td>
+<td>2m50.214s</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p><strong>Encrypt the symmetric key, using your collaborator public SSH key in PKCS8 format:</strong></p>
+<div class="highlight"><pre><span></span><code>$ openssl rsautl -encrypt -pubin -inkey &lt;<span class="o">(</span>ssh-keygen -e -m PKCS8 -f id_dst_rsa.pub<span class="o">)</span> -in key.bin -out key.bin.enc
+<span class="c1"># OR, if you have a copy of the PKCS#8 version of his public key</span>
+$ openssl rsautl -encrypt -pubin -inkey  id_dst_rsa.pkcs8.pub -in key.bin -out key.bin.enc
+</code></pre></div>
+
+<p>Delete the unencrypted symmetric key as you don't need it any more (and you should not use it anymore)</p>
+<div class="codehilite"><pre><span></span><code>  $&gt; rm key.bin
+</code></pre></div>
+
+
+<p>Now you can transfer the <code>*.enc</code> files <em>i.e.</em> send the (potentially big) encrypted file <code>&lt;file&gt;.enc</code> and the encrypted symmetric key (<em>i.e. <code>key.bin.enc</code> ) to the recipient _i.e.</em> your collaborator.
+Note that you are encouraged to send the encrypted file and the encrypted key separately. Although it's not absolutely necessary, it's good practice to separate the two.
+If you're allowed to, transfer them by SSH to an agreed remote server. It is even safe to upload the files to a public file sharing service and tell the recipient to download them from there.</p>
+<h3 id="decrypt-a-file-encrypted-with-a-public-ssh-key">Decrypt a file encrypted with a public SSH key<a class="headerlink" href="#decrypt-a-file-encrypted-with-a-public-ssh-key" title="Permanent link">&para;</a></h3>
+<p>First decrypt the symmetric key using the SSH private counterpart:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Decrypt the key -- /!\ ADAPT the path to the private SSH key</span>
+$ openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in key.bin.enc -out key.bin
+Enter pass phrase <span class="k">for</span> ~/.ssh/id_rsa:
+</code></pre></div>
+
+<p>Now the (potentially big) file can be decrypted, using the symmetric key:</p>
+<div class="highlight"><pre><span></span><code>openssl enc -d -aes-256-cbc -in bigdata.dat.enc -out bigdata.dat -pass file:./key.bin
+</code></pre></div>
+
+<h3 id="misc-qd-for-small-files">Misc Q&amp;D for small files<a class="headerlink" href="#misc-qd-for-small-files" title="Permanent link">&para;</a></h3>
+<p>For a 'quick and dirty' encryption/decryption of <em>small</em> files:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Encrypt</span>
+$  openssl rsautl -encrypt -inkey &lt;<span class="o">(</span>ssh-keygen -e -m PKCS8 -f ~/.ssh/id_rsa.pub<span class="o">)</span> -pubin -in &lt;cleartext_file&gt;.dat -out &lt;encrypted_file&gt;.dat.enc
+<span class="c1"># Decrypt</span>
+$ openssl rsautl -decrypt -inkey ~/.ssh/id_rsa -in &lt;encrypted_file&gt;.dat.enc -out &lt;cleartext_file&gt;.dat
+</code></pre></div>
+
+<h2 id="data-encryption-in-git-repository-with-git-crypt">Data Encryption in Git Repository with <code>git-crypt</code><a class="headerlink" href="#data-encryption-in-git-repository-with-git-crypt" title="Permanent link">&para;</a></h2>
+<p>It is of course even more important <strong>in the context of git repositories</strong>, whether public or private, since the disposal of a working copy of the repository enable the access to the full history of commits, in particular the ones eventually done by mistake (<code>git commit -a</code>) that used to include sensitive files.
+That's where <a href="https://www.agwa.name/projects/git-crypt/">git-crypt</a> comes for help.
+It is an open source, command line utility that empowers developers to protect specific files within a git repository.</p>
+<blockquote>
+<p>git-crypt enables transparent encryption and decryption of files in a git repository.
+Files which you choose to protect are encrypted when committed, and decrypted when checked
+out. git-crypt lets you freely share a repository containing a mix of public and private
+content. git-crypt gracefully degrades, so developers without the secret key can still
+clone and commit to a repository with encrypted files. This lets you store your secret
+material (such as keys or passwords) in the same repository as your code, without
+requiring you to lock down your entire repository.</p>
+</blockquote>
+<p>The biggest advantage of <a href="https://github.com/AGWA/git-crypt">git-crypt</a> is that private data and public data can live in the same location.</p>
+<p><a class="md-button md-button--link" href="https://hpc.uni.lu/blog/2018/using-git-crypt-to-protect-sensitive-data/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"/></svg></span> Using Git-crypt to Protect Sensitive Data</a></p>
+<h2 id="petasuite-protect">PetaSuite Protect<a class="headerlink" href="#petasuite-protect" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.petagene.com/products/">PetaSuite</a> is a compression suite for Next-Generation-Sequencing (NGS) data.
+It consists of a command-line tool and a user-mode library. The command line tool performs compression and decompression operations on files. The user-mode library allows other tools and pipelines to transparently access the NGS data in their original file formats.</p>
+<p>PetaSuite is used within LCSB and provides the following features:</p>
+<ul>
+<li>Encrypt and compress genomic data</li>
+<li>Encryption keys and access managed centrally</li>
+<li>Decryption and decompression on-the-fly using a library that intercepts all FS access</li>
+</ul>
+<p>This is a commercial software -- contact <code>lcsb.software@uni.lu</code> if you would like to use it</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:pem">
+<p>Defined in RFCs <a href="https://tools.ietf.org/html/rfc1421">1421</a> through <a href="https://tools.ietf.org/html/rfc1424">1424</a>, is a container format for public/private keys or certificates used preferentially by open-source software such as <a href="https://www.openssl.org/">OpenSSL</a>. The name is from <a href="https://en.wikipedia.org/wiki/Privacy-enhanced_Electronic_Mail">Privacy Enhanced Mail (PEM)</a> (a <em>failed</em> method for secure email, but the container format it used lives on, and is a base64 translation of the x509 ASN.1 keys.&#160;<a class="footnote-backref" href="#fnref:pem" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: October 16, 2024
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../../filesystems/unix-file-permissions/" title="Unix File Permissions" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Unix File Permissions
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../../environment/" title="Overview" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Overview
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2007-2022 S. Varrette and Uni.lu HPC (ULHPC) Team
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/ULHPC" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://twitter.com/ULHPC" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.f81b9e8b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.23546af0.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["navigation.instant"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.58d22e8e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/bootstrap.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3381 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ULHPC Technical Documentation">
+      
+      
+        <link rel="canonical" href="https://hpc-docs.uni.lu/development/build-tools/easybuild/">
+      
+      
+        <meta name="author" content="S. Varrette and Uni.lu HPC (ULHPC) Team">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.3">
+    
+    
+      
+        <title>Building [custom] software with EasyBuild on the UL HPC platform - ULHPC Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.62d34fff.min.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.c8acc6db.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#building-custom-software-with-easybuild-on-the-ul-hpc-platform" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-header-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            ULHPC Technical Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Building [custom] software with EasyBuild on the UL HPC platform
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    ULHPC Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../hpc-schools/" title="HPC Trainings and Tutorials" class="md-nav__link">
+      HPC Trainings and Tutorials
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Accounts
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Accounts" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Accounts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../accounts/" title="Get an Account" class="md-nav__link">
+      Get an Account
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../policies/passwords/" title="Password Policy" class="md-nav__link">
+      Password Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../accounts/collaboration_accounts/" title="Collaboration Accounts" class="md-nav__link">
+      Collaboration Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../accounts/projects/" title="Projects Accounts" class="md-nav__link">
+      Projects Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../connect/ipa/" title="Identity Management Portal" class="md-nav__link">
+      Identity Management Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../slurm/accounts/" title="Slurm Account Hierarchy" class="md-nav__link">
+      Slurm Account Hierarchy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../teaching-with-the-ulhpc/" title="Teaching with the ULHPC" class="md-nav__link">
+      Teaching with the ULHPC
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Data Center
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Center" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Center
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data-center/" title="Centre de Calcul (CDC)" class="md-nav__link">
+      Centre de Calcul (CDC)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      ULHPC Supercomputers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="ULHPC Supercomputers" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        ULHPC Supercomputers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../systems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Aion
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Aion" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Aion
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../systems/aion/" title="Aion System" class="md-nav__link">
+      Aion System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../systems/aion/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../systems/aion/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../systems/aion/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-3" type="checkbox" id="nav-7-3">
+    
+    <label class="md-nav__link" for="nav-7-3">
+      Iris
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Iris" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Iris
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../systems/iris/" title="Iris System" class="md-nav__link">
+      Iris System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../systems/iris/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../systems/iris/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../systems/iris/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/live-status/motd" title="Live status" class="md-nav__link">
+      Live status
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Interconnect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Interconnect" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Interconnect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../interconnect/ib/" title="Fast Infiniband Interconnect" class="md-nav__link">
+      Fast Infiniband Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../interconnect/ethernet/" title="Ethernet Interconnect" class="md-nav__link">
+      Ethernet Interconnect
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Storage Systems
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Storage Systems" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Storage Systems
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../filesystems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../filesystems/gpfs/" title="GPFS/SpectrumScale" class="md-nav__link">
+      GPFS/SpectrumScale
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../filesystems/lustre/" title="Lustre" class="md-nav__link">
+      Lustre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../filesystems/isilon/" title="OneFS Isilon" class="md-nav__link">
+      OneFS Isilon
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/live-status/motd" title="Live status" class="md-nav__link">
+      Live status
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Access/Connect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Access/Connect" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Access/Connect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../connect/access/" title="Access/Login Servers" class="md-nav__link">
+      Access/Login Servers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../connect/ssh/" title="SSH" class="md-nav__link">
+      SSH
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../connect/ipa/" title="Identity Management (IdM/IPA)" class="md-nav__link">
+      Identity Management (IdM/IPA)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../connect/ood/" title="Open On Demand Portal" class="md-nav__link">
+      Open On Demand Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../connect/troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Data Management
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Management" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data/layout/" title="Global Directory Structure" class="md-nav__link">
+      Global Directory Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data/sharing/" title="Data Sharing" class="md-nav__link">
+      Data Sharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data/transfer/" title="Data Transfer" class="md-nav__link">
+      Data Transfer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data/gdpr/" title="GDPR Compliance" class="md-nav__link">
+      GDPR Compliance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../filesystems/quotas/" title="Quotas" class="md-nav__link">
+      Quotas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data/project/" title="Project Data Management" class="md-nav__link">
+      Project Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../filesystems/lfs/" title="Scratch Data Management" class="md-nav__link">
+      Scratch Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data/backups/" title="Backups" class="md-nav__link">
+      Backups
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../filesystems/unix-file-permissions/" title="Unix File Permissions" class="md-nav__link">
+      Unix File Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data/encryption/" title="Sensitive Data Protection" class="md-nav__link">
+      Sensitive Data Protection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+    
+    <label class="md-nav__link" for="nav-12">
+      Environment
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Environment" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Environment
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../environment/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../environment/modules/" title="Modules" class="md-nav__link">
+      Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../environment/easybuild/" title="Easybuild" class="md-nav__link">
+      Easybuild
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../environment/conda/" title="Conda" class="md-nav__link">
+      Conda
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+    
+    <label class="md-nav__link" for="nav-13">
+      Policies
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Policies" data-md-level="1">
+      <label class="md-nav__title" for="nav-13">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Policies
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../policies/aup/" title="Acceptable Use Policy (AUP)" class="md-nav__link">
+      Acceptable Use Policy (AUP)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../policies/maintenance/" title="Downtime and Maintenance" class="md-nav__link">
+      Downtime and Maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../policies/usage-charging/" title="Usage Charging Policy" class="md-nav__link">
+      Usage Charging Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../policies/usage-charging.md#hpc-resource-allocations-for-research-project" title="HPC Resource Allocations for Research Project" class="md-nav__link">
+      HPC Resource Allocations for Research Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../policies/usage-charging.md#hpc-service-contract-for-external-and-private-partners" title="HPC Service Agreement for Externals" class="md-nav__link">
+      HPC Service Agreement for Externals
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../support/professional-services.md" title="Expert-level HPC services" class="md-nav__link">
+      Expert-level HPC services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+    
+    <label class="md-nav__link" for="nav-14">
+      Running Jobs
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Running Jobs" data-md-level="1">
+      <label class="md-nav__title" for="nav-14">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Running Jobs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../slurm/" title="Slurm Overview" class="md-nav__link">
+      Slurm Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../slurm/commands/" title="Convenient Slurm Commands" class="md-nav__link">
+      Convenient Slurm Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../slurm/partitions/" title="Partition/Queues" class="md-nav__link">
+      Partition/Queues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../slurm/qos/" title="Quality of Service (QOS)" class="md-nav__link">
+      Quality of Service (QOS)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../slurm/accounts/" title="Account Hierarchy" class="md-nav__link">
+      Account Hierarchy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../jobs/reason-codes/" title="Job State and Reason Code" class="md-nav__link">
+      Job State and Reason Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../slurm/fairsharing/" title="Fairsharing" class="md-nav__link">
+      Fairsharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../jobs/priority/" title="Job Priority and Backfilling" class="md-nav__link">
+      Job Priority and Backfilling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../jobs/billing/" title="Job Accounting and Billing" class="md-nav__link">
+      Job Accounting and Billing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../jobs/interactive/" title="Interactive Job" class="md-nav__link">
+      Interactive Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../jobs/submit/" title="Passive/Batch Job" class="md-nav__link">
+      Passive/Batch Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../jobs/gpu/" title="GPU Jobs" class="md-nav__link">
+      GPU Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../jobs/long/" title="Long Jobs" class="md-nav__link">
+      Long Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../jobs/best-effort/" title="Best-effort Jobs" class="md-nav__link">
+      Best-effort Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../slurm/launchers/" title="Launcher Scripts Examples" class="md-nav__link">
+      Launcher Scripts Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../services/jupyter/" title="Jupyter Notebook" class="md-nav__link">
+      Jupyter Notebook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
+    
+    <label class="md-nav__link" for="nav-15">
+      Software
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software" data-md-level="1">
+      <label class="md-nav__title" for="nav-15">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-1" type="checkbox" id="nav-15-1">
+    
+    <label class="md-nav__link" for="nav-15-1">
+      Supported Software List
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Supported Software List" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Supported Software List
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/all_softwares/" title="Full List (alphabetical order)" class="md-nav__link">
+      Full List (alphabetical order)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/bio/" title="Biology" class="md-nav__link">
+      Biology
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/cae/" title="CFD/Finite element modelling" class="md-nav__link">
+      CFD/Finite element modelling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/chem/" title="Chemistry" class="md-nav__link">
+      Chemistry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/compiler/" title="Compilers" class="md-nav__link">
+      Compilers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/data/" title="Data processing" class="md-nav__link">
+      Data processing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/debugger/" title="Debugging" class="md-nav__link">
+      Debugging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/devel/" title="Development" class="md-nav__link">
+      Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/lang/" title="Programming Languages" class="md-nav__link">
+      Programming Languages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/lib/" title="Libraries" class="md-nav__link">
+      Libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/math/" title="Mathematics" class="md-nav__link">
+      Mathematics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/mpi/" title="MPI" class="md-nav__link">
+      MPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/numlib/" title="Numerical libraries" class="md-nav__link">
+      Numerical libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/perf/" title="Performance measurements" class="md-nav__link">
+      Performance measurements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/phys/" title="Physics" class="md-nav__link">
+      Physics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/system/" title="System-level software" class="md-nav__link">
+      System-level software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/toolchain/" title="Toolchains (software stacks)" class="md-nav__link">
+      Toolchains (software stacks)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/tools/" title="Utilities" class="md-nav__link">
+      Utilities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/vis/" title="Visualisation" class="md-nav__link">
+      Visualisation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-2" type="checkbox" id="nav-15-2">
+    
+    <label class="md-nav__link" for="nav-15-2">
+      Software Sets
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/2019b/" title="2019b" class="md-nav__link">
+      2019b
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/swsets/2020b/" title="2020a" class="md-nav__link">
+      2020a
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/build/" title="Compiling/building your own software" class="md-nav__link">
+      Compiling/building your own software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/eessi/" title="EESSI software stack" class="md-nav__link">
+      EESSI software stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../containers/" title="Containers" class="md-nav__link">
+      Containers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-6" type="checkbox" id="nav-15-6">
+    
+    <label class="md-nav__link" for="nav-15-6">
+      Computer Aided Eng. (CAE)
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computer Aided Eng. (CAE)" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computer Aided Eng. (CAE)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/cae/fenics/" title="FEniCS" class="md-nav__link">
+      FEniCS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/cae/ansys/" title="ANSYS" class="md-nav__link">
+      ANSYS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/cae/openfoam/" title="OpenFOAM" class="md-nav__link">
+      OpenFOAM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/cae/abaqus/" title="Abaqus" class="md-nav__link">
+      Abaqus
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/cae/fds/" title="FDS" class="md-nav__link">
+      FDS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/cae/meshing-tools/" title="Meshing-Tools" class="md-nav__link">
+      Meshing-Tools
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-7" type="checkbox" id="nav-15-7">
+    
+    <label class="md-nav__link" for="nav-15-7">
+      Physics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Physics" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Physics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/physics/wrf/" title="WRF" class="md-nav__link">
+      WRF
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8" type="checkbox" id="nav-15-8">
+    
+    <label class="md-nav__link" for="nav-15-8">
+      Computational Chemistry
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computational Chemistry" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computational Chemistry
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8-1" type="checkbox" id="nav-15-8-1">
+    
+    <label class="md-nav__link" for="nav-15-8-1">
+      Electronics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Electronics" data-md-level="3">
+      <label class="md-nav__title" for="nav-15-8-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Electronics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/computational-chemistry/electronics/abinit/" title="ABINIT" class="md-nav__link">
+      ABINIT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/computational-chemistry/electronics/ase/" title="ASE" class="md-nav__link">
+      ASE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/computational-chemistry/electronics/meep/" title="MEEP" class="md-nav__link">
+      MEEP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/computational-chemistry/electronics/quantum-espresso/" title="Quantum Espresso" class="md-nav__link">
+      Quantum Espresso
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/computational-chemistry/electronics/vasp/" title="VASP" class="md-nav__link">
+      VASP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8-2" type="checkbox" id="nav-15-8-2">
+    
+    <label class="md-nav__link" for="nav-15-8-2">
+      Molecular Dynamics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Molecular Dynamics" data-md-level="3">
+      <label class="md-nav__title" for="nav-15-8-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Molecular Dynamics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/computational-chemistry/molecular-dynamics/cp2k/" title="CP2K" class="md-nav__link">
+      CP2K
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/computational-chemistry/molecular-dynamics/gromacs/" title="GROMACS" class="md-nav__link">
+      GROMACS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/computational-chemistry/molecular-dynamics/namd/" title="NAMD" class="md-nav__link">
+      NAMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/computational-chemistry/molecular-dynamics/nwchem/" title="NWCHEM" class="md-nav__link">
+      NWCHEM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/computational-chemistry/molecular-dynamics/helping-libraries/" title="Helping Libraries" class="md-nav__link">
+      Helping Libraries
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-9" type="checkbox" id="nav-15-9">
+    
+    <label class="md-nav__link" for="nav-15-9">
+      Mathematics & Statistics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Mathematics & Statistics" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Mathematics & Statistics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/maths/matlab/" title="MATLAB" class="md-nav__link">
+      MATLAB
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/maths/mathematica/" title="MATHEMATICA" class="md-nav__link">
+      MATHEMATICA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/maths/stata/" title="Stata" class="md-nav__link">
+      Stata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/maths/julia/" title="Julia" class="md-nav__link">
+      Julia
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/optim/" title="Optimizers" class="md-nav__link">
+      Optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-11" type="checkbox" id="nav-15-11">
+    
+    <label class="md-nav__link" for="nav-15-11">
+      Visualization
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Visualization" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Visualization
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../software/visu/paraview/" title="ParaView" class="md-nav__link">
+      ParaView
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16" type="checkbox" id="nav-16">
+    
+    <label class="md-nav__link" for="nav-16">
+      Development
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Development" data-md-level="1">
+      <label class="md-nav__title" for="nav-16">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Development
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16-1" type="checkbox" id="nav-16-1">
+    
+    <label class="md-nav__link" for="nav-16-1">
+      Performance/Debugging
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Performance/Debugging" data-md-level="2">
+      <label class="md-nav__title" for="nav-16-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Performance/Debugging
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../performance-debugging-tools/arm-forge/" title="Arm Forge" class="md-nav__link">
+      Arm Forge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../performance-debugging-tools/vtune/" title="Intel VTune" class="md-nav__link">
+      Intel VTune
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../performance-debugging-tools/advisor/" title="Intel Advisor" class="md-nav__link">
+      Intel Advisor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../performance-debugging-tools/inspector/" title="Intel Inspector" class="md-nav__link">
+      Intel Inspector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../performance-debugging-tools/itac/" title="Intel Trace Analyzer and Collector" class="md-nav__link">
+      Intel Trace Analyzer and Collector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../performance-debugging-tools/scalasca/" title="Scalasca" class="md-nav__link">
+      Scalasca
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../performance-debugging-tools/valgrind/" title="Valgrind" class="md-nav__link">
+      Valgrind
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../performance-debugging-tools/aps/" title="APS" class="md-nav__link">
+      APS
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16-2" type="checkbox" id="nav-16-2">
+    
+    <label class="md-nav__link" for="nav-16-2">
+      Containers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Containers" data-md-level="2">
+      <label class="md-nav__title" for="nav-16-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Containers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../containers/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-18" type="checkbox" id="nav-18">
+    
+    <label class="md-nav__link" for="nav-18">
+      Help and Support
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Help and Support" data-md-level="1">
+      <label class="md-nav__title" for="nav-18">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Help and Support
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../support/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-19" type="checkbox" id="nav-19">
+    
+    <label class="md-nav__link" for="nav-19">
+      Contributing
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Contributing" data-md-level="1">
+      <label class="md-nav__title" for="nav-19">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Contributing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../contributing/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../contributing/versioning/" title="Semantic Versioning" class="md-nav__link">
+      Semantic Versioning
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-20" type="checkbox" id="nav-20">
+    
+    <label class="md-nav__link" for="nav-20">
+      Web Portals
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Web Portals" data-md-level="1">
+      <label class="md-nav__title" for="nav-20">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Web Portals
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu" title="ULHPC Website" class="md-nav__link">
+      ULHPC Website
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc-docs.uni.lu" title="Technical Documentation" class="md-nav__link">
+      Technical Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://ulhpc-tutorials.readthedocs.io/" title="ULHPC Tutorials" class="md-nav__link">
+      ULHPC Tutorials
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-installation" class="md-nav__link">
+    a. Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b-local-vs-global-usage" class="md-nav__link">
+    b. Local vs. global usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-build-software-using-provided-easyconfig-file" class="md-nav__link">
+    c. Build software using provided EasyConfig file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d-build-software-using-a-customized-easyconfig-file" class="md-nav__link">
+    d. Build software using a customized EasyConfig file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#old-build-software-using-your-own-easyconfig-file" class="md-nav__link">
+    (OLD) Build software using your own EasyConfig file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-go-further-into-details" class="md-nav__link">
+    To go further into details
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/ULHPC/ulhpc-docs/blob/master/docs/development/build-tools/easybuild.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="building-custom-software-with-easybuild-on-the-ul-hpc-platform">Building [custom] software with EasyBuild on the UL HPC platform<a class="headerlink" href="#building-custom-software-with-easybuild-on-the-ul-hpc-platform" title="Permanent link">&para;</a></h1>
+<p><a href="http://easybuild.readthedocs.io">EasyBuild</a> can be used to ease, automate and script the build of software on the <a href="https://hpc.uni.lu">UL HPC</a> platforms.</p>
+<p>Indeed, as researchers involved in many cutting-edge and hot topics, you probably have access to many theoretical resources to understand the surrounding concepts. Yet it should <em>normally</em> give you a wish to test the corresponding software.
+Traditionally, this part is rather time-consuming and frustrating, especially when the developers did not rely on a "regular" building framework such as <a href="https://cmake.org/">CMake</a> or the <a href="https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html">autotools</a> (<em>i.e.</em> with build instructions as <code>configure --prefix &lt;path&gt; &amp;&amp; make &amp;&amp; make install</code>).</p>
+<p>And when it comes to have a build adapted to an HPC system, you are somehow <em>forced</em> to make a custom build performed on the target machine to ensure you will get the best possible performance.
+<a href="https://github.com/easybuilders/easybuild">EasyBuild</a> is one approach to facilitate this step.</p>
+<p><a href="https://easybuild.io/"><img width='150px' src='https://docs.easybuild.io/img/easybuild_logo_2022_vertical_dark_bg_transparent.png#only-dark'/></a></p>
+<p>EasyBuild is a tool that allows to perform automated and reproducible compilation and installation of software. A large number of scientific software are supported (<strong><a href="http://easybuild.readthedocs.io/en/latest/version-specific/Supported_software.html">1504 supported software packages</a></strong> in the last release 3.6.1) -- see also <a href="http://easybuild.readthedocs.io/en/latest/Introduction.html">What is EasyBuild?</a></p>
+<p>All builds and installations are performed at user level, so you don't need the admin (i.e. <code>root</code>) rights.
+The software are installed in your home directory (by default in <code>$HOME/.local/easybuild/software/</code>) and a module file is generated (by default in <code>$HOME/.local/easybuild/modules/</code>) to use the software.</p>
+<p>EasyBuild relies on two main concepts: <em>Toolchains</em> and <em>EasyConfig files</em>.</p>
+<p>A <strong>toolchain</strong> corresponds to a compiler and a set of libraries which are commonly used to build a software.
+The two main toolchains frequently used on the UL HPC platform are the <code>foss</code> ("<em>Free and Open Source Software</em>") and the <code>intel</code> one.</p>
+<ol>
+<li><code>foss</code>  is based on the GCC compiler and on open-source libraries (OpenMPI, OpenBLAS, etc.).</li>
+<li><code>intel</code> is based on the Intel compiler and on Intel libraries (Intel MPI, Intel Math Kernel Library, etc.).</li>
+</ol>
+<p>An <strong>EasyConfig file</strong> is a simple text file that describes the build process of a software. For most software that uses standard procedures (like <code>configure</code>, <code>make</code> and <code>make install</code>), this file is very simple.
+Many <a href="https://github.com/easybuilders/easybuild-easyconfigs/tree/master/easybuild/easyconfigs">EasyConfig files</a> are already provided with EasyBuild.
+By default, EasyConfig files and generated modules are named using the following convention:
+<code>&lt;Software-Name&gt;-&lt;Software-Version&gt;-&lt;Toolchain-Name&gt;-&lt;Toolchain-Version&gt;</code>.
+However, we use a <strong>hierarchical</strong> approach where the software are classified under a category (or class) -- see  the <code>CategorizedModuleNamingScheme</code> option for the <code>EASYBUILD_MODULE_NAMING_SCHEME</code> environmental variable), meaning that the layout will respect the following hierarchy:
+<code>&lt;Software-Class&gt;/&lt;Software-Name&gt;/&lt;Software-Version&gt;-&lt;Toolchain-Name&gt;-&lt;Toolchain-Version&gt;</code></p>
+<p>Additional details are available on EasyBuild website:</p>
+<ul>
+<li><a href="https://easybuilders.github.io/easybuild/">EasyBuild homepage</a></li>
+<li><a href="https://easybuilders.github.io/easybuild-tutorial/">EasyBuild tutorial</a></li>
+<li><a href="http://easybuild.readthedocs.io/">EasyBuild documentation</a></li>
+<li><a href="http://easybuild.readthedocs.io/en/latest/Introduction.html">What is EasyBuild?</a></li>
+<li><a href="https://github.com/easybuilders/easybuild/wiki/Compiler-toolchains">Toolchains</a></li>
+<li><a href="http://easybuild.readthedocs.io/en/latest/Writing_easyconfig_files.html">EasyConfig files</a></li>
+<li><a href="http://easybuild.readthedocs.io/en/latest/version-specific/Supported_software.html">List of supported software packages</a></li>
+</ul>
+<h3 id="a-installation">a. Installation<a class="headerlink" href="#a-installation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="http://easybuild.readthedocs.io/en/latest/Installation.html">the official instructions</a>.</li>
+</ul>
+<p>What is important for the installation of EasyBuild are the following variables:</p>
+<ul>
+<li><code>EASYBUILD_PREFIX</code>: where to install <strong>local</strong> modules and software, <em>i.e.</em> <code>$HOME/.local/easybuild</code></li>
+<li><code>EASYBUILD_MODULES_TOOL</code>: the type of <a href="http://modules.sourceforge.net/">modules</a> tool you are using, <em>i.e.</em> <code>LMod</code> in this case</li>
+<li><code>EASYBUILD_MODULE_NAMING_SCHEME</code>: the way the software and modules should be organized (flat view or hierarchical) -- we're advising on <code>CategorizedModuleNamingScheme</code></li>
+</ul>
+<p>Add the following entries to your <code>~/.bashrc</code> (use your favorite CLI editor like <code>nano</code> or <code>vim</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Easybuild</span>
+<span class="nb">export</span> <span class="nv">EASYBUILD_PREFIX</span><span class="o">=</span><span class="nv">$HOME</span>/.local/easybuild
+<span class="nb">export</span> <span class="nv">EASYBUILD_MODULES_TOOL</span><span class="o">=</span>Lmod
+<span class="nb">export</span> <span class="nv">EASYBUILD_MODULE_NAMING_SCHEME</span><span class="o">=</span>CategorizedModuleNamingScheme
+<span class="c1"># Use the below variable to run:</span>
+<span class="c1">#    module use $LOCAL_MODULES</span>
+<span class="c1">#    module load tools/EasyBuild</span>
+<span class="nb">export</span> <span class="nv">LOCAL_MODULES</span><span class="o">=</span><span class="si">${</span><span class="nv">EASYBUILD_PREFIX</span><span class="si">}</span>/modules/all
+
+<span class="nb">alias</span> <span class="nv">ma</span><span class="o">=</span><span class="s2">&quot;module avail&quot;</span>
+<span class="nb">alias</span> <span class="nv">ml</span><span class="o">=</span><span class="s2">&quot;module list&quot;</span>
+<span class="k">function</span> mu<span class="o">(){</span>
+   module use <span class="nv">$LOCAL_MODULES</span>
+   module load tools/EasyBuild
+<span class="o">}</span>
+</code></pre></div>
+
+<p>Then source this file to expose the environment variables:</p>
+<div class="highlight"><pre><span></span><code>$&gt; <span class="nb">source</span> ~/.bashrc
+$&gt; <span class="nb">echo</span> <span class="nv">$EASYBUILD_PREFIX</span>
+/home/users/&lt;login&gt;/.local/easybuild
+</code></pre></div>
+
+<p>Now let's install EasyBuild following the <a href="https://docs.easybuild.io/installation/#eb_as_module">official procedure</a>. Install EasyBuild in a temporary directory and use this temporary installation to build an EasyBuild module in your <code>$EASYBUILD_PREFIX</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># pick installation prefix, and install EasyBuild into it</span>
+<span class="nb">export</span> <span class="nv">EB_TMPDIR</span><span class="o">=</span>/tmp/<span class="nv">$USER</span>/eb_tmp
+python3 -m pip install --ignore-installed --prefix <span class="nv">$EB_TMPDIR</span> easybuild
+
+<span class="c1"># update environment to use this temporary EasyBuild installation</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$EB_TMPDIR</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="k">$(</span>/bin/ls -rtd -1 <span class="nv">$EB_TMPDIR</span>/lib*/python*/site-packages <span class="p">|</span> tail -1<span class="k">)</span>:<span class="nv">$PYTHONPATH</span>
+<span class="nb">export</span> <span class="nv">EB_PYTHON</span><span class="o">=</span>python3
+
+<span class="c1"># install Easybuild in your $EASYBUILD_PREFIX</span>
+eb --install-latest-eb-release --prefix <span class="nv">$EASYBUILD_PREFIX</span>
+</code></pre></div>
+
+<p>Now you can use your freshly built software. The main EasyBuild command is <code>eb</code>:</p>
+<div class="highlight"><pre><span></span><code>$&gt; eb --version             <span class="c1"># expected ;)</span>
+-bash: eb: <span class="nb">command</span> not found
+
+<span class="c1"># Load the newly installed Easybuild</span>
+$&gt; <span class="nb">echo</span> <span class="nv">$MODULEPATH</span>
+/opt/apps/resif/data/stable/default/modules/all/
+
+$&gt; module use <span class="nv">$LOCAL_MODULES</span>
+$&gt; <span class="nb">echo</span> <span class="nv">$MODULEPATH</span>
+/home/users/&lt;login&gt;/.local/easybuild/modules/all:/opt/apps/resif/data/stable/default/modules/all
+
+$&gt; module spider Easybuild
+$&gt; module load tools/EasyBuild       <span class="c1"># TAB is your friend...</span>
+$&gt; eb --version
+This is EasyBuild <span class="m">3</span>.6.1 <span class="o">(</span>framework: <span class="m">3</span>.6.1, easyblocks: <span class="m">3</span>.6.1<span class="o">)</span> on host iris-001.
+</code></pre></div>
+
+<p>Since you are going to use quite often the above command to use locally built modules and load easybuild, an alias <code>mu</code> is provided and can be used from now on. Use it <strong>now</strong>.</p>
+<p><div class="highlight"><pre><span></span><code>$&gt; mu
+$&gt; module avail     # OR &#39;ma&#39;
+</code></pre></div>
+To get help on the EasyBuild options, use the <code>-h</code> or <code>-H</code> option flags:</p>
+<div class="codehilite"><pre><span></span><code>$&gt; eb -h
+$&gt; eb -H
+</code></pre></div>
+
+
+<h3 id="b-local-vs-global-usage">b. Local vs. global usage<a class="headerlink" href="#b-local-vs-global-usage" title="Permanent link">&para;</a></h3>
+<p>As you probably guessed, we are going to use two places for the installed software:</p>
+<ul>
+<li>local builds <code>~/.local/easybuild</code>          (see <code>$LOCAL_MODULES</code>)</li>
+<li>global builds (provided to you by the UL HPC team) in <code>/opt/apps/resif/data/stable/default/modules/all</code> (see default <code>$MODULEPATH</code>).</li>
+</ul>
+<p>Default usage (with the <code>eb</code> command) would install your software and modules in <code>~/.local/easybuild</code>.</p>
+<p>Before that, let's explore the basic usage of <a href="http://easybuild.readthedocs.io/">EasyBuild</a> and the <code>eb</code> command.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Search for an Easybuild recipy with &#39;eb -S &lt;pattern&gt;&#39;</span>
+$&gt; eb -S Spark
+<span class="nv">CFGS1</span><span class="o">=</span>/opt/apps/resif/data/easyconfigs/ulhpc/default/easybuild/easyconfigs/s/Spark
+<span class="nv">CFGS2</span><span class="o">=</span>/home/users/&lt;login&gt;/.local/easybuild/software/tools/EasyBuild/3.6.1/lib/python2.7/site-packages/easybuild_easyconfigs-3.6.1-py2.7.egg/easybuild/easyconfigs/s/Spark
+ * <span class="nv">$CFGS1</span>/Spark-2.1.1.eb
+ * <span class="nv">$CFGS1</span>/Spark-2.3.0-intel-2018a-Hadoop-2.7-Java-1.8.0_162-Python-3.6.4.eb
+ * <span class="nv">$CFGS2</span>/Spark-1.3.0.eb
+ * <span class="nv">$CFGS2</span>/Spark-1.4.1.eb
+ * <span class="nv">$CFGS2</span>/Spark-1.5.0.eb
+ * <span class="nv">$CFGS2</span>/Spark-1.6.0.eb
+ * <span class="nv">$CFGS2</span>/Spark-1.6.1.eb
+ * <span class="nv">$CFGS2</span>/Spark-2.0.0.eb
+ * <span class="nv">$CFGS2</span>/Spark-2.0.2.eb
+ * <span class="nv">$CFGS2</span>/Spark-2.2.0-Hadoop-2.6-Java-1.8.0_144.eb
+ * <span class="nv">$CFGS2</span>/Spark-2.2.0-Hadoop-2.6-Java-1.8.0_152.eb
+ * <span class="nv">$CFGS2</span>/Spark-2.2.0-intel-2017b-Hadoop-2.6-Java-1.8.0_152-Python-3.6.3.eb
+</code></pre></div>
+
+<h3 id="c-build-software-using-provided-easyconfig-file">c. Build software using provided EasyConfig file<a class="headerlink" href="#c-build-software-using-provided-easyconfig-file" title="Permanent link">&para;</a></h3>
+<p>In this part, we propose to build <a href="http://www.netlib.org/benchmark/hpl/">High Performance Linpack (HPL)</a> using EasyBuild.
+HPL is supported by EasyBuild, this means that an EasyConfig file allowing to build HPL is already provided with EasyBuild.</p>
+<p>First of all, let's check if that software is not available by default:</p>
+<div class="highlight"><pre><span></span><code>$&gt; module spider HPL
+
+Lmod has detected the following error: Unable to find: &quot;HPL&quot;
+</code></pre></div>
+
+<p>Then, search for available EasyConfig files with HPL in their name. The EasyConfig files are named with the <code>.eb</code> extension.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Search for an Easybuild recipy with &#39;eb -S &lt;pattern&gt;&#39;</span>
+$&gt; eb -S HPL-2.2
+<span class="nv">CFGS1</span><span class="o">=</span>/home/users/svarrette/.local/easybuild/software/tools/EasyBuild/3.6.1/lib/python2.7/site-packages/easybuild_easyconfigs-3.6.1-py2.7.egg/easybuild/easyconfigs/h/HPL
+ * <span class="nv">$CFGS1</span>/HPL-2.2-foss-2016.07.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-foss-2016.09.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-foss-2017a.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-foss-2017b.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-foss-2018a.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-fosscuda-2018a.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-giolf-2017b.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-giolf-2018a.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-giolfc-2017b.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-gmpolf-2017.10.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-goolfc-2016.08.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-goolfc-2016.10.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2017.00.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2017.01.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2017.02.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2017.09.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2017a.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2017b.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2018.00.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2018.01.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2018.02.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2018a.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intelcuda-2016.10.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-iomkl-2016.09-GCC-4.9.3-2.25.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-iomkl-2016.09-GCC-5.4.0-2.26.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-iomkl-2017.01.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2017.02.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2017.09.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2017a.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2017b.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2018.00.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2018.01.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2018.02.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intel-2018a.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-intelcuda-2016.10.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-iomkl-2016.09-GCC-4.9.3-2.25.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-iomkl-2016.09-GCC-5.4.0-2.26.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-iomkl-2017.01.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-iomkl-2017a.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-iomkl-2017b.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-iomkl-2018.02.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-iomkl-2018a.eb
+ * <span class="nv">$CFGS1</span>/HPL-2.2-pomkl-2016.09.eb
+</code></pre></div>
+
+<p>We are going to build HPL 2.2 against the <code>intel</code> toolchain, typically the 2017a version which is available by default on the platform.</p>
+<p>Pick the corresponding recipy (for instance <code>HPL-2.2-intel-2017a.eb</code>), install it with</p>
+<div class="codehilite"><pre><span></span><code>   eb &lt;name&gt;.eb [-D] -r
+</code></pre></div>
+
+
+<ul>
+<li><code>-D</code> enables the dry-run mode to check what's going to be install -- <strong>ALWAYS try it first</strong></li>
+<li><code>-r</code> enables the robot mode to automatically install all dependencies while searching for easyconfigs in a set of pre-defined directories -- you can also prepend new directories to search for eb files (like the current directory <code>$PWD</code>) using the option and syntax <code>--robot-paths=$PWD:</code> (do not forget the ':'). See <a href="http://easybuild.readthedocs.io/en/latest/Using_the_EasyBuild_command_line.html#controlling-the-robot-search-path">Controlling the robot search path documentation</a></li>
+<li>The <code>$CFGS&lt;n&gt;/</code> prefix should be dropped unless you know what you're doing (and thus have previously defined the variable -- see the first output of the <code>eb -S [...]</code> command).</li>
+</ul>
+<p>So let's install <code>HPL</code> version 2.2 and <strong>FIRST</strong> check which dependencies are satisfied with <code>-Dr</code>:</p>
+<div class="highlight"><pre><span></span><code>$&gt; eb HPL-2.2-intel-2017a.eb -Dr
+<span class="o">==</span> temporary log file in <span class="k">case</span> of crash /tmp/eb-CTC2hq/easybuild-gfLf1W.log
+Dry run: printing build status of easyconfigs and dependencies
+<span class="nv">CFGS</span><span class="o">=</span>/home/users/svarrette/.local/easybuild/software/tools/EasyBuild/3.6.1/lib/python2.7/site-packages/easybuild_easyconfigs-3.6.1-py2.7.egg/easybuild/easyconfigs
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/m/M4/M4-1.4.17.eb <span class="o">(</span>module: devel/M4/1.4.17<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/b/Bison/Bison-3.0.4.eb <span class="o">(</span>module: lang/Bison/3.0.4<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/f/flex/flex-2.6.0.eb <span class="o">(</span>module: lang/flex/2.6.0<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/z/zlib/zlib-1.2.8.eb <span class="o">(</span>module: lib/zlib/1.2.8<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/b/binutils/binutils-2.27.eb <span class="o">(</span>module: tools/binutils/2.27<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/g/GCCcore/GCCcore-6.3.0.eb <span class="o">(</span>module: compiler/GCCcore/6.3.0<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/m/M4/M4-1.4.18-GCCcore-6.3.0.eb <span class="o">(</span>module: devel/M4/1.4.18-GCCcore-6.3.0<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/z/zlib/zlib-1.2.11-GCCcore-6.3.0.eb <span class="o">(</span>module: lib/zlib/1.2.11-GCCcore-6.3.0<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/h/help2man/help2man-1.47.4-GCCcore-6.3.0.eb <span class="o">(</span>module: tools/help2man/1.47.4-GCCcore-6.3.0<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/b/Bison/Bison-3.0.4-GCCcore-6.3.0.eb <span class="o">(</span>module: lang/Bison/3.0.4-GCCcore-6.3.0<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/f/flex/flex-2.6.3-GCCcore-6.3.0.eb <span class="o">(</span>module: lang/flex/2.6.3-GCCcore-6.3.0<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/b/binutils/binutils-2.27-GCCcore-6.3.0.eb <span class="o">(</span>module: tools/binutils/2.27-GCCcore-6.3.0<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/i/icc/icc-2017.1.132-GCC-6.3.0-2.27.eb <span class="o">(</span>module: compiler/icc/2017.1.132-GCC-6.3.0-2.27<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/i/ifort/ifort-2017.1.132-GCC-6.3.0-2.27.eb <span class="o">(</span>module: compiler/ifort/2017.1.132-GCC-6.3.0-2.27<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/i/iccifort/iccifort-2017.1.132-GCC-6.3.0-2.27.eb <span class="o">(</span>module: toolchain/iccifort/2017.1.132-GCC-6.3.0-2.27<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/i/impi/impi-2017.1.132-iccifort-2017.1.132-GCC-6.3.0-2.27.eb <span class="o">(</span>module: mpi/impi/2017.1.132-iccifort-2017.1.132-GCC-6.3.0-2.27<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/i/iimpi/iimpi-2017a.eb <span class="o">(</span>module: toolchain/iimpi/2017a<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/i/imkl/imkl-2017.1.132-iimpi-2017a.eb <span class="o">(</span>module: numlib/imkl/2017.1.132-iimpi-2017a<span class="o">)</span>
+ * <span class="o">[</span>x<span class="o">]</span> <span class="nv">$CFGS</span>/i/intel/intel-2017a.eb <span class="o">(</span>module: toolchain/intel/2017a<span class="o">)</span>
+ * <span class="o">[</span> <span class="o">]</span> <span class="nv">$CFGS</span>/h/HPL/HPL-2.2-intel-2017a.eb <span class="o">(</span>module: tools/HPL/2.2-intel-2017a<span class="o">)</span>
+<span class="o">==</span> Temporary log file<span class="o">(</span>s<span class="o">)</span> /tmp/eb-CTC2hq/easybuild-gfLf1W.log* have been removed.
+<span class="o">==</span> Temporary directory /tmp/eb-CTC2hq has been removed.
+</code></pre></div>
+
+<p>As can be seen, there is a single element to install and this has not been done so far (box not checked). All the dependencies are already present (box checked).
+Let's really install the selected software -- you may want to prefix the <code>eb</code> command with the <code>time</code> to collect the installation time:</p>
+<div class="highlight"><pre><span></span><code>$&gt; <span class="nb">time</span> eb HPL-2.2-intel-2017a.eb -r       <span class="c1"># Remove the &#39;-D&#39; (dry-run) flags</span>
+<span class="o">==</span> temporary log file in <span class="k">case</span> of crash /tmp/eb-nub_oL/easybuild-J8sNzx.log
+<span class="o">==</span> resolving dependencies ...
+<span class="o">==</span> processing EasyBuild easyconfig /home/users/svarrette/.local/easybuild/software/tools/EasyBuild/3.6.1/lib/python2.7/site-packages/easybuild_easyconfigs-3.6.1-py2.7.egg/easybuild/easyconfigs/h/HPL/HPL-2.2-intel-2017a.eb
+<span class="o">==</span> building and installing tools/HPL/2.2-intel-2017a...
+<span class="o">==</span> fetching files...
+<span class="o">==</span> creating build dir, resetting environment...
+<span class="o">==</span> unpacking...
+<span class="o">==</span> patching...
+<span class="o">==</span> preparing...
+<span class="o">==</span> configuring...
+<span class="o">==</span> building...
+<span class="o">==</span> testing...
+<span class="o">==</span> installing...
+<span class="o">==</span> taking care of extensions...
+<span class="o">==</span> postprocessing...
+<span class="o">==</span> sanity checking...
+<span class="o">==</span> cleaning up...
+<span class="o">==</span> creating module...
+<span class="o">==</span> permissions...
+<span class="o">==</span> packaging...
+<span class="o">==</span> COMPLETED: Installation ended <span class="nv">successfully</span>
+<span class="o">==</span> Results of the build can be found in the log file<span class="o">(</span>s<span class="o">)</span> /home/users/svarrette/.local/easybuild/software/tools/HPL/2.2-intel-2017a/easybuild/easybuild-HPL-2.2-20180608.094831.log
+<span class="o">==</span> Build succeeded <span class="k">for</span> <span class="m">1</span> out of <span class="nv">1</span>
+<span class="o">==</span> Temporary log file<span class="o">(</span>s<span class="o">)</span> /tmp/eb-nub_oL/easybuild-J8sNzx.log* have been removed.
+<span class="o">==</span> Temporary directory /tmp/eb-nub_oL has been removed.
+
+real    0m56.472s
+user    0m15.268s
+sys     0m19.998s
+</code></pre></div>
+
+<p>Check the installed software:</p>
+<div class="highlight"><pre><span></span><code>$&gt; module av HPL
+
+------------------------- /home/users/&lt;login&gt;/.local/easybuild/modules/all -------------------------
+   tools/HPL/2.2-intel-2017a
+
+Use &quot;module spider&quot; to find all possible modules.
+Use &quot;module keyword key1 key2 ...&quot; to search for all possible modules matching any of the &quot;keys&quot;.
+
+$&gt; module spider HPL
+
+----------------------------------------------------------------------------------------------------
+  tools/HPL: tools/HPL/2.2-intel-2017a
+----------------------------------------------------------------------------------------------------
+    Description:
+      HPL is a software package that solves a (random) dense linear system in double precision
+      (64 bits) arithmetic on distributed-memory computers. It can thus be regarded as a portable
+      as well as freely available implementation of the High Performance Computing Linpack Benchmark.
+
+    This module can be loaded directly: module load tools/HPL/2.2-intel-2017a
+
+    Help:
+
+      Description
+      ===========
+      HPL is a software package that solves a (random) dense linear system in double precision
+      (64 bits) arithmetic on distributed-memory computers. It can thus be regarded as a portable
+      as well as freely available implementation of the High Performance Computing Linpack Benchmark.
+
+
+      More information
+      ================
+       - Homepage: http://www.netlib.org/benchmark/hpl/
+
+$&gt; module show tools/HPL
+---------------------------------------------------------------------------------------------------
+   /home/users/svarrette/.local/easybuild/modules/all/tools/HPL/2.2-intel-2017a.lua:
+---------------------------------------------------------------------------------------------------
+help([[
+Description
+===========
+HPL is a software package that solves a (random) dense linear system in double precision
+(64 bits) arithmetic on distributed-memory computers. It can thus be regarded as a portable
+as well as freely available implementation of the High Performance Computing Linpack Benchmark.
+
+
+More information
+================
+ - Homepage: http://www.netlib.org/benchmark/hpl/
+]])
+whatis(&quot;Description: HPL is a software package that solves a (random) dense linear system in
+ double precision (64 bits) arithmetic on distributed-memory computers. It can thus be regarded
+ as a portable as well as freely available implementation of the High Performance Computing
+ Linpack Benchmark.&quot;)
+whatis(&quot;Homepage: http://www.netlib.org/benchmark/hpl/&quot;)
+conflict(&quot;tools/HPL&quot;)
+load(&quot;toolchain/intel/2017a&quot;)
+prepend_path(&quot;PATH&quot;,&quot;/home/users/svarrette/.local/easybuild/software/tools/HPL/2.2-intel-2017a/bin&quot;)
+setenv(&quot;EBROOTHPL&quot;,&quot;/home/users/svarrette/.local/easybuild/software/tools/HPL/2.2-intel-2017a&quot;)
+setenv(&quot;EBVERSIONHPL&quot;,&quot;2.2&quot;)
+setenv(&quot;EBDEVELHPL&quot;,&quot;/home/users/svarrette/.local/easybuild/software/tools/HPL/2.2-intel-2017a/easybuild/tools-HPL-2.2-intel-2017a-easybuild-devel&quot;)
+</code></pre></div>
+
+<p><strong>Note</strong>: to see the (locally) installed software, the <code>MODULEPATH</code> variable should include the <code>$HOME/.local/easybuild/modules/all/</code> (of <code>$LOCAL_MODULES</code>) path (which is what happens when using <code>module use &lt;path&gt;</code> -- see the <code>mu</code> command)</p>
+<p>You can now load the freshly installed module like any other:</p>
+<div class="highlight"><pre><span></span><code>$&gt; module load tools/HPL
+$&gt; module list
+
+Currently Loaded Modules:
+  <span class="m">1</span><span class="o">)</span> tools/EasyBuild/3.6.1                          <span class="m">7</span><span class="o">)</span> mpi/impi/2017.1.132-iccifort-2017.1.132-GCC-6.3.0-2.27
+  <span class="m">2</span><span class="o">)</span> compiler/GCCcore/6.3.0                         <span class="m">8</span><span class="o">)</span> toolchain/iimpi/2017a
+  <span class="m">3</span><span class="o">)</span> tools/binutils/2.27-GCCcore-6.3.0              <span class="m">9</span><span class="o">)</span> numlib/imkl/2017.1.132-iimpi-2017a
+  <span class="m">4</span><span class="o">)</span> compiler/icc/2017.1.132-GCC-6.3.0-2.27        <span class="m">10</span><span class="o">)</span> toolchain/intel/2017a
+  <span class="m">5</span><span class="o">)</span> compiler/ifort/2017.1.132-GCC-6.3.0-2.27      <span class="m">11</span><span class="o">)</span> tools/HPL/2.2-intel-2017a
+  <span class="m">6</span><span class="o">)</span> toolchain/iccifort/2017.1.132-GCC-6.3.0-2.27
+</code></pre></div>
+
+<p><strong>Tips</strong>: When you load a module <code>&lt;NAME&gt;</code> generated by Easybuild, it is installed within the directory reported by the <code>$EBROOT&lt;NAME&gt;</code> variable.
+In the above case, you will find the generated binary for HPL in <code>${EBROOTHPL}/bin/xhpl</code>.</p>
+<p>You may want to test the newly built HPL benchmark (you need to reserve at least 4 cores for that to succeed):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># In another terminal, connect to the cluster frontend</span>
+<span class="c1"># Have an interactive job</span>
+<span class="c1">############### iris cluster (slurm) ###############</span>
+<span class="o">(</span>access-iris<span class="o">)</span>$&gt; si -n <span class="m">4</span>        <span class="c1"># this time reserve for 4 (mpi) tasks</span>
+$&gt; mu
+$&gt; module load tools/HPL
+$&gt; <span class="nb">cd</span> <span class="nv">$EBROOTHPL</span>
+$&gt; ls
+$&gt; <span class="nb">cd</span> bin
+$&gt; ls
+$&gt; srun -n <span class="nv">$SLURM_NTASKS</span> ./xhpl
+</code></pre></div>
+
+<p>Running HPL benchmarks requires more attention -- a <a href="https://ulhpc-tutorials.readthedocs.io/en/latest/parallel/mpi/HPL/">full tutorial</a> is dedicated to it.
+Yet you can see that we obtained HPL 2.2 without writing any EasyConfig file.</p>
+<h3 id="d-build-software-using-a-customized-easyconfig-file">d. Build software using a customized EasyConfig file<a class="headerlink" href="#d-build-software-using-a-customized-easyconfig-file" title="Permanent link">&para;</a></h3>
+<p>There are multiple ways to amend an EasyConfig file. Check the <code>--try-*</code> option flags for all the possibilities.</p>
+<p>Generally you want to do that when the up-to-date version of the software you want is <strong>not</strong> available as a recipy within Easybuild.
+For instance, a very popular building environment <a href="https://blog.kitware.com/cmake-3-11-3-available-for-download/">CMake</a> has recently released a new version (3.11.3), which you want to give a try.</p>
+<p>It is not available as module, so let's build it.</p>
+<p>First let's check for available easyconfigs recipy if one exist for the expected version:</p>
+<div class="highlight"><pre><span></span><code>$&gt; eb -S Cmake-3
+[...]
+ * $CFGS2/CMake-3.9.1.eb
+ * $CFGS2/CMake-3.9.4-GCCcore-6.4.0.eb
+ * $CFGS2/CMake-3.9.5-GCCcore-6.4.0.eb
+</code></pre></div>
+
+<p>We are going to reuse one of the latest EasyConfig available, for instance lets copy <code>$CFGS2/CMake-3.9.1.eb</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Work in a dedicated directory</span>
+$&gt; mkdir -p ~/software/CMake
+$&gt; <span class="nb">cd</span> ~/software/CMake
+
+$&gt; eb -S Cmake-3<span class="p">|</span>less   <span class="c1"># collect the definition of the CFGS2 variable</span>
+$&gt; <span class="nv">CFGS2</span><span class="o">=</span>/home/users/svarrette/.local/easybuild/software/tools/EasyBuild/3.6.1/lib/python2.7/site-packages/easybuild_easyconfigs-3.6.1-py2.7.egg/easybuild/easyconfigs/c/CMake
+$&gt; cp <span class="nv">$CFGS2</span>/CMake-3.9.1.eb .
+$&gt; mv CMake-3.9.1.eb CMake-3.11.3.eb        <span class="c1"># Adapt version suffix to the lastest realse</span>
+</code></pre></div>
+
+<p>You need to perform the following changes (here: version upgrade, and adapted checksum)</p>
+<div class="highlight"><pre><span></span><code><span class="gd">--- CMake-3.9.1.eb      2018-06-08 10:56:24.447699000 +0200</span>
+<span class="gi">+++ CMake-3.11.3.eb     2018-06-08 11:07:39.716672000 +0200</span>
+<span class="gu">@@ -1,7 +1,7 @@</span>
+ easyblock = &#39;ConfigureMake&#39;
+
+ name = &#39;CMake&#39;
+<span class="gd">-version = &#39;3.9.1&#39;</span>
+<span class="gi">+version = &#39;3.11.3&#39;</span>
+
+ homepage = &#39;http://www.cmake.org&#39;
+ description = &quot;&quot;&quot;CMake, the cross-platform, open-source build system.
+<span class="gu">@@ -11,7 +11,7 @@</span>
+
+ source_urls = [&#39;http://www.cmake.org/files/v%(version_major_minor)s&#39;]
+ sources = [SOURCELOWER_TAR_GZ]
+<span class="gd">-checksums = [&#39;d768ee83d217f91bb597b3ca2ac663da7a8603c97e1f1a5184bc01e0ad2b12bb&#39;]</span>
+<span class="gi">+checksums = [&#39;287135b6beb7ffc1ccd02707271080bbf14c21d80c067ae2c0040e5f3508c39a&#39;]</span>
+
+ configopts = &#39;-- -DCMAKE_USE_OPENSSL=1&#39;
+</code></pre></div>
+
+<p>If the checksum is not provided on the <a href="https://cmake.org/download/">official software page</a>, you will need to compute it yourself by downloading the sources and collect the checksum:</p>
+<div class="highlight"><pre><span></span><code>$&gt; gsha256sum ~/Download/cmake-3.11.3.tar.gz
+287135b6beb7ffc1ccd02707271080bbf14c21d80c067ae2c0040e5f3508c39a  cmake-3.11.3.tar.gz
+</code></pre></div>
+
+<p>Let's build it:</p>
+<div class="highlight"><pre><span></span><code>$&gt;  eb ./CMake-3.11.3.eb -Dr
+<span class="o">==</span> temporary log file in <span class="k">case</span> of crash /tmp/eb-UX7APP/easybuild-gxnyIv.log
+Dry run: printing build status of easyconfigs and dependencies
+<span class="nv">CFGS</span><span class="o">=</span>/mnt/irisgpfs/users/&lt;login&gt;/software/CMake
+ * <span class="o">[</span> <span class="o">]</span> <span class="nv">$CFGS</span>/CMake-3.11.3.eb <span class="o">(</span>module: devel/CMake/3.11.3<span class="o">)</span>
+<span class="o">==</span> Temporary log file<span class="o">(</span>s<span class="o">)</span> /tmp/eb-UX7APP/easybuild-gxnyIv.log* have been removed.
+<span class="o">==</span> Temporary directory /tmp/eb-UX7APP has been removed.
+</code></pre></div>
+
+<p>Dependencies are fine, so let's build it:</p>
+<div class="highlight"><pre><span></span><code>$&gt; <span class="nb">time</span> eb ./CMake-3.11.3.eb -r
+<span class="o">==</span> temporary log file in <span class="k">case</span> of crash /tmp/eb-JjF92B/easybuild-RjzRjb.log
+<span class="o">==</span> resolving dependencies ...
+<span class="o">==</span> processing EasyBuild easyconfig /mnt/irisgpfs/users/&lt;login&gt;/software/CMake/CMake-3.11.3.eb
+<span class="o">==</span> building and installing devel/CMake/3.11.3...
+<span class="o">==</span> fetching files...
+<span class="o">==</span> creating build dir, resetting environment...
+<span class="o">==</span> unpacking...
+<span class="o">==</span> patching...
+<span class="o">==</span> preparing...
+<span class="o">==</span> configuring...
+<span class="o">==</span> building...
+<span class="o">==</span> testing...
+<span class="o">==</span> installing...
+<span class="o">==</span> taking care of extensions...
+<span class="o">==</span> postprocessing...
+<span class="o">==</span> sanity checking...
+<span class="o">==</span> cleaning up...
+<span class="o">==</span> creating module...
+<span class="o">==</span> permissions...
+<span class="o">==</span> packaging...
+<span class="o">==</span> COMPLETED: Installation ended <span class="nv">successfully</span>
+<span class="o">==</span> Results of the build can be found in the log file<span class="o">(</span>s<span class="o">)</span> /home/users/&lt;login&gt;/.local/easybuild/software/devel/CMake/3.11.3/easybuild/easybuild-CMake-3.11.3-20180608.111611.log
+<span class="o">==</span> Build succeeded <span class="k">for</span> <span class="m">1</span> out of <span class="nv">1</span>
+<span class="o">==</span> Temporary log file<span class="o">(</span>s<span class="o">)</span> /tmp/eb-JjF92B/easybuild-RjzRjb.log* have been removed.
+<span class="o">==</span> Temporary directory /tmp/eb-JjF92B has been removed.
+
+real    7m40.358s
+user    5m56.442s
+sys 1m15.185s
+</code></pre></div>
+
+<p><strong>Note</strong> you can follow the progress of the installation in a separate shell on the node:</p>
+<p>Check the result:</p>
+<div class="highlight"><pre><span></span><code>$&gt; module av CMake
+</code></pre></div>
+
+<p>That's all ;-)</p>
+<p><strong>Final remaks</strong></p>
+<p>This workflow (copying an existing recipy, adapting the filename, the version and the source checksum) covers most of the test cases.
+Yet sometimes you need to work on a more complex dependency check, in which case you'll need to adapt <em>many</em> eb files.
+In this case, for each build, you need to instruct Easybuild to search for easyconfigs also in the current directory, in which case you will use:</p>
+<div class="highlight"><pre><span></span><code>$&gt; eb &lt;filename&gt;.eb --robot<span class="o">=</span><span class="nv">$PWD</span>:<span class="nv">$EASYBUILD_ROBOT</span> -D
+$&gt; eb &lt;filename&gt;.eb --robot<span class="o">=</span><span class="nv">$PWD</span>:<span class="nv">$EASYBUILD_ROBOT</span>
+</code></pre></div>
+
+<hr />
+<h3 id="old-build-software-using-your-own-easyconfig-file">(OLD) Build software using your own EasyConfig file<a class="headerlink" href="#old-build-software-using-your-own-easyconfig-file" title="Permanent link">&para;</a></h3>
+<p>Below are obsolete instructions to write a full Easyconfig file, left for archiving and informal purposes.</p>
+<p>For this example, we create an EasyConfig file to build GZip 1.4 with the GOOLF toolchain.
+Open your favorite editor and create a file named <code>gzip-1.4-goolf-1.4.10.eb</code> with the following content:</p>
+<div class="codehilite"><pre><span></span><code>easyblock = &#39;ConfigureMake&#39;
+
+name = &#39;gzip&#39;
+version = &#39;1.4&#39;
+
+homepage = &#39;http://www.gnu.org/software/gzip/&#39;
+description = &quot;gzip (GNU zip) is a popular data compression program as a replacement for compress&quot;
+
+# use the GOOLF toolchain
+toolchain = {&#39;name&#39;: &#39;goolf&#39;, &#39;version&#39;: &#39;1.4.10&#39;}
+
+# specify that GCC compiler should be used to build gzip
+preconfigopts = &quot;CC=&#39;gcc&#39;&quot;
+
+# source tarball filename
+sources = [&#39;%s-%s.tar.gz&#39;%(name,version)]
+
+# download location for source files
+source_urls = [&#39;http://ftpmirror.gnu.org/gzip&#39;]
+
+# make sure the gzip and gunzip binaries are available after installation
+sanity_check_paths = {
+                      &#39;files&#39;: [&quot;bin/gunzip&quot;, &quot;bin/gzip&quot;],
+                      &#39;dirs&#39;: []
+                     }
+
+# run &#39;gzip -h&#39; and &#39;gzip --version&#39; after installation
+sanity_check_commands = [True, (&#39;gzip&#39;, &#39;--version&#39;)]
+</code></pre></div>
+
+
+<p>This is a simple EasyConfig. Most of the fields are self-descriptive. No build method is explicitely defined, so it uses by default the standard <em>configure/make/make install</em> approach.</p>
+<p>Let's build GZip with this EasyConfig file:</p>
+<div class="codehilite"><pre><span></span><code>$&gt; time eb gzip-1.4-goolf-1.4.10.eb
+
+== temporary log file in case of crash /tmp/eb-hiyyN1/easybuild-ynLsHC.log
+== processing EasyBuild easyconfig /mnt/nfs/users/homedirs/mschmitt/gzip-1.4-goolf-1.4.10.eb
+== building and installing base/gzip/1.4-goolf-1.4.10...
+== fetching files...
+== creating build dir, resetting environment...
+== unpacking...
+== patching...
+== preparing...
+== configuring...
+== building...
+== testing...
+== installing...
+== taking care of extensions...
+== packaging...
+== postprocessing...
+== sanity checking...
+== cleaning up...
+== creating module...
+== COMPLETED: Installation ended successfully
+== Results of the build can be found in the log file /home/users/mschmitt/.local/easybuild/software/base/gzip/1.4-goolf-1.4.10/easybuild/easybuild-gzip-1.4-20150624.114745.log
+== Build succeeded for 1 out of 1
+== temporary log file(s) /tmp/eb-hiyyN1/easybuild-ynLsHC.log* have been removed.
+== temporary directory /tmp/eb-hiyyN1 has been removed.
+
+real    1m39.982s
+user    0m52.743s
+sys     0m11.297s
+</code></pre></div>
+
+
+<p>We can now check that our version of GZip is available via the modules:</p>
+<div class="codehilite"><pre><span></span><code>$&gt; module avail gzip
+
+--------- /mnt/nfs/users/homedirs/mschmitt/.local/easybuild/modules/all ---------
+    base/gzip/1.4-goolf-1.4.10
+</code></pre></div>
+
+
+<h2 id="to-go-further-into-details">To go further into details<a class="headerlink" href="#to-go-further-into-details" title="Permanent link">&para;</a></h2>
+<p>Please refer to the following pointers to get additionnal features:</p>
+<ul>
+<li><a href="http://easybuilders.github.io/easybuild">EasyBuild homepage</a></li>
+<li><a href="https://easybuilders.github.io/easybuild-tutorial/">EasyBuild tutorial</a></li>
+<li><a href="http://easybuilders.github.io/easybuild/">EasyBuild documentation</a></li>
+<li><a href="https://github.com/easybuilders/easybuild/wiki/Getting-started">Getting started</a></li>
+<li><a href="https://github.com/easybuilders/easybuild/wiki/Using-EasyBuild">Using EasyBuild</a></li>
+<li><a href="https://github.com/easybuilders/easybuild/wiki/Step-by-step-guide">Step-by-step guide</a></li>
+</ul>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: October 16, 2024
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2007-2022 S. Varrette and Uni.lu HPC (ULHPC) Team
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/ULHPC" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://twitter.com/ULHPC" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.f81b9e8b.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.23546af0.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: ["navigation.instant"],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.58d22e8e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../../javascripts/extra.js"></script>
+      
+        <script src="../../../javascripts/bootstrap.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../../javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>
