@@ -485,7 +485,7 @@ This is useful if you run a server on one of the cluster nodes (let's say listen
 
 ```bash
 # Here targeting iris cluster
-(laptop)$ ssh iris-cluster -L 1111:iris-014:2222
+(laptop) $ ssh iris-cluster -L 1111:iris-014:2222
 ```
 
 #### Forwarding a remote port
@@ -494,6 +494,12 @@ You can forward a remote port back to a host protected by your firewall.
 
 ![SSH forward of a remote port](images/SshR.png)
 
+This is useful when you want the HPC node to access some local service. For instance is your local machine runs a service that is listening at some local port, say 2222, and you have some service in the HPC node that listens to some local port, say 1111, then the you'll run:
+
+```bash
+# Here targeting the iris cluster
+(local machine) $ ssh iris-cluster -R 1111:$(hostname -i):2222
+```
 
 #### Tunnelling for others
 
