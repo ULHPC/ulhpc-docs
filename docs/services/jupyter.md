@@ -109,6 +109,8 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
     echo "Then navigate to:" >> "${connection_instructions}"
 
     # Wait for the server to start
+    sleep 2s
+    # Wait and check that the landing page is available
     curl \
         --connect-timeout 10 \
         --retry 5 \
