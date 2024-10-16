@@ -91,30 +91,47 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
     module load lang/Python
     source "${HOME}/environments/jupyter_env/bin/activate"
 
-    jupyter lab --ip $(hostname -i) --no-browser &
-    declare pid=$!
-
+    declare port="8888"
     declare connection_instructions="connection_instructions.log"
-    echo "To access the jupyter notebook execute on your personal machine:" > "${connection_instructions}"
+
+    jupyter lab --ip=$(hostname -i) --port=${port} --no-browser &
+    declare lab_pid=$!
+
+    # Add connection instruction
+    echo "# Connection instructions" > "${connection_instructions}"
+    echo "" >> "${connection_instructions}"
+    echo "To access the jupyter notebook execute on your personal machine:" >> "${connection_instructions}"
+    echo "ssh -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L 8888:$(hostname -i):8888 ${USER}@$(hostname -i)" >> "${connection_instructions}"
+    echo "" >> "${connection_instructions}"
+    echo "To access the jupyter notebook if you have setup a key to connect to cluster nodes execute on your personal machine:" >> "${connection_instructions}"
     echo "ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L 8888:$(hostname -i):8888 ${USER}@$(hostname -i)" >> "${connection_instructions}"
+    echo "To access the jupyter notebook execute on your personal machine:" >> "${connection_instructions}"
     echo "" >> "${connection_instructions}"
     echo "Then navigate to:" >> "${connection_instructions}"
 
-    # Wait for the lab to start
-    sleep 5s
+    # Wait for the server to start
+    curl \
+        --connect-timeout 10 \
+        --retry 5 \
+        --retry-delay 1 \
+        --retry-connrefused \
+        --silent --show-error --fail \
+        "http://$(hostname -i):${port}" > /dev/null
+    # Note down the URL
+    jupyter lab list 2>&1 \
+        | grep -E '\?token=' \
+        | awk 'BEGIN {FS="::"} {gsub("[ \t]*","",$1); print $1}' \
+        | sed -r 's/([0-9]{1,3}\.){3}[0-9]{1,3}/127\.0\.0\.1/g' \
+        >> "${connection_instructions}"
+
+    # Save some debug information
 
     echo -e '\n===\n'
 
     echo "AVAILABLE LABS"
     echo ""
     jupyter lab list
-    # Add connection instruction
-    jupyter lab list 2>&1 \
-        | grep -E '\?token=' \
-        |  awk 'BEGIN {FS="::"} {gsub("[ \t]*","",$1); print $1}' \
-        | sed -r 's/([0-9]{1,3}\.){3}[0-9]{1,3}/127\.0\.0\.1/g' \
-        >> "${connection_instructions}"
-
+    
     echo -e '\n===\n'
 
     echo "CONFIGURATION PATHS"
@@ -127,7 +144,9 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
     echo ""
     jupyter kernelspec list
 
-    wait ${pid}
+    # Wait for the user to terminate the lab
+
+    wait ${lab_pid}
     ```
 
 Once your job is running (see [Joining/monitoring running jobs](../jobs/submit.md#joiningmonitoring-running-jobs)), you can use `ssh` [forwarding](../connect/ssh.md#ssh-port-forwarding) and an [ssh jump](../connect/ssh.md#ssh-jumps) through the login node to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command in the file `connection_instructions.log`, and then navigate to the webpage link provided.
