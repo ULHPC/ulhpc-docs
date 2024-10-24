@@ -171,7 +171,23 @@ You have to pay a particular attention when using `rsync` to transfer data withi
 %}
 
 ??? info "Debugging quota issues"
-    Sometimes when working with files from projects that have run out of quota you may encounter errors due to insufficient space. Note that even if a single directory is copied from a project without changing its group, all future files created in the copied directory will count towards the group quota (unless if specified otherwise explicitly). In such cases just set the correct ownership using `chown -R <username>:<groupname> <directory>`.
+    Sometimes, when copying files with `rsync` or `scp` commands and you are not careful with the options of these commands, you copy files with incorrect permissions and ownership. If a directory is copied with the wrong permissions and ownership, all files created within the directory may maintain the incorrect permissions and ownership. Typical issues that you may encounter include:
+
+    - If a directory is copied incorrectly _from a project directory to your home directory_, the contents of the directory may continue counting towards the group data instead of your personal data and data usage may be misquoted by the `df-ulphc` utility. Actual data usage takes into account the file group not only its location.
+    - If a directory is copied incorrectly _from a personal directory or another machine to a project directory_, you may be unable to create files, since the `clusterusers` group has no quota inside project directories. Note the [group special permission (g+/-s)](https://www.redhat.com/en/blog/suid-sgid-sticky-bit) in directories ensures that all files created in the directory will have the group of the directory instead of the process that creates the file.
+
+    Typical resolutions techniques involve resetting the correct file ownership and permissions:
+
+    === "Files in project directories"
+        ```bash
+        chown -R <username>:<project name> <path to directory or file>
+        find <path to directory or file> -type d | xargs -I % chmod g+s '%'
+        ```
+    === "Files in user home directories"
+        ```bash
+        chown -R <username>:clusterusers <path to directory or file>
+        find <path to directory or file> -type d | xargs -I % chmod g-s '%'
+        ```
 
 
 ## Using MobaXterm (Windows)
