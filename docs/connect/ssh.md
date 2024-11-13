@@ -541,7 +541,7 @@ In the `<node address>` option you can use the node IP address or the node name.
 
 #### Port forwarding over SSH jumps
 
-You can combine the jump command with other options, such as [port forwarding](#ssh-port-forwarding), for instance to access from you local machine a web server running in a compute node. Assume for instance that you have a server running in `iris-014` and listens at the IP `127.0.0.1` and port `2222`, and that you would like to forward the remote port `2222` to the `2222` port of you local machine. The, call the port forwarding command with a jump though the login node:
+You can combine the jump command with other options, such as [port forwarding](#ssh-port-forwarding), for instance to access from you local machine a web server running in a compute node. Assume for instance that you have a server running in `iris-014` and listens at the IP `127.0.0.1` and port `2222`, and that you would like to forward the remote port `2222` to the `1111` port of you local machine. The, call the port forwarding command with a jump though the login node:
 
 ```bash
 ssh -J iris-cluster -L 1111:127.0.0.1:2222 <cluster username>@iris-014
