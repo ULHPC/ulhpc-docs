@@ -50,7 +50,7 @@ JupyterLab makes sure that a default [IPython kernel](https://ipython.readthedoc
 
 You can [setup kernels with different environments on the same notebook](https://ipython.readthedocs.io/en/stable/install/kernel_install.html). Create the environment with the Python version and the packages you require, and then register the kernel in any environment with Jupyter (lab or classic notebook) installed. For instance, if we have installed Jupyter in `~/environments/jupyter_env`:
 ```shell
-source ~/environments/other_python_venv/bins/activate
+source ~/environments/other_python_venv/bin/activate
 python -m pip install ipykernel
 python -m ipykernel install --prefix=${HOME}/environments/jupyter_env --name other_python_env --display-name "Other Python env"
 deactivate
