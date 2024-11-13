@@ -128,7 +128,6 @@ Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following s
         >> "${connection_instructions}"
 
     # Save some debug information
-
     echo -e '\n===\n'
 
     echo "AVAILABLE LABS"
@@ -148,7 +147,6 @@ Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following s
     jupyter kernelspec list
 
     # Wait for the user to terminate the lab
-
     wait ${lab_pid}
     ```
 
