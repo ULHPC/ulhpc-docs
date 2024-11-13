@@ -22,7 +22,7 @@ $ python -m pip install jupyterlab
 ```
 
 !!! warning
-    Modules are not allowed on the access servers. To test interactively Singularity, remember to ask for an [interactive job](../jobs/interactive.md) first using  for instance the `si` tool.
+    Modules are not allowed on the access servers. To test interactively Singularity, remember to ask for an [interactive job](/jobs/interactive) first using  for instance the `si` tool.
 
 Once JupyterLab is installed along with , you can start to configure your installation setting the environment variables corresponding to your needs:
 
@@ -70,7 +70,7 @@ will make your conda environment, `conda_env`, available in the kernel launched 
 
 ## Starting a Jupyter Notebook
 
-Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The following script is a template for Jupyter submission scripts that will rarely need modifications. Most often you will need to modify the session duration (`--time` SBATCH option).
+Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following script is a template for Jupyter submission scripts that will rarely need modifications. Most often you will need to modify the session duration (`--time` SBATCH option).
 
 !!! example "Slurm Launcher script for Jupyter Notebook"
     ```slurm
@@ -152,10 +152,10 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
     wait ${lab_pid}
     ```
 
-Once your job is running (see [Joining/monitoring running jobs](/jobs/submit.md#joiningmonitoring-running-jobs)), you can combine 
+Once your job is running (see [Joining/monitoring running jobs](/jobs/submit#joiningmonitoring-running-jobs)), you can combine 
 
-- [`ssh` forwarding](/connect/ssh.md#ssh-port-forwarding), and
-- an [`ssh` jump](/connect/ssh.md#port-forwarding-over-ssh-jumps) through the login node,
+- [`ssh` forwarding](/connect/ssh#ssh-port-forwarding), and
+- an [`ssh` jump](/connect/ssh#port-forwarding-over-ssh-jumps) through the login node,
 
 to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command contained in the file `connection_instructions.log`, and then navigate to the webpage link provided.
 
