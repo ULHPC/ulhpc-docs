@@ -522,30 +522,32 @@ The ssh agent is [not configured in the login nodes](#on-ulhpc-clusters) for sec
 
 To avoid exposing your keys at your personal machine, create and share a new key. Create a key in your local machine,
 ```bash
-ssh-keygen -a 127 -t ed25519 -f ~/.ssh/hpc_id_ed25519
+ssh-keygen -a 127 -t ed25519 -f ~/.ssh/ulhpc_id_ed25519
 ```
 and then copy both the private and public keys in your HPC account,
 ```bash
-scp ~/.ssh/hpc_id_ed25519* aion-cluster:~/.ssh/
+scp ~/.ssh/ulhpc_id_ed25519* aion-cluster:~/.ssh/
 ```
 where the command assumes that you have setup your [SSH configuration file](#ssh-configuration). Finally, add the key to the list of authorized keys:
 ```bash
-ssh-copy-id -i ~/.ssh/hpc_id_ed25519 aion-cluster
+ssh-copy-id -i ~/.ssh/ulhpc_id_ed25519 aion-cluster
 ```
 Then you can connect without a password to any compute node at which you have a job running with the command:
 ```bash
-ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-aion.uni.lu:8022 ${USER}@<node address>
+ssh -i ~/.ssh/ulhpc_id_ed25519 -J ${USER}@access-aion.uni.lu:8022 ${USER}@<node address>
 ```
 
 In the `<node address>` option you can use the node IP address or the node name.
 
 #### Port forwarding over SSH jumps
 
-You can combine the jump command with other options, such as [port forwarding](#ssh-port-forwarding), for instance to access from you local machine a web server running in a compute node. Assume for instance you have a server running in `iris-014` and listens at port `2222`, and that you would like to forward the port `2222` to the `2222` port of you local machine. The, call the port forwarding command with a jump though the login node:
+You can combine the jump command with other options, such as [port forwarding](#ssh-port-forwarding), for instance to access from you local machine a web server running in a compute node. Assume for instance that you have a server running in `iris-014` and listens at the IP `127.0.0.1` and port `2222`, and that you would like to forward the remote port `2222` to the `1111` port of you local machine. The, call the port forwarding command with a jump though the login node:
 
 ```bash
-ssh -J iris-cluster -L 1111:iris-014:2222 <cluster username>@iris-014
+ssh -J iris-cluster -L 1111:127.0.0.1:2222 <cluster username>@iris-014
 ```
+
+This command can be combined with [passwordless access](#passwordless-ssh-jumps) to the cluster node.
 
 ## Extras Tools around SSH
 

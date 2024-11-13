@@ -22,7 +22,7 @@ $ python -m pip install jupyterlab
 ```
 
 !!! warning
-    Modules are not allowed on the access servers. To test interactively Singularity, remember to ask for an [interactive job](../jobs/interactive.md) first using  for instance the `si` tool.
+    Modules are not allowed on the access servers. To test interactively Singularity, remember to ask for an [interactive job](/jobs/interactive) first using  for instance the `si` tool.
 
 Once JupyterLab is installed along with , you can start to configure your installation setting the environment variables corresponding to your needs:
 
@@ -50,7 +50,7 @@ JupyterLab makes sure that a default [IPython kernel](https://ipython.readthedoc
 
 You can [setup kernels with different environments on the same notebook](https://ipython.readthedocs.io/en/stable/install/kernel_install.html). Create the environment with the Python version and the packages you require, and then register the kernel in any environment with Jupyter (lab or classic notebook) installed. For instance, if we have installed Jupyter in `~/environments/jupyter_env`:
 ```shell
-source ~/environments/other_python_venv/bins/activate
+source ~/environments/other_python_venv/bin/activate
 python -m pip install ipykernel
 python -m ipykernel install --prefix=${HOME}/environments/jupyter_env --name other_python_env --display-name "Other Python env"
 deactivate
@@ -70,7 +70,7 @@ will make your conda environment, `conda_env`, available in the kernel launched 
 
 ## Starting a Jupyter Notebook
 
-Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The following script is a template for Jupyter submission scripts that will rarely need modifications. Most often you will need to modify the session duration (`--time` SBATCH option).
+Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following script is a template for Jupyter submission scripts that will rarely need modifications. Most often you will need to modify the session duration (`--time` SBATCH option).
 
 !!! example "Slurm Launcher script for Jupyter Notebook"
     ```slurm
@@ -92,20 +92,21 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
     module load lang/Python
     source "${HOME}/environments/jupyter_env/bin/activate"
 
+    declare loopback_device="127.0.0.1"
     declare port="8888"
     declare connection_instructions="connection_instructions.log"
 
-    jupyter lab --ip=$(hostname -i) --port=${port} --no-browser &
+    jupyter lab --ip=${loopback_device} --port=${port} --no-browser &
     declare lab_pid=$!
 
     # Add connection instruction
     echo "# Connection instructions" > "${connection_instructions}"
     echo "" >> "${connection_instructions}"
     echo "To access the jupyter notebook execute on your personal machine:" >> "${connection_instructions}"
-    echo "ssh -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:$(hostname -i):${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
+    echo "ssh -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:${loopback_device}:${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
     echo "" >> "${connection_instructions}"
-    echo "To access the jupyter notebook if you have setup a key to connect to cluster nodes execute on your personal machine:" >> "${connection_instructions}"
-    echo "ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:$(hostname -i):${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
+    echo "To access the jupyter notebook if you have setup a special key (e.g ulhpc_id_ed25519) to connect to cluster nodes execute on your personal machine:" >> "${connection_instructions}"
+    echo "ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:${loopback_device}:${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
     echo "" >> "${connection_instructions}"
     echo "Then navigate to:" >> "${connection_instructions}"
 
@@ -118,7 +119,7 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
         --retry-delay 1 \
         --retry-connrefused \
         --silent --show-error --fail \
-        "http://$(hostname -i):${port}" > /dev/null
+        "http://${loopback_device}:${port}" > /dev/null
     # Note down the URL
     jupyter lab list 2>&1 \
         | grep -E '\?token=' \
@@ -127,7 +128,6 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
         >> "${connection_instructions}"
 
     # Save some debug information
-
     echo -e '\n===\n'
 
     echo "AVAILABLE LABS"
@@ -147,14 +147,13 @@ Jupyter notebooks must be started as [slurm jobs](../jobs/submit.md). The follow
     jupyter kernelspec list
 
     # Wait for the user to terminate the lab
-
     wait ${lab_pid}
     ```
 
-Once your job is running (see [Joining/monitoring running jobs](/jobs/submit.md#joiningmonitoring-running-jobs)), you can combine 
+Once your job is running (see [Joining/monitoring running jobs](/jobs/submit#joiningmonitoring-running-jobs)), you can combine 
 
-- [`ssh` forwarding](/connect/ssh.md#ssh-port-forwarding), and
-- an [`ssh` jump](/connect/ssh.md#port-forwarding-over-ssh-jumps) through the login node,
+- [`ssh` forwarding](/connect/ssh#ssh-port-forwarding), and
+- an [`ssh` jump](/connect/ssh#port-forwarding-over-ssh-jumps) through the login node,
 
 to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command contained in the file `connection_instructions.log`, and then navigate to the webpage link provided.
 
@@ -164,10 +163,10 @@ to connect to the notebook from your laptop. Open a terminal on your laptop and 
     # Connection instructions
     
     To access the jupyter notebook execute on your personal machine:
-    ssh -J gkafanas@access-aion.uni.lu:8022 -L 8888:172.21.12.29:8888 gkafanas@172.21.12.29
+    ssh -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
     
-    To access the jupyter notebook if you have setup a key to connect to cluster nodes execute on your personal machine:
-    ssh -i ~/.ssh/hpc_id_ed25519 -J gkafanas@access-aion.uni.lu:8022 -L 8888:172.21.12.29:8888 gkafanas@172.21.12.29
+    To access the jupyter notebook if you have setup a special key (e.g ulhpc_id_ed25519) to connect to cluster nodes execute on your personal machine:
+    ssh -i ~/.ssh/ulhpc_id_ed25519 -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
     
     Then navigate to:
     http://127.0.0.1:8888/?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
@@ -175,12 +174,12 @@ to connect to the notebook from your laptop. Open a terminal on your laptop and 
 
 As the instructions suggest, you access the jupyter lab server in the compute node by calling
 ```shell
-ssh -J gkafanas@access-aion.uni.lu:8022 -L 8888:172.21.12.29:8888 gkafanas@172.21.12.29
+ssh -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
 ```
 an SSH command that
 
 - opens a connection to your allocated cluster node jumping through the login node (`-J gkafanas@access-aion.uni.lu:8022 gkafanas@172.21.12.29`), and
-- exports the port to the jupyter server in the local machine (`-L 8888:172.21.12.29:888`).
+- exports the port to the jupyter server in the local machine (`-L 8888:127.0.0.1:8888`).
 
 Then, open the connection to the browser in your local machine by following the given link:
 ```
@@ -192,43 +191,48 @@ The link provides the access token, so you should be able to login without a pas
 !!! warning
     Do not forget to click on the `quit` button when finished to stop the Jupyter server and release the resources. Note that in the last line of the submission script the job waits for your Jupyter service to finish. 
 
-If you encounter any issues, have a look in the debug output in `Jupyter_<job id>.out`.
+If you encounter any issues, have a look in the debug output in `Jupyter_<job id>.err`. Generic information about the setup of your system is printed in `Jupyter_<job id>.out`.
 
-??? example "Typical content of ``Jupyter_<job id>.out`"
+??? example "Typical content of `Jupyter_<job id>.err`"
     ```shell
-    > cat Jupyter_3776876.out 
-    [I 2024-10-16 15:13:14.150 ServerApp] jupyter_lsp | extension was successfully linked.
-    [I 2024-10-16 15:13:14.154 ServerApp] jupyter_server_terminals | extension was successfully linked.
-    [I 2024-10-16 15:13:14.158 ServerApp] jupyterlab | extension was successfully linked.
-    [I 2024-10-16 15:13:14.346 ServerApp] notebook_shim | extension was successfully linked.
-    [I 2024-10-16 15:13:14.409 ServerApp] notebook_shim | extension was successfully loaded.
-    [I 2024-10-16 15:13:14.412 ServerApp] jupyter_lsp | extension was successfully loaded.
-    [I 2024-10-16 15:13:14.413 ServerApp] jupyter_server_terminals | extension was successfully loaded.
-    [I 2024-10-16 15:13:14.414 LabApp] JupyterLab extension loaded from /home/users/gkafanas/environments/jupyter_env/lib/python3.11/site-packages/jupyterlab
-    [I 2024-10-16 15:13:14.414 LabApp] JupyterLab application directory is /mnt/aiongpfs/users/gkafanas/environments/jupyter_env/share/jupyter/lab
-    [I 2024-10-16 15:13:14.415 LabApp] Extension Manager is 'pypi'.
-    [I 2024-10-16 15:13:14.425 ServerApp] jupyterlab | extension was successfully loaded.
-    [I 2024-10-16 15:13:14.426 ServerApp] Serving notebooks from local directory: /mnt/aiongpfs/users/gkafanas/support/RITM0195641
-    [I 2024-10-16 15:13:14.426 ServerApp] Jupyter Server 2.14.2 is running at:
-    [I 2024-10-16 15:13:14.426 ServerApp] http://172.21.12.29:8888/lab?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
-    [I 2024-10-16 15:13:14.426 ServerApp]     http://127.0.0.1:8888/lab?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
-    [I 2024-10-16 15:13:14.426 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
-    [C 2024-10-16 15:13:14.429 ServerApp] 
+    > cat Jupyter_3664038.err 
+    [I 2024-11-13 23:19:52.538 ServerApp] jupyter_lsp | extension was successfully linked.
+    [I 2024-11-13 23:19:52.543 ServerApp] jupyter_server_terminals | extension was successfully linked.
+    [I 2024-11-13 23:19:52.547 ServerApp] jupyterlab | extension was successfully linked.
+    [I 2024-11-13 23:19:52.766 ServerApp] notebook_shim | extension was successfully linked.
+    [I 2024-11-13 23:19:52.808 ServerApp] notebook_shim | extension was successfully loaded.
+    [I 2024-11-13 23:19:52.812 ServerApp] jupyter_lsp | extension was successfully loaded.
+    [I 2024-11-13 23:19:52.813 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+    [I 2024-11-13 23:19:52.814 LabApp] JupyterLab extension loaded from /home/users/gkafanas/environments/jupyter_env/lib/python3.11/site-packages/jupyterlab
+    [I 2024-11-13 23:19:52.814 LabApp] JupyterLab application directory is /mnt/aiongpfs/users/gkafanas/environments/jupyter_env/share/jupyter/lab
+    [I 2024-11-13 23:19:52.815 LabApp] Extension Manager is 'pypi'.
+    [I 2024-11-13 23:19:52.826 ServerApp] jupyterlab | extension was successfully loaded.
+    [I 2024-11-13 23:19:52.827 ServerApp] Serving notebooks from local directory: /mnt/aiongpfs/users/gkafanas/support/jupyter
+    [I 2024-11-13 23:19:52.827 ServerApp] Jupyter Server 2.14.2 is running at:
+    [I 2024-11-13 23:19:52.827 ServerApp] http://127.0.0.1:8888/lab?token=fe665f90872927f5f84be627f54cf9056908c34b3765e17d
+    [I 2024-11-13 23:19:52.827 ServerApp]     http://127.0.0.1:8888/lab?token=fe665f90872927f5f84be627f54cf9056908c34b3765e17d
+    [I 2024-11-13 23:19:52.827 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+    [C 2024-11-13 23:19:52.830 ServerApp] 
         
         To access the server, open this file in a browser:
-            file:///mnt/aiongpfs/users/gkafanas/.local/share/jupyter/runtime/jpserver-3804563-open.html
+            file:///home/users/gkafanas/.local/share/jupyter/runtime/jpserver-2253096-open.html
         Or copy and paste one of these URLs:
-            http://172.21.12.29:8888/lab?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
-            http://127.0.0.1:8888/lab?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
-    [I 2024-10-16 15:13:14.441 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
-    [I 2024-10-16 15:13:14.518 ServerApp] 302 GET / (@172.21.12.29) 0.51ms
+            http://127.0.0.1:8888/lab?token=fe665f90872927f5f84be627f54cf9056908c34b3765e17d
+            http://127.0.0.1:8888/lab?token=fe665f90872927f5f84be627f54cf9056908c34b3765e17d
+    [I 2024-11-13 23:19:52.845 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+    [I 2024-11-13 23:19:53.824 ServerApp] 302 GET / (@127.0.0.1) 0.47ms
+    ```
+
+??? example "Typical content of `Jupyter_<job id>.err`"
+    ```shell
+    > cat Jupyter_3664038.out
     
     ===
     
     AVAILABLE LABS
     
     Currently running servers:
-    http://172.21.12.29:8888/?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2 :: /mnt/aiongpfs/users/gkafanas/support/RITM0195641
+    http://127.0.0.1:8888/?token=fe665f90872927f5f84be627f54cf9056908c34b3765e17d :: /mnt/aiongpfs/users/gkafanas/support/jupyter
     
     ===
     
@@ -241,11 +245,11 @@ If you encounter any issues, have a look in the debug output in `Jupyter_<job id
         /etc/jupyter
     data:
         /home/users/gkafanas/environments/jupyter_env/share/jupyter
-        /mnt/aiongpfs/users/gkafanas/.local/share/jupyter
+        /home/users/gkafanas/.local/share/jupyter
         /usr/local/share/jupyter
         /usr/share/jupyter
     runtime:
-        /mnt/aiongpfs/users/gkafanas/.local/share/jupyter/runtime
+        /home/users/gkafanas/.local/share/jupyter/runtime
     
     ===
     
@@ -253,10 +257,7 @@ If you encounter any issues, have a look in the debug output in `Jupyter_<job id
     
     Available kernels:
       other_python_env    /home/users/gkafanas/environments/jupyter_env/share/jupyter/kernels/other_python_env
-      python3             /home/users/gkafanas/environments/jupyter_env/share/jupyter/kernels/python3
-    slurmstepd: error: *** JOB 3776876 ON aion-0113 CANCELLED AT 2024-10-16T15:25:20 ***
-    [C 2024-10-16 15:25:20.236 ServerApp] received signal 15, stopping
-    [I 2024-10-16 15:25:20.237 ServerApp] Shutting down 4 extensions
+      python3             /home/users/gkafanas/environments/jupyter_env/share/jupyter/kernels/python3 
     ```
 
 ### Password protected access
