@@ -79,6 +79,8 @@ You have two ways to proceed:
     matlab -nodisplay -nosplash -r inputfile -logfile outputfile.out
     ```
 
+The following script uses one full socket in a [compute node of Aion](/systems/aion/compute/).
+
 ```bash
 #!/usr/bin/bash --login
 #SBATCH --job-name=MATLAB_job
@@ -108,22 +110,23 @@ rm -rf ${HOME}/.matlab
 rm -rf ${HOME}/java*
 ```
 
-In matlab, you can create a parallel pool of thread workers on the local computing node by using the [parpool](https://mathworks.com/help/parallel-computing/parallel.threadpool.html) function.
-After you create the pool, parallel pool features, such as [`parfor`](https://mathworks.com/help/parallel-computing/parallel-for-loops-parfor.html) or [`parfeval`](https://fr.mathworks.com/help/matlab/ref/parfeval.html?searchHighlight=parfeval&s_tid=srchtitle_parfeval_1), run on the workers. With the ThreadPool object, you can interact with the parallel pool.
+Most matlab scripts cannot take advantage of more that one core (`--cpus-per-task=1`). If you want to use more than one core in your computations, use a parallel pool of threads.
+
+A parallel pool of threads allows the allocation of threads form the local computing node to independent workers that then use the thread to evaluate functions in parallel. Create a parallel pool on using the [parpool](https://mathworks.com/help/parallel-computing/parallel.threadpool.html) function. After you create the pool, parallel pool features, such as [`parfor`](https://mathworks.com/help/parallel-computing/parallel-for-loops-parfor.html) or [`parfeval`](https://fr.mathworks.com/help/matlab/ref/parfeval.html?searchHighlight=parfeval&s_tid=srchtitle_parfeval_1), run computations on independent workers in parallel. With the ThreadPool object, you can interact with the parallel pool.
 
 
 !!! example
 
     ```bash
     # example for MATLAB ParFor (matlab_script_parallel_file.m)
-    parpool('local', str2num(getenv('SLURM_CPUS_PER_TASK'))) % set the default cores
+    p = parpool('local', str2num(getenv('SLURM_CPUS_PER_TASK'))) % set the default cores
     %as number of threads
     tic
     n = 50;
     A = 50;
     a = zeros(1,n);
     parfor i = 1:n
-    a(i) = max(abs(eig(rand(A))));
+      a(i) = max(abs(eig(rand(A))));
     end
     toc
     delete(gcp); % you have to delete the parallel region after the work is done
@@ -132,9 +135,7 @@ After you create the pool, parallel pool features, such as [`parfor`](https://ma
 
 ## Additional information
 
-To know more information about MATLAB tutorial and documentation,
-please refer to [MATLAB tutorial](https://nl.mathworks.com/academia/books.html).
+To know more information about MATLAB tutorial and documentation, please refer to [MATLAB tutorial](https://nl.mathworks.com/academia/books.html).
 
 !!! tip
-    If you find some issues with the instructions above,
-    please report it to us using [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above, please report it to us using [support ticket](https://hpc.uni.lu/support).
