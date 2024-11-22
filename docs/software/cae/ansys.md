@@ -1,14 +1,8 @@
-[![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/ANSYS_logo.png/320px-ANSYS_logo.png){: style="width:200px;float: right;" }](https://www.ansys.com/)
-[ANSYS](https://www.ansys.com/) offers a comprehensive software suite that spans
-the entire range of physics, providing access to virtually any
-field of engineering simulation that a design process requires.
-Organizations around the world trust Ansys to deliver the best value for
-their engineering simulation software investment.
+[![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/ANSYS_logo.png/320px-ANSYS_logo.png){: style="width:200px;float: right;" }](https://www.ansys.com/) [ANSYS](https://www.ansys.com/) offers a comprehensive software suite that spans the entire range of physics, providing access to virtually any field of engineering simulation that a design process requires.
 
 
 ## Available versions of ANSYS in ULHPC
-To check available versions of ANSYS at ULHPC type `module spider ansys`.
-The following versions of ANSYS are available in ULHPC:
+To check available versions of ANSYS at ULHPC type `module spider ansys`. The following versions of ANSYS are available in ULHPC:
 ```bash
 # Available versions 
 tools/ANSYS/18.0
@@ -73,10 +67,7 @@ cfx5solve -double -def $defFile -start-method "Platform MPI Distributed Parallel
 ```
 
 ## Additional information
-ANSYS provides the [customer support](https://support.ansys.com),
-if you have a license key, you should be able to get all
-the support and needed documents.
+ANSYS provides the [customer support](https://support.ansys.com), if you have a license key, you should be able to get all the support and needed documents.
 
 !!! tip
-    If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above, please file a [support ticket](https://hpc.uni.lu/support).
