@@ -1,0 +1,3410 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ULHPC Technical Documentation">
+      
+      
+        <link rel="canonical" href="https://hpc-docs.uni.lu/environment/modules/">
+      
+      
+        <meta name="author" content="S. Varrette and Uni.lu HPC (ULHPC) Team">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.3">
+    
+    
+      
+        <title>Modules - ULHPC Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.62d34fff.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.c8acc6db.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ulhpc-softwaremodules-environment" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-header-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            ULHPC Technical Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Modules
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    ULHPC Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../hpc-schools/" title="HPC Trainings and Tutorials" class="md-nav__link">
+      HPC Trainings and Tutorials
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Accounts
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Accounts" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Accounts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/" title="Get an Account" class="md-nav__link">
+      Get an Account
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/passwords/" title="Password Policy" class="md-nav__link">
+      Password Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/collaboration_accounts/" title="Collaboration Accounts" class="md-nav__link">
+      Collaboration Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/projects/" title="Projects Accounts" class="md-nav__link">
+      Projects Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ipa/" title="Identity Management Portal" class="md-nav__link">
+      Identity Management Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/accounts/" title="Slurm Account Hierarchy" class="md-nav__link">
+      Slurm Account Hierarchy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../teaching-with-the-ulhpc/" title="Teaching with the ULHPC" class="md-nav__link">
+      Teaching with the ULHPC
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Data Center
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Center" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Center
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data-center/" title="Centre de Calcul (CDC)" class="md-nav__link">
+      Centre de Calcul (CDC)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      ULHPC Supercomputers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="ULHPC Supercomputers" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        ULHPC Supercomputers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Aion
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Aion" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Aion
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/" title="Aion System" class="md-nav__link">
+      Aion System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-3" type="checkbox" id="nav-7-3">
+    
+    <label class="md-nav__link" for="nav-7-3">
+      Iris
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Iris" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Iris
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/" title="Iris System" class="md-nav__link">
+      Iris System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/live-status/motd" title="Live status" class="md-nav__link">
+      Live status
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Interconnect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Interconnect" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Interconnect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interconnect/ib/" title="Fast Infiniband Interconnect" class="md-nav__link">
+      Fast Infiniband Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interconnect/ethernet/" title="Ethernet Interconnect" class="md-nav__link">
+      Ethernet Interconnect
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Storage Systems
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Storage Systems" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Storage Systems
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/gpfs/" title="GPFS/SpectrumScale" class="md-nav__link">
+      GPFS/SpectrumScale
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/lustre/" title="Lustre" class="md-nav__link">
+      Lustre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/isilon/" title="OneFS Isilon" class="md-nav__link">
+      OneFS Isilon
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/live-status/motd" title="Live status" class="md-nav__link">
+      Live status
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Access/Connect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Access/Connect" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Access/Connect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/access/" title="Access/Login Servers" class="md-nav__link">
+      Access/Login Servers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ssh/" title="SSH" class="md-nav__link">
+      SSH
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ipa/" title="Identity Management (IdM/IPA)" class="md-nav__link">
+      Identity Management (IdM/IPA)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ood/" title="Open On Demand Portal" class="md-nav__link">
+      Open On Demand Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Data Management
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Management" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/layout/" title="Global Directory Structure" class="md-nav__link">
+      Global Directory Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/sharing/" title="Data Sharing" class="md-nav__link">
+      Data Sharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/transfer/" title="Data Transfer" class="md-nav__link">
+      Data Transfer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/gdpr/" title="GDPR Compliance" class="md-nav__link">
+      GDPR Compliance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/quotas/" title="Quotas" class="md-nav__link">
+      Quotas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/project/" title="Project Data Management" class="md-nav__link">
+      Project Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/lfs/" title="Scratch Data Management" class="md-nav__link">
+      Scratch Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/backups/" title="Backups" class="md-nav__link">
+      Backups
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/unix-file-permissions/" title="Unix File Permissions" class="md-nav__link">
+      Unix File Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/encryption/" title="Sensitive Data Protection" class="md-nav__link">
+      Sensitive Data Protection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" checked>
+    
+    <label class="md-nav__link" for="nav-12">
+      Environment
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Environment" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Environment
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Modules
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Modules" class="md-nav__link md-nav__link--active">
+      Modules
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#environment-modules-and-lmod" class="md-nav__link">
+    Environment modules and LMod
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ulhpc-modulepath" class="md-nav__link">
+    ULHPC $MODULEPATH
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-naming-schemes" class="md-nav__link">
+    Module Naming Schemes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ulhpc-toolchains-and-software-set-versioning" class="md-nav__link">
+    ULHPC Toolchains and Software Set Versioning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-easybuild-to-create-custom-modules" class="md-nav__link">
+    Using Easybuild to Create Custom Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-custom-module-environment" class="md-nav__link">
+    Creating a Custom Module Environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-faq" class="md-nav__link">
+    Module FAQ
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../easybuild/" title="Easybuild" class="md-nav__link">
+      Easybuild
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../conda/" title="Conda" class="md-nav__link">
+      Conda
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+    
+    <label class="md-nav__link" for="nav-13">
+      Policies
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Policies" data-md-level="1">
+      <label class="md-nav__title" for="nav-13">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Policies
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/aup/" title="Acceptable Use Policy (AUP)" class="md-nav__link">
+      Acceptable Use Policy (AUP)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/maintenance/" title="Downtime and Maintenance" class="md-nav__link">
+      Downtime and Maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging/" title="Usage Charging Policy" class="md-nav__link">
+      Usage Charging Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging.md#hpc-resource-allocations-for-research-project" title="HPC Resource Allocations for Research Project" class="md-nav__link">
+      HPC Resource Allocations for Research Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging.md#hpc-service-contract-for-external-and-private-partners" title="HPC Service Agreement for Externals" class="md-nav__link">
+      HPC Service Agreement for Externals
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/professional-services.md" title="Expert-level HPC services" class="md-nav__link">
+      Expert-level HPC services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+    
+    <label class="md-nav__link" for="nav-14">
+      Running Jobs
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Running Jobs" data-md-level="1">
+      <label class="md-nav__title" for="nav-14">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Running Jobs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/" title="Slurm Overview" class="md-nav__link">
+      Slurm Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/commands/" title="Convenient Slurm Commands" class="md-nav__link">
+      Convenient Slurm Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/partitions/" title="Partition/Queues" class="md-nav__link">
+      Partition/Queues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/qos/" title="Quality of Service (QOS)" class="md-nav__link">
+      Quality of Service (QOS)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/accounts/" title="Account Hierarchy" class="md-nav__link">
+      Account Hierarchy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/reason-codes/" title="Job State and Reason Code" class="md-nav__link">
+      Job State and Reason Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/fairsharing/" title="Fairsharing" class="md-nav__link">
+      Fairsharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/priority/" title="Job Priority and Backfilling" class="md-nav__link">
+      Job Priority and Backfilling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/billing/" title="Job Accounting and Billing" class="md-nav__link">
+      Job Accounting and Billing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/interactive/" title="Interactive Job" class="md-nav__link">
+      Interactive Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/submit/" title="Passive/Batch Job" class="md-nav__link">
+      Passive/Batch Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/gpu/" title="GPU Jobs" class="md-nav__link">
+      GPU Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/long/" title="Long Jobs" class="md-nav__link">
+      Long Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/best-effort/" title="Best-effort Jobs" class="md-nav__link">
+      Best-effort Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/launchers/" title="Launcher Scripts Examples" class="md-nav__link">
+      Launcher Scripts Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/jupyter/" title="Jupyter Notebook" class="md-nav__link">
+      Jupyter Notebook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
+    
+    <label class="md-nav__link" for="nav-15">
+      Software
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software" data-md-level="1">
+      <label class="md-nav__title" for="nav-15">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-1" type="checkbox" id="nav-15-1">
+    
+    <label class="md-nav__link" for="nav-15-1">
+      Supported Software List
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Supported Software List" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Supported Software List
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/all_softwares/" title="Full List (alphabetical order)" class="md-nav__link">
+      Full List (alphabetical order)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/bio/" title="Biology" class="md-nav__link">
+      Biology
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/cae/" title="CFD/Finite element modelling" class="md-nav__link">
+      CFD/Finite element modelling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/chem/" title="Chemistry" class="md-nav__link">
+      Chemistry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/compiler/" title="Compilers" class="md-nav__link">
+      Compilers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/data/" title="Data processing" class="md-nav__link">
+      Data processing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/debugger/" title="Debugging" class="md-nav__link">
+      Debugging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/devel/" title="Development" class="md-nav__link">
+      Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/lang/" title="Programming Languages" class="md-nav__link">
+      Programming Languages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/lib/" title="Libraries" class="md-nav__link">
+      Libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/math/" title="Mathematics" class="md-nav__link">
+      Mathematics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/mpi/" title="MPI" class="md-nav__link">
+      MPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/numlib/" title="Numerical libraries" class="md-nav__link">
+      Numerical libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/perf/" title="Performance measurements" class="md-nav__link">
+      Performance measurements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/phys/" title="Physics" class="md-nav__link">
+      Physics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/system/" title="System-level software" class="md-nav__link">
+      System-level software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/toolchain/" title="Toolchains (software stacks)" class="md-nav__link">
+      Toolchains (software stacks)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/tools/" title="Utilities" class="md-nav__link">
+      Utilities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/vis/" title="Visualisation" class="md-nav__link">
+      Visualisation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-2" type="checkbox" id="nav-15-2">
+    
+    <label class="md-nav__link" for="nav-15-2">
+      Software Sets
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/2019b/" title="2019b" class="md-nav__link">
+      2019b
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/2020b/" title="2020a" class="md-nav__link">
+      2020a
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/build/" title="Compiling/building your own software" class="md-nav__link">
+      Compiling/building your own software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/eessi/" title="EESSI software stack" class="md-nav__link">
+      EESSI software stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../containers/" title="Containers" class="md-nav__link">
+      Containers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-6" type="checkbox" id="nav-15-6">
+    
+    <label class="md-nav__link" for="nav-15-6">
+      Computer Aided Eng. (CAE)
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computer Aided Eng. (CAE)" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computer Aided Eng. (CAE)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/fenics/" title="FEniCS" class="md-nav__link">
+      FEniCS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/ansys/" title="ANSYS" class="md-nav__link">
+      ANSYS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/openfoam/" title="OpenFOAM" class="md-nav__link">
+      OpenFOAM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/abaqus/" title="Abaqus" class="md-nav__link">
+      Abaqus
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/fds/" title="FDS" class="md-nav__link">
+      FDS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/meshing-tools/" title="Meshing-Tools" class="md-nav__link">
+      Meshing-Tools
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-7" type="checkbox" id="nav-15-7">
+    
+    <label class="md-nav__link" for="nav-15-7">
+      Physics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Physics" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Physics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/physics/wrf/" title="WRF" class="md-nav__link">
+      WRF
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8" type="checkbox" id="nav-15-8">
+    
+    <label class="md-nav__link" for="nav-15-8">
+      Computational Chemistry
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computational Chemistry" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computational Chemistry
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8-1" type="checkbox" id="nav-15-8-1">
+    
+    <label class="md-nav__link" for="nav-15-8-1">
+      Electronics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Electronics" data-md-level="3">
+      <label class="md-nav__title" for="nav-15-8-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Electronics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/abinit/" title="ABINIT" class="md-nav__link">
+      ABINIT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/ase/" title="ASE" class="md-nav__link">
+      ASE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/meep/" title="MEEP" class="md-nav__link">
+      MEEP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/quantum-espresso/" title="Quantum Espresso" class="md-nav__link">
+      Quantum Espresso
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/vasp/" title="VASP" class="md-nav__link">
+      VASP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8-2" type="checkbox" id="nav-15-8-2">
+    
+    <label class="md-nav__link" for="nav-15-8-2">
+      Molecular Dynamics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Molecular Dynamics" data-md-level="3">
+      <label class="md-nav__title" for="nav-15-8-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Molecular Dynamics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/cp2k/" title="CP2K" class="md-nav__link">
+      CP2K
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/gromacs/" title="GROMACS" class="md-nav__link">
+      GROMACS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/namd/" title="NAMD" class="md-nav__link">
+      NAMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/nwchem/" title="NWCHEM" class="md-nav__link">
+      NWCHEM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/helping-libraries/" title="Helping Libraries" class="md-nav__link">
+      Helping Libraries
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-9" type="checkbox" id="nav-15-9">
+    
+    <label class="md-nav__link" for="nav-15-9">
+      Mathematics & Statistics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Mathematics & Statistics" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Mathematics & Statistics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/matlab/" title="MATLAB" class="md-nav__link">
+      MATLAB
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/mathematica/" title="MATHEMATICA" class="md-nav__link">
+      MATHEMATICA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/stata/" title="Stata" class="md-nav__link">
+      Stata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/julia/" title="Julia" class="md-nav__link">
+      Julia
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/optim/" title="Optimizers" class="md-nav__link">
+      Optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-11" type="checkbox" id="nav-15-11">
+    
+    <label class="md-nav__link" for="nav-15-11">
+      Visualization
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Visualization" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Visualization
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/visu/paraview/" title="ParaView" class="md-nav__link">
+      ParaView
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16" type="checkbox" id="nav-16">
+    
+    <label class="md-nav__link" for="nav-16">
+      Development
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Development" data-md-level="1">
+      <label class="md-nav__title" for="nav-16">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Development
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16-1" type="checkbox" id="nav-16-1">
+    
+    <label class="md-nav__link" for="nav-16-1">
+      Performance/Debugging
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Performance/Debugging" data-md-level="2">
+      <label class="md-nav__title" for="nav-16-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Performance/Debugging
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/arm-forge/" title="Arm Forge" class="md-nav__link">
+      Arm Forge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/vtune/" title="Intel VTune" class="md-nav__link">
+      Intel VTune
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/advisor/" title="Intel Advisor" class="md-nav__link">
+      Intel Advisor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/inspector/" title="Intel Inspector" class="md-nav__link">
+      Intel Inspector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/itac/" title="Intel Trace Analyzer and Collector" class="md-nav__link">
+      Intel Trace Analyzer and Collector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/scalasca/" title="Scalasca" class="md-nav__link">
+      Scalasca
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/valgrind/" title="Valgrind" class="md-nav__link">
+      Valgrind
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/aps/" title="APS" class="md-nav__link">
+      APS
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16-2" type="checkbox" id="nav-16-2">
+    
+    <label class="md-nav__link" for="nav-16-2">
+      Containers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Containers" data-md-level="2">
+      <label class="md-nav__title" for="nav-16-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Containers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../containers/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-18" type="checkbox" id="nav-18">
+    
+    <label class="md-nav__link" for="nav-18">
+      Help and Support
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Help and Support" data-md-level="1">
+      <label class="md-nav__title" for="nav-18">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Help and Support
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-19" type="checkbox" id="nav-19">
+    
+    <label class="md-nav__link" for="nav-19">
+      Contributing
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Contributing" data-md-level="1">
+      <label class="md-nav__title" for="nav-19">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Contributing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/versioning/" title="Semantic Versioning" class="md-nav__link">
+      Semantic Versioning
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-20" type="checkbox" id="nav-20">
+    
+    <label class="md-nav__link" for="nav-20">
+      Web Portals
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Web Portals" data-md-level="1">
+      <label class="md-nav__title" for="nav-20">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Web Portals
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu" title="ULHPC Website" class="md-nav__link">
+      ULHPC Website
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc-docs.uni.lu" title="Technical Documentation" class="md-nav__link">
+      Technical Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://ulhpc-tutorials.readthedocs.io/" title="ULHPC Tutorials" class="md-nav__link">
+      ULHPC Tutorials
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#environment-modules-and-lmod" class="md-nav__link">
+    Environment modules and LMod
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ulhpc-modulepath" class="md-nav__link">
+    ULHPC $MODULEPATH
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-naming-schemes" class="md-nav__link">
+    Module Naming Schemes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ulhpc-toolchains-and-software-set-versioning" class="md-nav__link">
+    ULHPC Toolchains and Software Set Versioning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-easybuild-to-create-custom-modules" class="md-nav__link">
+    Using Easybuild to Create Custom Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-custom-module-environment" class="md-nav__link">
+    Creating a Custom Module Environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-faq" class="md-nav__link">
+    Module FAQ
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/ULHPC/ulhpc-docs/blob/master/docs/environment/modules.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="ulhpc-softwaremodules-environment">ULHPC Software/Modules Environment<a class="headerlink" href="#ulhpc-softwaremodules-environment" title="Permanent link">&para;</a></h1>
+<!--intro-start-->
+
+<div class="admonition important">
+<p>The UL HPC facility provides a large variety of scientific applications to its user community, either domain-specific codes and general purpose development tools which enable research and innovation excellence across a wide set of computational fields. -- see <a href="../../software/">software list</a>.</p>
+</div>
+<p><a href="https://lmod.readthedocs.io/"><img alt="" src="https://lmod.readthedocs.io/en/latest/_static/Lmod-4color@2x.png" style="width:200px; margin-right:10px; float: left;" /></a></p>
+<p>We use the <a href="http://modules.sourceforge.net/">Environment Modules</a> / <a href="http://lmod.readthedocs.io/en/latest/">LMod</a> framework which provided the <a href="http://lmod.readthedocs.io"><code>module</code></a> utility <strong>on Compute nodes</strong>
+to manage nearly all software.<br/>
+There are two main advantages of the <code>module</code> approach:</p>
+<ol>
+<li>ULHPC can provide many different versions and/or installations of a
+   single software package on a given machine, including a default
+   version as well as several older and newer version.</li>
+<li>Users can easily switch to different versions or installations
+   without having to explicitly specify different paths. With modules,
+   the <code>MANPATH</code> and related environment variables are automatically
+   managed.</li>
+</ol>
+<div class="admonition important">
+<p><strong>ULHPC modules are in practice automatically generated by <a href="../easybuild/">Easybuild</a>.</strong></p>
+</div>
+<!--intro-end-->
+
+<!-- BEGIN INCLUDE easybuild.md &lt;!--intro-start--&gt; &lt;!--intro-end--&gt; -->
+
+<p><a href="https://easybuild.readthedocs.io/"><img alt="" src="https://easybuild.readthedocs.io/en/latest/_static/easybuild_logo_alpha.png" style="width:200px; float: right;" /></a></p>
+<p><a href="https://docs.easybuild.io/">EasyBuild</a> (EB for short) is a software build and installation framework that allows you to manage (scientific) software on High Performance Computing (HPC) systems in an efficient way.
+A large number of scientific software are supported (<strong>at least <a href="https://docs.easybuild.io/en/latest/version-specific/Supported_software.html">2175 supported software packages</a></strong> since the 4.3.2 release) - see also <a href="https://docs.easybuild.io/en/latest/Introduction.html">What is EasyBuild?</a>.</p>
+<p>For several years now, <a href="https://docs.easybuild.io/">Easybuild</a> is used to <a href="./#ulhpc-toolchains-and-software-set-versioning">manage the ULHPC User Software Set</a> and generate automatically the module files available to you on our computational resources in either <code>prod</code> (default) or <code>devel</code> (early development/testing) environment -- see <a href="./#ulhpc-toolchains-and-software-set-versioning">ULHPC Toolchains and Software Set Versioning</a>.
+This enables users to easily <em>extend</em> the global <a href="./#ulhpc-toolchains-and-software-set-versioning">Software Set</a> with their own <strong>local</strong> software
+builds, either performed within their <a href="../../data/layout/#global-home-directory-home">global home
+directory</a> or (<em>better</em>) in a shared <a href="../../data/layout/">project
+directory</a> though <a href="../easybuild/">Easybuild</a>, which generate automatically module files compliant with the <a href="./">ULHPC module setup</a>.</p>
+<!-- END INCLUDE -->
+
+<h2 id="environment-modules-and-lmod">Environment modules and LMod<a class="headerlink" href="#environment-modules-and-lmod" title="Permanent link">&para;</a></h2>
+<p><a href="http://modules.sourceforge.net/">Environment Modules</a> are a standard and well-established technology across HPC sites, to permit developing and using complex software and libraries build with dependencies, allowing multiple versions of software stacks and combinations thereof to co-exist.</p>
+<p>It <strong>brings the <code>module</code> command</strong> which is used to manage environment variables such as <code>PATH</code>, <code>LD_LIBRARY_PATH</code> and <code>MANPATH</code>, enabling the easy loading and unloading of application/library profiles and their dependencies.</p>
+<details class="question"><summary>Why do you need [Environment] Modules?</summary><p>When users login to a Linux system, they get a login shell and the <a href="../#shell-and-dotfiles">shell</a> uses Environment variables to run commands and applications. Most common are:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/PATH_(variable)"><code>PATH</code></a>:  colon-separated list of directories in which your system looks for executable files;</li>
+<li><a href="https://man7.org/linux/man-pages/man1/manpath.1.html"><code>MANPATH</code></a>: colon-separated list of directories in which <a href="https://man7.org/linux/man-pages/man1/man.1.html"><code>man</code></a> searches for the man pages;</li>
+<li><a href="https://man7.org/linux/man-pages/man8/ld.so.8.html"><code>LD_LIBRARY_PATH</code></a>: colon-separated list of directories in which your system looks for for ELF / <code>*.so</code> libraries at execution time needed by applications.</li>
+</ul>
+<p>There are also <em>application specific</em> environment variables such as <code>CPATH</code>, <code>LIBRARY_PATH</code>, <code>JAVA_HOME</code>, <code>LM_LICENSE_FILE</code>, <code>MKLROOT</code> etc.</p>
+<p>A <em>traditional</em> way to setup these Environment variables is by <a href="../#customizing-shell-environment">customizing the shell initialization files</a>: <em>i.e.</em> <code>/etc/profile</code>, <code>.bash_profile</code>, and <code>.bashrc</code>
+This proves to be very impractical on multi-user systems with various applications and multiple application versions installed as on an HPC facility.</p>
+<p>To overcome the difficulty of setting and changing the Environment variables, the TCL/C Environment Modules were introduced over 2 decades ago.
+The <a href="https://lmod.readthedocs.io/">Environment Modules</a> package is a tool that simplify shell initialization and lets users easily modify their environment during the session with <strong><a href="https://lmod.readthedocs.io/en/latest/015_writing_modules.html">modulefiles</a></strong>.</p>
+<ul>
+<li>Each modulefile contains the information needed to configure the shell for an application. Once the Modules package is initialized, the environment can be modified on a <em>per-module</em> basis using the <code>module</code> command which interprets modulefiles. Typically modulefiles instruct the <code>module</code> command to alter or set shell environment variables such as <code>PATH</code>, <code>MANPATH</code>, etc.</li>
+<li><a href="https://lmod.readthedocs.io/en/latest/015_writing_modules.html">Modulefiles</a> may be shared by many users on a system (as done on the ULHPC clusters) and users may have their <em>own</em> collection to supplement or replace the shared modulefiles.</li>
+</ul>
+<p>Modules can be loaded and unloaded dynamically and atomically, in an clean fashion. All popular shells are supported, including <code>bash</code>, <code>ksh</code>, <code>zsh</code>, <code>sh</code>, <code>csh</code>, <code>tcsh</code>, <code>fish</code>, as well as some scripting languages such as <code>perl</code>, <code>ruby</code>, <code>tcl</code>, <code>python</code>, <code>cmake</code> and <code>R</code>. Modules are useful in managing different versions of applications.
+Modules can also be bundled into metamodules that will load an entire suite of different applications -- this is precisely the way we <a href="../../software/swsets/">manage the ULHPC Software Set</a></p>
+</details>
+<details class="info"><summary>Tcl/C Environment Modules (Tmod) vs. Tcl <a href="https://modules.readthedocs.io/">Environment Modules</a> vs. <a href="https://lmod.readthedocs.io/">Lmod</a></summary><p>There exists several implementation of the <code>module</code> tool:</p>
+<ul>
+<li><a href="http://modules.sourceforge.net/">Tcl/C Environment Modules</a> (3.2.10 <span><span class="MathJax_Preview">\leq</span><script type="math/tex">\leq</script></span> version &lt; 4), also called <code>Tmod</code>: the <em>seminal</em> (<strong>old</strong>) implementation</li>
+<li>Tcl-only variant of <a href="https://modules.readthedocs.io/">Environment modules</a> (version <span><span class="MathJax_Preview">\geq</span><script type="math/tex">\geq</script></span> 4), previously called <code>Modules-Tcl</code></li>
+<li>(<strong>recommended</strong>) <a href="https://lmod.readthedocs.io/">Lmod</a>,  a Lua based Environment Module System<ul>
+<li>Lmod ("L" stands for <a href="http://www.lua.org/">Lua</a>) provides all of the functionality of TCL/C Environment Modules plus more features:<ul>
+<li>support for <em>hierarchical</em> module file structure</li>
+<li><code>MODULEPATH</code> is dynamically updated when modules are loaded.</li>
+<li>makes loaded modules inactive and active to provide sane environment.</li>
+<li>supports for <em>hidden</em> modules</li>
+<li>support for <em>optional</em> usage tracking (implemented on ULHPC facilities)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>In particular, Lmod enforces the following <a href="https://lmod.readthedocs.io/en/latest/010_user.html#safety-features">safety features</a> that are not always guaranted with the other tools:<ol>
+<li>The <em>One Name Rule</em>: Users can only have one version active</li>
+<li>Users can only load one compiler or MPI stack at a time (through the <code>family(...)</code> directive)</li>
+</ol>
+</li>
+</ul>
+<p>The ULHPC Facility relies on <a href="https://lmod.readthedocs.io/">Lmod</a> -- the associated <a href="https://lmod.readthedocs.io/en/latest/015_writing_modules.html">Modulefiles</a> being automatically generated by <a href="https://docs.easybuild.io/">Easybuild</a>.</p>
+</details>
+<p>The ULHPC Facility relies on <a href="https://lmod.readthedocs.io/">Lmod</a>, a Lua-based Environment module system that easily handles the <code>MODULEPATH</code> Hierarchical problem. In this context, the <code>module</code> command supports the following subcommands:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>module avail</code></td>
+<td>Lists all the modules which are available to be loaded</td>
+</tr>
+<tr>
+<td><code>module spider &lt;pattern&gt;</code></td>
+<td>Search for <pattern> among available modules <strong>(Lmod only)</strong></td>
+</tr>
+<tr>
+<td><code>module load &lt;mod1&gt; [mod2...]</code></td>
+<td>Load a module</td>
+</tr>
+<tr>
+<td><code>module unload &lt;module&gt;</code></td>
+<td>Unload a module</td>
+</tr>
+<tr>
+<td><code>module list</code></td>
+<td>List loaded modules</td>
+</tr>
+<tr>
+<td><code>module purge</code></td>
+<td>Unload all modules (purge)</td>
+</tr>
+<tr>
+<td><code>module display &lt;module&gt;</code></td>
+<td>Display what a module does</td>
+</tr>
+<tr>
+<td><code>module use &lt;path&gt;</code></td>
+<td>Prepend the directory to the <code>MODULEPATH</code> environment variable</td>
+</tr>
+<tr>
+<td><code>module unuse &lt;path&gt;</code></td>
+<td>Remove the directory from the <code>MODULEPATH</code> environment variable</td>
+</tr>
+</tbody>
+</table>
+<details class="question"><summary>What is <code>module</code>?</summary><p><code>module</code> is a shell <em>function</em> that modifies user shell upon load of a modulefile.
+It is defined as follows
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> <span class="nb">type</span> module
+<span class="go">module is a function</span>
+<span class="go">module ()</span>
+<span class="go">{</span>
+<span class="go">    eval $($LMOD_CMD bash &quot;$@&quot;) &amp;&amp; eval $(${LMOD_SETTARG_CMD:-:} -s sh)</span>
+<span class="go">}</span>
+</code></pre></div>
+In particular, <strong><code>module</code> is NOT a program</strong></p>
+</details>
+<p>At the heart of environment modules interaction resides the following components:</p>
+<ul>
+<li>the <code>MODULEPATH</code> environment variable, which defines a colon-separated list of directories to search for modulefiles</li>
+<li><code>modulefile</code> (see <a href="https://lmod.readthedocs.io/en/latest/100_modulefile_examples.html">an example</a>) associated to each available software.</li>
+</ul>
+<details class="example"><summary>Example of ULHPC <code>toolchain/foss</code> (auto-generated) Modulefile</summary><div class="highlight"><pre><span></span><code><span class="gp">$</span> module show toolchain/foss
+<span class="go">-------------------------------------------------------------------------------</span>
+<span class="go">   /opt/apps/resif/iris/2019b/broadwell/modules/all/toolchain/foss/2019b.lua:</span>
+<span class="go">-------------------------------------------------------------------------------</span>
+<span class="go">help([[</span>
+<span class="go">Description</span>
+<span class="go">===========</span>
+<span class="go">GNU Compiler Collection (GCC) based compiler toolchain, including</span>
+<span class="go"> OpenMPI for MPI support, OpenBLAS (BLAS and LAPACK support), FFTW and ScaLAPACK.</span>
+
+<span class="go">More information</span>
+<span class="go">================</span>
+<span class="go"> - Homepage: https://easybuild.readthedocs.io/en/master/Common-toolchains.html#foss-toolchain</span>
+<span class="go">]])</span>
+<span class="go">whatis(&quot;Description: GNU Compiler Collection (GCC) based compiler toolchain, including</span>
+<span class="go"> OpenMPI for MPI support, OpenBLAS (BLAS and LAPACK support), FFTW and ScaLAPACK.&quot;)</span>
+<span class="go">whatis(&quot;Homepage: https://easybuild.readthedocs.io/en/master/Common-toolchains.html#foss-toolchain&quot;)</span>
+<span class="go">whatis(&quot;URL: https://easybuild.readthedocs.io/en/master/Common-toolchains.html#foss-toolchain&quot;)</span>
+<span class="go">conflict(&quot;toolchain/foss&quot;)</span>
+<span class="go">load(&quot;compiler/GCC/8.3.0&quot;)</span>
+<span class="go">load(&quot;mpi/OpenMPI/3.1.4-GCC-8.3.0&quot;)</span>
+<span class="go">load(&quot;numlib/OpenBLAS/0.3.7-GCC-8.3.0&quot;)</span>
+<span class="go">load(&quot;numlib/FFTW/3.3.8-gompi-2019b&quot;)</span>
+<span class="go">load(&quot;numlib/ScaLAPACK/2.0.2-gompi-2019b&quot;)</span>
+<span class="go">setenv(&quot;EBROOTFOSS&quot;,&quot;/opt/apps/resif/iris/2019b/broadwell/software/foss/2019b&quot;)</span>
+<span class="go">setenv(&quot;EBVERSIONFOSS&quot;,&quot;2019b&quot;)</span>
+<span class="go">setenv(&quot;EBDEVELFOSS&quot;,&quot;/opt/apps/resif/iris/2019b/broadwell/software/foss/2019b/easybuild/toolchain-foss-2019b-easybuild-devel&quot;)</span>
+</code></pre></div>
+
+</details>
+<div class="admonition danger">
+<p>(<em>reminder</em>): <strong>the <code>module</code> command is ONLY available on the compute nodes, NOT on the access front-ends.</strong><br/>
+In particular, you need to be <em>within</em> a job to load ULHPC or private modules.</p>
+</div>
+<h2 id="ulhpc-modulepath">ULHPC <code>$MODULEPATH</code><a class="headerlink" href="#ulhpc-modulepath" title="Permanent link">&para;</a></h2>
+<p>By default, the <code>MODULEPATH</code> environment variable holds a <em>single</em> searched directory holding the optimized builds prepared for you by the ULHPC Team.
+The general format of this directory is as follows:</p>
+<div class="highlight"><pre><span></span><code>/opt/apps/resif/&lt;cluster&gt;/&lt;version&gt;/&lt;arch&gt;/modules/all
+</code></pre></div>
+
+<p>where:</p>
+<ul>
+<li><code>&lt;cluster&gt;</code> depicts the name of the cluster (<code>iris</code> or <code>aion</code>). Stored as <code>$ULHPC_CLUSTER</code>.</li>
+<li><code>&lt;version&gt;</code> corresponds to the ULHPC Software set release (aligned with <a href="https://easybuild.readthedocs.io/en/master/Common-toolchains.html#component-versions-in-foss-toolchain">Easybuid toolchains release</a>), <em>i.e.</em> <code>2019b</code>, <code>2020a</code> etc.  Stored as <code>$RESIF_VERSION_{PROD,DEVEL,LEGACY}</code> depending on the Production / development / legacy ULHPC software set version</li>
+<li><code>&lt;arch&gt;</code> is a lower-case strings that categorize the CPU architecture of the build host, and permits to easyli identify optimized target architecture. It is stored as <code>$RESIF_ARCH</code>.<ul>
+<li>On Intel nodes: <code>broadwell</code> (<em>default</em>), <code>skylake</code></li>
+<li>On AMD nodes: <code>epyc</code></li>
+<li>On GPU nodes: <code>gpu</code></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Cluster</th>
+<th>Arch. <code>$RESIF_ARCH</code></th>
+<th><code>$MODULEPATH</code> Environment variable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../systems/iris/">Iris</a></td>
+<td><code>broadwell</code> (default)</td>
+<td><code>/opt/apps/resif/iris/&lt;version&gt;/broadwell/modules/all</code></td>
+</tr>
+<tr>
+<td><a href="../../systems/iris/">Iris</a></td>
+<td><code>skylake</code></td>
+<td><code>/opt/apps/resif/iris/&lt;version&gt;/skylake/modules/all</code></td>
+</tr>
+<tr>
+<td><a href="../../systems/iris/">Iris</a></td>
+<td><code>gpu</code></td>
+<td><code>/opt/apps/resif/iris/&lt;version&gt;/gpu/modules/all</code></td>
+</tr>
+<tr>
+<td><a href="../../systems/aion/">Aion</a></td>
+<td><code>epyc</code> (default)</td>
+<td><code>/opt/apps/resif/aion/&lt;version&gt;/{epyc}/modules/all</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>On skylake nodes, you may want to use the optimized modules for <code>skylake</code></li>
+<li>On GPU nodes, you may want to use the CPU-optimized builds for <code>skylake</code> (in addition to the <code>gpu</code>-enabled softwares)</li>
+</ul>
+<!--acm-pearc21-cite-start-->
+
+<div class="admonition important">
+<p class="admonition-title">ACM PEARC'21: RESIF 3.0</p>
+<p>If you are interested to know more on the wey we setup and deploy the User Software Environment on ULHPC systems through the RESIF 3 framework, you can refer to the below article presented during the <a href="https://hpc.uni.lu/blog/2021-05-11-resif-3">ACM PEARC'21</a> conference, on July 22, 2021.</p>
+<blockquote>
+<p><strong>ACM Reference Format</strong> | <a href="https://orbilu.uni.lu/handle/10993/47115">ORBilu entry</a> | <a href="https://dl.acm.org/doi/10.1145/3437359.3465600">OpenAccess</a> | <a href="https://hpc.uni.lu/blog/2021-05-11-resif-3">ULHPC blog post</a> | <a href="https://hpc.uni.lu/download/slides/2021-07-22-ACM-PEARC21_resif3.pdf">slides</a> | <a href="https://github.com/ULHPC/sw">Github</a>: <br/>
+Sebastien Varrette, Emmanuel Kieffer, Frederic Pinel, Ezhilmathi Krishnasamy, Sarah Peter, Hyacinthe Cartiaux, and Xavier Besseron. 2021. RESIF 3.0: Toward a Flexible &amp; Automated Management of User Software Environment on HPC facility. <em>In Practice and Experience in Advanced Research Computing (PEARC '21)</em>. Association for Computing Machinery (ACM), New York, NY, USA, Article 33, 1–4. <a href="https://doi.org/10.1145/3437359.3465600">https://doi.org/10.1145/3437359.3465600</a></p>
+</blockquote>
+</div>
+<!--acm-pearc21-cite-end-->
+
+<h2 id="module-naming-schemes">Module Naming Schemes<a class="headerlink" href="#module-naming-schemes" title="Permanent link">&para;</a></h2>
+<details class="question"><summary>What is a Module Naming Scheme?</summary><p>The full software and module install paths for a particular software package
+are determined by the <em>active</em> module naming scheme along with the general
+software and modules install paths specified by the EasyBuild configuration.</p>
+<p>You can list the supported module naming schemes of <a href="https://easybuilders.github.io/easybuild-tutorial/hmns/">Easybuild</a> using:
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> eb --avail-module-naming-schemes
+<span class="go">List of supported module naming schemes:</span>
+<span class="go">    EasyBuildMNS</span>
+<span class="go">    CategorizedHMNS</span>
+<span class="go">    MigrateFromEBToHMNS</span>
+<span class="go">    HierarchicalMNS</span>
+<span class="go">    CategorizedModuleNamingScheme</span>
+</code></pre></div>
+See <a href="https://easybuilders.github.io/easybuild-tutorial/hmns/#flat-vs-hierarchical">Flat vs. Hierarchical module naming scheme</a>
+for an illustrated explaination of the difference between two extreme cases: flat or 3-level hierarchical.
+On ULHPC systems, we selected an intermediate scheme called <code>CategorizedModuleNamingScheme</code>.</p>
+</details>
+<div class="admonition important">
+<p class="admonition-title">Module Naming Schemes on ULHPC system</p>
+<p><strong>ULHPC modules are organised through the Categorized Naming Scheme</strong> <br/>
+Format: <code>&lt;category&gt;/&lt;name&gt;/&lt;version&gt;-&lt;toolchain&gt;&lt;versionsuffix&gt;</code></p>
+</div>
+<p>This means that the typical module hierarchy has as prefix a <strong>category</strong> level, taken out from one of the supported software category or module <em>class</em>:
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> eb --show-default-moduleclasses
+<span class="go">Default available module classes:</span>
+
+<span class="go">    base:      Default module class</span>
+<span class="go">    astro:     Astronomy, Astrophysics and Cosmology</span>
+<span class="go">    bio:       Bioinformatics, biology and biomedical</span>
+<span class="go">    cae:       Computer Aided Engineering (incl. CFD)</span>
+<span class="go">    chem:      Chemistry, Computational Chemistry and Quantum Chemistry</span>
+<span class="go">    compiler:  Compilers</span>
+<span class="go">    data:      Data management &amp; processing tools</span>
+<span class="go">    debugger:  Debuggers</span>
+<span class="go">    devel:     Development tools</span>
+<span class="go">    geo:       Earth Sciences</span>
+<span class="go">    ide:       Integrated Development Environments (e.g. editors)</span>
+<span class="go">    lang:      Languages and programming aids</span>
+<span class="go">    lib:       General purpose libraries</span>
+<span class="go">    math:      High-level mathematical software</span>
+<span class="go">    mpi:       MPI stacks</span>
+<span class="go">    numlib:    Numerical Libraries</span>
+<span class="go">    perf:      Performance tools</span>
+<span class="go">    quantum:   Quantum Computing</span>
+<span class="go">    phys:      Physics and physical systems simulations</span>
+<span class="go">    system:    System utilities (e.g. highly depending on system OS and hardware)</span>
+<span class="go">    toolchain: EasyBuild toolchains</span>
+<span class="go">    tools:     General purpose tools</span>
+<span class="go">    vis:       Visualization, plotting, documentation and typesetting</span>
+</code></pre></div></p>
+<p>It follows that the ULHPC software modules are structured according to the organization depicted below (<em>click to enlarge</em>).</p>
+<p><a href="../images/ULHPC-software-stack.pdf"><img alt="" src="../images/ULHPC-software-stack.png" /></a></p>
+<h2 id="ulhpc-toolchains-and-software-set-versioning">ULHPC Toolchains and Software Set Versioning<a class="headerlink" href="#ulhpc-toolchains-and-software-set-versioning" title="Permanent link">&para;</a></h2>
+<!--swsets-versionning-start-->
+
+<p>We offer a <strong>YEARLY</strong> release of the ULHPC Software Set based on Easybuid release of toolchains
+-- see Component versions (<em>fixed per release</em>) in the  <a href="https://easybuild.readthedocs.io/en/master/Common-toolchains.html#component-versions-in-foss-toolchain">foss</a> and <a href="https://easybuild.readthedocs.io/en/master/Common-toolchains.html#component-versions-in-intel-toolchain">intel</a> toolchains.
+<em>However</em>, count at least 6 months of validation/import <em>after</em> EB release before ULHPC release</p>
+<p>An overview of the currently available component versions is depicted below:</p>
+<!--table-swsets-toolchains-versionning-start-->
+
+<table>
+<thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>2019b</strong> (<code>legacy</code>)</th>
+<th><strong>2020a</strong></th>
+<th><strong>2020b</strong> (<code>prod</code>)</th>
+<th><strong>2021a</strong></th>
+<th><strong>2021b</strong> (<code>devel</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GCCCore</code></td>
+<td>compiler</td>
+<td>8.3.0</td>
+<td>9.3.0</td>
+<td>10.2.0</td>
+<td>10.3.0</td>
+<td>11.2.0</td>
+</tr>
+<tr>
+<td><code>foss</code></td>
+<td>toolchain</td>
+<td>2019b</td>
+<td>2020a</td>
+<td>2020b</td>
+<td>2021a</td>
+<td>2021b</td>
+</tr>
+<tr>
+<td><code>intel</code></td>
+<td>toolchain</td>
+<td>2019b</td>
+<td>2020a</td>
+<td>2020b</td>
+<td>2021a</td>
+<td>2021b</td>
+</tr>
+<tr>
+<td>binutils</td>
+<td></td>
+<td>2.32</td>
+<td>2.34</td>
+<td>2.35</td>
+<td>2.36</td>
+<td>2.37</td>
+</tr>
+<tr>
+<td>Python</td>
+<td></td>
+<td>3.7.4 (and 2.7.16)</td>
+<td>3.8.2 (and 2.7.18)</td>
+<td>3.8.6</td>
+<td>3.9.2</td>
+<td>3.9.6</td>
+</tr>
+<tr>
+<td>LLVM</td>
+<td>compiler</td>
+<td>9.0.1</td>
+<td>10.0.1</td>
+<td>11.0.0</td>
+<td>11.1.0</td>
+<td>12.0.1</td>
+</tr>
+<tr>
+<td>OpenMPI</td>
+<td>MPI</td>
+<td>3.1.4</td>
+<td>4.0.3</td>
+<td>4.0.5</td>
+<td>4.1.1</td>
+<td>4.1.2</td>
+</tr>
+</tbody>
+</table>
+<!--table-swsets-toolchains-versionning-end-->
+
+<p>Once on a node, the current version of the ULHPC Software Set in production is stored in <code>$RESIF_VERSION_PROD</code>.
+You can use the variables <code>$MODULEPATH_{LEGACY,PROD,DEVEL}</code> to access or set the <code>MODULEPATH</code> command with the appropriate value. Yet we have define utility scripts to facilitate your quick reset of the module environment, <em>i.e.,</em> <code>resif-load-swset-{legacy,prod,devel}</code> and <code>resif-reset-swset</code></p>
+<p>For instance, if you want to use the legacy software set, proceed as follows in your launcher scripts:</p>
+<div class="highlight"><pre><span></span><code>resif-load-swset-legacy   <span class="c1"># Eq. of export MODULEPATH=$MODULEPATH_LEGACY</span>
+<span class="c1"># [...]</span>
+<span class="c1"># Restore production settings</span>
+resif-load-swset-prod     <span class="c1"># Eq. of export MODULEPATH=$MODULEPATH_PROD</span>
+</code></pre></div>
+
+<p>If on the contrary you want to test the (new) development software set, <em>i.e.,</em> the <code>devel</code> version, stored in <code>$RESIF_VERSION_DEVEL</code>:</p>
+<div class="highlight"><pre><span></span><code>resif-load-swset-devel  <span class="c1"># Eq. of export MODULEPATH=$MODULEPATH_DEVEL</span>
+<span class="c1"># [...]</span>
+<span class="c1"># Restore production settings</span>
+resif-reset-swset         <span class="c1"># As resif-load-swset-prod</span>
+</code></pre></div>
+
+<details class="tips"><summary>(iris only) Skylake Optimized builds</summary><p>Skylake optimized build can be loaded on <strong>regular</strong> nodes using
+<div class="highlight"><pre><span></span><code>resif-load-swset-skylake  <span class="c1"># Eq. of export MODULEPATH=$MODULEPATH_PROD_SKYLAKE</span>
+</code></pre></div>
+You <strong>MUST</strong> obviously be on a Skylake node (<code>sbatch -C skylake [...]</code>) to take benefit from it.
+Note that this action is <strong>not</strong> required on <strong>GPU</strong> nodes.</p>
+</details>
+<div class="admonition tips">
+<p class="admonition-title">GPU Optimized builds vs. CPU software set on GPU nodes</p>
+<p>On GPU nodes, be aware that the default MODULEPATH holds two directories:</p>
+<ol>
+<li>GPU Optimized builds (<em>i.e.</em> typically against the <code>{foss,intel}cuda</code> toolchains) stored under <code>/opt/apps/resif/&lt;cluster&gt;/&lt;version&gt;/gpu/modules/all</code></li>
+<li>CPU Optimized builds (ex: <em>skylake</em> on <a href="../../systems/iris/">Iris</a>)) stored under <code>/opt/apps/resif/&lt;cluster&gt;/&lt;version&gt;/skylake/modules/all</code></li>
+</ol>
+<p>You <strong>may want</strong> to exclude CPU builds to ensure you take the most out of the GPU accelerators. In that case, you may want to run:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /!\ ADAPT &lt;version&gt; accordingly</span>
+module unuse /opt/apps/resif/<span class="si">${</span><span class="nv">ULHPC_CLUSTER</span><span class="si">}</span>/<span class="si">${</span><span class="nv">RESIF_VERSION_PROD</span><span class="si">}</span>/skylake/modules/all
+</code></pre></div>
+
+</div>
+<!--swsets-versionning-end-->
+
+<h2 id="using-easybuild-to-create-custom-modules">Using Easybuild to Create Custom Modules<a class="headerlink" href="#using-easybuild-to-create-custom-modules" title="Permanent link">&para;</a></h2>
+<p>Just like we do, you probably want to use <a href="../easybuild/">Easybuild</a> to complete the existing
+software set with your own modules and software builds.</p>
+<p>See <a href="../../software/build/">Building Custom (or missing) software</a> documentation
+for more details.</p>
+<h2 id="creating-a-custom-module-environment">Creating a Custom Module Environment<a class="headerlink" href="#creating-a-custom-module-environment" title="Permanent link">&para;</a></h2>
+<p>You can modify your environment so that certain modules are loaded
+whenever you log in.
+Use <code>module save [&lt;name&gt;]</code> and <code>module restore [&lt;name&gt;]</code> for that purpose -- see <a href="https://lmod.readthedocs.io/en/latest/010_user.html#user-collections">Lmod documentation on User collections</a></p>
+<p>You can also create and install your own modules for your convenience or
+for sharing software among collaborators.
+See the <a href="https://lmod.readthedocs.io/en/latest/015_writing_modules.html">modulefile documentation</a> for
+details of the required format and available commands.
+These custom modulefiles can be made visible to the <code>module</code> command by</p>
+<div class="highlight"><pre><span></span><code>module use /path/to/the/custom/modulefiles
+</code></pre></div>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ol>
+<li>Make sure the <strong>UNIX</strong> file permissions grant access to all users who want to use the software.</li>
+<li>Do not give write permissions to your home directory to anyone else.</li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>module use</code> command adds new directories before
+other module search paths (defined as <code>$MODULEPATH</code>), so modules
+defined in a custom directory will have precedence if there are
+other modules with the same name in the module search paths. If
+you prefer to have the new directory added at the end of
+<code>$MODULEPATH</code>, use <code>module use -a</code> instead of <code>module use</code>.</p>
+</div>
+<h2 id="module-faq">Module FAQ<a class="headerlink" href="#module-faq" title="Permanent link">&para;</a></h2>
+<div class="admonition question">
+<p class="admonition-title">Is there an environment variable that captures loaded modules?</p>
+<p>Yes, active modules can be retrieved via <code>$LOADEDMODULES</code>, this environment variable is</p>
+</div>
+<p>automatically changed to reflect active loaded modules that is reflected via <code>module list</code>.
+If you want to access modulefile path for loaded modules you can retrieve via <code>$_LM_FILES</code></p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: December 2, 2024
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../" title="Overview" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Overview
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../easybuild/" title="Easybuild" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Easybuild
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2007-2022 S. Varrette and Uni.lu HPC (ULHPC) Team
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/ULHPC" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://twitter.com/ULHPC" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.f81b9e8b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.23546af0.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["navigation.instant"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.58d22e8e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/bootstrap.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>
