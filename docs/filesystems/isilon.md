@@ -2,11 +2,20 @@
 
 <!--intro-start-->
 
-OneFS, is a _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) that exports a network file system used to host project data, and for archival purposes. You will find them mounted under `/mnt/isilon/projects`.
+The university _central data storage services_ uses a [NAS](https://en.wikipedia.org/wiki/Network-attached_storage) system to provide long term storage for user data. The NAS system used is a [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) (Isilon) server with [OneFS](https://en.wikipedia.org/wiki/OneFS_distributed_file_system), a proprietary and distributed file system and environment, used to store the data. The OneFS file systems is exported by Isilon through the NFS protocol to the HPC platform and other Linux-based services, and through SMB (CIFS) to Windows-based clients.
 
-The file system in Isilon is redundant and regularly snapshot and backed up, including off site backups. Please move all your data to the Isilon directories as soon as your computations finish.
+In the UL HPC platform the NFS exported by Isilon is used to host project data when they are not activelly used in computations, and for archival purposes. Projects are mounted under `/mnt/isilon/projects`.
 
-You have to ask for a directory in the Isilon file system mounted in `/mnt/isilon/projects`. However, all users can access a personal directory in Isilon through the [ATLAS SMB system](https://hpc-docs.uni.lu/data/transfer/#transfers-between-long-term-storage-and-the-hpc-facilities).
+-  The file system in Isilon is redundant and regularly snapshot and backed up, including off site backups. It thus resilient to hardware failure and highly available, but it is also protected against catastrophic data loss.
+
+- The NFS share exported from Isilon to the UL HPC platform is not using the Infiniband high performance network and the OneFS file system has lower I/O performance that GPFS and lustre file systems, however, the central data storage has significantly higher capacity.
+
+!!! important "Long term data storage"
+    Please move all your data to OneFS directories of the central data storage as soon as your computations finish.
+
+    The central data storage is the intended place for storing data. Cluster file systems using the inifiniband network are meant as working storage only. For this reason, backups in cluster file systems are very limited.
+
+Users have to ask for a project directories in the Isilon mount point (`/mnt/isilon/projects`) separately from the GPFS project directories. However, all users have a personal directory in the university _central data storage_ which they can access through the [ATLAS SMB system](https://hpc-docs.uni.lu/data/transfer/#transfers-between-long-term-storage-and-the-hpc-facilities). Users may also ask for project directories that are accessible through ATLAS, however these project cannot be mounted on the Isilon NFS share (`/mnt/isilon/projects`).
 
 <!--intro-end-->
 
