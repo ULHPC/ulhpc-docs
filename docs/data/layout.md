@@ -1,6 +1,6 @@
-# Network file systems
+# Cluster file systems
 
-There are 4 different network file systems currently used in UL HPC systems. Each of the file systems is mounted in a unique location and it provides a distinct set of functions.
+Several _network file systems_ are available at the UL HPC clusters and are configured for different purposes. Each server and computational resources has access to at least three different file systems with different levels of performance, permanence, and available space. This is a high level description of  the data management practices for our file systems. You can find information about performance and best usage practices in the [Storage Systems](/filesystems/) section.
 
 {%
    include-markdown "../filesystems/overview.md"
@@ -21,7 +21,7 @@ There are 4 different network file systems currently used in UL HPC systems. Eac
    end="<!--intro-end-->"
 %}
 
-## Project Cold-Data and Archives
+## Cold project data and archives
 {%
    include-markdown "../filesystems/isilon.md"
    start="<!--intro-start-->"

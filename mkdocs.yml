@@ -53,7 +53,7 @@ nav:
     # - Multi-Factor Authentication: 'connect/mfa.md'
   ##################
   - Data Management:
-    - Network file systems:       'data/layout.md'
+    - Cluster file systems:       'data/layout.md'
     - Data Sharing:               'data/sharing.md'
     - Data Transfer:              'data/transfer.md'
     - GDPR Compliance:            'data/gdpr.md'
