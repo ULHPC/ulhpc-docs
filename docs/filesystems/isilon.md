@@ -1,4 +1,4 @@
-# Dell EMC Isilon (Archives and cold project data)
+# Dell EMC Isilon (Cold project data and Archives)
 
 <!--intro-start-->
 
