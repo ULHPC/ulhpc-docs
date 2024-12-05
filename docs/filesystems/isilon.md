@@ -2,7 +2,11 @@
 
 <!--intro-start-->
 
-OneFS, A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) solution is used to host project data, and serve for backup and archival purposes. You will find them mounted under `/mnt/isilon/projects`.
+OneFS, is a _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) that exports a network file system used to host project data, and for archival purposes. You will find them mounted under `/mnt/isilon/projects`.
+
+The file system in Isilon is redundant and regularly snapshot and backed up, including off site backups. Please move all your data to the Isilon directories as soon as your computations finish.
+
+You have to ask for a directory in the Isilon file system mounted in `/mnt/isilon/projects`. However, all users can access a personal directory in Isilon through the [ATLAS SMB system](https://hpc-docs.uni.lu/data/transfer/#transfers-between-long-term-storage-and-the-hpc-facilities).
 
 <!--intro-end-->
 

@@ -2,7 +2,7 @@
 
 <!--content-start-->
 
-Several _File Systems_ co-exist on the ULHPC facility and are configured for different purposes. Each server and computational resources has access to at least three different file systems with different levels of performance, permanence, and available space as summarized in the following table.
+The following table summarizes the mount location, backing up, and environment setup for each one of the network file systems.
 
 <!--table-start-->
 
@@ -13,3 +13,7 @@ Several _File Systems_ co-exist on the ULHPC facility and are configured for dif
 | [`/scratch/users/<username>`](../filesystems/lustre.md)                                                    | [`${SCRATCH}`](../filesystems/lustre.md)                       | [Lustre](../filesystems/lustre.md)           | no                                   |
 | `/mnt/isilon/projects/<project name>`                                                                      | -                                                              | [OneFS](../filesystems/isilon.md)            | yes (live sync and snapshots)        |
 
+The  file system mounted on the home directories (`/home/users`) and project directories (`/work/projects`) are both exported by the [GPFS/Spectrumscale](../filesystems/gpfs.md) file system.
+
+- Storage for both directories is redundant, so they are safe against hardware failure.
+- Only `/home/users` is mirrored in a SSD cache, so `/home/users` is a significantly faster for random and small file I/O.
