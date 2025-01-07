@@ -28,7 +28,7 @@ The historically first production system installed in 2007 has been [Chaos](http
 Both systems were kept running until their decommissioning in 2019.
 
 !!! info
-    Currently, **[Iris](iris/index.md)** ($R_\text{peak}$=1071 TFlops) **and [Aion](aion/index.md)** ($R_\text{peak}$=1693 TFlops) are our production systems sharing the same High Performance Storage solutions, when __[Aion](aion/index.md) is our flagship supercomputer__ until 2024.
+    Currently, **[Iris](iris/index.md)** ($R_\text{peak}$=1071 TFlops) **and [Aion](aion/index.md)** ($R_\text{peak}$=1693 TFlops) are our production systems sharing the same High Performance Storage solutions.
 
 The below figures illustrates the evolution of the computing and storage capacity of the ULHPC facility over the last years.
 
@@ -57,6 +57,6 @@ The below figure outline the cumulative usage (in CPU Years) of the production c
 Our clusters and supercomputers are named from [Greek primordial deities](https://en.wikipedia.org/wiki/Greek_primordial_deities) or [Greek mythology](https://en.wikipedia.org/wiki/Greek_mythology) while keeping a name as short as possible.
 
 * [chaos](https://en.wikipedia.org/wiki/Chaos_(cosmogony)#Greco-Roman_tradition) was, according to Hesiod's Theogony, the first thing to exist and thus looked as appropriate.  "_Hesiod's Chaos has been interpreted as either "the gaping void above the Earth created when Earth and Sky are separated from their primordial unity_"
-* [gaia](https://en.wikipedia.org/wiki/Gaia) is the personification of the Earth and the ancestral mother of all life. It sounded pertinent for our first system installed in Belval to serve the growing life-science community and the newly created LCSB system bio-medicine Interdiciplinary center.
+* [gaia](https://en.wikipedia.org/wiki/Gaia) is the personification of the Earth and the ancestral mother of all life. It sounded pertinent for our first system installed in Belval to serve the growing life-science community and the newly created LCSB system bio-medicine Interdisciplinary center.
 * [iris](https://en.wikipedia.org/wiki/Iris_(mythology)) is the personification and goddess of the rainbow and messenger of the gods.
 * [aion](https://en.wikipedia.org/wiki/Aion_(deity)) is a Hellenistic deity associated with time, the orb or circle encompassing the universe, and the zodiac.
