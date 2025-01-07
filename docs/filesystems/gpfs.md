@@ -1,10 +1,10 @@
-# GPFS/SpectrumScale (`$HOME`, project)
+
 
 ![](../images/plots/plot_piechart_storage_fs_2020.png){: style="width:350px; float: right;"}
 
 ## Introduction
 
-[IBM Spectrum Scale](https://www.ibm.com/products/scale-out-file-and-object-storage), formerly known as the General Parallel File System (GPFS), is global _high_-performance clustered file system available on all ULHPC computational systems through a [DDN GridScaler/GS7K](https://www.ddn.com/products/sfa7990x-hybrid-flash-storage-appliance/) system.
+[IBM Spectrum Scale](https://www.ibm.com/products/scale-out-file-and-object-storage), formerly known as the General Parallel File System (GPFS), is global _high_-performance clustered file system available on all ULHPC computational systems through a Dell-based storage infrastructure.
 
 It allows sharing **homedirs and project data** between users, systems, and eventually (i.e. if needed) with the "outside world".
 In terms of raw storage capacities, it represents more than **4PB** of raw space (more than **3PB** of usable space).
@@ -48,8 +48,10 @@ It is composed of:
 * One ME484 disk enclosure, containing 84x SAS hard disks of 22TB, configured in 2x [ADAPT volumes](https://www.delltechnologies.com/asset/en-gb/products/storage/industry-market/dell-powervault-me5-adapt-software-wp.pdf) plus 4x hot spares
 * One ME5084 disk enclosure, containing 84x SAS hard disks of 22TB, configured in 2x [ADAPT volumes](https://www.delltechnologies.com/asset/en-gb/products/storage/industry-market/dell-powervault-me5-adapt-software-wp.pdf) plus 4x hot spares
 
-There is no single point of failure within the storage solution and the setup is fully redundant.
-The data paths from the storage to the NSD servers are redundant and providing one link from each of the servers to each controller in the storage unit. There are redundant power supplies, redundant fans, redundant storage controller with mirrored cache and battery backup to secure the cache data when power is lost completely. The data paths to the enclosures are redundant so that links can fail, and the system will still be fully operational.
+There is no single point of failure within the storage solution and the setup is fully redundant (servers are set-up in pairs, and the system can tolerate the loss of one server in each pair).
+There are redundant power supplies, redundant fans, redundant storage controller and battery backup to secure the cache data when power is lost completely. The data paths to the disk enclosures are redundant so that links can fail, and the system will still be fully operational.
+
+Finally, each server is connected directly to the Aion Infiniband network via redundant HDR200 links, in such a way that all connections are perfectly balanced across the 4 Aion racks and 8 leaf switches, and connected to a redundant stack of ethernet switches via redundant 10GbE links.
 
 ??? note "(Obsolete) Initial DDN-Based GPFS infrastructure"
     Our DDN-based GPFS infrastructure has unfortunately reach End-of-Life and could not be supported anymore. It has been replaced in 2024 by the new Dell-based infrastructure described above. For the record, the following section describes the now decommissioned DDN system:
