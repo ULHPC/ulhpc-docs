@@ -1,6 +1,6 @@
 
 
-![](../images/plots/plot_piechart_storage_fs_2020.png){: style="width:350px; float: right;"}
+![](../images/plots/plot_piechart_storage_fs.png){: style="width:350px; float: right;"}
 
 ## Introduction
 

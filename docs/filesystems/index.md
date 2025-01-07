@@ -16,7 +16,7 @@ In particular, once connected, you have access to several different _File System
 
 ## Storage Systems Overview
 
-![](../images/plots/plot_piechart_storage_fs_2020.png){: style="width:350px; float: right;"}
+![](../images/plots/plot_piechart_storage_fs.png){: style="width:350px; float: right;"}
 
 Current statistics of the available filesystems are depicted on the side figure.
 The ULHPC facility relies on **2** types of [Distributed/Parallel File Systems](https://en.wikipedia.org/wiki/Clustered_file_system) to deliver high-performant Data storage at a BigData scale:
