@@ -7,7 +7,7 @@
 [IBM Spectrum Scale](https://www.ibm.com/products/scale-out-file-and-object-storage), formerly known as the General Parallel File System (GPFS), is global _high_-performance clustered file system available on all ULHPC computational systems through a [DDN GridScaler/GS7K](https://www.ddn.com/products/sfa7990x-hybrid-flash-storage-appliance/) system.
 
 It allows sharing **homedirs and project data** between users, systems, and eventually (i.e. if needed) with the "outside world".
-In terms of raw storage capacities, it represents more than **3PB** of usable space.
+In terms of raw storage capacities, it represents more than **4PB** of raw space (more than **3PB** of usable space).
 
 The filesystem is composed of two tiers, homedirs are stored on the **Tier 0** (Flash-based, 246TB) while project directories are stored on the **Tier 1** (Disk-based, 2956TB). The placement policy can be adjusted, in example, for publicly shared datasets.
 
@@ -41,19 +41,21 @@ The way the ULHPC GPFS file system is implemented is depicted on the below figur
 
 It is composed of:
 
-* Two gateway NFS servers (see [below](#gatewaynfs-servers)
-* Two metadata servers (Dell R750 containing 4x 6.4 TB NVMe each)
-* Two Tier 0 servers (Dell R750 containing 16x 15.36 TB NVMe each), configured as replicas
+* Two gateway NFS servers (see [below](#gatewaynfs-servers))
+* Two metadata servers (Dell R750 containing 4x 6.4TB NVMe each)
+* Two Tier 0 servers (Dell R750 containing 16x 15.36TB NVMe each), configured as replicas
 * Two Tier 1 servers (Dell R750, attached to the disk enclosures below)
-* One ME484 disk enclosure, containing 84x SAS hard disks of 22 TB, configured in 2x [ADAPT volumes](https://www.delltechnologies.com/asset/en-gb/products/storage/industry-market/dell-powervault-me5-adapt-software-wp.pdf) plus 4x hot spares
-* One ME5084 disk enclosure, containing 84x SAS hard disks of 22 TB, configured in 2x [ADAPT volumes](https://www.delltechnologies.com/asset/en-gb/products/storage/industry-market/dell-powervault-me5-adapt-software-wp.pdf) plus 4x hot spares
+* One ME484 disk enclosure, containing 84x SAS hard disks of 22TB, configured in 2x [ADAPT volumes](https://www.delltechnologies.com/asset/en-gb/products/storage/industry-market/dell-powervault-me5-adapt-software-wp.pdf) plus 4x hot spares
+* One ME5084 disk enclosure, containing 84x SAS hard disks of 22TB, configured in 2x [ADAPT volumes](https://www.delltechnologies.com/asset/en-gb/products/storage/industry-market/dell-powervault-me5-adapt-software-wp.pdf) plus 4x hot spares
 
 There is no single point of failure within the storage solution and the setup is fully redundant.
 The data paths from the storage to the NSD servers are redundant and providing one link from each of the servers to each controller in the storage unit. There are redundant power supplies, redundant fans, redundant storage controller with mirrored cache and battery backup to secure the cache data when power is lost completely. The data paths to the enclosures are redundant so that links can fail, and the system will still be fully operational.
 
 ??? note "(Obsolete) Initial DDN-Based GPFS infrastructure"
     Our DDN-based GPFS infrastructure has unfortunately reach End-of-Life and could not be supported anymore. It has been replaced in 2024 by the new Dell-based infrastructure described above. For the record, the following section describes the now decommissioned DDN system:
+
     ![](images/ulhpc_gpfs.png){: style="width:600px;"}
+
     * Two NAS protocol servers (see [below](#nasnfs-servers)
     * One DDN GridScaler 7K system acquired [as part of RFP 160019](../systems/iris/timeline.md) deployed in 2017 and later extended, composed of
         - 1x DDN GS7K enclosure (~11GB/s IO throughput)
