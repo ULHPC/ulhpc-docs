@@ -134,7 +134,7 @@ To make system specific customizations use the pre-defined environment
         esac
         ```
 
-[![CentOS](https://wiki.centos.org/ArtWork/Brand/Logo?action=AttachFile&do=get&target=centos-logo-light.png){: style="width:150px; float: right;"}](https://centos.org/)
+[![Rocky Linux](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Rocky_Linux_wordmark.svg/2560px-Rocky_Linux_wordmark.svg.png){: style="width:150px; float: right;"}](https://rockylinux.org/)
 
 ## Operating Systems :fontawesome-brands-linux:
 
@@ -142,29 +142,15 @@ To make system specific customizations use the pre-defined environment
 
 The ULHPC facility runs [RedHat-based Linux Distributions](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives), in particular:
 
-* the [Iris cluster](../systems/iris/index.md) run [CentOS](https://centos.org/)  and [RedHat (RHEL)](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/) Linux operating system, **version 7**
-* the [Aion cluster](../systems/aion/index.md) run [RedHat (RHEL)](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/) Linux operating system, **version 8**
+* the [Iris cluster](../systems/iris/index.md) and the [Aion cluster](../systems/aion/index.md) run [RedHat (RHEL)](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/) Linux operating system, **version 8** on the access and compute nodes. Servers (not accessible to users) run Rocky Linux 8, which is RHEL compatible, when appropriate.
 ![](https://www.debian.org/logos/openlogo-100.png){: style="width:75px; float: right;"}
-*  Experimental [Grid5000](https://www.grid5000.fr/w/Luxembourg:Hardware) cluster run [Debian](https://www.debian.org/) Linux, version 10
+*  Experimental [Grid5000](https://www.grid5000.fr/w/Luxembourg:Hardware) clusters run [Debian](https://www.debian.org/) Linux, version 11
 
 Thus, you are more than encouraged to become familiar - if not yet - with [Linux commands](http://linuxcommand.org/). We can recommend the following sites and resources:
 
 * [Software Carpentry: The Unix Shell](https://swcarpentry.github.io/shell-novice/)
 * [Unix/Linux Command Reference](https://files.fosswire.com/2007/08/fwunixref.pdf)
 
-??? info "Impact of CentOS project shifting focus starting 2021 from CentOS Linux to CentOS Stream"
-    You may have followed the [official announcement on Dec 8, 2020](https://blog.centos.org/2020/12/future-is-centos-stream/) where [Red Hat announced that it will discontinue CentOS 8](https://www.redhat.com/en/blog/centos-stream-building-innovative-future-enterprise-linux) by the end of 2021 and instead will focus on CentOS Stream going forward. Fortunately CentOS 7 will continue to be updated until 2024 and is therefore not affected by this change.
-
-    While CentOS traditionally has been a rebuild of RHEL, CentOS Stream will be
-    more or less a testing ground for changes that will eventually go into RHEL.
-    Unfortunately this means that CentOS Stream will likely become incompatible
-    with RHEL (e.g. binaries compiled on CentOS Stream will not necessarily run
-    on RHEL and vice versa). It is also questionable whether CentOS Stream is a
-    suitable environment for running production systems.
-
-    **For all these reasons, the migration to CentOS 8 for Iris (initially planned for Q1 2021) has been cancelled**.
-    _Alternative approaches are under investigation_, including an homogeneous
-    setup between Iris and Aion over Redhat 8.
 
 ## Discovering, visualizing and reserving UL HPC resources
 
