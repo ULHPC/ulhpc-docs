@@ -92,7 +92,7 @@ These resources can be reserved and allocated for the execution of jobs schedule
 
 ### GPFS/SpectrumScale File System (`$HOME`, project)
 
-[IBM Spectrum Scale](https://www.ibm.com/products/scale-out-file-and-object-storage), formerly known as the General Parallel File System (GPFS), is global _high_-performance clustered file system available on all ULHPC computational systems through a [DDN GridScaler/GS7K](https://www.ddn.com/products/sfa7990x-hybrid-flash-storage-appliance/) system.
+[IBM Spectrum Scale](https://www.ibm.com/products/scale-out-file-and-object-storage), formerly known as the General Parallel File System (GPFS), is global _high_-performance clustered file system available on all ULHPC computational systems. It is deployed over Dell-based storage hardware.
 
 It allows sharing **homedirs and project data** between users, systems, and eventually (i.e. if needed) with the "outside world".
 
