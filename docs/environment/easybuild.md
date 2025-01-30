@@ -12,15 +12,11 @@ For several years now, [Easybuild](https://docs.easybuild.io/) is used to [manag
 <!--intro-end-->
 
 ??? question "Why using an automatic building tool on HPC environment like [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/)?"
-    Well that may seem obvious to some of you, but scientific software is often **difficult** to build.
-    Not all rely on _standard_ building tools like Autotools/Automake (and the famous `configure; make; make install`) or CMake.
-    And even in that case, parsing the available option to ensure matching the hardware configuration of the computing resources used for the execution is time consuming and error-prone.
-    Most of the time unfortunately, scientific software embed hardcoded parameters and/or poor/outdated documentation with incomplete build procedures.
+    Well that may seem obvious to some of you, but scientific software is often **difficult** to build.  Not all rely on _standard_ building tools like Autotools/Automake (and the famous `configure; make; make install`) or CMake. And even in that case, parsing the available option to ensure matching the hardware configuration of the computing resources used for the execution is time consuming and error-prone. Most of the time unfortunately, scientific software embed hardcoded parameters and/or poor/outdated documentation with incomplete build procedures.
 
-    In this context,  software build and installation frameworks like [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/) helps to facilitate the building task in a _consistent_ and _automatic_ way, while generating also the LMod modulefiles.
+    In this context, software build and installation frameworks like [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/) helps to facilitate the building task in a _consistent_ and _automatic_ way, while generating also the LMod modulefiles.
 
-    We select [Easybuild](https://docs.easybuild.io) as primary building tool to ensure the best optimized builds.
-    Some HPC sites use both -- see [this talk from William Lucas at EPCC](https://www.archer2.ac.uk/training/courses/200617-spack-easybuild/) for instance.
+    We select [Easybuild](https://docs.easybuild.io) as primary building tool to ensure the best optimized builds. Some HPC sites use both -- see [this talk from William Lucas at EPCC](https://www.archer2.ac.uk/training/courses/200617-spack-easybuild/) for instance.
 
     It does not prevent from maintaining your own [build instructions notes](https://github.com/hpc-uk/build-instructions).
 
@@ -30,14 +26,12 @@ For several years now, [Easybuild](https://docs.easybuild.io/) is used to [manag
 
 EasyBuild relies on two main concepts: *[Toolchains](https://docs.easybuild.io/en/latest/Concepts_and_Terminology.html#toolchains)* and *[EasyConfig files](https://docs.easybuild.io/en/latest/Concepts_and_Terminology.html#easyconfig-files)*.
 
-A **toolchain** corresponds to a compiler and a set of libraries which are commonly used to build a software.
-The two main toolchains frequently used on the UL HPC platform are the `foss` ("_Free and Open Source Software_") and the `intel` one.
+A **toolchain** corresponds to a compiler and a set of libraries which are commonly used to build a software. The two main toolchains frequently used on the UL HPC platform are the `foss` ("_Free and Open Source Software_") and the `intel` one.
 
 1. `foss`, based on the GCC compiler and on open-source libraries (OpenMPI, OpenBLAS, etc.).
 2. `intel`, based on the Intel compiler suit and on Intel libraries (Intel MPI, Intel Math Kernel Library, etc.).
 
-An **[EasyConfig file](http://easybuild.readthedocs.io/en/latest/Writing_easyconfig_files.html)** is a simple text file that describes the build process of a software. For most software that uses standard procedures (like `configure`, `make` and `make install`), this file is very simple.
-Many [EasyConfig files](https://github.com/easybuilders/easybuild-easyconfigs/tree/master/easybuild/easyconfigs) are already provided with EasyBuild.
+An **[EasyConfig file](http://easybuild.readthedocs.io/en/latest/Writing_easyconfig_files.html)** is a simple text file that describes the build process of a software. For most software that uses standard procedures (like `configure`, `make` and `make install`), this file is very simple. Many [EasyConfig files](https://github.com/easybuilders/easybuild-easyconfigs/tree/master/easybuild/easyconfigs) are already provided with EasyBuild.
 
 
 ## ULHPC Easybuild Configuration
@@ -54,8 +48,7 @@ export EASYBUILD_MODULES_TOOL=Lmod
 export EASYBUILD_MODULE_NAMING_SCHEME=CategorizedModuleNamingScheme
 ```
 
-All builds and installations are performed at user level, so you don't need the admin (i.e. `root`) rights.
-Another **very** important configuration variable is the Overall [Easybuild prefix path](https://docs.easybuild.io/en/latest/Configuration.html#prefix) `$EASYBUILD_PREFIX` which affects the _default_ value of several configuration options:
+All builds and installations are performed at user level, so you don't need the admin (i.e. `root`) rights. Another **very** important configuration variable is the Overall [Easybuild prefix path](https://docs.easybuild.io/en/latest/Configuration.html#prefix) `$EASYBUILD_PREFIX` which affects the _default_ value of several configuration options:
 
 * built software are placed under `${EASYBUILD_PREFIX}/software/`
 * modules install path: `${EASYBUILD_PREFIX}/modules/all` (determined via Overall prefix path (--prefix), --subdir-modules and --suffix-modules-path)
@@ -103,10 +96,6 @@ You can thus extend the [ULHPC Software set](modules.md#ulhpc-toolchains-and-sof
 
 ## Installation / Update local Easybuild
 
-You can of course use the _default_ Easubuild that comes with the ULHPC software
-set with `module load tools/EasyBuild`.
-But as soon as you want to install your local builds, you have interest to
-install the up-to-date release of [EasyBuild](https://docs.easybuild.io/) in
-your local `$EASYBUILD_PREFIX`.
+You can of course use the _default_ Easubuild that comes with the ULHPC software set with `module load tools/EasyBuild`. But as soon as you want to install your local builds, you have interest to install the up-to-date release of [EasyBuild](https://docs.easybuild.io/) in your local `$EASYBUILD_PREFIX`.
 
 For this purpose, you can follow the [official instructions](https://docs.easybuild.io/installation/#eb_as_module).
