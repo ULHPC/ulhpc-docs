@@ -172,7 +172,7 @@ where:
 <!--acm-pearc21-cite-start-->
 
 !!! important "ACM PEARC'21: RESIF 3.0"
-    If you are interested to know more on the wey we setup and deploy the User Software Environment on ULHPC systems through the RESIF 3 framework, you can refer to the below article presented during the [ACM PEARC'21](https://hpc.uni.lu/blog/2021-05-11-resif-3) conference, on July 22, 2021.
+    If you are interested to know more on the way we setup and deploy the User Software Environment on ULHPC systems through the RESIF 3 framework, you can refer to the below article presented during the [ACM PEARC'21](https://hpc.uni.lu/blog/2021-05-11-resif-3) conference, on July 22, 2021.
     > __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/47115) | [OpenAccess](https://dl.acm.org/doi/10.1145/3437359.3465600) | [ULHPC blog post](https://hpc.uni.lu/blog/2021-05-11-resif-3) | [slides](https://hpc.uni.lu/download/slides/2021-07-22-ACM-PEARC21_resif3.pdf) | [Github](https://github.com/ULHPC/sw): <br/>
     > Sebastien Varrette, Emmanuel Kieffer, Frederic Pinel, Ezhilmathi Krishnasamy, Sarah Peter, Hyacinthe Cartiaux, and Xavier Besseron. 2021. RESIF 3.0: Toward a Flexible & Automated Management of User Software Environment on HPC facility. _In Practice and Experience in Advanced Research Computing (PEARC '21)_. Association for Computing Machinery (ACM), New York, NY, USA, Article 33, 1–4. https://doi.org/10.1145/3437359.3465600
 
