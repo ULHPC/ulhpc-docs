@@ -5,13 +5,9 @@
 [![](https://easybuild.readthedocs.io/en/latest/_static/easybuild_logo_alpha.png){:style="width:200px; float: right;"}](https://easybuild.readthedocs.io/)
 
 [EasyBuild](https://docs.easybuild.io/) (EB for short) is a software build and installation framework that allows you to manage (scientific) software on High Performance Computing (HPC) systems in an efficient way.
-A large number of scientific software are supported (**at least [2175 supported software packages](https://docs.easybuild.io/en/latest/version-specific/Supported_software.html)** since the 4.3.2 release) - see also [What is EasyBuild?](https://docs.easybuild.io/en/latest/Introduction.html).
+A large number of scientific software are supported (**at least [3670 supported software packages](https://docs.easybuild.io/version-specific/supported-software/)** since the 4.9.4 release) - see also [What is EasyBuild?](https://docs.easybuild.io/en/latest/Introduction.html).
 
-For several years now, [Easybuild](https://docs.easybuild.io/) is used to [manage the ULHPC User Software Set](modules.md#ulhpc-toolchains-and-software-set-versioning) and generate automatically the module files available to you on our computational resources in either `prod` (default) or `devel` (early development/testing) environment -- see [ULHPC Toolchains and Software Set Versioning](../environment/modules.md#ulhpc-toolchains-and-software-set-versioning).
-This enables users to easily _extend_ the global [Software Set](modules.md#ulhpc-toolchains-and-software-set-versioning) with their own **local** software
-builds, either performed within their [global home
-directory](../data/layout.md#global-home-directory-home) or (_better_) in a shared [project
-directory](../data/layout.md) though [Easybuild](../environment/easybuild.md), which generate automatically module files compliant with the [ULHPC module setup](../environment/modules.md).
+For several years now, [Easybuild](https://docs.easybuild.io/) is used to [manage the ULHPC User Software Set](modules.md#ulhpc-toolchains-and-software-set-versioning) and generate automatically the module files available to you on our computational resources in either `release` (default) or `testing` (pre-release/testing) environment -- see [ULHPC Toolchains and Software Set Versioning](../environment/modules.md#ulhpc-toolchains-and-software-set-versioning). This enables users to easily _extend_ the global [Software Set](modules.md#ulhpc-toolchains-and-software-set-versioning) with their own **local** software builds, either performed within their [global home directory](../data/layout.md#global-home-directory-home) or (_better_) in a shared [project directory](../data/layout.md) though [Easybuild](../environment/easybuild.md), which generate automatically module files compliant with the [ULHPC module setup](../environment/modules.md).
 
 <!--intro-end-->
 
@@ -38,7 +34,7 @@ A **toolchain** corresponds to a compiler and a set of libraries which are commo
 The two main toolchains frequently used on the UL HPC platform are the `foss` ("_Free and Open Source Software_") and the `intel` one.
 
 1. `foss`, based on the GCC compiler and on open-source libraries (OpenMPI, OpenBLAS, etc.).
-2. `intel`, based on the Intel compiler suit ([])and on Intel libraries (Intel MPI, Intel Math Kernel Library, etc.).
+2. `intel`, based on the Intel compiler suit and on Intel libraries (Intel MPI, Intel Math Kernel Library, etc.).
 
 An **[EasyConfig file](http://easybuild.readthedocs.io/en/latest/Writing_easyconfig_files.html)** is a simple text file that describes the build process of a software. For most software that uses standard procedures (like `configure`, `make` and `make install`), this file is very simple.
 Many [EasyConfig files](https://github.com/easybuilders/easybuild-easyconfigs/tree/master/easybuild/easyconfigs) are already provided with EasyBuild.
