@@ -8,10 +8,10 @@ The goal of this project is to build a common stack of scientific software insta
 
 The EESSI software stack is available on the ULHPC platform, and gives you access to software modules maintained by the EESSI project and optimized for the CPU architectures available on the ULHPC platform.
 
-On a compute node, to set up the EESSI environment, simply run the command:
+On a compute node, to set up the EESSI environment, simply load the EESSI [module](/environment/modules/):
 
 ```
-source /cvmfs/software.eessi.io/versions/2023.06/init/bash
+module load EESSI
 ```
 
 The first usage may be slow as the files are downloaded from an upstream Stratum 1 server, but the files are cached locally.
@@ -19,22 +19,13 @@ The first usage may be slow as the files are downloaded from an upstream Stratum
 You should see the following output:
 
 ```
-Found EESSI repo @ /cvmfs/software.eessi.io/versions/2023.06!
-archdetect says x86_64/amd/zen2
-Using x86_64/amd/zen2 as software subdirectory.
-Using /cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen2/modules/all as the directory to be added to MODULEPATH.
-Found Lmod configuration file at /cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen2/.lmod/lmodrc.lua
-Initializing Lmod...
-Prepending /cvmfs/software.eessi.io/versions/2023.06/software/linux/x86_64/amd/zen2/modules/all to $MODULEPATH...
-Environment set up to use EESSI (2023.06), have fun!
-{EESSI 2023.06} [user@system ~]$ 
+$ module load EESSI
+EESSI/2023.06 loaded successfully
 ```
 
-The last line is the shell prompt.
+The last line is the shell output.
 
-Your environment is now set up, you are ready to start running software provided by EESSI!
-
-To see which modules (and extensions) are available, run:
+Your environment is now set up, you are ready to start running software provided by EESSI! To see which modules (and extensions) are available, run:
 
 ```
 module avail
