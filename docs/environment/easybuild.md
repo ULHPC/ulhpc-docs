@@ -4,98 +4,189 @@
 
 [![](https://easybuild.readthedocs.io/en/latest/_static/easybuild_logo_alpha.png){:style="width:200px; float: right;"}](https://easybuild.readthedocs.io/)
 
-[EasyBuild](https://docs.easybuild.io/) (EB for short) is a software build and installation framework that allows you to manage (scientific) software on High Performance Computing (HPC) systems in an efficient way.
-A large number of scientific software are supported (**at least [3670 supported software packages](https://docs.easybuild.io/version-specific/supported-software/)** since the 4.9.4 release) - see also [What is EasyBuild?](https://docs.easybuild.io/en/latest/Introduction.html).
+[EasyBuild](https://docs.easybuild.io/) is a software build and installation framework that allows you to manage scientific and other software on High Performance Computing systems in an efficient way. A large number of scientific software are supported (at least [3670 supported software packages](https://docs.easybuild.io/version-specific/supported-software/) since the 4.9.4 release).[^1]
 
-For several years now, [Easybuild](https://docs.easybuild.io/) is used to [manage the ULHPC User Software Set](modules.md#ulhpc-toolchains-and-software-set-versioning) and generate automatically the module files available to you on our computational resources in either `release` (default) or `testing` (pre-release/testing) environment -- see [ULHPC Toolchains and Software Set Versioning](../environment/modules.md#ulhpc-toolchains-and-software-set-versioning). This enables users to easily _extend_ the global [Software Set](modules.md#ulhpc-toolchains-and-software-set-versioning) with their own **local** software builds, either performed within their [global home directory](../data/layout.md#global-home-directory-home) or (_better_) in a shared [project directory](../data/layout.md) though [Easybuild](../environment/easybuild.md), which generate automatically module files compliant with the [ULHPC module setup](../environment/modules.md).
+
+For several years now, Easybuild is used to [manage the ULHPC User Software Set](modules.md#ulhpc-toolchains-and-software-set-versioning) and generate automatically the module files available to you on our computational resources in either `release` (default) or `testing` (pre-release/testing) environment. This enables users to easily extend the global [software set](modules.md#ulhpc-toolchains-and-software-set-versioning) with their own local software builds, either stored within their [global home directory](../data/layout.md#global-home-directory-home), or preferably in a shared [project directory](../data/layout.md). Easybuild generates automatically module files compliant with the [ULHPC module setup](../environment/modules.md).
+
+[^1]: See also "[What is EasyBuild?](https://docs.easybuild.io/en/latest/Introduction.html)".
 
 <!--intro-end-->
 
-??? question "Why using an automatic building tool on HPC environment like [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/)?"
-    Well that may seem obvious to some of you, but scientific software is often **difficult** to build.  Not all rely on _standard_ building tools like Autotools/Automake (and the famous `configure; make; make install`) or CMake. And even in that case, parsing the available option to ensure matching the hardware configuration of the computing resources used for the execution is time consuming and error-prone. Most of the time unfortunately, scientific software embed hardcoded parameters and/or poor/outdated documentation with incomplete build procedures.
+??? question "Why use automatic building tools like [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/) on HPC environments?"
 
-    In this context, software build and installation frameworks like [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/) helps to facilitate the building task in a _consistent_ and _automatic_ way, while generating also the LMod modulefiles.
+    While it may seem obvious to some of you, scientific software is often surprisingly difficult to build. Not all software packages rely on standard building tools like Autotools/Automake (the famous `configure; make; make install`) or CMake. Even with standard building tools, parsing the available option to ensure that the build matches the underlying hardware is time consuming and error-prone. Furthermore, scientific software often contains hardcoded build parameters or the documentation on how to optimize the build is poorly maintained.
 
-    We select [Easybuild](https://docs.easybuild.io) as primary building tool to ensure the best optimized builds. Some HPC sites use both -- see [this talk from William Lucas at EPCC](https://www.archer2.ac.uk/training/courses/200617-spack-easybuild/) for instance.
+    Software build and installation frameworks like Easybuild or Spack automate and document software building, while generating also the LMod modulefiles. We select Easybuild as our primary building tool to ensure optimized builds. Some HPC sites use both [1]. Often though, simply documenting the build instructions in an organized manner is sufficient [2].
 
-    It does not prevent from maintaining your own [build instructions notes](https://github.com/hpc-uk/build-instructions).
+    _Resources_
+
+    1. See this [talk](https://www.archer2.ac.uk/training/courses/200617-spack-easybuild/) by William Lucas at EPCC for instance.
+    2. HPC-UK provides a large collection of system specific [build instructions notes](https://github.com/hpc-uk/build-instructions) which you can copy and adjust.
 
 ## Easybuild Concepts and terminology
 
 [:fontawesome-solid-sign-in-alt: Official Easybuild Tutorial](https://easybuilders.github.io/easybuild-tutorial/){: .md-button .md-button--link}
 
-EasyBuild relies on two main concepts: *[Toolchains](https://docs.easybuild.io/en/latest/Concepts_and_Terminology.html#toolchains)* and *[EasyConfig files](https://docs.easybuild.io/en/latest/Concepts_and_Terminology.html#easyconfig-files)*.
+EasyBuild relies on two main concepts, [toolchains](https://docs.easybuild.io/en/latest/Concepts_and_Terminology.html#toolchains) and [EasyConfig files](https://docs.easybuild.io/en/latest/Concepts_and_Terminology.html#easyconfig-files). A toolchain corresponds to a compiler and a set of libraries which are commonly used to build a software. The two main toolchains frequently used on the UL HPC platform are `foss` (Free and Open Source Software) and `intel` toolchains.
 
-A **toolchain** corresponds to a compiler and a set of libraries which are commonly used to build a software. The two main toolchains frequently used on the UL HPC platform are the `foss` ("_Free and Open Source Software_") and the `intel` one.
+1. `foss` is based on the GCC compiler and on open-source libraries (OpenMPI, OpenBLAS, etc.).
+2. `intel` is based on the [oneAPI Intel compiler suit](https://www.intel.com/content/www/us/en/developer/articles/technical/oneapi-what-is-it.html) and on Intel libraries, such as Intel MPI and Intel Math Kernel Library (MKL).
 
-1. `foss`, based on the GCC compiler and on open-source libraries (OpenMPI, OpenBLAS, etc.).
-2. `intel`, based on the Intel compiler suit and on Intel libraries (Intel MPI, Intel Math Kernel Library, etc.).
-
-An **[EasyConfig file](http://easybuild.readthedocs.io/en/latest/Writing_easyconfig_files.html)** is a simple text file that describes the build process of a software. For most software that uses standard procedures (like `configure`, `make` and `make install`), this file is very simple. Many [EasyConfig files](https://github.com/easybuilders/easybuild-easyconfigs/tree/master/easybuild/easyconfigs) are already provided with EasyBuild.
+An [EasyConfig file](http://easybuild.readthedocs.io/en/latest/Writing_easyconfig_files.html) is a simple text file that describes the build process of a software. For most software that uses standard procedures (like `configure`, `make` and `make install`), this file is very simple. Many [EasyConfig files](https://github.com/easybuilders/easybuild-easyconfigs/tree/master/easybuild/easyconfigs) are already provided with EasyBuild.
 
 
 ## ULHPC Easybuild Configuration
 
-To build software with [Easybuild](https://docs.easybuild.io/) compliant with the configuration in place on the ULHPC facility, you need to be aware of the following setup:
+To build software with [Easybuild](https://docs.easybuild.io/) compliant with the configuration of the ULHPC facility, you need to be aware of the following setup:
 
-* [Modules](modules.md) tool (`$EASYBUILD_MODULES_TOOL`): [Lmod](http://lmod.readthedocs.io/) (see [docs](https://docs.easybuild.io/en/latest/Configuration.html#prefix))
-* [Module Naming Scheme](modules.md#module-naming-schemes) (`EASYBUILD_MODULE_NAMING_SCHEME`): we use a special **hierarchical** organization where the software are classified/**categorized** under a pre-defined class.
+- [Modules](modules.md) tool (`${EASYBUILD_MODULES_TOOL}`): [Lmod](http://lmod.readthedocs.io/)
+- [Module Naming Scheme](modules.md#module-naming-schemes) (`${EASYBUILD_MODULE_NAMING_SCHEME}`): we use the hierarchical organization where the software are classified/categorized under a pre-defined class.
 
-These variables are defined at the global profile level, under `/etc/profile.d/ulhpc_resif.sh` on the compute nodes as follows:
+These variables are defined at the global profile level, under `/etc/profile.d/ulhpc_resif.sh` on the compute nodes with environment variables:
 
 ```bash
 export EASYBUILD_MODULES_TOOL=Lmod
 export EASYBUILD_MODULE_NAMING_SCHEME=CategorizedModuleNamingScheme
 ```
 
-All builds and installations are performed at user level, so you don't need the admin (i.e. `root`) rights. Another **very** important configuration variable is the Overall [Easybuild prefix path](https://docs.easybuild.io/en/latest/Configuration.html#prefix) `$EASYBUILD_PREFIX` which affects the _default_ value of several configuration options:
+### Configuring the build process 
 
-* built software are placed under `${EASYBUILD_PREFIX}/software/`
-* modules install path: `${EASYBUILD_PREFIX}/modules/all` (determined via Overall prefix path (--prefix), --subdir-modules and --suffix-modules-path)
+All builds and installations are performed at user level, so you don't need the admin (i.e. `root`) rights. The Easybuild [prefix path](https://docs.easybuild.io/configuration/#prefix) for instance determines the location where the compiled software is configured and installed. You can configure EasyBuild variables such as the prefix path either through
 
-You can thus extend the [ULHPC Software set](modules.md#ulhpc-toolchains-and-software-set-versioning) with your own local builds by setting appropriately the variable `$EASYBUILD_PREFIX`:
+- environment variables, like `${EASYBUILD_PREFIX}`, or
+- with flags like `--prefix`.
 
-* For installation in your home directory: `export EASYBUILD_PREFIX=$HOME/.local/easybuild`
-* For installation in a [shared project directory](../data/project.md) `<name>`: `export EASYBUILD_PREFIX=$PROJECTHOME/<name>/easybuild`
+You can change the prefix path either by exporting the environment variable
 
-!!! tips "Adapting you custom build to cluster, the toolchain version and the architecture"
-    Just like the ULHPC software set ([installed in
-    `EASYBUILD_PREFIX=/opt/apps/resif/<cluster>/<version>/<arch>`](modules.md#ulhpc-modulepath)),
-    you may want to isolate your local builds to take into account
-    the cluster `$ULHPC_CLUSTER` ("iris" or "aion"), the
-    toolchain version `<version>` (Ex: 2019b, 2020b etc.) you build upon and
-    eventually the architecture `<arch>`.
-    In that case, you can use the following helper scripts:
-    ```bash
-    resif-load-home-swset-prod
+```bash
+export EASYBUILD_PREFIX=/path/to/desired/location/easybuild
+```
+
+or by passing the flag
+
+```bash
+eb --prefix=/path/to/desired/location/easybuild
+```
+
+when calling EasyBuild.
+
+!!! info "Flags and environment variable in EasyBuild"
+
+    Each setting in EasyBuild can be controlled by an environment variable `${EASYBUILD_<NAME>}` or the corresponding option flag, `--<name>`, of the EasyBuild (`eb`) script. The flags take precedence over the corresponding environment variable.
+
+When installing software with EasyBuild, the program automatically detects the modules loaded in the system and only compiles the missing modules in the location pointed by `${EASYBUILD_PREFIX}`. Both system modules and modules previously build by the user are detected by EasyBuild. The installed software effectively extends the [ULHPC software set](modules.md#ulhpc-toolchains-and-software-set-versioning) with your own local builds.
+
+### Selecting the installation location
+
+The installation path of locally compiled EasyBuild modules is by default a subdirectory of the EasyBuild prefix path, `${EASYBUILD_PREFIX}`,
+
+```
+${EASYBUILD_PREFIX}/${EASYBUILD_SUBDIR_SOFTWARE}
+```
+
+where
+
+```
+${EASYBUILD_SUBDIR_SOFTWARE} = software
+```
+
+by default. The default value of prefix path is
+
+```
+${HOME}/.local/easybuild
+```
+
+which implies that software is installed in you home directory by default. As a rule of thump,
+
+- install any software on shared [project directories](../data/project.md), so that is can be shared by all project members and save space, by setting
+  ```bash
+  export EASYBUILD_PREFIX=${PROJECTHOME}/<name>/easybuild
+  ```
+  for a project `<name>`;
+- install any software that is used by yourself only on your [home directory](../data/layout.md#global-home-directory-home); set explicitly
+  ```bash
+  export EASYBUILD_PREFIX=${HOME}/.local/easybuild
+  ```
+  or use the `--prefix` flag in case the default location is modified in the future.
+
+### Configuring the structure of the installation directory
+
+In order to integrate the modules that you create in your local directories seamlessly in the modules of the [software set](modules.md#ulhpc-toolchains-and-software-set-versioning) you need to set some environment variables. The default location where modules are stored is
+
+```
+${EASYBUILD_PREFIX}/${EASYBUILD_SUBDIR_MODULES}/${EASYBUILD_SUFFIX_MODULES_PATH}
+```
+
+where by default
+
+- `${EASYBUILD_SUBDIR_MODULES} = modules` and
+- `${EASYBUILD_SUFFIX_MODULES_PATH} = all`.
+
+To access the compiled modules, you need to add the module path to the `${MODULEPATH}` environment variable. Add the variable to the module using the `use` sub-command of the [`module`](modules.md) environment management program:
+
+```bash
+module use ${EASYBUILD_PREFIX}/${EASYBUILD_SUBDIR_MODULES}/${EASYBUILD_SUFFIX_MODULES_PATH}
+```
+
+!!! tips "Structuring the module directory"
+
+    The value
+
     ```
-    which is roughly equivalent to the following code:
-    ```bash
-    # EASYBUILD_PREFIX: [basedir]/<cluster>/<environment>/<arch>
-    # Ex: Default EASYBUILD_PREFIX in your home - Adapt to project directory if needed
-    _EB_PREFIX=$HOME/.local/easybuild
-    # ... eventually complemented with cluster
-    [ -n "${ULHPC_CLUSTER}" ] && _EB_PREFIX="${_EB_PREFIX}/${ULHPC_CLUSTER}"
-    # ... eventually complemented with software set version
-    _EB_PREFIX="${_EB_PREFIX}/${RESIF_VERSION_PROD}"
-    # ... eventually complemented with arch
-    [ -n "${RESIF_ARCH}" ] && _EB_PREFIX="${_EB_PREFIX}/${RESIF_ARCH}"
-    export EASYBUILD_PREFIX="${_EB_PREFIX}"
-    export LOCAL_MODULES=${EASYBUILD_PREFIX}/modules/all
+    ${EASYBUILD_MODULE_NAMING_SCHEME} = CategorizedModuleNamingScheme
     ```
 
-    For a shared project directory `<name>` located under `$PROJECTHOME/<name>`, you can use the following following helper scripts:
-    ```bash
-    resif-load-project-swset-prod $PROJECTHOME/<name>
-    ```
+    ensures that the modules will appear in the correct category along side the [software set](modules.md#ulhpc-toolchains-and-software-set-versioning) modules when loading the module directory with `module use`.
 
-!!! important "ACM PEARC'21: RESIF 3.0"
-    For more details on the way we setup and deploy the User Software Environment on ULHPC systems through the RESIF 3 framework, see the [ACM PEARC'21](https://hpc.uni.lu/blog/2021-05-11-resif-3) conference paper presented on July 22, 2021.
-    > __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/47115) | [OpenAccess](https://dl.acm.org/doi/10.1145/3437359.3465600) | [ULHPC blog post](https://hpc.uni.lu/blog/2021-05-11-resif-3) | [slides](https://hpc.uni.lu/download/slides/2021-07-22-ACM-PEARC21_resif3.pdf) | [Github](https://github.com/ULHPC/sw): <br/>
-    > Sebastien Varrette, Emmanuel Kieffer, Frederic Pinel, Ezhilmathi Krishnasamy, Sarah Peter, Hyacinthe Cartiaux, and Xavier Besseron. 2021. RESIF 3.0: Toward a Flexible & Automated Management of User Software Environment on HPC facility. _In Practice and Experience in Advanced Research Computing (PEARC '21)_. Association for Computing Machinery (ACM), New York, NY, USA, Article 33, 1–4. https://doi.org/10.1145/3437359.3465600
+### Building optimized binaries
 
-## Installation / Update local Easybuild
+The advantage of EasyBuild over manual configuration and compilation of software is that it builds optimized binaries targeting the hardware used. If you build a single executable for all the architectures available in the UL HPC clusters you are achieving sub-par performance in all but the architecture for which your build is optimized. To help you configure your compilation, UL HPC systems export the following variables in all compute nodes,
 
-You can of course use the _default_ Easubuild that comes with the ULHPC software set with `module load tools/EasyBuild`. But as soon as you want to install your local builds, you have interest to install the up-to-date release of [EasyBuild](https://docs.easybuild.io/) in your local `$EASYBUILD_PREFIX`.
+- `${ULHPC_CLUSTER}` with values
+    - `aion`: in [Aion](/systems/aion/compute/) compute nodes,
+    - `iris`: in [Iris](/systems/iris/compute/) compute nodes;
+- `${RESIF_ARCH}` with values
+    - `epyc`: in Aion compute nodes;
+    - `broadwell`: in Iris [Broadwell](/systems/iris/compute/#broadwell-compute-nodes) and [Skylake](/systems/iris/compute/#skylake-compute-nodes) compute nodes in the [batch partition](/slurm/partitions/#iris);[^2]
+    - `skylake`: in Iris [large memory](/systems/iris/compute/#large-memory-compute-nodes) nodes;
+    - `gpu`: in Iris [GPU](/systems/iris/compute/#multi-gpu-compute-nodes) nodes.
 
-For this purpose, you can follow the [official instructions](https://docs.easybuild.io/installation/#eb_as_module).
+[^2]: We don't optimize the binaries for the Skylake architecture in the batch partition of Iris; jobs in Iris may use a mix of Broadwell and Skylake architectures, so we try to use the same binary in all machines.
+
+!!! tips "Compiling against the optimized software set"
+
+    When compiling your software you have to ensure that
+
+    1. you are using the software set modules that are optimized for your target hardware, and
+    2. you are installing in a location where only modules for the target hardware are installed.
+
+To load the correct modules for the compilation, simply login to a session on a compute node and load the desired environment setting module with the command,
+```
+module load env/<environment type>/<environment name>
+```
+where by default the `env/release/default` is loaded implicitly at login. Then, set your prefix path in your `bashrc` to:
+
+```bash
+export EASYBUILD_PREFIX=<path to desired root directory>/easybuild/${ULHPC_CLUSTER}/<environment type>/<environment name>/${RESIF_ARCH}
+```
+
+You can _optionally_ add the following to automatically load your modules in compute nodes,
+
+```bash
+if command -v module >/dev/null 2>&1; then
+    module use "<path to desired root directory>/easybuild/${ULHPC_CLUSTER}/<environment type>/<environment name>/${RESIF_ARCH}/modules/all"
+fi
+```
+assuming that you used the default values for `${EASYBUILD_SUBDIR_MODULES}` and `${EASYBUILD_SUFFIX_MODULES_PATH}`.
+
+
+## Installation and update of local Easybuild
+
+The ULHPC software provides an EasyBuild module that can be loaded with the command:
+
+```
+module load tools/EasyBuild
+```
+
+You can use EasyBuild to bootstrap the installation of an up-to-date version of EasyBuild in your local module set. More detailed instructions are available in the [official documentation](https://docs.easybuild.io/installation/#eb_as_module).
