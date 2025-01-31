@@ -169,14 +169,6 @@ where:
 * On skylake nodes, you may want to use the optimized modules for `skylake`
 * On GPU nodes, you may want to use the CPU-optimized builds for `skylake` (in addition to the `gpu`-enabled softwares)
 
-<!--acm-pearc21-cite-start-->
-
-!!! important "ACM PEARC'21: RESIF 3.0"
-    If you are interested to know more on the way we setup and deploy the User Software Environment on ULHPC systems through the RESIF 3 framework, you can refer to the below article presented during the [ACM PEARC'21](https://hpc.uni.lu/blog/2021-05-11-resif-3) conference, on July 22, 2021.
-    > __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/47115) | [OpenAccess](https://dl.acm.org/doi/10.1145/3437359.3465600) | [ULHPC blog post](https://hpc.uni.lu/blog/2021-05-11-resif-3) | [slides](https://hpc.uni.lu/download/slides/2021-07-22-ACM-PEARC21_resif3.pdf) | [Github](https://github.com/ULHPC/sw): <br/>
-    > Sebastien Varrette, Emmanuel Kieffer, Frederic Pinel, Ezhilmathi Krishnasamy, Sarah Peter, Hyacinthe Cartiaux, and Xavier Besseron. 2021. RESIF 3.0: Toward a Flexible & Automated Management of User Software Environment on HPC facility. _In Practice and Experience in Advanced Research Computing (PEARC '21)_. Association for Computing Machinery (ACM), New York, NY, USA, Article 33, 1–4. https://doi.org/10.1145/3437359.3465600
-
-<!--acm-pearc21-cite-end-->
 
 ## Module Naming Schemes
 
@@ -264,30 +256,12 @@ An overview of the currently available component versions is depicted below:
 
 
 Once on a node, the current version of the ULHPC Software Set in production is stored in `$RESIF_VERSION_PROD`.
-You can use the variables `$MODULEPATH_{LEGACY,PROD,DEVEL}` to access or set the `MODULEPATH` command with the appropriate value. Yet we have define utility scripts to facilitate your quick reset of the module environment, _i.e.,_ `resif-load-swset-{legacy,prod,devel}` and `resif-reset-swset`
-
-For instance, if you want to use the legacy software set, proceed as follows in your launcher scripts:
-
-```bash
-resif-load-swset-legacy   # Eq. of export MODULEPATH=$MODULEPATH_LEGACY
-# [...]
-# Restore production settings
-resif-load-swset-prod     # Eq. of export MODULEPATH=$MODULEPATH_PROD
-```
-
-If on the contrary you want to test the (new) development software set, _i.e.,_ the `devel` version, stored in `$RESIF_VERSION_DEVEL`:
-
-```bash
-resif-load-swset-devel  # Eq. of export MODULEPATH=$MODULEPATH_DEVEL
-# [...]
-# Restore production settings
-resif-reset-swset         # As resif-load-swset-prod
-```
+You can use the variables `$MODULEPATH_{LEGACY,PROD,DEVEL}` to access or set the `MODULEPATH` command with the appropriate value.
 
 ??? tips "(iris only) Skylake Optimized builds"
     Skylake optimized build can be loaded on **regular** nodes using
     ```bash
-    resif-load-swset-skylake  # Eq. of export MODULEPATH=$MODULEPATH_PROD_SKYLAKE
+    export MODULEPATH=$MODULEPATH_PROD_SKYLAKE
     ```
     You **MUST** obviously be on a Skylake node (`sbatch -C skylake [...]`) to take benefit from it.
     Note that this action is **not** required on **GPU** nodes.
