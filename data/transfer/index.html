@@ -1,0 +1,3498 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ULHPC Technical Documentation">
+      
+      
+        <link rel="canonical" href="https://hpc-docs.uni.lu/data/transfer/">
+      
+      
+        <meta name="author" content="S. Varrette and Uni.lu HPC (ULHPC) Team">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.3">
+    
+    
+      
+        <title>Data Transfer - ULHPC Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.62d34fff.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.c8acc6db.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-transfer-tofromwithin-ul-hpc-clusters" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-header-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            ULHPC Technical Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Data Transfer
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    ULHPC Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../hpc-schools/" title="HPC Trainings and Tutorials" class="md-nav__link">
+      HPC Trainings and Tutorials
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Accounts
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Accounts" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Accounts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/" title="Get an Account" class="md-nav__link">
+      Get an Account
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/passwords/" title="Password Policy" class="md-nav__link">
+      Password Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/collaboration_accounts/" title="Collaboration Accounts" class="md-nav__link">
+      Collaboration Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/projects/" title="Projects Accounts" class="md-nav__link">
+      Projects Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ipa/" title="Identity Management Portal" class="md-nav__link">
+      Identity Management Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/accounts/" title="Slurm Account Hierarchy" class="md-nav__link">
+      Slurm Account Hierarchy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../teaching-with-the-ulhpc/" title="Teaching with the ULHPC" class="md-nav__link">
+      Teaching with the ULHPC
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Data Center
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Center" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Center
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data-center/" title="Centre de Calcul (CDC)" class="md-nav__link">
+      Centre de Calcul (CDC)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      ULHPC Supercomputers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="ULHPC Supercomputers" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        ULHPC Supercomputers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Aion
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Aion" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Aion
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/" title="Aion System" class="md-nav__link">
+      Aion System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-3" type="checkbox" id="nav-7-3">
+    
+    <label class="md-nav__link" for="nav-7-3">
+      Iris
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Iris" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Iris
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/" title="Iris System" class="md-nav__link">
+      Iris System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/live-status/motd" title="Live status" class="md-nav__link">
+      Live status
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Interconnect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Interconnect" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Interconnect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interconnect/ib/" title="Fast Infiniband Interconnect" class="md-nav__link">
+      Fast Infiniband Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interconnect/ethernet/" title="Ethernet Interconnect" class="md-nav__link">
+      Ethernet Interconnect
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Storage Systems
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Storage Systems" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Storage Systems
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/gpfs/" title="GPFS/SpectrumScale" class="md-nav__link">
+      GPFS/SpectrumScale
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/lustre/" title="Lustre" class="md-nav__link">
+      Lustre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/isilon/" title="OneFS Isilon" class="md-nav__link">
+      OneFS Isilon
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/live-status/motd" title="Live status" class="md-nav__link">
+      Live status
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Access/Connect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Access/Connect" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Access/Connect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/access/" title="Access/Login Servers" class="md-nav__link">
+      Access/Login Servers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ssh/" title="SSH" class="md-nav__link">
+      SSH
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ipa/" title="Identity Management (IdM/IPA)" class="md-nav__link">
+      Identity Management (IdM/IPA)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ood/" title="Open On Demand Portal" class="md-nav__link">
+      Open On Demand Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
+    
+    <label class="md-nav__link" for="nav-11">
+      Data Management
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Management" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../layout/" title="Global Directory Structure" class="md-nav__link">
+      Global Directory Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sharing/" title="Data Sharing" class="md-nav__link">
+      Data Sharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Data Transfer
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Data Transfer" class="md-nav__link md-nav__link--active">
+      Data Transfer
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-rsync" class="md-nav__link">
+    Using rsync
+  </a>
+  
+    <nav class="md-nav" aria-label="Using rsync">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transfer-from-your-local-machine-to-the-remote-cluster" class="md-nav__link">
+    Transfer from your local machine to the remote cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-from-your-local-machine-to-a-project-directory-on-the-remote-cluster" class="md-nav__link">
+    Transfer from your local machine to a project directory on the remote cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-from-the-remote-cluster-to-your-local-machine" class="md-nav__link">
+    Transfer from the remote cluster to your local machine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-transfer-within-project-directories" class="md-nav__link">
+    Data Transfer within Project directories
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-mobaxterm-windows" class="md-nav__link">
+    Using MobaXterm (Windows)
+  </a>
+  
+    <nav class="md-nav" aria-label="Using MobaXterm (Windows)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-a-local-bash-transfer-your-files" class="md-nav__link">
+    Using a local bash, transfer your files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupt-and-resume-a-transfer-in-progress" class="md-nav__link">
+    Interrupt and resume a transfer in progress
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternative-approaches" class="md-nav__link">
+    Alternative approaches
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternative approaches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sshfs" class="md-nav__link">
+    SSHFS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transfers-between-long-term-storage-and-the-hpc-facilities" class="md-nav__link">
+    Transfers between long term storage and the HPC facilities
+  </a>
+  
+    <nav class="md-nav" aria-label="Transfers between long term storage and the HPC facilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mounting-an-smb-share-to-a-login-node" class="md-nav__link">
+    Mounting an SMB share to a login node
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-smb-shares-with-smbclient" class="md-nav__link">
+    Accessing SMB shares with smbclient
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#special-transfers" class="md-nav__link">
+    Special transfers
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gdpr/" title="GDPR Compliance" class="md-nav__link">
+      GDPR Compliance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/quotas/" title="Quotas" class="md-nav__link">
+      Quotas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../project/" title="Project Data Management" class="md-nav__link">
+      Project Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/lfs/" title="Scratch Data Management" class="md-nav__link">
+      Scratch Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../backups/" title="Backups" class="md-nav__link">
+      Backups
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/unix-file-permissions/" title="Unix File Permissions" class="md-nav__link">
+      Unix File Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../encryption/" title="Sensitive Data Protection" class="md-nav__link">
+      Sensitive Data Protection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+    
+    <label class="md-nav__link" for="nav-12">
+      Environment
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Environment" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Environment
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/modules/" title="Modules" class="md-nav__link">
+      Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/easybuild/" title="Easybuild" class="md-nav__link">
+      Easybuild
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/conda/" title="Conda" class="md-nav__link">
+      Conda
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+    
+    <label class="md-nav__link" for="nav-13">
+      Policies
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Policies" data-md-level="1">
+      <label class="md-nav__title" for="nav-13">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Policies
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/aup/" title="Acceptable Use Policy (AUP)" class="md-nav__link">
+      Acceptable Use Policy (AUP)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/maintenance/" title="Downtime and Maintenance" class="md-nav__link">
+      Downtime and Maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging/" title="Usage Charging Policy" class="md-nav__link">
+      Usage Charging Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging.md#hpc-resource-allocations-for-research-project" title="HPC Resource Allocations for Research Project" class="md-nav__link">
+      HPC Resource Allocations for Research Project
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging.md#hpc-service-contract-for-external-and-private-partners" title="HPC Service Agreement for Externals" class="md-nav__link">
+      HPC Service Agreement for Externals
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/professional-services.md" title="Expert-level HPC services" class="md-nav__link">
+      Expert-level HPC services
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+    
+    <label class="md-nav__link" for="nav-14">
+      Running Jobs
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Running Jobs" data-md-level="1">
+      <label class="md-nav__title" for="nav-14">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Running Jobs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/" title="Slurm Overview" class="md-nav__link">
+      Slurm Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/commands/" title="Convenient Slurm Commands" class="md-nav__link">
+      Convenient Slurm Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/partitions/" title="Partition/Queues" class="md-nav__link">
+      Partition/Queues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/qos/" title="Quality of Service (QOS)" class="md-nav__link">
+      Quality of Service (QOS)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/accounts/" title="Account Hierarchy" class="md-nav__link">
+      Account Hierarchy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/reason-codes/" title="Job State and Reason Code" class="md-nav__link">
+      Job State and Reason Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/fairsharing/" title="Fairsharing" class="md-nav__link">
+      Fairsharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/priority/" title="Job Priority and Backfilling" class="md-nav__link">
+      Job Priority and Backfilling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/billing/" title="Job Accounting and Billing" class="md-nav__link">
+      Job Accounting and Billing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/interactive/" title="Interactive Job" class="md-nav__link">
+      Interactive Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/submit/" title="Passive/Batch Job" class="md-nav__link">
+      Passive/Batch Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/gpu/" title="GPU Jobs" class="md-nav__link">
+      GPU Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/long/" title="Long Jobs" class="md-nav__link">
+      Long Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/best-effort/" title="Best-effort Jobs" class="md-nav__link">
+      Best-effort Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/launchers/" title="Launcher Scripts Examples" class="md-nav__link">
+      Launcher Scripts Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/jupyter/" title="Jupyter Notebook" class="md-nav__link">
+      Jupyter Notebook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
+    
+    <label class="md-nav__link" for="nav-15">
+      Software
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software" data-md-level="1">
+      <label class="md-nav__title" for="nav-15">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-1" type="checkbox" id="nav-15-1">
+    
+    <label class="md-nav__link" for="nav-15-1">
+      Supported Software List
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Supported Software List" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Supported Software List
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/all_softwares/" title="Full List (alphabetical order)" class="md-nav__link">
+      Full List (alphabetical order)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/bio/" title="Biology" class="md-nav__link">
+      Biology
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/cae/" title="CFD/Finite element modelling" class="md-nav__link">
+      CFD/Finite element modelling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/chem/" title="Chemistry" class="md-nav__link">
+      Chemistry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/compiler/" title="Compilers" class="md-nav__link">
+      Compilers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/data/" title="Data processing" class="md-nav__link">
+      Data processing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/debugger/" title="Debugging" class="md-nav__link">
+      Debugging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/devel/" title="Development" class="md-nav__link">
+      Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/lang/" title="Programming Languages" class="md-nav__link">
+      Programming Languages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/lib/" title="Libraries" class="md-nav__link">
+      Libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/math/" title="Mathematics" class="md-nav__link">
+      Mathematics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/mpi/" title="MPI" class="md-nav__link">
+      MPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/numlib/" title="Numerical libraries" class="md-nav__link">
+      Numerical libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/perf/" title="Performance measurements" class="md-nav__link">
+      Performance measurements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/phys/" title="Physics" class="md-nav__link">
+      Physics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/system/" title="System-level software" class="md-nav__link">
+      System-level software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/toolchain/" title="Toolchains (software stacks)" class="md-nav__link">
+      Toolchains (software stacks)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/tools/" title="Utilities" class="md-nav__link">
+      Utilities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/vis/" title="Visualisation" class="md-nav__link">
+      Visualisation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-2" type="checkbox" id="nav-15-2">
+    
+    <label class="md-nav__link" for="nav-15-2">
+      Software Sets
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/2019b/" title="2019b" class="md-nav__link">
+      2019b
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/2020b/" title="2020a" class="md-nav__link">
+      2020a
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/build/" title="Compiling/building your own software" class="md-nav__link">
+      Compiling/building your own software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/eessi/" title="EESSI software stack" class="md-nav__link">
+      EESSI software stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../containers/" title="Containers" class="md-nav__link">
+      Containers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-6" type="checkbox" id="nav-15-6">
+    
+    <label class="md-nav__link" for="nav-15-6">
+      Computer Aided Eng. (CAE)
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computer Aided Eng. (CAE)" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computer Aided Eng. (CAE)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/fenics/" title="FEniCS" class="md-nav__link">
+      FEniCS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/ansys/" title="ANSYS" class="md-nav__link">
+      ANSYS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/openfoam/" title="OpenFOAM" class="md-nav__link">
+      OpenFOAM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/abaqus/" title="Abaqus" class="md-nav__link">
+      Abaqus
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/fds/" title="FDS" class="md-nav__link">
+      FDS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/meshing-tools/" title="Meshing-Tools" class="md-nav__link">
+      Meshing-Tools
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-7" type="checkbox" id="nav-15-7">
+    
+    <label class="md-nav__link" for="nav-15-7">
+      Physics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Physics" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Physics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/physics/wrf/" title="WRF" class="md-nav__link">
+      WRF
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8" type="checkbox" id="nav-15-8">
+    
+    <label class="md-nav__link" for="nav-15-8">
+      Computational Chemistry
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computational Chemistry" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computational Chemistry
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8-1" type="checkbox" id="nav-15-8-1">
+    
+    <label class="md-nav__link" for="nav-15-8-1">
+      Electronics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Electronics" data-md-level="3">
+      <label class="md-nav__title" for="nav-15-8-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Electronics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/abinit/" title="ABINIT" class="md-nav__link">
+      ABINIT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/ase/" title="ASE" class="md-nav__link">
+      ASE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/meep/" title="MEEP" class="md-nav__link">
+      MEEP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/quantum-espresso/" title="Quantum Espresso" class="md-nav__link">
+      Quantum Espresso
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/vasp/" title="VASP" class="md-nav__link">
+      VASP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8-2" type="checkbox" id="nav-15-8-2">
+    
+    <label class="md-nav__link" for="nav-15-8-2">
+      Molecular Dynamics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Molecular Dynamics" data-md-level="3">
+      <label class="md-nav__title" for="nav-15-8-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Molecular Dynamics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/cp2k/" title="CP2K" class="md-nav__link">
+      CP2K
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/gromacs/" title="GROMACS" class="md-nav__link">
+      GROMACS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/namd/" title="NAMD" class="md-nav__link">
+      NAMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/nwchem/" title="NWCHEM" class="md-nav__link">
+      NWCHEM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/helping-libraries/" title="Helping Libraries" class="md-nav__link">
+      Helping Libraries
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-9" type="checkbox" id="nav-15-9">
+    
+    <label class="md-nav__link" for="nav-15-9">
+      Mathematics & Statistics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Mathematics & Statistics" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Mathematics & Statistics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/matlab/" title="MATLAB" class="md-nav__link">
+      MATLAB
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/mathematica/" title="MATHEMATICA" class="md-nav__link">
+      MATHEMATICA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/stata/" title="Stata" class="md-nav__link">
+      Stata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/julia/" title="Julia" class="md-nav__link">
+      Julia
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/optim/" title="Optimizers" class="md-nav__link">
+      Optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-11" type="checkbox" id="nav-15-11">
+    
+    <label class="md-nav__link" for="nav-15-11">
+      Visualization
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Visualization" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Visualization
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/visu/paraview/" title="ParaView" class="md-nav__link">
+      ParaView
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16" type="checkbox" id="nav-16">
+    
+    <label class="md-nav__link" for="nav-16">
+      Development
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Development" data-md-level="1">
+      <label class="md-nav__title" for="nav-16">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Development
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16-1" type="checkbox" id="nav-16-1">
+    
+    <label class="md-nav__link" for="nav-16-1">
+      Performance/Debugging
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Performance/Debugging" data-md-level="2">
+      <label class="md-nav__title" for="nav-16-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Performance/Debugging
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/arm-forge/" title="Arm Forge" class="md-nav__link">
+      Arm Forge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/vtune/" title="Intel VTune" class="md-nav__link">
+      Intel VTune
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/advisor/" title="Intel Advisor" class="md-nav__link">
+      Intel Advisor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/inspector/" title="Intel Inspector" class="md-nav__link">
+      Intel Inspector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/itac/" title="Intel Trace Analyzer and Collector" class="md-nav__link">
+      Intel Trace Analyzer and Collector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/scalasca/" title="Scalasca" class="md-nav__link">
+      Scalasca
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/valgrind/" title="Valgrind" class="md-nav__link">
+      Valgrind
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/aps/" title="APS" class="md-nav__link">
+      APS
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16-2" type="checkbox" id="nav-16-2">
+    
+    <label class="md-nav__link" for="nav-16-2">
+      Containers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Containers" data-md-level="2">
+      <label class="md-nav__title" for="nav-16-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Containers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../containers/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-18" type="checkbox" id="nav-18">
+    
+    <label class="md-nav__link" for="nav-18">
+      Help and Support
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Help and Support" data-md-level="1">
+      <label class="md-nav__title" for="nav-18">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Help and Support
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-19" type="checkbox" id="nav-19">
+    
+    <label class="md-nav__link" for="nav-19">
+      Contributing
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Contributing" data-md-level="1">
+      <label class="md-nav__title" for="nav-19">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Contributing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/versioning/" title="Semantic Versioning" class="md-nav__link">
+      Semantic Versioning
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-20" type="checkbox" id="nav-20">
+    
+    <label class="md-nav__link" for="nav-20">
+      Web Portals
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Web Portals" data-md-level="1">
+      <label class="md-nav__title" for="nav-20">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Web Portals
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu" title="ULHPC Website" class="md-nav__link">
+      ULHPC Website
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc-docs.uni.lu" title="Technical Documentation" class="md-nav__link">
+      Technical Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://ulhpc-tutorials.readthedocs.io/" title="ULHPC Tutorials" class="md-nav__link">
+      ULHPC Tutorials
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-rsync" class="md-nav__link">
+    Using rsync
+  </a>
+  
+    <nav class="md-nav" aria-label="Using rsync">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transfer-from-your-local-machine-to-the-remote-cluster" class="md-nav__link">
+    Transfer from your local machine to the remote cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-from-your-local-machine-to-a-project-directory-on-the-remote-cluster" class="md-nav__link">
+    Transfer from your local machine to a project directory on the remote cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-from-the-remote-cluster-to-your-local-machine" class="md-nav__link">
+    Transfer from the remote cluster to your local machine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-transfer-within-project-directories" class="md-nav__link">
+    Data Transfer within Project directories
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-mobaxterm-windows" class="md-nav__link">
+    Using MobaXterm (Windows)
+  </a>
+  
+    <nav class="md-nav" aria-label="Using MobaXterm (Windows)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-a-local-bash-transfer-your-files" class="md-nav__link">
+    Using a local bash, transfer your files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupt-and-resume-a-transfer-in-progress" class="md-nav__link">
+    Interrupt and resume a transfer in progress
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternative-approaches" class="md-nav__link">
+    Alternative approaches
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternative approaches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sshfs" class="md-nav__link">
+    SSHFS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transfers-between-long-term-storage-and-the-hpc-facilities" class="md-nav__link">
+    Transfers between long term storage and the HPC facilities
+  </a>
+  
+    <nav class="md-nav" aria-label="Transfers between long term storage and the HPC facilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mounting-an-smb-share-to-a-login-node" class="md-nav__link">
+    Mounting an SMB share to a login node
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-smb-shares-with-smbclient" class="md-nav__link">
+    Accessing SMB shares with smbclient
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#special-transfers" class="md-nav__link">
+    Special transfers
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/ULHPC/ulhpc-docs/blob/master/docs/data/transfer.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="data-transfer-tofromwithin-ul-hpc-clusters">Data Transfer to/from/within UL HPC Clusters<a class="headerlink" href="#data-transfer-tofromwithin-ul-hpc-clusters" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Directories such as <code>$HOME</code>, <code>$WORK</code> or <code>$SCRATCH</code> are shared among the nodes of the cluster that you are using (including the login node) via shared filesystems (SpectrumScale, Lustre) meaning that:</p>
+<ul>
+<li>every file/directory pushed or created on the login node is available on the computing nodes</li>
+<li>every file/directory pushed or created on the computing nodes is available on the login node</li>
+</ul>
+<p>The two most common commands you can use for data transfers over SSH:</p>
+<ul>
+<li><code>scp</code>: for the full transfer of files and directories (only works fine for single files or directories of small/trivial size)</li>
+<li><code>rsync</code>: a software application which synchronizes files and directories from one location to another while minimizing data transfer as only the outdated or inexistent elements are transferred (practically required for lengthy complex transfers, which are more likely to be interrupted in the middle).</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">scp or rsync?</p>
+<p>While both ensure a secure transfer of the data within an encrypted tunnel, <strong><code>rsync</code> should be preferred</strong>: as mentionned in the <a href="https://www.openssh.com/txt/release-8.0">from openSSH 8.0 release notes</a>:
+"<em>The <strong><code>scp</code></strong> protocol is <strong>outdated</strong>, <strong>inflexible</strong> and <strong>not readily fixed</strong>. We recommend the use of more modern protocols like sftp and rsync for file transfer instead</em>".</p>
+<p><code>scp</code> is also relatively slow when compared to <code>rsync</code> as exhibited for instance in the below sample <a href="https://distem.gitlabpages.inria.fr/">Distem</a> experience:</p>
+<p><img alt="" src="../images/distem-scp-vs-rsync.png" style="width:300px;" /></p>
+<p>You will find below notes on <code>scp</code> usage, but <strong>kindly prefer to use <a href="##using-rsync">rsync</a></strong>.</p>
+</div>
+<details class="warning"><summary>Consider <code>scp</code> as deprecated! Click nevertheless to get usage details</summary><p><code>scp</code> (see <a href="https://linux.die.net/man/1/scp">scp(1)</a> ) or secure copy is probably the easiest of all the methods. The basic syntax is as follows:</p>
+<div class="codehilite"><pre><span></span><code>scp [-P 8022] [-Cr] source_path destination_path
+</code></pre></div>
+
+
+<ul>
+<li>the <code>-P</code> option specifies the SSH port to use (in this case 8022)</li>
+<li>the <code>-C</code> option activates the compression (actually, it passes the -C flag to <a href="https://linux.die.net/man/1/ssh">ssh(1)</a> to enable compression).</li>
+<li>the <code>-r</code> option states to recursively copy entire directories (in this case, <code>scp</code> follows symbolic links encountered in the tree traversal).  Please note that in this case, you must specify the source file as a directory for this to work.</li>
+</ul>
+<p>The syntax for declaring a remote path is as follows on the cluster:
+<br/>
+<code>yourlogin@iris-cluster:path/from/homedir</code></p>
+<p><strong>Transfer from your local machine to the remote cluster login node</strong></p>
+<p>For instance, let's assume you have a local directory <code>~/devel/myproject</code> you want to transfer to the cluster, in your remote homedir.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /!\ ADAPT yourlogin to... your ULHPC login</span>
+$&gt; scp -P <span class="m">8022</span> -r ~/devel/myproject yourlogin@iris-cluster:
+</code></pre></div>
+
+<p>This will transfer recursively your local directory <code>~/devel/myproject</code>  on the cluster login node (in your homedir).</p>
+<p>Note that if you configured (as advised elsewhere) the SSH connection in your <code>~/.ssh/config</code> file, you can use a much simpler syntax:</p>
+<div class="highlight"><pre><span></span><code>$&gt; scp -r ~/devel/myproject iris-cluster:
+</code></pre></div>
+
+<p><strong>Transfer from the remote cluster front-end to your local machine</strong></p>
+<p>Conversely, let's assume you want to retrieve the files <code>~/experiments/parallel_run/*</code>
+<div class="highlight"><pre><span></span><code>$&gt; scp -P <span class="m">8022</span> yourlogin@iris-cluster:experiments/parallel_run/* /path/to/local/directory
+</code></pre></div></p>
+<p>Again, if you configured the SSH connection in your <code>~/.ssh/config</code> file, you can use a simpler syntax:</p>
+<div class="highlight"><pre><span></span><code>$&gt; scp iris-cluster:experiments/parallel_run/* /path/to/local/directory
+</code></pre></div>
+
+<p>See the <a href="https://linux.die.net/man/1/scp">scp(1) man page</a> or <code>man scp</code> for more details.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p><code>scp</code> <strong>SHOULD NOT be used in the following cases:</strong></p>
+<ul>
+<li>When you are copying more than a few files, as scp spawns a new process for each file and can be quite slow and resource intensive when copying a large number of files.</li>
+<li>When using the <code>-r</code> switch, scp does not know about symbolic links and will blindly follow them, even if it has already made a copy of the file. That can lead to scp copying an infinite amount of data and can easily fill up your hard disk (or worse, a system shared disk), so be careful.</li>
+</ul>
+</div>
+</details>
+<p>N.B. There are <a href="http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html">many alternative ways</a> to transfer files in HPC platforms and you should check your options according to the problem at hand.</p>
+<p>Windows and OS X users may wish to transfer files from their systems to the clusters' login nodes with easy-to-use GUI applications such as:</p>
+<ul>
+<li><a href="http://winscp.net">WinSCP</a> (Windows only)</li>
+<li><a href="https://filezilla-project.org">FileZilla Client</a> (Windows, OS X)</li>
+<li><a href="http://cyberduck.ch/">Cyberduck</a> (Windows, OS X)</li>
+</ul>
+<p>These applications will need to be configured to connect to the frontends with the same parameters as <a href="../../connect/ssh/">discussed on the SSH access page</a>.</p>
+<h2 id="using-rsync">Using <code>rsync</code><a class="headerlink" href="#using-rsync" title="Permanent link">&para;</a></h2>
+<p>The clever alternative to <code>scp</code> is <code>rsync</code>, which has the advantage of transferring only the files which differ between the source and the destination. This feature is often referred to as fast incremental file transfer. Additionally, symbolic links can be  preserved.
+The typical syntax of <code>rsync</code> (see <a href="https://linux.die.net/man/1/rsync">rsync(1)</a> ) for the cluster is similar to the one of <code>scp</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /!\ ADAPT &lt;/path/to/source&gt; and &lt;/path/to/destination&gt;</span>
+<span class="c1"># From LOCAL directory (/path/to/local/source) toward REMOTE server &lt;hostname&gt;</span>
+rsync --rsh<span class="o">=</span><span class="s1">&#39;ssh -p 8022&#39;</span> -avzu /path/to/local/source  <span class="o">[</span>user@<span class="o">]</span>hostname:/path/to/destination
+<span class="c1"># Ex: from REMOTE server &lt;hostname&gt; to LOCAL directory</span>
+rsync --rsh<span class="o">=</span><span class="s1">&#39;ssh -p 8022&#39;</span> -avzu <span class="o">[</span>user@<span class="o">]</span>hostname:/path/to/source  /path/to/local/destination
+</code></pre></div>
+
+<ul>
+<li>the <code>--rsh</code> option specifies the connector to use (here SSH on port 8022)</li>
+<li>the <code>-a</code> option corresponds to the "Archive" mode. Most likely you should always keep this on as it preserves file permissions and does not follow symlinks.</li>
+<li>the <code>-v</code> option enables the verbose mode</li>
+<li>the <code>-z</code> option enable compression, this will compress each file as it gets sent over the pipe. This can greatly decrease time, depending on what sort of files you are copying.</li>
+<li>the <code>-u</code> option (or <code>--update</code>) corresponds to an updating process which skips files that are newer on the receiver. At this level, you may prefer the more dangerous option <code>--delete</code> that deletes extraneous files from dest dirs.
+Just like <code>scp</code>, the syntax for qualifying a remote path is as follows on the cluster: <code>yourlogin@iris-cluster:path/from/homedir</code></li>
+</ul>
+<h3 id="transfer-from-your-local-machine-to-the-remote-cluster">Transfer from your local machine to the remote cluster<a class="headerlink" href="#transfer-from-your-local-machine-to-the-remote-cluster" title="Permanent link">&para;</a></h3>
+<p>Coming back to the previous examples, let's assume you have a local directory <code>~/devel/myproject</code> you want to transfer to the cluster, in your remote homedir. In that case:</p>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># /!\ ADAPT yourlogin to... your ULHPC login</span>
+$&gt; rsync --rsh<span class="o">=</span><span class="s1">&#39;ssh -p 8022&#39;</span> -avzu ~/devel/myproject yourlogin@access-iris.uni.lu:
+</code></pre></div>
+This will synchronize your local directory <code>~/devel/myproject</code>  on the cluster front-end (in your homedir).</p>
+<div class="admonition info">
+<p class="admonition-title">Transfer to Iris, Aion or both?</p>
+<p>The above example target the access server of Iris.
+Actually, you could have targetted the access server of Aion: <strong>it doesn't matter</strong> since the storage is <strong>SHARED</strong> between both clusters.</p>
+</div>
+<p>Note that if you configured (as advised above) your SSH connection in your <code>~/.ssh/config</code> file with a dedicated SSH entry <code>{iris,aion}-cluster</code>, you can use a simpler syntax:</p>
+<div class="highlight"><pre><span></span><code>$&gt; rsync -avzu ~/devel/myproject iris-cluster:
+<span class="c1"># OR (it doesn&#39;t matter)</span>
+$&gt; rsync -avzu ~/devel/myproject aion-cluster:
+</code></pre></div>
+
+<h3 id="transfer-from-your-local-machine-to-a-project-directory-on-the-remote-cluster">Transfer from your local machine to a project directory on the remote cluster<a class="headerlink" href="#transfer-from-your-local-machine-to-a-project-directory-on-the-remote-cluster" title="Permanent link">&para;</a></h3>
+<p>When transferring data to a project directory you should keep the group and group permissions imposed by the project directory and quota. Therefore you need to add the options <code>--no-p --no-g</code> to your rsync command:</p>
+<div class="highlight"><pre><span></span><code>$&gt; rsync -avP --no-p --no-g ~/devel/myproject iris-cluster:/work/projects/myproject/
+</code></pre></div>
+
+<h3 id="transfer-from-the-remote-cluster-to-your-local-machine">Transfer from the remote cluster to your local machine<a class="headerlink" href="#transfer-from-the-remote-cluster-to-your-local-machine" title="Permanent link">&para;</a></h3>
+<p>Conversely, let's assume you want to synchronize (retrieve) the remote files <code>~/experiments/parallel_run/*</code> on your local machine:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /!\ ADAPT yourlogin to... your ULHPC login</span>
+$&gt; rsync --rsh<span class="o">=</span><span class="s1">&#39;ssh -p 8022&#39;</span> -avzu yourlogin@access-iris.uni.lu:experiments/parallel_run /path/to/local/directory
+</code></pre></div>
+
+<p>Again, if you configured the SSH connection in your <code>~/.ssh/config</code> file, you can use a simpler syntax:</p>
+<div class="highlight"><pre><span></span><code>$&gt; rsync -avzu iris-cluster:experiments/parallel_run /path/to/local/directory
+<span class="c1"># OR (it doesn&#39;t matter)</span>
+$&gt; rsync -avzu aion-cluster:experiments/parallel_run /path/to/local/directory
+</code></pre></div>
+
+<p>As always, see the <a href="https://linux.die.net/man/1/rsync">man page</a> or <code>man rsync</code> for more details.</p>
+<details class="info"><summary>Windows Subsystem for Linux (WSL)</summary><p>In WSL, the home directory in Linux virtual machines is not your home directory in Windows. If you want to access the files that you downloaded with <code>rsync</code> inside a Linux virtual machine, please consult the <a href="https://learn.microsoft.com/en-us/windows/wsl/">WSL documentation</a> and the <a href="https://learn.microsoft.com/en-us/windows/wsl/filesystems">file system</a> section in particular.</p>
+</details>
+<h3 id="data-transfer-within-project-directories">Data Transfer within Project directories<a class="headerlink" href="#data-transfer-within-project-directories" title="Permanent link">&para;</a></h3>
+<p>The ULHPC facility features a <a href="../../filesystems/gpfs/#global-project-directory-projecthomeworkprojects">Global Project directory <code>$PROJECTHOME</code></a> hosted within the <a href="../../filesystems/gpfs/">GPFS/SpecrumScale</a> file-system.
+You have to pay a particular attention when using <code>rsync</code> to transfer data within your project directory as depicted below.</p>
+<!-- BEGIN INCLUDE ../data/project_acl.md &lt;!--start-warning-clusterusers--&gt; &lt;!--end-warning-clusterusers--&gt; -->
+
+<div class="admonition danger">
+<p class="admonition-title">Access rights to project directory: Quota for <code>clusterusers</code> group in project directories is 0 !!!</p>
+<p>When a project <code>&lt;name&gt;</code> is created, a group of the same name (<code>&lt;name&gt;</code>) is also created and researchers allowed to collaborate on the project are made members of this group,which grant them access to the project directory.</p>
+<p>Be aware that your <em>default</em> group as a user is <code>clusterusers</code> which has (<em>on purpose</em>) <strong>a quota in project directories set to 0</strong>.
+You thus need to ensure you always <strong>write</strong> data in your project directory using the <code>&lt;name&gt;</code> group (instead of yoru default one.).
+This can be achieved by ensuring the <a href="https://en.wikipedia.org/wiki/Setuid">setgid bit</a> is set on all folders in the project directories: <code>chmod g+s [...]</code></p>
+<p>When using <code>rsync</code> to transfer file toward the project directory <code>/work/projects/&lt;name&gt;</code> as destination, be aware that rsync will <strong>not</strong> use the correct permissions when copying files into your project directory. As indicated in the <a href="./">Data transfer</a> section, you also need to:</p>
+<ul>
+<li>give new files the destination-default permissions with <code>--no-p</code> (<code>--no-perms</code>), and</li>
+<li>use the default group <code>&lt;name&gt;</code> of the destination dir with <code>--no-g</code> (<code>--no-group</code>)</li>
+<li>(eventually) instruct rsync to preserve whatever executable permissions existed on the source file and aren't masked at the destination using <code>--chmod=ug=rwX</code></li>
+</ul>
+<p>Your full <code>rsync</code> command becomes (adapt accordingly):</p>
+<div class="codehilite"><pre><span></span><code>  rsync -avz {--update | --delete} --no-p --no-g [--chmod=ug=rwX] &lt;source&gt; /work/projects/&lt;name&gt;/[...]
+</code></pre></div>
+
+
+</div>
+<p>For the same reason detailed above, in case you are using a build command or
+more generally any command meant to <em>write</em> data in your project directory
+<code>/work/projects/&lt;name&gt;</code>, you want to use the
+<a href="https://linux.die.net/man/1/sg"><code>sg</code></a> as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /!\ ADAPT &lt;name&gt; accordingly</span>
+sg &lt;name&gt; -c <span class="s2">&quot;&lt;command&gt; [...]&quot;</span>
+</code></pre></div>
+
+<p>This is particularly important if you are <a href="../../environment/easybuild/">building dedicated software with
+Easybuild</a> for members of the project - you typically want to do it as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /!\ ADAPT &lt;name&gt; accordingly</span>
+sg &lt;name&gt; -c <span class="s2">&quot;eb [...] -r --rebuild -D&quot;</span>   <span class="c1"># Dry-run - enforce using the &#39;&lt;name&gt;&#39; group</span>
+sg &lt;name&gt; -c <span class="s2">&quot;eb [...] -r --rebuild&quot;</span>      <span class="c1"># Dry-run - enforce using the &#39;&lt;name&gt;&#39; group</span>
+</code></pre></div>
+
+<!-- END INCLUDE -->
+
+<details class="info"><summary>Debugging quota issues</summary><p>Sometimes, when copying files with <code>rsync</code> or <code>scp</code> commands and you are not careful with the options of these commands, you copy files with incorrect permissions and ownership. If a directory is copied with the wrong permissions and ownership, all files created within the directory may maintain the incorrect permissions and ownership. Typical issues that you may encounter include:</p>
+<ul>
+<li>If a directory is copied incorrectly <em>from a project directory to your home directory</em>, the contents of the directory may continue counting towards the group data instead of your personal data and data usage may be misquoted by the <code>df-ulphc</code> utility. Actual data usage takes into account the file group not only its location.</li>
+<li>If a directory is copied incorrectly <em>from a personal directory or another machine to a project directory</em>, you may be unable to create files, since the <code>clusterusers</code> group has no quota inside project directories. Note the <a href="https://www.redhat.com/en/blog/suid-sgid-sticky-bit">group special permission (g&plusmn;s)</a> in directories ensures that all files created in the directory will have the group of the directory instead of the process that creates the file.</li>
+</ul>
+<p>Typical resolutions techniques involve resetting the correct file ownership and permissions:</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Files in project directories</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>chown -R &lt;username&gt;:&lt;project name&gt; &lt;path to directory or file&gt;
+find &lt;path to directory or file&gt; -type d <span class="p">|</span> xargs -I % chmod g+s <span class="s1">&#39;%&#39;</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Files in user home directories</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>chown -R &lt;username&gt;:clusterusers &lt;path to directory or file&gt;
+find &lt;path to directory or file&gt; -type d <span class="p">|</span> xargs -I % chmod g-s <span class="s1">&#39;%&#39;</span>
+</code></pre></div>
+
+</div>
+</div>
+</details>
+<h2 id="using-mobaxterm-windows">Using MobaXterm (Windows)<a class="headerlink" href="#using-mobaxterm-windows" title="Permanent link">&para;</a></h2>
+<p>If you are under Windows and you have <a href="../../connect/ssh/#ssh-configuration">MobaXterm installed and configured</a>, you probably want to use it to transfer your files to the clusters. Here are the steps to use <code>rsync</code> <em>inside</em> MobaXterm in Windows.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be aware that you <strong>SHOULD enable MobaXterm SSH Agent</strong> -- see <a href="../../connect/ssh/#ssh-agent">SSH Agent instructions</a> for more instructions.</p>
+</div>
+<h3 id="using-a-local-bash-transfer-your-files">Using a local bash, transfer your files<a class="headerlink" href="#using-a-local-bash-transfer-your-files" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Open a local "bash" shell. Click on <em>Start local terminal</em> on the welcome page of MobaXterm.</p>
+</li>
+<li>
+<p>Find the location of the files you want to transfer. They should be located under <code>/drives/&lt;name of your disk&gt;</code>. You will have to use the Linux command line to move from one directory to the other. The <code>cd</code> command is used to change the current directory and <code>ls</code> to list files. For example, if your files are under <code>C:\\Users\janedoe\Downloads\</code> you should then go to <code>/drives/c/Users/janedoe/Downloads/</code> with this command:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>cd /drives/c/Users/janedoe/Downloads/
+</code></pre></div>
+
+<p>Then list the files with <code>ls</code> command. You should see the list of your data files.</p>
+<ul>
+<li>
+<p>When you have retrieved the location of your files, we can begin the transfer with <code>rsync</code>. For example <code>/drives/c/Users/janedoe/Downloads/</code> (watch out, there is no <code>/</code> character at the end of the path, it is important).</p>
+</li>
+<li>
+<p>Launch the command <code>rsync</code> with this parameters to transfer all the content of the <code>Downloads</code> directory to the <code>/isilon/projects/market_data/</code> directory on the cluster (the syntax is very important, be careful)</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>rsync -avzpP -e &quot;ssh -p 8022&quot; /drives/c/Users/janedoe/Downloads/ yourlogin@access-iris.uni.lu:/isilon/projects/market_data/
+</code></pre></div>
+
+<ul>
+<li>You should see the output of transfer in progress. Wait for it to finish (it can be very long).</li>
+</ul>
+<p><img alt="" src="../images/filetransfer/MobaXterm_transfer.png" /></p>
+<h3 id="interrupt-and-resume-a-transfer-in-progress">Interrupt and resume a transfer in progress<a class="headerlink" href="#interrupt-and-resume-a-transfer-in-progress" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>If you want to interrupt the transfer to resume it later, press <code>Ctrl-C</code> and exit MobaXterm.</p>
+</li>
+<li>
+<p>To resume a transfer, go in the right location and execute the <code>rsync</code> command again. Only the files that have not been transferred will be transferred again.</p>
+</li>
+</ul>
+<h2 id="alternative-approaches">Alternative approaches<a class="headerlink" href="#alternative-approaches" title="Permanent link">&para;</a></h2>
+<p>You can also consider alternative approaches to synchronize data with the cluster login node:</p>
+<ul>
+<li>rely on a versioning system such as <a href="http://git-scm.com">Git</a>; this approach works well for source code trees;</li>
+<li>mount your remote homedir by <a href="#sshfs">SSHFS</a>:<ul>
+<li>on Mac OS X, you should consider installing <a href="http://macfusionapp.org">MacFusion</a> for this purpose, where as</li>
+<li>on Linux, just use the command-line <code>sshfs</code> or, <code>mc</code>;</li>
+</ul>
+</li>
+<li>use GUI tools like <a href="https://filezilla-project.org/">FileZilla</a>, <a href="https://cyberduck.io/">Cyberduck</a>, or <a href="https://winscp.net/eng/download.php">WindSCP</a> (or proprietary options like <a href="https://www.expandrive.com/">ExpanDrive</a> or <a href="https://binarynights.com/">ForkLift 3</a>).</li>
+</ul>
+<h3 id="sshfs">SSHFS<a class="headerlink" href="#sshfs" title="Permanent link">&para;</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/SSHFS">SSHFS (SSH Filesystem)</a> is a file system client that mounts directories located on a remote server onto a local directory over a normal ssh connection. Install the requires packages if they are not already available in your system.</p>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Linux</label><div class="tabbed-content">
+<p><div class="highlight"><pre><span></span><code><span class="c1"># Debian-like</span>
+sudo apt-get install sshfs
+<span class="c1"># RHEL-like</span>
+sudo yum install sshfs
+</code></pre></div>
+You may need to add yourself to the <code>fuse</code> group.</p>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Mac OS X</label><div class="tabbed-content">
+<p><div class="highlight"><pre><span></span><code><span class="c1"># Assuming HomeBrew -- see https://brew.sh</span>
+brew install osxfuse sshfs
+</code></pre></div>
+You can also directly install macFUSE from: <a href="https://osxfuse.github.io/">https://osxfuse.github.io/</a>. You must reboot for the installation of osxfuse to take effect. You can then update to the latest version.</p>
+</div>
+</div>
+<p>With SSHFS any user can mount their ULHPC home directory onto a local workstation through an ssh connection. The CLI format is as follows:
+<div class="highlight"><pre><span></span><code>sshfs [user@]host:[dir] mountpoint [options]
+</code></pre></div></p>
+<p>Proceed as follows (<em>assuming</em> you have a working <a href="../../connect/ssh/">SSH connection</a>):
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a local directory for the mounting point, e.g. ~/ulhpc</span>
+mkdir -p ~/ulhpc
+<span class="c1"># Mount the remote file system</span>
+sshfs iris-cluster: ~/ulhpc -o follow_symlinks,reconnect,dir_cache<span class="o">=</span>no
+</code></pre></div>
+Note the leaving the <code>[dir]</code> argument blanck, mounts the user's home directory by default. The options (<code>-o</code>) used are:</p>
+<ul>
+<li><code>follow_symlinks</code> presents symbolic links in the remote files system as regular files in the local file system, useful when the symbolic link points outside the mounted directory;</li>
+<li><code>reconnect</code> allows the SSHFS client to automatically reconnect to server if connection is interrupted;</li>
+<li><code>dir_cache</code> enables or disables the directory cache which holds the names of directory entries (can be slow for mounted remote directories with many files).</li>
+</ul>
+<p>When you no longer need the mounted remote directory, you <strong>must</strong> unmount your remote file system:</p>
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Linux</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>fusermount -u ~/ulhpc
+</code></pre></div>
+
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Mac OS X</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>diskutil umount ~/ulhpc
+</code></pre></div>
+
+</div>
+</div>
+<h2 id="transfers-between-long-term-storage-and-the-hpc-facilities">Transfers between long term storage and the HPC facilities<a class="headerlink" href="#transfers-between-long-term-storage-and-the-hpc-facilities" title="Permanent link">&para;</a></h2>
+<p>The university provides <strong>central data storage</strong> services for all employees and students. The data are stored securely on the university campus and are <strong>managed by the IT department</strong>. The storage servers most commonly used at the university are</p>
+<ul>
+<li>Atlas (atlas.uni.lux) for staff members, and</li>
+<li>Poseidon (poseidon.uni.lux) for students.</li>
+</ul>
+<p>For more details on the university central storage, you can have a look at</p>
+<ul>
+<li><a href="https://hpc.uni.lu/accessing_central_university_storage">Usage of Atlas and Poseidon</a>, and</li>
+<li><a href="https://hpc.uni.lu/moving_files_to_the_central_university_storage">Backup of your files on Atlas</a>.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Connecting to central data storage services from a personal machine</p>
+<p>The examples presented here are targeted to the university HPC machines. To connect to the university central data storage with a (Linux) personal machine from outside of the university network, you need to start first a VPN connection.</p>
+</div>
+<p>The SMB shares exported for directories in the central data storage are meant to be accessed interactively. Transfer your data manually before and after your jobs are run. You can mount directories from the central data storage in the login nodes, and access the central data storage through the interface of <code>smbclient</code> from both the compute nodes during interactive jobs and the login nodes.</p>
+<div class="admonition danger">
+<p class="admonition-title">Never store your password in plain text</p>
+<p>Unlike mounting with <code>sshfs</code>, you will always need to enter your password to access a directory in an SMB share. Avoid, storing your password in any manner that it makes it recoverable from plain text. For instance, <strong>do not</strong> create job scripts that contain your password in plain text just to move data to Atlas within a job.</p>
+</div>
+<p>The following commands target Atlas, but commands for Poseidon are similar.</p>
+<h3 id="mounting-an-smb-share-to-a-login-node">Mounting an SMB share to a login node<a class="headerlink" href="#mounting-an-smb-share-to-a-login-node" title="Permanent link">&para;</a></h3>
+<p>The UL HPC team provides the <code>smb-storage</code> script to mount SMB shares in login nodes.</p>
+<ul>
+<li>There exists an SMB share <code>users</code> where all staff member have a directory named after their user name (<code>name.surname</code>). To mount your directory in an shell session at a login node execute the command
+<div class="highlight"><pre><span></span><code>smb-storage mount name.surname
+</code></pre></div>
+and your directory will be mounted to the default mount location:
+<div class="highlight"><pre><span></span><code>~/atlas.uni.lux-users-name.surname
+</code></pre></div></li>
+<li>To mount a project share <code>project_name</code> in a shell session at a login node execute the command
+<div class="highlight"><pre><span></span><code>smb-storage mount name.surname --project project_name
+</code></pre></div>
+and the share will be mounted in the default mount location:
+<div class="highlight"><pre><span></span><code>~/atlas.uni.lux-project_name
+</code></pre></div></li>
+<li>To unmount any share, simply call the <code>unmount</code> subcommand with the mount point path, for instance
+<div class="highlight"><pre><span></span><code>smb-storage unmount ~/atlas.uni.lux-users-name.surname
+</code></pre></div>
+or:
+<div class="highlight"><pre><span></span><code>smb-storage unmount ~/atlas.uni.lux-project_name
+</code></pre></div></li>
+</ul>
+<p>The <code>smb-storage</code> script provides optional flags to modify the default options:</p>
+<ul>
+<li><code>--help</code> prints information about the usage and options of he script;</li>
+<li><code>--server &lt;server url&gt;</code> specifies the server from which the SMB share is mounted (defaults to <code>--server atlas.uni.lux</code> if not specified, use <code>--server poseidon.uni.lux</code> to mount a share from Poseidon);</li>
+<li><code>--project &lt;project name&gt; [&lt;directory in project&gt;]</code> mounts the share <code>&lt;project name&gt;</code> and creates a symbolic link to the optionally provided location <code>&lt;directory in project&gt;</code>, or to the project root directory if a location is not provided (defaults to <code>--project users name.surname</code> if not specified);</li>
+<li><code>--mountpoint &lt;path&gt;</code> selects the path where the share directory will be available (defaults to <code>~/&lt;server url&gt;-&lt;project name&gt;-&lt;directory in project&gt;</code> if nbot specified);</li>
+<li><code>--debug</code> prints details of the operations performed by the mount script.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Best practices</p>
+<p>Mounted SMB shares will be available in the login node, and he mount point will appear as a dead symbolic link in compute nodes. This is be design, you can only mount SMB shares in login nodes because SMB shares are meant to be used in interactive sections.</p>
+<p>Mounted shares will remain available as long as the login session where the share was mounted remains active. You can mount shares in a <code>tmux</code> session in a login node, and access the share from any other session in the login node.</p>
+</div>
+<details class="info"><summary>Details of the mounting process</summary><p>There exists an SMB share <code>users</code> where all staff member have a directory named after their user name (<code>name.surname</code>). All other projects have an SMB share named after the project name (in lowercase characters).</p>
+<p>The <code>smb-storage</code> scripts uses <code>gio mount</code> to mount SMB shares. Shares are mounted in a specially named mount point in <code>/run/user/${UID}/gvfs</code>. Then, <code>smb-storage</code> creates a symbolic link to the requested <code>directory in project</code> in the path specified in the <code>--mountpoint</code> option.</p>
+<p>During unmounting, the symbolic links are deleted by the <code>smb-storage</code> script and then the shares mounted in <code>/run/user/${UID}/gvfs</code> are unmounted and their mount points are removed using <code>gio mount --unmount</code>. <strong>If a session with mounted SMB shares terminates without unmounting the shares</strong>, the shares in <code>/run/user/${UID}/gvfs</code> will be unmounted and their mount points deleted, but <strong>the symbolic links created by <code>smb-storage</code> must be removed manually</strong>.</p>
+</details>
+<h3 id="accessing-smb-shares-with-smbclient">Accessing SMB shares with <code>smbclient</code><a class="headerlink" href="#accessing-smb-shares-with-smbclient" title="Permanent link">&para;</a></h3>
+<p>The <code>smbclient</code> program is available in both login and compute nodes. In compute nodes the only way to access SMB shares is through the client program. With the SMB client one can connect to the <code>users</code> share and browse their personal directory with the command:
+<div class="highlight"><pre><span></span><code>smbclient //atlas.uni.lux/users --directory=&#39;name.surname&#39; --user=name.surname@uni.lu
+</code></pre></div>
+Project directories are accessed with the command:
+<div class="highlight"><pre><span></span><code>smbclient //atlas.uni.lux/project_name --user=name.surname@uni.lu
+</code></pre></div></p>
+<p>Type <code>help</code> to get a list of all available commands or <code>help (command_name)</code> to get more information for a specific command. Some useful commands are</p>
+<ul>
+<li><code>ls</code> to list all the files in a directory,</li>
+<li><code>mkdir (directory_name)</code> to create a directory,</li>
+<li><code>rm (file_name)</code> to remove a file,</li>
+<li><code>rmdir (directory_name)</code> to remove a directory,</li>
+<li><code>scopy (source_full_path) (destination_full_path)</code> to move a file <em>within</em> the SMN shared directory,</li>
+<li><code>get (file_name) [destination]</code> to move a file <em>from</em> Atlas to the local machine (placed in the working directory, if the destination is not specified), and</li>
+<li><code>put (file_name) [destination]</code> to move a file <em>to</em> Atlas from the local machine (placed in the working directory, if a full path is not specified),</li>
+<li><code>mget (file name pattern) [destination]</code> to download multiple files, and</li>
+<li><code>mput (file name pattern) [destination]</code> to upload multiple files.</li>
+</ul>
+<p>The patterns used in <code>mget</code>/<code>mput</code> are either normal file names, or globular expressions (e.g. <code>*.txt</code>). </p>
+<p>Connecting into an interactive SMB session means that you will have to maintain a shell session dedicated to SMB. However, it saves you from entering your password for every operation. If you would like to perform a single operation and exit, you can avoid maintaining an interactive session with the <code>--command</code> flag. For instance,
+<div class="highlight"><pre><span></span><code>smbclient //atlas.uni.lux/users --directory=&#39;name.surname&#39; --user=name.surname@uni.lu --command=&#39;get &quot;full path/to/remote file.txt&quot; &quot;full path/to/local file.txt&quot;&#39;
+</code></pre></div>
+copies a file from the SMB directory to the local machine. Notice the use of double quotes to handle file names with spaces. Similarly,
+<div class="highlight"><pre><span></span><code>smbclient //atlas.uni.lux/users --directory=&#39;name.surname&#39; --user=name.surname@uni.lu --command=&#39;put &quot;full path/to/local file.txt&quot; &quot;full path/to/remote file.txt&quot;&#39;
+</code></pre></div>
+copies a file from the local machine to the SMB directory.</p>
+<p>Moving whole directories is a bit more involved, as it requires setting some state variables for the session, both for interactive and non-interactive sessions. To download a directory for instance, use
+<div class="highlight"><pre><span></span><code>smbclient //atlas.uni.lux/users --directory<span class="o">=</span><span class="s1">&#39;name.surname&#39;</span> --user<span class="o">=</span>name.surname@uni.lu --command<span class="o">=</span><span class="s1">&#39;recurse ON; prompt OFF; mget &quot;full path/to/remote directory&quot; &quot;full path/to/local directory&quot;&#39;</span>
+</code></pre></div>
+and to upload a directory use
+<div class="highlight"><pre><span></span><code>smbclient //atlas.uni.lux/users --directory<span class="o">=</span><span class="s1">&#39;name.surname&#39;</span> --user<span class="o">=</span>name.surname@uni.lu --command<span class="o">=</span><span class="s1">&#39;recurse ON; prompt OFF; mput &quot;full path/to/remote local&quot; &quot;full path/to/remote directory&quot;&#39;</span>
+</code></pre></div>
+respectively. The session option</p>
+<ul>
+<li><code>recurse ON</code> enables recursion into directories, and the option</li>
+<li><code>prompt OFF</code> disables prompting for confirmation before moving each file.</li>
+</ul>
+<p><em>Sources</em></p>
+<ul>
+<li><a href="https://www.thegeekdiary.com/smbclient-command-examples-in-linux/">Cheat-sheet for SMB access from linux</a></li>
+</ul>
+<h2 id="special-transfers">Special transfers<a class="headerlink" href="#special-transfers" title="Permanent link">&para;</a></h2>
+<p>Sometimes you may have the case that a lot of files need to go from point A to B over a Wide Area Network (eg. across the Atlantic). Since packet latency and other factors on the network will naturally slow down the transfers, you need to find workarounds, typically with either rsync or tar.</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: January 31, 2025
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../sharing/" title="Data Sharing" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Data Sharing
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../gdpr/" title="GDPR Compliance" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                GDPR Compliance
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2007-2022 S. Varrette and Uni.lu HPC (ULHPC) Team
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/ULHPC" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://twitter.com/ULHPC" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.f81b9e8b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.23546af0.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["navigation.instant"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.58d22e8e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/bootstrap.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>
