@@ -171,14 +171,17 @@ where by default the `env/release/default` is loaded implicitly at login. Then, 
 export EASYBUILD_PREFIX=<path to desired root directory>/easybuild/${ULHPC_CLUSTER}/<environment type>/<environment name>/${RESIF_ARCH}
 ```
 
-You can _optionally_ add the following to automatically load your modules in compute nodes,
+!!! tips "Automatically load local modules when logging in to compute nodes"
 
-```bash
-if command -v module >/dev/null 2>&1; then
-    module use "<path to desired root directory>/easybuild/${ULHPC_CLUSTER}/<environment type>/<environment name>/${RESIF_ARCH}/modules/all"
-fi
-```
-assuming that you used the default values for `${EASYBUILD_SUBDIR_MODULES}` and `${EASYBUILD_SUFFIX_MODULES_PATH}`.
+    You can _optionally_ add the following to your `bashrc` to automatically load your modules in compute nodes,
+
+    ```bash
+    if command -v module >/dev/null 2>&1; then
+        module use "<path to desired root directory>/easybuild/${ULHPC_CLUSTER}/<environment type>/<environment name>/${RESIF_ARCH}/modules/all"
+    fi
+    ```
+
+    assuming that you used the default values for `${EASYBUILD_SUBDIR_MODULES}` and `${EASYBUILD_SUFFIX_MODULES_PATH}`.
 
 
 ## Installation and update of local Easybuild
