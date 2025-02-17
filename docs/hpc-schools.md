@@ -5,9 +5,9 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 ## Forthcoming events
 
-- Introduction to HPC, 12-13 March 2025, Belval Campus
-- Machine Learning for beginners, 19-20 March 2025, Belval Campus
-- Introduction to HPC and Machine Learning: combination of "Introduction to HPC" and "Machine Learning for beginners" eligible for ECTS credits
+- [Introduction to HPC](#introduction-to-hpc), 12-13 March 2025, Belval Campus
+- [Machine Learning for beginners](#machine-learning-for-beginners), 19-20 March 2025, Belval Campus
+- Introduction to HPC and Machine Learning: combination of "[Introduction to HPC](#introduction-to-hpc)" and "[Machine Learning for beginners](#machine-learning-for-beginners)" eligible for ECTS credits
 
 
 ## HPC School for beginners
