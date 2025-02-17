@@ -21,7 +21,7 @@ Feel free to only attend the second day session if:
 
 Limited spots available per session (usually 30 max).
 
-### Upcoming sessions:
+### Upcoming sessions
 
 - Date: July 2024, 1st-2nd
 - Time: 9am to 12pm (both days).
@@ -40,43 +40,43 @@ This event is an extended version of the "HPC school for beginners" and provides
 
 Limited spots available per session (20 max).
 
-### Upcoming sessions:
+### Upcoming sessions
 
 - Date: March 2025, 12th-13th
 - Time: 09:00-12:00 and 13:00-17:00 (both days)
 
-### Session 1 (Day 1, 09:00-12:00) - Accessing the Cluster and Command Line Introduction
+### Session 1 - Accessing the Cluster and Command Line Introduction
 
-_Location:_ MSA 4.320, Belval campus
+_Timeslot:_ Day 1 09:00-12:00, _Location:_ MSA 4.320, Belval campus
 
 Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
 
 Feel free to only to start attend the second day session if:
 
-- You can connect to the ULHPC
-- You are comfortable with the command line interface
+- you can connect to the ULHPC, and
+- you are comfortable with the command line interface.
 
-### Session 2 (Day 1, 13:00-17:00) - Understanding HPC Workflow: Job Submission and Monitoring
+### Session 2 - Understanding HPC Workflow: Job Submission and Monitoring
 
-_Location:_ MSA 4.320, Belval campus
+_Timeslot:_ Day 1 13:00-17:00, _Location:_ MSA 4.320, Belval campus
 
 Explore the inner workings of HPC systems. Discover the process of submitting and managing computational tasks. Learn how to monitor and optimize job performance.
 
-### Session 3 (Day 2, 09:00-12:00) - Working with software environments and containers
+### Session 3 - Working with software environments and containers
 
-_Location:_ MSA 4.380, Belval campus
+_Timeslot:_ Day 2 09:00-12:00, _Location:_ MSA 4.080, Belval campus
 
 Discover how you can setup isolated software environments and containers in the HPC systems. Improve the reproducibility of you workflows by creating reproducible setups.
 
-### Session 4 (Day 2, 13:00-17:00) - Using resources efficiently
+### Session 4 - Using resources efficiently
 
-_Location:_ MSA 4.320, Belval campus
+_Timeslot:_ Day 2 13:00-17:00, _Location:_ MSA 4.080, Belval campus
 
 Understand the allocation of resources in HPC systems. Configure you code to access cores, memory channels, and GPUs efficiently and prevent over-subscription.
 
-#### Requirements
+### Requirements
 
-- Having an HPC account to access the cluster.
+- Having an HPC account to access the cluster. Request an account following the [instructions in our system documentation](/accounts/#how-to-get-a-new-user-account).
 
 
 ## Machine Learning for beginners
@@ -89,30 +89,33 @@ Limited spots available per session (20 max).
 
 - Date: March, 2025, 19th-20th
 - Time: 09:00-12:00 and 13:00-17:00
-- Location: MSA 4.320, Belval campus
+- Location: MSA 4.080, Belval campus
 
-### Training outcomes:
+### Training outcomes
 
 By the end of the course, participants will:
+
 - Understand key ML and DL concepts and techniques;
 - Gain hands-on experience with data preprocessing, model training, and evaluation;
 - Learn how to use HPC resources for accelerated ML workloads;
 - Explore distributed computing and GPU acceleration tools;
 
-### Course structure:
+### Course structure
 
 Day 1 - ML Foundations
+
 - Introduction to ML - AI & ML, types of ML, key concepts;
 - Exploratory Data Analysis (EDA) in Jupyter Notebook - Loading, preprocessing, and visualizing;
 - Supervised Learning - Regression vs. Classification, model evaluation, hands-on exercises;
 - Introduction to Neural Networks.
 
 Day 2 - DL & HPC Acceleration
+
 - DL & CNNs - Building and training DL models;
 - Distributed computing on HPC;
 - Accelerated ML & DL.
 
-#### Requirements
+### Requirements
 
 - Having an HPC account to access the cluster.
 - Basic knowledge on SLURM (beginners HPC school).
