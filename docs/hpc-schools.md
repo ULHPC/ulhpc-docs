@@ -34,7 +34,7 @@ Learn how to access the HPC cluster, set up your machine, and navigate the comma
 Explore the inner workings of HPC systems. Discover the process of submitting and managing computational tasks. Learn how to monitor and optimize job performance.
 
 
-### Introduction to HPC
+## Introduction to HPC
 
 This event is an extended version of the "HPC school for beginners" and provides users with the essential skills required to use HPC facilities and to compose and deploy efficient programs in an HPC environment. The event is spread in 4 sessions across 2 days.
 
