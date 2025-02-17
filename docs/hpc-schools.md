@@ -5,8 +5,10 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 ## Forthcoming events
 
-- HPC School for beginners - July 2024, 1st-2nd, 1.040, MNO - Belval Campus 
-- Python HPC School - March 2024, 27-28th, 1.030 MNO - Belval Campus
+- Introduction to HPC, 12-13 March 2025, Belval Campus
+- Machine Learning for beginners, 19-20 March 2025, Belval Campus
+- Introduction to HPC and Machine Learning: combination of "Introduction to HPC" and "Machine Learning for beginners" eligible for ECTS credits
+
 
 ## HPC School for beginners
 
@@ -30,6 +32,93 @@ Learn how to access the HPC cluster, set up your machine, and navigate the comma
 
 ### Morning 2 - Understanding HPC Workflow: Job Submission and Monitoring
 Explore the inner workings of HPC systems. Discover the process of submitting and managing computational tasks. Learn how to monitor and optimize job performance.
+
+
+### Introduction to HPC
+
+This event is an extended version of the "HPC school for beginners" and provides users with the essential skills required to use HPC facilities and to compose and deploy efficient programs in an HPC environment. The event is spread in 4 sessions across 2 days.
+
+Limited spots available per session (20 max).
+
+### Upcoming sessions:
+
+- Date: March 2025, 12th-13th
+- Time: 09:00-12:00 and 13:00-17:00 (both days)
+
+### Session 1 (Day 1, 09:00-12:00) - Accessing the Cluster and Command Line Introduction
+
+_Location:_ MSA 4.320, Belval campus
+
+Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
+
+Feel free to only to start attend the second day session if:
+
+- You can connect to the ULHPC
+- You are comfortable with the command line interface
+
+### Session 2 (Day 1, 13:00-17:00) - Understanding HPC Workflow: Job Submission and Monitoring
+
+_Location:_ MSA 4.320, Belval campus
+
+Explore the inner workings of HPC systems. Discover the process of submitting and managing computational tasks. Learn how to monitor and optimize job performance.
+
+### Session 3 (Day 2, 09:00-12:00) - Working with software environments and containers
+
+_Location:_ MSA 4.380, Belval campus
+
+Discover how you can setup isolated software environments and containers in the HPC systems. Improve the reproducibility of you workflows by creating reproducible setups.
+
+### Session 4 (Day 2, 13:00-17:00) - Using resources efficiently
+
+_Location:_ MSA 4.320, Belval campus
+
+Understand the allocation of resources in HPC systems. Configure you code to access cores, memory channels, and GPUs efficiently and prevent over-subscription.
+
+#### Requirements
+
+- Having an HPC account to access the cluster.
+
+
+## Machine Learning for beginners
+
+This two-days course introduces participants to Machine Learning (ML) and Deep Learning (DL) on HPC. During the course, we will cover the fundamentals of ML and DL, work through practical exercises on model training, and explore how to speed up computations using HPC resources, distributed computing, and GPU acceleration. The course combines theory, coding exercises, and HPC applications to give participants both a solid foundation and practical skills.
+
+Limited spots available per session (20 max).
+
+### Upcoming sessions
+
+- Date: March, 2025, 19th-20th
+- Time: 09:00-12:00 and 13:00-17:00
+- Location: MSA 4.320, Belval campus
+
+### Training outcomes:
+
+By the end of the course, participants will:
+- Understand key ML and DL concepts and techniques;
+- Gain hands-on experience with data preprocessing, model training, and evaluation;
+- Learn how to use HPC resources for accelerated ML workloads;
+- Explore distributed computing and GPU acceleration tools;
+
+### Course structure:
+
+Day 1 - ML Foundations
+- Introduction to ML - AI & ML, types of ML, key concepts;
+- Exploratory Data Analysis (EDA) in Jupyter Notebook - Loading, preprocessing, and visualizing;
+- Supervised Learning - Regression vs. Classification, model evaluation, hands-on exercises;
+- Introduction to Neural Networks.
+
+Day 2 - DL & HPC Acceleration
+- DL & CNNs - Building and training DL models;
+- Distributed computing on HPC;
+- Accelerated ML & DL.
+
+#### Requirements
+
+- Having an HPC account to access the cluster.
+- Basic knowledge on SLURM (beginners HPC school).
+- A basic understanding of Python programming.
+- Familiarity with Jupyter Notebook (installed and configured).
+- A basic understanding of Numpy and linear algebra.
 
 
 ## Python HPC School
@@ -85,6 +174,7 @@ Limited spots available per session (usually 30 max).
 - A basic understanding of Numpy and linear algebra. 
 - Familiarity with parallel programming. 
 
+
 ## Conda environment management for Python and R
 
 The creation of Conda environments is supported in the University of Luxembourg HPC systems. But when Conda environments are needed and what tools are available to create Conda environments? Attend this tutorial if your projects involve R or Python and you need support with installing packages.
@@ -99,6 +189,7 @@ The topics that will be covered include:
 ### Upcoming sessions
 
 - Mar. 2024 (please await further announcements regarding specific dates)
+
 
 ## Introduction to numerical methods with BLAS
 
