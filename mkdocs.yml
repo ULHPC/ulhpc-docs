@@ -31,7 +31,6 @@ nav:
       - Fast Local Interconnect: 'systems/iris/interconnect.md'
     #  - Storage:       'filesystems/index.md'
       - Timeline:      'systems/iris/timeline.md'
-    - Live status: https://hpc.uni.lu/live-status/motd
   #######################
   - Interconnect:
     # - Overview:                     'interconnect/index.md'
@@ -43,7 +42,6 @@ nav:
     - GPFS/SpectrumScale:         'filesystems/gpfs.md'
     - Lustre:                     'filesystems/lustre.md'
     - OneFS Isilon:               'filesystems/isilon.md'
-    - Live status: https://hpc.uni.lu/live-status/motd
   #################
   - Access/Connect:
     - Access/Login Servers:          'connect/access.md'
@@ -302,8 +300,6 @@ nav:
   - Web Portals:
     - ULHPC Website: https://hpc.uni.lu
     - Technical Documentation: https://hpc-docs.uni.lu
-    # - OpenOn Demand: https://hpc.uni.lu/ood
-    # - Live Platform status: https://hpc.uni.lu/live-status/motd
     - ULHPC Tutorials: https://ulhpc-tutorials.readthedocs.io/
     - Helpdesk / Ticket Portal: https://hpc.uni.lu/support
   ##############
@@ -327,7 +323,7 @@ nav:
 # Project Information
 site_name: ULHPC Technical Documentation
 site_description: ULHPC Technical Documentation
-site_author: S. Varrette and Uni.lu HPC (ULHPC) Team
+site_author: Uni.lu HPC (ULHPC) Team
 site_dir: public
 site_url: "https://hpc-docs.uni.lu/"
 
@@ -337,7 +333,7 @@ repo_url: https://github.com/ULHPC/ulhpc-docs
 edit_uri: blob/master/docs/
 
 # Copyright
-copyright: Copyright &copy; 2007-2022 S. Varrette and Uni.lu HPC (ULHPC) Team
+copyright: Copyright &copy; 2007-2025 Uni.lu HPC (ULHPC) Team
 
 
 # Configuration
