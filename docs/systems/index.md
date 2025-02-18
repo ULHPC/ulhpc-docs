@@ -5,7 +5,7 @@
 
 For more details, see the [reference ULHPC Article](https://orbilu.uni.lu/handle/10993/51857):
 
-> __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/51857) | [slides](https://hpc-docs.uni.lu/system/2022-07-10-ACM-HPCCT22.pdf):<br/>
+> __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/51857) | [slides](https://hpc-docs.uni.lu/systems/2022-07-10-ACM-HPCCT22.pdf):<br/>
 > Sebastien Varrette, Hyacinthe Cartiaux, Sarah Peter, Emmanuel Kieffer, Teddy Valette, and Abatcha Olloh. 2022. Management of an Academic HPC & Research Computing Facility: The ULHPC Experience 2.0. In 6th High Performance Computing and Cluster Technologies Conference (HPCCT 2022), July 08-10, 2022, Fuzhou, China. ACM, New York, NY, USA, 14 pages.
 > https://doi.org/10.1145/3560442.3560445
 
