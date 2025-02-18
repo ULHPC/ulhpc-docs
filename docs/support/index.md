@@ -28,7 +28,7 @@ method for contacting ULHPC.
     _Before_ reporting a problem or and issue, kindly remember that:
 
     1. Your issue is probably documented here on the [ULHPC Technical documentation](https://hpc-docs.uni.lu)
-    2. An event may be on-going: **check the [ULHPC Live status page](https://hpc.uni.lu/live-status/motd/)**
+    2. An event may be on-going:
            * Planned maintenance are announced _at least_ 2 weeks in advance - -- see [Maintenance and Downtime Policy](../policies/maintenance.md)
            * The proper SSH banner is displayed during _planned_ downtime
     3. check the state of your nodes and jobs

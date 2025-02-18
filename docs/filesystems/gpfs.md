@@ -11,7 +11,6 @@ In terms of raw storage capacities, it represents more than **4PB** of raw space
 
 The filesystem is composed of two tiers, homedirs are stored on the **Tier 0** (Flash-based, 246TB) while project directories are stored on the **Tier 1** (Disk-based, 2956TB). The placement policy can be adjusted, in example, for publicly shared datasets.
 
-* [Live status](https://hpc.uni.lu/live-status/motd/)
 {%
    include-markdown "home.md"
    end="<!--intro-end-->"

@@ -80,14 +80,12 @@ These resources can be reserved and allocated for the execution of jobs schedule
 [`iris`](systems/iris/index.md), in production since June 2017, is a Dell/Intel supercomputer with a theoretical peak performance of **1082 TFlop/s**, featuring 196 computing nodes (totalling 5824 computing cores) and 96 GPU accelerators (NVidia V100).
 
 [:fontawesome-solid-sign-in-alt: Iris Detailed system specifications](systems/iris/index.md){: .md-button .md-button--link }
-<!-- [:fontawesome-solid-tachometer-alt: Live status](https://hpc.uni.lu/live-status/motd/){: .md-button .md-button--link } -->
 
 ### Aion
 
 [`aion`](systems/aion/index.md), in production since October 2020, is a [Bull Sequana XH2000](https://atos.net/en/solutions/high-performance-computing-hpc/bullsequana-x-supercomputers)/AMD supercomputer offering a peak performance of **1692 TFlop/s**, featuring 318 compute nodes (totalling 40704 computing cores).
 
 [:fontawesome-solid-sign-in-alt: Aion Detailed system specifications](systems/aion/index.md){: .md-button .md-button--link }
-<!-- [:fontawesome-solid-tachometer-alt: Live status](https://hpc.uni.lu/live-status/motd/){: .md-button .md-button--link } -->
 
 
 ### GPFS/SpectrumScale File System (`$HOME`, project)
@@ -97,7 +95,6 @@ These resources can be reserved and allocated for the execution of jobs schedule
 It allows sharing **homedirs and project data** between users, systems, and eventually (i.e. if needed) with the "outside world".
 
 [:fontawesome-solid-sign-in-alt: GPFS/Spectrumscale Detailed specifications](filesystems/gpfs.md){: .md-button .md-button--link }
-<!-- [:fontawesome-solid-tachometer-alt: Live status](https://hpc.uni.lu/live-status/motd/){: .md-button .md-button--link } -->
 
 ### Lustre File System (`$SCRATCH`)
 
@@ -105,14 +102,12 @@ The [Lustre](http://lustre.org/) file system is an open-source, parallel file sy
 and is meant to host **temporary scratch data**.
 
 [:fontawesome-solid-sign-in-alt: Lustre Detailed specifications](filesystems/lustre.md){: .md-button .md-button--link }
-<!-- [:fontawesome-solid-tachometer-alt: Live status](https://hpc.uni.lu/live-status/motd/){: .md-button .md-button--link } -->
 
 ### OneFS File System (project, backup, archival)
 
 In 2014, the SIU, the UL HPC and the LCSB join their forces (and their funding) to acquire a scalable and modular NAS solution able to sustain the need for an internal big data storage, i.e. provides space for centralized data and backups of all devices used by the UL staff and all research-related data, including the one proceed on the UL HPC platform.
 A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) system is available on all ULHPC computational systems. It is intended for long term storage of data that is not frequently accessed. For more details, see [Isilon specifications](filesystems/isilon.md).
 
-<!-- [:fontawesome-solid-tachometer-alt: Live status](https://hpc.uni.lu/live-status/motd/){: .md-button .md-button--link } -->
 
 ### Fast Infiniband Network
 
@@ -155,7 +150,6 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 * [ULHPC Login/Access servers](connect/access.md)
 * [Troubleshooting connection problems](connect/troubleshooting.md)
 
-<!-- * [Live status](https://hpc.uni.lu/live-status/motd/) -->
 
 ## Data Management
 

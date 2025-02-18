@@ -11,8 +11,6 @@ It is available as a global _high_-performance file system on all ULHPC computat
 It is meant to host **temporary scratch data** within your jobs.
 In terms of raw storage capacities, it represents more than **1.6PB**.
 
-* [Live status](https://hpc.uni.lu/live-status/motd/)
-
 {%
    include-markdown "scratch.md"
    end="<!--intro-end-->"

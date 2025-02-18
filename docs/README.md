@@ -15,8 +15,6 @@ of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'
 
 ## ULHPC Web Portals
 
-[:fontawesome-solid-sign-in-alt: ULHPC Platform status](https://hpc.uni.lu/live-status/motd){: .md-button .md-button--link }
-
 * [ULHPC Tutorials](https://ulhpc-tutorials.readthedocs.io/) - tutorials for many HPC topics
 * [Helpdesk / Ticket Portal](https://hpc.uni.lu/support) - open tickets, make requests
 * [ULHPC Discourse](https://hpc-discourse.uni.lu/) - forum-like community portal

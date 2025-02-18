@@ -24,9 +24,9 @@ The ULHPC team  will schedule maintenance in one of three manners:
 We _normally_ inform users of cluster maintenance **at least 3 weeks in advance** by mail using the HPC User community mailing list (moderated): [`hpc-users@uni.lu`](mailto:hpc-users 'at' uni.lu).
 A second reminder is sent a few days prior to actual downtime.
 
-The news of the downtimes is also posted on the [Live status](https://hpc.uni.lu/live-status/motd/) page.
+The news of the downtimes is also posted on the [hpc/support/infra issue tracker](https://gitlab.com/uniluxembourg/hpc/support/infra/-/issues)/.
 
-Finally, a colored "_message of the day_" (motd) banner is displayed on all [access/login servers](../connect/access.md) such that you can quickly be informed of any incoming maintenance operation upon connection to the cluster.
+A colored "_message of the day_" (motd) banner is displayed on all [access/login servers](../connect/access.md) such that you can quickly be informed of any incoming maintenance operation upon connection to the cluster.
 You can see this when you login or (again),any time by issuing the command:
 
 ```console
