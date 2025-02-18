@@ -1,5 +1,5 @@
 
-[:fontawesome-solid-sign-in-alt: UL HPC Acceptable Use Policy (AUP) (pdf)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.1.pdf){: .md-button .md-button--link }
+[:fontawesome-solid-sign-in-alt: UL HPC Acceptable Use Policy (AUP) (pdf)](hpc-docs.uni.lu/policies/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.1.pdf){: .md-button .md-button--link }
 
 !!! warning
     Personal data is/may be visible, accessible or handled:

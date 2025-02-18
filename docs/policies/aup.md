@@ -8,10 +8,10 @@ The University extends access to its HPC resources (including facilities, servic
 <!--intro-start-->
 There are a number of policies which apply to ULHPC users.
 
-[:fontawesome-solid-download: UL HPC Acceptable Use Policy (AUP) [pdf] ](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.1.pdf){: .md-button .md-button--link }
+[:fontawesome-solid-download: UL HPC Acceptable Use Policy (AUP) [pdf] ](https://hpc-docs.uni.lu/policies/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.1.pdf){: .md-button .md-button--link }
 
 !!! danger "Important"
-    **All** users of UL HPC resources and PIs must abide by the [UL HPC Acceptable Use Policy (AUP)](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.1.pdf).
+    **All** users of UL HPC resources and PIs must abide by the [UL HPC Acceptable Use Policy (AUP)](https://hpc-docs.uni.lu/policies/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.1.pdf).
     You should read and keep a signed copy of this document before using the facility.
 
     Access and/or usage of any ULHPC system assumes the tacit acknowledgement to this policy.
@@ -22,7 +22,7 @@ The purpose of this document is to define the rules and terms governing acceptab
 
 ## Crediting ULHPC in your research
 
-One of the requirements stemming from the [AUP](https://hpc.uni.lu/download/documents/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.1.pdf), is to credit and acknowle the usage of the University of Luxembourg HPC facility for **ALL** publications and contributions having results and/or contents obtained or derived from that usage.
+One of the requirements stemming from the [AUP](https://hpc-docs.uni.lu/policies/Uni.lu-HPC-Facilities_Acceptable-Use-Policy_v2.1.pdf), is to credit and acknowledge the usage of the University of Luxembourg HPC facility for **ALL** publications and contributions having results and/or contents obtained or derived from that usage.
 
 ## Publication tagging
 
