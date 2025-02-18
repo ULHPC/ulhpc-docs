@@ -221,8 +221,6 @@ It is an open source, command line utility that empowers developers to protect s
 
 The biggest advantage of [git-crypt](https://github.com/AGWA/git-crypt) is that private data and public data can live in the same location.
 
-[:fontawesome-solid-sign-in-alt: Using Git-crypt to Protect Sensitive Data](https://hpc.uni.lu/blog/2018/using-git-crypt-to-protect-sensitive-data/){: .md-button .md-button--link }
-
 
 ## PetaSuite Protect
 

@@ -31,11 +31,11 @@ You are also requested to tag the publication(s) you have produced thanks to the
 * Login on [MyOrbiLu](https://orbilu.uni.lu/login)
 * Select your publication entry and click on the "Edit" button
 * Select the "2. Enrich" category at the top of the page
-* In the "Research center" field, enter "ulhpc" and select the proposition![](https://hpc.uni.lu/images/logo/orbilu_edit.gif)
+* In the "Research center" field, enter "ulhpc" and select the proposition![](https://hpc-docs.uni.lu/policies/images/orbilu_edit.gif)
 
 ![](images/orbilu_ulhpc_research_center.png)
 
 !!! important ""
     This tag is a very important indicator for us to quantify the concrete impact of the HPC facility on the research performed at the University.
 
-[:fontawesome-solid-sign-in-alt:  List of publications generated thanks to the UL HPC Platform](http://orbilu.uni.lu/simple-search?query=%28%28researchcenter%3AULHPC%29%29&title=Publications+generated+thanks+to+the+UL+HPC+Platform&sort_by0=1&order0=DESC&sort_by1=3&order1=ASC&sort_by2=2&order2=ASC){: .md-button .md-button--link }
+[:fontawesome-solid-sign-in-alt:  List of publications generated thanks to the UL HPC Platform](https://orbilu.uni.lu/simple-search?query=researchcenter_authority%3A%28ORG_30%29){: .md-button .md-button--link }

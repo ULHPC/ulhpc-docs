@@ -4,7 +4,7 @@
 
 We can setup for you a dedicated project directory on the [GPFS/SpectrumScale Filesystem](../filesystems/gpfs.md#global-project-directory-projecthomeworkprojects) for sharing research data with other colleagues.
 
-Whether to _create_ a new project directory or to add/remove members to the group set to access the project data, use the [Service Now HPC Support Portal](https://hpc.uni.luy/support).
+Whether to _create_ a new project directory or to add/remove members to the group set to access the project data, use the [Service Now HPC Support Portal](https://hpc.uni.lu/support).
 
 [:fontawesome-solid-hand-holding-medical: Service Now HPC Support Portal](https://hpc.uni.lu/support){: .md-button .md-button--link }
 
@@ -37,7 +37,7 @@ sacctmgr show account where name=project_<name> format="account%20,user%20,Share
 As per [HPC Resource Allocations for Research Project](../policies/usage-charging.md#hpc-resource-allocations-for-research-project), creation of such project accounts is **mandatory for funded research projects**, since [usage charging](../policies/usage-charging.md) may occur when a detailed reporting will be provided for auditing purposes.
 
 With the help of the University Research Support department, we will create automatically project accounts from the list of accepted project which acknowledge the need of computing resources.
-Feel free nethertheless to use the [Service Now HPC Support Portal](https://hpc.uni.luy/support) to request the _creation_ of a new project account or to add/remove members to the group - this might be **pertinent for internal research projects or specific collaboration with external partners requiring a separate usage monitoring**.
+Feel free nevertheless to use the [Service Now HPC Support Portal](https://hpc.uni.lu/support) to request the _creation_ of a new project account or to add/remove members to the group - this might be **pertinent for internal research projects or specific collaboration with external partners requiring a separate usage monitoring**.
 
 !!! important
-    Project account is a natural way to access the higher priority [QOS](../slurm/qos.md) not granted by default to your personnal account on the ULHPC. For instance, the [`high` QOS](../slurm/qos.md) is automatically granted as soon as a contribution to the HPC budget line is performed by the project.
+    Project account is a natural way to access the higher priority [QOS](../slurm/qos.md) not granted by default to your personal account on the ULHPC. For instance, the [`high` QOS](../slurm/qos.md) is automatically granted as soon as a contribution to the HPC budget line is performed by the project.

@@ -91,47 +91,48 @@ Alternatively, you may want to save the configuration of this connection (and cr
 Now you'll be able to issue the following (simpler) command to connect to the cluster and obtain the welcome banner:
 
     (your_workstation)$> ssh iris-cluster
-    ==================================================================================
-     Welcome to access2.iris-cluster.uni.lux
-    ==================================================================================
-                              _                         ____
-                             / \   ___ ___ ___  ___ ___|___ \
-                            / _ \ / __/ __/ _ \/ __/ __| __) |
-                           / ___ \ (_| (_|  __/\__ \__ \/ __/
-                          /_/   \_\___\___\___||___/___/_____|
+    ================================================================================
+      Welcome to access1.iris-cluster.uni.lux
+      WARNING: For use by authorized users only!
                    _____      _        ____ _           _          __
                   / /_ _|_ __(_)___   / ___| |_   _ ___| |_ ___ _ _\ \
                  | | | || '__| / __| | |   | | | | / __| __/ _ \ '__| |
                  | | | || |  | \__ \ | |___| | |_| \__ \ ||  __/ |  | |
                  | ||___|_|  |_|___/  \____|_|\__,_|___/\__\___|_|  | |
                   \_\                                              /_/
-    ==================================================================================
     
-    === Computing Nodes ========================================= #RAM/n === #Cores ==
-     iris-[001-108] 108 Dell C6320 (2 Xeon E5-2680v4@2.4GHz [14c/120W]) 128GB  3024
-     iris-[109-168]  60 Dell C6420 (2 Xeon Gold 6132@2.6GHz [14c/140W]) 128GB  1680
-     iris-[169-186]  18 Dell C4140 (2 Xeon Gold 6132@2.6GHz [14c/140W]) 768GB   504
-                    +72 GPU  (4 Tesla V100 [5120c CUDA + 640c Tensor])   16GB +368640
-     iris-[187-190]   4 Dell R840 (4 Xeon Platin.8180M@2.5GHz [28c/205W]) 3TB   448
-     iris-[191-196]   6 Dell C4140 (2 Xeon Gold 6132@2.6GHz [14c/140W]) 768GB   168
-                    +24 GPU  (4 Tesla V100 [5120c CUDA + 640c Tensor])   32GB +122880
-    ==================================================================================
-      *** TOTAL: 196 nodes, 5824 cores + 491520 CUDA cores + 61440 Tensor cores ***
+    === Support and community ======================================================
     
-     Fast interconnect using InfiniBand EDR 100 Gb/s technology
-     Shared Storage (raw capacity): 2180 TB (GPFS) + 1300 TB (Lustre) = 3480 TB
+      - Technical Docs ........... https://hpc-docs.uni.lu
+      - Discourse / Forum ........ https://hpc-discourse.uni.lu/
+      - Helpdesk / Service Now ... https://hpc.uni.lu/support
+      - User Mailing-list ........ hpc-users@uni.lu
     
-     Support (in this order!)                       Platform notifications
-       - User DOC ........ https://hpc.uni.lu/docs    - Twitter: @ULHPC
-       - FAQ ............. https://hpc.uni.lu/faq
-       - Mailing-list .... hpc-users@uni.lu
-       - Bug reports .NEW. https://hpc.uni.lu/support (Service Now)
-       - Admins .......... hpc-team@uni.lu (OPEN TICKETS)
-    ==================================================================================
-     /!\ NEVER COMPILE OR RUN YOUR PROGRAMS FROM THIS FRONTEND !
-         First reserve your nodes (using srun/sbatch(1))
-    Linux access2.iris-cluster.uni.lux 3.10.0-957.21.3.el7.x86_64 x86_64
-     15:51:56 up 6 days,  2:32, 39 users,  load average: 0.59, 0.68, 0.54
+    === HPC utilization as of 2025-02-18 15h00 =====================================
+    
+      AION  batch    74.42%
+      IRIS  batch    47.94%
+      IRIS  gpu      85.42%
+      IRIS  bigmem   51.79%
+    
+    === Status =====================================================================
+    
+     New environment modules (env/development/2023b env/release/default env/release/2020b)
+     The default module currently points to 'env/release/2020b' 
+          but will be updated to 2023b upon release.
+     Add 'module use env/release/2020b' to your scripts to ensure that
+          they will continue working after the switch.
+    
+     Cluster maintenance complete (https://gitlab.com/uniluxembourg/hpc/support/infra/-/issues/29)
+     - General update to latest RedHat 8.10
+     - Slurm update to 23.11.10
+     - General security update
+     - New software set release (foss 2023a toolchain)
+    
+    ================================================================================
+    Last login: Tue Feb 18 10:40:24 2025 from 10.187.28.101
+    Linux access1.iris-cluster.uni.lux 4.18.0-553.34.1.el8_10.x86_64 x86_64
+     15:09:51 up 19 days, 5 min, 41 users,  load average: 2.24, 2.55, 3.79
     [yourlogin@access2 ~]$ 
 
 # Activate the SSH agent

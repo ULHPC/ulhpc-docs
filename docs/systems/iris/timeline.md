@@ -40,7 +40,7 @@ Delivery and installation of the `iris` cluster composed of:
 * End of cluster validation
 * 8 new regular nodes added
     - `iris-[101-108]`, Dell PowerEdge C6320, 8 nodes, 224 cores, 1.024 TB RAM
-* Official release of the `iris` cluster for production on **June 12, 2017** at the occasion of the [UL HPC Scool 2017](https://hpc.uni.lu/hpc-school/2017/06/index.html).
+* Official release of the `iris` cluster for production on **June 12, 2017** at the occasion of the UL HPC School 2017.
 
 ### October 2017
 

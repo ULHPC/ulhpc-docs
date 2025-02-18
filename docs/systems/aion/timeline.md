@@ -63,7 +63,7 @@ See also [:fontawesome-solid-sign-in-alt: Atos Press Release](https://atos.net/e
 
 ### February-March 2020: Start of global COVID-19 crisis
 
-* [COVID-19 Impact on HPC Activities](https://hpc.uni.lu/blog/2020/covid-19-impact-on-incoming-hpc-activities/)
+* COVID-19 Impact on HPC Activities
     - all operations tied to the preparation and installation of the new `aion` cluster are postponed
     - ULHPC systems remain operational, technical and non-technical staff are working remotely from home
     - Global worldwide delays on hardware equipment production and shipment
@@ -141,10 +141,10 @@ See also [:fontawesome-solid-sign-in-alt: Atos Press Release](https://atos.net/e
 
 ### Oct - Nov 2021
 
-* [Official production release of Aion supercomputer](https://hpc.uni.lu/blog/2021-10-03-official-production-release-of-the-aion-supercomputer)
+* Official production release of Aion supercomputer
 * [Inauguration](https://www.uni.lu/en/news/university-of-luxembourg-strengthens-its-computing-capacities/) of Aion Supercomputer
 
-[![](https://hpc.uni.lu/download/slides/2021-11-10_Aion-inauguration_keynote_svarrette.png)](https://hpc.uni.lu/download/slides/2021-11-10_Aion-inauguration_keynote_svarrette.pdf)
+[![](https://hpc-docs.uni.lu/systems/aion/images/2021-11-10_Aion-inauguration_keynote_svarrette.png)](https://hpc-docs.uni.lu/systems/aion/2021-11-10_Aion-inauguration_keynote_svarrette.pdf)
 
-* 11<sup>th</sup> [ULHPC School 2021](https://hpc.uni.lu/education/hpcschool)
-    - relies in Aion for its [practical sessions](https://hpc.uni.lu/education/hpcschool#program)
+* 11<sup>th</sup> ULHPC School 2021
+    - relies in Aion for its practical sessions

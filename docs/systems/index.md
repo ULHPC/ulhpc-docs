@@ -3,9 +3,9 @@
 ![](../images/plots/plot_piechart_compute_cluster.png){: style="width:300px;"}
 ![](../images/plots/plot_piechart_storage_fs.png){: style="width:300px;"}
 
-For more details, see the [reference ULHPC Article](https://hpc.uni.lu/about/publications#ul-hpc-reference-article):
+For more details, see the [reference ULHPC Article](https://orbilu.uni.lu/handle/10993/51857):
 
-> __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/51857) | [ULHPC blog post](https://hpc.uni.lu/blog/2022-07-10-acm-hpcct22) | [slides](https://hpc.uni.lu/download/slides/2022-07-10-ACM-HPCCT22.pdf):<br/>
+> __ACM Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/51857) | [slides](https://hpc-docs.uni.lu/system/2022-07-10-ACM-HPCCT22.pdf):<br/>
 > Sebastien Varrette, Hyacinthe Cartiaux, Sarah Peter, Emmanuel Kieffer, Teddy Valette, and Abatcha Olloh. 2022. Management of an Academic HPC & Research Computing Facility: The ULHPC Experience 2.0. In 6th High Performance Computing and Cluster Technologies Conference (HPCCT 2022), July 08-10, 2022, Fuzhou, China. ACM, New York, NY, USA, 14 pages.
 > https://doi.org/10.1145/3560442.3560445
 
@@ -15,7 +15,7 @@ For more details, see the [reference ULHPC Article](https://hpc.uni.lu/about/pub
 
 With the advent of the technological revolution and the digital transformation that made all scientific disciplines becoming computational nowadays, High-Performance Computing (HPC) is increasingly identified as a strategic asset and enabler to accelerate the research performed in all areas requiring intensive computing and large-scale Big Data analytic capabilities.
 
-**The [University of Luxembourg](https://www.uni.lu/research-en/core-facilities/) (UL) operates since 2007 a large academic HPC facility** that remained the **reference HPC implementation** within the country until 2021, offering a **cutting-edge research infrastructure** to Luxembourg public research while serving as edge access to the Euro-HPC Luxembourg supercomputer operated by [LuxProvide](http://www.lxp.lu) and more focused at serving the private sector.
+**The [University of Luxembourg](https://hpc.uni.lu/) (UL) operates since 2007 a large academic HPC facility** that remained the **reference HPC implementation** within the country until 2021, offering a **cutting-edge research infrastructure** to Luxembourg public research while serving as edge access to the Euro-HPC Luxembourg supercomputer operated by [LuxProvide](http://www.lxp.lu) and more focused at serving the private sector.
 Special focus was laid for the ULHPC facility on the development of large computing power combined with huge data storage capacity to accelerate the research performed in intensive computing and large-scale data analytic (Big Data).
 This was made possible through an ambitious funding strategy enabled from the early stage of the HPC developments, which was supported at the rectorate level to establish the HPC strategy as transversal to all research domains.
 
@@ -23,8 +23,8 @@ For more details: [:fontawesome-solid-sign-in-alt: hpc.uni.lu](https://hpc.uni.l
 
 ## Capacity evolution
 
-The historically first production system installed in 2007 has been [Chaos](https://hpc.uni.lu/systems/chaos/) with a final theoretical peak performance of 14.5 TFlop/s.
-[Gaia](https://hpc.uni.lu/systems/gaia/) was then launched in 2011 as a replacement to reach a theoretical peak performance of 145.5 TFlops. It was the first computing cluster introducing GPU accelerators to our users.
+The historically first production system installed in 2007 has been Chaos with a final theoretical peak performance of 14.5 TFlop/s.
+Gaia was then launched in 2011 as a replacement to reach a theoretical peak performance of 145.5 TFlops. It was the first computing cluster introducing GPU accelerators to our users.
 Both systems were kept running until their decommissioning in 2019.
 
 !!! info
@@ -38,14 +38,14 @@ The below figures illustrates the evolution of the computing and storage capacit
 
 ## Experimental systems
 
-We maintain (or used to maintain) several experimental systems in parallel (`nyx`, a testing cluster, `pyro`, an OpenStack-based cluster, `viridis`, a low-power ARM-based cluster). As of now, only our experimental [Grid'5000](https://hpc.uni.lu/systems/g5k/) clusters are still maintained.
+We maintain (or used to maintain) several experimental systems in parallel (`nyx`, a testing cluster, `pyro`, an OpenStack-based cluster, `viridis`, a low-power ARM-based cluster). As of now, only our experimental [Grid'5000](https://www.grid5000.fr/) clusters are still maintained.
 
 
 ## Usage
 
 The below figure outline the cumulative usage (in CPU Years) of the production clusters within the ULHPC facility for the time period 2015-2019.
 
-* During their lifetime, [Gaia](https://hpc.uni.lu/systems/gaia/) and [Chaos](https://hpc.uni.lu/systems/chaos/) processed respectively **4.5 million and 1.7 million jobs**, cumulating **13835 Years of CPU Time usage**.
+* During their lifetime, Gaia and Chaos processed respectively **4.5 million and 1.7 million jobs**, cumulating **13835 Years of CPU Time usage**.
 
 ![](../images/plots/plot_ulhpc_cluster_utilization.png)
 
