@@ -1,5 +1,4 @@
-# ULHPC Slurm QOS 2.0
-
+# ULHPC Slurm QOS
 
 [Quality of Service](https://slurm.schedmd.com/qos.html) or QOS is used to
 constrain or modify the characteristics that a job can have.
