@@ -25,15 +25,16 @@ jobs](../jobs/best-effort.md) and is named `besteffort`.
 
 <!--qos-start-->
 
-| QOS          (partition)      | Prio | GrpTRES | MaxTresPJ | MaxJobPU | MaxWall     |
-|-------------------------------|------|---------|-----------|----------|-------------|
-| `besteffort`  (*)             | 1    |         |           | 50       |             |
-| `low`         (*)             | 10   |         |           | 2        |             |
-| `normal`      (*)             | 100  |         |           | 50       |             |
-| `long`        (*)             | 100  | node=6  | node=2    | 4        | 14-00:00:00 |
-| `debug`       (`interactive`) | 150  | node=8  |           | 10       |             |
-| `high`        (*)             | 200  |         |           | 50       |             |
-| `urgent`      (*)             | 1000 |         |           | 100      |             |
+| QOS          (partition)       | Prio | GrpTRES | MaxTresPJ | MaxJobPU | MaxWall     |
+|--------------------------------|------|---------|-----------|----------|-------------|
+| `besteffort`  (\*)             | 1    |         |           | 300      | 50-00:00:00 |
+| `low`         (\*)             | 10   |         |           | 4        |             |
+| `normal`      (\*)             | 100  |         |           | 50       |             |
+| `long`        (\*)             | 100  | node=24 | node=2    | 4        | 14-00:00:00 |
+| `debug`       (`interactive`)  | 150  | node=50 |           | 10       |             |
+| `high`        (\*)             | 200  |         |           | 50       |             |
+| `urgent`      (\*)             | 1000 |         |           | 100      |             |
+| `wide`        (\*)             | 100  |         | node=160  | 10       | 0-02:00:00  |
 
 <!--qos-end-->
 
@@ -46,16 +47,18 @@ Use the `sqos` utility function to list the existing QOS limits.
 !!! example "List current ULHPC QOS limits with `sqos`"
     ```console
     $ sqos
-    \# sacctmgr show qos  format="name%20,preempt,priority,GrpTRES,MaxTresPerJob,MaxJobsPerUser,MaxWall,flags"
+    # sacctmgr show qos  format="name%20,preempt,priority,GrpTRES,MaxTresPerJob,MaxJobsPerUser,MaxWall,flags"
                     Name    Preempt   Priority       GrpTRES       MaxTRES MaxJobsPU     MaxWall                Flags
     -------------------- ---------- ---------- ------------- ------------- --------- ----------- --------------------
                   normal besteffort        100                                   100                      DenyOnLimit
-              besteffort                     1                                   300                        NoReserve
+              besteffort                     1                                   300 50-00:00:00            NoReserve
                      low besteffort         10                                     4                      DenyOnLimit
                     high besteffort        200                                    50                      DenyOnLimit
                   urgent besteffort       1000                                   100                      DenyOnLimit
-                   debug besteffort        150        node=8                      10                      DenyOnLimit
-                    long besteffort        100        node=6        node=2         4 14-00:00:00 DenyOnLimit,Partiti+
+                   debug besteffort        150       node=50                      10                      DenyOnLimit
+                    long besteffort        100       node=24        node=2         4 14-00:00:00 DenyOnLimit,Partiti+
+                   admin besteffort       1000                                                            DenyOnLimit
+                    wide besteffort        100                    node=160        10    02:00:00          DenyOnLimit
     ```
 
 <!--limits-end-->
