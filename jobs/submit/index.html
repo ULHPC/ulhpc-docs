@@ -1,0 +1,3645 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ULHPC Technical Documentation">
+      
+      
+        <link rel="canonical" href="https://hpc-docs.uni.lu/jobs/submit/">
+      
+      
+        <meta name="author" content="Uni.lu HPC (ULHPC) Team">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.3">
+    
+    
+      
+        <title>Passive/Batch Job - ULHPC Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.62d34fff.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.c8acc6db.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#regular-jobs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-header-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            ULHPC Technical Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Passive/Batch Job
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    ULHPC Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../hpc-schools/" title="HPC Trainings and Tutorials" class="md-nav__link">
+      HPC Trainings and Tutorials
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Accounts
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Accounts" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Accounts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/" title="Get an Account" class="md-nav__link">
+      Get an Account
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/passwords/" title="Password Policy" class="md-nav__link">
+      Password Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/collaboration_accounts/" title="Collaboration Accounts" class="md-nav__link">
+      Collaboration Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/projects/" title="Projects Accounts" class="md-nav__link">
+      Projects Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ipa/" title="Identity Management Portal" class="md-nav__link">
+      Identity Management Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/accounts/" title="Slurm Account Hierarchy" class="md-nav__link">
+      Slurm Account Hierarchy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../teaching-with-the-ulhpc/" title="Teaching with the ULHPC" class="md-nav__link">
+      Teaching with the ULHPC
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Data Center
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Center" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Center
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data-center/" title="Centre de Calcul (CDC)" class="md-nav__link">
+      Centre de Calcul (CDC)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      ULHPC Supercomputers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="ULHPC Supercomputers" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        ULHPC Supercomputers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Aion
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Aion" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Aion
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/" title="Aion System" class="md-nav__link">
+      Aion System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-3" type="checkbox" id="nav-7-3">
+    
+    <label class="md-nav__link" for="nav-7-3">
+      Iris
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Iris" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Iris
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/" title="Iris System" class="md-nav__link">
+      Iris System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Interconnect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Interconnect" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Interconnect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interconnect/ib/" title="Fast Infiniband Interconnect" class="md-nav__link">
+      Fast Infiniband Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interconnect/ethernet/" title="Ethernet Interconnect" class="md-nav__link">
+      Ethernet Interconnect
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Storage Systems
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Storage Systems" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Storage Systems
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/gpfs/" title="GPFS/SpectrumScale" class="md-nav__link">
+      GPFS/SpectrumScale
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/lustre/" title="Lustre" class="md-nav__link">
+      Lustre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/isilon/" title="OneFS Isilon" class="md-nav__link">
+      OneFS Isilon
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Access/Connect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Access/Connect" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Access/Connect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/access/" title="Access/Login Servers" class="md-nav__link">
+      Access/Login Servers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ssh/" title="SSH" class="md-nav__link">
+      SSH
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ipa/" title="Identity Management (IdM/IPA)" class="md-nav__link">
+      Identity Management (IdM/IPA)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ood/" title="Open On Demand Portal" class="md-nav__link">
+      Open On Demand Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Data Management
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Management" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/layout/" title="Global Directory Structure" class="md-nav__link">
+      Global Directory Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/sharing/" title="Data Sharing" class="md-nav__link">
+      Data Sharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/transfer/" title="Data Transfer" class="md-nav__link">
+      Data Transfer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/gdpr/" title="GDPR Compliance" class="md-nav__link">
+      GDPR Compliance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/quotas/" title="Quotas" class="md-nav__link">
+      Quotas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/project/" title="Project Data Management" class="md-nav__link">
+      Project Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/lfs/" title="Scratch Data Management" class="md-nav__link">
+      Scratch Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/backups/" title="Backups" class="md-nav__link">
+      Backups
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/unix-file-permissions/" title="Unix File Permissions" class="md-nav__link">
+      Unix File Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/encryption/" title="Sensitive Data Protection" class="md-nav__link">
+      Sensitive Data Protection
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+    
+    <label class="md-nav__link" for="nav-12">
+      Environment
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Environment" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Environment
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/modules/" title="Modules" class="md-nav__link">
+      Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/easybuild/" title="Easybuild" class="md-nav__link">
+      Easybuild
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/conda/" title="Conda" class="md-nav__link">
+      Conda
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+    
+    <label class="md-nav__link" for="nav-13">
+      Policies
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Policies" data-md-level="1">
+      <label class="md-nav__title" for="nav-13">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Policies
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/aup/" title="Acceptable Use Policy (AUP)" class="md-nav__link">
+      Acceptable Use Policy (AUP)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/maintenance/" title="Downtime and Maintenance" class="md-nav__link">
+      Downtime and Maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging/" title="Usage Charging Policy" class="md-nav__link">
+      Usage Charging Policy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
+    
+    <label class="md-nav__link" for="nav-14">
+      Running Jobs
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Running Jobs" data-md-level="1">
+      <label class="md-nav__title" for="nav-14">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Running Jobs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/" title="Slurm Overview" class="md-nav__link">
+      Slurm Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/commands/" title="Convenient Slurm Commands" class="md-nav__link">
+      Convenient Slurm Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/partitions/" title="Partition/Queues" class="md-nav__link">
+      Partition/Queues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/qos/" title="Quality of Service (QOS)" class="md-nav__link">
+      Quality of Service (QOS)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/accounts/" title="Account Hierarchy" class="md-nav__link">
+      Account Hierarchy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reason-codes/" title="Job State and Reason Code" class="md-nav__link">
+      Job State and Reason Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/fairsharing/" title="Fairsharing" class="md-nav__link">
+      Fairsharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../priority/" title="Job Priority and Backfilling" class="md-nav__link">
+      Job Priority and Backfilling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../billing/" title="Job Accounting and Billing" class="md-nav__link">
+      Job Accounting and Billing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../interactive/" title="Interactive Job" class="md-nav__link">
+      Interactive Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Passive/Batch Job
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Passive/Batch Job" class="md-nav__link md-nav__link--active">
+      Passive/Batch Job
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sbatch-pathtolauncher" class="md-nav__link">
+    sbatch [...] /path/to/launcher
+  </a>
+  
+    <nav class="md-nav" aria-label="sbatch [...] /path/to/launcher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#job-submission-option" class="md-nav__link">
+    Job Submission Option
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#careful-monitoring-of-your-jobs" class="md-nav__link">
+    Careful Monitoring of your Jobs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#joiningmonitoring-running-jobs" class="md-nav__link">
+    Joining/monitoring running jobs
+  </a>
+  
+    <nav class="md-nav" aria-label="Joining/monitoring running jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sjoin" class="md-nav__link">
+    sjoin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clustershell" class="md-nav__link">
+    ClusterShell
+  </a>
+  
+    <nav class="md-nav" aria-label="ClusterShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodeset" class="md-nav__link">
+    nodeset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clush" class="md-nav__link">
+    clush
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pestat-cpumem-usage-report" class="md-nav__link">
+    pestat: CPU/Mem usage report
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-guidelines" class="md-nav__link">
+    General Guidelines
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-past-jobs-efficiency" class="md-nav__link">
+    Monitoring past jobs efficiency
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoring past jobs efficiency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seff" class="md-nav__link">
+    seff
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#susage" class="md-nav__link">
+    susage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gpu/" title="GPU Jobs" class="md-nav__link">
+      GPU Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../long/" title="Long Jobs" class="md-nav__link">
+      Long Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../best-effort/" title="Best-effort Jobs" class="md-nav__link">
+      Best-effort Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/launchers/" title="Launcher Scripts Examples" class="md-nav__link">
+      Launcher Scripts Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../services/jupyter/" title="Jupyter Notebook" class="md-nav__link">
+      Jupyter Notebook
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
+    
+    <label class="md-nav__link" for="nav-15">
+      Software
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software" data-md-level="1">
+      <label class="md-nav__title" for="nav-15">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-1" type="checkbox" id="nav-15-1">
+    
+    <label class="md-nav__link" for="nav-15-1">
+      Supported Software List
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Supported Software List" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Supported Software List
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/all_softwares/" title="Full List (alphabetical order)" class="md-nav__link">
+      Full List (alphabetical order)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/bio/" title="Biology" class="md-nav__link">
+      Biology
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/cae/" title="CFD/Finite element modelling" class="md-nav__link">
+      CFD/Finite element modelling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/chem/" title="Chemistry" class="md-nav__link">
+      Chemistry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/compiler/" title="Compilers" class="md-nav__link">
+      Compilers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/data/" title="Data processing" class="md-nav__link">
+      Data processing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/debugger/" title="Debugging" class="md-nav__link">
+      Debugging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/devel/" title="Development" class="md-nav__link">
+      Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/lang/" title="Programming Languages" class="md-nav__link">
+      Programming Languages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/lib/" title="Libraries" class="md-nav__link">
+      Libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/math/" title="Mathematics" class="md-nav__link">
+      Mathematics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/mpi/" title="MPI" class="md-nav__link">
+      MPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/numlib/" title="Numerical libraries" class="md-nav__link">
+      Numerical libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/perf/" title="Performance measurements" class="md-nav__link">
+      Performance measurements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/phys/" title="Physics" class="md-nav__link">
+      Physics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/system/" title="System-level software" class="md-nav__link">
+      System-level software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/toolchain/" title="Toolchains (software stacks)" class="md-nav__link">
+      Toolchains (software stacks)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/tools/" title="Utilities" class="md-nav__link">
+      Utilities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/vis/" title="Visualisation" class="md-nav__link">
+      Visualisation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-2" type="checkbox" id="nav-15-2">
+    
+    <label class="md-nav__link" for="nav-15-2">
+      Software Sets
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/2019b/" title="2019b" class="md-nav__link">
+      2019b
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/2020b/" title="2020a" class="md-nav__link">
+      2020a
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/build/" title="Compiling/building your own software" class="md-nav__link">
+      Compiling/building your own software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/eessi/" title="EESSI software stack" class="md-nav__link">
+      EESSI software stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../containers/" title="Containers" class="md-nav__link">
+      Containers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-6" type="checkbox" id="nav-15-6">
+    
+    <label class="md-nav__link" for="nav-15-6">
+      Computer Aided Eng. (CAE)
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computer Aided Eng. (CAE)" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computer Aided Eng. (CAE)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/fenics/" title="FEniCS" class="md-nav__link">
+      FEniCS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/ansys/" title="ANSYS" class="md-nav__link">
+      ANSYS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/openfoam/" title="OpenFOAM" class="md-nav__link">
+      OpenFOAM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/abaqus/" title="Abaqus" class="md-nav__link">
+      Abaqus
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/fds/" title="FDS" class="md-nav__link">
+      FDS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/meshing-tools/" title="Meshing-Tools" class="md-nav__link">
+      Meshing-Tools
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-7" type="checkbox" id="nav-15-7">
+    
+    <label class="md-nav__link" for="nav-15-7">
+      Physics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Physics" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Physics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/physics/wrf/" title="WRF" class="md-nav__link">
+      WRF
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8" type="checkbox" id="nav-15-8">
+    
+    <label class="md-nav__link" for="nav-15-8">
+      Computational Chemistry
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computational Chemistry" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computational Chemistry
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8-1" type="checkbox" id="nav-15-8-1">
+    
+    <label class="md-nav__link" for="nav-15-8-1">
+      Electronics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Electronics" data-md-level="3">
+      <label class="md-nav__title" for="nav-15-8-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Electronics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/abinit/" title="ABINIT" class="md-nav__link">
+      ABINIT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/ase/" title="ASE" class="md-nav__link">
+      ASE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/meep/" title="MEEP" class="md-nav__link">
+      MEEP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/quantum-espresso/" title="Quantum Espresso" class="md-nav__link">
+      Quantum Espresso
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/vasp/" title="VASP" class="md-nav__link">
+      VASP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-8-2" type="checkbox" id="nav-15-8-2">
+    
+    <label class="md-nav__link" for="nav-15-8-2">
+      Molecular Dynamics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Molecular Dynamics" data-md-level="3">
+      <label class="md-nav__title" for="nav-15-8-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Molecular Dynamics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/cp2k/" title="CP2K" class="md-nav__link">
+      CP2K
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/gromacs/" title="GROMACS" class="md-nav__link">
+      GROMACS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/namd/" title="NAMD" class="md-nav__link">
+      NAMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/nwchem/" title="NWCHEM" class="md-nav__link">
+      NWCHEM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/helping-libraries/" title="Helping Libraries" class="md-nav__link">
+      Helping Libraries
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-9" type="checkbox" id="nav-15-9">
+    
+    <label class="md-nav__link" for="nav-15-9">
+      Mathematics & Statistics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Mathematics & Statistics" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Mathematics & Statistics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/matlab/" title="MATLAB" class="md-nav__link">
+      MATLAB
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/mathematica/" title="MATHEMATICA" class="md-nav__link">
+      MATHEMATICA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/stata/" title="Stata" class="md-nav__link">
+      Stata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/julia/" title="Julia" class="md-nav__link">
+      Julia
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/optim/" title="Optimizers" class="md-nav__link">
+      Optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-11" type="checkbox" id="nav-15-11">
+    
+    <label class="md-nav__link" for="nav-15-11">
+      Visualization
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Visualization" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Visualization
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/visu/paraview/" title="ParaView" class="md-nav__link">
+      ParaView
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16" type="checkbox" id="nav-16">
+    
+    <label class="md-nav__link" for="nav-16">
+      Development
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Development" data-md-level="1">
+      <label class="md-nav__title" for="nav-16">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Development
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16-1" type="checkbox" id="nav-16-1">
+    
+    <label class="md-nav__link" for="nav-16-1">
+      Performance/Debugging
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Performance/Debugging" data-md-level="2">
+      <label class="md-nav__title" for="nav-16-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Performance/Debugging
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/arm-forge/" title="Arm Forge" class="md-nav__link">
+      Arm Forge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/vtune/" title="Intel VTune" class="md-nav__link">
+      Intel VTune
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/advisor/" title="Intel Advisor" class="md-nav__link">
+      Intel Advisor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/inspector/" title="Intel Inspector" class="md-nav__link">
+      Intel Inspector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/itac/" title="Intel Trace Analyzer and Collector" class="md-nav__link">
+      Intel Trace Analyzer and Collector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/scalasca/" title="Scalasca" class="md-nav__link">
+      Scalasca
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/valgrind/" title="Valgrind" class="md-nav__link">
+      Valgrind
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/aps/" title="APS" class="md-nav__link">
+      APS
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-16-2" type="checkbox" id="nav-16-2">
+    
+    <label class="md-nav__link" for="nav-16-2">
+      Containers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Containers" data-md-level="2">
+      <label class="md-nav__title" for="nav-16-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Containers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../containers/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../services/" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-18" type="checkbox" id="nav-18">
+    
+    <label class="md-nav__link" for="nav-18">
+      Help and Support
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Help and Support" data-md-level="1">
+      <label class="md-nav__title" for="nav-18">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Help and Support
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-19" type="checkbox" id="nav-19">
+    
+    <label class="md-nav__link" for="nav-19">
+      Contributing
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Contributing" data-md-level="1">
+      <label class="md-nav__title" for="nav-19">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Contributing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/versioning/" title="Semantic Versioning" class="md-nav__link">
+      Semantic Versioning
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-20" type="checkbox" id="nav-20">
+    
+    <label class="md-nav__link" for="nav-20">
+      Web Portals
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Web Portals" data-md-level="1">
+      <label class="md-nav__title" for="nav-20">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Web Portals
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu" title="ULHPC Website" class="md-nav__link">
+      ULHPC Website
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc-docs.uni.lu" title="Technical Documentation" class="md-nav__link">
+      Technical Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://ulhpc-tutorials.readthedocs.io/" title="ULHPC Tutorials" class="md-nav__link">
+      ULHPC Tutorials
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sbatch-pathtolauncher" class="md-nav__link">
+    sbatch [...] /path/to/launcher
+  </a>
+  
+    <nav class="md-nav" aria-label="sbatch [...] /path/to/launcher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#job-submission-option" class="md-nav__link">
+    Job Submission Option
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#careful-monitoring-of-your-jobs" class="md-nav__link">
+    Careful Monitoring of your Jobs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#joiningmonitoring-running-jobs" class="md-nav__link">
+    Joining/monitoring running jobs
+  </a>
+  
+    <nav class="md-nav" aria-label="Joining/monitoring running jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sjoin" class="md-nav__link">
+    sjoin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clustershell" class="md-nav__link">
+    ClusterShell
+  </a>
+  
+    <nav class="md-nav" aria-label="ClusterShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodeset" class="md-nav__link">
+    nodeset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clush" class="md-nav__link">
+    clush
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pestat-cpumem-usage-report" class="md-nav__link">
+    pestat: CPU/Mem usage report
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-guidelines" class="md-nav__link">
+    General Guidelines
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-past-jobs-efficiency" class="md-nav__link">
+    Monitoring past jobs efficiency
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoring past jobs efficiency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seff" class="md-nav__link">
+    seff
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#susage" class="md-nav__link">
+    susage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/ULHPC/ulhpc-docs/blob/master/docs/jobs/submit.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="regular-jobs">Regular Jobs<a class="headerlink" href="#regular-jobs" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Node Type</strong></th>
+<th><strong>Slurm command</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">regular</td>
+<td><code>sbatch [-A &lt;project&gt;] -p batch  [--qos {high,urgent}] [-C {broadwell,skylake}] [...]</code></td>
+</tr>
+<tr>
+<td align="center">gpu</td>
+<td><code>sbatch [-A &lt;project&gt;] -p gpu    [--qos {high,urgent}] [-C volta[32]] -G 1 [...]</code></td>
+</tr>
+<tr>
+<td align="center">bigmem</td>
+<td><code>sbatch [-A &lt;project&gt;] -p bigmem [--qos {high,urgent}] [...]</code></td>
+</tr>
+</tbody>
+</table>
+<p><a class="md-button md-button--link" href="../../slurm/commands/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"/></svg></span> Main Slurm commands</a>
+<a class="md-button md-button--link" href="../../slurm/#specific-resource-allocation"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"/></svg></span> Resource Allocation guide</a></p>
+<h2 id="sbatch-pathtolauncher"><code>sbatch [...] /path/to/launcher</code><a class="headerlink" href="#sbatch-pathtolauncher" title="Permanent link">&para;</a></h2>
+<!-- BEGIN INCLUDE ../slurm/commands.md &lt;!--sbatch-start--&gt; &lt;!--sbatch-end--&gt; -->
+
+<p><a href="https://slurm.schedmd.com/sbatch.html"><code>sbatch</code></a> is used to submit a batch <em>launcher script</em> for later execution, corresponding to <em>batch/passive submission mode</em>.
+The script will typically contain one or more <code>srun</code> commands to launch parallel tasks.
+Upon submission with <code>sbatch</code>, Slurm will:</p>
+<ul>
+<li>allocate resources (nodes, tasks, partition, constraints, etc.)</li>
+<li>runs a single <strong>copy</strong> of the batch script on the <em>first</em> allocated node<ul>
+<li>in particular, if you depend on other scripts, ensure you have refer to them with the <em>complete</em> path toward them.</li>
+</ul>
+</li>
+</ul>
+<p>When you submit the job, Slurm responds with the job's ID, which will be used to identify this job in reports from Slurm.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /!\ ADAPT path to launcher accordingly</span>
+$ sbatch &lt;path/to/launcher&gt;.sh
+Submitted batch job <span class="m">864933</span>
+</code></pre></div>
+
+<!-- END INCLUDE -->
+
+<h3 id="job-submission-option">Job Submission Option<a class="headerlink" href="#job-submission-option" title="Permanent link">&para;</a></h3>
+<!-- BEGIN INCLUDE ../slurm/index.md &lt;!--job-submit-options-start--&gt; &lt;!--job-submit-options-end--&gt; -->
+
+<p>There are several useful <a href="https://slurm.schedmd.com/sbatch.html#lbAK">environment variables</a> set be Slurm <em>within</em> an allocated job.
+The most important ones are detailed in the below table which summarizes the main job submission options offered with <code>{sbatch | srun | salloc} [...]</code>:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Command-line option</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-N &lt;N&gt;</code></td>
+<td><strong><code>&lt;N&gt;</code> Nodes</strong> request</td>
+<td><code>-N 2</code></td>
+</tr>
+<tr>
+<td><code>--ntasks-per-node=&lt;n&gt;</code></td>
+<td><code>&lt;n&gt;</code> Tasks-per-node request</td>
+<td><code>--ntasks-per-node=28</code></td>
+</tr>
+<tr>
+<td><code>--ntasks-per-socket=&lt;s&gt;</code></td>
+<td><code>&lt;s&gt;</code> Tasks-per-socket request</td>
+<td><code>--ntasks-per-socket=14</code></td>
+</tr>
+<tr>
+<td><code>-c &lt;c&gt;</code></td>
+<td><code>&lt;c&gt;</code> Cores-per-task request (multithreading)</td>
+<td><code>-c 1</code></td>
+</tr>
+<tr>
+<td><code>--mem=&lt;m&gt;GB</code></td>
+<td><strong><code>&lt;m&gt;</code>GB memory per node</strong> request</td>
+<td><code>--mem 0</code></td>
+</tr>
+<tr>
+<td><code>-t [DD-]HH[:MM:SS]&gt;</code></td>
+<td><strong>Walltime</strong> request</td>
+<td><code>-t 4:00:00</code></td>
+</tr>
+<tr>
+<td><code>-G &lt;gpu&gt;</code></td>
+<td><code>&lt;gpu&gt;</code> GPU(s) request</td>
+<td><code>-G 4</code></td>
+</tr>
+<tr>
+<td><code>-C &lt;feature&gt;</code></td>
+<td>Feature request (<code>broadwell,skylake...</code>)</td>
+<td><code>-C skylake</code></td>
+</tr>
+<tr>
+<td><code>-p &lt;partition&gt;</code></td>
+<td>Specify job partition/queue</td>
+<td></td>
+</tr>
+<tr>
+<td><code>--qos &lt;qos&gt;</code></td>
+<td>Specify job qos</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-A &lt;account&gt;</code></td>
+<td>Specify account</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-J &lt;name&gt;</code></td>
+<td>Job name</td>
+<td><code>-J MyApp</code></td>
+</tr>
+<tr>
+<td><code>-d &lt;specification&gt;</code></td>
+<td>Job dependency</td>
+<td><code>-d singleton</code></td>
+</tr>
+<tr>
+<td><code>--mail-user=&lt;email&gt;</code></td>
+<td>Specify email address</td>
+<td></td>
+</tr>
+<tr>
+<td><code>--mail-type=&lt;type&gt;</code></td>
+<td>Notify user by email when certain event types occur.</td>
+<td><code>--mail-type=END,FAIL</code></td>
+</tr>
+</tbody>
+</table>
+<p>At a minimum a job submission script must include number of nodes, time, type of partition and nodes (resource allocation constraint and features), and quality of service (QOS).
+If a script does not specify any of these options then a default may be applied.
+The full list of directives is documented in the man pages for the <a href="https://slurm.schedmd.com/sbatch.html"><code>sbatch</code></a> command (see. <code>man sbatch</code>).</p>
+<!-- END INCLUDE -->
+
+<!-- BEGIN INCLUDE ../slurm/index.md &lt;!--resource-allocation-start--&gt; &lt;!--resource-allocation-end--&gt; -->
+
+<p>Within a job, you aim at running a certain number of <strong>tasks</strong>, and Slurm allow for a fine-grain control of the resource allocation that must be satisfied for <em>each</em> task.</p>
+<div class="admonition danger">
+<p class="admonition-title">Beware of Slurm terminology in <a href="https://slurm.schedmd.com/mc_support.html">Multicore Architecture</a>!</p>
+<p><img alt="" src="../../slurm/images/slurm_mc_support.png" style="width:350px; float: right;" /></p>
+<ul>
+<li><strong>Slurm Node = Physical node</strong>, specified with <code>-N &lt;#nodes&gt;</code><ul>
+<li><em>Advice</em>: always explicit number of expected number of tasks <em>per node</em> using <code>--ntasks-per-node &lt;n&gt;</code>. This way you control the node footprint of your job.</li>
+</ul>
+</li>
+<li><strong>Slurm Socket = Physical Socket/CPU/Processor</strong><ul>
+<li><em>Advice</em>: if possible, explicit also the number of expected number of tasks <em>per socket</em> (processor) using <code>--ntasks-per-socket &lt;s&gt;</code>.<ul>
+<li>relations between <code>&lt;s&gt;</code> and <code>&lt;n&gt;</code> must be aligned with the physical NUMA characteristics of the node.</li>
+<li>For instance on aion nodes, <code>&lt;n&gt; = 8*&lt;s&gt;</code></li>
+<li>For instance on iris regular nodes, <code>&lt;n&gt;=2*&lt;s&gt;</code> when on iris bigmem nodes, <code>&lt;n&gt;=4*&lt;s&gt;</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>(<em>the most confusing</em>): <strong>Slurm CPU = Physical CORE</strong><ul>
+<li>use <code>-c &lt;#threads&gt;</code> to specify the number of cores reserved per task.</li>
+<li>Hyper-Threading (HT) Technology is <em>disabled</em> on all ULHPC compute nodes. In particular:<ul>
+<li>assume <strong>#cores = #threads</strong>, thus when using <code>-c &lt;threads&gt;</code>, you can safely set
+<div class="highlight"><pre><span></span><code><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="k">:-</span><span class="nv">1</span><span class="si">}</span> <span class="c1"># Default to 1 if SLURM_CPUS_PER_TASK not set</span>
+</code></pre></div>
+to automatically abstract from the job context</li>
+<li>you have interest to match the physical NUMA characteristics of the compute node you're running at (Ex: target 16 threads per socket on Aion nodes (as there are 8 virtual sockets per nodes, 14 threads per socket on Iris regular nodes).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The total number of tasks defined in a given job is stored in the <code>$SLURM_NTASKS</code> environment variable.</p>
+<div class="admonition note">
+<p class="admonition-title">The --cpus-per-task option of srun in Slurm 23.11 and later</p>
+<p>In the latest versions of Slurm <code>srun</code> inherits the <code>--cpus-per-task</code> value requested by <code>salloc</code> or <code>sbatch</code> by reading the value of <code>SLURM_CPUS_PER_TASK</code>, as for any other option. <em>This behavior may differ from some older versions where special handling was required to propagate the <code>--cpus-per-task</code> option to <code>srun</code>.</em></p>
+</div>
+<p>In case you would like to launch multiple programs in a single allocation/batch script, divide the resources accordingly by requesting resources with <code>srun</code> when launching the process, for instance:
+<div class="highlight"><pre><span></span><code>srun --cpus-per-task &lt;some of the SLURM_CPUS_PER_TASK&gt; --ntasks &lt;some of the SLURM_NTASKS&gt; <span class="o">[</span>...<span class="o">]</span> &lt;program&gt;
+</code></pre></div></p>
+<p>We encourage you to <strong>always</strong> explicitly specify upon resource allocation the number of tasks you want <em>per</em> node/socket (<code>--ntasks-per-node &lt;n&gt; --ntasks-per-socket &lt;s&gt;</code>), to easily scale on multiple nodes with <code>-N &lt;N&gt;</code>. Adapt the number of threads and the settings to match the physical NUMA characteristics of the nodes</p>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Aion</label><div class="tabbed-content">
+<p>16 cores per socket and 8 (virtual) sockets (CPUs) per <code>aion</code> node.</p>
+<ul>
+<li><code>{sbatch|srun|salloc|si} [-N &lt;N&gt;] --ntasks-per-node &lt;8n&gt; --ntasks-per-socket &lt;n&gt; -c &lt;thread&gt;</code><ul>
+<li><em>Total</em>: <code>&lt;N&gt;</code><span><span class="MathJax_Preview">\times 8\times</span><script type="math/tex">\times 8\times</script></span><code>&lt;n&gt;</code> tasks, each on <code>&lt;thread&gt;</code> threads</li>
+<li><strong>Ensure</strong> <code>&lt;n&gt;</code><span><span class="MathJax_Preview">\times</span><script type="math/tex">\times</script></span><code>&lt;thread&gt;</code>= 16</li>
+<li>Ex: <code>-N 2 --ntasks-per-node 32 --ntasks-per-socket 4 -c 4</code> (<em>Total</em>: 64 tasks)</li>
+</ul>
+</li>
+</ul>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Iris (default Dual-CPU)</label><div class="tabbed-content">
+<p>14 cores per socket and 2 sockets (physical CPUs) per <em>regular</em> <code>iris</code>.</p>
+<ul>
+<li><code>{sbatch|srun|salloc|si} [-N &lt;N&gt;] --ntasks-per-node &lt;2n&gt; --ntasks-per-socket &lt;n&gt; -c &lt;thread&gt;</code><ul>
+<li><em>Total</em>: <code>&lt;N&gt;</code><span><span class="MathJax_Preview">\times 2\times</span><script type="math/tex">\times 2\times</script></span><code>&lt;n&gt;</code> tasks, each on <code>&lt;thread&gt;</code> threads</li>
+<li><strong>Ensure</strong> <code>&lt;n&gt;</code><span><span class="MathJax_Preview">\times</span><script type="math/tex">\times</script></span><code>&lt;thread&gt;</code>= 14</li>
+<li>Ex: <code>-N 2 --ntasks-per-node 4 --ntasks-per-socket 2  -c 7</code> (<em>Total</em>: 8 tasks)</li>
+</ul>
+</li>
+</ul>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Iris (Bigmem)</label><div class="tabbed-content">
+<p>28 cores per socket and 4 sockets (physical CPUs) per <em>bigmem</em> <code>iris</code></p>
+<ul>
+<li><code>{sbatch|srun|salloc|si} [-N &lt;N&gt;] --ntasks-per-node &lt;4n&gt; --ntasks-per-socket &lt;n&gt; -c &lt;thread&gt;</code><ul>
+<li><em>Total</em>: <code>&lt;N&gt;</code><span><span class="MathJax_Preview">\times 4\times</span><script type="math/tex">\times 4\times</script></span><code>&lt;n&gt;</code> tasks, each on <code>&lt;thread&gt;</code> threads</li>
+<li><strong>Ensure</strong> <code>&lt;n&gt;</code><span><span class="MathJax_Preview">\times</span><script type="math/tex">\times</script></span><code>&lt;thread&gt;</code>= 28</li>
+<li>Ex: <code>-N 2 --ntasks-per-node 8 --ntasks-per-socket 2  -c 14</code> (<em>Total</em>: 16 tasks)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- END INCLUDE -->
+
+<h3 id="careful-monitoring-of-your-jobs">Careful Monitoring of your Jobs<a class="headerlink" href="#careful-monitoring-of-your-jobs" title="Permanent link">&para;</a></h3>
+<div class="admonition bug">
+<p class="admonition-title">Bug</p>
+<p><strong>DON'T LEAVE your jobs running WITHOUT monitoring them</strong> and ensure they are not abusing of the computational resources allocated for you!!!</p>
+</div>
+<p><a class="md-button md-button--link" href="https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"/></svg></span> ULHPC Tutorial / Getting Started</a></p>
+<p>You will find below several ways to monitor the effective usage of the resources allocated (for running jobs) as well as the general efficiency (Average Walltime Accuracy, CPU/Memory efficiency etc.) for past jobs.</p>
+<h2 id="joiningmonitoring-running-jobs">Joining/monitoring running jobs<a class="headerlink" href="#joiningmonitoring-running-jobs" title="Permanent link">&para;</a></h2>
+<h3 id="sjoin"><code>sjoin</code><a class="headerlink" href="#sjoin" title="Permanent link">&para;</a></h3>
+<p>At any moment of time, you can <em>join</em> a running job using the
+<a href="https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh">custom helper functions</a>
+<code>sjoin</code> <strong>in another terminal</strong> (or another screen/tmux tab/window). The format is as follows:</p>
+<div class="highlight"><pre><span></span><code>sjoin &lt;jobid&gt; <span class="o">[</span>-w &lt;node&gt;<span class="o">]</span>    <span class="c1"># Use &lt;tab&gt; to automatically complete &lt;jobid&gt; among your jobs</span>
+</code></pre></div>
+
+<div class="admonition example">
+<p class="admonition-title">Using <code>sjoin</code> to <code>htop</code> your processes</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># check your running job</span>
+<span class="o">(</span>access<span class="o">)</span>$&gt; sq
+<span class="c1"># squeue -u $(whoami)</span>
+   JOBID PARTIT       QOS                 NAME       USER NODE  CPUS ST         TIME    TIME_LEFT PRIORITY NODELIST<span class="o">(</span>REASON<span class="o">)</span>
+ <span class="m">2171206</span>  <span class="o">[</span>...<span class="o">]</span>
+<span class="c1"># Connect to your running job, identified by its Job ID</span>
+<span class="o">(</span>access<span class="o">)</span>$&gt; sjoin <span class="m">2171206</span>     <span class="c1"># /!\ ADAPT &lt;jobid&gt; accordingly, use &lt;TAB&gt; to have it autocatically completed</span>
+<span class="c1"># Equivalent of: srun --jobid 2171206 --gres=gpu:0 --pty bash -i</span>
+<span class="o">(</span>node<span class="o">)</span>$&gt; htop <span class="c1"># view of all processes</span>
+<span class="c1">#               F5: tree view</span>
+<span class="c1">#               u &lt;name&gt;: filter by process of &lt;name&gt;</span>
+<span class="c1">#               q: quit</span>
+</code></pre></div>
+
+</div>
+<div class="admonition warning">
+<p class="admonition-title">On the [impossibility] to monitor <em>passive</em> GPU jobs over <code>sjoin</code></p>
+<p>If you use <code>sjoin</code> to join a GPU job, you <strong>WON'T</strong> be able to see the allocated GPU activity with <code>nvidia-smi</code> and all the monitoring tools provided by NVidia.
+The reason is that currently, there is no way to perform an over-allocation of a Slurm <a href="https://slurm.schedmd.com/gres.html">Generic Resource</a> (GRES) as our GPU cards, that means you can't create (<em>e.g.</em> with <code>sjoin</code> or <code>srun --jobid [...]</code>) job steps with access to GPUs which are bound to another step.
+<strong>To keep <code>sjoin</code> working with gres job, you MUST add "<code>--gres=none</code>"</strong></p>
+<p>You can use a direct connection with <code>ssh &lt;node&gt;</code> or <code>clush -w @job:&lt;jobid&gt;</code> for that (see below) but be aware that confined context is <strong>NOT</strong> maintained that way and that you will see the GPU processes on <em>all</em> 4 GPU cards.</p>
+</div>
+<h3 id="clustershell">ClusterShell<a class="headerlink" href="#clustershell" title="Permanent link">&para;</a></h3>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p><strong>Only for VERY Advanced users!!!</strong>.
+You should know what you are doing when using <a href="https://clustershell.readthedocs.io/en/latest/intro.html">ClusterShell</a> as you can mistakenly generate a huge amount of remote commands across the cluster which, while they will likely fail, still induce an unexpected load that may disturb the system.</p>
+</div>
+<p><a href="https://clustershell.readthedocs.io/en/latest/intro.html">ClusterShell</a> is a useful Python package for executing arbitrary commands across multiple hosts.
+On the ULHPC clusters, it provides a relatively simple way for you to run commands on nodes your jobs are running on, and collect the results.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You can only <code>ssh</code> to, and therefore run <code>clush</code> on, nodes where you have <strong>active/running</strong> jobs.</p>
+</div>
+<h4 id="nodeset"><code>nodeset</code><a class="headerlink" href="#nodeset" title="Permanent link">&para;</a></h4>
+<p>The <a href="https://clustershell.readthedocs.io/en/latest/tools/nodeset.html"><code>nodeset</code></a> command enables the easy manipulation of node sets, as well as node groups, at the command line level.
+It uses <code>sinfo</code>  underneath but has slightly different syntax. You can use it to ask about node states and nodes your job is running on.</p>
+<p>The nice difference is you can ask for <strong>folded</strong> (e.g. <code>iris-[075,078,091-092]</code>) or <strong>expanded</strong> (e.g. <code>iris-075 iris-078 iris-091 iris-092</code>) forms of the node lists.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Command</strong></th>
+<th><strong>description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nodeset -L[LL]</code></td>
+<td>List all groups  available</td>
+</tr>
+<tr>
+<td><code>nodeset -c [...]</code></td>
+<td>show number of nodes in nodeset(s)</td>
+</tr>
+<tr>
+<td><code>nodeset -e [...]</code></td>
+<td>expand nodeset(s) to separate nodes</td>
+</tr>
+<tr>
+<td><code>nodeset -f [...]</code></td>
+<td>fold nodeset(s) (or separate nodes) into one nodeset</td>
+</tr>
+</tbody>
+</table>
+<details class="example"><summary>Nodeset expansion and folding</summary><div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">nodeset -e (expand)</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="c1"># Get list of nodes with issues</span>
+$ sinfo -R --noheader -o <span class="s2">&quot;%N&quot;</span>
+iris-<span class="o">[</span><span class="m">005</span>-008,017,161-162<span class="o">]</span>
+<span class="c1"># ... and expand that list</span>
+$ sinfo -R --noheader -o <span class="s2">&quot;%N&quot;</span> <span class="p">|</span> nodeset -e
+iris-005 iris-006 iris-007 iris-008 iris-017 iris-161 iris-162
+
+<span class="c1"># Actually equivalent of (see below)</span>
+$ nodeset -e @state:drained
+</code></pre></div>
+
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">nodeset -f (fold)</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="c1"># List nodes in IDLE state</span>
+$&gt; sinfo -t IDLE --noheader
+interactive    up    <span class="m">4</span>:00:00      <span class="m">4</span>   idle iris-<span class="o">[</span><span class="m">003</span>-005,007<span class="o">]</span>
+long           up <span class="m">30</span>-00:00:0      <span class="m">2</span>   idle iris-<span class="o">[</span><span class="m">015</span>-016<span class="o">]</span>
+batch*         up <span class="m">5</span>-00:00:00      <span class="m">1</span>   idle iris-134
+gpu            up <span class="m">5</span>-00:00:00      <span class="m">9</span>   idle iris-<span class="o">[</span><span class="m">170</span>,173,175-178,181<span class="o">]</span>
+bigmem         up <span class="m">5</span>-00:00:00      <span class="m">0</span>    n/a
+
+<span class="c1"># make out a synthetic list</span>
+$&gt; sinfo -t IDLE --noheader <span class="p">|</span> awk <span class="s1">&#39;{ print $6 }&#39;</span> <span class="p">|</span> nodeset -f
+iris-<span class="o">[</span><span class="m">003</span>-005,007,015-016,134,170,173,175-178,181<span class="o">]</span>
+
+<span class="c1"># ... actually done when restricting the column to nodelist only</span>
+$&gt; sinfo -t IDLE --noheader -o <span class="s2">&quot;%N&quot;</span>
+iris-<span class="o">[</span><span class="m">003</span>-005,007,015-016,134,170,173,175-178,181<span class="o">]</span>
+
+<span class="c1"># Actually equivalent of (see below)</span>
+$ nodeset -f @state:idle
+</code></pre></div>
+
+</div>
+</div>
+</details>
+<details class="example"><summary>Exclusion / intersection  of nodeset</summary><table>
+<thead>
+<tr>
+<th><strong>Option</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-x &lt;nodeset&gt;</code></td>
+<td><strong>exclude</strong> from working set <code>&lt;nodeset&gt;</code></td>
+</tr>
+<tr>
+<td><code>-i &lt;nodeset&gt;</code></td>
+<td><strong>intersection</strong> from working set with <code>&lt;nodeset&gt;</code></td>
+</tr>
+<tr>
+<td><code>-X &lt;nodeset&gt;</code> (<code>--xor</code>)</td>
+<td>elements that are in <strong>exactly one</strong> of the working set and <code>&lt;nodeset&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1"># Exclusion</span>
+$&gt; nodeset -f iris-<span class="o">[</span><span class="m">001</span>-010<span class="o">]</span> -x iris-<span class="o">[</span><span class="m">003</span>-005,007,015-016<span class="o">]</span>
+iris-<span class="o">[</span><span class="m">001</span>-002,006,008-010<span class="o">]</span>
+<span class="c1"># Intersection</span>
+$&gt; nodeset -f iris-<span class="o">[</span><span class="m">001</span>-010<span class="o">]</span> -i iris-<span class="o">[</span><span class="m">003</span>-005,007,015-016<span class="o">]</span>
+iris-<span class="o">[</span><span class="m">003</span>-005,007<span class="o">]</span>
+<span class="c1"># &quot;XOR&quot; (one occurrence only)</span>
+$&gt; nodeset -f iris-<span class="o">[</span><span class="m">001</span>-010<span class="o">]</span> -x iris-006 -X iris-<span class="o">[</span><span class="m">005</span>-007<span class="o">]</span>
+iris-<span class="o">[</span><span class="m">001</span>-004,006,008-010<span class="o">]</span>
+</code></pre></div>
+
+</details>
+<p>The groups useful to you that we have configured are <code>@user</code>, <code>@job</code> and <code>@state</code>.</p>
+<div class="tabbed-set" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">List available groups</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>$ nodeset -LLL
+<span class="c1"># convenient partition groups</span>
+@batch  iris-<span class="o">[</span><span class="m">001</span>-168<span class="o">]</span> <span class="m">168</span>
+@bigmem iris-<span class="o">[</span><span class="m">187</span>-190<span class="o">]</span> <span class="m">4</span>
+@gpu    iris-<span class="o">[</span><span class="m">169</span>-186,191-196<span class="o">]</span> <span class="m">24</span>
+@interactive iris-<span class="o">[</span><span class="m">001</span>-196<span class="o">]</span> <span class="m">196</span>
+<span class="c1"># conveniente state groups</span>
+@state:allocated <span class="o">[</span>...<span class="o">]</span>
+@state:idle      <span class="o">[</span>...<span class="o">]</span>
+@state:mixed     <span class="o">[</span>...<span class="o">]</span>
+@state:reserved  <span class="o">[</span>...<span class="o">]</span>
+<span class="c1"># your individual jobs</span>
+@job:2252046 iris-076 <span class="m">1</span>
+@job:2252050 iris-<span class="o">[</span><span class="m">191</span>-196<span class="o">]</span> <span class="m">6</span>
+<span class="c1"># all the jobs under your username</span>
+@user:svarrette iris-<span class="o">[</span><span class="m">076</span>,191-196<span class="o">]</span> <span class="m">7</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">User group</label><div class="tabbed-content">
+<p>List expanded node names where you have jobs running
+<div class="highlight"><pre><span></span><code><span class="c1"># Similar to: squeue -h -u $USER -o &quot;%N&quot;|nodeset -e</span>
+$ nodeset -e @user:<span class="nv">$USER</span>
+</code></pre></div></p>
+</div>
+<input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><label for="__tabbed_3_3">Job group</label><div class="tabbed-content">
+<p>List folded nodes where your job 1234567 is running (use <code>sq</code> to quickly list your jobs):
+<div class="highlight"><pre><span></span><code>$ similar to squeue -h -j <span class="m">1234567</span> -o <span class="s2">&quot;%N&quot;</span>
+nodeset -f @job:1234567
+</code></pre></div></p>
+</div>
+<input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><label for="__tabbed_3_4">State group</label><div class="tabbed-content">
+<p>List expanded node names that are idle according to slurm
+<div class="highlight"><pre><span></span><code><span class="c1"># Similar to: sinfo -t IDLE -o &quot;%N&quot;</span>
+nodeset -e @state:idle
+</code></pre></div></p>
+</div>
+</div>
+<h4 id="clush"><code>clush</code><a class="headerlink" href="#clush" title="Permanent link">&para;</a></h4>
+<p><a href="https://clustershell.readthedocs.io/en/latest/tools/clush.html"><code>clush</code></a> can run commands on multiple nodes at once for instance to monitor you jobs. It uses the node grouping syntax from [<code>nodeset</code>]((<a href="https://clustershell.readthedocs.io/en/latest/tools/nodeset.html">https://clustershell.readthedocs.io/en/latest/tools/nodeset.html</a>) to allow you to run commands on those nodes.</p>
+<p><a href="https://clustershell.readthedocs.io/en/latest/tools/clush.html"><code>clush</code></a> uses <code>ssh</code> to connect to each of these nodes.
+You can use the <code>-b</code> option to gather output from nodes with same output into the same lines. Leaving this out will report on each node separately.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Option</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-b</code></td>
+<td>gathering output (as when piping to <code>dshbak -c</code>)</td>
+</tr>
+<tr>
+<td><code>-w &lt;nodelist&gt;</code></td>
+<td>specify remote hosts, incl. node groups with <code>@group</code> special syntax</td>
+</tr>
+<tr>
+<td><code>-g &lt;group&gt;</code></td>
+<td>similar to <code>-w @&lt;group&gt;</code>, restrict commands to the hosts group <code>&lt;group&gt;</code></td>
+</tr>
+<tr>
+<td><code>--diff</code></td>
+<td>show differences between common outputs</td>
+</tr>
+</tbody>
+</table>
+<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Monitor CPU usage</label><div class="tabbed-content">
+<p>Show %cpu, memory usage, and command for all nodes running any of your jobs.
+<div class="highlight"><pre><span></span><code>clush -bw @user:<span class="nv">$USER</span> ps -u<span class="nv">$USER</span> -o%cpu,rss,cmd
+</code></pre></div>
+As above, but only for the nodes reserved with your job <code>&lt;jobid&gt;</code>
+<div class="highlight"><pre><span></span><code>clush -bw @job:&lt;jobid&gt; ps -u<span class="nv">$USER</span> -o%cpu,rss,cmd
+</code></pre></div></p>
+</div>
+<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Monitor GPU usage</label><div class="tabbed-content">
+<p>Show what's running on <em>all</em> the GPUs on the nodes associated with your job <code>654321</code>.
+<div class="highlight"><pre><span></span><code>clush -bw @job:654321 bash -l -c <span class="s1">&#39;nvidia-smi --format=csv --query-compute-apps=process_name,used_gpu_memory&#39;</span>
+</code></pre></div>
+As above but for all your jobs (assuming you have only GPU nodes with <em>all</em> GPUs)
+<div class="highlight"><pre><span></span><code>clush -bw @user:<span class="nv">$USER</span> bash -l -c <span class="s1">&#39;nvidia-smi --format=csv --query-compute-apps=process_name,used_gpu_memory&#39;</span>
+</code></pre></div></p>
+<p>This may be convenient for passive jobs since the <code>sjoin</code> utility does <strong>NOT</strong> permit to run <code>nvidia-smi</code> (see <a href="#sjoin">explaination</a>).
+<strong>However</strong> that way you will see unfortunately <em>ALL</em> processes running on the 4 GPU cards -- including from other users sharing your nodes. It's a known bug, not a feature.</p>
+</div>
+</div>
+<h3 id="pestat-cpumem-usage-report"><code>pestat</code>: CPU/Mem usage report<a class="headerlink" href="#pestat-cpumem-usage-report" title="Permanent link">&para;</a></h3>
+<p>We have deployed the (excellent) Slurm tool <a href="https://github.com/OleHolmNielsen/Slurm_tools/tree/master/pestat"><code>pestat</code></a> (Processor Element status) of Ole Holm Nielsen that you can use to quickly check the CPU/Memory usage of your jobs.
+Information deserving investigation (too low/high CPU or Memory usage compared to allocation) will be flagged in Red or Magenta</p>
+<div class="highlight"><pre><span></span><code>pestat [-p &lt;partition&gt;] [-G] [-f]
+</code></pre></div>
+
+<details class="example"><summary><code>pestat</code> output (official sample output)</summary><p><img alt="" src="https://github.com/OleHolmNielsen/Slurm_tools/raw/master/pestat/pestat-example.png" /></p>
+</details>
+<h3 id="general-guidelines">General Guidelines<a class="headerlink" href="#general-guidelines" title="Permanent link">&para;</a></h3>
+<p>As mentionned before, always check your node activity with <em>at least</em> <code>htop</code> on the <strong>all</strong> allocated nodes to ensure you use them as expected. Several cases might apply to your job workflow:</p>
+<div class="tabbed-set" data-tabs="5:3"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">Single Node, single core</label><div class="tabbed-content">
+<p>You are dealing with an <a href="https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#embarrassingly-gnu-parallel-tasks-across-multiples-nodes">embarrasingly parallel job campaign</a> and this approach is <strong>bad</strong> and overload the scheduler unnecessarily.
+You will also quickly cross the limits set in terms of maximum number of jobs.
+<strong>You must aggregate multiples tasks within a single job</strong> to exploit fully a complete node.
+In particular, you <strong>MUST</strong> consider using <a href="https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/">GNU Parallel</a> and our <a href="https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/launcher.parallel.sh">generic GNU launcher <code>launcher.parallel.sh</code></a>.</p>
+<p><a class="md-button md-button--link" href="https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"/></svg></span> ULHPC Tutorial / HPC Management of Embarrassingly Parallel Jobs</a></p>
+</div>
+<input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">Single Node, multi-core</label><div class="tabbed-content">
+<p><strong>If you asked for more than a core in your job</strong> (&gt; 1 tasks, <code>-c &lt;threads&gt;</code> where <code>&lt;threads&gt;</code> &gt; 1), there are 3 typical situations you <strong>MUST</strong> analysed (and <code>pestat</code> or <code>htop</code> are of great help for that):</p>
+<ol>
+<li>You cannot see the expected activity (only 1 core seems to be active at 100%), then you should review your workflow as you are <em>under</em>-exploiting (and thus probably <strong>waste</strong>) the allocated resources.</li>
+<li>
+<p>you have the expected activity on the requested cores (Ex: the 28 cores were requested, and <code>htop</code> reports a significant usage of all cores) <strong>BUT</strong> the <a href="">CPU load of the system</a> <strong>exceed the core capacity of the computing node</strong>. That means you are forking too many processes and <strong>overloading/harming</strong> the systems.</p>
+<ul>
+<li>For instance on regular <code>iris</code> (resp. <code>aion</code>) node, a CPU load <em>above</em> 28 (resp. 128) is suspect.<ul>
+<li>Note that we use <a href="https://github.com/mej/nhc">LBNL Node Health Check (NHC)</a> to automatically <a href="https://slurm.schedmd.com/sinfo.html#lbAG">drain</a> nodes for which the load exceed twice the core capacity</li>
+</ul>
+</li>
+<li>An analogy for a <em>single</em> core load with the amont of cars possible in a single-lane brige or tunnel is illustrated below (<a href="https://scoutapm.com/blog/understanding-load-averages"><tiny>source</tiny></a>). Like the bridge/tunnel operator, you'd like your cars/processes to never be waiting, otherwise you are harming the system. Imagine this analogy for the amount of cores available on a computing node to better reporesent the situtation on a single core.</li>
+</ul>
+<p><img alt="" src="../images/understanding-cpu-load-1-core.png" /></p>
+</li>
+<li>
+<p>you have the expected activity on the requested cores and the load match your allocation without harming the system: you're good to go!</p>
+</li>
+</ol>
+</div>
+<input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><label for="__tabbed_5_3">Multi-node</label><div class="tabbed-content">
+<p><strong>If you asked for more than ONE node</strong>, ensure that you have consider the following questions.</p>
+<ol>
+<li>You are running an <strong>MPI job</strong>: you generally know what you're doing, <strong>YET</strong> ensure your followed the single node monitoring checks (<code>htop</code> etc. yet across all nodes) to review your core activity on <strong>ALL</strong> nodes (see 3. below) .
+Consider also parallel profilers like <a href="../../development/performance-debugging-tools/arm-forge/">Arm Forge</a></li>
+<li>You are running an <a href="https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#embarrassingly-gnu-parallel-tasks-across-multiples-nodes">embarrasingly parallel job campaign</a>. You should first ensure you correctly exploit a <strong>single node</strong> using <a href="https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/">GNU Parallel</a> before attempting to cross multiple nodes</li>
+<li>You run a distributed framework able to exploit multiple nodes (typically with a master/slave model as for <a href="https://ulhpc-tutorials.readthedocs.io/en/latest/bigdata/#running-spark-in-standalone-cluster">Spark cluster</a>). You <strong>MUST</strong> assert that your [slave] processes are <em>really</em> run on the over nodes using</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># check you running job</span>
+$ sq
+<span class="c1"># Join **another** node than the first one listed</span>
+$ sjoin &lt;jobid&gt; -w &lt;node&gt;
+$ htop  <span class="c1"># view of all processes</span>
+<span class="c1">#               F5: tree view</span>
+<span class="c1">#               u &lt;name&gt;: filter by process of &lt;name&gt;</span>
+<span class="c1">#               q: quit</span>
+</code></pre></div>
+
+</div>
+</div>
+<h2 id="monitoring-past-jobs-efficiency">Monitoring past jobs efficiency<a class="headerlink" href="#monitoring-past-jobs-efficiency" title="Permanent link">&para;</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Walltime estimation and Job efficiency</p>
+<p>By default, none of the regular jobs you submit can exceed a walltime of 2 days (<code>2-00:00:00</code>).
+You have a <em>strong</em> interest to estimate accurately the walltime of your jobs.
+While it is not always possible, or quite hard to guess at the beginning of a given job campaign where you'll probably ask for the maximum walltime possible, you should look back as your historical usage for the past efficiency and elapsed time of your previously completed jobs using <a href="../../slurm/commands/#job-efficiency-seff-susage"><code>seff</code> or <code>susage</code> utilities</a>.
+Update the time constraint <code>[#SBATCH] -t [...]</code> of your jobs accordingly.
+There are two immediate benefits for you:</p>
+<ol>
+<li>Short jobs are scheduled faster, and may even be elligible for <a href="../priority/#backfill-scheduling">backfilling</a></li>
+<li>You will be more likely elligible for a raw share upgrade of your user account -- see <a href="../../slurm/fairsharing/#q-my-user-fairshare-is-low-what-can-i-do">Fairsharing</a></li>
+</ol>
+</div>
+<p>The below utilities will help you track the CPU/Memory efficiency (<code>seff</code>) or the Average Walltime Accuracy (<code>susage</code>, <code>sacct</code>) of your past jobs</p>
+<h3 id="seff"><code>seff</code><a class="headerlink" href="#seff" title="Permanent link">&para;</a></h3>
+<!-- BEGIN INCLUDE ../slurm/commands.md &lt;!--seff-start--&gt; &lt;!--seff-end--&gt; -->
+
+<p>Use <code>seff</code> to double check a <em>past</em> job CPU/Memory efficiency. Below examples should be self-speaking:</p>
+<div class="tabbed-set" data-tabs="6:4"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">Good CPU Eff.</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> seff <span class="m">2171749</span>
+<span class="go">Job ID: 2171749</span>
+<span class="go">Cluster: iris</span>
+<span class="go">User/Group: &lt;login&gt;/clusterusers</span>
+<span class="go">State: COMPLETED (exit code 0)</span>
+<span class="go">Nodes: 1</span>
+<span class="go">Cores per node: 28</span>
+<span class="go">CPU Utilized: 41-01:38:14</span>
+<span class="go">CPU Efficiency: 99.64% of 41-05:09:44 core-walltime</span>
+<span class="go">Job Wall-clock time: 1-11:19:38</span>
+<span class="go">Memory Utilized: 2.73 GB</span>
+<span class="go">Memory Efficiency: 2.43% of 112.00 GB</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">Good Memory Eff.</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> seff <span class="m">2117620</span>
+<span class="go">Job ID: 2117620</span>
+<span class="go">Cluster: iris</span>
+<span class="go">User/Group: &lt;login&gt;/clusterusers</span>
+<span class="go">State: COMPLETED (exit code 0)</span>
+<span class="go">Nodes: 1</span>
+<span class="go">Cores per node: 16</span>
+<span class="go">CPU Utilized: 14:24:49</span>
+<span class="go">CPU Efficiency: 23.72% of 2-12:46:24 core-walltime</span>
+<span class="go">Job Wall-clock time: 03:47:54</span>
+<span class="go">Memory Utilized: 193.04 GB</span>
+<span class="go">Memory Efficiency: 80.43% of 240.00 GB</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><label for="__tabbed_6_3">Good CPU and Memory Eff.</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> seff <span class="m">2138087</span>
+<span class="go">Job ID: 2138087</span>
+<span class="go">Cluster: iris</span>
+<span class="go">User/Group: &lt;login&gt;/clusterusers</span>
+<span class="go">State: COMPLETED (exit code 0)</span>
+<span class="go">Nodes: 1</span>
+<span class="go">Cores per node: 64</span>
+<span class="go">CPU Utilized: 87-16:58:22</span>
+<span class="go">CPU Efficiency: 86.58% of 101-07:16:16 core-walltime</span>
+<span class="go">Job Wall-clock time: 1-13:59:19</span>
+<span class="go">Memory Utilized: 1.64 TB</span>
+<span class="go">Memory Efficiency: 99.29% of 1.65 TB</span>
+</code></pre></div>
+
+</div>
+<input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><label for="__tabbed_6_4">[Very] Bad efficiency</label><div class="tabbed-content">
+<p>This illustrates a very bad job in terms of CPU/memory efficiency (below 4%), which illustrate a case where basically the user wasted 4 hours of computation while mobilizing a full node and its 28 cores.
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> seff <span class="m">2199497</span>
+<span class="go">Job ID: 2199497</span>
+<span class="go">Cluster: iris</span>
+<span class="go">User/Group: &lt;login&gt;/clusterusers</span>
+<span class="go">State: COMPLETED (exit code 0)</span>
+<span class="go">Nodes: 1</span>
+<span class="go">Cores per node: 28</span>
+<span class="go">CPU Utilized: 00:08:33</span>
+<span class="go">CPU Efficiency: 3.55% of 04:00:48 core-walltime</span>
+<span class="go">Job Wall-clock time: 00:08:36</span>
+<span class="go">Memory Utilized: 55.84 MB</span>
+<span class="go">Memory Efficiency: 0.05% of 112.00 GB</span>
+</code></pre></div>
+ <strong>This is typical of a single-core task</strong> can could be drastically improved via <a href="https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/">GNU Parallel</a>.</p>
+</div>
+</div>
+<p><strong>Note however that demonstrating a CPU good efficiency with <code>seff</code> may not be enough!</strong>
+You may still induce an <em>abnormal</em> load on the reserved nodes if you spawn more processes than allowed by the Slurm reservation.
+To avoid that, always try to prefix your executions with <code>srun</code> within your launchers. See also <a href="../../slurm/#specific-resource-allocation">Specific Resource Allocations</a>.</p>
+<!-- END INCLUDE -->
+
+<h3 id="susage"><code>susage</code><a class="headerlink" href="#susage" title="Permanent link">&para;</a></h3>
+<!-- BEGIN INCLUDE ../slurm/commands.md &lt;!--susage-start--&gt; &lt;!--susage-end--&gt; -->
+
+<p>Use <code>susage</code> to check your past <em>jobs walltime accuracy</em> (<code>Timelimit</code> vs. <code>Elapsed</code>)</p>
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> susage -h
+<span class="go">Usage: susage [-m] [-Y] [-S YYYY-MM-DD] [-E YYYT-MM-DD]</span>
+<span class="go">  For a specific user (if accounting rights granted):    susage [...] -u &lt;user&gt;</span>
+<span class="go">  For a specific account (if accounting rights granted): susage [...] -A &lt;account&gt;</span>
+<span class="go">Display past job usage summary</span>
+</code></pre></div>
+
+<!-- END INCLUDE -->
+
+<p>In all cases, if you are confident that your jobs will last more than 2 days <strong>while efficiently using the allocated resources</strong>, you can use <a href="../long/"><code>--qos long</code></a> QOS. Be aware that special restrictions applies for this kind of jobs.</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: February 28, 2025
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../interactive/" title="Interactive Job" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Interactive Job
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../gpu/" title="GPU Jobs" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                GPU Jobs
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2007-2025 Uni.lu HPC (ULHPC) Team
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/ULHPC" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://twitter.com/ULHPC" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.f81b9e8b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.23546af0.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["navigation.instant"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.58d22e8e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/bootstrap.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>
