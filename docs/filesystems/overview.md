@@ -1,15 +1,23 @@
-## ULHPC File Systems Overview
+## ULHPC File system overview
 
 <!--content-start-->
 
-Several _File Systems_ co-exist on the ULHPC facility and are configured for different purposes.
-Each servers and computational resources has access to at least three different file systems with different levels of performance, permanence and available space summarized below
+The following table summarizes the mount location, backing up, and environment setup for each one of the network file systems.
 
 <!--table-start-->
 
-| Directory                                                                                            | Env.                                                         | file system                                  | backup                               |
-|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|----------------------------------------------|--------------------------------------|
-| [`/home/users/<login>`](../filesystems/gpfs.md#global-home-directory-home)                           | [`$HOME`](../filesystems/gpfs.md#global-home-directory-home) | [GPFS/Spectrumscale](../filesystems/gpfs.md) | no                                   |
-| [`/work/projects/`](../filesystems/gpfs.md#global-project-directory-projecthomeworkprojects)`<name>` | -                                                            | [GPFS/Spectrumscale](../filesystems/gpfs.md) | yes (partial, `backup` subdirectory) |
-| [`/scratch/users/<login>`](../filesystems/lustre.md)                                                 | [`$SCRATCH`](../filesystems/lustre.md)                       | [Lustre](../filesystems/lustre.md)           | no                                   |
-| `/mnt/isilon/projects/<name>`                                                                        | -                                                            | [OneFS](../filesystems/isilon.md)            | yes (live sync and snapshots)        |
+!!! info "Cluster file systems"
+
+    | Directory                                                                                                  | Environment variable                                           | File system                                      | Backup                                    |
+    |------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|--------------------------------------------------|-------------------------------------------|
+    | [`/home/users/<username>`](../filesystems/gpfs.md#global-home-directory-home)                              | [`${HOME}`](../filesystems/gpfs.md#global-home-directory-home) | [GPFS/Spectrumscale](../filesystems/gpfs.md) [1] | no                                        |
+    | [`/work/projects/<project name>`](../filesystems/gpfs.md#global-project-directory-projecthomeworkprojects) | -                                                              | [GPFS/Spectrumscale](../filesystems/gpfs.md) [1] | yes (partial, only `backup` subdirectory) |
+    | [`/scratch/users/<username>`](../filesystems/lustre.md)                                                    | [`${SCRATCH}`](../filesystems/lustre.md)                       | [Lustre](../filesystems/lustre.md)               | no                                        |
+    | `/mnt/isilon/projects/<project name>`                                                                      | -                                                              | [OneFS](../filesystems/isilon.md)                | yes (and live sync [2])                   |
+    
+    1. The  file system mounted on the home directories (`/home/users`) and project directories (`/work/projects`) are both exported by the [GPFS/Spectrumscale](../filesystems/gpfs.md) file system.
+    
+        - Storage for both directories is redundant, so they are safe against hardware failure.
+        - Only `/home/users` is mirrored in a SSD cache, so `/home/users` is a significantly faster for random and small file I/O.
+    
+    2. Live sync replicates data across multiple OneFS instances for high availability.
