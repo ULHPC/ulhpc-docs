@@ -21,7 +21,7 @@ You will find on ULHPC resources the following partitions (mostly matching the 3
 
 | __AION__      (type)     | #Nodes (cores/node) | Default/MaxTime | MaxNodes | PriorityTier |
 |--------------------------|---------------------|-----------------|----------|--------------|
-| `interactive` (floating) | 354                | 30min - 2h      | 2        | 100          |
+| `interactive` (floating) | 354                 | 30min - 2h      | 2        | 100          |
 | `batch` (default)        | 354    (128c)       | 2h    - 48h     | 64       | 1            |
 
 ## Iris
