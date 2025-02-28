@@ -1,9 +1,6 @@
 # ULHPC Slurm QOS
 
-[Quality of Service](https://slurm.schedmd.com/qos.html) or QOS is used to
-constrain or modify the characteristics that a job can have.
-This could come in the form of specifying a QoS to request for a longer run time
-or a high priority queue for a given job.
+[Quality of Service](https://slurm.schedmd.com/qos.html) or QOS is used to constrain or modify the characteristics that a job can have. This could come in the form of specifying a QoS to request for a longer run time or a high priority queue for a given job.
 
 To select a given QOS with a [Slurm command](commands.md), use the `--qos <qos>` option:
 
@@ -12,14 +9,9 @@ srun|sbatch|salloc|sinfo|squeue... [-p <partition>] --qos <qos> [...]
 ```
 
 !!! important ""
-    The _default_ QoS of your jobs depends on your account and affiliation.
-    Normally, the `--qos <qos>` directive does not need to be set for most jobs
+    The _default_ QoS of your jobs depends on your account and affiliation. Normally, the `--qos <qos>` directive does not need to be set for most jobs
 
-We favor in general _cross-partition QOS_, mainly tied to _priority level_
-(`low` $\rightarrow$ `urgent`).
-A special _preemptible QOS_ exists for [best-effort
-jobs](../jobs/best-effort.md) and is named `besteffort`.
-
+We favor in general _cross-partition QOS_, mainly tied to _priority level_ (`low` $\rightarrow$ `urgent`). A special _preemptible QOS_ exists for [best-effort jobs](../jobs/best-effort.md) and is named `besteffort`.
 
 ## Available QOS
 
