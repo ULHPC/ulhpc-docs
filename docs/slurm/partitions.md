@@ -1,4 +1,4 @@
-# ULHPC Slurm Partitions 2.0
+# ULHPC Slurm Partitions
 
 In Slurm multiple nodes can be grouped into _partitions_ which are sets of nodes aggregated by shared characteristics or objectives, with associated limits for wall-clock time, job size, etc. These limits are hard limits for the jobs and can not be overruled.
 
