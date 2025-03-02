@@ -81,7 +81,7 @@ nav:
     - Slurm Overview: 'slurm/index.md'
     - Convenient Slurm Commands: 'slurm/commands.md'
     - Partition/Queues: 'slurm/partitions.md'
-    - Quality of Service (QOS): 'slurm/qos.md'
+    - Quality of Service (QoS): 'slurm/qos.md'
     - Account Hierarchy: 'slurm/accounts.md'
     - Job State and Reason Code: 'jobs/reason-codes.md'
     - Fairsharing: 'slurm/fairsharing.md'
