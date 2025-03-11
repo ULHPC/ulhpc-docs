@@ -23,25 +23,34 @@ nav:
       - Aion System:   'systems/aion/index.md'
       - Compute Nodes: 'systems/aion/compute.md'
       - Fast Local Interconnect: 'systems/aion/interconnect.md'
-    #  - Storage:       'filesystems/index.md'
       - Timeline:      'systems/aion/timeline.md'
     - Iris:
       - Iris System:   'systems/iris/index.md'
       - Compute Nodes: 'systems/iris/compute.md'
       - Fast Local Interconnect: 'systems/iris/interconnect.md'
-    #  - Storage:       'filesystems/index.md'
       - Timeline:      'systems/iris/timeline.md'
   #######################
   - Interconnect:
-    # - Overview:                     'interconnect/index.md'
     - Fast Infiniband Interconnect: 'interconnect/ib.md'
     - Ethernet Interconnect:        'interconnect/ethernet.md'
   #######################
-  - Storage Systems:
+  - Storage:
     - Overview:                   'filesystems/index.md'
-    - GPFS/SpectrumScale:         'filesystems/gpfs.md'
-    - Lustre:                     'filesystems/lustre.md'
-    - OneFS Isilon:               'filesystems/isilon.md'
+    - Data Sharing:               'data/sharing.md'
+    - Data Transfer:              'data/transfer.md'
+    - Project Data Management:    'data/project.md'
+    - Scratch Data Management:    'filesystems/lfs.md'
+    - Quotas:                     'filesystems/quotas.md'
+    - Backups:                    'data/backups.md'
+    # - Archiving:                  'data/archiving.md'
+    - Unix File Permissions:      'filesystems/unix-file-permissions.md'
+    # - Version Control with Git:   'workflow/git.md'
+    - GDPR Compliance:            'data/gdpr.md'
+    - Sensitive Data Protection:  'data/encryption.md'
+    - Clustered and Networked File Systems:
+      - GPFS/SpectrumScale:         'filesystems/gpfs.md'
+      - Lustre:                     'filesystems/lustre.md'
+      - OneFS Isilon:               'filesystems/isilon.md'
   #################
   - Access/Connect:
     - Access/Login Servers:          'connect/access.md'
@@ -51,20 +60,6 @@ nav:
     - Troubleshooting:               'connect/troubleshooting.md'
 
     # - Multi-Factor Authentication: 'connect/mfa.md'
-  ##################
-  - Data Management:
-    - Global Directory Structure: 'data/layout.md'
-    - Data Sharing:               'data/sharing.md'
-    - Data Transfer:              'data/transfer.md'
-    - GDPR Compliance:            'data/gdpr.md'
-    - Quotas:                     'filesystems/quotas.md'
-    - Project Data Management:    'data/project.md'
-    - Scratch Data Management:    'filesystems/lfs.md'
-    - Backups:                    'data/backups.md'
-    # - Archiving:                  'data/archiving.md'
-    - Unix File Permissions:      'filesystems/unix-file-permissions.md'
-    # - Version Control with Git:   'workflow/git.md'
-    - Sensitive Data Protection:  'data/encryption.md'
   ##############
   - Environment:
     - Overview:  'environment/index.md'
@@ -81,7 +76,7 @@ nav:
     - Slurm Overview: 'slurm/index.md'
     - Convenient Slurm Commands: 'slurm/commands.md'
     - Partition/Queues: 'slurm/partitions.md'
-    - Quality of Service (QOS): 'slurm/qos.md'
+    - Quality of Service (QoS): 'slurm/qos.md'
     - Account Hierarchy: 'slurm/accounts.md'
     - Job State and Reason Code: 'jobs/reason-codes.md'
     - Fairsharing: 'slurm/fairsharing.md'

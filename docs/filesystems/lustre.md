@@ -11,11 +11,27 @@ It is available as a global _high_-performance file system on all ULHPC computat
 It is meant to host **temporary scratch data** within your jobs.
 In terms of raw storage capacities, it represents more than **1.6PB**.
 
-{%
-   include-markdown "scratch.md"
-   end="<!--intro-end-->"
-%}
+## Scratch directory `(${SCRATCH})`
 
+<!--scratch-mount-start-->
+
+The _scratch_ area is a [Lustre](http://lustre.org/)-based file system that provides high performance temporary storage of large files and is accessible across all cluster nodes. Use scratch to store working files and temporary large data files.
+
+- The scratch file system is not fully redundant, so do not use scratch to store files that cannot be recreated. For instance store only simulation output that can be recalculated.
+
+!!! warning "Small file and random I/O"
+
+    The scratch is best used to write large files in a continuous manner. Even though the Lustre file system can handle small file and random I/O better that the GPFS system, it still slows down considerable as the number of I/O operations increases.
+
+    Prefer the locally mounted file system in `/tmp` for small file and random I/O.
+
+??? info "Origin of the term scratch"
+
+    The term scratch originates from [scratch data tapes](https://en.wikipedia.org/wiki/Scratch_tape). People uses scratch tapes to write and read data that did not fit into the main memory, and since it was a tape, it could only perform continuous I/O. The term scratch is a bit abused in modern times as most storage systems nowadays support random access. In the case of the UL HPC scratch however, we use the term literally. Our file system in scratch has a very bad performance in small file and random reads and writes.
+
+The environment variable `${SCRATCH}` (which expands to `/scratch/users/$(whoami)`) points to a users scratch directory. The absolute path may change, but the value of `${SCRATCH}` will always be correct.
+
+<!--scratch-mount-end-->
 
 !!! warning "ULHPC `$SCRATCH` quotas and backup"
     Extended ACLs are provided for sharing data with other users using fine-grained control.

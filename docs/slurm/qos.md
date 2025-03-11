@@ -1,31 +1,23 @@
-# ULHPC Slurm QOS
+# ULHPC Slurm QoS
 
-[Quality of Service](https://slurm.schedmd.com/qos.html) or QOS is used to
-constrain or modify the characteristics that a job can have.
-This could come in the form of specifying a QoS to request for a longer run time
-or a high priority queue for a given job.
+[Quality of Service](https://slurm.schedmd.com/qos.html) or QoS is used to constrain or modify the characteristics that a job can have. This could come in the form of specifying a QoS to request for a longer run time or a high priority queue for a given job.
 
-To select a given QOS with a [Slurm command](commands.md), use the `--qos <qos>` option:
+To select a given QoS with a [Slurm command](commands.md), use the `--qos=<QoS>` option (available onlt in long form):
 
 ```
-srun|sbatch|salloc|sinfo|squeue... [-p <partition>] --qos <qos> [...]
+srun|sbatch|salloc|sinfo|squeue... [--partition=<partition>] --qos=<QoS> [...]
 ```
 
 !!! important ""
-    The _default_ QoS of your jobs depends on your account and affiliation.
-    Normally, the `--qos <qos>` directive does not need to be set for most jobs
+    The _default_ QoS of your jobs depends on your account and affiliation. Normally, the `--qos=<QoS>` directive does not need to be set for most jobs
 
-We favor in general _cross-partition QOS_, mainly tied to _priority level_
-(`low` $\rightarrow$ `urgent`).
-A special _preemptible QOS_ exists for [best-effort
-jobs](../jobs/best-effort.md) and is named `besteffort`.
+We favor in general _cross-partition QoS_, mainly tied to _priority level_ (`low` $\rightarrow$ `urgent`). A special _preemptible QoS_ exists for [best-effort jobs](../jobs/best-effort.md) and is named `besteffort`.
 
-
-## Available QOS
+## Available QoS's
 
 <!--qos-start-->
 
-| QOS          (partition)       | Prio | GrpTRES | MaxTresPJ | MaxJobPU | MaxWall     |
+| QoS          (partition)       | Prio | GrpTRES | MaxTresPJ | MaxJobPU | MaxWall     |
 |--------------------------------|------|---------|-----------|----------|-------------|
 | `besteffort`  (\*)             | 1    |         |           | 300      | 50-00:00:00 |
 | `low`         (\*)             | 10   |         |           | 4        |             |
@@ -38,7 +30,7 @@ jobs](../jobs/best-effort.md) and is named `besteffort`.
 
 <!--qos-end-->
 
-## List QOS Limits
+## List QoS Limits
 
 <!--limits-start-->
 
@@ -63,19 +55,18 @@ Use the `sqos` utility function to list the existing QOS limits.
 
 <!--limits-end-->
 
-!!! question "What are the possible limits set on ULHPC QOS?"
-    At the QOS level, the following elements are composed to define the [resource limits](https://slurm.schedmd.com/resource_limits.html) for our QOS:
+!!! question "What are the possible limits set on ULHPC QoS?"
+    At the QoS level, the following elements are composed to define the [resource limits](https://slurm.schedmd.com/resource_limits.html) for our QoS:
 
-    * Limits on Trackable RESources ([TRES](https://slurm.schedmd.com/tres.html) - a resource (cpu,node,etc.) tracked for usage or used to enforce limits against), in particular:
-        - `GrpTRES`: The total count of TRES able to be used at any given time from jobs running from the QOS.
-            * If this limit is reached new jobs will be queued but only allowed to run after resources have been relinquished from this group.
-        - `MaxTresPerJob`: the maximum size in TRES (cpu,nodes,...) any given job can have from the QOS
-    * `MaxJobsPerUser`: The maximum number of jobs a user can have running at a given time
-    * `MaxWall[DurationPerJob]`= The maximum wall clock time any individual job can run for in the given QOS.
+    - Limits on Trackable RESources [TRES](https://slurm.schedmd.com/tres.html) - a resource (nodes, cpus, gpus, etc.) tracked for usage or used to enforce limits against, in particular:
+        - `GrpTRES`: The total count of TRES able to be used at any given time from all jobs running from the QoS; if this limit is reached new jobs will be queued but only allowed to run after resources have been relinquished from this group.
+        - `MaxTresPerJob`: the maximum size in TRES any given job can have from the QoS.
+    - `MaxJobsPerUser`: The maximum number of jobs a user can have running at a given time.
+    - `MaxWall[DurationPerJob]`: The maximum wall clock time any individual job can run for in the given QoS.
 
 As explained in the [Limits](../jobs/limits.md) section, there are basically three layers of Slurm limits, from least to most priority:
 
 0. None
-1. [partitions](partitions.md)
-2. account associations: Root/Cluster -> Account (ascending the hierarchy) -> User
-3. Job/Partition [QOS](#)
+0. [Partitions](partitions.md)
+0. Account associations: Root/Cluster -> Account (ascending the hierarchy) -> User
+0. Job/Partition [QoS](#)
