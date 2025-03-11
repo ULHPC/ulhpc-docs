@@ -9,22 +9,21 @@ For more information:
 
 * [Getting Started](../getting-started.md)
 * [Connecting to ULHPC supercomputers](../getting-started.md#connecting-to-ulhpc-supercomputers)
-* [ULHPC Storage Systems Overview](../filesystems/overview.md)
+* [ULHPC Storage Systems Overview](../filesystems/index.md)
 <!-- * [ULHPC User Software](../software/index.md) -->
 
 !!! warning "'-bash: `module`: command not found' on access/login servers"
     Recall that by default, the `module` command is (_on purpose_) **NOT** available on the [access/login servers](../connect/access.md).
     You HAVE to be on a computing node (within a [slurm job](../slurm/index.md))
 
-
 ## Home and Directories Layout
 
-All ULHPC systems use [global home directories](../filesystems/gpfs.md#global-home-directory-home).
-You also have access to several other pre-defined directories setup over several different _File Systems_ which co-exist on the ULHPC facility and are configured for different purposes. They are listed below:
+All UL HPC systems use [global home directories](../filesystems/gpfs.md#global-home-directory-home). You also have access with environment variables to several other pre-defined directories setup over several different _File Systems_ which co-exist on the UL HPC facility and are configured for different purposes. They are listed below:
 
 {%
-   include-markdown "../filesystems/overview.md"
-   start="<!--table-start-->"
+   include-markdown "../filesystems/index.md"
+   start="<!--file-system-table-start-->"
+   end="<!--file-system-table-end-->"
 %}
 
 ## Shell and Dotfiles
@@ -110,7 +109,7 @@ modifications.
     fi
     ```
 
-Since all ULHPC systems share the [Global HOME](../filesystems/home.md) filesystem,
+Since all ULHPC systems share the [Global HOME](../data/layout#home-directory-home) filesystem,
 the same `$HOME` is available regardless of the platform.
 To make system specific customizations use the pre-defined environment
 `ULHPC_CLUSTER` variable:

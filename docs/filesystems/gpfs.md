@@ -1,51 +1,70 @@
-
+# GPFS/SpectrumScale
 
 ![](../images/plots/plot_piechart_storage_fs.png){: style="width:350px; float: right;"}
 
 ## Introduction
 
-[IBM Spectrum Scale](https://www.ibm.com/products/scale-out-file-and-object-storage), formerly known as the General Parallel File System (GPFS), is global _high_-performance clustered file system available on all ULHPC computational systems through a Dell-based storage infrastructure.
+[IBM Spectrum Scale](https://www.ibm.com/products/scale-out-file-and-object-storage), formerly known as the General Parallel File System (GPFS), is high-performance cluster file system available on all ULHPC computational systems through a Dell-based storage infrastructure.
 
-It allows sharing **homedirs and project data** between users, systems, and eventually (i.e. if needed) with the "outside world".
-In terms of raw storage capacities, it represents more than **4PB** of raw space (more than **3PB** of usable space).
+It allows sharing home directories and project data between machines, users, systems, and (if needed) with the "outside world". In terms of raw storage capacities, it represents more than **4PB** of raw space (more than **3PB** of usable space).
 
-The filesystem is composed of two tiers, homedirs are stored on the **Tier 0** (Flash-based, 246TB) while project directories are stored on the **Tier 1** (Disk-based, 2956TB). The placement policy can be adjusted, in example, for publicly shared datasets.
+The file system is composed of two tiers, home directories are stored on the **Tier 0** (Flash-based, 246TB) while project directories are stored on the **Tier 1** (Disk-based, 2956TB). The placement policy can be adjusted, in example, for publicly shared datasets.
 
-{%
-   include-markdown "home.md"
-   end="<!--intro-end-->"
-%}
+## Home directory (`${HOME}`)
 
-!!! note "`$HOME` quotas and backup policies"
-    See [quotas](quotas.md) for detailed information about inode,
-    space quotas, and file system purge policies.
-    Your HOME is backuped weekly, according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
+<!--home-mount-start-->
 
-{%
-   include-markdown "projecthome.md"
-   end="<!--intro-end-->"
-%}
+Home directories provide access to configuration files (such as dotfiles) and work files (such as binaries and input and output files) across all cluster nodes. Use home to store working data that are accessed by multiple processes in compute nodes and configuration files.
+
+- Home directories are mirrored and cached in Tier 0 storage, so small file and random I/O is relatively fast but not as fast as local storage.
+- The GPFS file system storing the home directories is redundant, so it is safe to data and access loss due to hardware failure.
+
+The environment variable `${HOME}` points to a user's home directory. The absolute path may change, but the value of `${HOME}` will always be correct.
+
+<!--home-mount-end-->
+
+## Project directories `(${PROJECTHOME})`
+
+<!--projecthome-mount-start-->
+
+Project directories share files within a group of researchers, and are accessible under the path `/work/projects/<project name>` in every cluster node. Use project directories to share files and to store large data files that are actively used in computations.
+
+- Project directories are not mirrored in Tier 0 storage, so small file I/O performance is lower that the home directory.
+- Since project directories are not mirrored in Tier 0 storage, the available storage space is much larger.
+- The GPFS file system storing the project directories is redundant, so it is safe to data and access loss due to hardware failure.
+
+The environment variable `${PROJECTHOME}` points to the parent directory of all projects (`/work/projects`). The absolute path to the project home directory may change, but `${PROJECTHOME}` is guaranteed to point to the parent directory of all projects directories.
+
+<!--projecthome-mount-end-->
 
 {%
    include-markdown "../data/project_acl.md"
    end="<!--end-warning-clusterusers-->"
 %}
 
+!!! danger
+
+    Redundancy does not replace backups. Home and project directories are redundant but not backed up, so do not leave data stored in home and project directories.
+
+!!! note "`${HOME}` quotas and backup policies"
+
+    See [quotas](quotas.md) for detailed information about inode, space quotas, and file system purge policies. Your HOME is backuped weekly, according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
+
 
 ## Storage System Implementation
 
-The way the ULHPC GPFS file system is implemented is depicted on the below figure.
+The way the UL HPC GPFS file system is implemented is depicted on the below figure.
 
 ![](images/ulhpc_gpfs_dell.png){: style="width:600px;"}
 
 It is composed of:
 
-* Two gateway NFS servers (see [below](#gatewaynfs-servers))
-* Two metadata servers (Dell R750 containing 4x 6.4TB NVMe each)
-* Two Tier 0 servers (Dell R750 containing 16x 15.36TB NVMe each), configured as replicas
-* Two Tier 1 servers (Dell R750, attached to the disk enclosures below)
-* One ME484 disk enclosure, containing 84x SAS hard disks of 22TB, configured in 2x [ADAPT volumes](https://www.delltechnologies.com/asset/en-gb/products/storage/industry-market/dell-powervault-me5-adapt-software-wp.pdf) plus 4x hot spares
-* One ME5084 disk enclosure, containing 84x SAS hard disks of 22TB, configured in 2x [ADAPT volumes](https://www.delltechnologies.com/asset/en-gb/products/storage/industry-market/dell-powervault-me5-adapt-software-wp.pdf) plus 4x hot spares
+- Two gateway NFS servers (see [below](#gatewaynfs-servers))
+- Two metadata servers (Dell R750 containing 4x 6.4TB NVMe each)
+- Two Tier 0 servers (Dell R750 containing 16x 15.36TB NVMe each), configured as replicas
+- Two Tier 1 servers (Dell R750, attached to the disk enclosures below)
+- One ME484 disk enclosure, containing 84x SAS hard disks of 22TB, configured in 2x [ADAPT volumes](https://www.delltechnologies.com/asset/en-gb/products/storage/industry-market/dell-powervault-me5-adapt-software-wp.pdf) plus 4x hot spares
+- One ME5084 disk enclosure, containing 84x SAS hard disks of 22TB, configured in 2x [ADAPT volumes](https://www.delltechnologies.com/asset/en-gb/products/storage/industry-market/dell-powervault-me5-adapt-software-wp.pdf) plus 4x hot spares
 
 There is no single point of failure within the storage solution and the setup is fully redundant (servers are set-up in pairs, and the system can tolerate the loss of one server in each pair).
 There are redundant power supplies, redundant fans, redundant storage controller and battery backup to secure the cache data when power is lost completely. The data paths to the disk enclosures are redundant so that links can fail, and the system will still be fully operational.
@@ -57,13 +76,13 @@ Finally, each server is connected directly to the Aion Infiniband network via re
 
     ![](images/ulhpc_gpfs.png){: style="width:600px;"}
 
-    * Two NAS protocol servers (see [below](#nasnfs-servers)
-    * One DDN GridScaler 7K system acquired [as part of RFP 160019](../systems/iris/timeline.md) deployed in 2017 and later extended, composed of
+    - Two NAS protocol servers (see [below](#nasnfs-servers)
+    - One DDN GridScaler 7K system acquired [as part of RFP 160019](../systems/iris/timeline.md) deployed in 2017 and later extended, composed of
         - 1x DDN GS7K enclosure (~11GB/s IO throughput)
         - 4x SS8460 disk expansion enclosures
         - 350x HGST disks (7.2K RPM HDD, 6TB, Self Encrypted Disks (SED) configured over 35 RAID6 (8+2) pools
         - 28x Sandisk SSD 400GB disks
-    * Another DDN GridScaler 7K system acquired [as part of RFP 190027](../systems/aion/timeline.md) deployed in 2020 as part of Aion  and later extended.
+    - Another DDN GridScaler 7K system acquired [as part of RFP 190027](../systems/aion/timeline.md) deployed in 2020 as part of Aion  and later extended.
         - 1x DDN GS7990-EDR embedded storage
         - 4x SS9012 disk expansion enclosures
         - 360x NL-SAS HDDs (6TB, Self Encrypted Disks (SED)) configured over 36 RAID6 (8+2) pools
@@ -74,8 +93,8 @@ Finally, each server is connected directly to the Aion Infiniband network via re
 
 The performance of the storage infrastructure via native GPFS and RDMA based data transport for the HPC filesystem is expected to be:
 
-* on Tier 0, in the range of **23GB/s** for sequential reads, and **55GB/s** for sequential writes
-* on Tier 1, in the range of **10GB/s** for large sequential reads and writes
+- on Tier 0, in the range of **23GB/s** for sequential reads, and **55GB/s** for sequential writes
+- on Tier 1, in the range of **10GB/s** for large sequential reads and writes
 Performance measurement by [IOR](https://github.com/hpc/ior), a synthetic benchmark for testing the performance of distributed filesystems, has been performed prior to the acceptance of the storage solution.
 
 ??? info "The [IOR](https://github.com/hpc/ior) benchmark"
