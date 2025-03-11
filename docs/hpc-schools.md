@@ -51,7 +51,7 @@ _Timeslot:_ Day 1 09:00-12:00, _Location:_ MSA 4.320, Belval campus
 
 Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
 
-Feel free to only to start attend the second day session if:
+Feel free to skip session 1 if:
 
 - you can connect to the ULHPC, and
 - you are comfortable with the command line interface.
