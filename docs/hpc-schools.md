@@ -74,6 +74,17 @@ _Timeslot:_ Day 2 13:00-17:00, _Location:_ MSA 4.080, Belval campus
 
 Understand the allocation of resources in HPC systems. Configure you code to access cores, memory channels, and GPUs efficiently and prevent over-subscription.
 
+### Resources
+
+- Setup
+    - [Request an account](resources/HPC_School_-_Beginner_S1-1_-_Account_request.pdf)
+    - [Access the HPC - Linux and Mac](resources/HPC_School_-_Beginner_S1-1_-_Mac_and_Linux.pdf)
+    - [Access the HPC - Windows](resources/HPC_School_-_Beginner_S1-1_-_Windows.pdf)
+- Basic shell and cluster skills
+    - [Introduction to the shell](resources/HPC_School_-_Beginner_S1-2.pdf)
+    - [Introduction to the job scheduler](resources/HPC_School_-_Beginner_S2.pdf)
+- [CLI Cheat Sheet](resources/CLI_Cheat_Sheet.pdf)
+
 ### Requirements
 
 - Having an HPC account to access the cluster. Request an account following the [instructions in our system documentation](/accounts/#how-to-get-a-new-user-account).
