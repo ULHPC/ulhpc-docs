@@ -21,13 +21,13 @@ The _scratch_ area is a [Lustre](http://lustre.org/)-based file system that prov
 
 !!! warning "Small file and random I/O"
 
-    The scratch is best used to write large files in a continuous manner. Even though the Lustre file system can handle small file and random I/O better that the GPFS system, it still slows down considerable as the number of I/O operations increases.
+    The scratch is best used to write large files in a continuous manner. Even though the Lustre file system can handle small file and random I/O better that our GPFS system, it still slows down considerably as the number of I/O operations increases. Typical example of operations with a lot random and small file I/O operations in the parallel compilation of large projects.
 
     Prefer the locally mounted file system in `/tmp` for small file and random I/O.
 
 ??? info "Origin of the term scratch"
 
-    The term scratch originates from [scratch data tapes](https://en.wikipedia.org/wiki/Scratch_tape). People uses scratch tapes to write and read data that did not fit into the main memory, and since it was a tape, it could only perform continuous I/O. The term scratch is a bit abused in modern times as most storage systems nowadays support random access. In the case of the UL HPC scratch however, we use the term literally. Our file system in scratch has a very bad performance in small file and random reads and writes.
+    The term scratch originates from [scratch data tapes](https://en.wikipedia.org/wiki/Scratch_tape). People uses scratch tapes to write and read data that did not fit into the main memory, and since it was a tape, it could only perform continuous I/O. The term scratch is a bit abused in modern times as most storage systems nowadays support random access. In the case of the lustre system in UL HPC, the terms scratch serves as a reminder that the file system is best used for contiguous I/O, even though it supports random access quite well.
 
 The environment variable `${SCRATCH}` (which expands to `/scratch/users/$(whoami)`) points to a users scratch directory. The absolute path may change, but the value of `${SCRATCH}` will always be correct.
 
