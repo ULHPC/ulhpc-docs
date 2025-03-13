@@ -58,7 +58,7 @@ Feel free to skip session 1 if:
 
 ### Session 2 - Understanding HPC Workflow: Job Submission and Monitoring
 
-_Timeslot:_ Day 1 13:00-17:00, _Location:_ MSA 4.320, Belval campus
+_Timeslot:_ Day 1 13:00-17:00, _Location:_ MSA 4.080, Belval campus
 
 Explore the inner workings of HPC systems. Discover the process of submitting and managing computational tasks. Learn how to monitor and optimize job performance.
 
