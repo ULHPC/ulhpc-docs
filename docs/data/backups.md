@@ -32,7 +32,7 @@ The cluster file systems are not meant to be used for data storage, so there are
 
 !!! info "UL HPC backup policy"
 
-    Data are copied live from the GPFS file system to a backup server (due to limitation regarding snapshots in GPFS). The backup data are copied to a Disaster Recovery Site (DSR) in a location outside the server room where the primary backup server is located.
+    Data are copied live from the GPFS file system to a backup server (due to limitation regarding snapshots in GPFS). The backup data are copied to a Disaster Recovery Site (DRS) in a location outside the server room where the primary backup server is located.
 
 <!--backup-ulhpc-end-->
 
@@ -50,7 +50,7 @@ Projects stored on the [Isilon system](/filesystems/isilon) are snapshotted regu
 
 !!! info "SIU back up policy"
 
-    Snapshots do not protect on themselves against a system failure, they only permit recovering files in case of accidental deletion. To ensure the safe storage, snapshots data is copied to a Disaster Recovery Site (DSR) in a location outside the server room where the primary data storage (Isilon) is located.
+    Snapshots do not protect on themselves against a system failure, they only permit recovering files in case of accidental deletion. To ensure the safe storage, snapshots data is copied to a Disaster Recovery Site (DRS) in a location outside the server room where the primary data storage (Isilon) is located.
 
 <!--backup-isilon-end-->
 
