@@ -125,16 +125,23 @@ At the heart of environment modules interaction resides the following components
     setenv("EBDEVELFOSS","/opt/apps/easybuild/systems/aion/rhel810-20250405/2023b/epyc/software/foss/2023b/easybuild/toolchain-foss-2023b-easybuild-devel")
     ```
 
-## Modules for software sets in UL HPC
+## Meta-modules for software set management in UL HPC
 
-In UL HPC we are using environment modules to modify the available module set. This is done to prevent accidental mixing of modules from different software sets. To load a set of software modules, simply load the appropriate module the modifies the available software set. There are two types of software sets.
+In UL HPC we are using environment meta-modules to modify the available module set. This is done to prevent accidental mixing of modules from different software sets. Meta-modules are modules that modify the `MODULEPATH` environment variable to change the set of available modules. To load a set of software modules, load the appropriate meta-module. Loading a meta-module will
 
-- _Modules under_ `env`: this is a set of [sticky](https://lmod.readthedocs.io/en/latest/240_sticky_modules.html) modules optimized for the UL HPC systems. The modules are designed to load a different natively optimized set of modules for each system in UL HPC.
-- _Modules under_ [`EESSI`](/software/eessi): this modules load EESSI software sets. The software sets distributed under EESSI are generically optimized software sets for a number of architectures that are designed to support reproducibility and are available across multiple HPC centers.
+- remove any other meta-module that modifies the software set, and
+- will add in the `MODULEPATH` variable the path to the modules of the required software set.
 
-!!! important "When to use EESSI"
+There are two types of software sets.
 
-    While the performance of EESSI modules is slightly lower that the natively optimized software set (`env`), it is easier to move your computations to new systems that support EESSI. If you plan to also run your computations in a centre where EESSI is available, you should consider using EESSI. Otherwise use the local modules.
+- _Modules under_ `env`: this is a set of modules optimized for the UL HPC systems. The modules are designed to load a different natively optimized set of modules for each system in UL HPC.
+- _Modules under_ [`EESSI`](/software/eessi): this modules load EESSI software sets. The software sets distributed under EESSI provide binaries generically optimized for a number of architectures. The EESSI modules are design to provide a uniform collection of software sets across multiple HPC center to support reproducibility.
+
+!!! important "When to use EESSI modules"
+
+    In general the performance of EESSI modules is slightly lower than the natively optimized software set modules (under `env`). The main advantage of EESSI modules in that they make it easier to move your computations to new systems that support EESSI. If you plan to also run your computations in a centre where EESSI is available, you should consider using EESSI, otherwise use the local modules.
+
+    The difference in performance between EESSI modules and the natively optimized software set is particularly large in applications that use a lot of MPI communication. At the moment we are not linking the EESSI application with an MPI version optimized for our site, as a result they rely on the generically optimized MPI distributed by EESSI.
 
 When you login to a compute node, the `default` software set is loaded automatically. You can change that by loading another software set.
 
@@ -146,7 +153,7 @@ $ module load env/development/2023b
 
 Lmod is automatically replacing "env/release/default" with "env/development/2023b".
 ```
-The command informs us that the `default` software set was replaces with the `2023b` software set from the `development` category. The modules setting the environment are [sticky](https://lmod.readthedocs.io/en/latest/240_sticky_modules.html) modules, meaning that you can only unload/purge them with the `--force` flag:
+The command informs us that the `default` software set was replaces with the `2023b` software set from the `development` category. The meta-modules configuring the environment are [sticky](https://lmod.readthedocs.io/en/latest/240_sticky_modules.html) modules, meaning that you can only unload/purge them with the `--force` flag:
 ```console
 $ module unload env/development/2023b
 The following modules were not unloaded:
@@ -156,6 +163,14 @@ The following modules were not unloaded:
 $ module --force unload env/development/2023b
 ```
 This saves you from loading environment setting module every time you purge your environment modules during normal operations.
+
+??? info "Inner workings of meta-module mutual exclusiveness"
+
+    The meta-modules in the UL HPC system are all members of the `env` family. This is defined in the module file with the
+    ```lua
+    family("env")
+    ```
+    command. Members of the same family cannot be loaded at the same time, so whenever you load a module of the `env` family, all other `env` modules that are loaded are removed.
 
 ### Loading an EESSI software set
 
@@ -180,9 +195,10 @@ $ module avail
 ...
 ```
 
-there are multiple versions of the same software available from multiple toolchains (foss-2023a, foss-2023b). Loading a module and purging the loaded modules also removes the `EESSI/2023.06` module.
+there are multiple versions of the same software available from multiple toolchains (foss-2022b, foss-2023a, foss-2023b). Loading a module and purging the loaded modules also removes the `EESSI/2023.06` module.
 
 ```console
+$ module load EESSI/2023.06
 $ module load foss/2023b
 $ module list EESSI
 
@@ -232,16 +248,16 @@ An overview of the currently available core toolchain component versions in the 
 
 <!--table-swsets-toolchains-versionning-end-->
 
-When using the [natively optimized software sets](/environment/modules/#loading-a-natively-optimized-software-set-under-env) loaded with the module under `env`, you should always have a single core component available. With the flat layout used in EESSI there will be multiple core components available with you load modules providing the [EESSI software sets](/environment/modules/#loading-an-eessi-software-set).
+In the [natively optimized software sets](/environment/modules/#loading-a-natively-optimized-software-set-under-env) loaded with the modules under `env`, you should always have a single core component of each type available. The [EESSI software sets](/environment/modules/#loading-an-eessi-software-set) in contrast follows a more flat layout, and multiple core components will be available at once per type when the software set is loaded.
 
 ### Architecture of the software set
 
- By default, the environment module system uses the contents of the `${MODULEPATH}` environment variable as the path where is will look for modules. In UL HPC the environment variable contains by default the following paths.
+ By default, the environment module system uses the contents of the `MODULEPATH` environment variable as the path where it looks for modules. In UL HPC the environment variable contains by default the following paths.
 
-- `/opt/apps/easybuild/environment/modules`: Location of [sticky](https://lmod.readthedocs.io/en/latest/240_sticky_modules.html) modules under `env` that provide the native optimized software modules.
-- `/cvmfs/software.eessi.io/init/modules`: Location of modules under `EESSI`, a module that provide the [EESSI](/software/eessi.md) software sets.
+- `/opt/apps/easybuild/environment/modules`: Location of [sticky](https://lmod.readthedocs.io/en/latest/240_sticky_modules.html) meta-modules under `env` that provide the native optimized software modules.
+- `/cvmfs/software.eessi.io/init/modules`: Location of modules under `EESSI`, a set of meta-modules that provide the [EESSI](/software/eessi.md) software sets.
 
-There is also a default version of a natively optimized `env` module loaded. The natively optimized module under `env` append the following path to `${MODULEPATH}` in the order described below.
+The natively optimized modules under `env` prepend one of the following paths to `${MODULEPATH}` in the order described below.
 
 - On all nodes except for the `gpu` partition of [Iris](/systems/iris/):
     - `/opt/apps/easybuild/systems/<cluster name>/<build version>/<software set version>/<target architecture>/modules/all`: Location of _natively optimized modules_.
@@ -251,7 +267,7 @@ There is also a default version of a natively optimized `env` module loaded. The
     - `/opt/apps/easybuild/systems/iris/<build version>/<software set version>/skylake/modules/all`: Location of _natively optimized modules_.
     - `/opt/apps/easybuild/systems/binary/<build version>/<software set version>/generic/modules/all`: Location of software distributed as binaries that cannot be optimized for any target architecture.
 
-    Note that the GPU optimized modules still need the CPU modules to function, like for instance MPI modules, and GPU nodes use Skylake CPUs.
+    The GPU optimized modules still need the CPU modules to function, like for instance the MPI module. The GPU nodes use Skylake CPUs, so the modules optimized for Skylake are loaded.
 
 ??? info "Parameters in the software set directory paths"
 
@@ -264,31 +280,31 @@ There is also a default version of a natively optimized `env` module loaded. The
     - `<software set version>`: the ULHPC Software set release, aligned with [Easybuid toolchains release](https://easybuild.readthedocs.io/en/master/Common-toolchains.html#component-versions-in-foss-toolchain).
     - `<target architecture>`: the architecture for which the software set has been optimized, as set in the `${RESIF_ARCH}` environment variable.
 
-### Organization of software set files and manual selection of the software set
-
 There are nodes with `broadwell` and nodes with `skylake` CPUs in the CPU partitions (`batch` and `interactive`) of [Iris](/systems/iris/). To ensure that a compatible binary is used in all CPUs of the partition, modules loading software sets are configured to load binaries that are compatible for `broadwell`, the older architecture of the two (note that the binary is selected in the primary node of an allocation).
 
 The `RESIF_ARCH` environment variable is used to load the software set for the appropriate architecture in the natively optimized software sets under `env`. The `${RESIF_ARCH}` value used for all nodes in the CPU partitions of Iris is `broadwell`.
 
 Similarly to `RESIF_ARCH`, EESSI provides the `EESSI_ARCHDETECT_OPTIONS_OVERRIDE` environment variable to enforce an architecture; by default `EESSI_ARCHDETECT_OPTIONS_OVERRIDE` is unset, and the EESSI module selects an appropriate architecture for the software set (as the name suggests). The `EESSI_ARCHDETECT_OPTIONS_OVERRIDE` variable is set to `x86_64/intel/haswell` in the CPU partitions of iris by default and unset in every other partition. Note that architectural support in EESSI is relatively limited. The available CPU architectures in EESSI for Iris nodes are
 
-    - `x86_64/intel/haswell` for `broadwell` CPUs, and
-    - `x86_64/intel/skylake` for `skylake` CPUs.
+- `x86_64/intel/haswell` for `broadwell` CPUs, and
+- `x86_64/intel/skylake` for `skylake` CPUs.
 
 EESSI does not provide builds optimized for all architectures, so the older `haswell` was chosen as the best alternative for `broadwell` which is missing.
 
 !!! info "Values for the `RESIF_ARCH` and `EESSI_ARCHDETECT_OPTIONS_OVERRIDE` environment variables in UL HPC systems"
 
-    | Cluster                          | Partition (`--parition=`) | Architecture (`${RESIF_ARCH}`) | EESSI Architecture (`EESSI_ARCHDETECT_OPTIONS_OVERRIDE`) |
-    |:---------------------------------|:--------------------------|:-------------------------------|:---------------------------------------------------------|
-    | [Iris](../systems/iris/index.md) | `batch`                   | `broadwell`                    | `x86_64/intel/haswell`                                   |
-    | [Iris](../systems/iris/index.md) | `interactive`             | `broadwell`                    | `x86_64/intel/haswell`                                   |
-    | [Iris](../systems/iris/index.md) | `bigmem`                  | `skylake`                      |                                                          |
-    | [Iris](../systems/iris/index.md) | `gpu`                     | `gpu`                          |                                                          |
-    | [Aion](../systems/aion/index.md) | `batch`                   | `epyc`                         |                                                          |
-    | [Aion](../systems/aion/index.md) | `interactive`             | `epyc`                         |                                                          |
+    | Cluster                          | Partition (`--parition=`) | Native architecture desciptor (`${RESIF_ARCH}`) | EESSI Architecture descriptor (`${EESSI_ARCHDETECT_OPTIONS_OVERRIDE}`) |
+    |:---------------------------------|:--------------------------|:------------------------------------------------|:-----------------------------------------------------------------------|
+    | [Iris](../systems/iris/index.md) | `batch`                   | `broadwell`                                     | `x86_64/intel/haswell`                                                 |
+    | [Iris](../systems/iris/index.md) | `interactive`             | `broadwell`                                     | `x86_64/intel/haswell`                                                 |
+    | [Iris](../systems/iris/index.md) | `bigmem`                  | `skylake`                                       |                                                                        |
+    | [Iris](../systems/iris/index.md) | `gpu`                     | `gpu`                                           |                                                                        |
+    | [Aion](../systems/aion/index.md) | `batch`                   | `epyc`                                          |                                                                        |
+    | [Aion](../systems/aion/index.md) | `interactive`             | `epyc`                                          |                                                                        |
 
     Note that all `bigmen` and `skylake` nodes use Skylake CPUs.
+
+### Manual selection of the software set
 
 There are occasion where a user may want to set the software set manually. For instance, a job can be constrained to run on a single kind of CPU, using for instance the `--constraint=skylake` flag on `sbatch` or `salloc` to force the job to run only on Skylake nodes of the `batch` partition in Iris. In this case it makes sense to use a software set optimized for Skylake.
 
@@ -334,10 +350,38 @@ You can always add a software set manually to `MODULEPATH` using the `use` optio
     | [Iris](../systems/iris/index.md) | `gpu`                 | `/opt/apps/easybuild/systems/iris/<build version>/<software set version>/gpu/modules/all`       |
     | [Aion](../systems/aion/index.md) | `epyc`                | `/opt/apps/easybuild/systems/aion/<build version>/<software set version>/epyc/modules/all`      |
 
+### Default native module set
+
+By default a native module set is loaded when you login into a node. This software set is
+```
+env/release/default
+```
+and its simply a symbolic link pointing to a some of the software sets in `end/release`. You can change the default software set by setting the environment variable `LMOD_SYSTEM_DEFAULT_MODULES` to a colon separated list of the modules you want to be loaded by default when you link into a node. For instance,
+```bash
+export LMOD_SYSTEM_DEFAULT_MODULES=/env/testing/2023b
+```
+loads the `/env/testing/2023b` software set, and
+```bash
+export LMOD_SYSTEM_DEFAULT_MODULES=/env/testing/2023b:EESSI/2023.06
+```
+loads both `/env/testing/2023b` and `EESSI/2023.06` software sets. You can force a clean default environment by setting `LMOD_SYSTEM_DEFAULT_MODULES` to the empty string.
+
+??? tip "Modify the default software set"
+
+    You can define the `LMOD_SYSTEM_DEFAULT_MODULES` environment variable in your `${HOME}/.bashrc` file to permanently modify the default software set loaded when logging into a compute node.
+
+??? info "Inner workings of default modules"
+
+    During login to a compute node, the command
+    ```bash
+    module --initial_load restore
+    ```
+    is executed (in a `profile.d` script). The `LMOD_SYSTEM_DEFAULT_MODULES` environment variable is used by the `restore` argument of the module command to purge the environment and load a default set of modules. The flag `--initial_load` is used to avoid the output of a report of the operations performed.
+
 
 ## Module Naming Schemes
 
-!!! important "Module Naming Schemes on ULHPC system"
+!!! important "Module Naming Schemes on UL HPC system"
 
     ULHPC modules are organised through the Categorized Naming Scheme.
 
@@ -374,13 +418,13 @@ Default available module classes:
         vis:       Visualization, plotting, documentation and typesetting
 ```
 
-It follows that the ULHPC software modules are structured accordingly.
+It follows that the UL HPC software modules are structured accordingly.
 
 <!--swsets-versionning-end-->
 
-## Using Easybuild to Create Custom Modules
+## Using EasyBuild to Create Custom Modules
 
-You may want to use [Easybuild](/environment/easybuild/) to complete the existing software set with your own modules and software builds. See [Building Custom (or missing) software](/software/build/) documentation for more details.
+You may want to use [EasyBuild](/environment/easybuild/) to complete the existing software set with your own modules and software builds. See [Building Custom (or missing) software](/software/build/) documentation for more details.
 
 
 ## Creating a Custom Module Environment
@@ -394,10 +438,12 @@ module use /path/to/the/custom/modulefiles
 ```
 
 !!! warning
+
     1. Make sure the UNIX file permissions grant access to all users who want to use the software.
     2. Do not give write permissions to your home directory to anyone else.
 
 !!! note
+
     The `module use` command adds new directories before other module search paths (defined as `${MODULEPATH}`), so modules defined in a custom directory will have precedence if there are other modules with the same name in the module search paths. If you prefer to have the new directory added at the end of `${MODULEPATH}`, use `module use -a` instead of `module use`.
 
 ## Module FAQ
