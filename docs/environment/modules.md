@@ -95,10 +95,9 @@ At the heart of environment modules interaction resides the following components
 
 ??? example "Example of ULHPC `toolchain/foss` (auto-generated) module file"
     ```console
-    $ module show toolchain/foss
-    -----------------------------------------------------------------------------------------------------
-       /opt/apps/easybuild/systems/aion/rhel810-20250216/2023b/epyc/modules/all/toolchain/foss/2023b.lua:
-    -----------------------------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------
+       /opt/apps/easybuild/systems/aion/rhel810-20250405/2023b/epyc/modules/all/toolchain/foss/2023b.lua:
+    ----------------------------------------------------------------------------------------------------------------
     help([[
     Description
     ===========
@@ -121,9 +120,9 @@ At the heart of environment modules interaction resides the following components
     depends_on("numlib/FFTW/3.3.10-GCC-13.2.0")
     depends_on("numlib/FFTW.MPI/3.3.10-gompi-2023b")
     depends_on("numlib/ScaLAPACK/2.2.0-gompi-2023b-fb")
-    setenv("EBROOTFOSS","/opt/apps/easybuild/systems/aion/rhel810-20250216/2023b/epyc/software/foss/2023b")
+    setenv("EBROOTFOSS","/opt/apps/easybuild/systems/aion/rhel810-20250405/2023b/epyc/software/foss/2023b")
     setenv("EBVERSIONFOSS","2023b")
-    setenv("EBDEVELFOSS","/opt/apps/easybuild/systems/aion/rhel810-20250216/2023b/epyc/software/foss/2023b/easybuild/toolchain-foss-2023b-easybuild-devel")
+    setenv("EBDEVELFOSS","/opt/apps/easybuild/systems/aion/rhel810-20250405/2023b/epyc/software/foss/2023b/easybuild/toolchain-foss-2023b-easybuild-devel")
     ```
 
 ## Modules for software sets in UL HPC
