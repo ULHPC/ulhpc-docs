@@ -18,7 +18,7 @@ The main advantages of using an environment module system are the following:
 
 ## Environment modules
 
-Environment module systems are a standard set of tools deployed in most HPC sites to allow dynamic modification of user environments. The [environment module framework](https://modules.sourceforge.net/docs/Modules-Paper.pdf) was fist implement in [Environment Modules](https://modules.sourceforge.net/) in [Tcl](https://www.tcl-lang.org/) and later in other tools such as [Lmod](https://lmod.readthedocs.io/) that is written in [Lua](https://www.lua.org/). All implementations provide the [`module`](http://lmod.readthedocs.io) command to
+Environment module systems are a standard set of tools deployed in most HPC sites to allow dynamic modification of user environments. The [environment module framework](https://modules.sourceforge.net/docs/Modules-Paper.pdf) was fist implement in [Environment Modules](https://modules.sourceforge.net/) in the [Tcl](https://www.tcl-lang.org/) language, and later in other tools such as [Lmod](https://lmod.readthedocs.io/) which is written in [Lua](https://www.lua.org/). All implementations provide the [`module`](http://lmod.readthedocs.io) command to
 
 - manage the `PATH`, `LD_LIBRARY_PATH`, `MANPATH`, and other shell environment variables,
 - define shell functions, and
@@ -30,6 +30,7 @@ By automatically modifying the shell environment, the modules can load and unloa
 - the provision of multiple version of software packages that can co-exists independently in different module environments.
 
 !!! danger "The `module` command is only available on the compute nodes"
+
     There is no environment module system installed in login nodes. This is a deliberate choice to prevent users from running large jobs on login nodes. You need to be within a job (interactive or not) to load modules provided by UL HPC or private modules.
 
 ??? info "Inner working of environment modules systems"
@@ -129,7 +130,7 @@ At the heart of environment modules interaction resides the following components
 
 In UL HPC we are using environment modules to modify the available module set. This is done to prevent accidental mixing of modules from different software sets. To load a set of software modules, simply load the appropriate module the modifies the available software set. There are two types of software sets.
 
-- _Modules under_ `env`: this is a set of modules [sticky](https://lmod.readthedocs.io/en/latest/240_sticky_modules.html) optimized for the UL HPC systems. The modules are designed to load a different natively optimized set of modules for each system in UL HPC.
+- _Modules under_ `env`: this is a set of [sticky](https://lmod.readthedocs.io/en/latest/240_sticky_modules.html) modules optimized for the UL HPC systems. The modules are designed to load a different natively optimized set of modules for each system in UL HPC.
 - _Modules under_ [`EESSI`](/software/eessi): this modules load EESSI software sets. The software sets distributed under EESSI are generically optimized software sets for a number of architectures that are designed to support reproducibility and are available across multiple HPC centers.
 
 !!! important "When to use EESSI"
