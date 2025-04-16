@@ -71,11 +71,11 @@ A local file system is also accessible through `/tmp`. The following table summa
 
 Each file system in the cluster performs best in a specific set of functions.
 
-- Use the GPFS file system directory mounted in your `${HOME}` for files that need to be accessed fast.
-- Use the GPFS file system directories mounted in `${PROJECTHOME}` to store large files required for running your jobs.
-- Use the Luster file system directory mounted in `${SCRATCH}` to store files that need to be accessed fast. Scratch is meant for temporary storage only, remove your files from scratch as soon as they are not needed for any running jobs.
-- Use project directories in the NFS and SMB exports of Isilon to archive data that need to be stored safely. The OneFS file system of Isilon is backed up regularly.
-- Use the local file systems mounted in `/tmp` for small file I/O. Clustered file systems do not handle small file I/O well.
+- Use the GPFS file system directory mounted in your `${HOME}` for configuration files and files that need to be accessed with low latency and high throughput, for instance for storing environments and container sandboxes.
+- Use the GPFS file system directories mounted in `${PROJECTHOME}` to store input and output files for your jobs.
+- Use the Lustre file system directory mounted in `${SCRATCH}` to store working files for running jobs that need to be accessed with low latency and high throughput, like checkpoint files. Scratch is meant for temporary storage only; _remove files from scratch as soon as they are not needed for any running jobs_.
+- Use project directories in the NFS and SMB exports of Isilon to archive data that need to be stored safely; the OneFS file system of Isilon is backed up regularly.
+- Use the local file systems mounted in `/tmp` for small file I/O in running jobs, like compilations. Clustered file systems like GPFS and Lustre do not handle high throughput small file I/O well.
 
 Many file system technologies (e.g. ZFS) can hide a lot of the complexity of using a file system. HPC clusters tend to provide low level access to file system functionality so that users can select the technology that provides the best performance for their workload.
 
