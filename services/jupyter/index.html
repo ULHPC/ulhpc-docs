@@ -1,0 +1,3114 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ULHPC Technical Documentation">
+      
+      
+        <link rel="canonical" href="https://hpc-docs.uni.lu/services/jupyter/">
+      
+      
+        <meta name="author" content="Uni.lu HPC (ULHPC) Team">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.3">
+    
+    
+      
+        <title>Jupyter Notebook - ULHPC Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.62d34fff.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.c8acc6db.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#jupyter-notebook" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-header-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            ULHPC Technical Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Jupyter Notebook
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://hpc-docs.uni.lu/" title="ULHPC Technical Documentation" class="md-nav__button md-logo" aria-label="ULHPC Technical Documentation">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    ULHPC Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/ULHPC/ulhpc-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../hpc-schools/" title="HPC Trainings and Tutorials" class="md-nav__link">
+      HPC Trainings and Tutorials
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Accounts
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Accounts" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Accounts
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/" title="Get an Account" class="md-nav__link">
+      Get an Account
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/passwords/" title="Password Policy" class="md-nav__link">
+      Password Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/collaboration_accounts/" title="Collaboration Accounts" class="md-nav__link">
+      Collaboration Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../accounts/projects/" title="Projects Accounts" class="md-nav__link">
+      Projects Accounts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ipa/" title="Identity Management Portal" class="md-nav__link">
+      Identity Management Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/accounts/" title="Slurm Account Hierarchy" class="md-nav__link">
+      Slurm Account Hierarchy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../teaching-with-the-ulhpc/" title="Teaching with the ULHPC" class="md-nav__link">
+      Teaching with the ULHPC
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Data Center
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Data Center" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Data Center
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data-center/" title="Centre de Calcul (CDC)" class="md-nav__link">
+      Centre de Calcul (CDC)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      ULHPC Supercomputers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="ULHPC Supercomputers" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        ULHPC Supercomputers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Aion
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Aion" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Aion
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/" title="Aion System" class="md-nav__link">
+      Aion System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/aion/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7-3" type="checkbox" id="nav-7-3">
+    
+    <label class="md-nav__link" for="nav-7-3">
+      Iris
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Iris" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Iris
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/" title="Iris System" class="md-nav__link">
+      Iris System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/compute/" title="Compute Nodes" class="md-nav__link">
+      Compute Nodes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/interconnect/" title="Fast Local Interconnect" class="md-nav__link">
+      Fast Local Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../systems/iris/timeline/" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Interconnect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Interconnect" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Interconnect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interconnect/ib/" title="Fast Infiniband Interconnect" class="md-nav__link">
+      Fast Infiniband Interconnect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../interconnect/ethernet/" title="Ethernet Interconnect" class="md-nav__link">
+      Ethernet Interconnect
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Storage
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Storage" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Storage
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/sharing/" title="Data Sharing" class="md-nav__link">
+      Data Sharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/transfer/" title="Data Transfer" class="md-nav__link">
+      Data Transfer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/project/" title="Project Data Management" class="md-nav__link">
+      Project Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/lfs/" title="Scratch Data Management" class="md-nav__link">
+      Scratch Data Management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/quotas/" title="Quotas" class="md-nav__link">
+      Quotas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/backups/" title="Backups" class="md-nav__link">
+      Backups
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/unix-file-permissions/" title="Unix File Permissions" class="md-nav__link">
+      Unix File Permissions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/gdpr/" title="GDPR Compliance" class="md-nav__link">
+      GDPR Compliance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/encryption/" title="Sensitive Data Protection" class="md-nav__link">
+      Sensitive Data Protection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9-11" type="checkbox" id="nav-9-11">
+    
+    <label class="md-nav__link" for="nav-9-11">
+      Clustered and Networked File Systems
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Clustered and Networked File Systems" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Clustered and Networked File Systems
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/gpfs/" title="GPFS/SpectrumScale" class="md-nav__link">
+      GPFS/SpectrumScale
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/lustre/" title="Lustre" class="md-nav__link">
+      Lustre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../filesystems/isilon/" title="OneFS Isilon" class="md-nav__link">
+      OneFS Isilon
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Access/Connect
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Access/Connect" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Access/Connect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/access/" title="Access/Login Servers" class="md-nav__link">
+      Access/Login Servers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ssh/" title="SSH" class="md-nav__link">
+      SSH
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ipa/" title="Identity Management (IdM/IPA)" class="md-nav__link">
+      Identity Management (IdM/IPA)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/ood/" title="Open On Demand Portal" class="md-nav__link">
+      Open On Demand Portal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../connect/troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Environment
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Environment" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Environment
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/modules/" title="Modules" class="md-nav__link">
+      Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/easybuild/" title="Easybuild" class="md-nav__link">
+      Easybuild
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../environment/conda/" title="Conda" class="md-nav__link">
+      Conda
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+    
+    <label class="md-nav__link" for="nav-12">
+      Policies
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Policies" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Policies
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/aup/" title="Acceptable Use Policy (AUP)" class="md-nav__link">
+      Acceptable Use Policy (AUP)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/maintenance/" title="Downtime and Maintenance" class="md-nav__link">
+      Downtime and Maintenance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../policies/usage-charging/" title="Usage Charging Policy" class="md-nav__link">
+      Usage Charging Policy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13" checked>
+    
+    <label class="md-nav__link" for="nav-13">
+      Running Jobs
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Running Jobs" data-md-level="1">
+      <label class="md-nav__title" for="nav-13">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Running Jobs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/" title="Slurm Overview" class="md-nav__link">
+      Slurm Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/commands/" title="Convenient Slurm Commands" class="md-nav__link">
+      Convenient Slurm Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/partitions/" title="Partition/Queues" class="md-nav__link">
+      Partition/Queues
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/qos/" title="Quality of Service (QoS)" class="md-nav__link">
+      Quality of Service (QoS)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/accounts/" title="Account Hierarchy" class="md-nav__link">
+      Account Hierarchy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/reason-codes/" title="Job State and Reason Code" class="md-nav__link">
+      Job State and Reason Code
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/fairsharing/" title="Fairsharing" class="md-nav__link">
+      Fairsharing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/priority/" title="Job Priority and Backfilling" class="md-nav__link">
+      Job Priority and Backfilling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/billing/" title="Job Accounting and Billing" class="md-nav__link">
+      Job Accounting and Billing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/interactive/" title="Interactive Job" class="md-nav__link">
+      Interactive Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/submit/" title="Passive/Batch Job" class="md-nav__link">
+      Passive/Batch Job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/gpu/" title="GPU Jobs" class="md-nav__link">
+      GPU Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/long/" title="Long Jobs" class="md-nav__link">
+      Long Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../jobs/best-effort/" title="Best-effort Jobs" class="md-nav__link">
+      Best-effort Jobs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../slurm/launchers/" title="Launcher Scripts Examples" class="md-nav__link">
+      Launcher Scripts Examples
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Jupyter Notebook
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Jupyter Notebook" class="md-nav__link md-nav__link--active">
+      Jupyter Notebook
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-jupyter" class="md-nav__link">
+    Install Jupyter
+  </a>
+  
+    <nav class="md-nav" aria-label="Install Jupyter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providing-access-to-kernels-of-other-environments" class="md-nav__link">
+    Providing access to kernels of other environments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kernels-for-conda-environments" class="md-nav__link">
+    Kernels for Conda environments
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starting-a-jupyter-notebook" class="md-nav__link">
+    Starting a Jupyter Notebook
+  </a>
+  
+    <nav class="md-nav" aria-label="Starting a Jupyter Notebook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#password-protected-access" class="md-nav__link">
+    Password protected access
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+    
+    <label class="md-nav__link" for="nav-14">
+      Software
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software" data-md-level="1">
+      <label class="md-nav__title" for="nav-14">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-1" type="checkbox" id="nav-14-1">
+    
+    <label class="md-nav__link" for="nav-14-1">
+      Supported Software List
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Supported Software List" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Supported Software List
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/all_softwares/" title="Full List (alphabetical order)" class="md-nav__link">
+      Full List (alphabetical order)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/bio/" title="Biology" class="md-nav__link">
+      Biology
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/cae/" title="CFD/Finite element modelling" class="md-nav__link">
+      CFD/Finite element modelling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/chem/" title="Chemistry" class="md-nav__link">
+      Chemistry
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/compiler/" title="Compilers" class="md-nav__link">
+      Compilers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/data/" title="Data processing" class="md-nav__link">
+      Data processing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/debugger/" title="Debugging" class="md-nav__link">
+      Debugging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/devel/" title="Development" class="md-nav__link">
+      Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/lang/" title="Programming Languages" class="md-nav__link">
+      Programming Languages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/lib/" title="Libraries" class="md-nav__link">
+      Libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/math/" title="Mathematics" class="md-nav__link">
+      Mathematics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/mpi/" title="MPI" class="md-nav__link">
+      MPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/numlib/" title="Numerical libraries" class="md-nav__link">
+      Numerical libraries
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/perf/" title="Performance measurements" class="md-nav__link">
+      Performance measurements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/phys/" title="Physics" class="md-nav__link">
+      Physics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/system/" title="System-level software" class="md-nav__link">
+      System-level software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/toolchain/" title="Toolchains (software stacks)" class="md-nav__link">
+      Toolchains (software stacks)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/tools/" title="Utilities" class="md-nav__link">
+      Utilities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/vis/" title="Visualisation" class="md-nav__link">
+      Visualisation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-2" type="checkbox" id="nav-14-2">
+    
+    <label class="md-nav__link" for="nav-14-2">
+      Software Sets
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Software Sets" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Software Sets
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/2019b/" title="2019b" class="md-nav__link">
+      2019b
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/swsets/2020b/" title="2020a" class="md-nav__link">
+      2020a
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/build/" title="Compiling/building your own software" class="md-nav__link">
+      Compiling/building your own software
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/eessi/" title="EESSI software stack" class="md-nav__link">
+      EESSI software stack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../containers/" title="Containers" class="md-nav__link">
+      Containers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-6" type="checkbox" id="nav-14-6">
+    
+    <label class="md-nav__link" for="nav-14-6">
+      Computer Aided Eng. (CAE)
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computer Aided Eng. (CAE)" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computer Aided Eng. (CAE)
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/fenics/" title="FEniCS" class="md-nav__link">
+      FEniCS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/ansys/" title="ANSYS" class="md-nav__link">
+      ANSYS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/openfoam/" title="OpenFOAM" class="md-nav__link">
+      OpenFOAM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/abaqus/" title="Abaqus" class="md-nav__link">
+      Abaqus
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/fds/" title="FDS" class="md-nav__link">
+      FDS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/cae/meshing-tools/" title="Meshing-Tools" class="md-nav__link">
+      Meshing-Tools
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-7" type="checkbox" id="nav-14-7">
+    
+    <label class="md-nav__link" for="nav-14-7">
+      Physics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Physics" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Physics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/physics/wrf/" title="WRF" class="md-nav__link">
+      WRF
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-8" type="checkbox" id="nav-14-8">
+    
+    <label class="md-nav__link" for="nav-14-8">
+      Computational Chemistry
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Computational Chemistry" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-8">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Computational Chemistry
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-8-1" type="checkbox" id="nav-14-8-1">
+    
+    <label class="md-nav__link" for="nav-14-8-1">
+      Electronics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Electronics" data-md-level="3">
+      <label class="md-nav__title" for="nav-14-8-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Electronics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/abinit/" title="ABINIT" class="md-nav__link">
+      ABINIT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/ase/" title="ASE" class="md-nav__link">
+      ASE
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/meep/" title="MEEP" class="md-nav__link">
+      MEEP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/quantum-espresso/" title="Quantum Espresso" class="md-nav__link">
+      Quantum Espresso
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/electronics/vasp/" title="VASP" class="md-nav__link">
+      VASP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-8-2" type="checkbox" id="nav-14-8-2">
+    
+    <label class="md-nav__link" for="nav-14-8-2">
+      Molecular Dynamics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Molecular Dynamics" data-md-level="3">
+      <label class="md-nav__title" for="nav-14-8-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Molecular Dynamics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/cp2k/" title="CP2K" class="md-nav__link">
+      CP2K
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/gromacs/" title="GROMACS" class="md-nav__link">
+      GROMACS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/namd/" title="NAMD" class="md-nav__link">
+      NAMD
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/nwchem/" title="NWCHEM" class="md-nav__link">
+      NWCHEM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/computational-chemistry/molecular-dynamics/helping-libraries/" title="Helping Libraries" class="md-nav__link">
+      Helping Libraries
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-9" type="checkbox" id="nav-14-9">
+    
+    <label class="md-nav__link" for="nav-14-9">
+      Mathematics & Statistics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Mathematics & Statistics" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Mathematics & Statistics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/matlab/" title="MATLAB" class="md-nav__link">
+      MATLAB
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/mathematica/" title="MATHEMATICA" class="md-nav__link">
+      MATHEMATICA
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/stata/" title="Stata" class="md-nav__link">
+      Stata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/maths/julia/" title="Julia" class="md-nav__link">
+      Julia
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/optim/" title="Optimizers" class="md-nav__link">
+      Optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-14-11" type="checkbox" id="nav-14-11">
+    
+    <label class="md-nav__link" for="nav-14-11">
+      Visualization
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Visualization" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Visualization
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../software/visu/paraview/" title="ParaView" class="md-nav__link">
+      ParaView
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
+    
+    <label class="md-nav__link" for="nav-15">
+      Development
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Development" data-md-level="1">
+      <label class="md-nav__title" for="nav-15">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Development
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-1" type="checkbox" id="nav-15-1">
+    
+    <label class="md-nav__link" for="nav-15-1">
+      Performance/Debugging
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Performance/Debugging" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Performance/Debugging
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/arm-forge/" title="Arm Forge" class="md-nav__link">
+      Arm Forge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/vtune/" title="Intel VTune" class="md-nav__link">
+      Intel VTune
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/advisor/" title="Intel Advisor" class="md-nav__link">
+      Intel Advisor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/inspector/" title="Intel Inspector" class="md-nav__link">
+      Intel Inspector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/itac/" title="Intel Trace Analyzer and Collector" class="md-nav__link">
+      Intel Trace Analyzer and Collector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/scalasca/" title="Scalasca" class="md-nav__link">
+      Scalasca
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/valgrind/" title="Valgrind" class="md-nav__link">
+      Valgrind
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../development/performance-debugging-tools/aps/" title="APS" class="md-nav__link">
+      APS
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-15-2" type="checkbox" id="nav-15-2">
+    
+    <label class="md-nav__link" for="nav-15-2">
+      Containers
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Containers" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Containers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../containers/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Services" class="md-nav__link">
+      Services
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-17" type="checkbox" id="nav-17">
+    
+    <label class="md-nav__link" for="nav-17">
+      Help and Support
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Help and Support" data-md-level="1">
+      <label class="md-nav__title" for="nav-17">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Help and Support
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../support/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-18" type="checkbox" id="nav-18">
+    
+    <label class="md-nav__link" for="nav-18">
+      Contributing
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Contributing" data-md-level="1">
+      <label class="md-nav__title" for="nav-18">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Contributing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/versioning/" title="Semantic Versioning" class="md-nav__link">
+      Semantic Versioning
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-19" type="checkbox" id="nav-19">
+    
+    <label class="md-nav__link" for="nav-19">
+      Web Portals
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Web Portals" data-md-level="1">
+      <label class="md-nav__title" for="nav-19">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Web Portals
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu" title="ULHPC Website" class="md-nav__link">
+      ULHPC Website
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc-docs.uni.lu" title="Technical Documentation" class="md-nav__link">
+      Technical Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://ulhpc-tutorials.readthedocs.io/" title="ULHPC Tutorials" class="md-nav__link">
+      ULHPC Tutorials
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="https://hpc.uni.lu/support" title="Helpdesk / Ticket Portal" class="md-nav__link">
+      Helpdesk / Ticket Portal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-jupyter" class="md-nav__link">
+    Install Jupyter
+  </a>
+  
+    <nav class="md-nav" aria-label="Install Jupyter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providing-access-to-kernels-of-other-environments" class="md-nav__link">
+    Providing access to kernels of other environments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kernels-for-conda-environments" class="md-nav__link">
+    Kernels for Conda environments
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#starting-a-jupyter-notebook" class="md-nav__link">
+    Starting a Jupyter Notebook
+  </a>
+  
+    <nav class="md-nav" aria-label="Starting a Jupyter Notebook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#password-protected-access" class="md-nav__link">
+    Password protected access
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/ULHPC/ulhpc-docs/blob/master/docs/services/jupyter.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="jupyter-notebook">Jupyter Notebook<a class="headerlink" href="#jupyter-notebook" title="Permanent link">&para;</a></h1>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Jupyter_logo.svg/1200px-Jupyter_logo.svg.png" style="width:300px;float: right;" /></p>
+<p><a href="https://jupyterlab.readthedocs.io/en/stable/">JupyterLab</a> is a flexible, popular literate-computing web application for creating notebooks containing code, equations, visualization, and text. Notebooks are documents that contain both computer code and rich text elements (paragraphs, equations, figures, widgets, links). They are human-readable documents containing analysis descriptions and results but are also executable data analytics artifacts. Notebooks are associated with kernels, processes that actually execute code. Notebooks can be shared or converted into static HTML documents. They are a powerful tool for reproducible research and teaching.</p>
+<h2 id="install-jupyter">Install Jupyter<a class="headerlink" href="#install-jupyter" title="Permanent link">&para;</a></h2>
+<p>While JupyterLab runs code in Jupyter notebooks for many programming languages, Python is a requirement (Python 3.3 or greater, or Python 2.7) for installing the JupyterLab. New users may wish to install JupyterLab in a Conda environment. Hereafter, the <code>pip</code> package manager will be used to install JupyterLab.</p>
+<p>We strongly recommend to use the Python module provided by the ULHPC and installing <code>jupyter</code> inside a Python virtual environment after upgrading <code>pip</code>.</p>
+<div class="highlight"><pre><span></span><code>$ si
+$ module load lang/Python <span class="c1">#Loading default Python</span>
+$ python -m venv ~/environments/jupyter_env
+$ <span class="nb">source</span> ~/environments/jupyter_env/bin/activate
+$ python -m pip install --upgrade pip
+$ python -m pip install jupyterlab
+</code></pre></div>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Modules are not allowed on the access servers. To test interactively Singularity, remember to ask for an <a href="/jobs/interactive">interactive job</a> first using  for instance the <code>si</code> tool.</p>
+</div>
+<p>Once JupyterLab is installed along with , you can start to configure your installation setting the environment variables corresponding to your needs:</p>
+<ul>
+<li><code>JUPYTER_CONFIG_DIR</code>: Set this environment variable to use a particular directory, other than the default, for Jupyter config files</li>
+<li><code>JUPYTER_PATH</code>: Set this environment variable to provide extra directories for the data search path. <code>JUPYTER_PATH</code> should contain a series of directories, separated by os.pathsep(; on Windows, : on Unix). Directories given in JUPYTER_PATH are searched before other locations. This is used in addition to other entries, rather than replacing any</li>
+<li><code>JUPYTER_DATA_DIR</code>: Set this environment variable to use a particular directory, other than the default, as the user data directory</li>
+<li><code>JUPYTER_RUNTIME_DIR</code>: Set this to override where Jupyter stores runtime files</li>
+<li><code>IPYTHONDIR</code>: If set, this environment variable should be the path to a directory, which IPython will use for user data. IPython will create it if it does not exist.</li>
+</ul>
+<p>JupyterLab is now installed and ready.</p>
+<details class="info"><summary>Installing the classic Notebook</summary><p>JupyterLab (<code>jupyterlab</code>) is a new package which automates many task that where performed manually in the traditional Jupyter package (<code>jupyter</code>). If you prefer to install the classic notebook, you also need to install the <a href="https://ipython.readthedocs.io/en/stable/index.html">IPython</a> manually as well, replacing
+<div class="highlight"><pre><span></span><code>python -m pip install jupyterlab
+</code></pre></div>
+with:
+<div class="highlight"><pre><span></span><code>python -m pip install jupyter ipykernel
+</code></pre></div></p>
+</details>
+<h3 id="providing-access-to-kernels-of-other-environments">Providing access to kernels of other environments<a class="headerlink" href="#providing-access-to-kernels-of-other-environments" title="Permanent link">&para;</a></h3>
+<p>JupyterLab makes sure that a default <a href="https://ipython.readthedocs.io/en/stable/install/kernel_install.html#">IPython kernel</a> is available, with the environment (and the Python version) with which the lab was created. Other environments can export a <em>kernel</em> to a JupyterLab instance, allowing the instance to launch interactive session inside environments others from the environment where JupyterLab is installed.</p>
+<p>You can <a href="https://ipython.readthedocs.io/en/stable/install/kernel_install.html">setup kernels with different environments on the same notebook</a>. Create the environment with the Python version and the packages you require, and then register the kernel in any environment with Jupyter (lab or classic notebook) installed. For instance, if we have installed Jupyter in <code>~/environments/jupyter_env</code>:
+<div class="highlight"><pre><span></span><code><span class="nb">source</span> ~/environments/other_python_venv/bin/activate
+python -m pip install ipykernel
+python -m ipykernel install --prefix<span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/environments/jupyter_env --name other_python_env --display-name <span class="s2">&quot;Other Python env&quot;</span>
+deactivate
+</code></pre></div>
+Then all kernels and their associated environment can be started from the same Jupyter instance in the <code>~/environments/jupyter_env</code> Python venv.</p>
+<p>You can also use the flag <code>--user</code> instead of <code>--prefix</code> to install the kernel in the default system location available to all Jupyter environments for a user.</p>
+<h3 id="kernels-for-conda-environments">Kernels for Conda environments<a class="headerlink" href="#kernels-for-conda-environments" title="Permanent link">&para;</a></h3>
+<p>If you would like to install a kernel in a Conda environment, install the <code>ipykernel</code> from the <code>conda-forge</code> channel. For instance,
+<div class="highlight"><pre><span></span><code>micromamba install --name conda_env conda-forge::ipykernel
+micromamba run --name conda_env python -m ipykernel install --prefix<span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/environments/jupyter_env --name other_python_env --display-name <span class="s2">&quot;Other Python env&quot;</span>
+</code></pre></div>
+will make your conda environment, <code>conda_env</code>, available in the kernel launched from the <code>~/environments/jupyter_env</code> Python venv.</p>
+<h2 id="starting-a-jupyter-notebook">Starting a Jupyter Notebook<a class="headerlink" href="#starting-a-jupyter-notebook" title="Permanent link">&para;</a></h2>
+<p>Jupyter notebooks must be started as <a href="/jobs/submit">slurm jobs</a>. The following script is a template for Jupyter submission scripts that will rarely need modifications. Most often you will need to modify the session duration (<code>--time</code> SBATCH option).</p>
+<div class="admonition example">
+<p class="admonition-title">Slurm Launcher script for Jupyter Notebook</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/bash --login</span>
+<span class="kp">#SBATCH --job-name=Jupyter</span>
+<span class="kp">#SBATCH --nodes=1</span>
+<span class="kp">#SBATCH --ntasks-per-node=1</span>
+<span class="kp">#SBATCH --cpus-per-task=2   # Change accordingly, note that ~1.7GB RAM is proivisioned per core</span>
+<span class="kp">#SBATCH --partition=batch</span>
+<span class="kp">#SBATCH --qos=normal</span>
+<span class="kp">#SBATCH --output=%x_%j.out  # Print messages to &#39;Jupyter_&lt;job id&gt;.out</span>
+<span class="kp">#SBATCH --error=%x_%j.err   # Print debug messages to &#39;Jupyter_&lt;job id&gt;.err</span>
+<span class="kp">#SBATCH --time=0-01:00:00   # Change maximum allowable jupyter server uptime here</span>
+
+print_error_and_exit<span class="o">()</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s2">&quot;***ERROR*** </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="p">;</span> <span class="nb">exit</span> <span class="m">1</span><span class="p">;</span> <span class="o">}</span>
+module purge <span class="o">||</span> print_error_and_exit <span class="s2">&quot;No &#39;module&#39; command&quot;</span>
+
+<span class="c1"># Load the default Python 3 module</span>
+module load lang/Python
+<span class="nb">source</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span><span class="s2">/environments/jupyter_env/bin/activate&quot;</span>
+
+<span class="nb">declare</span> <span class="nv">loopback_device</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span>
+<span class="nb">declare</span> <span class="nv">port</span><span class="o">=</span><span class="s2">&quot;8888&quot;</span>
+<span class="nb">declare</span> <span class="nv">connection_instructions</span><span class="o">=</span><span class="s2">&quot;connection_instructions.log&quot;</span>
+
+jupyter lab --ip<span class="o">=</span><span class="si">${</span><span class="nv">loopback_device</span><span class="si">}</span> --port<span class="o">=</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span> --no-browser <span class="p">&amp;</span>
+<span class="nb">declare</span> <span class="nv">lab_pid</span><span class="o">=</span><span class="nv">$!</span>
+
+<span class="c1"># Add connection instruction</span>
+<span class="nb">echo</span> <span class="s2">&quot;# Connection instructions&quot;</span> &gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">connection_instructions</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">connection_instructions</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;To access the jupyter notebook execute on your personal machine:&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">connection_instructions</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;ssh -J </span><span class="si">${</span><span class="nv">USER</span><span class="si">}</span><span class="s2">@access-</span><span class="si">${</span><span class="nv">ULHPC_CLUSTER</span><span class="si">}</span><span class="s2">.uni.lu:8022 -L </span><span class="si">${</span><span class="nv">port</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">loopback_device</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">USER</span><span class="si">}</span><span class="s2">@</span><span class="k">$(</span>hostname -i<span class="k">)</span><span class="s2">&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">connection_instructions</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">connection_instructions</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;To access the jupyter notebook if you have setup a special key (e.g ulhpc_id_ed25519) to connect to cluster nodes execute on your personal machine:&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">connection_instructions</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;ssh -i ~/.ssh/hpc_id_ed25519 -J </span><span class="si">${</span><span class="nv">USER</span><span class="si">}</span><span class="s2">@access-</span><span class="si">${</span><span class="nv">ULHPC_CLUSTER</span><span class="si">}</span><span class="s2">.uni.lu:8022 -L </span><span class="si">${</span><span class="nv">port</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">loopback_device</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">USER</span><span class="si">}</span><span class="s2">@</span><span class="k">$(</span>hostname -i<span class="k">)</span><span class="s2">&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">connection_instructions</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">connection_instructions</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;Then navigate to:&quot;</span> &gt;&gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">connection_instructions</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Wait for the server to start</span>
+sleep 2s
+<span class="c1"># Wait and check that the landing page is available</span>
+curl <span class="se">\</span>
+    --connect-timeout <span class="m">10</span> <span class="se">\</span>
+    --retry <span class="m">5</span> <span class="se">\</span>
+    --retry-delay <span class="m">1</span> <span class="se">\</span>
+    --retry-connrefused <span class="se">\</span>
+    --silent --show-error --fail <span class="se">\</span>
+    <span class="s2">&quot;http://</span><span class="si">${</span><span class="nv">loopback_device</span><span class="si">}</span><span class="s2">:</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span><span class="s2">&quot;</span> &gt; /dev/null
+<span class="c1"># Note down the URL</span>
+jupyter lab list <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="se">\</span>
+    <span class="p">|</span> grep -E <span class="s1">&#39;\?token=&#39;</span> <span class="se">\</span>
+    <span class="p">|</span> awk <span class="s1">&#39;BEGIN {FS=&quot;::&quot;} {gsub(&quot;[ \t]*&quot;,&quot;&quot;,$1); print $1}&#39;</span> <span class="se">\</span>
+    <span class="p">|</span> sed -r <span class="s1">&#39;s/([0-9]{1,3}\.){3}[0-9]{1,3}/127\.0\.0\.1/g&#39;</span> <span class="se">\</span>
+    &gt;&gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">connection_instructions</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Save some debug information</span>
+<span class="nb">echo</span> -e <span class="s1">&#39;\n===\n&#39;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;AVAILABLE LABS&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+jupyter lab list
+
+<span class="nb">echo</span> -e <span class="s1">&#39;\n===\n&#39;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;CONFIGURATION PATHS&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+jupyter --paths
+
+<span class="nb">echo</span> -e <span class="s1">&#39;\n===\n&#39;</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;KERNEL SPECIFICATIONS&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+jupyter kernelspec list
+
+<span class="c1"># Wait for the user to terminate the lab</span>
+<span class="nb">wait</span> <span class="si">${</span><span class="nv">lab_pid</span><span class="si">}</span>
+</code></pre></div>
+
+</div>
+<p>Once your job is running (see <a href="/jobs/submit#joiningmonitoring-running-jobs">Joining/monitoring running jobs</a>), you can combine </p>
+<ul>
+<li><a href="/connect/ssh#ssh-port-forwarding"><code>ssh</code> forwarding</a>, and</li>
+<li>an <a href="/connect/ssh#port-forwarding-over-ssh-jumps"><code>ssh</code> jump</a> through the login node,</li>
+</ul>
+<p>to connect to the notebook from your laptop. Open a terminal on your laptop and copy-paste the ssh command contained in the file <code>connection_instructions.log</code>, and then navigate to the webpage link provided.</p>
+<div class="admonition example">
+<p class="admonition-title">Example content  of <code>connection_instructions.log</code></p>
+<div class="highlight"><pre><span></span><code>&gt; cat connection_instructions.log
+<span class="c1"># Connection instructions</span>
+
+To access the jupyter notebook execute on your personal machine:
+ssh -J gkafanas@access-aion.uni.lu:8022 -L <span class="m">8888</span>:127.0.0.1:8888 gkafanas@172.21.12.29
+
+To access the jupyter notebook <span class="k">if</span> you have setup a special key <span class="o">(</span>e.g ulhpc_id_ed25519<span class="o">)</span> to connect to cluster nodes execute on your personal machine:
+ssh -i ~/.ssh/ulhpc_id_ed25519 -J gkafanas@access-aion.uni.lu:8022 -L <span class="m">8888</span>:127.0.0.1:8888 gkafanas@172.21.12.29
+
+Then navigate to:
+http://127.0.0.1:8888/?token<span class="o">=</span>b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
+</code></pre></div>
+
+</div>
+<p>As the instructions suggest, you access the jupyter lab server in the compute node by calling
+<div class="highlight"><pre><span></span><code>ssh -J gkafanas@access-aion.uni.lu:8022 -L <span class="m">8888</span>:127.0.0.1:8888 gkafanas@172.21.12.29
+</code></pre></div>
+an SSH command that</p>
+<ul>
+<li>opens a connection to your allocated cluster node jumping through the login node (<code>-J gkafanas@access-aion.uni.lu:8022 gkafanas@172.21.12.29</code>), and</li>
+<li>exports the port to the jupyter server in the local machine (<code>-L 8888:127.0.0.1:8888</code>).</li>
+</ul>
+<p>Then, open the connection to the browser in your local machine by following the given link:
+<div class="highlight"><pre><span></span><code>http://127.0.0.1:8888/?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
+</code></pre></div></p>
+<p>The link provides the access token, so you should be able to login without a password.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not forget to click on the <code>quit</code> button when finished to stop the Jupyter server and release the resources. Note that in the last line of the submission script the job waits for your Jupyter service to finish. </p>
+</div>
+<p>If you encounter any issues, have a look in the debug output in <code>Jupyter_&lt;job id&gt;.err</code>. Generic information about the setup of your system is printed in <code>Jupyter_&lt;job id&gt;.out</code>.</p>
+<details class="example"><summary>Typical content of <code>Jupyter_&lt;job id&gt;.err</code></summary><div class="highlight"><pre><span></span><code>&gt; cat Jupyter_3664038.err 
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.538 ServerApp<span class="o">]</span> jupyter_lsp <span class="p">|</span> extension was successfully linked.
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.543 ServerApp<span class="o">]</span> jupyter_server_terminals <span class="p">|</span> extension was successfully linked.
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.547 ServerApp<span class="o">]</span> jupyterlab <span class="p">|</span> extension was successfully linked.
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.766 ServerApp<span class="o">]</span> notebook_shim <span class="p">|</span> extension was successfully linked.
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.808 ServerApp<span class="o">]</span> notebook_shim <span class="p">|</span> extension was successfully loaded.
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.812 ServerApp<span class="o">]</span> jupyter_lsp <span class="p">|</span> extension was successfully loaded.
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.813 ServerApp<span class="o">]</span> jupyter_server_terminals <span class="p">|</span> extension was successfully loaded.
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.814 LabApp<span class="o">]</span> JupyterLab extension loaded from /home/users/gkafanas/environments/jupyter_env/lib/python3.11/site-packages/jupyterlab
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.814 LabApp<span class="o">]</span> JupyterLab application directory is /mnt/aiongpfs/users/gkafanas/environments/jupyter_env/share/jupyter/lab
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.815 LabApp<span class="o">]</span> Extension Manager is <span class="s1">&#39;pypi&#39;</span>.
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.826 ServerApp<span class="o">]</span> jupyterlab <span class="p">|</span> extension was successfully loaded.
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.827 ServerApp<span class="o">]</span> Serving notebooks from <span class="nb">local</span> directory: /mnt/aiongpfs/users/gkafanas/support/jupyter
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.827 ServerApp<span class="o">]</span> Jupyter Server <span class="m">2</span>.14.2 is running at:
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.827 ServerApp<span class="o">]</span> http://127.0.0.1:8888/lab?token<span class="o">=</span>fe665f90872927f5f84be627f54cf9056908c34b3765e17d
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.827 ServerApp<span class="o">]</span>     http://127.0.0.1:8888/lab?token<span class="o">=</span>fe665f90872927f5f84be627f54cf9056908c34b3765e17d
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.827 ServerApp<span class="o">]</span> Use Control-C to stop this server and shut down all kernels <span class="o">(</span>twice to skip confirmation<span class="o">)</span>.
+<span class="o">[</span>C <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.830 ServerApp<span class="o">]</span> 
+
+    To access the server, open this file in a browser:
+        file:///home/users/gkafanas/.local/share/jupyter/runtime/jpserver-2253096-open.html
+    Or copy and paste one of these URLs:
+        http://127.0.0.1:8888/lab?token<span class="o">=</span>fe665f90872927f5f84be627f54cf9056908c34b3765e17d
+        http://127.0.0.1:8888/lab?token<span class="o">=</span>fe665f90872927f5f84be627f54cf9056908c34b3765e17d
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:52.845 ServerApp<span class="o">]</span> Skipped non-installed server<span class="o">(</span>s<span class="o">)</span>: bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+<span class="o">[</span>I <span class="m">2024</span>-11-13 <span class="m">23</span>:19:53.824 ServerApp<span class="o">]</span> <span class="m">302</span> GET / <span class="o">(</span>@127.0.0.1<span class="o">)</span> <span class="m">0</span>.47ms
+</code></pre></div>
+
+</details>
+<details class="example"><summary>Typical content of <code>Jupyter_&lt;job id&gt;.err</code></summary><div class="highlight"><pre><span></span><code>&gt; cat Jupyter_3664038.out
+
+<span class="o">===</span>
+
+AVAILABLE LABS
+
+Currently running servers:
+http://127.0.0.1:8888/?token<span class="o">=</span>fe665f90872927f5f84be627f54cf9056908c34b3765e17d :: /mnt/aiongpfs/users/gkafanas/support/jupyter
+
+<span class="o">===</span>
+
+CONFIGURATION PATHS
+
+config:
+    /home/users/gkafanas/environments/jupyter_env/etc/jupyter
+    /mnt/aiongpfs/users/gkafanas/.jupyter
+    /usr/local/etc/jupyter
+    /etc/jupyter
+data:
+    /home/users/gkafanas/environments/jupyter_env/share/jupyter
+    /home/users/gkafanas/.local/share/jupyter
+    /usr/local/share/jupyter
+    /usr/share/jupyter
+runtime:
+    /home/users/gkafanas/.local/share/jupyter/runtime
+
+<span class="o">===</span>
+
+KERNEL SPECIFICATIONS
+
+Available kernels:
+  other_python_env    /home/users/gkafanas/environments/jupyter_env/share/jupyter/kernels/other_python_env
+  python3             /home/users/gkafanas/environments/jupyter_env/share/jupyter/kernels/python3 
+</code></pre></div>
+
+</details>
+<h3 id="password-protected-access">Password protected access<a class="headerlink" href="#password-protected-access" title="Permanent link">&para;</a></h3>
+<p>You can also set a password when launching the jupyter lab as detailed in the <a href="https://jupyter-notebook.readthedocs.io/en/stable/public_server.html">Jupyter official documentation</a>. In that case, simply direct you browser to the URL <code>http://127.0.0.1:8888/</code> and provide your password. You can see bellow an example of the login page.</p>
+<details class="example"><summary>Typical content of a password protected login page</summary><p><img alt="" src="../images/jupyter_login.png" /></p>
+</details>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: April 16, 2025
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../../slurm/launchers/" title="Launcher Scripts Examples" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Launcher Scripts Examples
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../../software/swsets/" title="Overview" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Overview
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2007-2025 Uni.lu HPC (ULHPC) Team
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/ULHPC" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="https://twitter.com/ULHPC" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.f81b9e8b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.23546af0.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["navigation.instant"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.58d22e8e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/bootstrap.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>
