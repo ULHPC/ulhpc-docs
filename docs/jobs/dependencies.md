@@ -103,95 +103,148 @@ When using the [scratch](/filesystems/#scratch-directory) you typically need to 
 
 ### Using `singleton` dependency to run a lightweight database
 
-Job dependencies can be used to provide a service that runs continuously for the duration of running some experiment. Imagine for instance that
+Job dependencies can be used to provide a service that runs continuously for the duration of some experiment. Imagine for instance that
 
-- you maintain an [SQLite](https://www.sqlite.org/) database in the [Isilon file system](/filesystems/#cold-project-data-and-archives),
-
-and you run an application in a external machine that,
-
-- writes data in files in Isilon, and
-- periodically submits a job to analyse the data and store them in the database.
+- you maintain an [SQLite](https://www.sqlite.org/) database in the [Isilon file system](/filesystems/#cold-project-data-and-archives) containing measurement data and analysis results, and
+- that you run an application in a external machine that periodically writes data files in Isilon, and submits a job to analyse the data and store them in the database.
 
 For this setup, you need a script that runs an SQLite database in the cluster at all times.
 
-The singleton job provides an appropriate method that is integrated with the Slurm scheduler. Remember that the singleton flag ensure that there is single job running in the cluster for each combination of job name (`--job-name`) and user id. If you submit multiple job with the same name and the `--dependency=singleton` they will run one at a time. The following script assumes that the database engine is contained in a singularity container.
+The singleton job provides an appropriate method for maintaining a jobs running in manner accounted by the Slurm scheduler. The singleton dependency ensure that there is single job running in the cluster for each combination of job name (`--job-name`) and user id. If you submit multiple job with the same name and the `--dependency=singleton` they will run one at a time.
 
-!!! info "The database script `run_database.sh`"
+!!! info "The database job service"
+
+    There are 2 options for running a database to collect processed results, run for a fixed amount of time, or for until a specific time instance. The following scripts assume that the database engine is contained in a singularity container.
+
+    === "Run for a fixed duration"
+
+        Running the database for a fixed duration is the simplest option. Split your job in jobs of smaller duration, and submit all the jobs at once. For instance this script splits the job in one day chunks.
+
+        !!! info "Database script `run_database.sh`"
+            ```bash
+            #!/bin/bash --login
+    
+            #SBATCH --job-name=database_service
+            #SBATCH --mail-type=all
+            #SBATCH --mail-user=name.surname@uni.lu
+            #SBATCH --nodes=1
+            #SBATCH --ntasks-per-node=1
+            #SBATCH --cpus-per-task=16
+            #SBATCH --time=1-00:05:00
+            #SBATCH --partition=batch
+            #SBATCH --qos=normal
+            #SBATCH --output=%x-%j.out
+            #SBATCH --error=%x-%j.err
+     
+            module load tools/Apptainer
+            apptainer run ${PROJECTHOME}/project_name/containers/database.sif &
+
+            sleep $((24*60*60)) # 1 day in sec
+            ```
+
+        If you want to run your job for `${N}` days, submit `${N}` copies:
+        ```bash
+        for i in $(seq "${N}"); do sbatch run_database.sh; done; unset i
+        ```
+
+    === "Run until a specific time instance"
+
+        Running a job until a specific time instance is also possible but more involved. The following script takes as argument the end date and time of the service.
+
+
+        !!! info "Database script `run_database.sh`"
+            ```bash
+            #!/bin/bash --login
+
+            #SBATCH --job-name=database_service
+            #SBATCH --mail-type=all
+            #SBATCH --mail-user=name.surname@uni.lu
+            #SBATCH --nodes=1
+            #SBATCH --ntasks-per-node=1
+            #SBATCH --cpus-per-task=16
+            #SBATCH --time=1-00:05:00
+            #SBATCH --partition=batch
+            #SBATCH --qos=normal
+            #SBATCH --output=%x-%j.out
+            #SBATCH --error=%x-%j.err
+
+            declare end_time="${1}"
+
+            convert_to_unix_time() {
+              local time="${1}"
+              date --date="${time}" '+%s'
+            }
+
+            get_slurm_job_script() {
+              local job_id="${1}"
+              scontrol show job "${job_id}" | awk 'BEGIN {FS="="} /^[[:space:]]*Command=/{print $2}'
+            }
+
+            declare time_now=$(date '+%s')
+            if [ -n "${end_time}" ] && [ "${time_now}" -lt "$(convert_to_unix_time "${end_time}")" ]; then
+              sbatch --dependency=singleton "$(get_slurm_job_script ${SLURM_JOBID})" "${end_time}"
+            fi
+
+            module load tools/Apptainer
+            apptainer run ${PROJECTHOME}/project_name/containers/database.sif &
+
+            sleep $((24*60*60)) # 1 day in sec
+            ```
+
+        Submit the script providing the end date and time of your job with the command
+        ```bash
+        sbatch run_database.sh "${end_time}"
+        ```
+        where `${end_time}` should be a string interpretable by the [`date`](https://man7.org/linux/man-pages/man1/date.1.html) command. A very flexible format is ISO 8601; for instance, `Wed Apr 23 04:49:36 PM CEST 2025` becomes `2025-04-23T16:49:36+02:00` in ISO 8601. The `date` can parse both aforementioned strings.
+
+        !!! danger "Avoid fork-bombs"
+
+            If you forget to specify `--dependency=singleton` in the command
+            ```bash
+            sbatch --dependency=singleton "$(get_slurm_job_script ${SLURM_JOBID})" "${end_time}"
+            ```
+            then `run_database.sh` jobs are recursively queued, and can crush of the scheduler. This is the equivalent of an accidental [fork bomb](https://en.wikipedia.org/wiki/Fork_bomb) for the Slurm scheduler.
+
+        !!! danger "Ensure proper scheduling"
+
+            If the service is scheduled after the command is called,
+            ```bash
+            apptainer run ${PROJECTHOME}/project_name/containers/database.sif
+            sbatch --dependency=singleton "$(get_slurm_job_script ${SLURM_JOBID})" "${end_time}"
+            ```
+            where you first wait for the process to finish (note the absence of `&`) and then schedule the next job, there may be a long wait for resources and thus an unacceptably long interruption of your service.
+
+The job scripts for the database, `run_database.sh`, schedule the future database job, launch a containerized database job in the background, and wait for the job for a fixed amount of time, a bit smaller that the job maximum duration. Thus, the scheduler has enough information an leeway to schedule the next instance of the database container close to the time the first job ends. Thus, given that enough resources are available, there will be a small gap between the two instances of the database process. Any application that is designed to be resilient to small interruptions in the database service will ride through the relaunch of the database without issues.
+
+??? info "Submitting jobs that use the database"
+
+    To periodically submit jobs that use the database we assume that your analysis procedure is contained in a Singularity container and that the job is configured to access the database. For instance, you may store read the database machine IP and the port used by the database from a specific location in the cluster file system. We assume that the single input to the analysis is a binary `dat` file.
+
+    !!! info "Job script `run_analysis`"
+        ```bash
+        #!/bin/bash --login
+    
+        #SBATCH --job-name=data_analysis
+        #SBATCH --nodes=1
+        #SBATCH --ntasks-per-node=1
+        #SBATCH --cpus-per-task=128
+        #SBATCH --time=0-00:30:00
+        #SBATCH --partition=batch
+        #SBATCH --qos=normal
+        #SBATCH --output=%x-%j.out
+        #SBATCH --error=%x-%j.err
+
+        local data="${1}"
+
+        module load tools/Apptainer
+        apptainer run ${PROJECTHOME}/project_name/containers/analysis.sif "${data}"
+        ```
+
+    With the database job running, the data analysis job can be submitted remotely for a server with the command
     ```bash
-    #!/bin/bash --login
-    
-    #SBATCH --job-name=database_service
-    #SBATCH --mail-type=all
-    #SBATCH --mail-user=name.surname@uni.lu
-    #SBATCH --nodes=1
-    #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=16
-    #SBATCH --time=1-00:05:00
-    #SBATCH --partition=batch
-    #SBATCH --qos=normal
-    #SBATCH --output=%x-%j.out
-    #SBATCH --error=%x-%j.err
-    
-    declare end_time="${1}"
-    
-    convert_to_unix_time() {
-      local time="${1}"
-      date -d "${time}" '+%s'
-    }
-    
-    get_slurm_job_script() {
-      local job_id="${1}"
-      scontrol show job "${job_id}" | awk 'BEGIN {FS="="} /^[[:space:]]*Command=/{print $2}'
-    }
-    
-    declare time_now=$(date +%s)
-    if [ -n "${end_time}" ] && [ "${time_now}" -lt "$(convert_to_unix_time "${end_time}")" ]; then
-      sbatch --dependency=singleton "$(get_slurm_job_script ${SLURM_JOBID})" "${end_time}"
-    fi
-    
-    module load tools/Singularity
-    singularity run ${PROJECTHOME}/project_name/containers/database.sif &
-    
-    sleep $((24*60*60)) # 1 day in sec
+    ssh aion-cluster "sbatch ${PROJECTHOME}/project_name/scripts/run_analysis.sh /mnt/isilon/projects/project_name/data/datafile_${id}.dat"
     ```
-
-The container is launched, and the job is killed a few minutes before the job maximum duration is reached. The scheduler has enough information to schedule the next instance of the database container close to the time the first job ends. Thus, given that enough resources are available, there will be a small gap between the two instances of the database process. Any application that is designed to be resilient to small interruptions in the database service will ride through the relaunch of the database.
-
-!!! warning "Avoid fork-bombs"
-
-    If you forget to specify `--dependency=singleton` in the line
-    ```bash
-    sbatch --dependency=singleton "$(get_slurm_job_script ${SLURM_JOBID})" "${end_time}"
-    ```
-    then `run_database.sh` jobs are recursively queued, and can crush of the scheduler. This is the equivalent of an accidental [fork bomb](https://en.wikipedia.org/wiki/Fork_bomb) for the Slurm scheduler.
-
-The job scripts that use the database assume that the analysis job is in a Singularity container. The only input to the singularity run script is an HDF5 (`.h5`) file with the data. It is assumed that the container is configured correctly to access the database.
-
-!!! info "Job script `run_analysis`"
-    ```bash
-    #!/bin/bash --login
-    
-    #SBATCH --job-name=data_analysis
-    #SBATCH --nodes=1
-    #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=128
-    #SBATCH --time=0-00:30:00
-    #SBATCH --partition=batch
-    #SBATCH --qos=normal
-    #SBATCH --output=%x-%j.out
-    #SBATCH --error=%x-%j.err
-
-    local data="${1}"
-
-    module load tools/Singularity
-    singularity run ${PROJECTHOME}/project_name/containers/analysis.sif "${data}"
-    ```
-
-With the database job running, the data analysis job can be submitted remotely for a server with the command
-```bash
-ssh aion-cluster "sbatch ${PROJECTHOME}/project_name/scripts/run_analysis.sh /mnt/isilon/projects/project_name/data/datafile_${id}.h5"
-```
-given that you have [setup in your SSH configuration](/connect/ssh/#ssh-configuration) an alias for the Aion cluster.
+    given that you have setup in your [SSH configuration](/connect/ssh/#ssh-configuration) an alias for the Aion cluster.
 
 !!! warning "Providing services with HPC systems"
 
