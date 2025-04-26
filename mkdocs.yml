@@ -421,5 +421,6 @@ markdown_extensions:
   - pymdownx.smartsymbols
   # code blocks with syntax highlighting, graphs
   - pymdownx.superfences
+  - md_in_html
   - toc:
       permalink: true
