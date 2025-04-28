@@ -221,3 +221,25 @@ Overall in this seminar you learn how to:
 ### Upcoming sessions
 
 - No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
+
+
+## An introduction to HPC
+
+This introductory presentation for HPC users with previous computing experience. It's a quite condensed course with minimal practical sections. The topics covered are
+
+- the architecture of HPC systems,
+- methods to extract architectural information about nodes,
+- advanced scheduler directives such as process pinning and job dependencies,
+- software distribution and containerization,
+- message passing programming with MPI,
+- shared memory programming with OpenMP, and
+- optimizing programs execution for specific architectures.
+
+
+### Upcoming sessions
+
+The course is given in only in special event.
+
+### Resources
+
+- [An introduction to HPC](resources/An_introduction_to_HPC.pdf)
