@@ -27,6 +27,213 @@ Typically the libraries used in HPC applications provide a high degree of contro
 
 ## Process and thread placement
 
+A call to `sbatch` or `salloc` in clusters with the Slurm scheduler allocates the resources for a job. To pin processes of your job to specific cores within each node you need to set binding option in each step of your job with `srun` or in raw calls to `mpirun`.
+
+### Binding processes
+
+Process (tasks) are bound to cores with the `--cpu-bind=[verbose],<bind type>` option flag of `srun`. The bind option assigns a process to fixed group of _processor units_ for the duration of a job step. Some common options for `<bind type>` are
+
+- `threads`: binds processes to threads,
+- `cores`: binds processes to cores,
+- `sockets`: binds processes to sockets,
+- `map_cpu:<list>`: binds processes to processor unit ranks given in a comma separated `<list>`, and
+- `mask_cpu:<list>`: binds processes to groups of processing units defined by _masks_ upon ranks given in a comma separated `<list>`.
+
+You can optionally add the `verbose` option in debugging jobs to print process bindings before the job step runs.
+
+Like with other resources, Slurm is using the [control group](https://www.kernel.org/doc/html/v5.4/admin-guide/cgroup-v1/cgroups.html) feature of Linux to allocate processor units to processes. The base option that controls the allocation of cores is the `mask_cpu`. The other allocation options are converted to mask according to groupings of cores with similar access to resources by the [hardware locality](https://www.open-mpi.org/projects/hwloc/) tool.
+
+#### Mask binding
+
+The basic biding option is the mask option, `mask_cpu:<list>`, all other options are converted to masks according to the site configuration of Slurm.
+
+- The `<mask>` is a bit field over the processor unit ranks (as reported by hardware locality) that marks with 1 the processor units that are available to a process running within a job step.
+- The `<list> == <mask>[,<mask>]` option of the binding directive is a comma separated list of masks, each consecutive process of the `srun` command uses the corresponding mask.
+- The list is reused if the available masks are exhausted.
+- Processes are allowed to move freely within the allocated processor units.
+
+??? info "Hexadecimal notation for masks"
+
+    Masks are written in hexadecimal notation. For instance, assume an allocation on some machine with 2 sockets, 16 cores per socket, and one hardware thread per core. Such an allocation contains 32 processor units (cores). Then, the mask
+    ```
+    mask_cpu:0xff0000,0xff000000
+    ```	
+    maps 4 processes to to the following bit fields
+    
+    | Process number | Processor unit availability               |
+    | :------------: | :---------------------------------------- |
+    | `0`            | `0000 0000 1111 1111 0000 0000 0000 0000` |
+    | `1`            | `1111 1111 0000 0000 0000 0000 0000 0000` |
+    | `2`            | `0000 0000 1111 1111 0000 0000 0000 0000` |
+    | `3`            | `1111 1111 0000 0000 0000 0000 0000 0000` |
+
+    that in turn constrain
+
+    - task 0 and 2 to run on processor units (hardware threads) 16 to 23 of the node, and
+    - task 1 and 3 to run on processor units (hardware threads) 24 to 31 of the node.
+
+    For convenience, you can add leading zeros to a mask so that all masks are of the same length, so, `0x00ff0000 = 0xff0000`.
+
+As an example consider an I/O throughput test for Aion local storage. In Aion there are 8 NUMA nodes per compute node, 4 CCXs per NUMA node, and 4 cores sharing a single L3 cache per CCX. Every digit in the hexadecimal mask controls the availability of a single CCX. To launch an I/O stress test in 4 parallel processes, with
+
+- processes 0 and 2 pinned on CCX 0 of virtual socket 0, and
+- processes 1 and 3 pinned on CCX 0 of virtual socket 1
+
+use the following command.
+
+```bash
+salloc --nodes=1 --exclusive --partition=batch --qos=normal --time=4:00:00
+srun --nodes=1 --ntasks-per-node=4 --cpu-bind=verbose,mask_cpu:0xf,0xf0000 stress --hdd 1 --timeout 240
+```
+
+??? note "Context switching within binding regions"
+
+    The HDD stress test processes are I/O heavy and are often interrupted by thread and process context switching. You can login to the running job from another terminal using the `sjoin` alias available in UL HPC systems, and with `htop` you may see the load moving among the allocated cores.
+
+#### Map binding
+
+The map binding binds processes to specific processor units (PUs). The `<list>==<PU rank>[,<PU rank>]` option of the binding directive is a list of processing unit ranks, as reported by hardware locality.
+
+- Processes launched within a job step use the processor unit with corresponding rank.
+- Ranks may appear more that once if processing units are shared between processes.
+- The list is reused if the available ranks are exhausted.
+
+!!! important "Limitations of map binding"
+    Note that with the map binding each process is assigned a single processor unit. If your process needs more that one processor unit, as is the case with multithreaded processes, using another binging option like mask.
+
+As an example consider an I/O throughput test for Aion local storage. In Aion there are 8 NUMA nodes per compute node, with 16 cores per NUMA node. Every digit in the hexadecimal mask controls the availability of a single CCX. To launch an I/O stress test in 4 parallel processes, with
+
+- processes 0 and 1 pinned on cores 0 and 2 of virtual socket 0, and
+- processes 2 and 3 pinned on cores 16 and 18 of virtual socket 1
+
+use the following command.
+
+```bash
+salloc --nodes=1 --exclusive --partition=batch --qos=normal --time=4:00:00
+srun --nodes=1 --ntasks-per-node=4 --cpu-bind=verbose,map_cpu:0,2,16,18 stress --hdd 1 --timeout 240
+```
+
+#### Automatically generated masks binding 
+
+The Slurm scheduler provides options to generate bindings automatically. Many systems as MUMPS rely on simple allocations of one MPI process per NUMA node, and OpenMP thread parallelism within NUMA nodes. Automatically generated masks can describe such simple binding efficiently and the resulting description is most often portable between systems.
+
+When using automatic binging users may want to inspect the resulting binding mask. The binding is implemented using [control groups](https://slurm.schedmd.com/cpu_management.html#Step4), so the cores allocated for the process can be inspected with
+
+- the `vorbose` option of binding,
+- the `taskset` command, or
+- directly reading the `Cpus_allowed_list` in `/proc/self/status`.
+
+As an example consider binding 2 process per node for 2 nodes with the various available options. The `taskset` command is used to report the core bindings, and the verbose option is enabled to print the same information in a format closer to the internal system representation. Start by creating an allocation with exclusive access to 2 nodes:
+
+```bash
+salloc --exclusive --nodes=2 --ntasks-per-node=2 --time=1:00:00
+```
+
+=== "Threads"
+
+    Simultaneous multi-threading is disabled in our systems, so the `threads` option is not relevant. The _core_ and _processor unit_ (threads) object types of hardware locality coincide.
+
+=== "Cores"
+
+    In this example the processes are pinned to cores of the CPUs.
+
+    - Allow processes to share sockets.
+      ```
+      $ srun --nodes=2 --ntasks-per-node=2 --cpu-bind=verbose,cores bash -c 'echo -n "task ${SLURM_PROCID} (node ${SLURM_NODEID}): "; taskset --cpu-list --pid ${BASHPID}' | sort
+      cpu-bind=MASK - aion-0014, task  0  0 [3431378]: mask 0x1 set
+      cpu-bind=MASK - aion-0014, task  1  1 [3431379]: mask 0x2 set
+      cpu-bind=MASK - aion-0220, task  2  0 [2549677]: mask 0x1 set
+      cpu-bind=MASK - aion-0220, task  3  1 [2549678]: mask 0x2 set
+      task 0 (node 0): pid 3431378's current affinity list: 0
+      task 1 (node 0): pid 3431379's current affinity list: 1
+      task 2 (node 1): pid 2549677's current affinity list: 0
+      task 3 (node 1): pid 2549678's current affinity list: 1
+      ```
+
+    - Processes pinned with one process per socket.
+      ```
+      $ srun --nodes=2 --ntasks-per-node=2 --ntasks-per-socket=1 --cpu-bind=verbose,cores bash -c 'echo -n "task ${SLURM_PROCID} (node ${SLURM_NODEID}): "; taskset --cpu-list --pid ${BASHPID}' | sort
+      cpu-bind=MASK - aion-0220, task  2  0 [2549899]: mask 0x1 set
+      cpu-bind=MASK - aion-0014, task  0  0 [3431621]: mask 0x1 set
+      cpu-bind=MASK - aion-0220, task  3  1 [2549900]: mask 0x10000 set
+      cpu-bind=MASK - aion-0014, task  1  1 [3431622]: mask 0x10000 set
+      task 0 (node 0): pid 3431621's current affinity list: 0
+      task 1 (node 0): pid 3431622's current affinity list: 16
+      task 2 (node 1): pid 2549899's current affinity list: 0
+      task 3 (node 1): pid 2549900's current affinity list: 16
+      ```
+
+=== "Sockets"
+
+    In this example the processes are pinned to sockets of the processesing nodes.
+
+    - Allow processes to share sockets (one processor unit per process by default).
+      ```
+      $ srun --nodes=2 --ntasks-per-node=2 --cpu-bind=verbose,sockets bash -c 'echo -n "task ${SLURM_PROCID} (node ${SLURM_NODEID}): "; taskset --cpu-list --pid ${BASHPID}' | sort
+      cpu-bind=MASK - aion-0014, task  0  0 [3431515]: mask 0xffff set
+      cpu-bind=MASK - aion-0220, task  2  0 [2549712]: mask 0xffff set
+      cpu-bind=MASK - aion-0014, task  1  1 [3431516]: mask 0xffff set
+      cpu-bind=MASK - aion-0220, task  3  1 [2549713]: mask 0xffff set
+      task 0 (node 0): pid 3431515's current affinity list: 0-15
+      task 1 (node 0): pid 3431516's current affinity list: 0-15
+      task 2 (node 1): pid 2549712's current affinity list: 0-15
+      task 3 (node 1): pid 2549713's current affinity list: 0-15
+      ```
+
+    - Processes pinned with one process per socket.
+      ```
+      $ srun --nodes=2 --ntasks-per-node=2 --ntasks-per-socket=1 --cpu-bind=verbose,sockets bash -c 'echo -n "task ${SLURM_PROCID} (node ${SLURM_NODEID}): "; taskset --cpu-list --pid ${BASHPID}' | sort
+      cpu-bind=MASK - aion-0220, task  2  0 [2550128]: mask 0xffff set
+      cpu-bind=MASK - aion-0014, task  0  0 [3431908]: mask 0xffff set
+      cpu-bind=MASK - aion-0220, task  3  1 [2550129]: mask 0xffff0000 set
+      cpu-bind=MASK - aion-0014, task  1  1 [3431909]: mask 0xffff0000 set
+      task 0 (node 0): pid 3431908's current affinity list: 0-15
+      task 1 (node 0): pid 3431909's current affinity list: 16-31
+      task 2 (node 1): pid 2550128's current affinity list: 0-15
+      task 3 (node 1): pid 2550129's current affinity list: 16-31
+      ```
+
+=== "Custom binding"
+
+    With custom bindings we specify exactly where processes are bound.
+
+    - Pin (single threaded) processes to sockets.
+      ```
+      $ srun --cpu-bind=verbose,mask_cpu:0xffff,0xffff0000 bash -c 'echo -n "task ${SLURM_PROCID} (node ${SLURM_NODEID})"; taskset --cpu-list --pid ${BASHPID}' | sort
+      cpu-bind=MASK - aion-0001, task  0  0 [3535103]: mask 0xffff set
+      cpu-bind=MASK - aion-0339, task  2  0 [3595625]: mask 0xffff set
+      cpu-bind=MASK - aion-0001, task  1  1 [3535104]: mask 0xffff0000 set
+      cpu-bind=MASK - aion-0339, task  3  1 [3595626]: mask 0xffff0000 set
+      task 0 (node 0)pid 3535103's current affinity list: 0-15
+      task 1 (node 0)pid 3535104's current affinity list: 16-31
+      task 2 (node 1)pid 3595625's current affinity list: 0-15
+      task 3 (node 1)pid 3595626's current affinity list: 16-31
+      ```
+
+    - Pin processes to cores.
+      ```
+      $ srun --cpu-bind=verbose,mask_cpu:0x1,0x10000 bash -c 'echo -n "task ${SLURM_PROCID} (node ${SLURM_NODEID})"; taskset --cpu-list --pid ${BASHPID}' | sort
+      cpu-bind=MASK - aion-0220, task  2  0 [2553408]: mask 0x1 set
+      cpu-bind=MASK - aion-0014, task  0  0 [3435289]: mask 0x1 set
+      cpu-bind=MASK - aion-0220, task  3  1 [2553409]: mask 0x10000 set
+      cpu-bind=MASK - aion-0014, task  1  1 [3435290]: mask 0x10000 set
+      task 0 (node 0)pid 3435289's current affinity list: 0
+      task 1 (node 0)pid 3435290's current affinity list: 16
+      task 2 (node 1)pid 2553408's current affinity list: 0
+      task 3 (node 1)pid 2553409's current affinity list: 16
+      ```
+
+    Printing the binding information however, demonstrates how processes are spread across nodes. By default, the tasks are distributed in _blocks_, where first the available slots in the first node of the allocation are filled, before moving to the next.
+
+---
+
+An exhaustive [list of reporting features for binding configurations](https://slurm.schedmd.com/cpu_management.html#Section2) can be found in the administrator's guide of Slurm.
+
+??? info "_Resources_"
+
+1. [Configuration options managing the allocation of CPU resources](https://slurm.schedmd.com/cpu_management.html)
+2. [Configuration of the control group plugin of Slurm (`cgroup.conf`)](https://slurm.schedmd.com/cgroup.conf.html)
+
 ## Examining the architecture of compute nodes
 
 You can extract detailed information for our clusters using the [Portable Hardware Locality (hwloc)](https://www.open-mpi.org/projects/hwloc/) package. The hardware locality modules are provided in UL HPC clusters by the `system/hwloc` [modules](/environment/modules). Let's examine the output of hardware locality in an Iris CPU node and how it is interpreted.
