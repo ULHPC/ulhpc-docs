@@ -1,96 +1,85 @@
 # Containers
 
-Many applications and libraries can also be used through container systems, with the updated Singularity tool providing many new features of which we can especially highlight support for Open Containers Initiative - OCI containers (including Docker OCI), and support for secure containers - building and running encrypted containers with RSA keys and passphrases.
+Many applications and libraries can also be used through container systems. The UL HPC clusters provide the [Apptainer](https://apptainer.org/) container platform (formerly Singularity). The Apptainer platform provides multiple features targeted towards HPC systems, such as support for Open Containers Initiative (OCI) containers, including Docker OCI, and support for secure containers, that is building and running encrypted containers with RSA keys and passphrases[^43].
 
+[^43]: Encrypted containers are not currently supported in UL HPC systems.
 
-## Singularity
+## Apptainer
 
+![](https://apptainer.org/docs/user/latest/_static/logo.png){: style="width:200px;float: right;"}
 
-![](https://sylabs.io/guides/3.0/admin-guide/_static/logo.png){: style="width:200px;float: right;"}
+The UL HPC supports [Apptainer containers](https://apptainer.org/docs/user/main/introduction.html). Apptainer is an open source container platform designed to be simple, fast, and secure. Apptainer is optimized for Enterprise Performance Computing (EPC){[^98] and High Performance Computing (HPC) workloads, allowing users to run containers in a trusted way.
 
-
-
-The ULHPC offers the possibilty to run [Singularity containers](https://sylabs.io/singularity/). Singularity is an open source container platform designed to be simple, fast, and secure. Singularity is optimized for EPC and HPC workloads, allowing untrusted users to run untrusted containers in a trusted way.
-
-
+[^98]: Typical examples of Enterprise Performance Computing workloads are deep learning inference and other machine learning workloads.
 
 ### Loading Singularity
 
-To use Singularity, you need to load the corresponding [Lmod](https://lmod.readthedocs.io/en/latest/) module.
-
+To use Apptainer load the corresponding [module](adthedocs.io/en/latest/).
 
 ```shell
->$ module load tools/Singularity
+module load tools/Apptainer
 ```
 
 !!! warning
-    Modules are not allowed on the access servers. To test interactively Singularity, rememerber to ask for an interactive job first.
+    Modules are not allowed on the access nodes. To test interactively Singularity, rememberer to ask for an interactive job first.
     ```shell
-    salloc -p interactive --pty bash
+    salloc --partition=interactive --qos=normal
     ```
-
 
 ### Pulling container images
 
-Like [Docker](https://www.docker.com/), Singularity provide a way to pull images from a Hubs such as [DockerHub](https://hub.docker.com/) and [Singuarity Hub](https://singularity-hub.org/).
+Like [Docker](https://www.docker.com/), Apptainer provide a way to pull images from a [registry](https://www.redhat.com/en/topics/cloud-native-apps/what-is-a-container-registry) such as [dockerhub](https://hub.docker.com/) and [Sylabs cloud library](https://cloud.sylabs.io/library/). You pull an image using the `pull` command:
 
 ```shell
-
->$ singularity pull docker://ubuntu:latest
-
+apptainer pull docker://ubuntu:latest
 ```
 You should see the following output:
 
 !!! note "Output"
-    <pre><font color="#3465A4">INFO:   </font> Converting OCI blobs to SIF format
-    <font color="#3465A4">INFO:   </font> Starting build...</pre>
-    <pre>Getting image source signatures
-    Copying blob d72e567cc804 done
-    Copying blob 0f3630e5ff08 done
-    Copying blob b6a83d81d1f4 done
-    Copying config bbea2a0436 done
-    Writing manifest to image destination
-    Storing signatures
-    ...
-    <font color="#3465A4">INFO:   </font> Creating SIF file...
-    </pre>
+    <pre><font color="#3465A4">INFO:</font>    Converting OCI blobs to SIF format
+    <font color="#3465A4">INFO:</font>    Starting build...
+    <font color="#3465A4">INFO:</font>    Fetching OCI image...
+    28.3MiB / 28.3MiB [===================================] 100 % 8.7 MiB/s 0s
+    <font color="#3465A4">INFO:</font>    Extracting OCI image...
+    <font color="#3465A4">INFO:</font>    Inserting Apptainer configuration...
+    <font color="#3465A4">INFO:</font>    Creating SIF file...
+    <font color="#3465A4">INFO:</font>    To see mksquashfs output with progress bar enable verbose logging
 
-You may now test the container by executing some inner commands:
+You may now test the container by executing some command inside the container with the `exec` command of Apptainer:
 
 ```shell
->$ singularity exec ubuntu_latest.sif cat /etc/os-release
-
+apptainer exec ubuntu_latest.sif cat /etc/os-release
 ```
 
 !!! note "Output"
-    <pre>NAME=&quot;Ubuntu&quot;
-    VERSION=&quot;20.04.1 LTS (Focal Fossa)&quot;
+    ```
+    PRETTY_NAME="Ubuntu 24.04.2 LTS"
+    NAME="Ubuntu"
+    VERSION_ID="24.04"
+    VERSION="24.04.2 LTS (Noble Numbat)"
+    VERSION_CODENAME=noble
     ID=ubuntu
     ID_LIKE=debian
-    PRETTY_NAME=&quot;Ubuntu 20.04.1 LTS&quot;
-    VERSION_ID=&quot;20.04&quot;
-    HOME_URL=&quot;https://www.ubuntu.com/&quot;
-    SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;
-    BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;
-    PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;
-    VERSION_CODENAME=focal
-    UBUNTU_CODENAME=focal
-    </pre>
-
+    HOME_URL="https://www.ubuntu.com/"
+    SUPPORT_URL="https://help.ubuntu.com/"
+    BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+    PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+    UBUNTU_CODENAME=noble
+    LOGO=ubuntu-logo
+    ```
 
 ### Building container images
 
-Building container images requires to have root privileges. Therefore, users have to build images on their local machine before transfering them to the platform.
-Please refer to the [Data transfer](../data/transfer.md) section for this purpose.
+Building container images requires root privileges. Therefore, users have to build images on their local machine before transferring them to the UL HPC platform. Please refer to the [Data transfer](../data/transfer.md) section for this purpose.
 
-!!! note
-    Singularity 3 introduces the ability to build your containers in the cloud, so you can easily and securely create containers for your applications without speci    al privileges or setup on your local system. The Remote Builder can securely build a container for you from a definition file entered here or via the Singularity CLI (see https://cloud.sylabs.io/builder for more details).
+!!! note "Building containers in the cloud"
+    [Syslabs](https://cloud.sylabs.io/), an Apptainer container service, provides a service for building containers in the cloud. You can create containers for your applications without special privileges or setting up a container platform on your local system. The Remote Builder can securely build a container from a definition file provided through the [online interface](https://cloud.sylabs.io/builder).
 
-### GPU-enabled Singularity containers
+### GPU-enabled Apptainer containers
 
-This section relies on the very excellent documentation from [CSCS](https://user.cscs.ch/tools/containers/singularity/). In the following example, a container with CUDA features is build, transfered and tested on the ULHPC platform. This example will pull a CUDA container from DockrHub and setup [CUDA examples](https://github.com/NVIDIA/cuda-samples.git). For this purpose, a singularity definition file, i.e., `cuda_samples.def`  needs to be created with the following content:
+This section relies on the very excellent documentation from [CSCS](https://user.cscs.ch/tools/containers/singularity/). In the following example, a container with CUDA features is build, transferred and tested on the ULHPC platform. This example will pull a CUDA container from DockrHub and setup [CUDA examples](https://github.com/NVIDIA/cuda-samples.git). For this purpose, a singularity definition file, i.e., `cuda_samples.def`  needs to be created with the following content:
 
-```shell
+```
 Bootstrap: docker
 From: nvidia/cuda:10.1-devel
 
@@ -105,33 +94,30 @@ From: nvidia/cuda:10.1-devel
 
 %runscript
     /usr/local/cuda_samples/Samples/deviceQuery/deviceQuery
-
 ```
 
-On a local machine having singularity installed, we can build the container image, i.e., `cuda_samples.sif` using the definition file using the follwing singularity command:
+On a local machine having Apptainer installed, we can build the container image, i.e., `cuda_samples.sif` using the definition file using the following command:
 
 ```shell
-sudo singularity build cuda_samples.sif cuda_samples.def
-
+sudo apptainer build cuda_samples.sif cuda_samples.def
 ```
 
 !!! warning
-    You should have root privileges on this machine. Without this condition, you will not be able to built the definition file.
+    You should have root privileges on this machine, without them, you will not be able to built the definition file.
 
-
-Once the container is built and transfered to your dedicated storage on the ULHPC plaform, the container can be executed with the following command:
+Once the container is built and transferred to your dedicated storage on the UL HPC platform, the container can be executed with the following command:
 
 
 ```shell
 # Inside an interactive job on a gpu-enabled node
-singularity run --nv cuda_samples.sif
+apptainer run --nv cuda_samples.sif
 ```
 
 !!! warning
-    In order to run a CUDA-enabled container, the --nv option has to be passed to singularity run. According to this option, singularity is going to setup the container environment to use the NVIDIA GPU and the basic CUDA libraries.
+    In order to run a CUDA-enabled container, the `--nv` option has to be passed to the Apptainer command `run`. According to this option, Apptainer is going to setup the container environment to use the NVIDIA GPU and the basic CUDA libraries.
 
 
-The lastest command should print:
+The latest command should print:
 !!! note "Output"
     <pre>CUDA Device Query (Runtime API) version (CUDART static linking)
 
@@ -178,11 +164,11 @@ The lastest command should print:
     </pre>
 
 
-### MPI and Singularity containers
+### MPI and Apptainer containers
+
 This section relies on the very excellent documentation from [CSCS](https://user.cscs.ch/tools/containers/singularity/). The following singularity definition file mpi_osu.def can be used to build a container with the osu benchmarks using mpi:
 
-
-```shell
+```
 bootstrap: docker
 from: debian:jessie
 
@@ -214,29 +200,31 @@ from: debian:jessie
 %runscript
     /usr/local/libexec/osu-micro-benchmarks/mpi/pt2pt/osu_bw
 ```
+
 ```shell
-sudo singularity build mpi_osu.sif mpi_osu.def
+sudo apptainer build mpi_osu.sif mpi_osu.def
 ```
-Once the container image is ready, you can use it for example inside the following slurm launcher to start a best-effort job:
+
+Once the container image is ready, you can use it for example inside the following Slurm launcher to start a best-effort job:
 
 ```slurm
-#!/bin/bash -l
-#SBATCH -J ParallelJob
-#SBATCH -N 2
+#!/bin/bash --login
+#SBATCH --job-name=Containerized_MPI
+#SBATCH --nodes=2
 #SBATCH --ntasks-per-node=1
 #SBATCH --time=05:00
-#SBATCH -p batch
-#SBATCH --qos=qos-besteffort
+#SBATCH --partition=batch
+#SBATCH --qos=besteffort
 
-module load tools/Singularity
-srun -n $SLURM_NTASKS singularity run mpi_osu.sif
+module load tools/Apptainer
+srun apptainer run mpi_osu.sif
 ```
 The content of the output file:
 
 !!! note "Output"
-    <pre>
-    \# OSU MPI Bandwidth Test v5.3.2
-    \# Size      Bandwidth (MB/s)
+   ```
+    # OSU MPI Bandwidth Test v5.3.2
+    # Size      Bandwidth (MB/s)
     1                       0.35
     2                       0.78
     4                       1.70
@@ -259,4 +247,4 @@ The content of the output file:
     524288                682.37
     1048576               712.19
     2097152               714.55
-    </pre>
+    ```
