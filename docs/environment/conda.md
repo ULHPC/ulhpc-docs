@@ -5,7 +5,7 @@
 Packages provided through the standard channels of [modules](modules.md) and [containers](../containers/) are optimized for the ULHPC clusters to ensure their performance and stability. However, many packages where performance is not critical and are used by few users are not provided through the standard channels. These packages can still be installed locally by the users through an environment management system such as Conda.
 
 !!! warning "Contact the ULHPC before installing any software with Conda"
-	Prefer binaries provided through [modules](modules.md) or [containers](../containers/). Conda installs generic binaries that may be suboptimal for the configuration of the ULHPC clusters. Furthermore, installing packages locally with Conda consumes quotas in your or your project's account in terms of [storage space and number of files](../../filesystems/quotas/#current-usage).
+	Prefer binaries provided through [modules](modules.md) or [containers](../containers/). Conda installs generic binaries that may be suboptimal for the configuration of the ULHPC clusters. Furthermore, installing packages locally with Conda consumes quotas in your or your project's account in terms of [storage space and number of files](/filesystems/quotas/#current-usage).
 	
 	Contact the ULHPC High Level Support Team in the [service portal](https://service.uni.lu/sp?id=index) [Home > Research > HPC > Software environment > Request expertise] to discuss possible options before installing any software.
 
@@ -130,7 +130,7 @@ Micromamba supports almost all the subcommands of Conda. For more details see th
 
 ### Using environments in submission scripts
 
-Since all computationally heavy operations must be performed in compute nodes, Conda environments are also used in jobs submitted to the [queuing system](../slurm/index.md). Returning to the R example, a submission script running a single core R job can use the `R-project_name` environment as follows:
+Since all computationally heavy operations must be performed in compute nodes, Conda environments are also used in jobs submitted to the [queuing system](/slurm/). Returning to the R example, a submission script running a single core R job can use the `R-project_name` environment as follows:
 ```
 #SBATCH --job-name R-test-job
 #SBATCH --nodes 1
@@ -156,11 +156,11 @@ micromamba deactivate
 
 _Useful scripting resources_
 
-- [Formatting submission scripts for R (and other systems)](../slurm/launchers.md#serial-task-script-launcher)
+- [Formatting submission scripts for R (and other systems)](/slurm/launchers.md#serial-task-script-launcher)
 
 ### Cleaning up package data
 
-The Conda environment managers download and store a sizable amount of data to provided packages to the various environments. Even though the package data are shared between the various environments, they still consume space in your or your project's account. There are [limits in the storage space and number of files](../../filesystems/quotas/#current-usage) that are available to projects and users in the cluster. Since Conda packages are self managed, **you need to clean unused data yourself**.
+The Conda environment managers download and store a sizable amount of data to provided packages to the various environments. Even though the package data are shared between the various environments, they still consume space in your or your project's account. There are [limits in the storage space and number of files](/filesystems/quotas/#current-usage) that are available to projects and users in the cluster. Since Conda packages are self managed, **you need to clean unused data yourself**.
 
 There are two main sources of unused data, the compressed archives of the packages that Conda stores in its cache when downloading a package, and the data of removed packages. All unused data in Micromoamba can be removed with the command
 ```bash
@@ -204,7 +204,7 @@ Using an external packaging tool is possible because of the method that Conda us
 - packages installed by the package tool are specific to an environment and cannot be shared as with Conda, since components are installed directly and not with links.
 
 !!! important "Prefer Conda over external package managers"
-    Installing the same package in multiple environments with an external package tool consumes quotas in terms of [storage space and number of files](../../filesystems/quotas/#current-usage), so prefer Conda when possible. This is particularly important for the `inode` limit, since some packages install a large number of files, and the hard links used by Conda do not consume inodes or [disk space](https://stackoverflow.com/questions/55566419/why-are-packages-installed-rather-than-just-linked-to-a-specific-environment).
+    Installing the same package in multiple environments with an external package tool consumes quotas in terms of [storage space and number of files](/filesystems/quotas/#current-usage), so prefer Conda when possible. This is particularly important for the `inode` limit, since some packages install a large number of files, and the hard links used by Conda do not consume inodes or [disk space](https://stackoverflow.com/questions/55566419/why-are-packages-installed-rather-than-just-linked-to-a-specific-environment).
 
 #### Pip
 
@@ -309,7 +309,7 @@ ${HOME}/micromamba/envs/julia/share
 if the default location for the Micromamba environment directory is used.
 
 ??? info "Advanced management of package data"
-	Julia packages will consume [storage and number of files quota](../../filesystems/quotas/#current-usage). Pkg uses automatic garbage collection to cleanup packages that are no longer is use. In general you don't need to manage then package data, simply remove the package and its data will be deleted automatically after some time. However, when you exceed your quota you need to delete files immediately.
+	Julia packages will consume [storage and number of files quota](/filesystems/quotas/#current-usage). Pkg uses automatic garbage collection to cleanup packages that are no longer is use. In general you don't need to manage then package data, simply remove the package and its data will be deleted automatically after some time. However, when you exceed your quota you need to delete files immediately.
 	
 	The _immediate removal_ of the data of uninstalled packages can be forced with the command:
 	```julia
