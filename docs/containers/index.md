@@ -119,7 +119,8 @@ apptainer run --nv cuda_samples.sif
 
 The latest command should print:
 !!! note "Output"
-    <pre>CUDA Device Query (Runtime API) version (CUDART static linking)
+    ```
+    CUDA Device Query (Runtime API) version (CUDART static linking)
 
     Detected 1 CUDA Capable device(s)
 
@@ -157,12 +158,11 @@ The latest command should print:
       Supports MultiDevice Co-op Kernel Launch:      Yes
       Device PCI Domain ID / Bus ID / location ID:   0 / 30 / 0
       Compute Mode:
-         &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;
+         < Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) >
 
     deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 10.2, CUDA Runtime Version = 10.1, NumDevs = 1
     Result = PASS
-    </pre>
-
+    ```
 
 ### MPI and Apptainer containers
 
@@ -219,10 +219,10 @@ Once the container image is ready, you can use it for example inside the followi
 module load tools/Apptainer
 srun apptainer run mpi_osu.sif
 ```
-The content of the output file:
+The content of the output:
 
-!!! note "Output"
-   ```
+!!! note "Job output"
+    ```
     # OSU MPI Bandwidth Test v5.3.2
     # Size      Bandwidth (MB/s)
     1                       0.35
