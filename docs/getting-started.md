@@ -182,10 +182,10 @@ of ULHPC.
 The ULHPC Team supplies a large variety of HPC utilities, scientific applications and programming libraries to its user community.
 The user software environment is generated using [Easybuild](https://easybuild.readthedocs.io) (EB) and is made available as environment modules through [LMod](https://lmod.readthedocs.io/). <!-- We have developped a specific tool named [RESIF](software/resif.md) -->
 
-* [ULHPC Modules Environment](environment/modules.md)
-* [ULHPC Supported Software List](./software/index.md).
-    - Available [modules](./environment/modules.md) are reachable **from the compute nodes only** via `module avail`
-* [ULHPC Easybuild Configuration](environment/easybuild.md)
+* [ULHPC Modules Environment](/environment/modules)
+* [ULHPC Supported Software List](/software/).
+    - Available [modules](/environment/modules) are reachable **from the compute nodes only** via `module avail`
+* [ULHPC Easybuild Configuration](/environment/easybuild)
 
 <!-- * [RESIF Architecture-at-a-glance](software/resif.md) -->
 <!-- * [Software Sets, compilers and toolchains at ULHPC](software/swsets.md) -->
