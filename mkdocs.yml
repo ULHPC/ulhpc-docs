@@ -62,10 +62,11 @@ nav:
     # - Multi-Factor Authentication: 'connect/mfa.md'
   ##############
   - Environment:
-    - Overview:  'environment/index.md'
-    - Modules:   'environment/modules.md'
-    - Easybuild: 'environment/easybuild.md'
-    - Conda: 'environment/conda.md'
+    - Overview:   'environment/index.md'
+    - Modules:    'environment/modules.md'
+    - Easybuild:  'environment/easybuild.md'
+    - Containers: 'environment/containers.md'
+    - Conda:      'environment/conda.md'
   ###########
   - Policies:
     - Acceptable Use Policy (AUP):                   'policies/aup.md'
@@ -141,7 +142,6 @@ nav:
     # - Contributing:                'software/contributing.md'
     # - BigData Analytics:           'software/bigdata/index.md'
     # - Bioinformatics/Life Science: 'software/bio/index.md'
-    - Containers:                  'containers/index.md'
     - Computer Aided Eng. (CAE):
         - FEniCS : 'software/cae/fenics.md'
         - ANSYS : 'software/cae/ansys.md'
@@ -241,9 +241,6 @@ nav:
         - Scalasca:        'development/performance-debugging-tools/scalasca.md'
         - Valgrind:        'development/performance-debugging-tools/valgrind.md'
         - APS:             'development/performance-debugging-tools/aps.md'
-    - Containers:
-        - About:       'containers/index.md'
-        # - Singularity: 'containers/singularity.md'
   ###############
   # - Applications:
   #   - Overview: 'software/index.md'

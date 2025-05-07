@@ -2,10 +2,10 @@
 
 <!--intro-start-->
 
-Packages provided through the standard channels of [modules](modules.md) and [containers](../../containers/) are optimized for the ULHPC clusters to ensure their performance and stability. However, many packages where performance is not critical and are used by few users are not provided through the standard channels. These packages can still be installed locally by the users through an environment management system such as Conda.
+Packages provided through the standard channels of [modules](modules.md) and [containers](../containers/) are optimized for the ULHPC clusters to ensure their performance and stability. However, many packages where performance is not critical and are used by few users are not provided through the standard channels. These packages can still be installed locally by the users through an environment management system such as Conda.
 
 !!! warning "Contact the ULHPC before installing any software with Conda"
-	Prefer binaries provided through [modules](modules.md) or [containers](../../containers/). Conda installs generic binaries that may be suboptimal for the configuration of the ULHPC clusters. Furthermore, installing packages locally with Conda consumes quotas in your or your project's account in terms of [storage space and number of files](../../filesystems/quotas/#current-usage).
+	Prefer binaries provided through [modules](modules.md) or [containers](../containers/). Conda installs generic binaries that may be suboptimal for the configuration of the ULHPC clusters. Furthermore, installing packages locally with Conda consumes quotas in your or your project's account in terms of [storage space and number of files](../../filesystems/quotas/#current-usage).
 	
 	Contact the ULHPC High Level Support Team in the [service portal](https://service.uni.lu/sp?id=index) [Home > Research > HPC > Software environment > Request expertise] to discuss possible options before installing any software.
 
