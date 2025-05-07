@@ -191,7 +191,7 @@ The user software environment is generated using [Easybuild](https://easybuild.r
 <!-- * [Software Sets, compilers and toolchains at ULHPC](software/swsets.md) -->
 <!-- * [Compiling/building software](development/software/index.md) -->
 <!--     - [Building missing software with Easybuild](development/software/easybuild.md) -->
-* [Running Containers](containers/index.md)
+* [Running Containers](/environment/containers)
 <!-- * [Contributing to the ULHPC User Software](development/software/contributing.md) -->
 
 !!! question "Software building support"

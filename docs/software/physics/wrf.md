@@ -12,7 +12,7 @@ In our systems we provide repackaged containers developed by the Central Researc
 
 ## Available versions in the UL HPC systems
 
-In the UL HPC system we support [Singularity containers](/containers). The University of Manchester containers have been repackaged as Singularity containers for use in our systems. The Singularity containers are:
+In the UL HPC system we support [Apptainer containers](/environment/containers). The University of Manchester containers have been repackaged as Singularity containers for use in our systems. The Singularity containers are:
 
 - WRF-WPS version 4.3.3: `/work/projects/singularity/ulhpc/wrf-wps-4.3.3.sif`
 - WRF-Chem version 4.3.3: `/work/projects/singularity/ulhpc/wrf-chem-4.3.3.sif`
