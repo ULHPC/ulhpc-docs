@@ -8,7 +8,7 @@ Many applications and libraries can also be used through container systems. The 
 
 ![](https://apptainer.org/docs/user/latest/_static/logo.png){: style="width:200px;float: right;"}
 
-The UL HPC supports [Apptainer containers](https://apptainer.org/docs/user/main/introduction.html). Apptainer is an open source container platform designed to be simple, fast, and secure. Apptainer is optimized for Enterprise Performance Computing (EPC){[^98] and High Performance Computing (HPC) workloads, allowing users to run containers in a trusted way.
+The UL HPC supports [Apptainer containers](https://apptainer.org/docs/user/main/introduction.html). Apptainer is an open source container platform designed to be simple, fast, and secure. Apptainer is optimized for Enterprise Performance Computing (EPC)[^98] and High Performance Computing (HPC) workloads, allowing users to run containers in a trusted way.
 
 [^98]: Typical examples of Enterprise Performance Computing workloads are deep learning inference and other machine learning workloads.
 
