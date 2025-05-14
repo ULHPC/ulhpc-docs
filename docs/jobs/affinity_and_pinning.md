@@ -25,6 +25,31 @@ The CPU is thus organized in a number of levels with actual threads running on p
 
 Typically the libraries used in HPC applications provide a high degree of control of process and thread placement. In order to extract the best performance from the HPC system you often need to specify the placement of threads and processes.
 
+??? info "TL; DR"
+
+    The recommended settings for optimal performance for most applications when using full nodes of Aion is to add the options:
+
+    - `--cpus-per-task=16`, and
+    - `--distribution=block:block`
+
+    in every call of `srun`. This is an example submission script.
+
+    ```bash
+    #!/bin/bash --login
+    #SBATCH --job-name=stress_test
+    #SBATCH --partition=batch
+    #SBATCH --qos=normal
+    #SBATCH --nodes=4
+    #SBATCH --time=02:00:00
+    #SBATCH --output=%x-%j.out
+    #SBATCH --error=%x-%j.err
+    #SBATCH --exclusive
+
+    declare stress_test_duration=160
+
+    srun --ntasks-per-node=8 --cpu-per-task=16 --distribution=block:block stress --cpu 16 --timeout "${stress_test_duration}"
+    ```
+
 ## Process and thread placement
 
 A call to `sbatch` or `salloc` in clusters with the Slurm scheduler allocates the resources for a job. To pin processes of your job to specific cores within each node you need to set binding option in each step of your job with `srun` or in raw calls to `mpirun`.
