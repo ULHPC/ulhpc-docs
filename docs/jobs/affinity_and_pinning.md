@@ -287,8 +287,8 @@ An exhaustive [list of reporting features for binding configurations](https://sl
 
 ??? info "_Resources_"
 
-1. [Configuration options managing the allocation of CPU resources](https://slurm.schedmd.com/cpu_management.html)
-2. [Configuration of the control group plugin of Slurm (`cgroup.conf`)](https://slurm.schedmd.com/cgroup.conf.html)
+    1. [Configuration options managing the allocation of CPU resources](https://slurm.schedmd.com/cpu_management.html)
+    2. [Configuration of the control group plugin of Slurm (`cgroup.conf`)](https://slurm.schedmd.com/cgroup.conf.html)
 
 ## Process distribution
 
