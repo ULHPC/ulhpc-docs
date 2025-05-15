@@ -97,7 +97,7 @@ Process (tasks) are bound to cores with the `--cpu-bind=[verbose],<bind type>` o
 
 You can optionally add the `verbose` option in debugging jobs to print process bindings before the job step runs.
 
-Like with other resources, Slurm is using the [control group](https://www.kernel.org/doc/html/v5.4/admin-guide/cgroup-v1/cgroups.html) feature of Linux to allocate processor units to processes. The base option that controls the allocation of cores is the `mask_cpu`. The other allocation options are converted to mask according to groupings of cores with similar access to resources by the [hardware locality](https://www.open-mpi.org/projects/hwloc/) tool.
+Like with other resources, Slurm is using the [control group](https://www.kernel.org/doc/html/v5.4/admin-guide/cgroup-v1/cgroups.html) feature of Linux to allocate processor units to processes. The base option that controls the allocation of cores is the `mask_cpu`. The other allocation options are converted to mask according to groupings of cores with similar access to resources by the [hardware locality](/jobs/hwloc/) tool.
 
 #### Mask binding
 
