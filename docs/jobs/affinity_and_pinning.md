@@ -27,28 +27,59 @@ Typically the libraries used in HPC applications provide a high degree of contro
 
 ??? info "TL; DR"
 
-    The recommended settings for optimal performance for most applications when using full nodes of Aion is to add the options:
+    For regular CPU nodes there configuration that work well for the majority of the applications.
 
-    - `--cpus-per-task=16`, and
-    - `--distribution=block:block`
+    === "Iris CPU nodes"
 
-    in every call of `srun`. This is an example submission script.
+        The recommended settings for optimal performance for most applications when using full nodes of Iris is to add the options:
 
-    ```bash
-    #!/bin/bash --login
-    #SBATCH --job-name=stress_test
-    #SBATCH --partition=batch
-    #SBATCH --qos=normal
-    #SBATCH --nodes=4
-    #SBATCH --time=02:00:00
-    #SBATCH --output=%x-%j.out
-    #SBATCH --error=%x-%j.err
-    #SBATCH --exclusive
+        - `--ntasks-per-socket=1`,
+        - `--cpus-per-task=14`, and
+        - `--distribution=block:block`
 
-    declare stress_test_duration=160
+        in every call of `srun`. This is an example submission script.
 
-    srun --ntasks-per-node=8 --cpu-per-task=16 --distribution=block:block stress --cpu 16 --timeout "${stress_test_duration}"
-    ```
+        ```bash
+        #!/bin/bash --login
+        #SBATCH --job-name=stress_test
+        #SBATCH --partition=batch
+        #SBATCH --qos=normal
+        #SBATCH --nodes=4
+        #SBATCH --time=02:00:00
+        #SBATCH --output=%x-%j.out
+        #SBATCH --error=%x-%j.err
+        #SBATCH --exclusive
+
+        declare stress_test_duration=160
+
+        srun --ntasks-per-socket=1 --cpu-per-task=14 --distribution=block:block stress --cpu 14 --timeout "${stress_test_duration}"
+        ```
+
+    === "Aion nodes"
+
+        The recommended settings for optimal performance for most applications when using full nodes of Aion is to add the options:
+
+        - `--ntasks-per-socket=1`,
+        - `--cpus-per-task=16`, and
+        - `--distribution=block:block`
+
+        in every call of `srun`. This is an example submission script.
+
+        ```bash
+        #!/bin/bash --login
+        #SBATCH --job-name=stress_test
+        #SBATCH --partition=batch
+        #SBATCH --qos=normal
+        #SBATCH --nodes=4
+        #SBATCH --time=02:00:00
+        #SBATCH --output=%x-%j.out
+        #SBATCH --error=%x-%j.err
+        #SBATCH --exclusive
+
+        declare stress_test_duration=160
+
+        srun --ntasks-per-socket=1 --cpu-per-task=16 --distribution=block:block stress --cpu 16 --timeout "${stress_test_duration}"
+        ```
 
 ## Process placement
 
