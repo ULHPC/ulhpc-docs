@@ -544,6 +544,11 @@ Very precise placement of processes is afforded using the node list (`--nodelist
 
 With the `arbitrary` option of the distribution flag, the launcher will launch one processes in every entry of the node list (repeated entries allowed). If no node list (`--nodelist`) is provided, then the distribution method defaults to `block`.
 
+<!--
+## Distributing and binding OpenMP process threads
+
+The Slurm distribution and binding mechanisms only bind the processes of MPI applications
+-->
 
 ## Examining the architecture of compute nodes
 
