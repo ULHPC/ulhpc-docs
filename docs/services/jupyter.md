@@ -1,74 +1,123 @@
-# Jupyter Notebook
+# Jupyter
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Jupyter_logo.svg/1200px-Jupyter_logo.svg.png){: style="width:300px;float: right;"}
 
+[Jupyter](https://jupyter.org/) is a set of free software, open standards, and web services for interactive computing across all programming languages. Jupyter is a large umbrella project that covers many different software offerings and tools, including the popular Jupyter Notebook and JupyterLab web-based notebook authoring and editing applications. The Jupyter project and its subprojects all center around providing tools (and standards) for interactive computing with computational [notebooks](#notebooks).
 
-[JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) is a flexible, popular literate-computing web application for creating notebooks containing code, equations, visualization, and text. Notebooks are documents that contain both computer code and rich text elements (paragraphs, equations, figures, widgets, links). They are human-readable documents containing analysis descriptions and results but are also executable data analytics artifacts. Notebooks are associated with kernels, processes that actually execute code. Notebooks can be shared or converted into static HTML documents. They are a powerful tool for reproducible research and teaching.
+We strongly recommend using [modules](/environment/modules/) for Jupter application whenever modules are available. The main applications for interacting with Jupyter notebooks that are supported in UL HPC systems through modules are the following.
 
+- [JupyterLab](https://jupyterlab.readthedocs.io/en/latest/) provided by `tools/JupyterLab`: a web-based interactive development environment for notebooks, code, and data; typically used to develop notebook documents.
 
-## Install Jupyter
+- [Jupyter Notebook](https://jupyter-notebook.readthedocs.io/en/latest/) provided by `tools/JupyterNotebook`: a notebook authoring application; notebooks are shareable document that combines computer code, plain language descriptions, data, and visualizations.
 
-While JupyterLab runs code in Jupyter notebooks for many programming languages, Python is a requirement (Python 3.3 or greater, or Python 2.7) for installing the JupyterLab. New users may wish to install JupyterLab in a Conda environment. Hereafter, the `pip` package manager will be used to install JupyterLab.
-
-We strongly recommend to use the Python module provided by the ULHPC and installing `jupyter` inside a Python virtual environment after upgrading `pip`.
-
-```shell
-$ si
-$ module load lang/Python #Loading default Python
-$ python -m venv ~/environments/jupyter_env
-$ source ~/environments/jupyter_env/bin/activate
-$ python -m pip install --upgrade pip
-$ python -m pip install jupyterlab
-```
+-  [JupyterHub](https://jupyterhub.readthedocs.io/en/latest/) provided by `tools/JupyterHub`: a multi-user Hub that spawns and manages multiple instances of the single-user Jupyter notebook server; useful for sharing multiple instances of a notebook to a group of users.
 
 !!! warning
-    Modules are not allowed on the access servers. To test interactively Singularity, remember to ask for an [interactive job](/jobs/interactive) first using  for instance the `si` tool.
+    Modules are not allowed on the access servers. To test interactively, remember to ask for an [interactive job](/jobs/interactive) first using  for instance the `si` tool.
 
-Once JupyterLab is installed along with , you can start to configure your installation setting the environment variables corresponding to your needs:
+## Notebooks
 
-- `JUPYTER_CONFIG_DIR`: Set this environment variable to use a particular directory, other than the default, for Jupyter config files
-- `JUPYTER_PATH`: Set this environment variable to provide extra directories for the data search path. `JUPYTER_PATH` should contain a series of directories, separated by os.pathsep(; on Windows, : on Unix). Directories given in JUPYTER_PATH are searched before other locations. This is used in addition to other entries, rather than replacing any
-- `JUPYTER_DATA_DIR`: Set this environment variable to use a particular directory, other than the default, as the user data directory
-- `JUPYTER_RUNTIME_DIR`: Set this to override where Jupyter stores runtime files
-- `IPYTHONDIR`: If set, this environment variable should be the path to a directory, which IPython will use for user data. IPython will create it if it does not exist.
+[Notebooks](https://docs.jupyter.org/en/latest/#what-is-a-notebook) are documents that contain computer code, data, and rich text elements such as normal test, graphical equations, links, figures, and widgets. Notebooks contain human-readable analysis, descriptions, and results, together with executable versions of code data. As a result, notebooks are particularly popular for data analytics jobs, where they allow the interactive development of reproducible data analytic pipelines. Notebooks can be shared or converted into static HTML documents, and they are thus a powerful teaching tool as well.
 
-JupyterLab is now installed and ready.
+Notebooks are associated with [kernels](https://jupyter-client.readthedocs.io/en/stable/kernels.html), processes that actually execute code required for the notebook. You can host kernels in isolated Python environments. Whenever possible use the Python [module](/environment/modules/) provided to create your environment, as modules have been optimally configured for our systems. If your application requires a different version of Python you can always install one with [Conda](/environment/conda/) or other tools.
 
-??? info "Installing the classic Notebook"
-    JupyterLab (`jupyterlab`) is a new package which automates many task that where performed manually in the traditional Jupyter package (`jupyter`). If you prefer to install the classic notebook, you also need to install the [IPython](https://ipython.readthedocs.io/en/stable/index.html) manually as well, replacing
-    ```bash
-    python -m pip install jupyterlab
-    ```
-    with:
-    ```bash
-    python -m pip install jupyter ipykernel
-    ```
+To create the Python environment, start by loading the Python module and then create the environment. 
 
-### Providing access to kernels of other environments
-
-JupyterLab makes sure that a default [IPython kernel](https://ipython.readthedocs.io/en/stable/install/kernel_install.html#) is available, with the environment (and the Python version) with which the lab was created. Other environments can export a _kernel_ to a JupyterLab instance, allowing the instance to launch interactive session inside environments others from the environment where JupyterLab is installed.
-
-You can [setup kernels with different environments on the same notebook](https://ipython.readthedocs.io/en/stable/install/kernel_install.html). Create the environment with the Python version and the packages you require, and then register the kernel in any environment with Jupyter (lab or classic notebook) installed. For instance, if we have installed Jupyter in `~/environments/jupyter_env`:
 ```shell
-source ~/environments/other_python_venv/bin/activate
-python -m pip install ipykernel
-python -m ipykernel install --prefix=${HOME}/environments/jupyter_env --name other_python_env --display-name "Other Python env"
+module load lang/Python
+python -m venv ~/environments/notebook_venv
+```
+
+Install the packages that you require in your environment, and then install the `ipykernel` package.
+
+```shell
+module load lang/Python
+source ~/environments/notebook_venv/bin/activate
+pip install ipykernel
 deactivate
 ```
-Then all kernels and their associated environment can be started from the same Jupyter instance in the `~/environments/jupyter_env` Python venv.
 
-You can also use the flag `--user` instead of `--prefix` to install the kernel in the default system location available to all Jupyter environments for a user.
+You can then export a kernel for your environment that Jupyter applications can use to create notebooks using the environment. Jupyter applications provide a default environment with a kernel and also search some default locations for additional kernels. The user default location selected with the `--user` option of `ipykernel` is:
+
+```
+${HOME}/.local/share/jupyter/kernels
+```
+
+With the command,
+
+```shell
+module load lang/Python
+source ~/environments/notebook_venv/bin/activate
+python -m ipykernel install --user --name notebook_venv --display-name "Notebook"
+deactivate
+```
+
+the kernel will be created in the default user location:
+
+```
+${HOME}/.local/share/jupyter/kernels/notebook_venv
+```
+
+and the kernel will appear with the name "Notebook" in your list of available kernels in all Jupyter applications launched by the user.
+
+### Kernels in environments with site packages
+
+The UL HPC systems offer optimized Python packages for applications such as PyTorch. You can access the optimized packages in your environments if you build your environment with access to system site packages. For instance to access the PyTorch packages that have been optimized for GPUs in the Iris GPU nodes create the environment for your notebook as follows.
+
+```shell
+module load ai/PyTorch/2.3.0-foss-2023b-CUDA-12.6.0
+python -m venv --system-site-packages ~/environments/notebook_venv
+source ~/environments/notebook_venv/bin/activate
+pip install ipykernel
+python -m ipykernel install --user --name notebook_venv --display-name "Notebook"
+deactivate
+```
+
+With the `--system-site-packages` flag, the packages provided by the `ai/PyTorch/2.3.0-foss-2023b-CUDA-12.6.0` module are accessible to your `notebook_venv`.
+
+### Kernels in arbitrary directories
+
+You can also specify an installation location for your kernel that is different than the default user location. For instance you may want to store your kernel in a [project directory](/filesystems/#project-directories) to share it with other members of your team. In this case you can use the `--prefix` option to create the project.
+
+```shell
+module load lang/Python
+source ~/environments/notebook_venv/bin/activate
+python -m ipykernel install --prefix=${PROJECTHOME}/project_name/environments/jupyter_env --name notebook_venv --display-name "Notebook"
+deactivate
+```
+
+To use a kernel from a custom installation path instruct the Jupyter application to search for environments in the extra path with the `--notebook-dir` option. For instance with the command
+
+```shell
+module load tools/JupyterLab
+jupyter lab --notebook-dir=${PROJECTHOME}/project_name/environments/jupyter_env
+```
+
+the "Notebook" will be listed in the available kernels in the Jupyter lab application.
 
 ### Kernels for Conda environments
 
-If you would like to install a kernel in a Conda environment, install the `ipykernel` from the `conda-forge` channel. For instance,
+Some packages may require a specific version of Python. In this case install the required Python version in a Conda environment. Then follow the steps above to create the Python environment while using the Python of the Conda environment. For instance, the commands
 ```bash
-micromamba install --name conda_env conda-forge::ipykernel
-micromamba run --name conda_env python -m ipykernel install --prefix=${HOME}/environments/jupyter_env --name other_python_env --display-name "Other Python env"
+micromamba create --name conda_notebook conda-forge::python=3.8
+micromamba run --name conda_notebook python -m venv ~/environments/conda_notebook_venv
+source ~/environments/conda_notebook_vemv/bin/activate
+python -m ipykernel install --user --name conda_notebook_venv --display-name "Conda notebook"
+deactivate
 ```
-will make your conda environment, `conda_env`, available in the kernel launched from the `~/environments/jupyter_env` Python venv.
+create a kernel for the `conda_notebook_venv` environment with Python 3.8.
 
-## Starting a Jupyter Notebook
+Note that Jupyter does not currently support kernels for Conda environments, so you have to create a Python environment (`venv`) for your kernel.
+
+
+## Working with JupyterLab
+
+[JupyterLab](https://jupyterlab.readthedocs.io/en/latest/) is a web-based interactive development environment for notebooks, code, and data. Typically used to develop notebook documents, is highly extensible, and more feature-rich that the traditional Jupyter Notebook. In UL HPC systems Jupyter lab is provided by the `tools/JupyterLab` [module](/environment/modules/). Load the Jupyter module with the following command.
+
+```shell
+module load tools/JupyterLab
+```
+### Starting a JupyterLab session
 
 Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following script is a template for Jupyter submission scripts that will rarely need modifications. Most often you will need to modify the session duration (`--time` SBATCH option).
 
@@ -88,9 +137,8 @@ Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following s
     print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
     module purge || print_error_and_exit "No 'module' command"
     
-    # Load the default Python 3 module
-    module load lang/Python
-    source "${HOME}/environments/jupyter_env/bin/activate"
+    # Load the JupyterLab module
+    module load tools/JupyterLab
 
     declare loopback_device="127.0.0.1"
     declare port="8888"
@@ -260,11 +308,67 @@ If you encounter any issues, have a look in the debug output in `Jupyter_<job id
       python3             /home/users/gkafanas/environments/jupyter_env/share/jupyter/kernels/python3 
     ```
 
+### Environment configuration
+
+Jupyter generates various files during runtime, and reads configuration files from various locations. You can control these paths using [environment variables](https://docs.jupyter.org/en/latest/use/jupyter-directories.html). For instance, you may set the `JUPYTER_RUNTIME_DIR` to point somewhere in the [`/tmp` directory](https://hpc-docs.uni.lu/filesystems/#intended-usage-of-file-systems) for better performance.
+
+- [`JUPYTER_CONFIG_DIR`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_CONFIG_DIR): Set the directory for Jupyter config files; default is `${HOME}/.jupyter`.
+- [`JUPYTER_PATH`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_PATH): Extra directories to search for installable data files, such as [kernelspecs](https://jupyter-client.readthedocs.io/en/stable/kernels.html#making-kernels-for-jupyter) and [notebook extensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/); should contain a series of directories, separated by `os.pathsep` (`;` on Windows and `:` on Unix); directories given in `JUPYTER_PATH` are searched before other locations.
+- [`JUPYTER_DATA_DIR`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_DATA_DIR): Set the user data directory which contains files such as [kernelspecs](https://jupyter-client.readthedocs.io/en/stable/kernels.html#making-kernels-for-jupyter), [notebook extensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/), or [voila templates](https://voila.readthedocs.io/en/stable/index.html); default is `${HOME}/.local/share/jupyter/` (respects `${XDG_DATA_HOME}`).
+- [`JUPYTER_RUNTIME_DIR`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_RUNTIME_DIR): Set the location where Jupyter stores runtime files, such as connection files, which are only useful for the lifetime of a particular process; default is `${JUPYTER_DATA_DIR}/runtime`.
+
 ### Password protected access
 
 You can also set a password when launching the jupyter lab as detailed in the [Jupyter official documentation](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html). In that case, simply direct you browser to the URL `http://127.0.0.1:8888/` and provide your password. You can see bellow an example of the login page.
 
 ??? example "Typical content of a password protected login page"
     ![](./images/jupyter_login.png)
+
+
+## Install Jupyter
+
+While JupyterLab runs code in Jupyter notebooks for many programming languages, Python is a requirement (Python 3.3 or greater, or Python 2.7) for installing the JupyterLab. New users may wish to install JupyterLab in a Conda environment. Hereafter, the `pip` package manager will be used to install JupyterLab.
+
+We strongly recommend to use the Python module provided by the ULHPC and installing `jupyter` inside a Python virtual environment after upgrading `pip`.
+
+```shell
+$ si
+$ module load lang/Python #Loading default Python
+$ python -m venv ~/environments/jupyter_env
+$ source ~/environments/jupyter_env/bin/activate
+$ python -m pip install --upgrade pip
+$ python -m pip install jupyterlab
+```
+
+Once JupyterLab is installed along with , you can start to configure your installation setting the environment variables corresponding to your needs.
+
+JupyterLab is now installed and ready.
+
+??? info "Installing the classic Notebook"
+    JupyterLab (`jupyterlab`) is a new package which automates many task that where performed manually in the traditional Jupyter package (`jupyter`). If you prefer to install the classic notebook, you also need to install the [IPython](https://ipython.readthedocs.io/en/stable/index.html) manually as well, replacing
+    ```bash
+    python -m pip install jupyterlab
+    ```
+    with:
+    ```bash
+    python -m pip install jupyter ipykernel
+    ```
+
+### Providing access to kernels of other environments
+
+JupyterLab makes sure that a default [IPython kernel](https://ipython.readthedocs.io/en/stable/install/kernel_install.html#) is available, with the environment (and the Python version) with which the lab was created. Other environments can export a _kernel_ to a JupyterLab instance, allowing the instance to launch interactive session inside environments others from the environment where JupyterLab is installed.
+
+You can [setup kernels with different environments on the same notebook](https://ipython.readthedocs.io/en/stable/install/kernel_install.html). Create the environment with the Python version and the packages you require, and then register the kernel in any environment with Jupyter (lab or classic notebook) installed. For instance, if we have installed Jupyter in `~/environments/jupyter_env`:
+```shell
+source ~/environments/other_python_venv/bin/activate
+python -m pip install ipykernel
+python -m ipykernel install --prefix=${HOME}/environments/jupyter_env --name other_python_env --display-name "Other Python env"
+deactivate
+```
+Then all kernels and their associated environment can be started from the same Jupyter instance in the `~/environments/jupyter_env` Python venv.
+
+You can also use the flag `--user` instead of `--prefix` to install the kernel in the default system location available to all Jupyter environments for a user.
+
+
 
 
