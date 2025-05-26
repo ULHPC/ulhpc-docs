@@ -2,9 +2,9 @@
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Jupyter_logo.svg/1200px-Jupyter_logo.svg.png){: style="width:300px;float: right;"}
 
-[Jupyter](https://jupyter.org/) is a set of free software, open standards, and web services for interactive computing across all programming languages. Jupyter is a large umbrella project that covers many different software offerings and tools, including the popular Jupyter Notebook and JupyterLab web-based notebook authoring and editing applications. The Jupyter project and its subprojects all center around providing tools (and standards) for interactive computing with computational [notebooks](#notebooks).
+[Jupyter](https://jupyter.org/) is a large umbrella project that covers many different software offerings and tools, including the popular Jupyter Notebook and JupyterLab web-based notebook authoring and editing applications. The Jupyter project and its subprojects all center around providing tools and standards for interactive computing with computational [notebooks](#notebooks). The set of free software, open standards, and web services supported by Jupyter can be used to implement interactive computing in notebooks across any programming language.
 
-We strongly recommend using [modules](/environment/modules/) for Jupter application whenever modules are available. The main applications for interacting with Jupyter notebooks that are supported in UL HPC systems through modules are the following.
+We strongly recommend using the Jupyter application provided through [modules](/environment/modules/) whenever possible. The applications for interacting with Jupyter notebooks that are supported in UL HPC systems through modules are the following.
 
 - [JupyterLab](https://jupyterlab.readthedocs.io/en/latest/) provided by `tools/JupyterLab`: a web-based interactive development environment for notebooks, code, and data; typically used to develop notebook documents.
 
