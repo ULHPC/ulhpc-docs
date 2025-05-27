@@ -17,11 +17,11 @@ We strongly recommend using the Jupyter application provided through [modules](/
 
 ## Notebooks
 
-[Notebooks](https://docs.jupyter.org/en/latest/#what-is-a-notebook) are documents that contain computer code, data, and rich text elements such as normal test, graphical equations, links, figures, and widgets. Notebooks contain human-readable analysis, descriptions, and results, together with executable versions of code data. As a result, notebooks are particularly popular for data analytics jobs, where they allow the interactive development of reproducible data analytic pipelines. Notebooks can be shared or converted into static HTML documents, and they are thus a powerful teaching tool as well.
+[Notebooks](https://docs.jupyter.org/en/latest/#what-is-a-notebook) are documents that contain computer code, data, and rich text elements such as normal test, graphical equations, links, figures, and widgets. The main advantage of Notebooks is that the concentrate human-readable analysis, descriptions, and results, together with executable versions of code data in a single document. As a result, notebooks are particularly popular for exploratory data analysis, where they allow the interactive development of reproducible data analytic pipelines. Notebooks can be shared or converted into static HTML documents, and they are thus a powerful teaching tool too.
 
-Notebooks are associated with [kernels](https://jupyter-client.readthedocs.io/en/stable/kernels.html), processes that actually execute code required for the notebook. You can host kernels in isolated Python environments. Whenever possible use the Python [module](/environment/modules/) provided to create your environment, as modules have been optimally configured for our systems. If your application requires a different version of Python you can always install one with [Conda](/environment/conda/) or other tools.
+Notebooks are associated with [kernels](https://jupyter-client.readthedocs.io/en/stable/kernels.html), processes that actually execute the code of the notebook. You can host kernels on isolated Python environments or on the environment of the notebook. Whenever possible use the Python [module](/environment/modules/) to create your environment. Modules have been configured for optimal performance in our systems. If your application requires a different version of Python you can always install one with [Conda](/environment/conda/) or other tools.
 
-To create the Python environment, start by loading the Python module and then create the environment. 
+To create a Python environment for your kernel, start by loading the Python module and then create the environment. 
 
 ```shell
 module load lang/Python
@@ -37,7 +37,7 @@ pip install ipykernel
 deactivate
 ```
 
-You can then export a kernel for your environment that Jupyter applications can use to create notebooks using the environment. Jupyter applications provide a default environment with a kernel and also search some default locations for additional kernels. The user default location selected with the `--user` option of `ipykernel` is:
+You can then export a kernel for your environment that Jupyter applications can use to create notebooks for the environment. Jupyter applications provide a default environment with a kernel and also search some default locations for additional kernels. The user default location is selected with the `--user` option of `ipykernel` and is located in:
 
 ```
 ${HOME}/.local/share/jupyter/kernels
@@ -58,7 +58,7 @@ the kernel will be created in the default user location:
 ${HOME}/.local/share/jupyter/kernels/notebook_venv
 ```
 
-and the kernel will appear with the name "Notebook" in your list of available kernels in all Jupyter applications launched by the user.
+and will appear with the name "Notebook" in the list of available kernels in all Jupyter applications launched by the user.
 
 ### Kernels in environments with site packages
 
@@ -73,11 +73,11 @@ python -m ipykernel install --user --name notebook_venv --display-name "Notebook
 deactivate
 ```
 
-With the `--system-site-packages` flag, the packages provided by the `ai/PyTorch/2.3.0-foss-2023b-CUDA-12.6.0` module are accessible to your `notebook_venv`.
+With the `--system-site-packages` flag, the packages provided by the `ai/PyTorch/2.3.0-foss-2023b-CUDA-12.6.0` module are accessible inside the `notebook_venv` environment.
 
 ### Kernels in arbitrary directories
 
-You can also specify an installation location for your kernel that is different than the default user location. For instance you may want to store your kernel in a [project directory](/filesystems/#project-directories) to share it with other members of your team. In this case you can use the `--prefix` option to create the project.
+Kernels can be installed in arbitrary directories. For instance you store kernels in a [project directory](/filesystems/#project-directories) to share them with other members of your team. In this case use the `--prefix` option when creating the kernel.
 
 ```shell
 module load lang/Python
