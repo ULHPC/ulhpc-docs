@@ -19,7 +19,9 @@ We strongly recommend using the Jupyter application provided through [modules](/
 
 [Notebooks](https://docs.jupyter.org/en/latest/#what-is-a-notebook) are documents that contain computer code, data, and rich text elements such as normal test, graphical equations, links, figures, and widgets. The main advantage of Notebooks is that the concentrate human-readable analysis, descriptions, and results, together with executable versions of code data in a single document. As a result, notebooks are particularly popular for exploratory data analysis, where they allow the interactive development of reproducible data analytic pipelines. Notebooks can be shared or converted into static HTML documents, and they are thus a powerful teaching tool too.
 
-Notebooks are associated with [kernels](https://jupyter-client.readthedocs.io/en/stable/kernels.html), processes that actually execute the code of the notebook. You can host kernels on isolated Python environments or on the environment of the notebook. Whenever possible use the Python [module](/environment/modules/) to create your environment. Modules have been configured for optimal performance in our systems. If your application requires a different version of Python you can always install one with [Conda](/environment/conda/) or other tools.
+### Kernels
+
+Notebooks are associated with [kernels](https://jupyter-client.readthedocs.io/en/stable/kernels.html), processes that actually execute the code of the notebook. You can host kernels on isolated Python environments or on the environment of the notebook. Whenever possible use the Python [module](/environment/modules/) to create your Python environments. Modules have been configured for optimal performance in our systems. If your application requires a different version of Python you can always install one with [Conda](/environment/conda/) or other tools.
 
 To create a Python environment for your kernel, start by loading the Python module and then create the environment. 
 
@@ -28,7 +30,7 @@ module load lang/Python
 python -m venv ${HOME}/environments/notebook_venv
 ```
 
-Install the packages that you require in your environment, and then install the `ipykernel` package.
+Install the packages that you require in your environment, and then install the IPython Kernel for Jupyter (`ipykernel`) package.
 
 ```shell
 module load lang/Python
@@ -37,7 +39,9 @@ pip install ipykernel
 deactivate
 ```
 
-You can then export a kernel for your environment that Jupyter applications can use to create notebooks for the environment. Jupyter applications provide a default environment with a kernel and also search some default locations for additional kernels. The user default location is selected with the `--user` option of `ipykernel` and is located in:
+The [IPython Kernel for Jupyter (`ipykernel`)](https://ipython.readthedocs.io/en/stable/index.html) provides Jupyter kernels that work with IPython, a toolkit for using Python interactively.
+
+You can then [install a kernel](https://ipython.readthedocs.io/en/stable/install/kernel_install.html) for your environment; the kernel is used by Jupyter applications to create notebooks for the environment. Jupyter applications provide a default environment with a kernel and also search some default locations for additional kernels. The user default location is selected with the `--user` option of `ipykernel` and is located in:
 
 ```
 ${HOME}/.local/share/jupyter/kernels
@@ -327,32 +331,49 @@ You can also set a password when launching the jupyter lab as detailed in the [J
 
 ## Install Jupyter
 
-While JupyterLab runs code in Jupyter notebooks for many programming languages, Python is a requirement (Python 3.3 or greater, or Python 2.7) for installing the JupyterLab. New users may wish to install JupyterLab in a Conda environment. Hereafter, the `pip` package manager will be used to install JupyterLab.
-
-We strongly recommend to use the Python module provided by the ULHPC and installing `jupyter` inside a Python virtual environment after upgrading `pip`.
+In case you need some features of JupyterLab that are not available in the versions of JupyterLab provided by modules in our systems, you can install JupyterLab in a Python environment.
 
 ```shell
-$ si
-$ module load lang/Python #Loading default Python
-$ python -m venv ${HOME}/environments/jupyter_env
-$ source ${HOME}/environments/jupyter_env/bin/activate
-$ python -m pip install --upgrade pip
-$ python -m pip install jupyterlab
+module load lang/Python #Loading default Python
+python -m venv ${HOME}/environments/jupyter_venv
+source ${HOME}/environments/jupyter_venv/bin/activate
+pip install jupyterlab
 ```
 
-Once JupyterLab is installed along with , you can start to configure your installation setting the environment variables corresponding to your needs.
+??? info "Debugging installation issues"
 
-JupyterLab is now installed and ready.
+    If the installation of JupyterLab fails, try updating the version of `pip` in your environment,
+
+    ```shell
+    source ${HOME}/environments/jupyter_venv/bin/activate
+    python -m pip install --upgrade pip
+    ```
+
+    and try installing JupyterLab again.
+
+After installing your required version of JupyterLab, you can install your packages and [`ipykernel`](#kernels)
+
+- either in a separate Python environment, or
+- at the same python environment where JupyterLab is installed.
+
+??? info "Using a separate Python environment"
+
+    To use a separate Python environment [create a notebook](#notebook) and export its kernel so that the JupyterLab installed in your custom environment can  locate it. Remember, you only need to load the environment with JupyterLab, to launch JupyterLab, not the environment of the kernel.
+
+??? info "Using the Python environment of JupyterLab"
+
+    Every environment with JupyterLab already contains `ipykernel` to provide a default notebook. You can install all your packages directly in the `jupyter_venv` and use the default kernel. Note that in this manner you can only support one environment, and the packages you install in that environment must be compatible with the packages require by JupyterLab.
 
 ??? info "Installing the classic Notebook"
-    JupyterLab (`jupyterlab`) is a new package which automates many task that where performed manually in the traditional Jupyter package (`jupyter`). If you prefer to install the classic notebook, you also need to install the [IPython](https://ipython.readthedocs.io/en/stable/index.html) manually as well, replacing
+    If you prefer to install the classic notebook, you also need to install the [`ipykernel`](#kernels) manually. So, replace
     ```bash
-    python -m pip install jupyterlab
+    pip install jupyterlab
     ```
-    with:
+    with
     ```bash
-    python -m pip install jupyter ipykernel
+    pip install jupyter ipykernel
     ```
+    in the creation of the `jupyter_env` Python environment.
 
 ### Providing access to kernels of other environments
 
