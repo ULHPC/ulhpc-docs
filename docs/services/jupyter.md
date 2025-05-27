@@ -25,14 +25,14 @@ To create the Python environment, start by loading the Python module and then cr
 
 ```shell
 module load lang/Python
-python -m venv ~/environments/notebook_venv
+python -m venv ${HOME}/environments/notebook_venv
 ```
 
 Install the packages that you require in your environment, and then install the `ipykernel` package.
 
 ```shell
 module load lang/Python
-source ~/environments/notebook_venv/bin/activate
+source ${HOME}/environments/notebook_venv/bin/activate
 pip install ipykernel
 deactivate
 ```
@@ -47,7 +47,7 @@ With the command,
 
 ```shell
 module load lang/Python
-source ~/environments/notebook_venv/bin/activate
+source ${HOME}/environments/notebook_venv/bin/activate
 python -m ipykernel install --user --name notebook_venv --display-name "Notebook"
 deactivate
 ```
@@ -66,8 +66,8 @@ The UL HPC systems offer optimized Python packages for applications such as PyTo
 
 ```shell
 module load ai/PyTorch/2.3.0-foss-2023b-CUDA-12.6.0
-python -m venv --system-site-packages ~/environments/notebook_venv
-source ~/environments/notebook_venv/bin/activate
+python -m venv --system-site-packages ${HOME}/environments/notebook_venv
+source ${HOME}/environments/notebook_venv/bin/activate
 pip install ipykernel
 python -m ipykernel install --user --name notebook_venv --display-name "Notebook"
 deactivate
@@ -81,7 +81,7 @@ You can also specify an installation location for your kernel that is different 
 
 ```shell
 module load lang/Python
-source ~/environments/notebook_venv/bin/activate
+source ${HOME}/environments/notebook_venv/bin/activate
 python -m ipykernel install --prefix=${PROJECTHOME}/project_name/environments/jupyter_env --name notebook_venv --display-name "Notebook"
 deactivate
 ```
@@ -100,8 +100,8 @@ the "Notebook" will be listed in the available kernels in the Jupyter lab applic
 Some packages may require a specific version of Python. In this case install the required Python version in a Conda environment. Then follow the steps above to create the Python environment while using the Python of the Conda environment. For instance, the commands
 ```bash
 micromamba create --name conda_notebook conda-forge::python=3.8
-micromamba run --name conda_notebook python -m venv ~/environments/conda_notebook_venv
-source ~/environments/conda_notebook_vemv/bin/activate
+micromamba run --name conda_notebook python -m venv ${HOME}/environments/conda_notebook_venv
+source ${HOME}/environments/conda_notebook_vemv/bin/activate
 python -m ipykernel install --user --name conda_notebook_venv --display-name "Conda notebook"
 deactivate
 ```
@@ -334,8 +334,8 @@ We strongly recommend to use the Python module provided by the ULHPC and install
 ```shell
 $ si
 $ module load lang/Python #Loading default Python
-$ python -m venv ~/environments/jupyter_env
-$ source ~/environments/jupyter_env/bin/activate
+$ python -m venv ${HOME}/environments/jupyter_env
+$ source ${HOME}/environments/jupyter_env/bin/activate
 $ python -m pip install --upgrade pip
 $ python -m pip install jupyterlab
 ```
@@ -358,14 +358,14 @@ JupyterLab is now installed and ready.
 
 JupyterLab makes sure that a default [IPython kernel](https://ipython.readthedocs.io/en/stable/install/kernel_install.html#) is available, with the environment (and the Python version) with which the lab was created. Other environments can export a _kernel_ to a JupyterLab instance, allowing the instance to launch interactive session inside environments others from the environment where JupyterLab is installed.
 
-You can [setup kernels with different environments on the same notebook](https://ipython.readthedocs.io/en/stable/install/kernel_install.html). Create the environment with the Python version and the packages you require, and then register the kernel in any environment with Jupyter (lab or classic notebook) installed. For instance, if we have installed Jupyter in `~/environments/jupyter_env`:
+You can [setup kernels with different environments on the same notebook](https://ipython.readthedocs.io/en/stable/install/kernel_install.html). Create the environment with the Python version and the packages you require, and then register the kernel in any environment with Jupyter (lab or classic notebook) installed. For instance, if we have installed Jupyter in `${HOME}/environments/jupyter_env`:
 ```shell
-source ~/environments/other_python_venv/bin/activate
+source ${HOME}/environments/other_python_venv/bin/activate
 python -m pip install ipykernel
 python -m ipykernel install --prefix=${HOME}/environments/jupyter_env --name other_python_env --display-name "Other Python env"
 deactivate
 ```
-Then all kernels and their associated environment can be started from the same Jupyter instance in the `~/environments/jupyter_env` Python venv.
+Then all kernels and their associated environment can be started from the same Jupyter instance in the `${HOME}/environments/jupyter_env` Python venv.
 
 You can also use the flag `--user` instead of `--prefix` to install the kernel in the default system location available to all Jupyter environments for a user.
 
