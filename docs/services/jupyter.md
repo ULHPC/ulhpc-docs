@@ -64,7 +64,41 @@ ${HOME}/.local/share/jupyter/kernels/notebook_venv
 
 and will appear with the name "Notebook" in the list of available kernels in all Jupyter applications launched by the user.
 
-### Kernels in environments with site packages
+??? info "Kernels in arbitrary directories"
+
+    Kernels can be installed in arbitrary directories. For instance you store kernels in a [project directory](/filesystems/#project-directories) to share them with other members of your team. In this case use the `--prefix` option when creating the kernel.
+
+    ```shell
+    module load lang/Python
+    source ${HOME}/environments/notebook_venv/bin/activate
+    python -m ipykernel install --prefix=${PROJECTHOME}/project_name/environments/jupyter_env --name notebook_venv --display-name "Notebook"
+    deactivate
+    ```
+
+    To use a kernel from a custom installation path instruct the Jupyter application to search for environments in the extra path with the `--notebook-dir` option. For instance with the command
+
+    ```shell
+    module load tools/JupyterLab
+    jupyter lab --notebook-dir=${PROJECTHOME}/project_name/environments/jupyter_env
+    ```
+
+    the "Notebook" will be listed in the available kernels in the Jupyter lab application.
+
+??? info "Kernels for Conda environments"
+
+    Some packages may require a specific version of Python. In this case install the required Python version in a Conda environment. Then follow the steps above to create the Python environment while using the Python of the Conda environment. For instance, the commands
+    ```bash
+    micromamba create --name conda_notebook conda-forge::python=3.8
+    micromamba run --name conda_notebook python -m venv ${HOME}/environments/conda_notebook_venv
+    source ${HOME}/environments/conda_notebook_vemv/bin/activate
+    python -m ipykernel install --user --name conda_notebook_venv --display-name "Conda notebook"
+    deactivate
+    ```
+    create a kernel for the `conda_notebook_venv` environment with Python 3.8.
+
+    Note that Jupyter does not currently support kernels for Conda environments, so you have to create a Python environment (`venv`) for your kernel.
+
+### Environments with site packages
 
 The UL HPC systems offer optimized Python packages for applications such as PyTorch. You can access the optimized packages in your environments if you build your environment with access to system site packages. For instance to access the PyTorch packages that have been optimized for GPUs in the Iris GPU nodes create the environment for your notebook as follows.
 
@@ -78,40 +112,6 @@ deactivate
 ```
 
 With the `--system-site-packages` flag, the packages provided by the `ai/PyTorch/2.3.0-foss-2023b-CUDA-12.6.0` module are accessible inside the `notebook_venv` environment.
-
-### Kernels in arbitrary directories
-
-Kernels can be installed in arbitrary directories. For instance you store kernels in a [project directory](/filesystems/#project-directories) to share them with other members of your team. In this case use the `--prefix` option when creating the kernel.
-
-```shell
-module load lang/Python
-source ${HOME}/environments/notebook_venv/bin/activate
-python -m ipykernel install --prefix=${PROJECTHOME}/project_name/environments/jupyter_env --name notebook_venv --display-name "Notebook"
-deactivate
-```
-
-To use a kernel from a custom installation path instruct the Jupyter application to search for environments in the extra path with the `--notebook-dir` option. For instance with the command
-
-```shell
-module load tools/JupyterLab
-jupyter lab --notebook-dir=${PROJECTHOME}/project_name/environments/jupyter_env
-```
-
-the "Notebook" will be listed in the available kernels in the Jupyter lab application.
-
-### Kernels for Conda environments
-
-Some packages may require a specific version of Python. In this case install the required Python version in a Conda environment. Then follow the steps above to create the Python environment while using the Python of the Conda environment. For instance, the commands
-```bash
-micromamba create --name conda_notebook conda-forge::python=3.8
-micromamba run --name conda_notebook python -m venv ${HOME}/environments/conda_notebook_venv
-source ${HOME}/environments/conda_notebook_vemv/bin/activate
-python -m ipykernel install --user --name conda_notebook_venv --display-name "Conda notebook"
-deactivate
-```
-create a kernel for the `conda_notebook_venv` environment with Python 3.8.
-
-Note that Jupyter does not currently support kernels for Conda environments, so you have to create a Python environment (`venv`) for your kernel.
 
 
 ## Working with JupyterLab
