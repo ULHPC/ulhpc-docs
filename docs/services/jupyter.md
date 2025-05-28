@@ -316,10 +316,16 @@ If you encounter any issues, have a look in the debug output in `Jupyter_<job id
 
 Jupyter generates various files during runtime, and reads configuration files from various locations. You can control these paths using [environment variables](https://docs.jupyter.org/en/latest/use/jupyter-directories.html). For instance, you may set the `JUPYTER_RUNTIME_DIR` to point somewhere in the [`/tmp` directory](https://hpc-docs.uni.lu/filesystems/#intended-usage-of-file-systems) for better performance.
 
-- [`JUPYTER_CONFIG_DIR`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_CONFIG_DIR): Set the directory for Jupyter config files; default is `${HOME}/.jupyter`.
-- [`JUPYTER_PATH`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_PATH): Extra directories to search for installable data files, such as [kernelspecs](https://jupyter-client.readthedocs.io/en/stable/kernels.html#making-kernels-for-jupyter) and [notebook extensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/); should contain a series of directories, separated by `os.pathsep` (`;` on Windows and `:` on Unix); directories given in `JUPYTER_PATH` are searched before other locations.
-- [`JUPYTER_DATA_DIR`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_DATA_DIR): Set the user data directory which contains files such as [kernelspecs](https://jupyter-client.readthedocs.io/en/stable/kernels.html#making-kernels-for-jupyter), [notebook extensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/), or [voila templates](https://voila.readthedocs.io/en/stable/index.html); default is `${HOME}/.local/share/jupyter/` (respects `${XDG_DATA_HOME}`).
-- [`JUPYTER_RUNTIME_DIR`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_RUNTIME_DIR): Set the location where Jupyter stores runtime files, such as connection files, which are only useful for the lifetime of a particular process; default is `${JUPYTER_DATA_DIR}/runtime`.
+#### JupyterLab
+
+- [`JUPYTER_CONFIG_DIR`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_CONFIG_DIR): set the directory for Jupyter config files; default is `${HOME}/.jupyter`.
+- [`JUPYTER_PATH`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_PATH): extra directories to search for installable data files, such as [kernelspecs](https://jupyter-client.readthedocs.io/en/stable/kernels.html#making-kernels-for-jupyter) and [notebook extensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/); should contain a series of directories, separated by `os.pathsep` (`;` on Windows and `:` on Unix); directories given in `JUPYTER_PATH` are searched before other locations.
+- [`JUPYTER_DATA_DIR`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_DATA_DIR): set the user data directory which contains files such as [kernelspecs](https://jupyter-client.readthedocs.io/en/stable/kernels.html#making-kernels-for-jupyter), [notebook extensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/), or [voila templates](https://voila.readthedocs.io/en/stable/index.html); default is `${HOME}/.local/share/jupyter/` (respects `${XDG_DATA_HOME}`).
+- [`JUPYTER_RUNTIME_DIR`](https://docs.jupyter.org/en/latest/use/jupyter-directories.html#envvar-JUPYTER_RUNTIME_DIR): set the location where Jupyter stores runtime files, such as connection files, which are only useful for the lifetime of a particular process; default is `${JUPYTER_DATA_DIR}/runtime`.
+
+#### IPython Kernel for Jupyter (`ipykernel`)
+
+- [`IPYTHONDIR`](https://ipython.readthedocs.io/en/stable/config/intro.html#envvar-IPYTHONDIR): path to a directory where [IPython](#kernels) will store user data; IPython will create it if it does not exist.
 
 ### Password protected access
 
