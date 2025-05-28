@@ -108,7 +108,7 @@ nav:
     #   - Parsl: 'jobs/workflow/parsl.md'
     #   - Snakemake: 'jobs/workflow/snakemake.md'
     #   - Spark Cluster: 'bigdata/spark.md'
-    - Jupyter Notebook: 'services/jupyter.md'
+    - Jupyter: 'services/jupyter.md'
     # - Checkpoint/Restart: 'jobs/checkpoint-restart.md'
   ###########
   - Software:
