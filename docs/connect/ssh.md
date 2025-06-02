@@ -224,101 +224,165 @@ You should now be able to connect as follows
 
     Next time you want to connect to the cluster, click on _Load_ button and _Open_ to open a new connection.
 
+
 ## SSH Agent
 
-### On your laptop
+Using passphrase protected private keys can be tedious as you have to unlock the key every time it is used. SSH agent mitigate this issue by reducing the number of times you have to enter your passphrase.
 
-To be able to use your SSH key in a public-key authentication scheme, it must be loaded by an **SSH agent**.
+SSH agents are programs that safely hold unencrypted private keys used for public key authentication schemes. The agent unlocks the encrypted private key once per session[^576], and stores the unencrypted key is in program memory. A [socket](https://en.wikipedia.org/wiki/Unix_domain_socket) is provided where programs that have access to the socket can request responses to challenges on the public key.
 
-* **:fontawesome-brands-apple: Mac OS X (>= 10.5)**, this will be handled automatically; you will be asked to fill in the passphrase on the first connection.
+Due to the [challenge-response protocol](http://www.unixwiz.net/techtips/ssh-agent-forwarding.html) architecture of SSH agents, there are differences between how SSH works with and without SSH agents.
 
-* **:fontawesome-brands-linux: Linux**, this will be handled automatically; you will be asked to fill the passphrase on the first connection.
+- The clients of the SSH agent, such as the SSH program, only get responses to challenges on the public key, not the private key itself.
+- The socket of the SSH agent can be forwarded to remove hosts, where every process that has access to socket can request a response to a public key challenge as if it was located in the local host.
 
-However if you get a message similar to the following:
+[^576]: SSH agents usually support session timeout to limit the time duration a key is exposed without a passphrase; this can guard against accidental key exposure, for instance if a user leaves their computer unlocked.
 
-```bash
-(laptop)$> ssh -vv iris-cluster
+### Security implications 
+
+The most critical security risk when using SSH agent is the [man in the middle attack](https://goteleport.com/blog/how-to-use-ssh-agent-safely/). Any sufficiently privileged user, like a system administrator, can hijack the process by accessing the exposed socket and use it to impersonate you in a remote connection. While this does not reveal the user's private keys, it still violates the integrity of your communications.
+
+- When agent forwarding is enabled, a sufficiently privileged user in the remote machine can impersonate the identities linked to keys in your local machine.
+- When you enable the agent after connecting to a shared machine, a sufficiently privileged user can impersonate the identities linked to keys in the shared machine.
+
+Because of the risk of man in the middle attacks, SSH agent forwarding is prohibited in UL HPC systems and it is recommended that you also explicitly disable it in your SSH configuration file (see [`ForwardAgent no` option in [recommended SSH configuration file](#ssh-configuration)).
+
+### Adding keys
+
+In most UNIX like operating systems the SSH agent is installed and setup by default.
+
+- **Mac OS X (>= 10.5):** the SSH agent is installed and setup by default.
+- **Linux:** in most distribution the SSH agent is installed and setup by default.
+
+However if you get a message similar to the following,
+
+```
+(laptop) $ ssh -vv iris-cluster
 [...]
 Agent admitted failure to sign using the key.
 Permission denied (publickey).
 ```
 
-This means that you have to manually load your key in the SSH agent by running:
+this means that you have to manually load your keys to the SSH agent by running the `ssh-add` command of the SSH agent. When running the command without any arguments
 
+```
+(laptop) $ ssh-add
+```
 
-```bash
-(laptop)$> ssh-add ~/.ssh/id_rsa
-Enter passphrase for ~/.ssh/id_rsa:           # <-- enter your passphrase here
+the agent scans the home directory for some standard keys and adds imports them. By default, the agent looks for:
+
+- `~/.ssh/id_rsa`
+- `~/.ssh/id_ed25519`
+- `~/.ssh/id_dsa`
+- `~/.ssh/id_ecdsa`
+
+If you would like to add specific keys, then provide the _private_ key of the key pair as argument to the agent. For instance to add only the RSA and ED25519 keys call the following command.
+
+```
+(laptop) $ ssh-add ~/.ssh/id_rsa
+Enter passphrase for ~/.ssh/id_rsa: # <-- enter your passphrase here
 Identity added: ~/.ssh/id_rsa (<login>@<hostname>)
-
-(laptop)$> ssh-add ~/.ssh/id_ed25519
-Enter passphrase for ~/.ssh/id_ed25519:       # <-- enter your passphrase here
+(laptop) $ ssh-add ~/.ssh/id_ed25519
+Enter passphrase for ~/.ssh/id_ed25519: # <-- enter your passphrase here
 Identity added: ~/.ssh/id_ed25519 (<login>@<hostname>)
 ```
 
-* :fontawesome-brands-ubuntu: :fontawesome-brands-windows: On **Ubuntu/WSL**, if you experience issues when using `ssh-add`, you should install the `keychain` package and use it as follows (eventually add it to your `~/.profile`):
+!!! tip "Useful commands"
+    You can add as many identities as you need in your `ssh-agent`.
 
-```bash
-# Installation
-(laptop)$> sudo apt install keychain
+    - list the identities added with: `ssh-add -L`
+    - delete an identity added with: `ssh-add -d <private key file>`
+    - delete _all_ identities added with: `ssh-add -D`
 
-# Save your passphrase
-/usr/bin/keychain --nogui ~/.ssh/id_ed25519    # (eventually) repeat with ~/.ssh/id_rsa
-# Load the agent in your shell
-source ~/.keychain/$(hostname)-sh
-```
+??? note "Issues in Ubuntu on WSL"
+    If you experience issues when using `ssh-add`, the install the [`keychain` package](#the-keychain-package).
 
-??? note "(Windows only) SSH Agent within MobaXterm"
-
-    * Go in **Settings > SSH Tab**
-    * In **SSH agents** section, check **Use internal SSH agent "MobAgent"**
+??? note "SSH Agent within MobaXterm (Windows only)"
+    - Go in **Settings > SSH Tab**.
+    - In **SSH agents** section, check **Use internal SSH agent "MobAgent"**.
 
     ![](images/moba-agent1.png)
 
-    * Click on the `+` button on the right
-    * Select your private key file. If you have several keys, you can add them by doing steps above again.
-    * Click on "Show keys currently loaded in MobAgent". An advertisement window may appear asking if you want to run MobAgent. Click on "Yes".
-    * Check that your key(s) appears in the window.
+    - Click on the `+` button on the right.
+    - Select your private key file. If you have several keys, you can add them by doing steps above again.
+    - Click on "Show keys currently loaded in MobAgent". An advertisement window may appear asking if you want to run MobAgent. Click on "Yes".
+    - Check that your key(s) appears in the window.
 
     ![](images/moba-agent2.png)
 
-    * Close the window.
-    * Click on `OK`. Restart MobaXterm.
+    - Close the window.
+    - Click on `OK` and then restart MobaXterm.
 
-??? note "(deprecated - Windows only) - SSH Agent with PuTTY Pageant"
-    To be able to use your PuTTY key in a public-key authentication scheme, it must be loaded by an **SSH agent**.
-    You should run [Pageant](http://the.earth.li/~sgtatham/putty/latest/x86/pageant.exe) for that.
-    To load your SSH key in Pageant:
+??? note "SSH Agent with PuTTY Pageant (Windows only - deprecated)"
+    To be able to use your PuTTY key in a public-key authentication scheme, it must be loaded by an SSH agent. You should run [Pageant](http://the.earth.li/~sgtatham/putty/latest/x86/pageant.exe) for that. To load your SSH key in Pageant,
 
-    * Right-click on the pageant icon in the system tray,
-        - click on the `Add key` menu item
-        - select the private key file you saved while running puttygen.exe i.e. ``
-        - click on the Open button: a new dialog will pop up and ask for your passphrase. Once your passphrase is entered, your key will be loaded in pageant, enabling you to connect with Putty.
+    - right-click on the pageant icon in the system tray,
+    - click on the `Add key` menu item,
+    - select the private key file you saved while running `puttygen.exe`,
+    - save the private key by clicking on the `Open` button which opens a new dialog pop up and asks for your passphrase, and
+    - add your passphrase and click `OK`.
 
+    Once your passphrase is entered, your key will be loaded in pageant, enabling you to connect with Putty.
+
+### The keychain package
+
+The keychain utility (program) checks for a running `ssh-agent` and starts one if it’s not already running. It saves the `ssh-agent` environment variables to the `~/.keychain/${HOSTNAME}-sh` file, allowing subsequent logins and non-interactive shells such as `cron` jobs to source the file and establish passwordless `ssh` connections.
+
+Install the `keychain` package with the following command.
+
+```
+(laptop) $ sudo apt install keychain
+```
+
+Then, save the passphrase for _all_ the keys you would like to use. For instance to save the passphrases for the RSA and ED25519 keys call the following command.
+
+```
+(laptop) $ /usr/bin/keychain --nogui ~/.ssh/id_rsa
+(laptop) $ /usr/bin/keychain --nogui ~/.ssh/id_ed25519
+```
+
+Finally to load the agent in you shell source the file generated for your local host in your current session.
+
+```
+(laptop) $ source ~/.keychain/$(hostname)-sh
+```
+
+You can also add the source command above in your `~/.profile` script to load the `ssh-agent` automatically in every session.
 
 ### On ULHPC clusters
 
-For security reason, SSH agent forwarding is prohibited and explicitly disabled (see `ForwardAgent no` configuration by default in the [above configuration](#ssh-configuration), you may need to manually load an agent once connected on the ULHPC facility, for instance if you are tired of typing the passphrase of a SSH key generated on the cluster to access a remote (private) service.
+SSH agent forwarding is prohibited in UL HPC systems for [security reasons](#security-implications) mentioned above and it is recommended that you also explicitly disable it in your SSH configuration.For more details, see the `ForwardAgent no` configuration option in the [SSH configuration](#ssh-configuration) proposed for UL HPC clusters. There are however legitimate uses of SSH agent. Consider for instance keys _generated in the UL HPC cluster_ to access a remote service. You can use SSH agent to avoid entering the passphrase of SSH keys every time you access the remote service. 
 
-You need to proceed as follows:
+In such cases an SSH agent must be manually loaded after connecting to UL HPC facilities. To load the agent, execute the command,
 
 ```bash
-$ eval "$(ssh-agent)"    # export the SSH_AUTH_SOCK and SSH_AGENT_PID variables
-$ ssh-add ~/.ssh/id_rsa
-# [...]
-Enter passphrase for [...]
-Identity added: ~/.ssh/id_rsa (<login>@<hostname>)
+eval "$(ssh-agent)"
 ```
 
-You can then enjoy it.
-Be aware however that this exposes your private key. So you **MUST** properly kill your agent when you don't need it any mode, using
+that exports the `SSH_AUTH_SOCK` and `SSH_AGENT_PID` environment variables required by the clients of the SSH agent. Then, you can setup the agent by [adding your keys](adding-keys). For instance to add the RSA and ED25519 keys, execute the following command.
 
-```console
+```
+$ ssh-add ~/.ssh/id_rsa
+Enter passphrase for ~/.ssh/id_rsa: # <-- enter your passphrase here
+Identity added: ~/.ssh/id_rsa (<login>@<hostname>)
+$ ssh-add ~/.ssh/id_ed25519
+Enter passphrase for ~/.ssh/id_ed25519: # <-- enter your passphrase here
+Identity added: ~/.ssh/id_ed25519 (<login>@<hostname>)
+```
+
+Adding your keys to the agent exposes your session to a [man in the middle attack](#security-implications), as discussed above [^5223]. Thus, you _must_ kill your agent whenever it is no longer needed. Kill the agent executing the following command.
+
+```
 $ eval "$(ssh-agent -k)"
 Agent pid <PID> killed
 ```
 
+[^5223]: If you store private keys in the UL HPC cluster file systems these keys are already visible to users with sufficiently high privileges. You must kill the SSH agent to avoid exposing these keys to [man in the middle attack](#security-implications) through SSH agent forwarding.
 
+??? info "_Useful resources_"
+    1. [An Illustrated Guide to SSH Agent Forwarding](http://www.unixwiz.net/techtips/ssh-agent-forwarding.html)
+    2. [SSH Agent Explained](https://smallstep.com/blog/ssh-agent-explained/)
+    3. [How to Use SSH Agent Safely](https://goteleport.com/blog/how-to-use-ssh-agent-safely/)
 
 
 ## Key fingerprints
