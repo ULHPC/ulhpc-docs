@@ -399,7 +399,7 @@ See [the corresponding section](troubleshooting.md).
 
 ### CLI Completion
 
-The `bash-completion` package eases the ssh command usage by providing completion for hostnames and more (assuming you set the directive `HashKnownHost` to `no` in your `~/etc/ssh_config`)
+The `bash-completion` package eases the ssh command usage by providing completion for hostnames and more (assuming you set the directive `HashKnownHost` to `no` in your `~/etc/ssh_config`).
 
 ### SOCKS 5 Proxy plugin
 
