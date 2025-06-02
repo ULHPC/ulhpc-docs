@@ -572,36 +572,41 @@ By using the `-g` parameter, you allow connections from other hosts than localho
 
 ### SSH jumps
 
-Compute nodes are not directly accessible from the outside network. To login into a cluster node you will need to jump through a login node. Remember, you need a job running in a node before you can ssh into it. Assume that you have some job running on `aion-0014` for instance. Then, connect to `aion-0014` with:
+Compute nodes are not directly accessible from the outside network. To login into a cluster node you will need to jump through a login node. Remember, you need a job running in a node before you can ssh into it. Assume that you have some job running on `aion-0014` for instance. Then, connect to `aion-0014` with,
 
 ```bash
-ssh -J ${USER}@access-aion.uni.lu:8022 ${USER}@aion-0014
+ssh -J ${CLUSTER_USER}@access-aion.uni.lu:8022 ${CLUSTER_USER}@aion-0014
 ```
 
-The domain resolution in the login node will determine the IP of the `aion-0014`. You can always use the IP address if the node directly if you know it.
+where `CLUSTER_USER` is your username in UL HPC clusters. The domain resolution in the login node will determine the IP of the `aion-0014`. You can always use the IP address of the node directly.
 
-#### Passwordless SSH jumps
+!!! tip "Obtaining the IP address of cluster nodes"
+    To get the IP address of any node just run the following command.
 
-The ssh agent is [not configured in the login nodes](#on-ulhpc-clusters) for security reasons. As a result, compute nodes will request your password. To configure a passwordless jump to a compute node, you will need to install the same key in your ssh configuration of your local machine and the login node.
+    ```bash
+    hostname --ip-address
+    ```
 
-To avoid exposing your keys at your personal machine, create and share a new key. Create a key in your local machine,
-```bash
-ssh-keygen -a 127 -t ed25519 -f ~/.ssh/ulhpc_id_ed25519
+#### Authorizing access to compute nodes
+
+In UL HPC clusters, the authorization for logging into the login nodes is not provided by the `authorized_keys` file, but by [identity management](/connect/ipa/) system. However, connection to the compute nodes are authorized by the `authorized_keys` file. Thus, to be able to jump to compute nodes, just append your public key to the
+
 ```
-and then copy both the private and public keys in your HPC account,
-```bash
-scp ~/.ssh/ulhpc_id_ed25519* aion-cluster:~/.ssh/
-```
-where the command assumes that you have setup your [SSH configuration file](#ssh-configuration). Finally, add the key to the list of authorized keys:
-```bash
-ssh-copy-id -i ~/.ssh/ulhpc_id_ed25519 aion-cluster
-```
-Then you can connect without a password to any compute node at which you have a job running with the command:
-```bash
-ssh -i ~/.ssh/ulhpc_id_ed25519 -J ${USER}@access-aion.uni.lu:8022 ${USER}@<node address>
+${HOME}/.ssh/authorized_keys
 ```
 
-In the `<node address>` option you can use the node IP address or the node name.
+file in the UL HPC cluster, creating the file if it does not already exist. There is an SSH command to automate this error prone process. Just call 
+
+```
+ssh-copy-id -i <private key> aion-cluster
+```
+
+in your local machine, where the `<private key>` is the private key for the public key you would like to copy to the UL HPC cluster. For instance `<private key> = ~/.ssh/id_ed25519` for the default ED25519 key pair.
+
+!!! tip "Passwordless SSH jumps"
+    With a proxy jump command SSH logs into the jump host, initiates I/O forwarding, and then logs into the target remote host using the credentials of your local machine. Thus, the `ProxyJump` SSH option [obviates the need for SSH agent forwarding](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts#Old:_Recursively_Chaining_Gateways_Using_stdio_Forwarding). You do not need SSH agent forwarding to the jump host or the target remote host, just ensure that your private key is authorized both in the jump hosts and in the target remote host.
+
+    You still need to run the [SSH agent](#ssh-agent) in your local machine to ensure passwordless to keys protected by passphrase.
 
 #### Port forwarding over SSH jumps
 
