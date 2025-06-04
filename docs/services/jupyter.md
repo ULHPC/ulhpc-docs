@@ -346,10 +346,34 @@ Jupyter generates various files during runtime, and reads configuration files fr
 
 ### Password protected access
 
-You can also set a password when launching the jupyter lab as detailed in the [Jupyter official documentation](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html). In that case, simply direct you browser to the URL `http://127.0.0.1:8888/` and provide your password. You can see bellow an example of the login page.
+You can also set a password when launching the Jupyter lab. To setup your password, open an interactive session and load the `tools/JupyterLab` [module](/environment/modules). Then execute the following command.
+
+```
+$ jupyter lab password
+Enter password:
+Verify password:
+[JupyterPasswordApp] Wrote hashed password to /mnt/aiongpfs/users/gkafanas/.jupyter/jupyter_server_config.json
+```
+
+To login to a password protected [session](#starting-a-jupyterlab-session), navigate direct you browser to the URL [`http://127.0.0.1:8888/`](http://127.0.0.1:8888/) and provide your password. You may have to logout to clear the page cache if you have logged in previously with a token.
+
+!!! info
+    You may have to logout to clear the page cache if you have logged in previously with a token.
 
 ??? example "Typical content of a password protected login page"
     ![](./images/jupyter_login.png)
+
+??? info "Setting up passwords for Jupyter Notebooks"
+    You can setup password protected logins in Jupyter notebooks similarly. Load the `tools/JupyterNotebook` [module](/environment/modules) and execute the following command.
+
+    ```
+    $ jupyter notebook password
+    Enter password:
+    Verify password:
+    [JupyterPasswordApp] Wrote hashed password to /mnt/aiongpfs/users/gkafanas/.jupyter/jupyter_server_config.json
+    ```
+
+    To login to a [running notebook](#starting-a-jupyterlab-session), navigate to [`http://127.0.0.1:8888/`](http://127.0.0.1:8888/) and enter your password. You may have to logout to clear the page cache if you have logged in previously with a token.
 
 
 ## Install Jupyter
