@@ -166,10 +166,10 @@ Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following s
     echo "# Connection instructions" > "${connection_instructions}"
     echo "" >> "${connection_instructions}"
     echo "To access the jupyter notebook execute on your personal machine:" >> "${connection_instructions}"
-    echo "ssh -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:${loopback_device}:${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
+    echo "ssh -N -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:${loopback_device}:${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
     echo "" >> "${connection_instructions}"
     echo "To access the jupyter notebook if you have setup a special key (e.g ulhpc_id_ed25519) to connect to cluster nodes execute on your personal machine:" >> "${connection_instructions}"
-    echo "ssh -i ~/.ssh/hpc_id_ed25519 -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:${loopback_device}:${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
+    echo "ssh -i ~/.ssh/hpc_id_ed25519 -N -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:${loopback_device}:${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
     echo "" >> "${connection_instructions}"
     echo "Then navigate to:" >> "${connection_instructions}"
 
@@ -226,10 +226,10 @@ to connect to the notebook from your laptop. Open a terminal on your laptop and 
     # Connection instructions
     
     To access the jupyter notebook execute on your personal machine:
-    ssh -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
+    ssh -N -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
     
     To access the jupyter notebook if you have setup a special key (e.g ulhpc_id_ed25519) to connect to cluster nodes execute on your personal machine:
-    ssh -i ~/.ssh/ulhpc_id_ed25519 -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
+    ssh -i ~/.ssh/ulhpc_id_ed25519 -N -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
     
     Then navigate to:
     http://127.0.0.1:8888/?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
@@ -238,7 +238,7 @@ to connect to the notebook from your laptop. Open a terminal on your laptop and 
 As the instructions suggest, you access the jupyter lab server in the compute node by the following SSH command.
 
 ```shell
-ssh -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
+ssh -N -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
 ```
 
 The above command,
