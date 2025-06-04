@@ -21,9 +21,9 @@ We strongly recommend using the Jupyter application provided through [modules](/
 
 ### Kernels
 
-Notebooks are associated with [kernels](https://jupyter-client.readthedocs.io/en/stable/kernels.html), processes that actually execute the code of the notebook. You can host kernels on isolated Python environments or on the environment of the notebook. Whenever possible use the Python [module](/environment/modules/) to create your Python environments. Modules have been configured for optimal performance in our systems. If your application requires a different version of Python you can always install one with [Conda](/environment/conda/) or other tools.
+Notebooks are associated with [kernels](https://jupyter-client.readthedocs.io/en/stable/kernels.html), processes that actually execute the code of the notebook. Jupyter applications provide a default [IPython](https://ipython.readthedocs.io/en/stable/) kernel in the environment where Jupyer lab runs. Other environments can export a _kernel_ to a Jupyter application instances, allowing each instance to launch interactive session inside environments others than the environment where Jupyter application is installed.
 
-To create a Python environment for your kernel, start by loading the Python module and then create the environment. 
+Whenever possible use the Python [module](/environment/modules/) to create your Python environments. Modules have been configured for optimal performance in our systems. If your application requires a different version of Python you can always install one with [Conda](/environment/conda/) or other tools. To create a Python environment for your kernel, start by loading the Python module and then create the environment.
 
 ```shell
 module load lang/Python
@@ -417,22 +417,4 @@ After installing your required version of JupyterLab, you can install your packa
     pip install jupyter ipykernel
     ```
     in the creation of the `jupyter_env` Python environment.
-
-### Providing access to kernels of other environments
-
-JupyterLab makes sure that a default [IPython kernel](https://ipython.readthedocs.io/en/stable/install/kernel_install.html#) is available, with the environment (and the Python version) with which the lab was created. Other environments can export a _kernel_ to a JupyterLab instance, allowing the instance to launch interactive session inside environments others from the environment where JupyterLab is installed.
-
-You can [setup kernels with different environments on the same notebook](https://ipython.readthedocs.io/en/stable/install/kernel_install.html). Create the environment with the Python version and the packages you require, and then register the kernel in any environment with Jupyter (lab or classic notebook) installed. For instance, if we have installed Jupyter in `${HOME}/environments/jupyter_env`:
-```shell
-source ${HOME}/environments/other_python_venv/bin/activate
-python -m pip install ipykernel
-python -m ipykernel install --prefix=${HOME}/environments/jupyter_env --name other_python_env --display-name "Other Python env"
-deactivate
-```
-Then all kernels and their associated environment can be started from the same Jupyter instance in the `${HOME}/environments/jupyter_env` Python venv.
-
-You can also use the flag `--user` instead of `--prefix` to install the kernel in the default system location available to all Jupyter environments for a user.
-
-
-
 
