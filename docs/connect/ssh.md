@@ -273,7 +273,6 @@ the agent scans the home directory for some standard keys and adds imports them.
 
 - `~/.ssh/id_rsa`
 - `~/.ssh/id_ed25519`
-- `~/.ssh/id_dsa`
 - `~/.ssh/id_ecdsa`
 
 If you would like to add specific keys, then provide the _private_ key of the key pair as argument to the agent. For instance to add only the RSA and ED25519 keys call the following command.
