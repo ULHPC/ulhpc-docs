@@ -575,38 +575,55 @@ By using the `-g` parameter, you allow connections from other hosts than localho
 Compute nodes are not directly accessible from the outside network. To login into a cluster node you will need to jump through a login node. Remember, you need a job running in a node before you can ssh into it. Assume that you have some job running on `aion-0014` for instance. Then, connect to `aion-0014` with,
 
 ```bash
-ssh -J ${CLUSTER_USER}@access-aion.uni.lu:8022 ${CLUSTER_USER}@aion-0014
+ssh -J ${USER}@access-aion.uni.lu:8022 ${USER}@aion-0014
 ```
 
-where `CLUSTER_USER` is your username in UL HPC clusters. The domain resolution in the login node will determine the IP of the `aion-0014`. You can always use the IP address of the node directly.
+where `USER` is a variable containing your username in UL HPC clusters. The domain resolution in the login node will determine the IP of the `aion-0014`. You can always use the IP address of the node directly.
 
-!!! tip "Obtaining the IP address of cluster nodes"
+??? tip "Obtaining the IP address of cluster nodes"
     To get the IP address of any node just run the following command.
 
     ```bash
     hostname --ip-address
     ```
 
+??? tip "Useful environment variables for SSH jumps"
+    - `USER`: In most Linux systems the `USER` environment variable is defined in the `/etc/profile` and `/etc/prifile.d/*` scripts, and contains the username of the user.
+    - `HOSTNAME`: A shell variable defined in BASH that contains the name of the host machine.
+    - `ULHPC_CLUSTER`: An environment variable defined in environment initialization scripts of UL HPC, and contains and identifier of the system, `aion` or `iris`.
+
+
 #### Authorizing access to compute nodes
 
-In UL HPC clusters, the authorization for logging into the login nodes is not provided by the `authorized_keys` file, but by [identity management](/connect/ipa/) system. However, connection to the compute nodes are authorized by the `authorized_keys` file. Thus, to be able to jump to compute nodes, just append your public key to the
-
-```
-${HOME}/.ssh/authorized_keys
-```
-
-file in the UL HPC cluster, creating the file if it does not already exist. There is an SSH command to automate this error prone process. Just call 
+In UL HPC clusters, the authorization for logging into the login nodes is not provided by the `authorized_keys` file, but by [identity management](/connect/ipa/) system. However, connections to the compute nodes are authorized by the `authorized_keys` file. Use the command
 
 ```
 ssh-copy-id -i <private key> aion-cluster
 ```
 
-in your local machine, where the `<private key>` is the private key for the public key you would like to copy to the UL HPC cluster. For instance `<private key> = ~/.ssh/id_ed25519` for the default ED25519 key pair.
+if you have [configured SSH](#ssh-configuration), or
+
+```
+ssh-copy-id -i <private key> -p 8022 <user name>@access-aion.uni.lu
+```
+
+if you haven't; the `<private key>` is the private key for the public key you would like to copy to the UL HPC cluster. For instance,
+
+-  `<private key>` is `~/.ssh/id_ed25519` for the default ED25519 key pair, and
+-  `<private key>` is `~/.ssh/id_rsa` for the default RSA key pair.
 
 !!! tip "Passwordless SSH jumps"
     With a proxy jump command SSH logs into the jump host, initiates I/O forwarding, and then logs into the target remote host using the credentials of your local machine. Thus, the `ProxyJump` SSH option [obviates the need for SSH agent forwarding](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts#Old:_Recursively_Chaining_Gateways_Using_stdio_Forwarding). You do not need SSH agent forwarding to the jump host or the target remote host, just ensure that your private key is authorized both in the jump hosts and in the target remote host.
 
     You still need to run the [SSH agent](#ssh-agent) in your local machine to ensure passwordless to keys protected by passphrase.
+
+??? tip "the `authorized_keys` file"
+    The `authorized_keys` file is located in 
+    ```
+    ${HOME}/.ssh/authorized_keys
+    ```
+    and `ssh-copy-id` simply automatically appends the key at the end of the file in the remote host.
+
 
 #### Port forwarding over SSH jumps
 
