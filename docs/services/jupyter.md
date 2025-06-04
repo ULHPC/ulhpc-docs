@@ -235,20 +235,16 @@ to connect to the notebook from your laptop. Open a terminal on your laptop and 
     http://127.0.0.1:8888/?token=b7cf9d71d5c89627250e9a73d4f28cb649cd3d9ff662e7e2
     ```
 
-As the instructions suggest, you access the jupyter lab server in the compute node by the following [SSH jump command](/connect/ssh/#ssh-jumps).
+As the instructions suggest, you access the jupyter lab server in the compute node by the following SSH command.
+
 ```shell
 ssh -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
 ```
 
-??? info "TL;DR: SSH jump"
-    The [SSH jump command](/connect/ssh/#ssh-jumps) command,
+The above command,
 
-    ```shell
-    ssh -J gkafanas@access-aion.uni.lu:8022 -L 8888:127.0.0.1:8888 gkafanas@172.21.12.29
-    ```
-
-    - opens a connection to your allocated cluster node jumping through the login node (`-J gkafanas@access-aion.uni.lu:8022 gkafanas@172.21.12.29`), and
-    - exports the port to the jupyter server in the local machine (`-L 8888:127.0.0.1:8888`).
+- opens a connection to your allocated cluster compute node jumping through the login node (`-J gkafanas@access-aion.uni.lu:8022 gkafanas@172.21.12.29`), and
+- forwards the port of the Jupyter server running in the compute node to your local machine (`-L 8888:127.0.0.1:8888`).
 
 Then, open the connection to the browser in your local machine by following the given link:
 ```
