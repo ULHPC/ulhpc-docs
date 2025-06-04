@@ -100,7 +100,7 @@ and will appear with the name "Notebook" in the list of available kernels in all
 
 ### Environments with site packages
 
-The UL HPC systems offer optimized Python packages for applications such as PyTorch. You can access the optimized packages in your environments if you build your environment with access to system site packages. For instance to access the PyTorch packages that have been optimized for GPUs in the Iris GPU nodes create the environment for your notebook as follows.
+The UL HPC systems offer optimized Python packages for applications such as PyTorch. You can access the optimized packages in your environments if you build your environment with access to system site packages. For instance, to access the PyTorch packages that have been optimized for GPUs in the Iris GPU nodes create the environment for your notebook as follows.
 
 ```shell
 module load ai/PyTorch/2.3.0-foss-2023b-CUDA-12.6.0
@@ -112,6 +112,13 @@ deactivate
 ```
 
 With the `--system-site-packages` flag, the packages provided by the `ai/PyTorch/2.3.0-foss-2023b-CUDA-12.6.0` module are accessible inside the `notebook_venv` environment.
+
+!!! warning "Using environments with system site packages"
+    Before using an environment with system site packages, remember to load the module that provides the system site packages. For instance, in our example, you need to load the PyTorch module
+    ```
+    module load ai/PyTorch/2.3.0-foss-2023b-CUDA-12.6.0
+    ```
+    before using the "Notebook" kernel.
 
 
 ## Working with JupyterLab
@@ -143,6 +150,10 @@ Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following s
     
     # Load the JupyterLab module
     module load tools/JupyterLab
+    #######################################################################
+    # IF THE KERNEL YOU UARE PLANNING TO USE IS USING SITE PACKAGES, THEN #
+    # LOAD ANY OTHER MODULES REQUIRED BY THE KERNEL HERE.                 #
+    #######################################################################
 
     declare loopback_device="127.0.0.1"
     declare port="8888"
