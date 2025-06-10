@@ -2,10 +2,10 @@
 
 In Slurm multiple nodes can be grouped into _partitions_ which are sets of nodes aggregated by shared characteristics or objectives, with associated limits for wall-clock time, job size, etc. These limits are hard limits for the jobs and can not be overruled.
 
-To select a given partition with a [Slurm command](commands.md), use the `-p <partition>` option:
+To select a given partition with a [Slurm command](commands.md), use the `--partition=<partition>` option:
 
 ```
-srun|sbatch|salloc|sinfo|squeue... -p <partition> [...]
+srun|sbatch|salloc|sinfo|squeue... --partition=<partition> [...]
 ```
 
 You will find on ULHPC resources the following partitions (mostly matching the 3 types of computing resources)
@@ -31,6 +31,7 @@ You will find on ULHPC resources the following partitions (mostly matching the 3
 | `interactive` (floating) | 196              | 30min - 2h      | 2        | 100          |
 | `batch` (default)        | 168     (28c)    | 2h    - 48h     | 64       | 1            |
 | `gpu`                    | 24      (28c)    | 2h    - 48h     | 4        | 1            |
+| `hopper`                 | 1       (112c)   | 2h    - 48h     | 1        | 1            |
 | `bigmem`                 | 4       (112c)   | 2h    - 48h     | 1        | 1            |
 
 
@@ -43,7 +44,7 @@ scontrol show partitions [name]
 
 ## Partition load status
 
-You can of course use [`squeue -p <partition>`](https://slurm.schedmd.com/squeue.html) to list the jobs currently scheduled on a given, partition `<partition>`.
+You can of course use [`squeue --partition=<partition>`](https://slurm.schedmd.com/squeue.html) to list the jobs currently scheduled on a given, partition `<partition>`.
 
 As part of the custom ULHPC Slurm helpers defined in [`/etc/profile.d/slurm.sh`](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh), the following commands have been made to facilitate the review of the current load usage of the partitions.
 
