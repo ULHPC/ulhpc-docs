@@ -10,11 +10,11 @@ Following EuroHPC/PRACE Recommendations, the `long` QOS allow for an extended Ma
 
 | Node Type     | Cluster | Partition | Slurm command                                                                                                       |
 |---------------|---------|-----------|---------------------------------------------------------------------------------------------------------------------|
-| regular       | aion    | batch     | `sbatch [--account=<project>] --partition=batch  --qos=aion-long-batch  [...]`                                      |
-| regular       | iris    | batch     | `sbatch [--account=<project>] --partition=batch  --qos=iris-long-batch  [--constraint={broadwell,skylake}] [...]`   |
-| gpu           | iris    | gpu       | `sbatch [--account=<project>] --partition=gpu    --qos=iris-long-gpu    --gpus=1 [--constraint=volta{16,32}] [...]` |
-| gpu           | iris    | h100      | `sbatch [--account=<project>] --partition=h100   --qos=iris-long-h100   --gpus=1 [...]`                             |
-| bigmem        | iris    | bigmem    | `sbatch [--account=<project>] --partition=bigmem --qos=iris-long-bigmem [...]`                                      |
+| regular       | aion    | batch     | `sbatch [--account=<project>] --partition=batch  --qos=aion-batch-long  [...]`                                      |
+| regular       | iris    | batch     | `sbatch [--account=<project>] --partition=batch  --qos=iris-batch-long  [--constraint={broadwell,skylake}] [...]`   |
+| gpu (v100)    | iris    | gpu       | `sbatch [--account=<project>] --partition=gpu    --qos=iris-gpu-long    --gpus=1 [--constraint=volta{16,32}] [...]` |
+| gpu (h100)    | iris    | hopper    | `sbatch [--account=<project>] --partition=hopper --qos=iris-hopper-long --gpus=1 [...]`                             |
+| bigmem        | iris    | bigmem    | `sbatch [--account=<project>] --partition=bigmem --qos=iris-bigmem-long [...]`                                      |
 
 !!! important
     Be aware however that special [restrictions](/slurm/qos/#available-qoss) apply to long jobs. In sort, the constraints are the following.

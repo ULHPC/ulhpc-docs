@@ -12,16 +12,16 @@ To submit a job in the `besteffort` [QoS](/slurm/qos/) set the `--qos` option as
 sbatch --partition={batch|gpu|bigmem} --qos=besteffort [...]
 ```
 
-A few examples for submiting `besteffort` [OoS](/slurm/qos/) are the following in the various compute node types are summarized in the following table.
+A few examples for submitting `besteffort` [OoS](/slurm/qos/) are the following in the various compute node types are summarized in the following table.
 
 | Node Type | Slurm command                                                                                                         |
 |-----------|-----------------------------------------------------------------------------------------------------------------------|
 | regular   | `sbatch [--account=<project>] --partition=batch          --qos=besteffort [--constraints={broadwell,skylake}] [...]`  |
-| gpu       | `sbatch [--account=<project>] --partition={gpu,gpu-h100} --qos=besteffort --gpus=1 [--constraint=volta{16,32}] [...]` |
+| gpu       | `sbatch [--account=<project>] --partition={gpu,hopper}   --qos=besteffort --gpus=1 [--constraint=volta{16,32}] [...]` |
 | bigmem    | `sbatch [--account=<project>] --partition=bigmem         --qos=besteffort [...]`                                      |
 
 !!! question "Why use preemtible jobs?"
-    Best-effort (preemptible) jobs allow an efficient usage of the platform resources. Usually when jobs are scheduled, some compute nodes are left unexploited. [Backfilling](https://slurm.schedmd.com/sched_config.html#backfill) can be used to schedule some lower priority jobs in leftover nodes, but these jobs must fill in the "time" gaps left by higher priority jobs. Preemtpible jobs relax the time constrains, by allowing the scheduler to schedule them in "time" gaps where they do not fit, knowing that they can be interrupted at any time to schedule a higher priority job.
+    Best-effort (preemptible) jobs allow an efficient usage of the platform resources. Usually when jobs are scheduled, some compute nodes are left unexploited. [Backfilling](https://slurm.schedmd.com/sched_config.html#backfill) can be used to schedule some lower priority jobs in leftover nodes, but these jobs must fill in the "time" gaps left by higher priority jobs. Preemptible jobs relax the time constrains, by allowing the scheduler to schedule them in "time" gaps where they do not fit, knowing that they can be interrupted at any time to schedule a higher priority job.
 
     As a result of their scheduling flexibility, `besteffort` QoS have less constraints than the other QoS (for instance, you can submit more jobs).
 
