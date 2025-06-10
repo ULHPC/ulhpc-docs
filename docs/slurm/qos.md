@@ -74,9 +74,9 @@ Use the `sqos` utility function to list the existing QOS limits.
     - `MaxJobsPerUser`: The maximum number of jobs a user can have running at a given time.
     - `MaxWall[DurationPerJob]`: The maximum wall clock time any individual job can run for in the given QoS.
 
-As explained in the [Limits](../jobs/limits.md) section, there are basically three layers of Slurm limits, from least to most priority:
+As explained in the [Limits](/slurm/partitionS/#partition-limits) section, there are basically three layers of Slurm limits, from lower to higher precedence:
 
 0. None
-0. [Partitions](partitions.md)
+0. [Partitions](/slurm/partitions/)
 0. Account associations: Root/Cluster -> Account (ascending the hierarchy) -> User
-0. Job/Partition [QoS](slurm/qos/)
+0. Job/Partition [QoS](/slurm/qos/)
