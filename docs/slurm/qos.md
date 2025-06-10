@@ -17,19 +17,21 @@ We favor in general _cross-partition QoS_, mainly tied to _priority level_ (`low
 
 <!--qos-start-->
 
-| QoS                | cluster | partition   | Prio | GrpTRES | MaxTresPJ | MaxJobPU | MaxWall     |
-|--------------------|---------|-------------|------|---------|-----------|----------|-------------|
-| `besteffort`       | *       | *           | 1    |         |           | 300      | 50-00:00:00 |
-| `low`              | *       | *           | 10   |         |           | 200      |             |
-| `normal`           | *       | *           | 100  |         |           | 100      |             |
-| `high`             | *       | *           | 200  |         |           | 50       |             |
-| `urgent`           | *       | *           | 1000 |         |           | 20       |             |
-| `debug`            | *       | interactive | 150  | node=50 |           | 10       |             |
-| `wide`             | *       | *           | 100  |         | node=160  | 10       | 0-02:00:00  |
-| `aion-batch-long`  | aion    | batch       | 100  | node=64 | node=16   | 8        | 14-00:00:00 |
-| `iris-batch-long`  | iris    | batch       | 100  | node=24 | node=16   | 8        | 14-00:00:00 |
-| `iris-gpu-long`    | iris    | gpu         | 100  | node=6  | node=2    | 4        | 14-00:00:00 |
-| `iris-bigmem-long` | iris    | bigmem      | 100  | node=2  | node=2    | 4        | 14-00:00:00 |
+| QoS                | cluster | partition   | Prio | GrpTRES           | MaxTresPJ         | MaxJobPU | MaxWall     |
+|--------------------|---------|-------------|------|-------------------|-------------------|----------|-------------|
+| `besteffort`       | *       | *           | 1    |                   |                   | 300      | 50-00:00:00 |
+| `low`              | *       | *           | 10   |                   |                   | 200      |             |
+| `normal`           | *       | *           | 100  |                   |                   | 100      |             |
+| `high`             | *       | *           | 200  |                   |                   | 50       |             |
+| `urgent`           | *       | *           | 1000 |                   |                   | 20       |             |
+| `debug`            | *       | interactive | 150  | node=50           |                   | 10       |             |
+| `wide`             | *       | *           | 100  |                   | node=160          | 10       | 0-02:00:00  |
+| `aion-batch-long`  | aion    | batch       | 100  | node=64           | node=16           | 8        | 14-00:00:00 |
+| `iris-batch-long`  | iris    | batch       | 100  | node=24           | node=16           | 8        | 14-00:00:00 |
+| `iris-gpu-long`    | iris    | gpu         | 100  | node=6            | node=2            | 4        | 14-00:00:00 |
+| `iris-bigmem-long` | iris    | bigmem      | 100  | node=2            | node=2            | 4        | 14-00:00:00 |
+| `iris-hopper  `    | iris    | hoper       | 100  |                   |                   | 100      | 14-00:00:00 |
+| `iris-hopper-long` | iris    | hopper      | 100  | gres/gpu:hopper=2 | gres/gpu:hopper=1 | 100      | 14-00:00:00 |
 
 <!--qos-end-->
 
@@ -51,13 +53,14 @@ Use the `sqos` utility function to list the existing QOS limits.
                     high besteffort        200                                    50                      DenyOnLimit 
                   urgent besteffort       1000                                    20                      DenyOnLimit 
                    debug besteffort        150       node=50                      10                      DenyOnLimit 
-                    long besteffort        100       node=24        node=2         4 14-00:00:00 DenyOnLimit,Partiti+ 
                    admin besteffort       1000                                                            DenyOnLimit 
                     wide besteffort        100                    node=160        10    02:00:00          DenyOnLimit 
          aion-batch-long besteffort        100       node=64       node=16         8 14-00:00:00 DenyOnLimit,Partiti+ 
          iris-batch-long besteffort        100       node=24       node=16         8 14-00:00:00 DenyOnLimit,Partiti+ 
            iris-gpu-long besteffort        100        node=6        node=2         4 14-00:00:00 DenyOnLimit,Partiti+ 
         iris-bigmem-long besteffort        100        node=2        node=2         4 14-00:00:00 DenyOnLimit,Partiti+ 
+             iris-hopper besteffort        100                                   100                      DenyOnLimit 
+        iris-hopper-long besteffort        100 gres/gpu:hop+ gres/gpu:hop+       100 14-00:00:00 DenyOnLimit,Partiti+
     ```
 
 <!--limits-end-->
