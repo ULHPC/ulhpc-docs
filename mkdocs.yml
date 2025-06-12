@@ -346,7 +346,6 @@ plugins:
   - search # necessary for search to work
   - git-revision-date-localized:
       type: date
-  - progress
   - include-markdown
   - exclude:
       glob:
