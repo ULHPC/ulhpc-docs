@@ -31,7 +31,7 @@ should be aware of when interacting with it:
         * for code development, testing, and debugging
 * Queue Policy: _[cross-partition QOS](../slurm/qos.md)_, mainly tied to _priority level_ (`low` $\rightarrow$ `urgent`)
     - `long` QOS with extended Max walltime (`MaxWall`) set to **14 days**
-    -  special _preemptible QOS_ for [best-effort](../jobs/best-effort.md') jobs: `besteffort`.
+    -  special _preemptible QOS_ for [best-effort](/jobs/best-effort.md') jobs: `besteffort`.
 * [Accounts hierarchy](../slurm/accounts.md) associated to supervisors (multiple
   associations possible), projects or trainings
     - you **MUST** use the proper account as a [detailed usage
@@ -69,7 +69,7 @@ From the login node you can interact with Slurm to **submit** job scripts or sta
 ## Submit Jobs
 
 {%
-   include-markdown "commands.md"
+   include-markdown "slurm/commands.md"
    start="<!--submit-start-->"
    end="<!--submit-end-->"
 %}

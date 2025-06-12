@@ -107,7 +107,7 @@ change that account.
 Policy](../policies/usage-charging.md){: .md-button .md-button--link }
 
 {%
-   include-markdown "accounts.md"
+   include-markdown "slurm/accounts.md"
    start="<!--share-rule-per-level-start-->"
    end="<!--share-rule-per-level-end-->"
 %}

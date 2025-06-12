@@ -1,7 +1,7 @@
 # ULHPC User Environment
 
 {%
-   include-markdown "workflow.md"
+   include-markdown "environment/workflow.md"
    start="<!--intro-start-->"
 %}
 
@@ -158,12 +158,12 @@ See [ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en
 ## ULHPC User Software Environment
 
 {%
-   include-markdown "modules.md"
+   include-markdown "environment/modules.md"
    start="<!--intro-start-->"
    end="<!--intro-end-->"
 %}
 {%
-   include-markdown "easybuild.md"
+   include-markdown "environment/easybuild.md"
    start="<!--intro-start-->"
    end="<!--intro-end-->"
 %}
@@ -174,7 +174,7 @@ See [ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en
 ## Self management of work environments in UL HPC with Conda
 
 {%
-   include-markdown "conda.md"
+   include-markdown "environment/conda.md"
    start="<!--intro-start-->"
    end="<!--intro-end-->"
 %}

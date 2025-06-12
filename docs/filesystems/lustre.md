@@ -161,5 +161,5 @@ Tests on 4 clients with up to 20 threads have been included as well to show the 
 ## Lustre Usage
 
 {%
-   include-markdown "lfs.md"
+   include-markdown "filesystems/lfs.md"
 %}
