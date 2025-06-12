@@ -15,7 +15,7 @@ lunr==0.5.6
 Markdown==3.2.1
 markdown-include==0.5.1
 MarkupSafe==2.0.1
-mkdocs==1.4
+mkdocs==1.6
 mkdocs-exclude==1.0.2
 mkdocs-git-revision-date-localized-plugin==1.4.7
 mkdocs-include-markdown-plugin==6.2.2
