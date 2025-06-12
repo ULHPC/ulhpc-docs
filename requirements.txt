@@ -29,7 +29,7 @@ pep562==1.0
 Pygments==2.6.1
 pymdown-extensions==7.1
 python-dateutil==2.8.2
-pytz==2020.1
+pytz==2025.1
 PyYAML==5.3.1
 regex==2022.8.17
 six==1.14.0
