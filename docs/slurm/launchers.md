@@ -1,7 +1,7 @@
 # Slurm Launcher Examples
 
-[:fontawesome-solid-sign-in-alt:  ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
-[:fontawesome-solid-sign-in-alt:  ULHPC Tutorial / OpenMP/MPI ](https://ulhpc-tutorials.readthedocs.io/en/latest/parallel/basics/){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket:  ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket:  ULHPC Tutorial / OpenMP/MPI ](https://ulhpc-tutorials.readthedocs.io/en/latest/parallel/basics/){: .md-button .md-button--link }
 
 
 When setting your default `#SBATCH` directive, always keep in mind your expected _default_ resource allocation that would permit to submit your launchers
@@ -159,7 +159,7 @@ Instead, you should use [GNU Parallel](http://www.gnu.org/software/parallel/) wh
 
 More specifically, [GNU Parallel](http://www.gnu.org/software/parallel/) is a tool for executing tasks in parallel, typically on a single machine. When coupled with the Slurm command srun, `parallel` becomes a powerful way of distributing a set of tasks amongst a number of workers. This is particularly useful when the number of tasks is significantly larger than the number of available workers (i.e. `$SLURM_NTASKS`), and each tasks is independent of the others.
 
-[:fontawesome-solid-sign-in-alt: ULHPC Tutorial: GNU Parallel launcher for Embarrassingly Parallel Jobs](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#best-launcher-based-on-gnu-parallel-1-job-1-node-n-tasks){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: ULHPC Tutorial: GNU Parallel launcher for Embarrassingly Parallel Jobs](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#best-launcher-based-on-gnu-parallel-1-job-1-node-n-tasks){: .md-button .md-button--link }
 
 Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/launcher.parallel.sh) that should be straight forward to adapt to your own workflow following [our tutorial](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#best-launcher-based-on-gnu-parallel-1-job-1-node-n-tasks):
 

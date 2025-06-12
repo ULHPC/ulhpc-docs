@@ -3,9 +3,9 @@
 ULHPC uses [Slurm](https://slurm.schedmd.com/) (_Simple Linux Utility for Resource Management_) for cluster/resource management and job scheduling.
 This middleware is responsible for allocating resources to users, providing a framework for starting, executing and monitoring work on allocated resources and scheduling work for future execution.
 
-[:fontawesome-solid-sign-in-alt: Official docs](https://slurm.schedmd.com/documentation.html){: .md-button .md-button--link }
-[:fontawesome-solid-sign-in-alt: Official FAQ](https://slurm.schedmd.com/faq.html){: .md-button .md-button--link }
-[:fontawesome-solid-sign-in-alt: ULHPC Tutorial/Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Official docs](https://slurm.schedmd.com/documentation.html){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Official FAQ](https://slurm.schedmd.com/faq.html){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: ULHPC Tutorial/Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
 
 [![](https://hpc-docs.uni.lu/slurm/images/2022-ULHPC-user-guide.png)](https://hpc-docs.uni.lu/slurm/2022-ULHPC-user-guide.pdf)
 

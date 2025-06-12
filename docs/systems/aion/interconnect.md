@@ -39,7 +39,7 @@ The following illustration show HDRtopology within the BullSequana XH2000 cell s
 ![](images/aion_XH2000_cell_IB_topology.png)
 
 For more details:
-[:fontawesome-solid-sign-in-alt: ULHPC Fast IB Interconnect](../../interconnect/ib.md#ulhpc-ib-topology){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: ULHPC Fast IB Interconnect](../../interconnect/ib.md#ulhpc-ib-topology){: .md-button .md-button--link }
 
 ## Routing Algorithm
 
@@ -47,4 +47,4 @@ The IB Subnet Managers in Aion are configured with the [Up/Down](https://communi
 Up-Down is a super-set of Fat-Tree with a tracker mode that allow each node to have dedicated route. This is well adapted to IO traffic patterns, and would be used within Aion for Gateway nodes, [Lustre](../../filesystems/lustre.md) OSS, and [GPFS/SpectrumScale](../../filesystems/gpfs.md) NSD servers.
 
 For more details:
-[:fontawesome-solid-sign-in-alt: Understanding Up/Down InfiniBand Routing Algorithm](https://community.mellanox.com/s/article/understanding-up-down-infiniband-routing-algorithm){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Understanding Up/Down InfiniBand Routing Algorithm](https://community.mellanox.com/s/article/understanding-up-down-infiniband-routing-algorithm){: .md-button .md-button--link }

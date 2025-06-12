@@ -12,7 +12,7 @@ Aion nodes are equipped with [AMD Epyc ROME 7H12](https://www.amd.com/en/product
 
 Two global [_high_-performance clustered file systems](../../filesystems/index.md) are available on all ULHPC computational systems: one based on GPFS/SpectrumScale, one on Lustre.
 
-[:fontawesome-solid-sign-in-alt: Aion Compute](compute.md){: .md-button .md-button--link } [:fontawesome-solid-sign-in-alt: Aion Interconnect](interconnect.md){: .md-button .md-button--link } [:fontawesome-solid-sign-in-alt: Global Storage](../../filesystems/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Aion Compute](compute.md){: .md-button .md-button--link } [:fontawesome-solid-right-to-bracket: Aion Interconnect](interconnect.md){: .md-button .md-button--link } [:fontawesome-solid-right-to-bracket: Global Storage](../../filesystems/index.md){: .md-button .md-button--link }
 
 The cluster runs a [Red Hat Linux](https://www.redhat.com/) operating system.
 The ULHPC Team supplies on all clusters a large variety of HPC utilities, scientific applications and programming libraries to its user community.
@@ -38,7 +38,7 @@ The full solution with 4 racks (total dimension: dimensions: HxWxD (mm) = 2030x3
 | __#Compute Cores__           |     11520 |     11136 |     11136 |     11520 | __45312__      |
 | __$R_\text{peak}$ [TFlops]__ | 479,23 TF | 463,25 TF | 463,25 TF | 479,23 TF | __1884.96 TF__ |
 
-For more details: [:fontawesome-solid-sign-in-alt: BullSequana XH2000 SpecSheet (PDF)](BullSequanaXH2000_Features_Atos_supercomputers.pdf){: .md-button .md-button--link }
+For more details: [:fontawesome-solid-right-to-bracket: BullSequana XH2000 SpecSheet (PDF)](BullSequanaXH2000_Features_Atos_supercomputers.pdf){: .md-button .md-button--link }
 
 ### Cooling
 

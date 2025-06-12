@@ -50,8 +50,8 @@ Details are provided below.
            - In particular, the usable storage capacity of the existing primary high-performance storage solution (SpectrumScale/GPFS filesystem) will be extended by 1720TB/1560TiB to reach a total of 4.41 PB
        * _Lot 3_:Adaptation of the network (Ethernet and IB)
 
-See also [:fontawesome-solid-sign-in-alt: Atos Press Release](https://atos.net/en/2020/press-release_2020_01_07/atos-empowers-researchers-at-the-university-of-luxembourg-with-its-bullsequana-xh2000-supercomputer?utm_campaign=G+-+PR+-+BullSequana+XH2000+Uni+of+Luxembourg+&utm_content=&utm_medium=twitter&utm_source=social){: .md-button .md-button--link }
-[:fontawesome-solid-sign-in-alt: Aion Supercomputer Overview](index.md){: .md-button .md-button--link }
+See also [:fontawesome-solid-right-to-bracket: Atos Press Release](https://atos.net/en/2020/press-release_2020_01_07/atos-empowers-researchers-at-the-university-of-luxembourg-with-its-bullsequana-xh2000-supercomputer?utm_campaign=G+-+PR+-+BullSequana+XH2000+Uni+of+Luxembourg+&utm_content=&utm_medium=twitter&utm_source=social){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Aion Supercomputer Overview](index.md){: .md-button .md-button--link }
 
 
 ## 2020

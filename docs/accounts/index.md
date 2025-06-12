@@ -22,7 +22,7 @@ See [Acceptable Use Policy](../policies/aup.md) for more details.
 
 ### Resource allocation policies
 
-[:fontawesome-solid-sign-in-alt: ULHPC Usage Charging and Resource allocation policy](../policies/usage-charging.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: ULHPC Usage Charging and Resource allocation policy](../policies/usage-charging.md){: .md-button .md-button--link }
 
 #### UL internal R&D and training
 

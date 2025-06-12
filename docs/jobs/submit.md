@@ -6,8 +6,8 @@
 | gpu           | `sbatch [-A <project>] -p gpu    [--qos {high,urgent}] [-C volta[32]] -G 1 [...]`      |
 | bigmem        | `sbatch [-A <project>] -p bigmem [--qos {high,urgent}] [...]`                          |
 
-[:fontawesome-solid-sign-in-alt: Main Slurm commands](../slurm/commands.md){: .md-button .md-button--link }
-[:fontawesome-solid-sign-in-alt: Resource Allocation guide](../slurm/index.md#specific-resource-allocation){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Main Slurm commands](../slurm/commands.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Resource Allocation guide](../slurm/index.md#specific-resource-allocation){: .md-button .md-button--link }
 
 ## `sbatch [...] /path/to/launcher`
 
@@ -36,7 +36,7 @@
 !!! bug
     **DON'T LEAVE your jobs running WITHOUT monitoring them** and ensure they are not abusing of the computational resources allocated for you!!!
 
-[:fontawesome-solid-sign-in-alt: ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: ULHPC Tutorial / Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
 
 You will find below several ways to monitor the effective usage of the resources allocated (for running jobs) as well as the general efficiency (Average Walltime Accuracy, CPU/Memory efficiency etc.) for past jobs.
 
@@ -265,7 +265,7 @@ As mentionned before, always check your node activity with _at least_ `htop` on 
     **You must aggregate multiples tasks within a single job** to exploit fully a complete node.
     In particular, you **MUST** consider using [GNU Parallel](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/) and our [generic GNU launcher `launcher.parallel.sh`](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/launcher.parallel.sh).
 
-    [:fontawesome-solid-sign-in-alt: ULHPC Tutorial / HPC Management of Embarrassingly Parallel Jobs](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
+    [:fontawesome-solid-right-to-bracket: ULHPC Tutorial / HPC Management of Embarrassingly Parallel Jobs](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
 
 
 === "Single Node, multi-core"

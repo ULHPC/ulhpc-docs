@@ -85,8 +85,8 @@ implemented in Slurm:
     another user due to loss of precision in calculations.
     * New jobs are immediately assigned a priority.
 
-    [:fontawesome-solid-sign-in-alt: Overview of Fair Tree for End Users](https://slurm.schedmd.com/fair_tree.html#enduser){: .md-button .md-button--link }
-    [:fontawesome-solid-sign-in-alt: Level Fairshare Calculation](https://slurm.schedmd.com/fair_tree.html#fairshare){: .md-button .md-button--link }
+    [:fontawesome-solid-right-to-bracket: Overview of Fair Tree for End Users](https://slurm.schedmd.com/fair_tree.html#enduser){: .md-button .md-button--link }
+    [:fontawesome-solid-right-to-bracket: Level Fairshare Calculation](https://slurm.schedmd.com/fair_tree.html#fairshare){: .md-button .md-button--link }
 
 
 
@@ -103,7 +103,7 @@ Users when they run are charged back for their runs against the account used
 upon job submission -- you can use `sbatch|srun|... -A <account> [...]` to
 change that account.
 
-[:fontawesome-solid-sign-in-alt: ULHPC Usage Charging
+[:fontawesome-solid-right-to-bracket: ULHPC Usage Charging
 Policy](../policies/usage-charging.md){: .md-button .md-button--link }
 
 {%

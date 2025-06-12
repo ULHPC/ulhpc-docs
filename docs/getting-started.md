@@ -79,13 +79,13 @@ These resources can be reserved and allocated for the execution of jobs schedule
 
 [`iris`](systems/iris/index.md), in production since June 2017, is a Dell/Intel supercomputer with a theoretical peak performance of **1082 TFlop/s**, featuring 196 computing nodes (totalling 5824 computing cores) and 96 GPU accelerators (NVidia V100).
 
-[:fontawesome-solid-sign-in-alt: Iris Detailed system specifications](systems/iris/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Iris Detailed system specifications](systems/iris/index.md){: .md-button .md-button--link }
 
 ### Aion
 
 [`aion`](systems/aion/index.md), in production since October 2020, is a [Bull Sequana XH2000](https://atos.net/en/solutions/high-performance-computing-hpc/bullsequana-x-supercomputers)/AMD supercomputer offering a peak performance of **1692 TFlop/s**, featuring 318 compute nodes (totalling 40704 computing cores).
 
-[:fontawesome-solid-sign-in-alt: Aion Detailed system specifications](systems/aion/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Aion Detailed system specifications](systems/aion/index.md){: .md-button .md-button--link }
 
 
 ### GPFS/SpectrumScale File System (`$HOME`, project)
@@ -94,14 +94,14 @@ These resources can be reserved and allocated for the execution of jobs schedule
 
 It allows sharing **homedirs and project data** between users, systems, and eventually (i.e. if needed) with the "outside world".
 
-[:fontawesome-solid-sign-in-alt: GPFS/Spectrumscale Detailed specifications](filesystems/gpfs.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: GPFS/Spectrumscale Detailed specifications](filesystems/gpfs.md){: .md-button .md-button--link }
 
 ### Lustre File System (`$SCRATCH`)
 
 The [Lustre](http://lustre.org/) file system is an open-source, parallel file system that supports many requirements of leadership class HPC simulation environments. It is available as a global _high_-performance file system on all ULHPC computational systems through a [DDN ExaScaler](https://www.ddn.com/products/lustre-file-system-exascaler/)
 and is meant to host **temporary scratch data**.
 
-[:fontawesome-solid-sign-in-alt: Lustre Detailed specifications](filesystems/lustre.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Lustre Detailed specifications](filesystems/lustre.md){: .md-button .md-button--link }
 
 ### OneFS File System (project, backup, archival)
 
@@ -169,7 +169,7 @@ of ULHPC.
     * every file/directory pushed or created on the front-end is available on the computing nodes
     * every file/directory pushed or created on the computing nodes is available on the front-end
 
-[:fontawesome-solid-sign-in-alt: ULHPC User Environment](environment/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: ULHPC User Environment](environment/index.md){: .md-button .md-button--link }
 
 <!-- * [Understanding and customizing your environment](environment/index.md) -->
 <!-- * [ULHPC Modules Environment](environment/modules.md) -->
@@ -203,8 +203,8 @@ The user software environment is generated using [Easybuild](https://easybuild.r
 
 Typical usage of the ULHPC supercomputers involves the reservation and allocation of computing resources for the execution of jobs (submitted via _launcher scripts_) and scheduled on the platform thanks to a Resource and Job Management Systems (RJMS) - [Slurm](https://slurm.schedmd.com/documentation.html) in our case.
 
-[:fontawesome-solid-sign-in-alt: Slurm on ULHPC clusters](slurm/index.md){: .md-button .md-button--link }
-[:fontawesome-solid-sign-in-alt: Convenient Slurm Commands](slurm/commands.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Slurm on ULHPC clusters](slurm/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Convenient Slurm Commands](slurm/commands.md){: .md-button .md-button--link }
 
 * [Rich set of launcher scripts examples](slurm/launchers.md)
 * [Fairshare](slurm/fairsharing.md)
@@ -232,8 +232,8 @@ user-oriented systems and services.
 
 We have always maintained an extensive [documentation](https://hpc-docs.uni.lu) and [HPC tutorials](https://ulhpc-tutorials.readthedocs.io) available online, which aims at being the most up-to-date and comprehensive while covering many (many) topics.
 
-[:fontawesome-solid-sign-in-alt: ULHPC Technical Documentation](https://hpc-docs.uni.lu/support){: .md-button .md-button--link }
-[:fontawesome-solid-chalkboard-teacher: ULHPC Tutorials](ttps://ulhpc-tutorials.readthedocs.io/){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: ULHPC Technical Documentation](https://hpc-docs.uni.lu/support){: .md-button .md-button--link }
+[:fontawesome-solid-chalkboard-user: ULHPC Tutorials](https://ulhpc-tutorials.readthedocs.io/){: .md-button .md-button--link }
 
 !!! tip "The ULHPC Team welcomes your contributions"
 	These pages are hosted from a [git repository](https://github.com/ULHPC/ulhpc-docs) and [contributions](contributing/)
@@ -242,7 +242,7 @@ We have always maintained an extensive [documentation](https://hpc-docs.uni.lu) 
 
 ### Support
 
-[:fontawesome-solid-sign-in-alt: ULHPC Support Overview](support/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: ULHPC Support Overview](support/index.md){: .md-button .md-button--link }
 [:fontawesome-solid-hand-holding-medical: Service Now HPC Support Portal](https://hpc.uni.lu/support){: .md-button .md-button--link }
 
 !!! info "Availability and Response Time"

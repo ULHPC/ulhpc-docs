@@ -1,6 +1,6 @@
 # Job Accounting and Billing
 
-[:fontawesome-solid-sign-in-alt: Usage Charging Policy](../policies/usage-charging.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Usage Charging Policy](../policies/usage-charging.md){: .md-button .md-button--link }
 
 ## Billing rates
 

@@ -26,7 +26,7 @@ For several years now, Easybuild is used to [manage the ULHPC User Software Set]
 
 ## Easybuild Concepts and terminology
 
-[:fontawesome-solid-sign-in-alt: Official Easybuild Tutorial](https://easybuilders.github.io/easybuild-tutorial/){: .md-button .md-button--link}
+[:fontawesome-solid-right-to-bracket: Official Easybuild Tutorial](https://easybuilders.github.io/easybuild-tutorial/){: .md-button .md-button--link}
 
 EasyBuild relies on two main concepts, [toolchains](https://docs.easybuild.io/en/latest/Concepts_and_Terminology.html#toolchains) and [EasyConfig files](https://docs.easybuild.io/en/latest/Concepts_and_Terminology.html#easyconfig-files). A toolchain corresponds to a compiler and a set of libraries which are commonly used to build a software. The two main toolchains frequently used on the UL HPC platform are `foss` (Free and Open Source Software) and `intel` toolchains.
 

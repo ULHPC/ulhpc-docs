@@ -19,7 +19,7 @@ With the advent of the technological revolution and the digital transformation t
 Special focus was laid for the ULHPC facility on the development of large computing power combined with huge data storage capacity to accelerate the research performed in intensive computing and large-scale data analytic (Big Data).
 This was made possible through an ambitious funding strategy enabled from the early stage of the HPC developments, which was supported at the rectorate level to establish the HPC strategy as transversal to all research domains.
 
-For more details: [:fontawesome-solid-sign-in-alt: hpc.uni.lu](https://hpc.uni.lu){: .md-button .md-button--link }
+For more details: [:fontawesome-solid-right-to-bracket: hpc.uni.lu](https://hpc.uni.lu){: .md-button .md-button--link }
 
 ## Capacity evolution
 

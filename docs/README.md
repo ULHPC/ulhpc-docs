@@ -8,8 +8,8 @@
 **technical details** for users to make _effective_ use
 of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'s resources.
 
-[:fontawesome-solid-sign-in-alt: ULHPC Supercomputers](systems/index.md){: .md-button .md-button--link }
-[:fontawesome-solid-sign-in-alt: Getting Started](getting-started.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: ULHPC Supercomputers](systems/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Getting Started](getting-started.md){: .md-button .md-button--link }
 
 **New:** monthly HPC trainings for beginners, see [our dedicated page](hpc-schools.md).
 

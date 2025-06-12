@@ -6,7 +6,7 @@
    end="<!--swsets-versionning-end-->"
 %}
 
-[:fontawesome-solid-sign-in-alt: List of available software](../software/swsets/all_softwares.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: List of available software](../software/swsets/all_softwares.md){: .md-button .md-button--link }
 
 ## Software List By category
 

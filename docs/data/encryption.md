@@ -19,7 +19,7 @@ $ gpg --decrypt <file>.gpg          # Decrypt PGP encrypted file
 
 One drawback is that files need to be completely decrypted for processing
 
-[:fontawesome-solid-sign-in-alt: Tutorial: Using GnuPG aka Gnu Privacy Guard aka GPG](https://varrette.gforge.uni.lu/tutorials/gpg.html){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Tutorial: Using GnuPG aka Gnu Privacy Guard aka GPG](https://varrette.gforge.uni.lu/tutorials/gpg.html){: .md-button .md-button--link }
 
 
 ## File Encryption Frameworks (EncFS, GoCryptFS...)

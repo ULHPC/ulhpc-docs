@@ -13,7 +13,7 @@ Finally,  a few large-memory (fat) computing nodes offer multiple high-core dens
 
 Two global [_high_-performance clustered file systems](../../filesystems/index.md) are available on all ULHPC computational systems: one based on GPFS/SpectrumScale, one on Lustre.
 
-[:fontawesome-solid-sign-in-alt: Iris Compute](compute.md){: .md-button .md-button--link } [:fontawesome-solid-sign-in-alt: Iris Interconnect](interconnect.md){: .md-button .md-button--link } [:fontawesome-solid-sign-in-alt: Global Storage](../../filesystems/index.md){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket: Iris Compute](compute.md){: .md-button .md-button--link } [:fontawesome-solid-right-to-bracket: Iris Interconnect](interconnect.md){: .md-button .md-button--link } [:fontawesome-solid-right-to-bracket: Global Storage](../../filesystems/index.md){: .md-button .md-button--link }
 
 The cluster runs a [Red Hat Linux Family](https://en.wikipedia.org/wiki/Red_Hat_Enterprise_Linux_derivatives) operating system.
 The ULHPC Team supplies on all clusters a large variety of HPC utilities, scientific applications and programming libraries to its user community.

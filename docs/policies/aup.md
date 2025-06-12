@@ -38,4 +38,4 @@ You are also requested to tag the publication(s) you have produced thanks to the
 !!! important ""
     This tag is a very important indicator for us to quantify the concrete impact of the HPC facility on the research performed at the University.
 
-[:fontawesome-solid-sign-in-alt:  List of publications generated thanks to the UL HPC Platform](https://orbilu.uni.lu/simple-search?query=researchcenter_authority%3A%28ORG_30%29){: .md-button .md-button--link }
+[:fontawesome-solid-right-to-bracket:  List of publications generated thanks to the UL HPC Platform](https://orbilu.uni.lu/simple-search?query=researchcenter_authority%3A%28ORG_30%29){: .md-button .md-button--link }
