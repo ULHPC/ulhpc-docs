@@ -1,4 +1,4 @@
-Babel==2.7.0
+Babel==2.10.2
 certifi==2020.4.5.1
 click==7.1.1
 confuse==1.7.0
