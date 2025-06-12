@@ -45,6 +45,7 @@ nav:
     # - Archiving:                  'data/archiving.md'
     - Unix File Permissions:      'filesystems/unix-file-permissions.md'
     # - Version Control with Git:   'workflow/git.md'
+    - Datasets:                   'data/datasets.md'
     - GDPR Compliance:            'data/gdpr.md'
     - Sensitive Data Protection:  'data/encryption.md'
     - Clustered and Networked File Systems:
