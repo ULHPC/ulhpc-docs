@@ -12,13 +12,12 @@ For more information:
 * [ULHPC Storage Systems Overview](../filesystems/index.md)
 <!-- * [ULHPC User Software](../software/index.md) -->
 
-!!! warning "'-bash: `module`: command not found' on access/login servers"
-    Recall that by default, the `module` command is (_on purpose_) **NOT** available on the [access/login servers](../connect/access.md).
-    You HAVE to be on a computing node (within a [slurm job](../slurm/index.md))
+!!! warning "Getting error '`-bash: module: command not found`' on access/login servers"
+    Recall that by default, the `module` command is **NOT** available on the [access/login servers](/connect/access) (on purpose). The module command is only available on computing nodes, within a [slurm job](/slurm/).
 
 ## Home and Directories Layout
 
-All UL HPC systems use [global home directories](../filesystems/gpfs.md#global-home-directory-home). You also have access with environment variables to several other pre-defined directories setup over several different _File Systems_ which co-exist on the UL HPC facility and are configured for different purposes. They are listed below:
+All UL HPC systems use [global home directories](/filesystems/gpfs/#home-directory-home). You also have access with environment variables to several other pre-defined directories setup over several different _File Systems_ which co-exist on the UL HPC facility and are configured for different purposes. They are listed below:
 
 {%
    include-markdown "../filesystems/index.md"
