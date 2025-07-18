@@ -105,24 +105,32 @@ parallel --max-procs "${SLURM_NTASKS}" --max-args 0 srun --nodes=1 --ntasks=1 ba
 ```
 
 
-## Launching concurrent programs in one allocation
+## Launch concurrent Programs in One Allocation
 
-Many real‑world pipelines need to run several different executables inside a single Slurm allocation. The simplest way to orchestrate them is to provide a space‑ or tab‑delimited command table:
+Often, real workflows need to run different commands or executables within one job. GNU Parallel can take a command list from a file and execute each line. For example, create a tab-separated file `cmdlist.txt` listing programs and their arguments for each task:
+
+```txt
+# prog  args
+python3 data_processing.py    sample1.dat sample1.proc
+python3 model_training.py    sample1.csv sample1.model
+```
+
+Each line defines a program and its arguments. We can then write a Slurm batch script to execute each line in parallel:
+
 
 ```bash
 #!/bin/bash --login
-#SBATCH --job-name=many_programs
-# ... Slurm directives ...
+#SBATCH --job-name=conc_programs
+#SBATCH --partition=batch
+#SBATCH --qos=normal
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=8
+#SBATCH --cpus-per-task=16
+#SBATCH --time=02:00:00
+#SBATCH --output=%x-%j.out
+#SBATCH --error=%x-%j.err
 
-cat > cmdlist.txt <<'EOF'
-fastqc   sample1.fastq.gz
-samtools sort sample1.bam -o sample1.sorted.bam
-python   train_model.py --epochs 10
-EOF
-
-parallel --colsep ' +' --max-procs "${SLURM_NTASKS}" \
-        srun --nodes=1 --ntasks=1 {1} {2..}  \
-        :::: cmdlist.txt
+parallel --colsep '\t' --jobs "$SLURM_NTASKS" --results parallel_logs/ srun -N1 -n1 {1} {2} :::: cmdlist.txt
 ```
 
 * `{1}` is the program; `{2..}` expands to the remaining columns (its arguments).
@@ -130,7 +138,7 @@ parallel --colsep ' +' --max-procs "${SLURM_NTASKS}" \
 
 
 
-## Collecting Logs and Monitoring Progress
+## Collect Logs and Monitor Progress
 
 ```bash
 parallel --joblog run.log \
@@ -139,9 +147,9 @@ parallel --joblog run.log \
          srun ... ::: ${TASKS}
 ```
 
-* **`run.log`** — TSV with start/finish, runtime, exit status.
-* **`results/{#}`** — one directory per task; stdout/stderr captured automatically.
-* **`--bar`** — live progress bar; **`--eta`** — estimated completion time.
+* `run.log` — TSV with start/finish, runtime, exit status.
+* `results/{#}` — one directory per task; stdout/stderr captured automatically.
+* `--bar` — live progress bar; **`--eta`** — estimated completion time.
 
 Tail the bar in real time:
 
@@ -169,34 +177,20 @@ parallel --joblog run.log --resume-failed ...
 ```
 
 
-## Performance Tuning Tips
+## GNU Parallel vs Slurm Job Arrays
 
-| Symptom                     | Lever                | Example                           |
-| --------------------------- | -------------------- | --------------------------------- |
-| I/O saturation on shared FS | `--compress`         | pipe‑compress large stdout chunks |
-| Many tiny files             | `--results /scratch` | stage results to local SSD first  |
-| CPU under‑utilisation       | `--block 10M`        | batch stdin in 10 MB chunks       |
-| SSH startup cost            | `--sshloginfile`     | reuse control master via `-M`     |
+| **Use Case**                             | **Use GNU Parallel**                          | **Use Slurm Job Arrays**                        |
+|------------------------------------------|-----------------------------------------------|--------------------------------------------------|
+| Interactive or quick testing             | Runs tasks immediately                        | May wait for each task to be scheduled           |
+| Thousands of very short tasks            | Reduces load on the scheduler                 | Can overload the scheduler                       |
+| Need individual job tracking             | All tasks share the same job record           | Each task has its own job record                 |
+| Different commands per task              | Can run different commands in each task       | Usually runs the same script for all tasks       |
+| Restart failed tasks easily              | Needs manual scripting to resume tasks        | Has built-in support for retrying failed tasks   |
 
-Benchmark one tweak at a time; use `sar`/`iostat` on compute nodes to confirm bottlenecks.
+---
 
+> **Tip**: If your tasks are shorter than the scheduler wait time (around **30 to 180 seconds**), it's better to use **GNU Parallel**. Otherwise, use **Slurm Job Arrays**.
 
-
-## Comparing GNU Parallel and Slurm Job Arrays
-
-GNU Parallel and Slurm job arrays both launch many similar tasks, but they solve *different* bottlenecks.
-
-| Use Case                                           | Prefer GNU Parallel                               | Prefer Slurm Array                          |
-| -------------------------------------------------- | ------------------------------------------------- | ------------------------------------------- |
-| **Interactive/rapid turn‑around** (e.g. dev nodes) | ✔ Parallel runs immediately inside one allocation | ✖ Array needs scheduler cycle for each task |
-| **Thousands of ultra‑short jobs**                  | ✔ Drastically reduces queue chatter               | ✖ Creates scheduling overhead               |
-| **Need individual Slurm accounting per task**      | ✖ All tasks share one Slurm step                  | ✔ Each array index has its own record       |
-| **Mix heterogeneous commands**                     | ✔ Parallel can vary executable per line           | ✖ Arrays assume one script                  |
-| **Checkpoint/re‑queue tasks**                      | ✖ Must script custom resume                       | ✔ Native `--array` + `--requeue`            |
-
-A quick rule‑of‑thumb:
-
-> *If the run time of the task is **less than the scheduler cycle** (≈30‑180 s), package the tasks with GNU Parallel.*
 
 ---
 
@@ -208,4 +202,3 @@ A quick rule‑of‑thumb:
 _Resources_
 
 - [luncher_script_examples.zip](https://github.com/user-attachments/files/21215923/luncher_script_examples.zip)
-- 
