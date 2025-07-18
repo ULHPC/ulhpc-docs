@@ -1,12 +1,7 @@
-# The Spack: A Package Manager on the UL HPC Platform
+# Spack: A Package Manager on the UL HPC Platform
 
 [<img width='400px' src='https://cdn.rawgit.com/spack/spack/develop/share/spack/logo/spack-logo-text.svg'/>](https://spack.readthedocs.io/en/latest/#)
 
-<!-- This should also be useful for other clusters where you want to use
-components (e.g. MPI, compilers) from the `module` system. -->
-
-!!! note
-    This guide is also applicable to other HPC clusters where users need to manage components such as MPI libraries, compilers, and other software through the `module` system.
 
 
 ## Introduction to Spack
@@ -15,6 +10,10 @@ components (e.g. MPI, compilers) from the `module` system. -->
 A brief introduction to Spack will be added here.
 
 ## Setting up Spack
+
+!!! note
+    The guide is also applicable to other HPC clusters where users need to manage components such as MPI libraries, compilers, and other software through the `module` system.
+
 
 ### Connection to a compute node
 
@@ -71,14 +70,16 @@ To make Spack available in your shell session, source its environment setup scri
 ``` { .sh .copy }
 source $HOME/spack/share/spack/setup-env.sh
 ```
-You may want to add this line to the file .`bashrc`for convenience.
+For convenience, this line can be added to the .`bashrc` file to make Spack automatically available in every new shell session.
 
 ### Define System-Provided Packages
-To avoid rebuilding packages already available as modules on your cluster (e.g., compilers, MPI, libraries), create a packages.yaml file under: `$HOME/.spack/packages.yaml`
+
+`packages.yaml` A spack configuration file used to tell Spack what tools and versions already exist on the cluster, so Spack can use those instead of building everything again.Create a packages.yaml file under: `$HOME/.spack/packages.yaml` 
 
 ``` { .sh .copy }
 touch $HOME/.spack/packages.yaml
 ```
+
 
 with the following contents:
 
