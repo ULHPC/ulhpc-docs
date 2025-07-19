@@ -68,6 +68,7 @@ nav:
     - Easybuild:  'environment/easybuild.md'
     - Containers: 'environment/containers.md'
     - Conda:      'environment/conda.md'
+    - Spack: 'environment/spack.md'
   ###########
   - Policies:
     - Acceptable Use Policy (AUP):                   'policies/aup.md'
