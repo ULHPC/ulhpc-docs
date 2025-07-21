@@ -105,6 +105,37 @@ parallel --max-procs "${SLURM_NTASKS}" --max-args 0 srun --nodes=1 --ntasks=1 ba
 ```
 
 
+To run jobs successfully, the resources you request from Slurm (#SBATCH directives) must match what your commands (parallel, srun, and your program) actually use. Let's break down the previous examples to see how the numbers connect.
+
+
+??? info "How the Resources Are Calculated and Used"
+
+    1.  **Total Tasks (The "Slots" for Work)**
+        *   We request `#SBATCH --nodes=4` and `#SBATCH --ntasks-per-node=8`.
+        *   Slurm calculates the total number of tasks it will create for our job: `4 nodes × 8 tasks/node = 32 total tasks`.
+        *   This total value is automatically stored in the `$SLURM_NTASKS` environment variable.
+
+    2.  **CPUs for Each Task**
+        *   We request `#SBATCH --cpus-per-task=16`.
+        *   This tells Slurm: "For each of the 32 tasks, reserve **16 dedicated CPU cores**." This is the resource pool for a single piece of work.
+
+    3.  **GNU Parallel's Role**
+        *  We use `parallel --max-procs "${SLURM_NTASKS}" ...`
+        *  This instructs GNU Parallel to run up to `$SLURM_NTASKS` (which is 32) commands concurrently. It will launch 32 `srun` commands at once, filling every available task "slot" that Slurm prepared for us.
+
+     4.  **The `srun` Command (The Job Step)**
+        *  The command being run by `parallel` is `srun --nodes=1 --ntasks=1 ...`
+        * Each of these `srun` commands consumes exactly **one** of the 32 available task slots.
+
+     5.  **The `stress` Program (The Actual Work)**
+        * Finally, the program being run is `stress --cpu 16`.
+        * This is the crucial link: we instruct our program to use **16 CPUs**, which perfectly matches the `#SBATCH --cpus-per-task=16` directive. The `srun` command ensures this `stress` test runs within the 16 cores that Slurm reserved for it.
+
+
+> **The Golden Rule:** The `--cpu` (or `--threads`, etc.) value in your final program should match the value you requested in `#SBATCH --cpus-per-task`. This ensures your job uses exactly what it asked for, leading to maximum efficiency and stability.
+
+
+
 ## Launch concurrent Programs in One Allocation
 
 Often, real workflows need to run different commands or executables within one job. GNU Parallel can take a command list from a file and execute each line. For example, create a tab-separated file `cmdlist.txt` listing programs and their arguments for each task:
