@@ -5,14 +5,11 @@ The Slurm scheduler performs 2 jobs,
 - allocates resources for a job (allocation),
 - launches the job steps.
 
-
-
 The job steps are the actual processes launched within a job which consume the job resources. Resources can be entities like nodes, CPU cores, GPUs, and memory allocated for the job. The job steps can execute in serial or parallel given that enough resources are available.
 
 The Slurm scheduler is designed to allocate resources in an allocation loop that runs periodically, usually every 30-180sec depending on the Slurm configuration. The resource allocation loop is quite time consuming as the scheduler is configured to perform operations such as back-filling. If a lot of small jobs are in the queue, they tend to trigger expensive operations such as back-filling, and can delay the scheduling loop past its usual period. The end result is a scheduler with sluggish response.
 
 To avoid multiple small jobs, we can schedule multiple jobs in a single allocation.
-
 
 ```bash
 #!/bin/bash --login
