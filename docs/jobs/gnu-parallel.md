@@ -101,50 +101,21 @@ export -f run_step
 parallel --max-procs "${SLURM_NTASKS}" --max-args 0 srun --nodes=1 --ntasks=1 bash -c "\"run_step ${operations_per_step} ${stress_test_duration}\"" ::: {0..255}
 ```
 
-
-To run jobs successfully, the resources you request from Slurm (#SBATCH directives) must match what your commands (parallel, srun, and your program) actually use. Let's break down the previous examples to see how the numbers connect.
-
-
-??? info "How the Resources Are Calculated and Used"
-
-    1.  **Total Tasks (The "Slots" for Work)**
-        *   We request `#SBATCH --nodes=4` and `#SBATCH --ntasks-per-node=8`.
-        *   Slurm calculates the total number of tasks it will create for our job: `4 nodes × 8 tasks/node = 32 total tasks`.
-        *   This total value is automatically stored in the `$SLURM_NTASKS` environment variable.
-
-    2.  **CPUs for Each Task**
-        *   We request `#SBATCH --cpus-per-task=16`.
-        *   This tells Slurm: "For each of the 32 tasks, reserve **16 dedicated CPU cores**." This is the resource pool for a single piece of work.
-
-    3.  **GNU Parallel's Role**
-        *  We use `parallel --max-procs "${SLURM_NTASKS}" ...`
-        *  This instructs GNU Parallel to run up to `$SLURM_NTASKS` (which is 32) commands concurrently. It will launch 32 `srun` commands at once, filling every available task "slot" that Slurm prepared for us.
-
-     4.  **The `srun` Command (The Job Step)**
-        *  The command being run by `parallel` is `srun --nodes=1 --ntasks=1 ...`
-        * Each of these `srun` commands consumes exactly **one** of the 32 available task slots.
-
-     5.  **The `stress` Program (The Actual Work)**
-        * Finally, the program being run is `stress --cpu 16`.
-        * This is the crucial link: we instruct our program to use **16 CPUs**, which perfectly matches the `#SBATCH --cpus-per-task=16` directive. The `srun` command ensures this `stress` test runs within the 16 cores that Slurm reserved for it.
-
-
-> **The Golden Rule:** The `--cpu` (or `--threads`, etc.) value in your final program should match the value you requested in `#SBATCH --cpus-per-task`. This ensures your job uses exactly what it asked for, leading to maximum efficiency and stability.
-
+To run jobs successfully, the resources you request from Slurm (#SBATCH directives) must match what your commands (parallel, srun, and your program) actually use. See [Resource Allocation Guidelines](https://hpc-docs.uni.lu/slurm/launchers/#resource-allocation-guidelines) 
 
 
 ## Launch concurrent Programs in One Allocation
 
-Often, real workflows need to run different commands or executables within one job. GNU Parallel can take a command list from a file and execute each line. For example, create a tab-separated file `cmdlist.txt` listing programs and their arguments for each task:
+Often, real workflows need to run different commands or executables within one job. GNU Parallel can take a command list from a file and execute each line. For example, create `cmdlist.txt` (tab-separated, or use multiple spaces) listing programs and their arguments for each task:
 
 ```txt
-# prog  args
-python3 data_processing.py    sample1.dat sample1.proc
-python3 model_training.py    sample1.csv sample1.model
+python3	data_processing.py	sample1.dat	sample1.proc
+python3	model_training.py	sample1.csv	sample1.model
 ```
 
-Each line defines a program and its arguments. We can then write a Slurm batch script to execute each line in parallel:
+*(Use tabs or multiple spaces between columns)*
 
+Each line defines a program and its arguments. We can then write a Slurm batch script to execute each line in parallel:
 
 ```bash
 #!/bin/bash --login
@@ -161,71 +132,80 @@ Each line defines a program and its arguments. We can then write a Slurm batch s
 parallel --colsep '\t' --jobs "$SLURM_NTASKS" --results parallel_logs/ srun -N1 -n1 {1} {2} :::: cmdlist.txt
 ```
 
-* `{1}` is the program; `{2..}` expands to the remaining columns (its arguments).
-* `--colsep ' +'` treats runs of spaces or tabs as column separators.
+- `{1}` is the program; `{2..}` expands to the remaining columns (its arguments).
+- `--colsep ' +'` treats runs of spaces or tabs as column separators.
 
+if you want to pass each line as a full command use:
+```bash
+parallel --jobs "$SLURM_NTASKS" --results parallel_logs/ srun -N1 -n1 {} :::: cmdlist.txt
+```
+- `{}` is replaced by the entire line (the full command and its arguments).
 
 
 ## Collect Logs and Monitor Progress
 
 ```bash
-parallel --joblog run.log \
-         --results results/{#}/ \
-         --bar --eta \
-         srun ... ::: ${TASKS}
+parallel --joblog run.log --results results/{#}/ --bar --eta srun ... ::: ${TASKS}
 ```
 
-* `run.log` — TSV with start/finish, runtime, exit status.
-* `results/{#}` — one directory per task; stdout/stderr captured automatically.
-* `--bar` — live progress bar; **`--eta`** — estimated completion time.
+- `run.log` — records start/finish time, runtime duration, exit status.
+- `results/{#}` — create a separate directory per task; stdout/stderr captured automatically.
+- `--bar` — live progress bar
+- `--eta` — estimated completion time
 
-Tail the bar in real time:
+
+
+To check the actual state of your job and all it's steps you can use `sacct` 
 
 ```bash
-tail -f --pid=${PARALLEL_PID} parallel_bar.log
+sacct -j $SLURM_JOBID --format=JobID,JobName,State,ExitCode,Elapsed
 ```
-
 
 ## Error Handling and Automatic Retries
 
 Enable bounded retries for flaky tasks:
 
 ```bash
-parallel --retries 3 --halt now,fail=1 \
-         srun ... ::: ${TASKS}
+parallel --retries 3 --halt now,fail=1 srun ... ::: ${TASKS}
 ```
 
-* `--retries 3` — attempt each job up to 3 times.
-* `--halt now,fail=1` — abort the whole allocation if any task keeps failing.
+- `--retries 3` — retries each task up to 3 times if it fails.
+- `--halt now,fail=1` — If any task fails after all retries, GNU Parallel will immediately stop all running and pending tasks, aborting the whole job allocation.
 
-For *checkpointable* binaries, pair Parallel’s resume file with `--resume`:
+For _checkpointable_ binaries, you can resume failed tasks using the joblog:
 
 ```bash
 parallel --joblog run.log --resume-failed ...
 ```
+`--resume-failed` — Only reruns the tasks that failed (according to the log file).
 
+## When to Use GNU Parallel
 
-## GNU Parallel vs Slurm Job Arrays
+Use GNU Parallel when:
 
-| **Use Case**                             | **Use GNU Parallel**                          | **Use Slurm Job Arrays**                        |
-|------------------------------------------|-----------------------------------------------|--------------------------------------------------|
-| Interactive or quick testing             | Runs tasks immediately                        | May wait for each task to be scheduled           |
-| Thousands of very short tasks            | Reduces load on the scheduler                 | Can overload the scheduler                       |
-| Need individual job tracking             | All tasks share the same job record           | Each task has its own job record                 |
-| Different commands per task              | Can run different commands in each task       | Usually runs the same script for all tasks       |
-| Restart failed tasks easily              | Needs manual scripting to resume tasks        | Has built-in support for retrying failed tasks   |
+- You have many short or heterogeneous tasks (different commands or arguments per task).
+
+- You want to minimize scheduler overhead by running many tasks within a single job allocation.
+
+- You need to quickly retry or resume failed tasks using GNU Parallel’s joblog.
+
+- You want interactive or rapid prototyping without waiting for the scheduler.
+
+- You want to efficiently utilize allocated resources by launching multiple commands concurrently.
+
+When not to use GNU Parallel:
+
+- When you need each task to be tracked individually by the scheduler for accounting or dependencies.
+
+- When your tasks are long-running and require advanced scheduler features like job dependencies or per-task resource allocation.
+
+- When your workflow is already well-suited to Slurm’s built-in job array features.
 
 ---
 
 > **Tip**: If your tasks are shorter than the scheduler wait time (around **30 to 180 seconds**), it's better to use **GNU Parallel**. Otherwise, use **Slurm Job Arrays**.
 
-
 ---
-
-
-
-
-
 
 _Resources_
 
