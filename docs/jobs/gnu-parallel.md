@@ -1,3 +1,16 @@
+[GNU Parallel](https://www.gnu.org/software/parallel/) is a tool for executing tasks in parallel, typically on a single machine. When coupled with the Slurm command `srun`, `parallel` becomes a powerful way of distributing a set of tasks amongst a number of workers. This is particularly useful when the number of tasks is significantly larger than the number of available workers (i.e. `$SLURM_NTASKS`), and each tasks is independent of the others.
+
+??? info "Example usage"
+
+    ```bash
+    $ parallel -j 5 'srun --exclusive -N1 -n1 echo Task {} on $(hostname)' ::: {1..5}
+    Task 1 on access1.aion-cluster.uni.lux
+    Task 4 on access1.aion-cluster.uni.lux
+    Task 5 on access1.aion-cluster.uni.lux
+    Task 3 on access1.aion-cluster.uni.lux
+    Task 2 on access1.aion-cluster.uni.lux
+    ```
+
 ## Running jobs with GNU parallel
 
 The Slurm scheduler performs 2 jobs,
@@ -106,7 +119,7 @@ To run jobs successfully, the resources you request from Slurm (#SBATCH directiv
 
 ## Launch concurrent Programs in One Allocation
 
-Often, real workflows need to run different commands or executables within one job. GNU Parallel can take a command list from a file and execute each line. For example, create `cmdlist.txt` (tab-separated, or use multiple spaces) listing programs and their arguments for each task:
+Often, real workflows need to run different commands or executables within one job. GNU parallel can take a command list from a file and execute each line. For example, create `cmdlist.txt` (tab-separated, or use multiple spaces) listing programs and their arguments for each task:
 
 ```txt
 python3	data_processing.py	sample1.dat	sample1.proc
@@ -155,10 +168,27 @@ parallel --joblog run.log --results results/{#}/ --bar --eta srun ... ::: ${TASK
 
 
 
-To check the actual state of your job and all it's steps you can use `sacct` 
+To check the actual state of your job and all it's steps you can use `sacct` command.  
 
 ```bash
 sacct -j $SLURM_JOBID --format=JobID,JobName,State,ExitCode,Elapsed
+$ sacct -j 8717582 --format=JobID,JobName,State,ExitCode,Elapsed
+JobID           JobName      State ExitCode    Elapsed 
+------------ ---------- ---------- -------- ---------- 
+8717582      single_pr+    RUNNING      0:0   00:00:52 
+8717582.bat+      batch    RUNNING      0:0   00:00:52 
+8717582.ext+     extern    RUNNING      0:0   00:00:52 
+8717582.0        stress    RUNNING      0:0   00:00:51 
+8717582.1        stress    RUNNING      0:0   00:00:51 
+8717582.2        stress    RUNNING      0:0   00:00:51 
+8717582.3        stress    RUNNING      0:0   00:00:51 
+8717582.4        stress    RUNNING      0:0   00:00:51 
+8717582.5        stress    RUNNING      0:0   00:00:51 
+8717582.6        stress    RUNNING      0:0   00:00:51 
+8717582.7        stress    RUNNING      0:0   00:00:51 
+8717582.8        stress    RUNNING      0:0   00:00:51 
+8717582.9        stress    RUNNING      0:0   00:00:51 
+8717582.10       stress    RUNNING      0:0   00:00:51 
 ```
 
 ## Error Handling and Automatic Retries
@@ -166,7 +196,8 @@ sacct -j $SLURM_JOBID --format=JobID,JobName,State,ExitCode,Elapsed
 Enable bounded retries for flaky tasks:
 
 ```bash
-parallel --retries 3 --halt now,fail=1 srun ... ::: ${TASKS}
+# /!\ ADAPT <n> to set the number of automatic retries
+parallel --retries <n> --halt now,fail=1 srun ... ::: ${TASKS}
 ```
 
 - `--retries 3` — retries each task up to 3 times if it fails.
@@ -179,9 +210,9 @@ parallel --joblog run.log --resume-failed ...
 ```
 `--resume-failed` — Only reruns the tasks that failed (according to the log file).
 
-## When to Use GNU Parallel
+## When to Use GNU parallel
 
-Use GNU Parallel when:
+Use GNU parallel when:
 
 - You have many short or heterogeneous tasks (different commands or arguments per task).
 
@@ -193,7 +224,7 @@ Use GNU Parallel when:
 
 - You want to efficiently utilize allocated resources by launching multiple commands concurrently.
 
-When not to use GNU Parallel:
+When not to use GNU parallel:
 
 - When you need each task to be tracked individually by the scheduler for accounting or dependencies.
 
@@ -203,7 +234,7 @@ When not to use GNU Parallel:
 
 ---
 
-> **Tip**: If your tasks are shorter than the scheduler wait time (around **30 to 180 seconds**), it's better to use **GNU Parallel**. Otherwise, use **Slurm Job Arrays**.
+> **Tip**: If your tasks are shorter than the scheduler wait time (around **30 to 180 seconds**), it's better to use **GNU parallel**. Otherwise, use **Slurm Job Arrays**.
 
 ---
 
