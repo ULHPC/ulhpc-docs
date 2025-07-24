@@ -10,6 +10,7 @@
     Task 3 on access1.aion-cluster.uni.lux
     Task 2 on access1.aion-cluster.uni.lux
     ```
+    The default argument separator `:::` separate your command from your inputs. Inputs can either be a list separated by spaces, or a range using brace expansions. Place `{}` replacement string where you want your inputs to go inside your command.
 
 ## Running jobs with GNU parallel
 
@@ -114,6 +115,12 @@ export -f run_step
 parallel --max-procs "${SLURM_NTASKS}" --max-args 0 srun --nodes=1 --ntasks=1 bash -c "\"run_step ${operations_per_step} ${stress_test_duration}\"" ::: {0..255}
 ```
 
+!!! tip "Notice how `srun` works"
+    
+    For `parallel` jobs `srun` command plays an important role of starting the parallel program and setting up the environment. Each srun invocation becomes a separate SLURM job step within your overall allocation meaning it will start as many instances of the program as requested with the `--ntasks` option on the CPUs that were allocated for the job. 
+
+
+
 To run jobs successfully, the resources you request from Slurm (#SBATCH directives) must match what your commands (parallel, srun, and your program) actually use. See [Resource Allocation Guidelines](https://hpc-docs.uni.lu/slurm/launchers/#resource-allocation-guidelines) 
 
 
@@ -150,7 +157,7 @@ parallel --colsep '\t' --jobs "$SLURM_NTASKS" --results parallel_logs/ srun -N1 
 
 if you want to pass each line as a full command use:
 ```bash
-parallel --jobs "$SLURM_NTASKS" --results parallel_logs/ srun -N1 -n1 {} :::: cmdlist.txt
+parallel --jobs "$SLURM_NTASKS" --results parallel_logs/ srun -N1 -n1 {} ::: cmdlist.txt
 ```
 - `{}` is replaced by the entire line (the full command and its arguments).
 
@@ -170,7 +177,7 @@ parallel --joblog run.log --results results/{#}/ --bar --eta srun ... ::: ${TASK
 
 To check the actual state of your job and all it's steps you can use `sacct` command.  
 
-```bash
+```
 sacct -j $SLURM_JOBID --format=JobID,JobName,State,ExitCode,Elapsed
 $ sacct -j 8717582 --format=JobID,JobName,State,ExitCode,Elapsed
 JobID           JobName      State ExitCode    Elapsed 
@@ -188,7 +195,8 @@ JobID           JobName      State ExitCode    Elapsed
 8717582.7        stress    RUNNING      0:0   00:00:51 
 8717582.8        stress    RUNNING      0:0   00:00:51 
 8717582.9        stress    RUNNING      0:0   00:00:51 
-8717582.10       stress    RUNNING      0:0   00:00:51 
+8717582.10       stress    RUNNING      0:0   00:00:51
+[...] 
 ```
 
 ## Error Handling and Automatic Retries
