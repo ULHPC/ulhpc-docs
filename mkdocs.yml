@@ -419,7 +419,8 @@ markdown_extensions:
       social_url_shorthand: true
   - pymdownx.snippets:
       base_path: snippets
-  - pymdownx.tabbed
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.smartsymbols
   # code blocks with syntax highlighting, graphs
   - pymdownx.superfences
