@@ -418,10 +418,8 @@ markdown_extensions:
       repo_url_shorthand: true
       social_url_shorthand: true
   - pymdownx.snippets:
-      base_path: snippets
-        
+      base_path: snippets    
   - pymdownx.tabbed:
-      alternate_style: true
   - pymdownx.smartsymbols
   # code blocks with syntax highlighting, graphs
   - pymdownx.superfences

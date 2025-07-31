@@ -1,255 +1,139 @@
 # Spack: A Package Manager on the UL HPC Platform
 
-[<img width='400px' src='https://cdn.rawgit.com/spack/spack/develop/share/spack/logo/spack-logo-text.svg'/>](https://spack.readthedocs.io/en/latest/#)
-
-
+<!--intro-start-->
 
 ## Introduction to Spack
 
-<p style="text-align: justify;"> Spack is an open-source package manager designed for installing, building, and managing scientific software across a wide range of systems—from personal laptops to the world’s largest supercomputers. It supports multiple versions, compilers, and configurations of packages, all coexisting without conflict. Spack is especially popular in high-performance computing (HPC) environments due to its non-destructive installations, flexible dependency resolution, and robust support for complex software stacks. </p>
-
-### Why spack ? 
-
-<p style="text-align: justify;">Spack simplifies the software installation process in scientific computing. It uses a concise <code>spec</code> syntax to let users define versions, compilers, build options, and dependencies in a readable format. Package recipes in Spack are written in pure Python, allowing contributors to manage many builds with a single file. With over 8,500 official packages available, Spack offers great flexibility—and it's not limited to pre-existing packages. Users can create custom ( e.g. <code>package.py</code> ) files for software not yet available in the Spack pre-defined packages. <a href="https://spack.readthedocs.io/en/latest/" target="_blank">[1]</a> </p>
-
-### Key Features of Spack
-<ul style="text-align: justify;"> 
-
-<li><strong>Multiple Versions & Configurations:</strong> Easily install multiple versions of the same software with different compilers or build options.</li> 
-
-<li><strong>Custom Dependencies:</strong> Flexibly control dependencies, even choosing between alternative implementations.</li> 
-
-<li><strong>Non-destructive Installs:</strong> New installations do not interfere with existing packages.</li> 
-
-<li><strong>Package Coexistence:</strong> Different builds of the same software can live side by side.</li>
-
- <li><strong>Easy Package Creation:</strong> Write simple ( e.g. <code>package.py</code> ) files in Python to add new software to Spack.</li> 
- 
- <li><strong>Virtual Environments:</strong> Create isolated environments for experiments or projects.</li> 
- 
- </ul>
+[Spack](https://spack.io/about/) is an open-source package manager designed for installing, building, and managing scientific software across a wide range of system including from personal computers to super computers. It supports multiple versions, compilers, and configurations of software packages, all coexisting in a single system without conflict. Spack provides with [over 8,500 ](https://packages.spack.io/)official software packages available since the `v1.0.0` release.Additionally users can also create [custom packages](https://spack-tutorial.readthedocs.io/en/latest/tutorial_packaging.html) via `package.py` files for software not yet available in the Spack pre-defined [packages](https://spack.readthedocs.io/en/latest/package_fundamentals.html).
 
 
-### Key Resources
+Similar to [EasyBuild](https://docs.easybuild.io/), [Spack](https://spack.io/about/) is also available on the UL HPC platform for managing and installing scientific software in more flexible and customizable way.
+At present, the UL HPC environment includes a pre-installed version of Spack,namely `devel/Spack/0.21.2` which can be accessed via the module system.
 
-Below are essential resources including its official documentation, usage guides, packaging tutorials, and community links:
+??? question "Why use automatic building tools like [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/) on HPC environments?"
 
-=== "Important Resources"
+    While it may seem obvious to some of you, scientific software is often surprisingly difficult to build. Not all software packages rely on standard building tools like Autotools/Automake (the famous `configure; make; make install`) or CMake. Even with standard building tools, parsing the available option to ensure that the build matches the underlying hardware is time consuming and error-prone. Furthermore, scientific software often contains hardcoded build parameters or the documentation on how to optimize the build is poorly maintained.
 
-    -  <a href="https://spack.readthedocs.io/en/latest/" target="_blank">**Official Documentation**</a>  
+    Software build and installation frameworks like Easybuild or Spack allow reproducible builds, handle complex dependency trees, and automatically generate corresponding environment modulefiles (e.g., LMod) for easy usage. In the ULHPC platform, EasyBuild is the primary tool used to ensure optimized software builds. However, Spack is also available and can be valuable in more flexible or user-driven contexts.Spack Some HPC sites use both [1]. 
 
-    -  <a href="https://spack-tutorial.readthedocs.io/en/latest/" target="_blank">**Spack Tutorial**</a>  
+    _Resources_
 
-    - <a href="https://packages.spack.io/" target="_blank"> **Package Index**  </a> 
+    1. See this [talk](https://www.archer2.ac.uk/training/courses/200617-spack-easybuild/) by William Lucas at EPCC for instance.
 
-    -  <a href="https://spack.readthedocs.io/en/latest/package_fundamentals.html" target="_blank">**Package Fundamentals**</a>   
+??? question "when should consider [Spack](https://spack.io/)?"
 
-    - <a href="https://spack.readthedocs.io/en/latest/environments.html" target="_blank">**Spack Environments**</a>  
+     While EasyBuild is the primary and most integrated software management system on ULHPC, there are specific scenarios where users should consider using Spack.
 
-    - <a href="https://cache.spack.io/" target="_blank"> **Spack Build Cache** </a>  
+    Spack is particularly suitable when users need greater flexibility and customization in building software. For example, if a user requires selecting specific compilers, enabling/disabling features like MPI or CUDA, or managing large and complex dependency chains easily, Spack offers a more configurable environment than EasyBuild.While EasyBuild is often favored by HPC system administrators for its robust and repeatable system-wide deployments, Spack is more focused on HPC developers and advanced users due to its easier-to-tweak nature.
 
+    Additionally, Spack supports user-level installations, allowing users to create isolated environments without administrative privileges, making it highly suitable for personal or experimental setups. Spack's environment definition files (e.g., spack.yaml) further enhance its utility by allowing users to precisely replicate the same software stack elsewhere.
 
-=== "Additional Resources"
-
-    - <a href="https://spack.readthedocs.io/en/latest/configuration.html" target="_blank">**Spack Configuration file **</a>  
-
-    -  <a href="https://spack.readthedocs.io/en/latest/packaging_guide.html" target="_blank">**Advance Packaging Guide**</a> 
-
-    - <a href="https://spack.readthedocs.io/en/latest/build_settings.html" target="_blank">**Concretization Settings**</a>  
-
-
-    - <a href="https://github.com/spack/spack/discussions" target="_blank">**Spack Community & Discussions**</a>  
-
-???+ tabs "Spack Resources"
-
-    === "Important Resources"
-
-        -  <a href="https://spack.readthedocs.io/en/latest/" target="_blank">**Official Documentation**</a>  
-
-        -  <a href="https://spack-tutorial.readthedocs.io/en/latest/" target="_blank">**Spack Tutorial**</a>  
-
-
-        -  <a href="https://spack.readthedocs.io/en/latest/package_fundamentals.html" target="_blank">**Package Fundamentals**</a>  
-
-        - <a href="https://packages.spack.io/" target="_blank"> **Package Index**  </a>  
-
-        - <a href="https://spack.readthedocs.io/en/latest/environments.html" target="_blank">**Spack Environments**</a>  
-
-        
-        - <a href="https://cache.spack.io/" target="_blank"> **Spack Build Cache** </a>  
-
-
-    === "Additional Resources"
-
-        - <a href="https://spack.readthedocs.io/en/latest/configuration.html" target="_blank">**Spack Configuration file **</a>  
-
-        -  <a href="https://spack.readthedocs.io/en/latest/packaging_guide.html" target="_blank">**Advance Packaging Guide**</a>  
-
-        - <a href="https://spack.readthedocs.io/en/latest/build_settings.html" target="_blank">**Concretization Settings**</a>  
-
-        - <a href="https://github.com/spack/spack/discussions" target="_blank">**Spack Community & Discussions**</a>  
-
-
+    In essence, Spack is the better choice when customization, portability, or broader package availability are required beyond what EasyBuild typically offers.
 
 
 
 ## Setting up Spack.
 
+For all tests and compilation with Spack, it is essential to run on a **compute node**, not in the login/access node. 
 
-!!! note
-    The guide is also applicable to other HPC clusters where users need to manage components such as MPI libraries, compilers, and other software through the `module` system.
+??? note "Connection to a compute node"
 
+    Here's an example of how to allocate an [interactive session](../jobs/interactive.md) in **Aion cluster**.
 
-### Connection to a compute node
-For all tests and compilation with Spack, it is essential to run on a **compute node**, not in the login/access node. Here's an example of how to allocate an [interactive session](../jobs/interactive.md) in **Aion cluster**.
-
-```{.sh .copy}
-si -N 1 -n 16 -c 1 -t 0-02:00:00 # on iris: -C broadwell or -C skylake
-```
-
-??? note "Allocation Details"
-
-    `si` is a shell function that wraps the `salloc` command to simplify interactive Slurm job allocation.  
-    It stands for:
-
-    ```bash
-    salloc -p interactive --qos debug -C batch ${options}
-    ```
-    - `${options}`: any additional arguments passed to `si` (e.g., `-N`, `-n`, `-c`, `-t`, etc.)
-
-    ```bash
+    ```{.sh .copy}
     si -N 1 -n 16 -c 1 -t 0-02:00:00
     ```
 
-    This allocates:
+    This command requests a [job](../jobs/submit.md)  with 1 node, 16 MPI processes (-n 16), and 1 CPU core per process (-c 1).The -n 16 option allows running up to 16 parallel processes, which can accelerate builds spack.However, these values are only examples and are not mandatory. Users may adjust the resource allocation according to their requirements or omit certain options entirely for simpler use cases.
 
-    - 1 node (`-N 1`)
-    - 16 MPI tasks (`-n 16`)
-    - 1 CPU per task (`-c 1`)
-    - for a wall time of 2 hours (`-t 0-02:00:00`) 
-
-    !!! info "Iris Cluster"
-
-        On the **Iris** cluster, 
-
-        - Use `-C broadwell` or  `-C skylake` 
-
-        **Examples:**
-        ```bash
-        si -N 1 -n 16 -c 1 -t 0-02:00:00 -C broadwell
-        ```
 
 
 ### Clone & Setup Spack
 
 Cloning and setting up Spack in  `$HOME` directory is recommended, as it provides significantly better performance for handling small files compared to `$SCRATCH`.
+
 To clone the Spack Repository: 
 
 ``` { .sh .copy }
 cd $HOME
-git clone --depth=2 https://github.com/spack/spack.git
-cd spack
+git clone -c feature.manyFiles=true https://github.com/spack/spack.git
 ```
+
+Cloning the Spack repository creates a directory named spack, and by default, it uses the develop branch. However for improved stability  switching to the latest official [release](https://github.com/spack/spack/releases) is recommended. The current release tags at that time `v1.0.0`. and to checkout the most recnet release `v1.0.0` : 
+
+``` { .sh .copy }
+cd spack
+git checkout v1.0.0
+```
+
 To make Spack available in the shell session, source its environment setup script:
 
 ``` { .sh .copy }
 source $HOME/spack/share/spack/setup-env.sh
 ```
+
 For convenience, this line can be added to the .`bashrc` file to make Spack automatically available in every new shell session.
 
-??? note "Test some basic functionality"
 
-    Once Spack is sourced, the installation can be verified and basic functionality explored using the following commands:
 
-    **Check Spack Version:**
-    ```sh
-    # Displays the currently installed version of Spack
-    spack --version 
+??? note "Verfifying Spack installtion"
+
+    Once Spack is sourced, the following command should display the path to the Spack executable and confirming that the environment is correctly set up:
+    ``` { .sh .copy }
+    which spack
     ```
-    **Search for Available Packages:**
-    ```sh
-    # Lists all available packages in Spack
-    spack list
-    ```
-
-    **Search for a specific one:**
-    ```sh
-    # Shows all packages whose names contain "cmake"
-    spack list cmake
-    ```
-
-    **Find Installed Packages:**
-    ```sh
-    # Lists all currently installed packages
-    spack find
-    ```
-    !!! note 
-
-        If Spack was just installed, this list will likely be empty. Installed packages will appear here after the first successful build.
+    !!! note "Expected output resembles:"
         
-    For more details : 
-    
-      - <a href="https://spack-tutorial.readthedocs.io/en/latest/tutorial_basics.html#" target="_blank">**Spack Basic Tutorial.**</a>  
+    ``` { .sh  }
+    spack () 
+          { 
+              : this is a shell function from: /home/users/<username>/spack/share/spack/setup-env.sh;
+              : the real spack script is here: /home/users/<username>/spack/bin/spack;
+              _spack_shell_wrapper "$@";
+              return $?
+          }
+    ```
+    This confirms that Spack’s environment is correctly loaded and ready for use.
+ 
 
-### Useful Spack Commands.
+### Spack Configuration Scopes
 
+Spack’s behavior is controlled by [configuration files](https://spack.readthedocs.io/en/latest/configuration.html) in different scopes, which determine settings like installation paths, compilers, and package preferences and so on.Spack’s default configuration settings reside in `$SPACK_ROOT/etc/spack/defaults`. Spack provides six distinct configuration scopes to handle this customization, applied in order of decreasing priority.
 
-The following tables summarizes the basic commands for managing software packages with Spack, from searching and installation to managing the software environment.
+| Scope        | Directory                                      |
+|--------------|------------------------------------------------|
+| Environment  | In environment base directory (`spack.yaml`)   |
+| Custom       | Custom directory, specified with `--config-scope` |
+| User         | `~/.spack/`                                    |
+| Site         | `$SPACK_ROOT/etc/spack/`                       |
+| System       | `/etc/spack/`                                  |
+| Defaults     | `$SPACK_ROOT/etc/spack/defaults/`              |
 
-| Spack Command                | Description                                                  |
-|------------------------------|--------------------------------------------------------------|
-|`spack list`|	Lists all available packages. |
-|`spack list <package>` |	Searches for packages matching the name or keyword.|
-|` spack info <package>` | displays detailed information about that package|
-| `spack install <package>`    | Installs a new package on the cluster.                       |
-| `spack uninstall <package>`  | Removes an installed package from the cluster.               |
-| `spack load <package>`       | Makes a package ready for use in the current session.        |
-| `spack unload <package>`     | Removes a package from the current session's environment.    |
-| `spack versions <package>`   | Shows all available versions of a package for installation on the cluster. |
-| `spack help` |	Displays general help and available subcommands. |
-| `spack help <subcommand>` |	Shows help for a specific subcommand. |
-|`spack config get`|	Shows current Spack configuration settings |
-|`spack compiler find	`| Detects and registers available compilers on the system |
-|`spack dependencies <package>`|	Lists dependencies of a package |
+The user configuration scope, stored in `~/.spack/` is ideal for defining personal preferences, compiler settings, and package defaults that apply across multiple projects and environments.The settings of this scope affect all instances of Spack. For more details see the [official tutorials](https://spack-tutorial.readthedocs.io/en/isc22/tutorial_configuration.html#configs-tutorial)
 
-??? info "Further Reference"
-    For a comprehensive list of commands and advanced usage options, refer to the official Spack documentation:<a href="https://spack.readthedocs.io/en/latest/command_index.html" target="_blank"><strong>Spack Command Index</strong></a>
+###  Define System-Provided Packages
 
+Spack allows fine-grained control over how software is built through the [`packages.yaml`](https://spack.readthedocs.io/en/latest/packages_yaml.html) configuration file. This enables users to choose preferred implementations for virtual dependencies, choose particular compilers, and even configure Spack to use external installed software that are already available on the system while avoiding the need to rebuild everything from source.
 
-### Spack Environments
+Spack’s build defaults are in the  `etc/spack/defaults/packages.yaml` file.Most commonly, users define custom preferences in a user-level [configuration Scopes](https://spack.readthedocs.io/en/latest/configuration.html#configuration-scopes), which should be placed at`~/.spack/packages.yaml`.
 
-A Spack environment is a powerful feature that allows users to manage sets of software packages, dependencies, and configurations in an isolated and reproducible way. 
+!!! question "Why is it crucial for users to define external packages in packages.yaml?"
 
-Below is a list of commonly used Spack environment commands:
+    While Spack can build everything from source, fundamental libraries like [MPI](../software/swsets/mpi.md) and [BLAS](https://www.netlib.org/blas/)/[LAPACK](https://www.netlib.org/lapack/)are often highly optimized and meticulously tuned by system administrators to leverage the specific hardware capabilities of the HPC clusters (e.g., network interconnects, CPU features, GPU architectures).
 
-| Spack Command                      | Description                                                  |
-|-----------------------------------|--------------------------------------------------------------|
-| `spack env status`                | Displays the currently active Spack environment.             |
-| `spack env list`                  | Lists all existing Spack environments.                       |
-| `spack env create <env_name>`     | Creates a new Spack environment with the specified name.     |
-| `spack env activate <env_name>`   | Activates the specified Spack environment.                   |
-| `spack env deactivate`            | Deactivates the currently active environment.                |
-|`spack concretize`|	Prepares a full dependency spec for an environment or package before install |
-| `spack install --add <package>`   | Installs a package into the currently active environment.    |
+    Using Spack's generic builds for these core libraries often results in sub-optimal performance compared to the finely-tuned system-provided versions. Declaring optimized external packages in `packages.yaml` ensures that Spack-built applications link against the most performant versions available in the [ULHPC software collection](https://hpc-docs.uni.lu/software/), thereby maximizing the efficiency of scientific computations. This avoids the overhead of rebuilding everything from source unnecessarily and guarantees users code benefits from HPC system's specialized hardware optimizations.
 
 
-??? info "Further Reference"
-    For more technical details, see the official Spack documentation:<a href="https://spack.readthedocs.io/en/latest/environments.html" target="_blank"><strong>Spack Environments</strong></a>
-
-
-
-### Define System-Provided Packages
-
-Spack allows users to control how software is built using the`packages.yaml` configuration file. This enables users to choose preferred implementations for virtual dependencies (like MPI or BLAS/LAPACK), choose particular compilers, and even configure Spack to use external installed software that are already available on the system while avoiding the need to rebuild everything from source.<a href="https://spack.readthedocs.io/en/latest/packages_yaml.html#package-settings-packages-yaml" target="_blank">[2]</a> </p>Create a `packages.yaml` file under: `$HOME/.spack/packages.yaml` 
+To create a `packages.yaml` file at the user-level configuration scope  `~/.spack/`: 
 
 
 ``` { .sh .copy }
+mkdir -p $HOME/.spack/
 touch $HOME/.spack/packages.yaml
 ```
 
 
-with the following contents:
-
+Then, add the following contents, which instructs Spack to use system-provided versions of `GCC`, `binutils`, and `OpenMPI` configured with native fabrics:
 ``` { .sh .copy }
  packages:
   gcc:
@@ -344,113 +228,62 @@ with the following contents:
     buildable: false
 
 ```
-This tells Spack to use the system available GCC, binutils and OpenMPI with the native fabrics.
+!!! note " Defining CUDA as an External Package"
 
-## Building FEniCS
-
-Create an environment and install FEniCS
-``` { .sh .copy }
-cd ~
-spack env create -d fenicsx-main-20230126/ 
-spack env activate fenicsx-main-20230126/
-spack add py-fenics-dolfinx@main fenics-dolfinx+adios2 adios2+python petsc+mumps
-# Change @main to e.g. @0.7.2 in the above if you want a fixed version.
-spack concretize
-spack install -j16
-``` 
-or the same directly in `spack.yaml` in `$SPACK_ENV`
-
-``` { .sh .copy }
-spack:
-  # add package specs to the `specs` list
-  specs:
-  - py-fenics-dolfinx@main
-  - fenics-dolfinx@main+adios2
-  - petsc+mumps
-  - adios2+python
-  view: true
-  concretizer:
-    unify: true
-```
-The following are also commonly used in FEniCS scripts and may be useful
-
-``` { .sh .copy }
-spack add gmsh+opencascade py-numba py-scipy py-matplotlib
-```
-It is possible to build a specific version (git ref) of DOLFINx. Note that the hash must be the full hash. It is best to specify appropriate git refs on all components.
-
-``` { .sh .copy }
-# This is a Spack Environment file.
-#
-# It describes a set of packages to be installed, along with
-# configuration settings.
-spack:
-  # add package specs to the `specs` list
-  specs:
-  - fenics-dolfinx@git.4f575964c70efd02dca92f2cf10c125071b17e4d=main+adios2
-  - py-fenics-dolfinx@git.4f575964c70efd02dca92f2cf10c125071b17e4d=main
-
-  - py-fenics-basix@git.2e2a7048ea5f4255c22af18af3b828036f1c8b50=main
-  - fenics-basix@git.2e2a7048ea5f4255c22af18af3b828036f1c8b50=main
-
-  - py-fenics-ufl@git.b15d8d3fdfea5ad6fe78531ec4ce6059cafeaa89=main
-
-  - py-fenics-ffcx@git.7bc8be738997e7ce68ef0f406eab63c00d467092=main
-
-  - fenics-ufcx@git.7bc8be738997e7ce68ef0f406eab63c00d467092=main
-
-  - petsc+mumps
-  - adios2+python
-  view: true
-  concretizer:
-    unify: true
-```
-
-It is also possible to build only the C++ layer using
+    Similarly, users can configure Spack to use a system-provided CUDA toolkit by adding the following example to the `packages.yaml` file. This helps Spack avoid rebuilding CUDA from source and ensures compatibility with the system GPU drivers and libraries:
+    ``` { .sh .copy }
+    packages:
+      cuda:
+        externals:
+        - spec: 
+          modules:
+          - 
+        buildable: false
+    ```
 
 
-``` { .sh .copy }
-spack add fenics-dolfinx@main+adios2 py-fenics-ffcx@main petsc+mumps
-```
-To rebuild FEniCSx from main branches inside an existing environment
+## Software installtion with Spack
+!!! Note 
+    This section will include examples and detailed instructions on how to install software using Spack. Relevant official documentation will also be linked to guide users through advanced usage and best practices.
 
 
-``` { .sh .copy }
-spack install --overwrite -j16 fenics-basix py-fenics-basix py-fenics-ffcx fenics-ufcx py-fenics-ufl fenics-dolfinx py-fenics-dolfinx
-```
+### Useful Spack Commands.
 
 
-## Testing the build
+The following tables summarizes the basic commands for managing software packages with Spack, from searching and installation to managing the software environment.
 
-Quickly test the build with
-``` { .sh .copy }
-srun python -c "from mpi4py import MPI; import dolfinx"
-```
+| Spack Command                | Description                                                  |
+|------------------------------|--------------------------------------------------------------|
+|`spack list <package>` |	Searches for packages matching the name or keyword.|
+|` spack info <package>` | displays detailed information about that package|
+| `spack install <package>`    | Installs a new package on the cluster.                       |
+| `spack uninstall <package>`  | Removes an installed package from the cluster.               |
+| `spack load <package>`       | Makes a package ready for use in the current session.        |
+| `spack unload <package>`     | Removes a package from the current session's environment.    |
+| `spack help` |	Displays general help and available subcommands. |
 
-## Using the build
 
-See the uni.lu documentation for full details - using the environment should be as 
-simple as adding the following where `...` is the name/folder of your environment.
+??? info "Further Reference"
+    For a comprehensive list of commands and advanced usage options, see the official Spack documentation:<a href="https://spack.readthedocs.io/en/latest/command_index.html" target="_blank"><strong>Spack Command Index</strong></a>
 
-``` { .sh .copy }
-#!/bin/bash -l
-source $HOME/spack/share/spack/setup-env.sh
-spack env activate ...
-```
 
-## Known issues
+### Spack Environments
 
-Workaround for broken Python module find for gmsh on uni.lu cluster
+A Spack environment is a powerful feature that allows users to manage sets of software packages, dependencies, and configurations in an isolated and reproducible way. 
 
-``` { .sh .copy }
+Below is a list of commonly used Spack environment commands:
 
-export PYTHONPATH=$SPACK_ENV/.spack-env/view/lib64/:$PYTHONPATH
+| Spack Command                      | Description                                                                 |
+|-----------------------------------|-----------------------------------------------------------------------------|
+| `spack env create <env_name>`     | Creates a new Spack environment with the specified name.                   |
+| `spack env activate <env_name>`   | Activates the specified Spack environment.                                 |
+| `spack env status`                | Displays the currently active Spack environment.                           |
+| `spack env deactivate`            | Deactivates the currently active environment.                              |
+| `spack concretize`                | Prepares a full dependency spec for an environment or package before install. |
 
-```
-Workaround for broken Python module find for adios2 (seems broken in Spack)
 
-``` { .sh .copy }
+??? info "Further Reference"
+    For more technical details, see the official Spack documentation:<a href="https://spack.readthedocs.io/en/latest/environments.html" target="_blank"><strong>Spack Environments</strong></a>
 
-export PYTHONPATH=$(find $SPACK_ENV/.spack-env -type d -name 'site-packages' | grep venv):$PYTHONPATH
 
-```
+
