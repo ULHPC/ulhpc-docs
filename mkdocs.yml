@@ -66,9 +66,9 @@ nav:
     - Overview:   'environment/index.md'
     - Modules:    'environment/modules.md'
     - Easybuild:  'environment/easybuild.md'
+    - Spack:      'environment/spack.md'
     - Containers: 'environment/containers.md'
     - Conda:      'environment/conda.md'
-    - Spack: 'environment/spack.md'
   ###########
   - Policies:
     - Acceptable Use Policy (AUP):                   'policies/aup.md'
@@ -418,8 +418,8 @@ markdown_extensions:
       repo_url_shorthand: true
       social_url_shorthand: true
   - pymdownx.snippets:
-      base_path: snippets    
-  - pymdownx.tabbed:
+      base_path: snippets
+  - pymdownx.tabbed
   - pymdownx.smartsymbols
   # code blocks with syntax highlighting, graphs
   - pymdownx.superfences
