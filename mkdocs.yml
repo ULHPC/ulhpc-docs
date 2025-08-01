@@ -66,6 +66,7 @@ nav:
     - Overview:   'environment/index.md'
     - Modules:    'environment/modules.md'
     - Easybuild:  'environment/easybuild.md'
+    - Spack:      'environment/spack.md'
     - Containers: 'environment/containers.md'
     - Conda:      'environment/conda.md'
   ###########
