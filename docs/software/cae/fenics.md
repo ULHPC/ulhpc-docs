@@ -1,161 +1,202 @@
 [![](https://fenicsproject.org/pub/tutorial/sphinx1/_static/fenics_banner.png){: style="width:200px;float: right;" }](https://fenicsproject.org/)
-[FEniCS](https://fenicsproject.org/) is a popular open-source (LGPLv3) computing platform for
-solving partial differential equations (PDEs).
-FEniCS enables users to quickly translate scientific models
-into efficient finite element code. With the high-level
-Python and C++ interfaces to FEniCS, it is easy to get started,
-but FEniCS offers also powerful capabilities for more
-experienced programmers. FEniCS runs on a multitude of
-platforms ranging from laptops to high-performance clusters.
 
-## How to access the FEniCS through [Anaconda](https://www.anaconda.com/products/individual)
-The following steps provides information about how to installed
-on your local path. 
-```bash
-# From your local computer
-$ ssh -X iris-cluster    # OR ssh -Y iris-cluster on Mac
+<!-- Intro start -->
 
-# Reserve the node for interactive computation with grahics view (plots)
-$ si --x11 --ntasks-per-node 1 -c 4
-# salloc -p interactive --qos debug -C batch --x11 --ntasks-per-node 1 -c 4
+[FEniCS](https://fenicsproject.org/) is a popular open-source computing platform for solving partial differential equations (PDEs) using the finite element method ([FEM](https://en.wikipedia.org/wiki/Finite_element_method)). Originally developed in 2003, the earlier version is now known as legacy FEniCS. In 2020, the next-generation framework [FEniCSx](https://docs.fenicsproject.org/) was introduced, with the latest stable [release v0.9.0](https://fenicsproject.org/blog/v0.9.0/) in October 2024. Though it builds on the legacy FEniCS but introduces significant improvements over the legacy libraries. FEniCSx is comprised of the libraries [UFL](https://github.com/FEniCS/ufl), [Basix](https://github.com/FEniCS/basix), [FFCx](https://github.com/FEniCS/ffcx), and [DOLFINx](https://github.com/FEniCS/dolfinx) which are the build blocks of it. And new users are encouraged to adopt [FEniCSx](https://docs.fenicsproject.org/) for its modern features and active development support.
 
-# Go to scratch directory 
-$ cds
 
-/scratch/users/<login> $ Anaconda3-2020.07-Linux-x86_64.sh
-/scratch/users/<login> $ chmod +x Anaconda3-2020.07-Linux-x86_64.sh
-/scratch/users/<login> $ ./Anaconda3-2020.07-Linux-x86_64.sh
+<!-- // Tutorials: https://jsdokken.com/dolfinx-tutorial/index.html -->
 
-Do you accept the license terms? [yes|no]
-yes
-Anaconda3 will now be installed into this location:
-/home/users/<login>/anaconda3
 
-  - Press ENTER to confirm the location
-  - Press CTRL-C to abort the installation
-  - Or specify a different location below
+<!-- Intro end  -->
 
-# You can choose your path where you want to install it
-[/home/users/<login>/anaconda3] >>> /scratch/users/<login>/Anaconda3
+## Installation of FEniCSx
 
-# To activate the anaconda 
-/scratch/users/<login> $ source /scratch/users/<login>/Anaconda3/bin/activate
+FEniCSx can be installed on [ULHPC](https://www.uni.lu/research-en/core-facilities/hpc/) systems using [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/), Below are detailed instructions for each method, 
 
-# Install the fenics in anaconda environment 
-/scratch/users/<login> $ conda create -n fenicsproject -c conda-forge fenics
 
-# Install matplotlib for the visualization 
-/scratch/users/<login> $ conda install -c conda-forge matplotlib 
-```
-Once you have installed the anaconda, you can always
-activate it by calling the `source activate` path where `anaconda`
-has been installed. 
 
-## Working example
-### Interactive mode
-```bash
-# From your local computer
-$ ssh -X iris-cluster      # or ssh -Y iris-cluster on Mac
+### Building FEniCS With Spack
 
-# Reserve the node for interactive computation with grahics view (plots)
-$ si --ntasks-per-node 1 -c 4 --x11
-# salloc -p interactive --qos debug -C batch --x11 --ntasks-per-node 1 -c 4
 
-# Activate anaconda  
-$ source /${SCRATCH}/Anaconda3/bin/activate
+Building FEniCSx with Spack requires that Spack is already installed, configured, and its environment sourced on the [ULHPC] system. If Spack is not yet configured, follow the [spack documentation](../../environment/spack.md) for installation and configuration.  
 
-# activate the fenicsproject
-$ conda activate fenicsproject
+!!! note 
+        Spack can a good choice to  build FEniCSx with its many complex dependencies, leveraging the system-provided packages defined in ~/.spack/packages.yaml for optimal performance. 
 
-# execute the Poisson.py example (you can uncomment the plot lines in Poission.py example)
-$ python3 Poisson.py
-```
+Create and Activate a  Spack Environment: 
 
-### Batch script
-```bash
-#!/bin/bash -l                                                                                                 
-#SBATCH -J FEniCS                                                                                        
-#SBATCH -N 1
-###SBATCH -A <project name>
-###SBATCH --ntasks-per-node=1
-#SBATCH -c 1
-#SBATCH --time=00:05:00                                                                      
-#SBATCH -p batch
+To maintain an isolated installation, create a dedicated Spack environment in a chosen directory.
+The following example builds FEniCSx in the `home` directory:
 
-echo "== Starting run at $(date)"                                                                                             
-echo "== Job ID: ${SLURM_JOBID}"                                                                                            
-echo "== Node list: ${SLURM_NODELIST}"                                                                                       
-echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
+    cd ~
+    spack env create -d fenicsx-main-20230126/
+    spack env activate fenicsx-main-20230126/
 
-# activate the anaconda source 
-source ${SCRATCH}/Anaconda3/bin/activate
+ 
+Add the core FEniCSx components and common dependencies:
 
-# activate the fenicsproject from anaconda 
-conda activate fenicsproject
+    spack add py-fenics-dolfinx@0.9.0+petsc4py fenics-dolfinx+adios2+petsc adios2+python petsc+mumps
 
-# execute the poisson.py through python
-srun python3 Poisson.py  
-```
+    # Change @0.9.0 to any version in the above if you want a another version.
+    spack concretize
+    spack install -j16
+
+
+!!! note 
+
+        `spack concretize` resolves all dependencies and selects compatible versions for the specified packages. `-j16` sets the number of parallel build jobs. Using a higher number can speed up the build but should be chosen based on available CPU cores and cluster policies.
+
+
+
+or the same directly in `spack.yaml` in `$SPACK_ENV`
+
+    spack:
+      # add package specs to the `specs` list
+      specs:
+      - py-fenics-dolfinx@0.9.0+petsc4py
+      - fenics-dolfinx+adios2+petsc
+      - petsc+mumps
+      - adios2+python
+
+      view: true
+      concretizer:
+        unify: true
+    
+The following are also commonly used in FEniCS scripts and may be useful
+
+    spack add gmsh+opencascade py-numba py-scipy py-matplotlib
+    
+It is possible to build a specific version (git ref) of DOLFINx. 
+Note that the hash must be the full hash.
+It is best to specify appropriate git refs on all components.
+
+    # This is a Spack Environment file.
+    #
+    # It describes a set of packages to be installed, along with
+    # configuration settings.
+    spack:
+      # add package specs to the `specs` list
+      specs:
+      - fenics-dolfinx@git.4f575964c70efd02dca92f2cf10c125071b17e4d=main+adios2
+      - py-fenics-dolfinx@git.4f575964c70efd02dca92f2cf10c125071b17e4d=main
+
+      - py-fenics-basix@git.2e2a7048ea5f4255c22af18af3b828036f1c8b50=main
+      - fenics-basix@git.2e2a7048ea5f4255c22af18af3b828036f1c8b50=main
+
+      - py-fenics-ufl@git.b15d8d3fdfea5ad6fe78531ec4ce6059cafeaa89=main
+
+      - py-fenics-ffcx@git.7bc8be738997e7ce68ef0f406eab63c00d467092=main
+
+      - fenics-ufcx@git.7bc8be738997e7ce68ef0f406eab63c00d467092=main
+
+      - petsc+mumps
+      - adios2+python
+      view: true
+      concretizer:
+        unify: true
+        
+It is also possible to build only the C++ layer using
+
+    spack add fenics-dolfinx@main+adios2 py-fenics-ffcx@main petsc+mumps
+    
+To rebuild FEniCSx from main branches inside an existing environment
+
+    spack install --overwrite -j16 fenics-basix py-fenics-basix py-fenics-ffcx fenics-ufcx py-fenics-ufl fenics-dolfinx py-fenics-dolfinx
+
+#### Testing the build
+
+Quickly test the build with
+
+    srun python -c "from mpi4py import MPI; import dolfinx"
+
+#### Using the build
+
+See the uni.lu documentation for full details - using the environment should be as 
+simple as adding the following where `...` is the name/folder of your environment.
+
+    #!/bin/bash -l
+    source $HOME/spack/share/spack/setup-env.sh
+    spack env activate ...
+
+#### Known issues
+
+Workaround for inability to find gmsh Python package:
+
+    export PYTHONPATH=$SPACK_ENV/.spack-env/view/lib64/:$PYTHONPATH
+
+Workaround for inability to find adios2 Python package:
+
+    export PYTHONPATH=$(find $SPACK_ENV/.spack-env -type d -name 'site-packages' | grep venv):$PYTHONPATH
+
+
+### Building FEniCS With EasyBuild
+
 
 ### Example (Poisson.py)
 ```bash
-# FEniCS tutorial demo program: Poisson equation with Dirichlet conditions.
-# Test problem is chosen to give an exact solution at all nodes of the mesh.
-#  -Laplace(u) = f    in the unit square
-#            u = u_D  on the boundary
-#  u_D = 1 + x^2 + 2y^2
-#    f = -6
 
-from __future__ import print_function
-from fenics import *
-import matplotlib.pyplot as plt
+# Demo possion problem 
+# https://docs.fenicsproject.org/dolfinx/main/python/demos/demo_poisson.html
 
-# Create mesh and define function space
-mesh = UnitSquareMesh(8, 8)
-V = FunctionSpace(mesh, 'P', 1)
+from mpi4py import MPI
+from petsc4py.PETSc import ScalarType
 
-# Define boundary condition
-u_D = Expression('1 + x[0]*x[0] + 2*x[1]*x[1]', degree=2)
-
-def boundary(x, on_boundary):
-    return on_boundary
-
-bc = DirichletBC(V, u_D, boundary)
-
-# Define variational problem
-u = TrialFunction(V)
-v = TestFunction(V)
-f = Constant(-6.0)
-a = dot(grad(u), grad(v))*dx
-L = f*v*dx
-
-# Compute solution
-u = Function(V)
-solve(a == L, u, bc)
-
-# Plot solution and mesh
-#plot(u)
-#plot(mesh)
-
-# Save solution to file in VTK format
-vtkfile = File('poisson/solution.pvd')
-vtkfile << u
-
-# Compute error in L2 norm
-error_L2 = errornorm(u_D, u, 'L2')
-
-# Compute maximum error at vertices
-vertex_values_u_D = u_D.compute_vertex_values(mesh)
-vertex_values_u = u.compute_vertex_values(mesh)
 import numpy as np
-error_max = np.max(np.abs(vertex_values_u_D - vertex_values_u))
 
-# Print errors
-print('error_L2  =', error_L2)
-print('error_max =', error_max)
+import ufl
+from dolfinx import fem, mesh
+from dolfinx.fem.petsc import LinearProblem
 
-# Hold plot
-#plt.show()
+# Create mesh
+msh = mesh.create_rectangle(
+    comm=MPI.COMM_WORLD,
+    points=((0.0, 0.0), (2.0, 1.0)),
+    n=(32, 16),
+    cell_type=mesh.CellType.triangle,
+)
+
+# Function space
+V = fem.functionspace(msh, ("Lagrange", 1))
+
+# Boundary facets (x=0 and x=2)
+facets = mesh.locate_entities_boundary(
+    msh,
+    dim=(msh.topology.dim - 1),
+    marker=lambda x: np.isclose(x[0], 0.0) | np.isclose(x[0], 2.0),
+)
+dofs = fem.locate_dofs_topological(V=V, entity_dim=1, entities=facets)
+
+# Dirichlet BC u = 0
+bc = fem.dirichletbc(value=ScalarType(0), dofs=dofs, V=V)
+
+# Variational problem
+u = ufl.TrialFunction(V)
+v = ufl.TestFunction(V)
+x = ufl.SpatialCoordinate(msh)
+f = 10 * ufl.exp(-((x[0] - 0.5) ** 2 + (x[1] - 0.5) ** 2) / 0.02)
+g = ufl.sin(5 * x[0])
+a = ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
+L = ufl.inner(f, v) * ufl.dx + ufl.inner(g, v) * ufl.ds
+
+# Create problem (no petsc_options_prefix in 0.9.0)
+problem = LinearProblem(
+    a,
+    L,
+    bcs=[bc],
+    petsc_options={"ksp_type": "preonly", "pc_type": "lu", "ksp_error_if_not_converged": True},
+)
+
+# Solve
+uh = problem.solve()
+
+# Only print from rank 0 to avoid MPI spam
+if MPI.COMM_WORLD.rank == 0:
+    print("First 10 values of the solution vector:", uh.x.array[:10])
+
+assert isinstance(uh, fem.Function)
+
+
 ```
 
 ## Additional information
