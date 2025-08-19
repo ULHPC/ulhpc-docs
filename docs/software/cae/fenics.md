@@ -2,27 +2,27 @@
 
 <!-- Intro start -->
 
-[FEniCS](https://fenicsproject.org/) is a popular open-source computing platform for solving partial differential equations (PDEs) using the finite element method ([FEM](https://en.wikipedia.org/wiki/Finite_element_method)). Originally developed in 2003, the earlier version is now known as legacy FEniCS. In 2020, the next-generation framework [FEniCSx](https://docs.fenicsproject.org/) was introduced, with the latest stable [release v0.9.0](https://fenicsproject.org/blog/v0.9.0/) in October 2024. Though it builds on the legacy FEniCS but introduces significant improvements over the legacy libraries. FEniCSx is comprised of the libraries [UFL](https://github.com/FEniCS/ufl), [Basix](https://github.com/FEniCS/basix), [FFCx](https://github.com/FEniCS/ffcx), and [DOLFINx](https://github.com/FEniCS/dolfinx) which are the build blocks of it. And new users are encouraged to adopt [FEniCSx](https://docs.fenicsproject.org/) for its modern features and active development support.
+[FEniCS](https://fenicsproject.org/) is a popular open-source computing platform for solving partial differential equations (PDEs) using the finite element method ([FEM](https://en.wikipedia.org/wiki/Finite_element_method)). Originally developed in 2003, the earlier version is now known as legacy FEniCS. In 2020, the next-generation framework [FEniCSx](https://docs.fenicsproject.org/) was introduced, with the latest stable [release v0.9.0](https://fenicsproject.org/blog/v0.9.0/) in October 2024. Though it builds on the legacy FEniCS but introduces significant improvements over the legacy libraries. FEniCSx is composed of the following libraries that support typical workflows: [UFL](https://github.com/FEniCS/ufl) → [FFCx](https://github.com/FEniCS/ffcx) → [Basix](https://github.com/FEniCS/basix) → [DOLFINx](https://github.com/FEniCS/dolfinx), which are the build blocks of it. And new users are encouraged to adopt [FEniCSx](https://fenicsproject.org/documentation/) for its modern features and active development support.
 
 
-<!-- // Tutorials: https://jsdokken.com/dolfinx-tutorial/index.html -->
+(Maybe add a short intro into the stack the software depends on, and further more the internal dependencies UFL->FFCx ...)
 
 
-<!-- Intro end  -->
 
-## Installation of FEniCSx
 
 FEniCSx can be installed on [ULHPC](https://www.uni.lu/research-en/core-facilities/hpc/) systems using [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/), Below are detailed instructions for each method, 
 
-
+<!-- Intro end  -->
 
 ### Building FEniCS With Spack
 
 
-Building FEniCSx with Spack requires that Spack is already installed, configured, and its environment sourced on the [ULHPC] system. If Spack is not yet configured, follow the [spack documentation](../../environment/spack.md) for installation and configuration.  
+Building FEniCSx with Spack on the [ULHPC](https://www.uni.lu/research-en/core-facilities/hpc/) system requires that Users already installed Spack and sourced its enviroment on the cluster. If Spack is not yet configured, follow the [spack documentation](../../environment/spack.md) for installation and configuration.
+
 
 !!! note 
-        Spack can a good choice to  build FEniCSx with its many complex dependencies, leveraging the system-provided packages defined in ~/.spack/packages.yaml for optimal performance. 
+
+        Spack would be a good choice for  building FEniCSx because it automatically manages complex dependencies, allows to isolates all installations in a dedicated environment, leverages system-provided packages  in ~/.`spack/packages.yaml` for optimal performance, and simplifies reproducibility and maintenance across different systems.
 
 Create and Activate a  Spack Environment: 
 
@@ -30,8 +30,8 @@ To maintain an isolated installation, create a dedicated Spack environment in a 
 The following example builds FEniCSx in the `home` directory:
 
     cd ~
-    spack env create -d fenicsx-main-20230126/
-    spack env activate fenicsx-main-20230126/
+    spack env create -d fenicsx-0.9.0/ 
+    spack env activate fenicsx-0.9.0/
 
  
 Add the core FEniCSx components and common dependencies:
@@ -43,13 +43,13 @@ Add the core FEniCSx components and common dependencies:
     spack install -j16
 
 
-!!! note 
+!!! question " why concretize and -j16 ? " 
 
-        `spack concretize` resolves all dependencies and selects compatible versions for the specified packages. `-j16` sets the number of parallel build jobs. Using a higher number can speed up the build but should be chosen based on available CPU cores and cluster policies.
+        `spack concretize` resolves all dependencies and selects compatible versions for the specified packages. `-j16` sets the number cores to use for building. Using a higher number can speed up the build but should be chosen based on available CPU cores and cluster policies.
 
 
 
-or the same directly in `spack.yaml` in `$SPACK_ENV`
+or its also possible to define build packages in  `$SPACK_ENV` in a `spack.yaml` file. 
 
     spack:
       # add package specs to the `specs` list
@@ -63,7 +63,13 @@ or the same directly in `spack.yaml` in `$SPACK_ENV`
       concretizer:
         unify: true
     
-The following are also commonly used in FEniCS scripts and may be useful
+!!! question  " why unify : true ? "
+    
+        `unify: true` ensures all packages share the same dependency versions, preventing multiple builds of the same library. Without it, each `spec` could resolve dependencies independently, leading to potential conflicts and redundant installations.
+
+
+
+The following are also common dependencies used in FEniCS scripts:
 
     spack add gmsh+opencascade py-numba py-scipy py-matplotlib
     
@@ -72,7 +78,6 @@ Note that the hash must be the full hash.
 It is best to specify appropriate git refs on all components.
 
     # This is a Spack Environment file.
-    #
     # It describes a set of packages to be installed, along with
     # configuration settings.
     spack:
@@ -96,11 +101,11 @@ It is best to specify appropriate git refs on all components.
       concretizer:
         unify: true
         
-It is also possible to build only the C++ layer using
+It is also possible to build only the C++ layer using (Need to comment about why we add python depndencies?)
 
-    spack add fenics-dolfinx@main+adios2 py-fenics-ffcx@main petsc+mumps
+    spack add fenics-dolfinx@0.9.0+adios2 py-fenics-ffcx@0.9.0 petsc+mumps
     
-To rebuild FEniCSx from main branches inside an existing environment
+To rebuild FEniCSx from main branches inside an existing environment: 
 
     spack install --overwrite -j16 fenics-basix py-fenics-basix py-fenics-ffcx fenics-ufcx py-fenics-ufl fenics-dolfinx py-fenics-dolfinx
 
@@ -110,14 +115,11 @@ Quickly test the build with
 
     srun python -c "from mpi4py import MPI; import dolfinx"
 
-#### Using the build
+!!! info "Try the Build Explicitly" 
 
-See the uni.lu documentation for full details - using the environment should be as 
-simple as adding the following where `...` is the name/folder of your environment.
+        After installation, the [FEniCSx](https://fenicsproject.org/documentation/) build can be tried explicitly by running the demo problems corresponding to the installed release version, as provided in the [FEniCSx documentation](https://docs.fenicsproject.org/).  
+        For [DOLFINx](https://docs.fenicsproject.org/dolfinx/main/python/) Python bindings, see for example the demos in the [stable release v0.9.0](https://docs.fenicsproject.org/dolfinx/v0.9.0/python/demos.html).
 
-    #!/bin/bash -l
-    source $HOME/spack/share/spack/setup-env.sh
-    spack env activate ...
 
 #### Known issues
 
@@ -129,75 +131,13 @@ Workaround for inability to find adios2 Python package:
 
     export PYTHONPATH=$(find $SPACK_ENV/.spack-env -type d -name 'site-packages' | grep venv):$PYTHONPATH
 
+<!-- if any other known issues need to be added -->
+
 
 ### Building FEniCS With EasyBuild
 
 
-### Example (Poisson.py)
-```bash
 
-# Demo possion problem 
-# https://docs.fenicsproject.org/dolfinx/main/python/demos/demo_poisson.html
-
-from mpi4py import MPI
-from petsc4py.PETSc import ScalarType
-
-import numpy as np
-
-import ufl
-from dolfinx import fem, mesh
-from dolfinx.fem.petsc import LinearProblem
-
-# Create mesh
-msh = mesh.create_rectangle(
-    comm=MPI.COMM_WORLD,
-    points=((0.0, 0.0), (2.0, 1.0)),
-    n=(32, 16),
-    cell_type=mesh.CellType.triangle,
-)
-
-# Function space
-V = fem.functionspace(msh, ("Lagrange", 1))
-
-# Boundary facets (x=0 and x=2)
-facets = mesh.locate_entities_boundary(
-    msh,
-    dim=(msh.topology.dim - 1),
-    marker=lambda x: np.isclose(x[0], 0.0) | np.isclose(x[0], 2.0),
-)
-dofs = fem.locate_dofs_topological(V=V, entity_dim=1, entities=facets)
-
-# Dirichlet BC u = 0
-bc = fem.dirichletbc(value=ScalarType(0), dofs=dofs, V=V)
-
-# Variational problem
-u = ufl.TrialFunction(V)
-v = ufl.TestFunction(V)
-x = ufl.SpatialCoordinate(msh)
-f = 10 * ufl.exp(-((x[0] - 0.5) ** 2 + (x[1] - 0.5) ** 2) / 0.02)
-g = ufl.sin(5 * x[0])
-a = ufl.inner(ufl.grad(u), ufl.grad(v)) * ufl.dx
-L = ufl.inner(f, v) * ufl.dx + ufl.inner(g, v) * ufl.ds
-
-# Create problem (no petsc_options_prefix in 0.9.0)
-problem = LinearProblem(
-    a,
-    L,
-    bcs=[bc],
-    petsc_options={"ksp_type": "preonly", "pc_type": "lu", "ksp_error_if_not_converged": True},
-)
-
-# Solve
-uh = problem.solve()
-
-# Only print from rank 0 to avoid MPI spam
-if MPI.COMM_WORLD.rank == 0:
-    print("First 10 values of the solution vector:", uh.x.array[:10])
-
-assert isinstance(uh, fem.Function)
-
-
-```
 
 ## Additional information
 FEniCS provides the [technical documentation](https://fenicsproject.org/documentation/),
