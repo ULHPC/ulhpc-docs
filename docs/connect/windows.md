@@ -36,11 +36,11 @@ Go onto **Tools > Network > MobaKeyGen (SSH key generator)**. Choose **RSA** as 
     Additionally, your private key and passphrase should never be transmitted to anybody.
 
 Select a strong passphrase in the **Key passphrase** field for your key. Save the public and private keys as respectively `id_rsa.pub` and `id_rsa.ppk`.
-Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
+Please keep a copy of the public key, you will have to add this public key into your account, using the ULHPC Identity Management Portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
 
 ![MobaKeyGen (SSH key generator)](images/moba-ssh-key-gen.png)
 
-![IPA user portal](images/ipa.png)
+![Identity Management Portal](images/idm-ssh.png)
 
 #### With local terminal
 
@@ -96,7 +96,7 @@ MobaXterm allows you to launch remote sessions. You just have to click on the "S
 
 Go in **Advanced SSH settings** and check the **Use private key** box. Select your previously generated key `id_rsa.ppk`.
 
-![MobaXterm Session Manager Advanced](/images/moba-session-advanced.png)
+![MobaXterm Session Manager Advanced](images/moba-session-advanced.png)
 
 Click on **Connect**. The following text appears.
 
@@ -109,35 +109,35 @@ Click on **Connect**. The following text appears.
                  | | | || |  | \__ \ | |___| | |_| \__ \ ||  __/ |  | |
                  | ||___|_|  |_|___/  \____|_|\__,_|___/\__\___|_|  | |
                   \_\                                              /_/
-    
+
     === Support and community ======================================================
-    
+
       - Technical Docs ........... https://hpc-docs.uni.lu
       - Discourse / Forum ........ https://hpc-discourse.uni.lu/
       - Helpdesk / Service Now ... https://hpc.uni.lu/support
       - User Mailing-list ........ hpc-users@uni.lu
-    
+
     === HPC utilization as of 2025-02-18 15h00 =====================================
-    
+
       AION  batch    74.42%
       IRIS  batch    47.94%
       IRIS  gpu      85.42%
       IRIS  bigmem   51.79%
-    
+
     === Status =====================================================================
-    
+
      New environment modules (env/development/2023b env/release/default env/release/2020b)
-     The default module currently points to 'env/release/2020b' 
+     The default module currently points to 'env/release/2020b'
           but will be updated to 2023b upon release.
      Add 'module use env/release/2020b' to your scripts to ensure that
           they will continue working after the switch.
-    
+
      Cluster maintenance complete (https://gitlab.com/uniluxembourg/hpc/support/infra/-/issues/29)
      - General update to latest RedHat 8.10
      - Slurm update to 23.11.10
      - General security update
      - New software set release (foss 2023a toolchain)
-    
+
     ================================================================================
     Last login: Tue Feb 18 10:40:24 2025 from 10.187.28.101
     Linux access1.iris-cluster.uni.lux 4.18.0-553.34.1.el8_10.x86_64 x86_64
@@ -166,15 +166,11 @@ The simplest method is probably to download and run the [latest Putty installer]
 
 The different steps involved in the installation process are illustrated below (**REMEMBER to tick the option "Associate .PPK files (PuTTY Private Key) with Pageant and PuTTYGen"**):
 
-![Windows security warning](./images/screen-1.png)
+![Putty Setup Screen #1](images/putty-setup-screenshot.png)
 
-![Putty Setup Screen #1](./images/screen-2.png)
+![Putty Setup Screen #2](images/puttygen-screenshot-6.png)
 
-![Putty Setup Screen #2](./images/screen-3.png)
-
-![Putty Setup Screen #3](./images/screen-4.png)
-
-![Putty Setup Screen #4](./images/screen-5.png)
+![Putty Setup Screen #3](images/puttygen-screenshot-7.png)
 
 
 Now you should have all the [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/) programs available in `Start / All Programs / Putty `.
@@ -186,22 +182,17 @@ Here you can use the [PuTTYgen](http://the.earth.li/~sgtatham/putty/latest/x86/p
 
 The main steps for the generation of the keys are illustrated below:
 
-![Putty Key Generator interface](./images/screen-6.png)
+![Putty Key Generator interface](images/puttygen-screenshot-1.png)
 
-![Key generation in progress](./images/screen-7.png)
+![Key generation in progress](images/puttygen-screenshot-2.png)
 
-![Configuring a passphrase](./images/screen-8.png)
-
-![Saving the private key](./images/screen-9.png)
-
-![Saving the public key](./images/screen-10.png)
-
+![Configuring a passphrase](images/puttygen-screenshot-3.png)
 
 ### Configuration
 
 In order to be able to login to the clusters, you will have to add this **public key** into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
 
-![IPA user portal](images/ipa.png)
+![IPA user portal](images/idm-ssh.png)
 
 The port on which the SSH servers are listening is not the default one (*i.e.* 22) but **8022**.
 Consequently, if you want to connect to the Iris cluster, open Putty and enter the following settings:
@@ -232,35 +223,35 @@ Now you'll be able to obtain the welcome banner:
                  | | | || |  | \__ \ | |___| | |_| \__ \ ||  __/ |  | |
                  | ||___|_|  |_|___/  \____|_|\__,_|___/\__\___|_|  | |
                   \_\                                              /_/
-    
+
     === Support and community ======================================================
-    
+
       - Technical Docs ........... https://hpc-docs.uni.lu
       - Discourse / Forum ........ https://hpc-discourse.uni.lu/
       - Helpdesk / Service Now ... https://hpc.uni.lu/support
       - User Mailing-list ........ hpc-users@uni.lu
-    
+
     === HPC utilization as of 2025-02-18 15h00 =====================================
-    
+
       AION  batch    74.42%
       IRIS  batch    47.94%
       IRIS  gpu      85.42%
       IRIS  bigmem   51.79%
-    
+
     === Status =====================================================================
-    
+
      New environment modules (env/development/2023b env/release/default env/release/2020b)
-     The default module currently points to 'env/release/2020b' 
+     The default module currently points to 'env/release/2020b'
           but will be updated to 2023b upon release.
      Add 'module use env/release/2020b' to your scripts to ensure that
           they will continue working after the switch.
-    
+
      Cluster maintenance complete (https://gitlab.com/uniluxembourg/hpc/support/infra/-/issues/29)
      - General update to latest RedHat 8.10
      - Slurm update to 23.11.10
      - General security update
      - New software set release (foss 2023a toolchain)
-    
+
     ================================================================================
 
 ### Activate the SSH agent
