@@ -190,9 +190,9 @@ The main steps for the generation of the keys are illustrated below:
 
 ### Configuration
 
-In order to be able to login to the clusters, you will have to add this **public key** into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
+In order to be able to login to the clusters, you will have to add this **public key** into your account, using the ULHPC Identity Management Portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
 
-![IPA user portal](images/idm-ssh.png)
+![Identity Management Portal](images/idm-ssh.png)
 
 The port on which the SSH servers are listening is not the default one (*i.e.* 22) but **8022**.
 Consequently, if you want to connect to the Iris cluster, open Putty and enter the following settings:
