@@ -2,8 +2,6 @@
 
 Grid'5000 is a large-scale and flexible testbed for experiment-driven research in all areas of computer science, with a focus on parallel and distributed computing, cloud, HPC, Big Data and AI.
 
-Grid'5000 is a precursor infrastructure of SLICES-RI, the Scientific Large Scale Infrastructure for Computing/Communication Experimental Studies.
-
 It provides:
 * an access to a large amount of resources (about 25000 cores, 800 compute nodes, 550 GPUs...)
 * highly configurable and controllable hardware
@@ -17,7 +15,7 @@ At the end of this session, you should be able to log on the platform, reserve c
 # Grid'5000 platform
 
 Grid'5000 is a distributed platform, composed of multiple sites scattered all over France.
-To use Grid'5000, a user will log into a given site (e.g., Lyon, Grenoble, Toulouse, …) and reserve computing resources located in this site in order to deploy their experimentation (or reserve resources accross several sites to perform multi-sites experimentation).
+To use Grid'5000, a user will log into a given site (e.g., Luxembourg, Lyon, Grenoble, Toulouse, …) and reserve computing resources located in this site in order to deploy their experimentation (or reserve resources accross several sites to perform multi-sites experimentation).
 
 
 ![Grid'5000's distributed architecture](https://www.grid5000.fr/mediawiki/images/Grid5000_SSH_access.png)
@@ -25,11 +23,11 @@ To use Grid'5000, a user will log into a given site (e.g., Lyon, Grenoble, Toulo
 ## Discovering Grid'5000 Resources
 
 Grid'5000 resources are organised in **clusters**.
-A **cluster** is a named group of **nodes** with homogeneous hardware (CPU, RAM, disk space, GPU...): for example *neowise* at Lyon, *dahu* at Grenoble...
+A **cluster** is a named group of **nodes** with homogeneous hardware (CPU, RAM, disk space, GPU...): for example *larochette* at Luxembourg, *neowise* at Lyon, *dahu* at Grenoble...
 
 
 A **node** is a bare-metal resource (server, or edge-class machine) composed of several **cores**.
-A **node** is named by appending its ID to the **cluster** name, for exemple: *neowise-1* and *neowise-2* are nodes belonging to the *neowise* cluster.
+A **node** is named by appending its ID to the **cluster** name, for exemple: *larochette-1* and *larochette-2* are nodes belonging to the *larochette* cluster.
 
 Finally, a **core** (CPU core) is the smallest resource size that can be reserved on Grid'5000.
 Each **node** is composed of several **cores** that can be reserved individually.
@@ -64,6 +62,7 @@ The more interesting links on theses pages are the hardware and network pages li
 Here are some links for the biggest sites:
 * grenoble: [hardware](https://www.grid5000.fr/w/Grenoble:Hardware) | [network](https://www.grid5000.fr/w/Grenoble:Network)
 * lille: [hardware](https://www.grid5000.fr/w/Lille:Hardware) | [network](https://www.grid5000.fr/w/Lille:Network)
+* luxembourg: [hardware](https://www.grid5000.fr/w/Luxembourg:Hardware) | [network](https://www.grid5000.fr/w/Luxembourg:Network)
 * lyon: [hardware](https://www.grid5000.fr/w/Lyon:Hardware) | [network](https://www.grid5000.fr/w/Lyon:Network)
 * nancy: [hardware](https://www.grid5000.fr/w/Nancy:Hardware) | [network](https://www.grid5000.fr/w/Nancy:Network)
 * nantes: [hardware](https://www.grid5000.fr/w/Nantes:Hardware) | [network](https://www.grid5000.fr/w/Nantes:Network)
@@ -74,15 +73,16 @@ Here are some links for the biggest sites:
 Grid'5000 also provide a REST API that allow users to automatically discover resources, and allow to monitor their evolution over time.
 Using tools like curl, or a simple web browser, users can obtain a lot of information such as:
 * Grid'5000 sites list and informations: https://api.grid5000.fr/stable/sites/
-    * lyon site description: https://api.grid5000.fr/stable/sites/lyon/
+    * luxembourg site description: https://api.grid5000.fr/stable/sites/luxembourg/
 * Clusters informations:
-    * lyon clusters informations: https://api.grid5000.fr/stable/sites/lyon/clusters/
+    * luxembourg clusters informations: https://api.grid5000.fr/stable/sites/luxembourg/clusters/
 * Nodes informations:
-    * lyon nova-1 node informations: https://api.grid5000.fr/stable/sites/lyon/clusters/nova/nodes/nova-1
+    * luxembourg nova-1 node informations: https://api.grid5000.fr/stable/sites/luxembourg/clusters/nova/nodes/nova-1
 
 
 Theses endpoints allow users to explore Grid'5000 resources programmatically.
 Here is a bash script that will search for any cluster having more than 2 network interfaces:
+<!--TODO: Simplify?-->
 ```bash
 #!/bin/bash
 
@@ -112,14 +112,7 @@ In this part of the tutorial, we'll connect to a Grid'5000 site and reserve reso
 
 Before logging onto a Grid'5000 site, it's best to already know what resources we'd like to reserve.
 Usually, users will explore the Hardware pages mentioned sooner, and choose their resources that fit their experiment's requirements.
-Since we are not going to need any particular hardware, the following clusters are a good fit for this tutorial:
-* *gros* cluster at Nancy
-* *ecotype* cluster at Nantes
-* *econome* cluster at Nantes
-* *paradoxe* cluster at Rennes
-* *dahu* cluster at Grenoble
-* *nova* cluster at Lyon
-* *taurus* cluster at Lyon
+For this tutorial, we'll use the *clervaux* cluster at Luxembourg.
 
 ## logging onto a site
 
@@ -131,7 +124,7 @@ There, users will be able to reserve resources, start deployment, and more.
 This is done with the `ssh-keygen` command:
 
 ```bash
-pjacquot@lip-pierre: ssh-keygen -t ed25519
+user@pc: ssh-keygen -t ed25519
 ```
 
 > The choice of how you configure your SSH key (passphrase, location...) is yours.
@@ -139,7 +132,7 @@ pjacquot@lip-pierre: ssh-keygen -t ed25519
 
 When the SSH key is generated, copy the public key:
 ```bash
-pjacquot@lip-pierre: cat .ssh/id_ed25519.pub
+user@pc: cat .ssh/id_ed25519.pub
 # Copy the output of this command.
 ```
 
@@ -152,15 +145,16 @@ As seen in the schema describing Grid'5000 platform, users must pass through `ac
 Once on this machine, they can start another SSH connection to the site frontend they want to reach:
 
 ```bash
-pjacquot@lip-pierre:~$ ssh access.grid5000.fr
-pjacquot@access-north:~$ ssh lyon
-pjacquot@flyon:~$ 
+user@pc:~$ ssh access.grid5000.fr
+user@access-north:~$ ssh luxembourg
+user@fluxembourg:~$
 ```
 
 You should be greeted by a message similar as below:
+<!--TODO: update-->
 ```
-Linux flyon 5.10.0-34-amd64 #1 SMP Debian 5.10.234-1 (2025-02-24) x86_64
------- Welcome to Grid'5000 - Lyon ------
+Linux fluxembourg 5.10.0-34-amd64 #1 SMP Debian 5.10.234-1 (2025-02-24) x86_64
+------ Welcome to Grid'5000 - Luxembourg ------
 
 As a member of the 'g5k-staff' group, you can access the following clusters in queue 'default' on this site:
  - sagittaire (2006): 9 nodes (2 CPUs AMD Opteron 250, 1 core/CPU, 2GB RAM, 68GB HDD, 1 x 1Gb Ethernet)
@@ -188,7 +182,7 @@ More resources are available in other sites and queues. See <https://api.grid500
  - account management (password change): https://api.grid5000.fr/ui/account
  - support: https://www.grid5000.fr/w/Support
 Last login: Sun Jun  8 12:07:37 2025 from 192.168.66.33
-[pjacquot@flyon|~]$ 
+[user@fluxembourg|~]$
 ```
 
 The Message of the Day provides a little summary of the site:
@@ -224,8 +218,8 @@ Host *.g5k
 
 Now, we should be able to log in any Grid'5000 site *"directly"* with this command:
 ```bash
-pjacquot@lip-pierre:~$ ssh lyon.g5k
-pjacquot@flyon:~$
+user@pc:~$ ssh luxembourg.g5k
+user@fluxembourg:~$
 ```
 
 ## Basic resource reservation
@@ -236,9 +230,9 @@ We are now ready to reserve resources.
 Grid'5000's resources are managed by the [OAR](https://oar.imag.fr/) resources and tasks manager.
 Hence, the command to reserve a resource is `oarsub`.
 A basic `oarsub` command will allocate the first resource available for a default duration (wall time) of 1 hour:
-
+<!-- TODO: update -->
 ```bash
-[pjacquot@flyon|~]$ oarsub -r now
+[user@fluxembourg|~]$ oarsub -r now
 # Filtering out exotic resources (pyxis, neowise, hydra, gemini, sirius).
 # Set walltime to default (3600 s).
 # Warning: your reservation starts very soon, you might get less nodes than what you required!
@@ -252,10 +246,10 @@ Our reservation should be visible on the drawgantt of the site we're currently l
 It may not have started yet, so it may be worth checking our reservation's state with the `oarstat` command:
 
 ```bash
-[pjacquot@flyon|~]$ oarstat -u
+[user@fluxembourg|~]$ oarstat -u
 Job id     Name           User           Submission Date     S Queue
 ---------- -------------- -------------- ------------------- - ----------
-1894417                   pjacquot       2025-06-08 12:19:52 R default   
+1894417                   user           2025-06-08 12:19:52 R default
 ```
 
 (`-u` option is used to show reservation's from current user only)
@@ -274,23 +268,25 @@ Check regularly the state of your job until its state is `R`.
 
 After submitting a reservation, it can be useful to check related informations, such as the node(s) allocated, with `oarstat` command.
 
+<!-- TODO: update ? -->
+
 ```bash
-pjacquot@flyon:~$ oarstat -f -j 1894417
+user@fluxembourg:~$ oarstat -f -j 1894417
 id: 1894417
     array_id = 1894417
     array_index = 1
     name = 
     project = g5k-staff
-    owner = pjacquot
+    owner = user
     state = Error
     wanted_resources = -l "{(type = 'default') AND exotic = 'NO'}/host=1,walltime=0:59:49" 
     types = monitor=prom_.*default_metrics
     dependencies = 
     assigned_resources = 2762+2763+2764+2765+2766+2767+2768+2769+2770+2771+2772+2773
-    assigned_hostnames = taurus-11.lyon.grid5000.fr
+    assigned_hostnames = clervaux-11.luxembourg.grid5000.fr
     queue = default
     command = 
-    launching_directory = /home/pjacquot
+    launching_directory = /home/user
     stdout_file = <interactive shell>
     stderr_file = <interactive shell>
     type = INTERACTIVE
@@ -300,7 +296,7 @@ id: 1894417
     submission_time = 2025-06-08 12:19:52
     start_time = 2025-06-08 12:20:02
     stop_time = 2025-06-08 12:45:26
-    cpuset_name = pjacquot_1894417
+    cpuset_name = user_1894417
     initial_request = oarsub -r now
     message = R=12,W=0:59:49,J=R,P=g5k-staff,T=monitor=prom_.*default_metrics
     scheduled_start = no prediction
@@ -318,14 +314,14 @@ This will help us log in to our resource during the next step.
 Now that we have a resource reserved, we can connect to the node allocated and use it.
 This can be done using SSH
 ```bash
-[pjacquot@flyon|~]$ ssh taurus-11
-pjacquot@taurus-11:~$ 
+[user@fluxembourg|~]$ ssh clervaux-11
+user@clervaux-11:~$
 ```
 
 You can also use following command to get connected to the node:
 ```bash
-[pjacquot@flyon|~]$ oarsub -C
-pjacquot@taurus-11:~$ 
+[user@fluxembourg|~]$ oarsub -C
+user@clervaux-11:~$
 ```
 
 > `oarsub -C` will work only if you have **one** reservation currently ongoing at the moment.
@@ -362,9 +358,9 @@ Once done, we'll export the result to our home.
 
 Let's start by going into `/tmp/` directory, and download the benchmarks' source code:
 ```bash
-pjacquot@taurus-11:~$ cd /tmp/
-pjacquot@taurus-11:~$ wget 'https://www.nas.nasa.gov/assets/npb/NPB3.4.3.tar.gz'
-pjacquot@taurus-11:~$ tar -xzvf NPB3.4.3.tar.gz
+user@clervaux-11:~$ cd /tmp/
+user@clervaux-11:~$ wget 'https://www.nas.nasa.gov/assets/npb/NPB3.4.3.tar.gz'
+user@clervaux-11:~$ tar -xzvf NPB3.4.3.tar.gz
 ```
 
 > It's important to keep in mind that the `/tmp/` directory is located on the disk's filesystem, while our current home directory is mounted via NFS from a storage server.
@@ -373,10 +369,10 @@ pjacquot@taurus-11:~$ tar -xzvf NPB3.4.3.tar.gz
 Now we'll use the default template and Makefile to compile the benchmarks:
 
 ```bash
-pjacquot@taurus-11:~$ cd NPB3.4.3/NPB3.4-OMP
-pjacquot@taurus-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cp config/suite.def.template config/suite.def
-pjacquot@taurus-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cp config/make.def.template config/make.def
-pjacquot@taurus-11:/tmp/NPB3.4.3/NPB3.4-OMP$ make -j$(nproc) suite
+user@clervaux-11:~$ cd NPB3.4.3/NPB3.4-OMP
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cp config/suite.def.template config/suite.def
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cp config/make.def.template config/make.def
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ make -j$(nproc) suite
 ```
 
 Now that everthing is compiled, we can run the benchmarks.
@@ -384,17 +380,17 @@ The following commands create a directory where the benchmarks output will be st
 The benchmarks are run with the default configuration, and once they have completed their output is copied to our home directory.
 
 ```bash
-pjacquot@taurus-11:/tmp/NPB3.4.3/NPB3.4-OMP$ mkdir /tmp/benchs
-pjacquot@taurus-11:/tmp/NPB3.4.3/NPB3.4-OMP$ for bench in $(ls bin); do ./bin/$bench | tee /tmp/benchs/$bench.txt; done
-pjacquot@taurus-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cp -R /tmp/benchs ~/benchs-$OAR_JOBID
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ mkdir /tmp/benchs
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ for bench in $(ls bin); do ./bin/$bench | tee /tmp/benchs/$bench.txt; done
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cp -R /tmp/benchs ~/benchs-$OAR_JOBID
 ```
 
 The benchmarks output should have been copied to our home directory.
 Each benchmark output can now be read with `cat` or `less`, and will stay on our home even when our reservation will be over.
 
 ```bash
-pjacquot@taurus-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cd
-pjacquot@taurus-11:~$ cat benchs-$OAR_JOBID/lu.S.x.txt
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cd
+user@clervaux-11:~$ cat benchs-$OAR_JOBID/lu.S.x.txt
 ```
 
 > In the example we use the `OAR_JOBID` variable because we are still "in" our reservation.
@@ -408,7 +404,7 @@ This command is a wrapper for `sudo` that will perform safety checks before gran
 
 Once logged into their computing resource, users can ask for root access with the following command:
 ```bash
-pjacquot@taurus-11:~$ sudo-g5k [command-to-execute]
+user@clervaux-11:~$ sudo-g5k [command-to-execute]
 ```
 
 > Providing a command while using `sudo-g5k` is not mandatory.
@@ -420,19 +416,19 @@ When their job will be finished, the default environment will be redeployed to p
 After running `sudo-g5k`, it is possible to run root command with `sudo` or to become root directly:
 
 ```bash
-pjacquot@taurus-11:~$ sudo -iu root
-root@taurus-11:~#
+user@clervaux-11:~$ sudo -iu root
+root@clervaux-11:~#
 ```
 
 > Note that the `$` at the end of the prompt has changed into `#`, indicating you are indeed root.
 
 Once a user is allowed to use the root account, they can perform any operation that would be forbidden as a normal user:
 ```bash
-root@taurus-11:~# apt update
-root@taurus-11:~# apt upgrade
-root@taurus-11:~# apt install ninvaders
-root@taurus-11:~# exit
-pjacquot@taurus-11:~$ ninvaders
+root@clervaux-11:~# apt update
+root@clervaux-11:~# apt upgrade
+root@clervaux-11:~# apt install ninvaders
+root@clervaux-11:~# exit
+user@clervaux-11:~$ ninvaders
 ```
 
 > You can quit ninvaders by using `Ctrl`+`c` shortcut if the lecturer or your thesis professor are coming. :eyes:
@@ -445,10 +441,10 @@ By using `sudo-g5k` in short reservations performed by a script you might end su
 
 When work is finished on the node we reserved, we can log out and delete our job with the `oardel` command:
 ```bash
-pjacquot@taurus-11:~$ logout
-Connection to taurus-11.lyon.grid5000.fr closed.
+user@clervaux-11:~$ logout
+Connection to clervaux-11.luxembourg.grid5000.fr closed.
 Disconnected from OAR job 1894417.
-[pjacquot@flyon|~]$ oardel 1894417
+[user@fluxembourg|~]$ oardel 1894417
 Deleting the job = 1894417 ...REGISTERED.
 The job(s) [ 1894417 ] will be deleted in the near future.
 ```
@@ -462,8 +458,10 @@ It is important to delete jobs that are holding unused resources to make them av
 Users can reserve resources in advance for a given date and a given amount of time.
 This can be done with the `oarsub` command by specifying the start date and end date of the job:
 
+<!-- TODO: update -->
+
 ```bash
-pjacquot@flyon:~$ oarsub -r "2025-06-10 10:00, 2025-06-10 12:00"
+user@fluxembourg:~$ oarsub -r "2025-06-10 10:00, 2025-06-10 12:00"
 # Filtering out exotic resources (pyxis, neowise, hydra, gemini, sirius).
 OAR_JOB_ID=1894550
 # Advance reservation request: waiting for validation...
@@ -475,7 +473,7 @@ The job will start automatically at the given date, and we'll be able to log in 
 
 Delete this job, since we are not going to use it:
 ```bash
-pjacquot@flyon:~$ oardel 1894550
+user@fluxembourg:~$ oardel 1894550
 Deleting the job = 1894550 ...REGISTERED.
 The job(s) [ 1894550 ] will be deleted in the near future.
 ```
@@ -492,7 +490,7 @@ This part of the tutorial will present some ways to select resources according t
 With the `-p` option of the `oarsub` command we can ask for a given cluster.
 For example:
 ```bash
-pjacquot@flyon:~$ oarsub -r now -p orion
+user@fluxembourg:~$ oarsub -r now -p orion
 ```
 
 ### Cluster properties
@@ -502,8 +500,9 @@ For example; `-p "core_count > 8"` will let us reserve computing resources with 
 
 The string passed with the `-p` option follow SQL syntax, so we can write selections like this:
 ```bash
-pjacquot@flyon:~$ oarsub -r now -p "cputype LIKE 'Intel Xeon%'"
+user@fluxembourg:~$ oarsub -r now -p "cputype LIKE 'Intel Xeon%'"
 ```
+<!-- TODO: check if relevant -->
 This `oarsub` command will reserve one node having an intel Xeon CPU.
 
 For more properties, consult the [OAR properties page](https://www.grid5000.fr/w/OAR_Properties) of the wiki.
@@ -523,9 +522,11 @@ For all the reasons mentionned above, some resources won't be allocated unless u
 
 The list of exotic resources available on Grid'5000 can be found here: https://www.grid5000.fr/w/Exotic.
 
-Here is an oarsub command that will reserve a neowise node on Lyon:
+<!-- TODO: should we put this example? Maybe by reserving only a few cpu to avoid clashes? Should vianden be reserved for the tutorial? -->
+
+Here is an oarsub command that will reserve the vianden node on Luxembourg:
 ```bash
-pjacquot@flyon:~$ oarsub -r now -p neowise -t exotic
+user@fluxembourg:~$ oarsub -r now -p vianden -t exotic
 ```
 
 ## Resources quantity
@@ -538,16 +539,16 @@ By using theses options, you can modify the granularity of your reservation and 
 
 The following command will book 2 nodes, for a duration of 4 hours:
 ```bash
-pjacquot@flyon:~$ oarsub -r now -l nodes=2,walltime=4:00
+user@fluxembourg:~$ oarsub -r now -l nodes=2,walltime=4:00
 ```
 
 Once again, when reserving several nodes at the same time, the oarstat command can provide the list of reserved computing resources.
 Here is a commande that format the output of `oarstat` into JSON and print the assigned_network_adresses of the the nodes allocated:
 ```bash
-pjacquot@flyon:~$ oarstat -j 1899660 -fJ | jq '."1899660".assigned_network_address' 
+user@fluxembourg:~$ oarstat -j 1899660 -fJ | jq '."1899660".assigned_network_address' 
 [
-  "taurus-1.lyon.grid5000.fr",
-  "taurus-10.lyon.grid5000.fr"
+  "clervaux-1.luxembourg.grid5000.fr",
+  "clervaux-10.luxembourg.grid5000.fr"
 ]
 ```
 
@@ -559,7 +560,7 @@ Note that `oarwalltime` will not be able to extend the reservation duration ever
 
 The following command extends by 1 hour the walltime of a reservation.
 ```bash
-pjacquot@flyon:~$ oarwalltime <oar_job_id> +1:00
+user@fluxembourg:~$ oarwalltime <oar_job_id> +1:00
 ```
 
 # Basics of system deployment with kadeploy3
@@ -591,7 +592,7 @@ The full list of environments can be found in [the following page](https://www.g
 
 On a site frontend, the command `kaenv3` can be used to print the list of available environments.
 ```bash
-pjacquot@flyon:~$ kaenv3
+user@fluxembourg:~$ kaenv3
 ```
 
 ## Make a reservation for deployement
@@ -604,7 +605,7 @@ This notifies OAR that we are about to change the operating system of the node, 
 Let's reserve a node with this parameter:
 
 ```bash
-pjacquot@flyon:~$ oarsub -r now -t deploy
+user@fluxembourg:~$ oarsub -r now -t deploy
 ```
 
 ### Environment deployment
@@ -612,28 +613,28 @@ pjacquot@flyon:~$ oarsub -r now -t deploy
 Once the job has started, we can start the deployment using:
 
 ```bash
-pjacquot@flyon:~$ kadeploy3 -e debian12-min -m taurus-3.lyon.grid5000.fr
+user@fluxembourg:~$ kadeploy3 -e debian12-min -m clervaux-3.luxembourg.grid5000.fr
 ```
 (`-m` can be given multiple time to deploy several nodes at once)
 
 
 Alternatively, you can use your reservation's job ID to perform the deployment:
 ```bash
-pjacquot@flyon:~$ oarsub -C 1895784
-pjacquot@flyon:~$ kadeploy3 -e debian12-min
+user@fluxembourg:~$ oarsub -C 1895784
+user@fluxembourg:~$ kadeploy3 -e debian12-min
 ```
 
 Once the deployment is over, we can log as root on our newly-deployed node:
 ```
-pjacquot@flyon:~$ ssh root@taurus-3
-root@taurus-3:~#
+user@fluxembourg:~$ ssh root@clervaux-3
+root@clervaux-3:~#
 ```
 
 To ensure we have changed the distribution running on the node, we can take a look at the file `/etc/os-release`, or install `lsb_release`:
 
 ```
-root@taurus-3:~# apt update && apt install -y lsb-release
-root@taurus-3:~# lsb_release -a
+root@clervaux-3:~# apt update && apt install -y lsb-release
+root@clervaux-3:~# lsb_release -a
 ```
 
 ### Customize environment
@@ -656,7 +657,7 @@ This is done by using `kaconsole3` command.
 
 The following command will give access to a node's serial console, if we reserved it via a -t deploy job:
 ```bash
-pjacquot@flyon:~$ kaconsole3 -m taurus-3
+user@fluxembourg:~$ kaconsole3 -m clervaux-3
 ```
 
 > Since you are accessing a serial console, it is possible that you don't see anything at first.
@@ -669,8 +670,8 @@ Rebooting a node reserved via a `-t deploy` job can be done with the `kareboot3`
 Open a new shell, connect to Grid'5000 and enter the following command.
 Next, go to your kaconsole3 session and look at the logs outputted by the kernel on serial TTY.
 ```bash
-pjacquot@flyon:~$ kareboot3 simple -m taurus-3
-pjacquot@flyon:~$ kaconsole3 -m taurus-3
+user@fluxembourg:~$ kareboot3 simple -m clervaux-3
+user@fluxembourg:~$ kaconsole3 -m clervaux-3
 ```
 
 ### Example of network mistake repaired with kaconsole3
@@ -680,27 +681,30 @@ In this context, a mistake in the network configuration can be costly: a mis-con
 
 We'll simulate this mistake by harshly deactivating the network interface of our node:
 ```bash
-pjacquot@flyon:~$ ssh root@taurus-3
+user@fluxembourg:~$ ssh root@clervaux-3
 ```
 
 Use the `ip a` command to see which interface has an IP address.
-On taurus cluster, this interface is `enp68s0f0`.
+On clervaux cluster, this interface is `enp1s0f0np0`.
 Let's shutdown this interface: 
 ```bash
-root@taurus-4:~# ifdown enp68s0f0
+root@clervaux-4:~# ifdown enp1s0f0np0
 ```
 
 Our terminal is hanging ! This mean we have cut the branch we were sitted on: the node is not reachable via the network.
 Let's log in Grid'5000 in another terminal, and try to ping our node:
+
+<!-- TODO: update ips -->
+
 ```bash
-pjacquot@pc-pierre:~$ ssh lyon.g5k
-pjacquot@flyon:~$ ping taurus-3
-PING taurus-3.lyon.grid5000.fr (172.16.48.3) 56(84) bytes of data.
-From flyon.lyon.grid5000.fr (172.16.63.101) icmp_seq=1 Destination Host Unreachable
-From flyon.lyon.grid5000.fr (172.16.63.101) icmp_seq=2 Destination Host Unreachable
-From flyon.lyon.grid5000.fr (172.16.63.101) icmp_seq=3 Destination Host Unreachable
+user@pc:~$ ssh luxembourg.g5k
+user@fluxembourg:~$ ping clervaux-3
+PING clervaux-3.luxembourg.grid5000.fr (172.16.48.3) 56(84) bytes of data.
+From fluxembourg.luxembourg.grid5000.fr (172.16.63.101) icmp_seq=1 Destination Host Unreachable
+From fluxembourg.luxembourg.grid5000.fr (172.16.63.101) icmp_seq=2 Destination Host Unreachable
+From fluxembourg.luxembourg.grid5000.fr (172.16.63.101) icmp_seq=3 Destination Host Unreachable
 ^C
---- taurus-3.lyon.grid5000.fr ping statistics ---
+--- clervaux-3.luxembourg.grid5000.fr ping statistics ---
 6 packets transmitted, 0 received, +3 errors, 100% packet loss, time 5113ms
 pipe 4
 ```
@@ -712,11 +716,11 @@ We'll use `kaconsole3` to gain access to the serial console of the node and then
 > Reminder: the default password for the root account in Grid'5000 environments is `grid5000`.
 
 ```bash
-pjacquot@flyon:~$ kaconsole3 -m taurus-3
+user@fluxembourg:~$ kaconsole3 -m clervaux-3
 root
 password:
 [...]
-root@taurus-4:~# ifup enp68s0f0
+root@clervaux-4:~# ifup enp1s0f0np0
 ```
 
 We have restored the network connection ! The previous SSH connection should resume a few moments later.
@@ -742,7 +746,7 @@ By providing our own command, we can start a script at the beginning of our rese
 
 Let's submit a simple command to experiment with this feature:
 ```bash
-pjacquot@flyon:~$ oarsub -r now "lscpu > lscpu.txt"
+user@fluxembourg:~$ oarsub -r now "lscpu > lscpu.txt"
 ```
 
 Let this job be scheduled and executed, and then take a look at the `lscpu.txt` file.
@@ -801,8 +805,8 @@ Let's save this script as `experiment.sh` in our home directory.
 Be careful about setting the `x` permission, as we'll need to execute it:
 
 ```bash
-pjacquot@flyon:~$ chmod +x experiment.sh
-pjacquot@flyon:~$ oarsub -t deploy -r now "./experiment.sh"
+user@fluxembourg:~$ chmod +x experiment.sh
+user@fluxembourg:~$ oarsub -t deploy -r now "./experiment.sh"
 ```
 
 We can track the progress of the job by looking at the job's state with `oarstat` command, or by looking at `OAR.<jobid>.stdout` and `OAR.<jobid>.stderr` content.
@@ -810,7 +814,7 @@ Once the reservation is over, we should see that a `stress` directory was create
 
 Let's find the job id of our reservation and then monitor our experiment with the multitail command:
 ```bash
-pjacquot:~$ multitail -i OAR.<jobid>.stdout -i OAR.<jobid>.stderr
+user:~$ multitail -i OAR.<jobid>.stdout -i OAR.<jobid>.stderr
 ```
 
 ## Fully scripted usage of Grid'5000 through the REST API
@@ -855,9 +859,9 @@ print(f"Job submitted ({job_id})")
 
 While executing this script, you will be asked for a site and a cluster name:
 ```bash
-pjacquot@flyon:~$ python api.py
-Enter a site: lyon
-Enter a cluster: nova
+user@fluxembourg:~$ python api.py
+Enter a site: luxembourg
+Enter a cluster: clervaux
 Job submitted (1900199)
 ```
 
@@ -875,16 +879,8 @@ They are listed on the [Experiment scripting tutorial page](https://www.grid5000
 # To go further: links and tutorials
 
 This tutorial introduced a very basic usage of Grid'5000 and its resources.
-Other tutorials will cover a more advance use of Grid'5000 tools:
 
-A more advanced use of kadeploy3 will be covered in **Création d'environnement système à déployer sur Grid'5000 et plus largement**, on **wednesday 09th july at 10:30**.
-This tutorial will introduce [Kameleon](http://kameleon.imag.fr/), a tool for reproducible environment building.
-
-**Orchestration d'expériences distribuées sur le continuum Cloud-Edge-IoT avec EnOSlib** (**Thursday 10th july at 10:30**) will cover the use of Grid'5000 and other platforms via [EnOSlib](https://discovery.gitlabpages.inria.fr/enoslib/).
-
-**Monitoring énergétique sur les ressources Cloud/HPC et IoT sur Grid'5000 et IoT-Lab** on **Thursday 10th july at 15:00** will introduce [Kwollect](https://www.grid5000.fr/w/Monitoring_Using_Kwollect): the energy monitoring service of Grid'5000.
-
-**Expérimentation sur le continuum IoT-Cloud sur Grid'5000 et IoT-Lab** on **Thursday 10th july at 15:00** will cover IoT and Cloud experimentation.
+<!-- TODO: add recommendations -->
 
 ## Links
 
