@@ -259,6 +259,7 @@ nav:
     # - PrivateBin: 'services/privatebin.md'
     # - Databases: 'services/databases.md'
   #########################
+  - Grid5000: 'g5k/getting-started-g5k.md'
   - Help and Support:
     # - FAQ: 'support/faq.md'
     - Overview: 'support/index.md'
