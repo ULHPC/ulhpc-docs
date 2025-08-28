@@ -41,7 +41,7 @@ To avoid multiple small jobs, we can schedule multiple jobs in a single allocati
 
 declare stress_test_duration=160
 
-parallel --max-procs "${SLURM_NTASKS}" --max-args 0 srun --nodes=1 --ntasks=1 stress --cpu 16 --timeout "${stress_test_duration}" ::: {0..255}
+parallel --max-procs "${SLURM_NTASKS}" --max-args 0 srun --nodes=1 --ntasks=1 stress-ng --cpu 16 --timeout "${stress_test_duration}" ::: {0..255}
 ```
 
 The scheduler is much more efficient in lunching job steps within a job, as the resources have been allocated and there is no need to interact with the resource allocation loop. Job steps are lunched in blocking calls within a job whenever a `srun` command is executes in the job.
@@ -80,7 +80,7 @@ declare total_operations="${1}"
 declare test_duration="${2}"
 declare final_operation=$((${total_operations}-1))
 
-parallel --max-procs 4 --max-args 0 stress --cpu 4 --timeout "${test_duration}" ::: $(seq 0 "${final_operation}")
+parallel --max-procs 4 --max-args 0 stress-ng --cpu 4 --timeout "${test_duration}" ::: $(seq 0 "${final_operation}")
 ```
 
 When running the job in a function, make sure that the function is exported to the environment of `srun`:
@@ -107,7 +107,7 @@ run_step() {
   local test_duration="${2}"
   local final_operation=$((${total_operations}-1))
 
-  parallel --max-procs 4 --max-args 0 stress --cpu 4 --timeout "${test_duration}" ::: $(seq 0 "${final_operation}")
+  parallel --max-procs 4 --max-args 0 stress-ng --cpu 4 --timeout "${test_duration}" ::: $(seq 0 "${final_operation}")
 }
 
 export -f run_step
@@ -153,7 +153,9 @@ parallel --colsep '\t' --jobs "$SLURM_NTASKS" --results parallel_logs/ srun -N1 
 ```
 
 - `{1}` is the program; `{2..}` expands to the remaining columns (its arguments).
-- `--colsep ' +'` treats runs of spaces or tabs as column separators.
+- `--colsep ' +'` (Column separator) The input will be treated as a table with regexp separating the columns. The n'th column can be accessed using {n} or {n.}. E.g. {3} is the 3rd column.
+
+
 
 if you want to pass each line as a full command use:
 ```bash
@@ -164,15 +166,17 @@ parallel --jobs "$SLURM_NTASKS" --results parallel_logs/ srun -N1 -n1 {} ::: cmd
 
 ## Collect Logs and Monitor Progress
 
+GNU Parallel can automatically log task execution and capture per-task output. A single line is enough to both run tasks and collect reports:
+
 ```bash
 parallel --joblog run.log --results results/{#}/ --bar --eta srun ... ::: ${TASKS}
 ```
 
-- `run.log` — records start/finish time, runtime duration, exit status.
-- `results/{#}` — create a separate directory per task; stdout/stderr captured automatically.
-- `--bar` — live progress bar
-- `--eta` — estimated completion time
+- `--joblog run.log` — records start time, runtime, and exit status for each task.
+- `--results results/{#}` — stores stdout/stderr of each task in its own numbered directory.
+- `--bar --eta` - displays a live progress bar and estimated time to completion.
 
+This one-line pattern provides an audit trail (run.log), separate logs per task (results/{#}/), and real-time progress reporting with no extra scripting.
 
 
 To check the actual state of your job and all it's steps you can use `sacct` command.  
@@ -246,6 +250,11 @@ When not to use GNU parallel:
 
 ---
 
+
+
+
 _Resources_
 
 - [luncher_script_examples.zip](https://github.com/user-attachments/files/21215923/luncher_script_examples.zip)
+- [Official Documentation](https://www.gnu.org/software/parallel/parallel.html)
+- [NERSC Documentation](https://docs.nersc.gov/jobs/workflow/gnuparallel/)
