@@ -29,6 +29,10 @@ nav:
       - Compute Nodes: 'systems/iris/compute.md'
       - Fast Local Interconnect: 'systems/iris/interconnect.md'
       - Timeline:      'systems/iris/timeline.md'
+    - Grid'5000:
+      - Luxembourg site: 'https://www.grid5000.fr/w/Luxembourg:Home'
+      - Compute Nodes: 'https://www.grid5000.fr/w/Luxembourg:Hardware'
+      - Network: 'https://www.grid5000.fr/w/Luxembourg:Network'
   #######################
   - Interconnect:
     - Fast Infiniband Interconnect: 'interconnect/ib.md'
@@ -259,7 +263,7 @@ nav:
     # - PrivateBin: 'services/privatebin.md'
     # - Databases: 'services/databases.md'
   #########################
-  - Grid5000: 'g5k/getting-started-g5k.md'
+  - Grid'5000 - Getting started: 'g5k/getting-started-g5k.md'
   - Help and Support:
     # - FAQ: 'support/faq.md'
     - Overview: 'support/index.md'
