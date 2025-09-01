@@ -15,7 +15,7 @@ At the end of this session, you should be able to log on the platform, reserve c
 
 ## Grid'5000 platform
 
-Grid'5000 is a distributed platform, composed of multiple sites scattered all over France.
+Grid'5000 is a distributed platform, composed of multiple sites scattered all over France, Luxembourg and Belgium.
 To use Grid'5000, a user will log into a given site (e.g., Luxembourg, Lyon, Grenoble, Toulouse, …) and reserve computing resources located in this site in order to deploy their experimentation (or reserve resources accross several sites to perform multi-sites experimentation).
 
 ![Grid'5000's distributed architecture](https://www.grid5000.fr/mediawiki/images/Grid5000_SSH_access.png)
@@ -23,7 +23,7 @@ To use Grid'5000, a user will log into a given site (e.g., Luxembourg, Lyon, Gre
 ### Discovering Grid'5000 Resources
 
 Grid'5000 resources are organised in **clusters**.
-A **cluster** is a named group of **nodes** with homogeneous hardware (CPU, RAM, disk space, GPU...): for example *larochette* at Luxembourg, *neowise* at Lyon, *dahu* at Grenoble...
+A **cluster** is a named group of **nodes** with homogeneous hardware (CPU, RAM, disk space, GPU...): for example *larochette* in Luxembourg, *neowise* in Lyon, *dahu* in Grenoble...
 
 A **node** is a bare-metal resource (server, or edge-class machine) composed of several **cores**.
 A **node** is named by appending its ID to the **cluster** name, for exemple: *larochette-1* and *larochette-2* are nodes belonging to the *larochette* cluster.
@@ -109,7 +109,7 @@ In this part of the tutorial, we'll connect to a Grid'5000 site and reserve reso
 
 Before logging onto a Grid'5000 site, it's best to already know what resources we'd like to reserve.
 Usually, users will explore the Hardware pages mentioned sooner, and choose their resources that fit their experiment's requirements.
-For this tutorial, we'll use the *clervaux* cluster at Luxembourg.
+For this tutorial, we'll use the *clervaux* cluster in Luxembourg.
 
 ### Logging onto a site
 
