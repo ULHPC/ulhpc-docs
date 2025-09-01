@@ -83,7 +83,7 @@ In these extreme cases, GNU parallel can limit the number of job steps by groupi
     !!! example "Submission script"
         ```bash
         #!/bin/bash --login
-        #SBATCH --job-name=multi_job_per_step_script
+        #SBATCH --job-name=multi_job_step_in_script
         #SBATCH --partition=batch
         #SBATCH --qos=normal
         #SBATCH --nodes=4
@@ -132,7 +132,7 @@ In these extreme cases, GNU parallel can limit the number of job steps by groupi
         parallel \
           --max-procs "${max_parallel_substeps}" \
           --max-args 0 \
-          stress \
+          stress-ng \
             --cpu "${cpus_per_substep}" \
             --timeout "${test_duration}" \
             ::: $(seq 0 "${final_substep}")
@@ -140,9 +140,9 @@ In these extreme cases, GNU parallel can limit the number of job steps by groupi
 
 === "GNU parallel jobs in a function"
     !!! example "Submission script"
-        ```bash
+       ```bash
         #!/bin/bash --login
-        #SBATCH --job-name=multi_job_per_step_function
+        #SBATCH --job-name=multi_job_step_in_function
         #SBATCH --partition=batch
         #SBATCH --qos=normal
         #SBATCH --nodes=4
