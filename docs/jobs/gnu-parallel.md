@@ -1,18 +1,14 @@
-[GNU parallel](https://www.gnu.org/software/parallel/) allows the execution of multiple small jobs in an HPC cluster without overloading the [cluster scheduler](/slurm/). The Slurm scheduler performs 2 jobs,
+# GNU parallel in HPC systems
+
+Job campaigns that allocate many small jobs quickly, either using job arrays or custom launcher scripts, should use [GNU parallel](https://www.gnu.org/software/parallel/) to reduce the scheduler load. The Slurm scheduler performs 2 jobs,
 
 - allocates resources for a job,
 - launches the [job steps](/jobs/steps/).
 
+Slurm is designed to allocate resources in an allocation loop that runs periodically, usually every 30-180s, depending on its configuration. If many small jobs are in the queue, then operations triggered during the allocation loop, such as backfilling, become expensive. As a result, the scheduling loop can delay past its period, causing the scheduler to appear slow and unresponsive. GNU parallel executes multiple commands in parallel in a single allocation, removing the need to allocate resources and reducing the scheduler load.
 
-<!--
-
-Job steps launch processes within a job which consume the job resources.
-
--->
-
-The Slurm scheduler is designed to allocate resources in an allocation loop that runs periodically, usually every 30-180s, depending on the Slurm configuration. If a lot of small jobs are in the queue, then expensive operations, such as back-filling, are triggered during the allocation loop. As a result, the scheduling loop can delay past its period, causing the scheduler to appear slow and unresponsive.
-
-To avoid multiple small jobs, schedule multiple job steps in a single allocation with GNU parallel.
+!!! info "When should GNU parallel be used?"
+    If you are planning to execute jobs campaigns that require more that 100 job allocations per minute, then please consider using [GNU parallel](https://www.gnu.org/software/parallel/).
 
 ## Running HPC jobs with GNU parallel
 
