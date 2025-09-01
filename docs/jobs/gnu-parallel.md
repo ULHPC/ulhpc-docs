@@ -98,9 +98,10 @@ In these extreme cases, GNU parallel can limit the number of job steps by groupi
         declare substeps_per_step=1024
         declare cpus_per_substep=4
 
-        run_job_step() {
+        run_step() {
           local total_substeps="${1}"
           local test_duration="${2}"
+          local cpus_per_substep="${3}"
 
           local final_substep=$(( ${total_substeps} - 1 ))
           local max_parallel_substeps=$(( ${SLURM_CPUS_PER_TASK} / ${cpus_per_substep} ))
@@ -125,7 +126,7 @@ In these extreme cases, GNU parallel can limit the number of job steps by groupi
             --nodes=1 \
             --ntasks=1 \
             bash \
-              -c "\"run_job_step ${substeps_per_step} ${stress_test_duration}\"" \
+              -c "\"run_step ${substeps_per_step} ${stress_test_duration} ${cpus_per_substep}\"" \
               ::: $(seq 0 ${final_step})
         ```
 
