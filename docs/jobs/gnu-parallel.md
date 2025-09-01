@@ -28,7 +28,7 @@ The scheduler is much more efficient in lunching job steps within a job, where r
 
 ```bash
 #!/bin/bash --login
-#SBATCH --job-name=single_job_per_step
+#SBATCH --job-name=single_job_step
 #SBATCH --partition=batch
 #SBATCH --qos=normal
 #SBATCH --nodes=4
@@ -78,6 +78,58 @@ This example script launches a single job step per GNU parallel job. The executa
 If a jobs contains a massive amounts of very small job steps, it can be limited by the rate in which job steps can be launched. The scheduler stores keep some information for each job step in a database, and with multiple small steps launching in parallel the throughput limits of the database system can exceeded affecting every job in the cluster.
 
 In these extreme cases, GNU parallel can limit the number of job steps by grouping multiple GNU parallel jobs in a single job step. There are 2 options when lunching multiple GNU parallel jobs in a single jobs step, the GNU parallel jobs of the step can be launched in a script or in a function.
+
+=== "GNU parallel jobs in a function"
+    !!! example "Submission script"
+        ```bash
+        #!/bin/bash --login
+        #SBATCH --job-name=multi_job_step_in_function
+        #SBATCH --partition=batch
+        #SBATCH --qos=normal
+        #SBATCH --nodes=4
+        #SBATCH --ntasks-per-node=8
+        #SBATCH --cpus-per-task=16
+        #SBATCH --time=02:00:00
+        #SBATCH --output=%x-%j.out
+        #SBATCH --error=%x-%j.err
+
+        declare stress_test_duration=5
+        declare steps=256
+        declare substeps_per_step=1024
+        declare cpus_per_substep=4
+
+        run_job_step() {
+          local total_substeps="${1}"
+          local test_duration="${2}"
+
+          local final_substep=$(( ${total_substeps} - 1 ))
+          local max_parallel_substeps=$(( ${SLURM_CPUS_PER_TASK} / ${cpus_per_substep} ))
+
+          parallel \
+            --max-procs "${max_parallel_substeps}" \
+            --max-args 0 \
+            stress-ng \
+              --cpu "${cpus_per_substep}" \
+              --timeout "${test_duration}" \
+              ::: $(seq 0 "${final_substep}")
+        }
+
+        export -f run_step
+
+        declare final_step=$(( ${steps} - 1 ))
+
+        parallel \
+          --max-procs "${SLURM_NTASKS}" \
+          --max-args 0 \
+          srun \
+            --nodes=1 \
+            --ntasks=1 \
+            bash \
+              -c "\"run_job_step ${substeps_per_step} ${stress_test_duration}\"" \
+              ::: $(seq 0 ${final_step})
+        ```
+
+    When running the GNU parallel job steps in a function, make sure that the function is exported to the environment of `srun` with the `export -f` bash builtin command.
 
 === "GNU parallel jobs in a script"
     !!! example "Submission script"
@@ -137,58 +189,6 @@ In these extreme cases, GNU parallel can limit the number of job steps by groupi
             --timeout "${test_duration}" \
             ::: $(seq 0 "${final_substep}")
         ```
-
-=== "GNU parallel jobs in a function"
-    !!! example "Submission script"
-       ```bash
-        #!/bin/bash --login
-        #SBATCH --job-name=multi_job_step_in_function
-        #SBATCH --partition=batch
-        #SBATCH --qos=normal
-        #SBATCH --nodes=4
-        #SBATCH --ntasks-per-node=8
-        #SBATCH --cpus-per-task=16
-        #SBATCH --time=02:00:00
-        #SBATCH --output=%x-%j.out
-        #SBATCH --error=%x-%j.err
-
-        declare stress_test_duration=5
-        declare steps=256
-        declare substeps_per_step=1024
-        declare cpus_per_substep=4
-
-        run_step() {
-          local total_substeps="${1}"
-          local test_duration="${2}"
-
-          local final_substep=$(( ${total_substeps} - 1 ))
-          local max_parallel_substeps=$(( ${SLURM_CPUS_PER_TASK} / ${cpus_per_substep} ))
-
-          parallel \
-            --max-procs "${max_parallel_substeps}" \
-            --max-args 0 \
-            stress-ng \
-              --cpu "${cpus_per_substep}" \
-              --timeout "${test_duration}" \
-              ::: $(seq 0 "${final_substep}")
-        }
-
-        export -f run_step
-
-        declare final_step=$(( ${steps} - 1 ))
-
-        parallel \
-          --max-procs "${SLURM_NTASKS}" \
-          --max-args 0 \
-          srun \
-            --nodes=1 \
-            --ntasks=1 \
-            bash \
-              -c "\"run_step ${substeps_per_step} ${stress_test_duration}\"" \
-              ::: $(seq 0 ${final_step})
-        ```
-
-    When running the GNU parallel job steps in a function, make sure that the function is exported to the environment of `srun` with the `export -f` bash builtin command.
 
 ---
 
