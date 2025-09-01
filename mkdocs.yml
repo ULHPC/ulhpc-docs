@@ -82,7 +82,7 @@ nav:
     #- Job dependencies: 'jobs/dependencies.md'
     - Affinity and pinning: 'jobs/affinity_and_pinning.md'
     - Inspecting node architecture: 'jobs/hwloc.md'
-    #- Job steps: 'jobs/steps.md'
+    - Job steps: 'jobs/steps.md'
     - Account Hierarchy: 'slurm/accounts.md'
     - Job State and Reason Code: 'jobs/reason-codes.md'
     - Fairsharing: 'slurm/fairsharing.md'
