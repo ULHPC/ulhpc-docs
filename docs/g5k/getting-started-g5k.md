@@ -4,29 +4,29 @@ Grid'5000 is a large-scale and flexible testbed for experiment-driven research i
 
 It provides:
 
-* an access to a large amount of resources (about 25000 cores, 800 compute nodes, 550 GPUs...)
+* access to a large amount of resources (about 25000 cores, 800 compute nodes, 550 GPUs...)
 * highly configurable and controllable hardware
 * advanced monitoring and measurement features
 * Reproducible Research and Open Science support
 * a large community of 500+ users
 
 In this tutorial, we'll cover the basics of Grid'5000 usage.
-At the end of this session, you should be able to log on the platform, reserve computing resources, and perform basic experiments on them.
+At the end of this session, you should be able to log onto the platform, reserve computing resources, and perform basic experiments on them.
 
 ## Grid'5000 platform
 
 Grid'5000 is a distributed platform, composed of multiple sites scattered all over France, Luxembourg and Belgium.
-To use Grid'5000, a user will log into a given site (e.g., Luxembourg, Lyon, Grenoble, Toulouse, …) and reserve computing resources located in this site in order to deploy their experimentation (or reserve resources accross several sites to perform multi-sites experimentation).
+To use Grid'5000, a user will log into a given site (e.g., Luxembourg, Lyon, Grenoble, Toulouse, …) and reserve computing resources located at this site in order to deploy their experimentation (or reserve resources across several sites to perform multi-site experimentation).
 
 ![Grid'5000's distributed architecture](https://www.grid5000.fr/mediawiki/images/Grid5000_SSH_access.png)
 
 ### Discovering Grid'5000 Resources
 
-Grid'5000 resources are organised in **clusters**.
+Grid'5000 resources are organized in **clusters**.
 A **cluster** is a named group of **nodes** with homogeneous hardware (CPU, RAM, disk space, GPU...): for example *larochette* in Luxembourg, *neowise* in Lyon, *dahu* in Grenoble...
 
 A **node** is a bare-metal resource (server, or edge-class machine) composed of several **cores**.
-A **node** is named by appending its ID to the **cluster** name, for exemple: *larochette-1* and *larochette-2* are nodes belonging to the *larochette* cluster.
+A **node** is named by appending its ID to the **cluster** name, for example: *larochette-1* and *larochette-2* are nodes belonging to the *larochette* cluster.
 
 Finally, a **core** (CPU core) is the smallest resource size that can be reserved on Grid'5000.
 Each **node** is composed of several **cores** that can be reserved individually.
@@ -55,7 +55,7 @@ You can check the list of events currently ongoing, planned, and terminated at t
 ##### Sites descriptions
 
 Each Grid'5000 site also has a Home page where links related to the site are aggregated and additional information can be found.
-The more interesting links on theses pages are the hardware and network pages links.
+The more interesting links on these pages are the hardware and network page links.
 Here are some links for the biggest sites:
 
 * grenoble: [hardware](https://www.grid5000.fr/w/Grenoble:Hardware) | [network](https://www.grid5000.fr/w/Grenoble:Network)
@@ -72,7 +72,7 @@ In order to reserve resources located on a given site, users must log into the r
 A frontend is a virtual machine which has a software environment very close to the one deployed on the nodes by default.
 There, users will be able to reserve resources, start deployment, and more.
 
-**If you haven't done it before, generate a SSH key and put your public key on Grid'5000 User Management System**.
+**If you haven't done it before, generate an SSH key and put your public key on Grid'5000 User Management System**.
 This is done with the `ssh-keygen` command:
 
 ```bash
@@ -80,7 +80,7 @@ user@pc: ssh-keygen -t ed25519
 ```
 
 > The choice of how you configure your SSH key (passphrase, location...) is yours.
-> Just remember that this key will be used each time you log in Grid'5000.
+> Just remember that this key will be used each time you log in to Grid'5000.
 
 When the SSH key is generated, copy the public key:
 
@@ -89,12 +89,12 @@ user@pc: cat .ssh/id_ed25519.pub
 # Copy the output of this command.
 ```
 
-Then go to the following link: [https://api.grid5000.fr/stable/users/](https://api.grid5000.fr/stable/users/                                     ).
+Then go to the following link: [https://api.grid5000.fr/stable/users/](https://api.grid5000.fr/stable/users/).
 Paste the content of your public key in the `SSH Keys` tab on the right.
 
 ### First log in on Grid'5000
 
-As seen in the schema describing Grid'5000 platform, users must pass through `access.grid5000.fr` to gain access to the platform.
+As seen in the schema describing the Grid'5000 platform, users must pass through `access.grid5000.fr` to gain access to the platform.
 Once on this machine, they can start another SSH connection to the site frontend they want to reach:
 
 ```bash
@@ -103,7 +103,7 @@ user@access-north:~$ ssh luxembourg
 user@fluxembourg:~$
 ```
 
-You should be greeted by a message similar as below:
+You should be greeted by a message similar to below:
 <!--TODO: update-->
 ```
 Linux fluxembourg 5.10.0-34-amd64 #1 SMP Debian 5.10.234-1 (2025-02-24) x86_64
@@ -148,11 +148,11 @@ The Message of the Day provides a little summary of the site:
 ### Efficient SSH connection with config file
 
 Currently we need to manually connect to `access.grid5000.fr` via SSH and then start another SSH connection to a site.
-This is tedious and error prone, so we'll configure our SSH client to automatically start a SSH connection to `access.grid5000.fr` when we're trying to access grid'5000 Network.
+This is tedious and error prone, so we'll configure our SSH client to automatically start an SSH connection to `access.grid5000.fr` when we're trying to access the Grid'5000 network.
 
 Open the file where your SSH user configuration is stored **on your local machine**.
 It is usually `~/.ssh/config`.
-Add the following lines to this file, and replace `<g5k_login>` by your grid'5000 login:
+Add the following lines to this file, and replace `<g5k_login>` with your Grid'5000 login:
 
 ```
 # Alias for the gateway (not really needed, but convenient)
@@ -168,9 +168,9 @@ Host *.g5k
   ForwardAgent no
 ```
 
-> The ProxyCommand given might not work with other shells than bash on Grid'5000 side.
+> The ProxyCommand given might not work with shells other than bash on the Grid'5000 side.
 
-Now, we should be able to log in any Grid'5000 site *"directly"* with this command:
+Now, we should be able to log into any Grid'5000 site *"directly"* with this command:
 
 ```bash
 user@pc:~$ ssh luxembourg.g5k
@@ -184,7 +184,7 @@ OAR is the tool used by Grid'5000 to manage its resources.
 In this part of the tutorial, we'll connect to a Grid'5000 site and reserve resources to learn how users can perform experiments on the platform.
 
 Before logging onto a Grid'5000 site, it's best to already know what resources we'd like to reserve.
-Usually, users will explore the Hardware pages mentioned sooner, and choose their resources that fit their experiment's requirements.
+Usually, users will explore the Hardware pages mentioned earlier and choose resources that fit their experiment's requirements.
 For this tutorial, we'll use the *clervaux* cluster in Luxembourg.
 
 #### Reserving resources
@@ -204,8 +204,8 @@ OAR_JOB_ID=1894417
 # Reservation valid --> OK
 ```
 
-Our reservation has been assigned to a job ID.
-Our reservation should be visible on the drawgantt of the site we're currently logged on.
+Our reservation has been assigned a job ID.
+Our reservation should be visible on the drawgantt of the site we're currently logged onto.
 It may not have started yet, so it may be worth checking our reservation's state with the `oarstat` command:
 
 ```bash
@@ -215,11 +215,11 @@ Job id     Name           User           Submission Date     S Queue
 1894417                   user           2025-06-08 12:19:52 R default
 ```
 
-(`-u` option is used to show reservation's from current user only)
+(`-u` option is used to show reservations from the current user only)
 
 The state of the reservation will be shown in the `S` column.
 There are the following job states:
-* `W`: waiting - OAR must wait before scheduling the job, because the resources asked are not available yet
+* `W`: waiting - OAR must wait before scheduling the job, because the requested resources are not available yet
 * `L`: launching - the job is starting, resources will be available to use soon
 * `R`: running - The job is currently running
 * `E`: error - There was an error with the job
@@ -229,7 +229,7 @@ Check regularly the state of your job until its state is `R`.
 
 #### Information about a reservation
 
-After submitting a reservation, it can be useful to check related informations, such as the node(s) allocated, with `oarstat` command.
+After submitting a reservation, it can be useful to check related information, such as the node(s) allocated, with the `oarstat` command.
 
 <!-- TODO: update ? -->
 
@@ -269,8 +269,8 @@ id: 1894417
 
 If needed, `oarstat` can output in YAML format with the `-Y` parameter, or JSON with the `-J` parameter.
 
-The node allocated to our reservation can be found by looking at `assigned_hostnames` property of the oarstat output.
-This will help us log in to our resource during the next step.
+The node allocated to our reservation can be found by looking at the `assigned_hostnames` property of the oarstat output.
+This will help us log into our resource during the next step.
 
 #### Connecting to the reservation
 
@@ -282,7 +282,7 @@ This can be done using SSH:
 user@clervaux-11:~$
 ```
 
-You can also use following command to get connected to the node:
+You can also use the following command to get connected to the node:
 
 ```bash
 [user@fluxembourg|~]$ oarsub -C
@@ -292,24 +292,24 @@ user@clervaux-11:~$
 > `oarsub -C` will work only if you have **one** reservation currently ongoing at the moment.
 > If you have several reservations running at the same time, `oarsub` can't decide which node it will send you to, and it will ask you to enter the OAR Job ID like this: `oarsub -C <jobid>`
 
-You should see that your prompt changed: it now displays the current Grid'5000 node on which you are logged on.
+You should see that your prompt changed: it now displays the current Grid'5000 node on which you are logged.
 
 ##### Information about storage on Grid'5000
 
 On Grid'5000 infrastructure, users have access to several means of storing their files.
 First, each user is allocated one homedir directory per site, with a 25GB soft quota (and 100GB hard quota).
-Theses homes are mounted by default on the nodes that are used by an experiment.
+These homes are mounted by default on the nodes that are used by an experiment.
 
 Apart from this homedir mounted via NFS, computing nodes have their own filesystem on disk by default.
-This means that if someone is writing files into the `/tmp` or `/var` they are writing directly to the nodes' disk, thus having quicker IOs than if they were writing in their home via NFS.
-However, disks are not persistents on Grid'5000, so any file written on a node's disk will be lost eventually.
+This means that if someone is writing files into `/tmp` or `/var` they are writing directly to the nodes' disk, thus having quicker IOs than if they were writing in their home via NFS.
+However, disks are not persistent on Grid'5000, so any file written on a node's disk will be lost eventually.
 Users still need to bring back their files to their home at the end of their experiment.
 
-Finally, users can benefits from *storage groups*.
-*Storage groups* are big dedicated volumes located on NFS servers which volumetry is around several TeraBytes.
-Theses volumes can be associated with a dedicated user group, ensuring that only a subset of users are allowed to access.
+Finally, users can benefit from *storage groups*.
+*Storage groups* are big dedicated volumes located on NFS servers which volume is around several terabytes.
+These volumes can be associated with a dedicated user group, ensuring that only a subset of users are allowed to access.
 
-Each of theses storage are described on the [Storage Guide](https://www.grid5000.fr/w/Storage).
+Each of these storage options is described in the [Storage Guide](https://www.grid5000.fr/w/Storage).
 
 #### Node usage example
 
@@ -319,7 +319,7 @@ Let's assume we wanted to run a benchmark.
 We'll get the *NAS Parallel Benchmarks* (NPB), compile and run them.
 Once done, we'll export the result to our home.
 
-Let's start by going into `/tmp/` directory, and download the benchmarks' source code:
+Let's start by going into the `/tmp/` directory and downloading the benchmarks' source code:
 
 ```bash
 user@clervaux-11:~$ cd /tmp/
@@ -328,7 +328,7 @@ user@clervaux-11:~$ tar -xzvf NPB3.4.3.tar.gz
 ```
 
 > It's important to keep in mind that the `/tmp/` directory is located on the disk's filesystem, while our current home directory is mounted via NFS from a storage server.
-> Working in the `/tmp/` reduce network I/O overhead and reduce pressure on the storage servers.
+> Working in `/tmp/` reduces network I/O overhead and reduces pressure on the storage servers.
 
 Now we'll use the default template and Makefile to compile the benchmarks:
 
@@ -339,7 +339,7 @@ user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cp config/make.def.template config/ma
 user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ make -j$(nproc) suite
 ```
 
-Now that everthing is compiled, we can run the benchmarks.
+Now that everything is compiled, we can run the benchmarks.
 The following commands create a directory where the benchmarks output will be stored.
 The benchmarks are run with the default configuration, and once they have completed their output is copied to our home directory.
 
@@ -350,7 +350,7 @@ user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cp -R /tmp/benchs ~/benchs-$OAR_JOBID
 ```
 
 The benchmarks output should have been copied to our home directory.
-Each benchmark output can now be read with `cat` or `less`, and will stay on our home even when our reservation will be over.
+Each benchmark output can now be read with `cat` or `less`, and will stay in our home even when our reservation is over.
 
 ```bash
 user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$ cd
@@ -358,12 +358,12 @@ user@clervaux-11:~$ cat benchs-$OAR_JOBID/lu.S.x.txt
 ```
 
 > In the example we use the `OAR_JOBID` variable because we are still "in" our reservation.
-> If someone wish to come back at their results later, they'll have to enter the reservation's job id manually.
+> If someone wishes to come back to their results later, they'll have to enter the reservation's job id manually.
 
-#### Deeper customisation by gaining root access with sudo-g5k
+#### Deeper customization by gaining root access with sudo-g5k
 
-One of the key features of Grid'5000 is that you are allowed to become root in certain conditions to fully customise your experiment setup.
-One way of becoming root, is by reserving a whole computing node as we did, and using the `sudo-g5k` command.
+One of the key features of Grid'5000 is that you are allowed to become root under certain conditions to fully customize your experiment setup.
+One way of becoming root is by reserving a whole computing node as we did and using the `sudo-g5k` command.
 This command is a wrapper for `sudo` that will perform safety checks before granting you the right to use the default sudo and become root.
 
 Once logged into their computing resource, users can ask for root access with the following command:
@@ -375,16 +375,16 @@ user@clervaux-11:~$ sudo-g5k [command-to-execute]
 > Providing a command while using `sudo-g5k` is not mandatory.
 
 Once `sudo-g5k` has run, the platform is aware that the user is going to perform non-trivial operations on the node.
-When their job will be finished, the default environment will be redeployed to provide a clean copy for future users.
+When their job is finished, the default environment will be redeployed to provide a clean copy for future users.
 
-After running `sudo-g5k`, it is possible to run root command with `sudo` or to become root directly:
+After running `sudo-g5k`, it is possible to run root commands with `sudo` or to become root directly:
 
 ```bash
 user@clervaux-11:~$ sudo -iu root
 root@clervaux-11:~#
 ```
 
-> Note that the `$` at the end of the prompt has changed into `#`, indicating you are indeed root.
+> Note that the `$` at the end of the prompt has changed to `#`, indicating you are indeed root.
 
 Once a user is allowed to use the root account, they can perform any operation that would be forbidden as a normal user:
 
@@ -396,11 +396,11 @@ root@clervaux-11:~# exit
 user@clervaux-11:~$ ninvaders
 ```
 
-> You can quit ninvaders by using `Ctrl`+`c` shortcut if the lecturer or your thesis professor are coming. :eyes:
+> You can quit ninvaders by using `Ctrl`+`c` shortcut if the lecturer or your thesis professor is coming. :eyes:
 
 Be aware that using `sudo-g5k` will trigger a full redeployment of the node at the end of your reservation.
 `sudo-g5k` is a very great tool for prototyping, but it should not be used intensively, especially on automatic and short reservations.
-By using `sudo-g5k` in short reservations performed by a script you might end submitting reservations faster than the node can be reployed, causing a starvation phenomenon for other users.
+By using `sudo-g5k` in short reservations performed by a script you might end up submitting reservations faster than the node can be redeployed, causing a starvation phenomenon for other users.
 
 #### Releasing resources
 
@@ -434,7 +434,7 @@ OAR_JOB_ID=1894550
 # Reservation valid --> OK
 ```
 
-Here, a node has been allocated on the 2025-06-10 between 10AM and 12PM (french time).
+Here, a node has been allocated on 2025-06-10 between 10AM and 12PM (French time).
 The job will start automatically at the given date, and we'll be able to log in when it starts.
 
 Delete this job, since we are not going to use it:
@@ -462,35 +462,35 @@ user@fluxembourg:~$ oarsub -r now -p orion
 #### Cluster properties
 
 The `-p` option can also be used to specify hardware specs we want to get for our reservation.
-For example; `-p "core_count > 8"` will let us reserve computing resources with more than 8 cores.
+For example, `-p "core_count > 8"` will let us reserve computing resources with more than 8 cores.
 
-The string passed with the `-p` option follow SQL syntax, so we can write selections like this:
+The string passed with the `-p` option follows SQL syntax, so we can write selections like this:
 ```bash
 user@fluxembourg:~$ oarsub -r now -p "cputype LIKE 'Intel Xeon%'"
 ```
 <!-- TODO: check if relevant -->
-This `oarsub` command will reserve one node having an intel Xeon CPU.
+This `oarsub` command will reserve one node having an Intel Xeon CPU.
 
 For more properties, consult the [OAR properties page](https://www.grid5000.fr/w/OAR_Properties) of the wiki.
-The [OAR Syntax Simplication](https://www.grid5000.fr/w/OAR_Syntax_simplification) page also describe how to ease the use of the `-p` parameter by avoiding to write SQL syntax.
+The [OAR Syntax Simplification](https://www.grid5000.fr/w/OAR_Syntax_simplification) page also describes how to ease the use of the `-p` parameter by avoiding having to write SQL syntax.
 
 #### Exotic type
 
 By default, OAR will exclude some resources from the pool of resources that can be allocated to users.
-Theses resources are called **exotic**.
+These resources are called **exotic**.
 A resource can be declared exotic for several reasons:
 
 * It is rare on the platform (only a few machines with the same particular characteristics are available in Grid'5000)
-* Its usage is complex: a relevant usage of theses resources requires specific knowledge
-* It has characteristics too different from regular Grid'5000 ressources to be allocated as a "standard" resource
+* Its usage is complex: a relevant usage of these resources requires specific knowledge
+* It has characteristics too different from regular Grid'5000 resources to be allocated as a "standard" resource
 
-For all the reasons mentionned above, some resources won't be allocated unless users specify the `-t exotic` parameter in their oarsub command.
+For all the reasons mentioned above, some resources won't be allocated unless users specify the `-t exotic` parameter in their oarsub command.
 
 The list of exotic resources available on Grid'5000 can be found here: [https://www.grid5000.fr/w/Exotic](https://www.grid5000.fr/w/Exotic).
 
 <!-- TODO: should we put this example? Maybe by reserving only a few cpu to avoid clashes? Should vianden be reserved for the tutorial? -->
 
-Here is an oarsub command that will reserve the vianden node on Luxembourg:
+Here is an oarsub command that will reserve the vianden node in Luxembourg:
 
 ```bash
 user@fluxembourg:~$ oarsub -r now -p vianden -t exotic
@@ -503,16 +503,16 @@ The `-l` parameter can be used to alter various parameters regarding the reserva
 * walltime of the job, which corresponds to reservation duration
 * number of resources requested (nodes, cpu, cores, gpu...)
 
-By using theses options, you can modify the granularity of your reservation and extends the time your resources will be allocated to you.
+By using these options, you can modify the granularity of your reservation and extend the time your resources will be allocated to you.
 
-The following command will book 2 nodes, for a duration of 4 hours:
+The following command will book 2 nodes for a duration of 4 hours:
 
 ```bash
 user@fluxembourg:~$ oarsub -r now -l nodes=2,walltime=4:00
 ```
 
 Once again, when reserving several nodes at the same time, the oarstat command can provide the list of reserved computing resources.
-Here is a commande that format the output of `oarstat` into JSON and print the assigned_network_adresses of the the nodes allocated:
+Here is a command that formats the output of `oarstat` into JSON and prints the assigned_network_address of the nodes allocated:
 
 ```bash
 user@fluxembourg:~$ oarstat -j 1899660 -fJ | jq '."1899660".assigned_network_address'
@@ -524,11 +524,11 @@ user@fluxembourg:~$ oarstat -j 1899660 -fJ | jq '."1899660".assigned_network_add
 
 #### Extend a reservation with oarwalltime
 
-Once the walltime of a reservation is reached, users are log out of their node and their processes are killed.
+Once the walltime of a reservation is reached, users are logged out of their node and their processes are killed.
 To avoid this issue, users can extend the walltime of their reservation while it is running with the command `oarwalltime`.
 Note that `oarwalltime` will not be able to extend the reservation duration every time; if someone is in the queue for the same resources, based on several parameters oarwalltime might refuse to extend the walltime.
 
-The following command extends by 1 hour the walltime of a reservation.
+The following command extends by 1 hour the walltime of a reservation:
 
 ```bash
 user@fluxembourg:~$ oarwalltime <oar_job_id> +1:00
@@ -536,14 +536,14 @@ user@fluxembourg:~$ oarwalltime <oar_job_id> +1:00
 
 ## Basics of system deployment with kadeploy3
 
-One of the key features of Grid'5000 is that users are allowed to deploy another operating system on the computing nodes they reserved, and become root on their resources.
+One of the key features of Grid'5000 is that users are allowed to deploy another operating system on the computing nodes they reserved and become root on their resources.
 Operating system deployment is done with [kadeploy3](https://kadeploy.gitlabpages.inria.fr/).
 
-With kadeploy3, users can deploy software environments (usually GNU/Linux distributions) on their computing resources, and customize the system to set up a complex experiment.
+With kadeploy3, users can deploy software environments (usually GNU/Linux distributions) on their computing resources and customize the system to set up a complex experiment.
 
 ### Grid'5000 environments
 
-The Grid'5000/SLICES-FR & ABACA technical teams maintains several environments that can be deployed.
+The Grid'5000/SLICES-FR & ABACA technical teams maintain several environments that can be deployed.
 Here is a partial list of the environments available:
 
 | environment    | quick description                                                              |
@@ -559,7 +559,7 @@ Here is a partial list of the environments available:
 | ubuntu2404-min | ubuntu 24.04 with standard system utilities                                    |
 | ubuntu2404-nfs | ubuntu2404-min with nfs configuration for user home mounting                   |
 
-The full list of environments can be found in [the following page](https://www.grid5000.fr/w/Advanced_Kadeploy#Search_an_environment).
+The full list of environments can be found on [the following page](https://www.grid5000.fr/w/Advanced_Kadeploy#Search_an_environment).
 
 On a site frontend, the command `kaenv3` can be used to print the list of available environments.
 
@@ -567,12 +567,12 @@ On a site frontend, the command `kaenv3` can be used to print the list of availa
 user@fluxembourg:~$ kaenv3
 ```
 
-### Make a reservation for deployement
+### Make a reservation for deployment
 
 #### "-t deploy" parameter
 
 In order to be deployed, nodes must be reserved with the `-t deploy` parameter.
-This notifies OAR that we are about to change the operating system of the node, and that it will have to redeploy back the node to its original environment when our job will be over.
+This notifies OAR that we are about to change the operating system of the node, and that it will have to redeploy the node back to its original environment when our job is over.
 
 Let's reserve a node with this parameter:
 
@@ -587,7 +587,7 @@ Once the job has started, we can start the deployment using:
 ```bash
 user@fluxembourg:~$ kadeploy3 -e debian12-min -m clervaux-3.luxembourg.grid5000.fr
 ```
-(`-m` can be given multiple time to deploy several nodes at once)
+(`-m` can be given multiple times to deploy several nodes at once)
 
 Alternatively, you can use your reservation's job ID to perform the deployment:
 
@@ -596,7 +596,7 @@ user@fluxembourg:~$ oarsub -C 1895784
 user@fluxembourg:~$ kadeploy3 -e debian12-min
 ```
 
-Once the deployment is over, we can log as root on our newly-deployed node:
+Once the deployment is over, we can log in as root on our newly-deployed node:
 ```
 user@fluxembourg:~$ ssh root@clervaux-3
 root@clervaux-3:~#
@@ -611,14 +611,14 @@ root@clervaux-3:~# lsb_release -a
 
 #### Customize environment
 
-Now that we are logged as root on the node, we can fully customize the system.
-For example; install upgrades, install a newer kernel, drivers, toolchain etc.
+Now that we are logged in as root on the node, we can fully customize the system.
+For example, install upgrades, install a newer kernel, drivers, toolchain etc.
 
-Once a user is happy with its customisation, they should think about saving their environment to be able to deploy it later without having to reconfigure it.
-The [Environment Creation page](https://www.grid5000.fr/w/Environment_creation) describe two methods for storing Grid'5000 environments:
+Once a user is happy with their customization, they should think about saving their environment to be able to deploy it later without having to reconfigure it.
+The [Environment Creation page](https://www.grid5000.fr/w/Environment_creation) describes two methods for storing Grid'5000 environments:
 
-* saving the current customised environment to a compressed tarball with **tgz-g5k**
-* write a reproducible recipe and generate the environnement with **Kameleon**
+* saving the current customized environment to a compressed tarball with **tgz-g5k**
+* write a reproducible recipe and generate the environment with **Kameleon**
 
 #### Serial console with kaconsole3
 
@@ -626,7 +626,7 @@ Now that we gained root access to a computing node, the risk of committing a reg
 
 To prevent users from being stuck in situations where they lost access to their resource and are forced to redeploy a full environment, Grid'5000 provides a way to access the nodes via their serial console.
 
-This is done by using `kaconsole3` command.
+This is done by using the `kaconsole3` command.
 
 The following command will give access to a node's serial console, if we reserved it via a -t deploy job:
 
@@ -635,11 +635,11 @@ user@fluxembourg:~$ kaconsole3 -m clervaux-3
 ```
 
 > Since you are accessing a serial console, it is possible that you don't see anything at first.
-> Pressing `ENTER` should make appear information, such as the login prompt.
+> Pressing `ENTER` should make information appear, such as the login prompt.
 > To exit a kaconsole3 session, type `&.`, or press `ESC` 4 times.
 
 This tool is also very useful for debugging boot problems.
-Let's reboot the node, and look at the kaconsole3 output to see the boot logs of the node.
+Let's reboot the node and look at the kaconsole3 output to see the boot logs of the node.
 Rebooting a node reserved via a `-t deploy` job can be done with the `kareboot3` command.
 Open a new shell, connect to Grid'5000 and enter the following command.
 Next, go to your kaconsole3 session and look at the logs outputted by the kernel on serial TTY.
@@ -651,8 +651,8 @@ user@fluxembourg:~$ kaconsole3 -m clervaux-3
 
 #### Example of network mistake repaired with kaconsole3
 
-A common use-case of Grid'5000 is to deploy network topologies to study distributed system.
-In this context, a mistake in the network configuration can be costly: a mis-configured node might not be reachable anymore, thus being unconfigurable.
+A common use case of Grid'5000 is to deploy network topologies to study distributed systems.
+In this context, a mistake in the network configuration can be costly: a misconfigured node might not be reachable anymore, thus being unconfigurable.
 
 We'll simulate this mistake by harshly deactivating the network interface of our node:
 
@@ -661,15 +661,15 @@ user@fluxembourg:~$ ssh root@clervaux-3
 ```
 
 Use the `ip a` command to see which interface has an IP address.
-On clervaux cluster, this interface is `enp1s0f0np0`.
+On the clervaux cluster, this interface is `enp1s0f0np0`.
 Let's shutdown this interface:
 
 ```bash
 root@clervaux-4:~# ifdown enp1s0f0np0
 ```
 
-Our terminal is hanging ! This mean we have cut the branch we were sitted on: the node is not reachable via the network.
-Let's log in Grid'5000 in another terminal, and try to ping our node:
+Our terminal is hanging! This means we have cut the branch we were sitting on: the node is not reachable via the network.
+Let's log into Grid'5000 in another terminal and try to ping our node:
 
 <!-- TODO: update ips -->
 
@@ -686,7 +686,7 @@ From fluxembourg.luxembourg.grid5000.fr (172.16.63.101) icmp_seq=3 Destination H
 pipe 4
 ```
 
-Pings doesn't reach our computing resource.
+Pings don't reach our computing resource.
 It is really disconnected from the network.
 We'll use `kaconsole3` to gain access to the serial console of the node and then put back up the network interface of the node:
 
@@ -700,7 +700,7 @@ password:
 root@clervaux-4:~# ifup enp1s0f0np0
 ```
 
-We have restored the network connection ! The previous SSH connection should resume a few moments later.
+We have restored the network connection! The previous SSH connection should resume a few moments later.
 
 ## Experiment automation
 
@@ -716,7 +716,7 @@ Grid'5000 usage is split between day and night: the day is intended to let peopl
 
 ### Submitting a command
 
-For simple tasks, users can submit a command that will be executed when the job start.
+For simple tasks, users can submit a command that will be executed when the job starts.
 When we made our previous reservations for this tutorial, there was actually a command that was executed by default: `sleep infinity`.
 That was this command that was holding our job in place.
 By providing our own command, we can start a script at the beginning of our reservation that will handle our experiment (for example, start a deployment, setup a software stack on the node, and then run a series of benchmarks).
@@ -730,13 +730,13 @@ user@fluxembourg:~$ oarsub -r now "lscpu > lscpu.txt"
 Let this job be scheduled and executed, and then take a look at the `lscpu.txt` file.
 You'll see that this file has been populated with the output of lscpu, and this output suggests that it has been executed on the computing node that was allocated to you.
 
-> If your __non-deploy__ reservation contains several nodes the given command will be executed on the first allocated node, which is called the *head node*.
+> If your __non-deploy__ reservation contains several nodes, the given command will be executed on the first allocated node, which is called the *head node*.
 > A __deploy__ reservation will have its command executed on the site's frontend.
-> When this command terminate, the reservation if over, and any remaining connexion will be closed.
-> When no command is provided (as we did until now), a default `sleep infinty` command is started.
-> This command will never complete, so it ensure that the job will only terminate when the reservation's walltime has exceeded.
+> When this command terminates, the reservation is over, and any remaining connection will be closed.
+> When no command is provided (as we did until now), a default `sleep infinity` command is started.
+> This command will never complete, so it ensures that the job will only terminate when the reservation's walltime has been exceeded.
 
-Instead of submitting a basic command like we did, we could submit a command launching a script of our own, and performing a whole experiment: fetching source code, building, running, extracting relevant metrics.
+Instead of submitting a basic command like we did, we could submit a command launching a script of our own and performing a whole experiment: fetching source code, building, running, extracting relevant metrics.
 
 #### Script execution
 
@@ -774,8 +774,8 @@ rm $NODES_FILE
 
 ```
 
-> This script deploy a `-min` environment.
-> Min environments doesn't include NFS tools and configuration allowing automagic homedir mounting.
+> This script deploys a `-min` environment.
+> Min environments don't include NFS tools and configuration allowing automagic homedir mounting.
 > This is why we must use *scp* to retrieve the data generated by our experiment at the end of the job.
 > In a similar way, users often need to clone git repositories or send source code to their reserved nodes at the beginning of their reservation.
 
@@ -787,8 +787,8 @@ user@fluxembourg:~$ chmod +x experiment.sh
 user@fluxembourg:~$ oarsub -t deploy -r now "./experiment.sh"
 ```
 
-We can track the progress of the job by looking at the job's state with `oarstat` command, or by looking at `OAR.<jobid>.stdout` and `OAR.<jobid>.stderr` content.
-Once the reservation is over, we should see that a `stress` directory was created in our home, and a .txt file has been rsynced inside.
+We can track the progress of the job by looking at the job's state with the `oarstat` command, or by looking at `OAR.<jobid>.stdout` and `OAR.<jobid>.stderr` content.
+Once the reservation is over, we should see that a `stress` directory was created in our home, and a .txt file has been synced inside.
 
 Let's find the job id of our reservation and then monitor our experiment with the multitail command:
 
@@ -798,19 +798,19 @@ user:~$ multitail -i OAR.<jobid>.stdout -i OAR.<jobid>.stderr
 
 ### Fully scripted usage of Grid'5000 through the REST API
 
-#### Programmaticaly discovering resources
+#### Programmatically discovering resources
 
-Grid'5000 provides a REST API that allow users to automatically discover resources, and allow to monitor their evolution over time.
+Grid'5000 provides a REST API that allows users to automatically discover resources and allows monitoring their evolution over time.
 Using tools like curl, or a simple web browser, users can obtain a lot of information such as:
 
-* Grid'5000 sites list and informations: [https://api.grid5000.fr/stable/sites/](https://api.grid5000.fr/stable/sites/)
+* Grid'5000 sites list and information: [https://api.grid5000.fr/stable/sites/](https://api.grid5000.fr/stable/sites/)
     * luxembourg site description: [https://api.grid5000.fr/stable/sites/luxembourg/](https://api.grid5000.fr/stable/sites/luxembourg/)
-* Clusters informations:
-    * luxembourg clusters informations: [https://api.grid5000.fr/stable/sites/luxembourg/clusters/](https://api.grid5000.fr/stable/sites/luxembourg/clusters/)
-* Nodes informations:
-    * luxembourg vianden-1 node informations: [https://api.grid5000.fr/stable/sites/luxembourg/clusters/vianden/nodes/vianden-1](https://api.grid5000.fr/stable/sites/luxembourg/clusters/vianden/nodes/vianden-1)
+* Clusters information:
+    * luxembourg clusters information: [https://api.grid5000.fr/stable/sites/luxembourg/clusters/](https://api.grid5000.fr/stable/sites/luxembourg/clusters/)
+* Nodes information:
+    * luxembourg vianden-1 node information: [https://api.grid5000.fr/stable/sites/luxembourg/clusters/vianden/nodes/vianden-1](https://api.grid5000.fr/stable/sites/luxembourg/clusters/vianden/nodes/vianden-1)
 
-Theses endpoints allow users to explore Grid'5000 resources programmatically.
+These endpoints allow users to explore Grid'5000 resources programmatically.
 Here is a bash script that will search for any cluster having more than 2 network interfaces:
 <!--TODO: Simplify?-->
 ```bash
@@ -830,18 +830,18 @@ done
 ```
 
 This script must be executed from within Grid'5000.
-We'll see in the next steps how we can log in the platform.
+We'll see in the next steps how we can log into the platform.
 Users wanting to reach the API from outside Grid'5000 will have to authenticate themselves using their Grid'5000 account.
 
 #### Job submission
 
 Since Grid'5000 provides a REST API, each API call can be automatized via a high-level script (python, ruby, bash...).
-This allow users to script and reproduce all their experiments: from the reservation to the results saving.
+This allows users to script and reproduce all their experiments: from the reservation to the results saving.
 
-Let's write a python script that submit the reservation for our previous stress reservation.
-Below is a script that will ask users to specify the Grid'5000 and cluster where to perform the experiment, and will then submit a reservation executing the `experiment.sh` shown above.
+Let's write a python script that submits the reservation for our previous stress reservation.
+Below is a script that will ask users to specify the Grid'5000 site and cluster where to perform the experiment, and will then submit a reservation executing the `experiment.sh` shown above.
 
-> This python script assumes that there is a bash script named `experiment.sh` located at the root of your home directory and executable !
+> This python script assumes that there is a bash script named `experiment.sh` located at the root of your home directory and executable!
 > If you want to launch the experiment on a different site you must ensure that the `experiment.sh` script has been copied to the homedir of this site.
 
 ```python
@@ -850,7 +850,7 @@ import requests
 from time import sleep
 
 # When querying the API from the frontends, users are already identified.
-# However, if using this script from the outside of Grid'5000, g5k_auth
+# However, if using this script from outside of Grid'5000, g5k_auth
 # must be a tuple of strings: (username, password)
 g5k_auth = None
 
