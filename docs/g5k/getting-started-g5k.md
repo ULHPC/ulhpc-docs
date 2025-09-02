@@ -11,7 +11,7 @@ It provides:
 * a large community of 500+ users
 
 In this tutorial, we'll cover the basics of Grid'5000 usage.
-At the end of this session, you should be able to log onto the platform, reserve computing resources, and perform basic experiments on them.
+At the end of this session, you should be able to log into the platform, reserve computing resources, and perform basic experiments on them.
 
 ## Grid'5000 platform
 
@@ -66,7 +66,7 @@ Here are some links for the biggest sites:
 * nantes: [hardware](https://www.grid5000.fr/w/Nantes:Hardware) | [network](https://www.grid5000.fr/w/Nantes:Network)
 * rennes [hardware](https://www.grid5000.fr/w/Rennes:Hardware) | [network](https://www.grid5000.fr/w/Rennes:Network)
 
-## Logging onto a site
+## Logging into a site
 
 In order to reserve resources located on a given site, users must log into the related frontend.
 A frontend is a virtual machine which has a software environment very close to the one deployed on the nodes by default.
@@ -183,7 +183,7 @@ OAR is the tool used by Grid'5000 to manage its resources.
 
 In this part of the tutorial, we'll connect to a Grid'5000 site and reserve resources to learn how users can perform experiments on the platform.
 
-Before logging onto a Grid'5000 site, it's best to already know what resources we'd like to reserve.
+Before logging into a Grid'5000 site, it's best to already know what resources we'd like to reserve.
 Usually, users will explore the Hardware pages mentioned earlier and choose resources that fit their experiment's requirements.
 For this tutorial, we'll use the *clervaux* cluster in Luxembourg.
 
@@ -205,7 +205,7 @@ OAR_JOB_ID=1894417
 ```
 
 Our reservation has been assigned a job ID.
-Our reservation should be visible on the drawgantt of the site we're currently logged onto.
+Our reservation should be visible on the drawgantt of the site we're currently logged into.
 It may not have started yet, so it may be worth checking our reservation's state with the `oarstat` command:
 
 ```bash
