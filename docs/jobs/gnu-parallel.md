@@ -8,7 +8,7 @@ Job campaigns that allocate many small jobs quickly, either using job arrays or 
 Slurm is designed to allocate resources in an allocation loop that runs periodically, usually every 30-180s, depending on its configuration. If many small jobs are in the queue, then operations triggered during the allocation loop, such as backfilling, become expensive. As a result, the scheduling loop can delay past its period, causing the scheduler to appear slow and unresponsive. GNU parallel executes multiple commands in parallel in a single allocation, removing the need to allocate resources and reducing the scheduler load.
 
 !!! info "When should GNU parallel be used?"
-    If you are planning to execute jobs campaigns that require more that 100 job allocations per minute, then please consider using [GNU parallel](https://www.gnu.org/software/parallel/).
+    As a rule of thumb, if you are planning to execute jobs campaigns that require more that 10 job allocations per minute, then please consider using [GNU parallel](https://www.gnu.org/software/parallel/).
 
 ## Running HPC jobs with GNU parallel
 
@@ -34,7 +34,7 @@ The scheduler is much more efficient in lunching job steps within a job, where r
 #SBATCH --output=%x-%j.out
 #SBATCH --error=%x-%j.err
 
-declare stress_test_duration=160
+declare test_duration=60
 
 parallel \
   --max-procs "${SLURM_NTASKS}" \
@@ -44,13 +44,13 @@ parallel \
     --ntasks=1 \
     stress-ng \
       --cpu ${SLURM_CPUS_PER_TASK} \
-      --timeout "${stress_test_duration}" \
-      ::: {0..255}
+      --timeout "${test_duration}" \
+      ::: {0..1023}
 ```
 
 This example script launches a single job step per GNU parallel job. The executable `stress-ng` is a stress test program.
 
-- The number of GNU parallel jobs is limited to the number of tasks, `SLURM_NTASKS`, so that there is no overallocation of GNU parallel jobs. Note that if a jobs step is launched without sufficient resources, then the job step fails.
+- The number of GNU parallel jobs (`--max-procs`) is limited to the number of tasks, `SLURM_NTASKS`, so that there is no overallocation of GNU parallel jobs. Note that if a jobs step is launched without sufficient resources, then the job step fails.
 - Each job step is consuming a single task (`--ntasks=1`) that has access to `SLURM_CPUS_PER_TASK` CPUs. The `stress-ng` program requires the explicit specification of the number of CPUs to use for the CPU benchmark with the `--cpu` flag.
 
 ??? info "Slurm environment variables (`SLURM_*`)"
@@ -69,11 +69,19 @@ This example script launches a single job step per GNU parallel job. The executa
 
     and its value can be used in the submission script without defining `--nodes`.
 
+!!! example "Job allocation rate calculation"
+    - In this example jobs steps of `1 min` duration (`test_duration`) are being launched in parallel from `4` nodes (`--nodes`) and `8` tasks per node (`--ntasks-per-node`), for a total of `32` tasks.
+    - If `32` tasks where launched every minute in distinct jobs the job allocation rate would be above the empirical limit of `10` jobs per minute.
+    - Thus, the use of GNU parallel is justified.
+
 ### Running multiple GNU parallel jobs per job step
 
-If a jobs contains a massive amounts of very small job steps, it can be limited by the rate in which job steps can be launched. The scheduler stores keep some information for each job step in a database, and with multiple small steps launching in parallel the throughput limits of the database system can exceeded affecting every job in the cluster.
+If a jobs contains a massive amounts of very small job steps, it can be limited by the rate in which job steps can be launched. The scheduler stores keep some information for each job step in a database, and with multiple small steps launching in parallel the throughput limits of the database system can exceeded affecting every job in the cluster. In these extreme cases, GNU parallel can limit the number of job steps by grouping multiple GNU parallel jobs in a single job step.
 
-In these extreme cases, GNU parallel can limit the number of job steps by grouping multiple GNU parallel jobs in a single job step. There are 2 options when lunching multiple GNU parallel jobs in a single jobs step, the GNU parallel jobs of the step can be launched in a script or in a function.
+!!! info "When should job step be grouped with GNU parallel jobs?"
+    As a rule of thumb, if you are planning to execute jobs that launch more that 1000 job steps per minute, then please consider grouping job steps using [GNU parallel](https://www.gnu.org/software/parallel/).
+
+There are 2 options when lunching multiple GNU parallel jobs in a single jobs step, the GNU parallel jobs of the step can be launched in a script or in a function.
 
 === "GNU parallel jobs in a function"
     !!! example "Submission script"
@@ -89,26 +97,40 @@ In these extreme cases, GNU parallel can limit the number of job steps by groupi
         #SBATCH --output=%x-%j.out
         #SBATCH --error=%x-%j.err
 
-        declare stress_test_duration=5
-        declare steps=256
-        declare substeps_per_step=1024
+        declare test_duration=5
+        declare substeps=$((1024*48+11))
+        declare substeps_per_step=48
         declare cpus_per_substep=4
 
-        run_step() {
-          local total_substeps="${1}"
-          local test_duration="${2}"
-          local cpus_per_substep="${3}"
+        declare steps=$(( ${substeps} / ${substeps_per_step} ))
+        declare remainder_steps=$(( ${substeps} % ${substeps_per_step} ))
+        if [ ! "${remainder_steps}" -eq "0" ]; then
+          steps=$(( ${steps} + 1 ))
+        fi
 
-          local final_substep=$(( ${total_substeps} - 1 ))
+        run_step() {
+          local substeps="${1}"
+          local substeps_per_step="${2}"
+          local test_duration="${3}"
+          local cpus_per_substep="${4}"
+          local step_idx="${5}"
+
+          local initial_substep=$(( ${step_idx} * ${substeps_per_step} ))
+          local final_substep=$(( ${initial_substep} + ${substeps_per_step} ))
+          if [ "${final_substep}" -gt "${substeps}" ]; then
+            final_substep=${substeps}
+          fi
+          final_substep=$(( ${final_substep} - 1 ))
+
           local max_parallel_substeps=$(( ${SLURM_CPUS_PER_TASK} / ${cpus_per_substep} ))
 
           parallel \
             --max-procs "${max_parallel_substeps}" \
             --max-args 0 \
-            stress-ng \
-              --cpu "${cpus_per_substep}" \
-              --timeout "${test_duration}" \
-              ::: $(seq 0 "${final_substep}")
+              stress-ng \
+                --cpu "${cpus_per_substep}" \
+                --timeout "${test_duration}" \
+                ::: $(seq ${initial_substep} "${final_substep}")
         }
 
         export -f run_step
@@ -117,12 +139,12 @@ In these extreme cases, GNU parallel can limit the number of job steps by groupi
 
         parallel \
           --max-procs "${SLURM_NTASKS}" \
-          --max-args 0 \
+          --max-args 1 \
           srun \
             --nodes=1 \
             --ntasks=1 \
             bash \
-              -c "\"run_step ${substeps_per_step} ${stress_test_duration} ${cpus_per_substep}\"" \
+              -c "\"run_step ${substeps} ${substeps_per_step} ${test_duration} ${cpus_per_substep} {1}\"" \
               ::: $(seq 0 ${final_step})
         ```
 
@@ -142,24 +164,30 @@ In these extreme cases, GNU parallel can limit the number of job steps by groupi
         #SBATCH --output=%x-%j.out
         #SBATCH --error=%x-%j.err
 
-        declare stress_test_duration=5
-        declare steps=256
-        declare substeps_per_step=1024
+        declare test_duration=5
+        declare substeps=$((1024*48+11))
+        declare substeps_per_step=48
         declare cpus_per_substep=4
+
+        declare steps=$(( ${substeps} / ${substeps_per_step} ))
+        declare remainder_steps=$(( ${substeps} % ${substeps_per_step} ))
+        if [ ! "${remainder_steps}" -eq "0" ]; then
+          steps=$(( ${steps} + 1 ))
+        fi
 
         declare final_step=$(( ${steps} - 1 ))
 
         parallel \
           --max-procs "${SLURM_NTASKS}" \
-          --max-args 0 \
+          --max-args 1 \
           srun \
             --nodes=1 \
             --ntasks=1 \
             run_job_step \
+              "${substeps}" \
               "${substeps_per_step}" \
+              "${test_duration}" \
               "${cpus_per_substep}" \
-              "${SLURM_CPUS_PER_TASK}" \
-              "${stress_test_duration}" \
               ::: $(seq 0 ${final_step})
         ```
 
@@ -171,23 +199,44 @@ In these extreme cases, GNU parallel can limit the number of job steps by groupi
         #!/bin/bash --login
 
         declare substeps="${1}"
-        declare cpus_per_substep="${2}"
-        declare cpus_per_step="${3}"
-        declare test_duration="${4}"
+        declare substeps_per_step="${2}"
+        declare test_duration="${3}"
+        declare cpus_per_substep="${4}"
+        declare step_idx="${5}"
 
-        declare final_substep=$(( ${substeps} - 1 ))
-        declare max_parallel_substeps=$(( ${cpus_per_step} / ${cpus_per_substep} ))
+        declare initial_substep=$(( ${step_idx} * ${substeps_per_step} ))
+        declare final_substep=$(( ${initial_substep} + ${substeps_per_step} ))
+        if [ "${final_substep}" -gt "${substeps}" ]; then
+          final_substep=${substeps}
+        fi
+        final_substep=$(( ${final_substep} - 1 ))
+
+        declare max_parallel_substeps=$(( ${SLURM_CPUS_PER_TASK} / ${cpus_per_substep} ))
 
         parallel \
           --max-procs "${max_parallel_substeps}" \
           --max-args 0 \
-          stress-ng \
-            --cpu "${cpus_per_substep}" \
-            --timeout "${test_duration}" \
-            ::: $(seq 0 "${final_substep}")
+            stress-ng \
+              --cpu "${cpus_per_substep}" \
+              --timeout "${test_duration}" \
+              ::: $(seq ${initial_substep} "${final_substep}")
         ```
 
+    Finally, make sure that the `run_job_step` is executable. The command
+    ```console
+    chmod u+x run_job_step
+    ```
+    is usually required to provide the user with [execution permission](/filesystems/unix-file-permissions/#chmod).
+
 ---
+
+!!! example "Job step launch rate calculation"
+    - Each node contains `128` CPUs, and each job requires `4` CPUs (`cpus_per_substep`); thus each node has `128/4 = 32` slots to execute jobs in parallel.
+    - There are `4` nodes (`--nodes`), so with `32` slots per node, there are in total `128` slots to launch job steps in parallel.
+    - Each jobs has a duration of `5 sec`, so each slot runs `12` jobs per minute.
+    - If every parallel job was a job step, then `12*128 = 1536` jobs steps per minute are launched.
+    - This is above the empirical threshold of `1000` job steps per minute, so grouping steps is justified.
+    - Grouping creates groups of `48` GNU parallel jobs (`substeps_per_step`) reducing the job step launch rate to `1536/48 = 32` that is safely below the empirical limit of `1000` per minute.
 
 <!--
 
