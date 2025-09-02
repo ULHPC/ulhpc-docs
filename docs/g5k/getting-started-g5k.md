@@ -755,7 +755,7 @@ fi
 cat $OAR_NODEFILE | sort | uniq > $NODES_FILE
 kadeploy3 -f $OAR_NODEFILE -e $ENV
 clush -l root --hostfile=$NODES_FILE "apt-get update && apt-get install -y stress"
-clush -l root --hostfile=$NODES_FILE 'stress -c $(nproc) -t 60 > /tmp/stress-$(hostname).txt'
+clush -l root --hostfile=$NODES_FILE 'stress -c $(nproc) -t 60 > /tmp/stress.txt'
 
 mkdir -p stress
 clush -l root --hostfile=$NODES_FILE --rcopy /tmp/stress.txt --dest stress
