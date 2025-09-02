@@ -66,52 +66,7 @@ Here are some links for the biggest sites:
 * nantes: [hardware](https://www.grid5000.fr/w/Nantes:Hardware) | [network](https://www.grid5000.fr/w/Nantes:Network)
 * rennes [hardware](https://www.grid5000.fr/w/Rennes:Hardware) | [network](https://www.grid5000.fr/w/Rennes:Network)
 
-#### Programmaticaly discovering resources
-
-Grid'5000 also provide a REST API that allow users to automatically discover resources, and allow to monitor their evolution over time.
-Using tools like curl, or a simple web browser, users can obtain a lot of information such as:
-
-* Grid'5000 sites list and informations: [https://api.grid5000.fr/stable/sites/](https://api.grid5000.fr/stable/sites/)
-    * luxembourg site description: [https://api.grid5000.fr/stable/sites/luxembourg/](https://api.grid5000.fr/stable/sites/luxembourg/)
-* Clusters informations:
-    * luxembourg clusters informations: [https://api.grid5000.fr/stable/sites/luxembourg/clusters/](https://api.grid5000.fr/stable/sites/luxembourg/clusters/)
-* Nodes informations:
-    * luxembourg vianden-1 node informations: [https://api.grid5000.fr/stable/sites/luxembourg/clusters/vianden/nodes/vianden-1](https://api.grid5000.fr/stable/sites/luxembourg/clusters/vianden/nodes/vianden-1)
-
-Theses endpoints allow users to explore Grid'5000 resources programmatically.
-Here is a bash script that will search for any cluster having more than 2 network interfaces:
-<!--TODO: Simplify?-->
-```bash
-#!/bin/bash
-
-mapfile -t sites < <(curl -s https://api.grid5000.fr/stable/sites | jq -r ".items[] | .uid")
-
-for site in "${sites[@]}"; do
-    mapfile -t clusters < <(curl -s https://api.grid5000.fr/stable/sites/$site/clusters | jq -r ".items[] | .uid")
-    for cluster in "${clusters[@]}"; do
-        count=$(curl -s https://api.grid5000.fr/stable/sites/$site/clusters/$cluster/nodes.json | jq ".items[0].kavlan | length")
-        if [ $(($count)) -ge 2 ]; then
-            echo "$site: $cluster has $count network interfaces"
-        fi
-    done
-done
-```
-
-This script must be executed from within Grid'5000.
-We'll see in the next steps how we can log in the platform.
-Users wanting to reach the API from outside Grid'5000 will have to authenticate themselves using their Grid'5000 account.
-
-## First resource reservation with OAR
-
-OAR is the tool used by Grid'5000 to manage its resources.
-
-In this part of the tutorial, we'll connect to a Grid'5000 site and reserve resources to learn how users can perform experiments on the platform.
-
-Before logging onto a Grid'5000 site, it's best to already know what resources we'd like to reserve.
-Usually, users will explore the Hardware pages mentioned sooner, and choose their resources that fit their experiment's requirements.
-For this tutorial, we'll use the *clervaux* cluster in Luxembourg.
-
-### Logging onto a site
+## Logging onto a site
 
 In order to reserve resources located on a given site, users must log into the related frontend.
 A frontend is a virtual machine which has a software environment very close to the one deployed on the nodes by default.
@@ -137,7 +92,7 @@ user@pc: cat .ssh/id_ed25519.pub
 Then go to the following link: [https://api.grid5000.fr/stable/users/](https://api.grid5000.fr/stable/users/                                     ).
 Paste the content of your public key in the `SSH Keys` tab on the right.
 
-#### First log in on Grid'5000
+### First log in on Grid'5000
 
 As seen in the schema describing Grid'5000 platform, users must pass through `access.grid5000.fr` to gain access to the platform.
 Once on this machine, they can start another SSH connection to the site frontend they want to reach:
@@ -222,7 +177,15 @@ user@pc:~$ ssh luxembourg.g5k
 user@fluxembourg:~$
 ```
 
-### Basic resource reservation
+## First resource reservation with OAR
+
+OAR is the tool used by Grid'5000 to manage its resources.
+
+In this part of the tutorial, we'll connect to a Grid'5000 site and reserve resources to learn how users can perform experiments on the platform.
+
+Before logging onto a Grid'5000 site, it's best to already know what resources we'd like to reserve.
+Usually, users will explore the Hardware pages mentioned sooner, and choose their resources that fit their experiment's requirements.
+For this tutorial, we'll use the *clervaux* cluster in Luxembourg.
 
 #### Reserving resources
 
@@ -834,6 +797,43 @@ user:~$ multitail -i OAR.<jobid>.stdout -i OAR.<jobid>.stderr
 ```
 
 ### Fully scripted usage of Grid'5000 through the REST API
+
+#### Programmaticaly discovering resources
+
+Grid'5000 provides a REST API that allow users to automatically discover resources, and allow to monitor their evolution over time.
+Using tools like curl, or a simple web browser, users can obtain a lot of information such as:
+
+* Grid'5000 sites list and informations: [https://api.grid5000.fr/stable/sites/](https://api.grid5000.fr/stable/sites/)
+    * luxembourg site description: [https://api.grid5000.fr/stable/sites/luxembourg/](https://api.grid5000.fr/stable/sites/luxembourg/)
+* Clusters informations:
+    * luxembourg clusters informations: [https://api.grid5000.fr/stable/sites/luxembourg/clusters/](https://api.grid5000.fr/stable/sites/luxembourg/clusters/)
+* Nodes informations:
+    * luxembourg vianden-1 node informations: [https://api.grid5000.fr/stable/sites/luxembourg/clusters/vianden/nodes/vianden-1](https://api.grid5000.fr/stable/sites/luxembourg/clusters/vianden/nodes/vianden-1)
+
+Theses endpoints allow users to explore Grid'5000 resources programmatically.
+Here is a bash script that will search for any cluster having more than 2 network interfaces:
+<!--TODO: Simplify?-->
+```bash
+#!/bin/bash
+
+mapfile -t sites < <(curl -s https://api.grid5000.fr/stable/sites | jq -r ".items[] | .uid")
+
+for site in "${sites[@]}"; do
+    mapfile -t clusters < <(curl -s https://api.grid5000.fr/stable/sites/$site/clusters | jq -r ".items[] | .uid")
+    for cluster in "${clusters[@]}"; do
+        count=$(curl -s https://api.grid5000.fr/stable/sites/$site/clusters/$cluster/nodes.json | jq ".items[0].kavlan | length")
+        if [ $(($count)) -ge 2 ]; then
+            echo "$site: $cluster has $count network interfaces"
+        fi
+    done
+done
+```
+
+This script must be executed from within Grid'5000.
+We'll see in the next steps how we can log in the platform.
+Users wanting to reach the API from outside Grid'5000 will have to authenticate themselves using their Grid'5000 account.
+
+#### Job submission
 
 Since Grid'5000 provides a REST API, each API call can be automatized via a high-level script (python, ruby, bash...).
 This allow users to script and reproduce all their experiments: from the reservation to the results saving.
