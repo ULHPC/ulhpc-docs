@@ -104,37 +104,32 @@ user@fluxembourg:~$
 ```
 
 You should be greeted by a message similar to below:
-<!--TODO: update-->
-```
-Linux fluxembourg 5.10.0-34-amd64 #1 SMP Debian 5.10.234-1 (2025-02-24) x86_64
------- Welcome to Grid'5000 - Luxembourg ------
 
-As a member of the 'g5k-staff' group, you can access the following clusters in queue 'default' on this site:
- - sagittaire (2006): 9 nodes (2 CPUs AMD Opteron 250, 1 core/CPU, 2GB RAM, 68GB HDD, 1 x 1Gb Ethernet)
- - hercule    (2012): 4 nodes (2 CPUs Intel Xeon E5-2620, 6 cores/CPU, 32GB RAM, 3x1863GB HDD, 1 x 10Gb Ethernet)
- - orion      (2012): 3 nodes (2 CPUs Intel Xeon E5-2630, 6 cores/CPU, 1 GPU Tesla M2075, 32GB RAM, 278GB HDD, 1 x 10Gb Ethernet)
- - taurus     (2012): 12 nodes (2 CPUs Intel Xeon E5-2630, 6 cores/CPU, 32GB RAM, 278GB HDD, 1 x 10Gb Ethernet)
- - nova       (2016): 20 nodes (2 CPUs Intel Xeon E5-2620 v4, 8 cores/CPU, 64GB RAM, 557GB HDD, 1 x 10Gb Ethernet)
+```
+Linux fluxembourg 5.10.0-35-amd64 #1 SMP Debian 5.10.237-1 (2025-05-19) x86_64
+------ Welcome to SLICES-FR - Luxembourg ------
+
+As a member of the 'ulhpc' group, you can access the following clusters in queue 'default' on this site:
+ - petitprince (2012): 11 nodes (2 CPUs Intel Xeon E5-2630L, 6 cores/CPU, 32GB RAM, 232GB HDD, 2 x 10Gb Ethernet)
+ - larochette  (2024): 7 nodes (2 CPUs Intel Xeon Platinum 8568Y+, 48 cores/CPU, 4 GPUs Instinct MI210, 512GB RAM, 2980GB SSD, 1 x 25Gb Ethernet)
 * with exotic job type:
- - gemini     (2019): 2 nodes (2 CPUs Intel Xeon E5-2698 v4, 20 cores/CPU, 8 GPUs Tesla V100-SXM2-32GB, 512GB RAM, 447GB SSD, 4x1788GB SSD, 1 x 10Gb Ethernet)
- - pyxis      (2019): 4 nodes (2 CPUs ThunderX2 99xx, 32 cores/CPU, 256GB RAM, 2x232GB SSD, 1 x 10Gb Ethernet)
- - neowise    (2021): 10 nodes (1 CPU AMD EPYC 7642, 48 cores/CPU, 8 GPUs Radeon Instinct MI50 32GB, 512GB RAM, 1788GB SSD, 2 x 10Gb Ethernet, 2 x 100Gb InfiniBand)
- - sirius     (2021): 1 node (2 CPUs AMD EPYC 7742, 64 cores/CPU, 8 GPUs A100-SXM4-40GB, 1024GB RAM, 2x1788GB SSD, 4x3576GB SSD, 1 x 100Gb Ethernet)
+ - vianden     (2024): 1 node (2 CPUs Intel Xeon Platinum 8470, 52 cores/CPU, 8 GPUs AMD Instinct MI300X, 2048GB RAM, 2980GB SSD, 1 x 100Gb Ethernet, 2 x 10Gb Ethernet)
 
 More resources are available in other sites and queues. See <https://api.grid5000.fr/explorer>
 
-** Other Grid'5000 sites: grenoble lille luxembourg nancy nantes rennes sophia strasbourg toulouse
+** Other SLICES-FR sites: grenoble lille lyon nancy nantes rennes sophia strasbourg toulouse
+** Other groups you are a member of: g5k-staff
 
 ** 1 bug could affect your experiment (see https://www.grid5000.fr/status/artifact/)
---> Wattmeters and other metrics unavailable on neowise
-    https://intranet.grid5000.fr/bug/13311
+--> Inconsistent BIOS configuration details on petitprince
+    https://intranet.grid5000.fr/bug/10647
 
 ** Useful links:
  - users home: https://www.grid5000.fr/w/Users_Home
  - usage policy: https://www.grid5000.fr/w/Grid5000:UsagePolicy
  - account management (password change): https://api.grid5000.fr/ui/account
  - support: https://www.grid5000.fr/w/Support
-Last login: Sun Jun  8 12:07:37 2025 from 192.168.66.33
+Last login: Tue Sep  2 16:43:50 2025 from 192.168.66.33
 [user@fluxembourg|~]$
 ```
 
@@ -193,13 +188,12 @@ We are now ready to reserve resources.
 Grid'5000's resources are managed by the [OAR](https://oar.imag.fr/) resources and tasks manager.
 Hence, the command to reserve a resource is `oarsub`.
 A basic `oarsub` command will allocate the first resource available for a default duration (wall time) of 1 hour:
-<!-- TODO: update -->
+
 ```bash
 [user@fluxembourg|~]$ oarsub -r now
-# Filtering out exotic resources (pyxis, neowise, hydra, gemini, sirius).
+# Filtering out exotic resources (vianden).
 # Set walltime to default (3600 s).
-# Warning: your reservation starts very soon, you might get less nodes than what you required!
-OAR_JOB_ID=1894417
+OAR_JOB_ID=256908
 # Advance reservation request: waiting for validation...
 # Reservation valid --> OK
 ```
@@ -424,12 +418,10 @@ It is important to delete jobs that are holding unused resources to make them av
 Users can reserve resources in advance for a given date and a given amount of time.
 This can be done with the `oarsub` command by specifying the start date and end date of the job:
 
-<!-- TODO: update -->
-
 ```bash
 user@fluxembourg:~$ oarsub -r "2025-06-10 10:00, 2025-06-10 12:00"
-# Filtering out exotic resources (pyxis, neowise, hydra, gemini, sirius).
-OAR_JOB_ID=1894550
+# Filtering out exotic resources (vianden).
+OAR_JOB_ID=256910
 # Advance reservation request: waiting for validation...
 # Reservation valid --> OK
 ```
@@ -438,10 +430,11 @@ Here, a node has been allocated on 2025-06-10 between 10AM and 12PM (French time
 The job will start automatically at the given date, and we'll be able to log in when it starts.
 
 Delete this job, since we are not going to use it:
+
 ```bash
-user@fluxembourg:~$ oardel 1894550
-Deleting the job = 1894550 ...REGISTERED.
-The job(s) [ 1894550 ] will be deleted in the near future.
+user@fluxembourg:~$ oardel 256910
+Deleting the job = 256910 ...REGISTERED.
+The job(s) [ 256910 ] will be deleted in the near future.
 ```
 
 ## Selecting resources with OAR
@@ -455,8 +448,9 @@ This part of the tutorial will present some ways to select resources according t
 
 With the `-p` option of the `oarsub` command we can ask for a given cluster.
 For example:
+
 ```bash
-user@fluxembourg:~$ oarsub -r now -p orion
+user@fluxembourg:~$ oarsub -r now -p clervaux
 ```
 
 #### Cluster properties
@@ -465,6 +459,7 @@ The `-p` option can also be used to specify hardware specs we want to get for ou
 For example, `-p "core_count > 8"` will let us reserve computing resources with more than 8 cores.
 
 The string passed with the `-p` option follows SQL syntax, so we can write selections like this:
+
 ```bash
 user@fluxembourg:~$ oarsub -r now -p "cputype LIKE 'Intel Xeon%'"
 ```
@@ -671,15 +666,13 @@ root@clervaux-4:~# ifdown enp1s0f0np0
 Our terminal is hanging! This means we have cut the branch we were sitting on: the node is not reachable via the network.
 Let's log into Grid'5000 in another terminal and try to ping our node:
 
-<!-- TODO: update ips -->
-
 ```bash
 user@pc:~$ ssh luxembourg.g5k
 user@fluxembourg:~$ ping clervaux-3
-PING clervaux-3.luxembourg.grid5000.fr (172.16.48.3) 56(84) bytes of data.
-From fluxembourg.luxembourg.grid5000.fr (172.16.63.101) icmp_seq=1 Destination Host Unreachable
-From fluxembourg.luxembourg.grid5000.fr (172.16.63.101) icmp_seq=2 Destination Host Unreachable
-From fluxembourg.luxembourg.grid5000.fr (172.16.63.101) icmp_seq=3 Destination Host Unreachable
+PING clervaux-3.luxembourg.grid5000.fr (172.16.180.3) 56(84) bytes of data.
+From fluxembourg.luxembourg.grid5000.fr (172.16.191.109) icmp_seq=1 Destination Host Unreachable
+From fluxembourg.luxembourg.grid5000.fr (172.16.191.109) icmp_seq=2 Destination Host Unreachable
+From fluxembourg.luxembourg.grid5000.fr (172.16.191.109) icmp_seq=3 Destination Host Unreachable
 ^C
 --- clervaux-3.luxembourg.grid5000.fr ping statistics ---
 6 packets transmitted, 0 received, +3 errors, 100% packet loss, time 5113ms
@@ -765,13 +758,9 @@ clush -l root --hostfile=$NODES_FILE "apt-get update && apt-get install -y stres
 clush -l root --hostfile=$NODES_FILE 'stress -c $(nproc) -t 60 > /tmp/stress-$(hostname).txt'
 
 mkdir -p stress
-cd stress
-for node in $(cat $NODES_FILE); do
-    scp root@$node:/tmp/stress-*.txt .
-done
+clush -l root --hostfile=$NODES_FILE --rcopy /tmp/stress.txt --dest stress
 
 rm $NODES_FILE
-
 ```
 
 > This script deploys a `-min` environment.
