@@ -5,12 +5,16 @@ Job campaigns that allocate many small jobs quickly, either using job arrays or 
 - allocates resources for a job,
 - launches the [job steps](/jobs/steps/).
 
-Slurm is designed to allocate resources in an allocation loop that runs periodically, usually every 30-180s, depending on its configuration. If many small jobs are in the queue, then operations triggered during the allocation loop, such as backfilling, become expensive. As a result, the scheduling loop can delay past its period, causing the scheduler to appear slow and unresponsive. GNU parallel executes multiple commands in parallel in a single allocation, removing the need to allocate resources and reducing the scheduler load.
+Slurm is designed to allocate resources in an allocation loop that runs periodically, usually every 30-180s, depending on its configuration. If many small jobs are in the queue, then operations triggered during the allocation loop, such as backfilling, become expensive. As a result, the scheduling loop can delay past its period, causing the scheduler to appear slow and unresponsive. GNU parallel executes multiple commands in parallel in a single allocation or even in a single job step, removing the need to allocate resources and reducing the scheduler load.
 
 !!! info "When should GNU parallel be used?"
-    As a rule of thumb, if you are planning to execute jobs campaigns that require more that 10 job allocations per minute, then please consider using [GNU parallel](https://www.gnu.org/software/parallel/).
 
-## Running HPC jobs with GNU parallel
+    As a rule of thumb,
+
+    - if you are planning to execute jobs campaigns that require more that 10 job allocations per minute, then please consider [grouping jobs with GNU parallel](#grouping-allocations-with-gnu-parallel);
+    - if you are planning to execute jobs that cumulatively launch more that 1000 job steps per minute, the please consider [grouping job and job steps using GNU parallel](#grouping-allocations-and-job-steps-with-gnu-parallel).
+
+## Using GNU parallel in HPC jobs
 
 [GNU parallel](https://www.gnu.org/software/parallel/) (command `parallel`)is a shell tool for executing jobs in parallel using one or more computers. A job can be a single command or a small script that has to be run for each of the lines in the input.
 
@@ -18,7 +22,7 @@ Slurm is designed to allocate resources in an allocation loop that runs periodic
 - The parallel command blocks until all forked processes exit.
 - You can limit the number of jobs that run in parallel; `parallel` implements a form of process pull, where a limited number of processes running in parallel executes the jobs.
 
-### Running a single GNU parallel job per job step
+### Grouping allocations with GNU parallel
 
 The scheduler is much more efficient in lunching job steps within a job, where resources have been allocated and there is no need to interact with the resource allocation loop. Job steps are lunched within a job with call to the blocking `srun` command, so the executable needs to be launched with the `srun` command within GNU parallel.
 
@@ -74,12 +78,9 @@ This example script launches a single job step per GNU parallel job. The executa
     - If `32` tasks where launched every minute in distinct jobs the job allocation rate would be above the empirical limit of `10` jobs per minute.
     - Thus, the use of GNU parallel is justified.
 
-### Running multiple GNU parallel jobs per job step
+### Grouping allocations and job steps with GNU parallel
 
-If a jobs contains a massive amounts of very small job steps, it can be limited by the rate in which job steps can be launched. The scheduler stores keep some information for each job step in a database, and with multiple small steps launching in parallel the throughput limits of the database system can exceeded affecting every job in the cluster. In these extreme cases, GNU parallel can limit the number of job steps by grouping multiple GNU parallel jobs in a single job step.
-
-!!! info "When should job step be grouped with GNU parallel jobs?"
-    As a rule of thumb, if you are planning to execute jobs that launch more that 1000 job steps per minute, then please consider grouping job steps using [GNU parallel](https://www.gnu.org/software/parallel/).
+If a jobs contains a massive amounts of very small job steps, it can be limited by the rate with which job steps can be launched. The scheduler stores some information for each job step in a database, and with multiple small steps launching in parallel the throughput limits of the database system can exceeded affecting every job in the cluster. In such extreme cases, GNU parallel can limit the number of job steps by grouping multiple GNU parallel jobs in a single job step.
 
 There are 2 options when lunching multiple GNU parallel jobs in a single jobs step, the GNU parallel jobs of the step can be launched in a script or in a function.
 
