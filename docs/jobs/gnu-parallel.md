@@ -11,8 +11,8 @@ Slurm is designed to allocate resources in an allocation loop that runs periodic
 
     As a rule of thumb,
 
-    - if you are planning to execute jobs campaigns that require more that 10 job allocations per minute, then please consider [grouping jobs with GNU parallel](#grouping-allocations-with-gnu-parallel);
-    - if you are planning to execute jobs that cumulatively launch more that 1000 job steps per minute, the please consider [grouping job and job steps using GNU parallel](#grouping-allocations-and-job-steps-with-gnu-parallel).
+    - if you are planning to execute jobs campaigns that require more than 10 job allocations per minute, then please consider [grouping jobs with GNU parallel](#grouping-allocations-with-gnu-parallel);
+    - if you are planning to execute jobs that cumulatively launch more than 1000 job steps per minute, then please consider [grouping job and job steps using GNU parallel](#grouping-allocations-and-job-steps-with-gnu-parallel).
 
 ## Using GNU parallel in HPC jobs
 
