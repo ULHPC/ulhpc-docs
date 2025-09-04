@@ -20,7 +20,7 @@ To use Grid'5000, a user will log into a given site (e.g., Luxembourg, Lyon, Gre
 
 ![Grid'5000's distributed architecture](https://www.grid5000.fr/mediawiki/images/Grid5000_SSH_access.png)
 
-### Discovering Grid'5000 Resources
+### Discovering Grid'5000 resources
 
 Grid'5000 resources are organized in **clusters**.
 A **cluster** is a named group of **nodes** with homogeneous hardware (CPU, RAM, disk space, GPU...): for example *larochette* in Luxembourg, *neowise* in Lyon, *dahu* in Grenoble...
@@ -213,6 +213,7 @@ Job id     Name           User           Submission Date     S Queue
 
 The state of the reservation will be shown in the `S` column.
 There are the following job states:
+
 * `W`: waiting - OAR must wait before scheduling the job, because the requested resources are not available yet
 * `L`: launching - the job is starting, resources will be available to use soon
 * `R`: running - The job is currently running
@@ -437,7 +438,7 @@ Deleting the job = 256910 ...REGISTERED.
 The job(s) [ 256910 ] will be deleted in the near future.
 ```
 
-## Selecting resources with OAR
+## Advanced resource management
 
 For now, we have been reserving resources without specifically asking for anything.
 This part of the tutorial will present some ways to select resources according to given criteria.
