@@ -98,7 +98,7 @@ As seen in the schema describing the Grid'5000 platform, users must pass through
 Once on this machine, they can start another SSH connection to the site frontend they want to reach:
 
 ```bash
-user@pc:~$ ssh access.grid5000.fr
+user@pc:~$ ssh <g5k_login>@access.grid5000.fr
 user@access-north:~$ ssh luxembourg
 user@fluxembourg:~$
 ```
@@ -190,7 +190,7 @@ Hence, the command to reserve a resource is `oarsub`.
 A basic `oarsub` command will allocate the first resource available for a default duration (wall time) of 1 hour:
 
 ```bash
-[user@fluxembourg|~]$ oarsub -r now
+[user@fluxembourg|~]$ oarsub -r now -q testing
 # Filtering out exotic resources (vianden).
 # Set walltime to default (3600 s).
 OAR_JOB_ID=256908
@@ -450,7 +450,7 @@ With the `-p` option of the `oarsub` command we can ask for a given cluster.
 For example:
 
 ```bash
-user@fluxembourg:~$ oarsub -r now -p clervaux
+user@fluxembourg:~$ oarsub -r now -p larochette
 ```
 
 #### Cluster properties
@@ -572,7 +572,7 @@ This notifies OAR that we are about to change the operating system of the node, 
 Let's reserve a node with this parameter:
 
 ```bash
-user@fluxembourg:~$ oarsub -r now -t deploy
+user@fluxembourg:~$ oarsub -r now -t deploy -q testing
 ```
 
 #### Environment deployment
@@ -773,7 +773,7 @@ Be careful about setting the `x` permission, as we'll need to execute it:
 
 ```bash
 user@fluxembourg:~$ chmod +x experiment.sh
-user@fluxembourg:~$ oarsub -t deploy -r now "./experiment.sh"
+user@fluxembourg:~$ oarsub -t deploy -r now "./experiment.sh" -q testing
 ```
 
 We can track the progress of the job by looking at the job's state with the `oarstat` command, or by looking at `OAR.<jobid>.stdout` and `OAR.<jobid>.stderr` content.
