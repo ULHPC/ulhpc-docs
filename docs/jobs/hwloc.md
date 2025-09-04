@@ -1,6 +1,6 @@
 # Examining the architecture of compute nodes
 
-You can extract detailed information about the architecture of cluster nodes using the [Portable Hardware Locality (hwloc)](https://www.open-mpi.org/projects/hwloc/) package. The hardware locality modules are provided in UL HPC clusters by the `system/hwloc` [modules](/environment/modules). Let's examine the output of hardware locality in an Iris CPU node and how it is interpreted.
+You can extract detailed information about the architecture of cluster nodes using the [Portable Hardware Locality (hwloc)](https://www.open-mpi.org/projects/hwloc/) package. The hardware locality modules are provided in UL HPC clusters by the `system/hwloc` [modules](/environment/modules). Let's examine the output of hardware locality for the various types of nodes in Aion and Iris and how it is interpreted.
 
 ## Using hardware locality
 
@@ -82,8 +82,8 @@ Running the hardware locality is as simple as loading the module and calling the
     From the output you can see the following in an Iris CPU node.
 
     - There are 2 sockets in a node (`Package`).
-    - There is a single NUMA node with `63GB` and a single L3 cache per socket.
-    - There are 12 cores per L3 cache group.
+    - There is a single NUMA node with `63GB` of RAM and a single L3 cache per socket.
+    - There are 14 cores per L3 cache group.
     - There is a single processor unit (`PU`), also known as hardware thread, per core.
     - The storage (`sda`) and the fast interconnect adaptor (`mlx5_0`) are attached to socket 0 (`Package L#0`).
 
@@ -185,8 +185,8 @@ Running the hardware locality is as simple as loading the module and calling the
     From the output you can see the following in an Iris CPU node.
 
     - There are 2 sockets in a node (`Package`).
-    - There is a single NUMA node with `378GB` and a single L3 cache per socket.
-    - There are 12 cores per L3 cache group.
+    - There is a single NUMA node with `378GB` of RAM and a single L3 cache per socket.
+    - There are 14 cores per L3 cache group.
     - There is a single processor unit (`PU`), also known as hardware thread, per core.
     - There are 4 GPUs attached to socket 0 (`Package L#0`) through PCIe (`PCIBridge`).
     - The fast interconnect adaptor (`mlx5_0`) is also attached to socket 0.
@@ -368,8 +368,8 @@ Running the hardware locality is as simple as loading the module and calling the
     From the output you can see the following in an Iris CPU node.
 
     - There are 4 sockets in a node (`Package`).
-    - There is a single NUMA node with `754GB` and a single L3 cache per socket.
-    - There are 12 cores per L3 cache group.
+    - There is a single NUMA node with `754GB` of RAM and a single L3 cache per socket.
+    - There are 28 cores per L3 cache group.
     - There is a single processor unit (`PU`), also known as hardware thread, per core.
     - There are 2 fast interconnect adaptors (`mlx5_0` and `mlx5_1`) attached to socket 0 (`Package L#0`).
     - The storage (`nvme0n1`) is attached to socket 1.
@@ -596,7 +596,7 @@ Running the hardware locality is as simple as loading the module and calling the
 
     - There are 2 physical sockets in a node (`Package`).
     - There are 8 virtual sockets (`Group0`) in a node, 4 per physical socket.
-    - There is a single NUMA node with `32GB` per virtual socket.
+    - There is a single NUMA node with `32GB` of RAM per virtual socket.
     - There are 4 physical L3 caches per NUMA node.
     - There are 4 cores per L3 cache group.
     - There is a single processor unit (`PU`), also known as hardware thread, per core.
@@ -669,7 +669,7 @@ In the output of hardware locality only the cores of the running task are availa
 
 ## Object types 
 
-The architectural data extracted by hardware locality are not very useful without any information on how to pin software threads in the processes units of the compute nodes. Fortunately, hardware locality also provides a distance matrix for the communication latency between processor units. Communication latency is reported at the lowest relevant level of an object type hierarchy.
+The architectural data extracted by hardware locality are not very useful without any information on how to pin software threads on the processor units (PU) of the compute nodes. Fortunately, hardware locality also provides a distance matrix for the communication latency between processor units. Communication latency is reported at the lowest relevant level of an object type hierarchy.
 
 The object types are reported in the verbose output of hardware locality.
 
@@ -677,7 +677,7 @@ The object types are reported in the verbose output of hardware locality.
 hwloc-ls --verbose
 ```
 
-In hardware locality interface, _object types_ are an abstraction of the architectural units of organization of the CPU. The finest object type is always the processor unit (`PU`), also known as hardware thread. Each level in the hierarchy consists of objects of the previous level.
+In hardware locality interface, _object types_ are an abstraction of the architectural units of organization of the CPU. The finest object type is always the processor unit (`PU`), also known as hardware thread. Each level in the hierarchy consists of objects of the underlying level.
 
 !!! info "Object types"
 
@@ -685,7 +685,7 @@ In hardware locality interface, _object types_ are an abstraction of the archite
     |:-----:|:-----------|:------------|
     | 0     | `Machine`  | The compute node. |
     | 1     | `Package`  | The physical socket. |
-    | 2     | `Group0`   | A group of cores (level 0); usually this is an architectural artifact like CCX complexes in Zen architectures. |
+    | 2     | `Group0`   | A group of cores (level 0); usually this is an architectural artifact like a [CPU Complex (CCX)](https://en.wikichip.org/wiki/amd/microarchitectures/zen#CPU_Complex_.28CCX.29) in Zen architectures. |
     | 3     | `L3Cache`  | The L3 cache. |
     | 4     | `L2Cache`  | The L2 cache. |
     | 5     | `L1dCache` | The L1 data cache. |
@@ -700,7 +700,7 @@ There are also _special object types_ that correspond to groups of processor uni
     | Depth | Object      | Description |
     |:-----:|:------------|:------------|
     | -3    | `NUMANode`  | A group of cores with access to the same memory channels |
-    | -4    | `PCIBridge` | A group of cores that have direct access to a PICe connection. |
+    | -4    | `PCIBridge` | A group of cores that have direct access to a PCIe connection. |
     | -5    | `PCIDev`    | A generic PCIe device, such as interconnect cards; connects to a `PCIBridge`. |
 
 
@@ -772,7 +772,7 @@ This option produces a matrix of distances between an object type of the archite
          7    32    32    32    32    12    12    12    10
     ```
 
-    Cores in different NUMA nodes within the same socket have a distance of 12 versus cores on the sane NUMA node with distance of 10.
+    Cores in different NUMA nodes within the same socket have a distance of 12 versus cores on the same NUMA node with distance of 10.
 
     By disabling the extra synchronization operations for L3, we get faster L3 synchronization within a NUMA node at the expense of slower L3 synchronization across NUMA nodes in the same socket. This affects multithreaded applications as threads rely heavily on caches for fast communication. However, HPC applications use message passing (MPI) parallelism between NUMA nodes which is not affected as much by the cache speed.
 
