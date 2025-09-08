@@ -1,162 +1,143 @@
 [![](https://fenicsproject.org/pub/tutorial/sphinx1/_static/fenics_banner.png){: style="width:200px;float: right;" }](https://fenicsproject.org/)
-[FEniCS](https://fenicsproject.org/) is a popular open-source (LGPLv3) computing platform for
-solving partial differential equations (PDEs).
-FEniCS enables users to quickly translate scientific models
-into efficient finite element code. With the high-level
-Python and C++ interfaces to FEniCS, it is easy to get started,
-but FEniCS offers also powerful capabilities for more
-experienced programmers. FEniCS runs on a multitude of
-platforms ranging from laptops to high-performance clusters.
 
-## How to access the FEniCS through [Anaconda](https://www.anaconda.com/products/individual)
-The following steps provides information about how to installed
-on your local path. 
-```bash
-# From your local computer
-$ ssh -X iris-cluster    # OR ssh -Y iris-cluster on Mac
+<!-- Intro start -->
 
-# Reserve the node for interactive computation with grahics view (plots)
-$ si --x11 --ntasks-per-node 1 -c 4
-# salloc -p interactive --qos debug -C batch --x11 --ntasks-per-node 1 -c 4
+[FEniCS](https://fenicsproject.org/) is a popular open-source computing platform for solving partial differential equations (PDEs) using the finite element method ([FEM](https://en.wikipedia.org/wiki/Finite_element_method)). Originally developed in 2003, the earlier version is now known as legacy FEniCS. In 2020, the next-generation framework [FEniCSx](https://docs.fenicsproject.org/) was introduced, with the latest stable [release v0.9.0](https://fenicsproject.org/blog/v0.9.0/) in October 2024. Though it builds on the legacy FEniCS but introduces significant improvements over the legacy libraries. FEniCSx is composed of the following libraries that support typical workflows: [UFL](https://github.com/FEniCS/ufl) → [FFCx](https://github.com/FEniCS/ffcx) → [Basix](https://github.com/FEniCS/basix) → [DOLFINx](https://github.com/FEniCS/dolfinx), which are the build blocks of it. And new users are encouraged to adopt [FEniCSx](https://fenicsproject.org/documentation/) for its modern features and active development support.
 
-# Go to scratch directory 
-$ cds
 
-/scratch/users/<login> $ Anaconda3-2020.07-Linux-x86_64.sh
-/scratch/users/<login> $ chmod +x Anaconda3-2020.07-Linux-x86_64.sh
-/scratch/users/<login> $ ./Anaconda3-2020.07-Linux-x86_64.sh
+(Maybe add a short intro into the stack the software depends on, and further more the internal dependencies UFL->FFCx ...)
 
-Do you accept the license terms? [yes|no]
-yes
-Anaconda3 will now be installed into this location:
-/home/users/<login>/anaconda3
 
-  - Press ENTER to confirm the location
-  - Press CTRL-C to abort the installation
-  - Or specify a different location below
 
-# You can choose your path where you want to install it
-[/home/users/<login>/anaconda3] >>> /scratch/users/<login>/Anaconda3
 
-# To activate the anaconda 
-/scratch/users/<login> $ source /scratch/users/<login>/Anaconda3/bin/activate
+FEniCSx can be installed on [ULHPC](https://www.uni.lu/research-en/core-facilities/hpc/) systems using [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/), Below are detailed instructions for each method, 
 
-# Install the fenics in anaconda environment 
-/scratch/users/<login> $ conda create -n fenicsproject -c conda-forge fenics
+<!-- Intro end  -->
 
-# Install matplotlib for the visualization 
-/scratch/users/<login> $ conda install -c conda-forge matplotlib 
-```
-Once you have installed the anaconda, you can always
-activate it by calling the `source activate` path where `anaconda`
-has been installed. 
+### Building FEniCS With Spack
 
-## Working example
-### Interactive mode
-```bash
-# From your local computer
-$ ssh -X iris-cluster      # or ssh -Y iris-cluster on Mac
 
-# Reserve the node for interactive computation with grahics view (plots)
-$ si --ntasks-per-node 1 -c 4 --x11
-# salloc -p interactive --qos debug -C batch --x11 --ntasks-per-node 1 -c 4
+Building FEniCSx with Spack on the [ULHPC](https://www.uni.lu/research-en/core-facilities/hpc/) system requires that Users already installed Spack and sourced its enviroment on the cluster. If Spack is not yet configured, follow the [spack documentation](../../environment/spack.md) for installation and configuration.
 
-# Activate anaconda  
-$ source /${SCRATCH}/Anaconda3/bin/activate
 
-# activate the fenicsproject
-$ conda activate fenicsproject
+!!! note 
 
-# execute the Poisson.py example (you can uncomment the plot lines in Poission.py example)
-$ python3 Poisson.py
-```
+        Spack would be a good choice for  building FEniCSx because it automatically manages complex dependencies, allows to isolates all installations in a dedicated environment, leverages system-provided packages  in ~/.`spack/packages.yaml` for optimal performance, and simplifies reproducibility and maintenance across different systems.
 
-### Batch script
-```bash
-#!/bin/bash -l                                                                                                 
-#SBATCH -J FEniCS                                                                                        
-#SBATCH -N 1
-###SBATCH -A <project name>
-###SBATCH --ntasks-per-node=1
-#SBATCH -c 1
-#SBATCH --time=00:05:00                                                                      
-#SBATCH -p batch
+Create and Activate a  Spack Environment: 
 
-echo "== Starting run at $(date)"                                                                                             
-echo "== Job ID: ${SLURM_JOBID}"                                                                                            
-echo "== Node list: ${SLURM_NODELIST}"                                                                                       
-echo "== Submit dir. : ${SLURM_SUBMIT_DIR}"
+To maintain an isolated installation, create a dedicated Spack environment in a chosen directory.
+The following example builds FEniCSx in the `home` directory:
 
-# activate the anaconda source 
-source ${SCRATCH}/Anaconda3/bin/activate
+    cd ~
+    spack env create -d fenicsx-0.9.0/ 
+    spack env activate fenicsx-0.9.0/
 
-# activate the fenicsproject from anaconda 
-conda activate fenicsproject
+ 
+Add the core FEniCSx components and common dependencies:
 
-# execute the poisson.py through python
-srun python3 Poisson.py  
-```
+    spack add py-fenics-dolfinx@0.9.0+petsc4py fenics-dolfinx+adios2+petsc adios2+python petsc+mumps
 
-### Example (Poisson.py)
-```bash
-# FEniCS tutorial demo program: Poisson equation with Dirichlet conditions.
-# Test problem is chosen to give an exact solution at all nodes of the mesh.
-#  -Laplace(u) = f    in the unit square
-#            u = u_D  on the boundary
-#  u_D = 1 + x^2 + 2y^2
-#    f = -6
+    # Change @0.9.0 to any version in the above if you want a another version.
+    spack concretize
+    spack install -j16
 
-from __future__ import print_function
-from fenics import *
-import matplotlib.pyplot as plt
 
-# Create mesh and define function space
-mesh = UnitSquareMesh(8, 8)
-V = FunctionSpace(mesh, 'P', 1)
+!!! question " why concretize and -j16 ? " 
 
-# Define boundary condition
-u_D = Expression('1 + x[0]*x[0] + 2*x[1]*x[1]', degree=2)
+        `spack concretize` resolves all dependencies and selects compatible versions for the specified packages. `-j16` sets the number cores to use for building. Using a higher number can speed up the build but should be chosen based on available CPU cores and cluster policies.
 
-def boundary(x, on_boundary):
-    return on_boundary
 
-bc = DirichletBC(V, u_D, boundary)
 
-# Define variational problem
-u = TrialFunction(V)
-v = TestFunction(V)
-f = Constant(-6.0)
-a = dot(grad(u), grad(v))*dx
-L = f*v*dx
+or its also possible to define build packages in  `$SPACK_ENV` in a `spack.yaml` file. 
 
-# Compute solution
-u = Function(V)
-solve(a == L, u, bc)
+    spack:
+      # add package specs to the `specs` list
+      specs:
+      - py-fenics-dolfinx@0.9.0+petsc4py
+      - fenics-dolfinx+adios2+petsc
+      - petsc+mumps
+      - adios2+python
 
-# Plot solution and mesh
-#plot(u)
-#plot(mesh)
+      view: true
+      concretizer:
+        unify: true
+    
+!!! question  " why unify : true ? "
+    
+        `unify: true` ensures all packages share the same dependency versions, preventing multiple builds of the same library. Without it, each `spec` could resolve dependencies independently, leading to potential conflicts and redundant installations.
 
-# Save solution to file in VTK format
-vtkfile = File('poisson/solution.pvd')
-vtkfile << u
 
-# Compute error in L2 norm
-error_L2 = errornorm(u_D, u, 'L2')
 
-# Compute maximum error at vertices
-vertex_values_u_D = u_D.compute_vertex_values(mesh)
-vertex_values_u = u.compute_vertex_values(mesh)
-import numpy as np
-error_max = np.max(np.abs(vertex_values_u_D - vertex_values_u))
+The following are also common dependencies used in FEniCS scripts:
 
-# Print errors
-print('error_L2  =', error_L2)
-print('error_max =', error_max)
+    spack add gmsh+opencascade py-numba py-scipy py-matplotlib
+    
+It is possible to build a specific version (git ref) of DOLFINx. 
+Note that the hash must be the full hash.
+It is best to specify appropriate git refs on all components.
 
-# Hold plot
-#plt.show()
-```
+    # This is a Spack Environment file.
+    # It describes a set of packages to be installed, along with
+    # configuration settings.
+    spack:
+      # add package specs to the `specs` list
+      specs:
+      - fenics-dolfinx@git.4f575964c70efd02dca92f2cf10c125071b17e4d=main+adios2
+      - py-fenics-dolfinx@git.4f575964c70efd02dca92f2cf10c125071b17e4d=main
+
+      - py-fenics-basix@git.2e2a7048ea5f4255c22af18af3b828036f1c8b50=main
+      - fenics-basix@git.2e2a7048ea5f4255c22af18af3b828036f1c8b50=main
+
+      - py-fenics-ufl@git.b15d8d3fdfea5ad6fe78531ec4ce6059cafeaa89=main
+
+      - py-fenics-ffcx@git.7bc8be738997e7ce68ef0f406eab63c00d467092=main
+
+      - fenics-ufcx@git.7bc8be738997e7ce68ef0f406eab63c00d467092=main
+
+      - petsc+mumps
+      - adios2+python
+      view: true
+      concretizer:
+        unify: true
+        
+It is also possible to build only the C++ layer using (Need to comment about why we add python depndencies?)
+
+    spack add fenics-dolfinx@0.9.0+adios2 py-fenics-ffcx@0.9.0 petsc+mumps
+    
+To rebuild FEniCSx from main branches inside an existing environment: 
+
+    spack install --overwrite -j16 fenics-basix py-fenics-basix py-fenics-ffcx fenics-ufcx py-fenics-ufl fenics-dolfinx py-fenics-dolfinx
+
+#### Testing the build
+
+Quickly test the build with
+
+    srun python -c "from mpi4py import MPI; import dolfinx"
+
+!!! info "Try the Build Explicitly" 
+
+        After installation, the [FEniCSx](https://fenicsproject.org/documentation/) build can be tried explicitly by running the demo problems corresponding to the installed release version, as provided in the [FEniCSx documentation](https://docs.fenicsproject.org/).  
+        For [DOLFINx](https://docs.fenicsproject.org/dolfinx/main/python/) Python bindings, see for example the demos in the [stable release v0.9.0](https://docs.fenicsproject.org/dolfinx/v0.9.0/python/demos.html).
+
+
+#### Known issues
+
+Workaround for inability to find gmsh Python package:
+
+    export PYTHONPATH=$SPACK_ENV/.spack-env/view/lib64/:$PYTHONPATH
+
+Workaround for inability to find adios2 Python package:
+
+    export PYTHONPATH=$(find $SPACK_ENV/.spack-env -type d -name 'site-packages' | grep venv):$PYTHONPATH
+
+<!-- if any other known issues need to be added -->
+
+
+### Building FEniCS With EasyBuild
+
+
+
 
 ## Additional information
 FEniCS provides the [technical documentation](https://fenicsproject.org/documentation/),
