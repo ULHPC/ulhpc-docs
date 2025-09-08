@@ -738,7 +738,7 @@ While specifying a command of their own with their reservation, users can execut
 Here is a small bash script that will deploy an environment and run a stress command:
 
 ```bash
-#! /bin/bash
+#!/bin/bash
 
 # bash strict mode configuration
 set -euo pipefail
