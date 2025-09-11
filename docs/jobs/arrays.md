@@ -59,7 +59,3 @@ Additionally you can specify the maximum number of concurrent running tasks from
     - `SLURM_ARRAY_TASK_COUNT`: the number of tasks in the job array
     - `SLURM_ARRAY_TASK_MAX`: the highest job array index value
     - `SLURM_ARRAY_TASK_MIN`: the lowest job array index value
-
-
-
-
