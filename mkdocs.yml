@@ -348,6 +348,7 @@ theme:
   features:
     - navigation.instant
     #- navigation.tabs
+    - content.tabs.link
 
 plugins:
   - search # necessary for search to work
