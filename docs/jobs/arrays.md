@@ -188,7 +188,7 @@ Consider submitting the following job.
     srun \
       stress-ng \
         --cpu ${SLURM_CPUS_PER_TASK} \
-        --timeout "${test_duration}" 
+        --timeout "${test_duration}"
     ```
 
 The tasks in `stress_test.sh` do not have sufficient time to finish. After submission the `TimeLimit` can be raised to 15min to allow tasks sufficient time to finish. Assume that `SLURM_ARRAY_JOB_ID=9625003`.
@@ -204,7 +204,7 @@ The tasks in `stress_test.sh` do not have sufficient time to finish. After submi
 - Update individual tasks:
   ```
   scontrol update jobid=9625003_4 TimeLimit=00:15:00
-  ```  
+  ```
 
 ## Job array scripts
 
@@ -228,7 +228,7 @@ Consider a job array script designed to stress test a set of network file system
 
     srun \
       stress-ng \
-        --timeout "${test_duration}" \ 
+        --timeout "${test_duration}" \
         --iomix "${SLURM_CPUS_PER_TASK}" \
         --temp-path "${FILE_SYSTEM_PATH_PREFIX}_${SLURM_ARRAY_TASK_ID}" \
         --verify \
@@ -273,7 +273,7 @@ Array indices can be used to differentiate the input of a task. In the following
 
     declare max_parallel_tasks=16
     declare speed_step=0.01
-    
+
     generate_commands() {
       local filename="${1}"
 
@@ -287,39 +287,39 @@ Array indices can be used to differentiate the input of a task. In the following
         done
       done
     }
-    
+
     generate_submission_script() {
       local submission_script="${1}"
       local command_script="${2}"
 
       local n_commands="$(cat ${command_script} | wc --lines)"
       local max_task_id="$((${n_commands} - 1))"
-      
+
       cat > job_array_script.sh <<EOF
-      #!/bin/bash --login
-      #SBATCH --job-name=parametric_analysis
-      #SBATCH --array=0-${max_task_id}%${max_parallel_tasks}
-      #SBATCH --partition=batch
-      #SBATCH --qos=normal
-      #SBATCH --nodes=1
-      #SBATCH --ntasks-per-node=1
-      #SBATCH --cpus-per-task=16
-      #SBATCH --time=0-10:00:00
-      #SBATCH --output=%x-%A_%a.out
-      #SBATCH --error=%x-%A_%a.err
-      
-      module load lang/Python
-      
-      declade command="\$(sed "\${SLURM_ARRAY_TASK_ID}"'!d' ${command_script})"
-      
-      echo "Running commnand: \${command}"
-      eval "srun python \${command}"
-      EOF
+    #!/bin/bash --login
+    #SBATCH --job-name=parametric_analysis
+    #SBATCH --array=0-${max_task_id}%${max_parallel_tasks}
+    #SBATCH --partition=batch
+    #SBATCH --qos=normal
+    #SBATCH --nodes=1
+    #SBATCH --ntasks-per-node=1
+    #SBATCH --cpus-per-task=16
+    #SBATCH --time=0-10:00:00
+    #SBATCH --output=%x-%A_%a.out
+    #SBATCH --error=%x-%A_%a.err
+
+    module load lang/Python
+
+    declade command="\$(sed "\${SLURM_ARRAY_TASK_ID}"'!d' ${command_script})"
+
+    echo "Running commnand: \${command}"
+    eval "srun python \${command}"
+    EOF
     }
 
     generate_commands 'commands.sh'
     generate_submission_script 'job_array_script.sh' 'commands.sh'
-        
+
     sbatch job_array_script.sh
     ```
 
@@ -329,7 +329,7 @@ Run the `launch_parammetric_analysis.sh` script with the bash command.
 bash launch_parammetric_analysis.sh
 ```
 
-!!! info "Avoiding script generation"
+??? info "Avoiding script generation"
     Script generation is a complex and error prone command. In this example script generation is unavoidable, as the whole parametric analysis cannot run in a single job of the [`normal` QoS](/slurm/qos/#available-qoss) which has the default maximum wall time (`MaxWall`) of 2 days. The expected runtime on each simulation would be about $0.25$ to $0.5$ of the maximum wall time (`--time`) which is set at 10 hours.
 
     If all the parametric analysis can run within the 2 day limit, then consider running the analysis in a single allocation using [GNU parallel](/jobs/gnu-parallel/). You can then generate the command file and lauch the simulation all from a single script in a single job allocation.
