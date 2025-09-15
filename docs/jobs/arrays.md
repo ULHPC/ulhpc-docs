@@ -183,7 +183,7 @@ Consider submitting the following job.
     #SBATCH --cpus-per-task=16
     #SBATCH --time=00:10:00
 
-    declare test_duration=720 # 12min
+    declare test_duration=12m
 
     srun \
       stress-ng \
