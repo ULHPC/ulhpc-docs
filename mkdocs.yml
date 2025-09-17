@@ -101,6 +101,7 @@ nav:
     - Long Jobs: 'jobs/long.md'
     - Best-effort Jobs: 'jobs/best-effort.md'
     - Launcher Scripts Examples: 'slurm/launchers.md'
+    - Job arrays: 'jobs/arrays.md'
     - GNU parallel: 'jobs/gnu-parallel.md'
     # - Affinity: 'jobs/affinity.md'
     # - (Multi-)GPU Jobs: 'jobs/gpu.md'
@@ -347,6 +348,7 @@ theme:
   features:
     - navigation.instant
     #- navigation.tabs
+    - content.tabs.link
 
 plugins:
   - search # necessary for search to work
