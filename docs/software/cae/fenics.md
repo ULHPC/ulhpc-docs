@@ -4,21 +4,13 @@
 
 [FEniCS](https://fenicsproject.org/) is a popular open-source computing platform for solving partial differential equations (PDEs) using the finite element method ([FEM](https://en.wikipedia.org/wiki/Finite_element_method)). Originally developed in 2003, the earlier version is now known as legacy FEniCS. In 2020, the next-generation framework [FEniCSx](https://docs.fenicsproject.org/) was introduced, with the latest stable [release v0.9.0](https://fenicsproject.org/blog/v0.9.0/) in October 2024. Though it builds on the legacy FEniCS but introduces significant improvements over the legacy libraries. FEniCSx is composed of the following libraries that support typical workflows: [UFL](https://github.com/FEniCS/ufl) → [FFCx](https://github.com/FEniCS/ffcx) → [Basix](https://github.com/FEniCS/basix) → [DOLFINx](https://github.com/FEniCS/dolfinx), which are the build blocks of it. And new users are encouraged to adopt [FEniCSx](https://fenicsproject.org/documentation/) for its modern features and active development support.
 
-
-(Maybe add a short intro into the stack the software depends on, and further more the internal dependencies UFL->FFCx ...)
-
-
-
-
 FEniCSx can be installed on [ULHPC](https://www.uni.lu/research-en/core-facilities/hpc/) systems using [Easybuild](https://docs.easybuild.io) or [Spack](https://spack.io/), Below are detailed instructions for each method, 
 
 <!-- Intro end  -->
 
 ### Building FEniCS With Spack
 
-
 Building FEniCSx with Spack on the [ULHPC](https://www.uni.lu/research-en/core-facilities/hpc/) system requires that Users already installed Spack and sourced its enviroment on the cluster. If Spack is not yet configured, follow the [spack documentation](../../environment/spack.md) for installation and configuration.
-
 
 !!! note 
 
@@ -27,47 +19,47 @@ Building FEniCSx with Spack on the [ULHPC](https://www.uni.lu/research-en/core-f
 Create and Activate a  Spack Environment: 
 
 To maintain an isolated installation, create a dedicated Spack environment in a chosen directory.
-The following example builds FEniCSx in the `home` directory:
+The following example sets up a stable release of FEniCSx `v0.9.0` in the `fenicsx-test` directory inside the `home` directory:
 
     cd ~
-    spack env create -d fenicsx-0.9.0/ 
-    spack env activate fenicsx-0.9.0/
-
- 
+    spack env create -d fenicsx-test/ 
+    spack env activate fenicsx-test/
+    
 Add the core FEniCSx components and common dependencies:
 
     spack add py-fenics-dolfinx@0.9.0+petsc4py fenics-dolfinx+adios2+petsc adios2+python petsc+mumps
 
-    # Change @0.9.0 to any version in the above if you want a another version.
-    spack concretize
-    spack install -j16
+!!! Additional
 
+    The spack `add command` add abstract specs of packages to the currently active environment and registers them as root `specs` in the environment’s `spack.yaml` file. Alternatively, packages can be predefined directly in the `spack.yaml` file located in`$SPACK_ENV`. 
 
-!!! question " why concretize and -j16 ? " 
+        spack:
+        # add package specs to the `specs` list
+        specs:
+        - py-fenics-dolfinx@0.9.0+petsc4py
+        - fenics-dolfinx+adios2+petsc
+        - petsc+mumps
+        - adios2+python
 
-        `spack concretize` resolves all dependencies and selects compatible versions for the specified packages. `-j16` sets the number cores to use for building. Using a higher number can speed up the build but should be chosen based on available CPU cores and cluster policies.
-
-
-
-or its also possible to define build packages in  `$SPACK_ENV` in a `spack.yaml` file. 
-
-    spack:
-      # add package specs to the `specs` list
-      specs:
-      - py-fenics-dolfinx@0.9.0+petsc4py
-      - fenics-dolfinx+adios2+petsc
-      - petsc+mumps
-      - adios2+python
-
-      view: true
-      concretizer:
-        unify: true
+        view: true
+        concretizer:
+            unify: true
+    !!! note 
+            Replace `@0.9.0` with a different version if you prefer to install others release.
     
-!!! question  " why unify : true ? "
+??? question  " why unify : true ? "
     
         `unify: true` ensures all packages share the same dependency versions, preventing multiple builds of the same library. Without it, each `spec` could resolve dependencies independently, leading to potential conflicts and redundant installations.
 
+Once Packages `specs` have been added to the current environment, they need to be concretized. 
 
+    spack concretize
+    spack install -j16
+
+!!! note 
+
+        Here, [`spack concretize`](https://spack.readthedocs.io/en/latest/environments.html#spec-concretization) resolves all dependencies and selects compatible versions for the specified packages. In addition to adding individual specs to an environment, the `spack install` command installs the entire environment at once and `-j16` option sets the number of CPU cores used for building, which can speed up the installation.
+        Once installed, the FEniCSx environment is ready to use on the cluster.
 
 The following are also common dependencies used in FEniCS scripts:
 
