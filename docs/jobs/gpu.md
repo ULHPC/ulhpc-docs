@@ -29,7 +29,7 @@ Thus your typical GPU launcher would match the [AI/DL launcher](../slurm/launche
 #SBATCH --time=0-04:00:00
 
 ### Submit to the `gpu` partition of Iris
-#SBATCH --parition=gpu
+#SBATCH --partition=gpu
 #SBATCH --qos=normal
 
 print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }

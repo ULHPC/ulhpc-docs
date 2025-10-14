@@ -108,7 +108,7 @@ micromamba install <package_name>
 ```
 all the required packages. Quite often, the channel name must also be specified:
 ```bash
-micromamba install --chanell <chanell_name> <package_name>
+micromamba install --chanel <chanel_name> <package_name>
 ```
 Packages can be found by searching the [conda-forge channel](https://anaconda.org/conda-forge).
 
