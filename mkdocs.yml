@@ -258,14 +258,6 @@ nav:
   # - Applications:
   #   - Overview: 'software/index.md'
   #########################
-  - Services: 'services/index.md'
-    # - Gitlab: 'services/gitlab.md'
-    # - Gforge: 'service/gforge.md'
-    # - Jupyter : 'services/jupyter.md'
-    # - EtherPad: 'services/etherpad.md'
-    # - PrivateBin: 'services/privatebin.md'
-    # - Databases: 'services/databases.md'
-  #########################
   - Help and Support:
     # - FAQ: 'support/faq.md'
     - Overview: 'support/index.md'
