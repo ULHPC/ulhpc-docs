@@ -54,19 +54,12 @@ Projects stored on the [Isilon system](/filesystems/isilon) are snapshotted regu
 
 <!--backup-isilon-end-->
 
-Users can access some backed up data through the snapshots in Isilon file systems. This can help restoration after incidents such as accidental data deletion. Each project directory, in `/mnt/isilon/projects/` contains a hidden sub-directory `.snapshot`. 
+Users can access some backed up data through the snapshots in Isilon file systems. This can help restoration after incidents such as accidental data deletion. Each project directory, in `/mnt/isilon/projects/` contains a hidden sub-directory `.snapshot`.
 
 - The `.snapshot` directory is invisible to `ls`, but also to `ls -a`, `find` and similar commands.
 - Snapshots can be browsed normally after changing into the snapshot directory (`cd .snapshot`).
 - Files cannot be created, deleted, or edited in snapshots; files can *only* be copied *out* of a snapshot.
 - Only a few, strategically selected snapshots are exposed to the users. See the [section on backup restoration](#restore) on how to access other snapshots if you need them.
-
-## Data of services
-
-| Name                         | Backup location | Frequency | Retention                                                 |
-|------------------------------|-----------------|-----------|-----------------------------------------------------------|
-| hpc.uni.lu (pad, privatebin) | CDC, Belval     | Daily     | last 7 daily backups, one per month for the last 6 months |
-
 
 ## Restore
 
