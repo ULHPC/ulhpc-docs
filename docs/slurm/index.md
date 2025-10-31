@@ -1,53 +1,83 @@
 # Slurm Resource and Job Management System
 
-ULHPC uses [Slurm](https://slurm.schedmd.com/) (_Simple Linux Utility for Resource Management_) for cluster/resource management and job scheduling.
-This middleware is responsible for allocating resources to users, providing a framework for starting, executing and monitoring work on allocated resources and scheduling work for future execution.
+The UL HPC uses [Slurm](https://slurm.schedmd.com/) (formerly an acronym for _Simple Linux Utility for Resource Management_) cluster and workload management. The Slurm scheduler is a cluster workload manager and performs three main functions:
+
+- allocates access to [resources](#jobs-and-resources) for fixed time intervals,
+- provides a framework for starting, executing, and monitoring work on allocated resources, and
+- maintains a priority queue that schedules and regulates access to resources.
 
 [:fontawesome-solid-right-to-bracket: Official docs](https://slurm.schedmd.com/documentation.html){: .md-button .md-button--link }
 [:fontawesome-solid-right-to-bracket: Official FAQ](https://slurm.schedmd.com/faq.html){: .md-button .md-button--link }
 [:fontawesome-solid-right-to-bracket: ULHPC Tutorial/Getting Started](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
 
-[![](https://hpc-docs.uni.lu/slurm/images/2022-ULHPC-user-guide.png)](https://hpc-docs.uni.lu/slurm/2022-ULHPC-user-guide.pdf)
-
-!!! important "IEEE ISPDC22: ULHPC Slurm 2.0"
+??? info "IEEE ISPDC22: ULHPC Slurm 2.0"
     If you want more details on the RJMS optimizations performed upon Aion acquisition, check out our [IEEE ISPDC22](https://orbilu.uni.lu/handle/10993/51494) conference paper (21<sup>st</sup> IEEE Int. Symp. on Parallel and Distributed Computing) presented in Basel (Switzerland) on July 13, 2022.
+
     > __IEEE Reference Format__ | [ORBilu entry](https://orbilu.uni.lu/handle/10993/51494) | [slides](https://hpc-docs.uni.lu/slurm/2022-07-13-IEEE-ISPDC22.pdf) <br/>
-    > Sebastien Varrette, Emmanuel Kieffer, and Frederic Pinel, "Optimizing the Resource and Job Management System of an Academic HPC and Research Computing Facility". _In 21st IEEE Intl. Symp. on Parallel and Distributed Computing (ISPDC’22)_, Basel, Switzerland, 2022.
+    > Sebastien Varrette, Emmanuel Kieffer, and Frederic Pinel, "Optimizing the Resource and Job Management System of an Academic HPC and Research Computing Facility". _In 21st IEEE Intl. Symp. on Parallel and Distributed Computing (ISPDC'22)_, Basel, Switzerland, 2022.
 
+    [![](https://hpc-docs.uni.lu/slurm/images/2022-ULHPC-user-guide.png)](https://hpc-docs.uni.lu/slurm/2022-ULHPC-user-guide.pdf)
 
-## TL;DR Slurm on ULHPC clusters
+## Overview of the configuration of Slurm on UL HPC clusters
 
 <!--tldr-start-->
 
-In its concise form, the Slurm configuration in place on [ULHPC
-supercomputers](../systems/index.md) features the following attributes you
-should be aware of when interacting with it:
+The main configuration options for Slurm that affect the resources that are available for jobs in [UL HPC systems](/systems/) are the following.
 
-* Predefined [_Queues/Partitions_](../slurm/partitions.md) depending on node type
-    - `batch`  (Default Dual-CPU nodes) _Max_: 64 nodes, 2 days walltime
-    - `gpu`    (GPU nodes nodes)        _Max_: 4 nodes, 2 days walltime
-    - `bigmem` (Large-Memory nodes)     _Max_: 1 node, 2 days walltime
-    - In addition: `interactive` (for quicks tests)  _Max_: 2 nodes, 2h walltime
-        * for code development, testing, and debugging
-* Queue Policy: _[cross-partition QOS](../slurm/qos.md)_, mainly tied to _priority level_ (`low` $\rightarrow$ `urgent`)
-    - `long` QOS with extended Max walltime (`MaxWall`) set to **14 days**
-    -  special _preemptible QOS_ for [best-effort](/jobs/best-effort.md') jobs: `besteffort`.
-* [Accounts hierarchy](../slurm/accounts.md) associated to supervisors (multiple
-  associations possible), projects or trainings
-    - you **MUST** use the proper account as a [detailed usage
-      tracking](../policies/usage-charging.md) is performed and reported.
-* [Slurm Federation configuration](https://slurm.schedmd.com/federation.html) between `iris` and `aion`
-    - ensures global policy (coherent job ID, global scheduling, etc.) within ULHPC systems
-    - easily submit jobs from one cluster to another using `-M, --cluster aion|iris`
+- [__Queues/Partitions__](/slurm/partitions) group nodes according to the set of hardware _features_ they implement.
+    - `batch`: default dual-CPU nodes. Limited to _max_:
+        - 64 nodes, and
+        - 2 days walltime.
+    - `gpu`: GPU nodes nodes. Limited to _max_:
+        - 4 nodes, and
+        - 2 days walltime.
+    - `bigmem`: large-memory nodes. Limited to _max_:
+        - 1 node, and
+        - 2 days walltime.
+    - `interactive`: _floating partition_ across all node types allowing higher priority allocation for quicks tests. Best used in interactive allocations for code development, testing, and debugging. Limited to _max_:
+        - 2 nodes, and
+        - 2h walltime.
+- [__Queue policies/Quality of Service (QoS's)__](/slurm/qos) apply restrictions to resource access and modify job priority on top of (overriding) access restrictions and priority modifications applied by partitions.
+    - _Cross-partition QoS's_ are tied to a priority level.
+        - `low`: Priority 10 and _max_ 300 jobs per user.
+        - `normal`: Priority 100 and _max_ 100 jobs per user.
+        - `high`: Priority 200 and _max_ 50 jobs per user.
+        - `urgent`: Priority 1000 and _max_ 20 jobs per user.
+    - _Special QoS's_ that control priority access to special hardware.
+        - `iris-hopper`: Priority 100 and _max_ 100 jobs per user.
+    - _Long_ type QoS's have extended max walltime (`MaxWall`) of _14 days_ and are defined per cluster/partition combination (`<cluster>-<partition>-long`).
+        - `aion-batch-long`: _max_ 16 nodes and 8 jobs per user.
+        - `iris-batch-long`: _max_ 16 nodes and 8 jobs per user.
+        - `iris-gpu-long`: _max_ 2 nodes per and 4 jobs per user.
+        - `iris-bigmem-long`: _max_ 2 nodes per and 4 jobs per user.
+        - `iris-hopper-long`: _max_ 1 GPU per and 100 jobs per user.
+    - Special _preemptible QoS_ for [best-effort](/jobs/best-effort') jobs.
+        - `besteffort`: jobs in best effort OoS can be interrupted by jobs in any other QoS. The processes running during interruption are killed, so the executables use in best effort jobs require a [custom checkpoint-restart mechanism](https://docs.nersc.gov/development/checkpoint-restart/).
+- [__Accounts__](/slurm/accounts) organize user access to resources hierarchically. Accounts are associated to organization (like faculties), supervisors (multiple associations possible), and activities (like projects, and trainings).
+    - A default account is associated with all users affiliated with the University of Luxembourg.
+    - Users not associated with the University of Luxembourg must have access and specify an account association when allocating resources for a job.
+    - Users must use the proper account as resource usage is [tracked](/policies/usage-charging) and reported.
+- [__Federated scheduling__](https://slurm.schedmd.com/federation.html) supports scheduling jobs across both `iris` and `aion`.
+    - A global policy (coherent job ID, global scheduling, etc.) is enforced within all UL HPC systems.
+    - Submission of jobs from one cluster to another is possible using the `-M, --cluster (aion|iris)` option.
+
+??? info "Features, partitions, and floating partitions"
+    _Features_ in Slurm are tags that correspond to hardware capabilities of nodes. For instance the `volta` flag in UL HPC system denotes that the node has GPUs of the Volta architecture.
+
+    _Partitions_ are collections of nodes that usually have a homogeneous set of features. For instance all nodes of the GPU partition in UL HPC system have GPUs of the Volta architecture. As a result, partitions tend to be mutually exclusive sets.
+
+    _Floating partitions_ contain nodes from multiple partitions. As a result, floating partitions have nodes with variable features. The `-C, --constraint` flag is available to filter nodes in floating partitions according to their features.
 
 <!--tldr-end-->
 
-For more details, see the appropriate pages in the left menu.
+## Jobs and resources
 
-## Jobs
+A _job_ is the minimal independent unit of work in a Slurm cluster.
 
-A **job** is an allocation of resources such as compute nodes assigned to a user for an certain amount of time.
-Jobs can be _interactive_ or _passive_ (e.g., a batch script) scheduled for later execution.
+
+an allocation of resources such as compute nodes assigned to a user for an certain amount of time. Jobs can be _interactive_ or _passive_ (e.g., a batch script) scheduled for later execution.
+
+The resources that the scheduler manages are physical entities like nodes, CPU cores, GPUs, access to special devices, but also system resources like and memory and I/O operations.
 
 !!! question "What characterize a job?"
     A user _jobs_ have the following key characteristics:
