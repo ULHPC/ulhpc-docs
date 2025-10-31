@@ -14,8 +14,8 @@ The batch launcher script may contain `srun` commands to launch [job steps](). T
 
 _Batch job scripts_ are submitted to the scheduler with the [`sbatch`](https://slurm.schedmd.com/sbatch.html) command.
 
-- The command adds a resource allocation request to the scheduler job queue together with a _copy_ of a job luncher script to execute in the allocation. The command then exits.
-- When the requested resources are available, a job is lunched and the job script is executed in the first node of the allocated resources.
+- The command adds a resource allocation request to the scheduler job queue together with a _copy_ of a job launcher script to execute in the allocation. The command then exits.
+- When the requested resources are available, a job is launched and the job script is executed in the first node of the allocated resources.
 - The job allocation is freed when the job script finishes or the allocation times out.
 
 The execution of the job script is thus asynchronous to the execution of the `sbatch` command.
@@ -45,10 +45,10 @@ The execution of the job script is thus asynchronous to the execution of the `sb
 _Interactive jobs_ are launched  with the [`salloc`](https://slurm.schedmd.com/salloc.html) command.
 
 - The command submits a resources allocation request to the scheduler job queue, and blocks until the resources are available.
-- When the requested resources are available, a job is lunched and a command is executed in the first node of the allocated resources.
+- When the requested resources are available, a job is launched and a command is executed in the first node of the allocated resources.
 - The allocation is freed when the interactive session terminates with and `exit` command, or the allocation times out.
 
-The main difference of `salloc` from `sbatch` is that the `salloc` runs for the whole runtime of the command that is executed in the allocation, that it `salloc` is a blocking version of `sbatch`.
+The main difference of `salloc` from `sbatch` is that `salloc` runs for the whole runtime of the command being is executed in the allocation, that is `salloc` is a blocking version of `sbatch`.
 
 !!! info "Typical `salloc` (interactive job) options"
     To start an interactive job scheduler use the following `salloc` command.
