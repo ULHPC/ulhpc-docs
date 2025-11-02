@@ -4,9 +4,9 @@
 
 <!--submit-start-->
 
-Jobs in the [Slurm scheduler](/slurm/) are executed in batch or interactive mode. Batch jobs are executed asynchronously in the background, whereas interactive jobs allow the user to issue commands directly in a shell session. In both cases, the users must request resources for his job, including a finite amount of time for which they can occupy the compute resources.
+Jobs in the [Slurm scheduler](/slurm/) are executed in batch or interactive mode. Batch jobs are executed asynchronously in the background, whereas interactive jobs allow the user to issue a command in an interactive manner, and even start a shell session. In both cases, the users must request resources for their job, including a finite amount of time for which they can occupy the compute resources.
 
-The batch launcher script may contain `srun` commands to launch [job steps](). The job steps can run in sequence or in parallel given that enough resources are available in the job allocation or that resources can be shared. Access to resources such as nodes, memory, and accelerator devices, can be requested with appropriate [partition](/partitions/) and [constraint]() options.
+Jobs executed in batch or interactive mode may contain `srun` commands to launch [job steps](). The job steps can run in sequence or in parallel given that enough resources are available in the job allocation or that resources can be shared. Access to resources such as nodes, memory, and accelerator devices, can be requested with appropriate [partition](/partitions/) and [constraint]() options.
 
 ### Executing a job in batch mode with `sbatch`
 
@@ -42,33 +42,46 @@ The execution of the job script is thus asynchronous to the execution of the `sb
 
 ### Execute a job in interactive mode with `salloc`
 
-_Interactive jobs_ are launched  with the [`salloc`](https://slurm.schedmd.com/salloc.html) command.
+_Interactive jobs_ launched a command in an allocation of compute nodes with the [`salloc`](https://slurm.schedmd.com/salloc.html) command.
 
-- The command submits a resources allocation request to the scheduler job queue, and blocks until the resources are available.
-- When the requested resources are available, a job is launched and a command is executed in the first node of the allocated resources.
-- The allocation is freed when the interactive session terminates with and `exit` command, or the allocation times out.
+- The `salloc` command submits a resources allocation request to the scheduler job queue, and blocks until the resources are available.
+- When the requested resources are available, a job is launched and the command provided to `salloc` is executed on the first node of the allocated resources.
+- The allocation is freed when the command terminates, or the allocation times out.
 
-The main difference of `salloc` from `sbatch` is that `salloc` runs for the whole runtime of the command being is executed in the allocation, that is `salloc` is a blocking version of `sbatch`.
+The main difference of `salloc` from `sbatch` is that `salloc` runs for the whole duration of the command being executed in the allocation, that is `salloc` is a blocking version of `sbatch`.
 
 !!! info "Typical `salloc` (interactive job) options"
     To start an interactive job scheduler use the following `salloc` command.
     ```bash
     sbatch --partition=<partition> [--qos=<qos>] [--account=<account>] [--x11] [...] [<commmand>]
     ```
-    - The `salloc` command will block until the requested resources are available, and it will the launch the `<command>` in the first node of the allocation.
-    - The `<command>` argument is optional; if no command is provided then the behavior of `salloc` depends on the configuration of Slurm. Our site Slurm is configured to launch an interactive shell when no `<command>` is provided.
-    Upon job submission, Slurm print a message with the job's ID; the job ID is used to identify this job in all Slurm interactions.
+    The `salloc` command will block until the requested resources are available, and when resources are available then it will the launch the `<command>` in the first node of the allocation. Upon job submission, Slurm print a message with the job's ID; the job ID is used to identify this job in all Slurm interactions.
 
 !!! example "Example interactive job submission"
     ```console
-    $ salloc --partition=batch --qos=normal --nodes=1 --time=8:00:00
-    salloc: Granted job allocation 9805184
-    salloc: Nodes aion-0207 are ready for job
+    $ salloc --partition=batch --qos=normal --nodes=1 --time=8:00:00 bash --login -c 'echo "Hello, world!"'
+    salloc: Granted job allocation 9824090
+    salloc: Waiting for resource configuration
+    salloc: Nodes aion-0085 are ready for job
+    Hello, world!
+    salloc: Relinquishing job allocation 9824090
+    $
     ```
 
-??? info "Configuring the default behavior of `salloc`"
+#### Launching interactive shell sessions with `salloc`
 
-    The [LaunchParameters](https://slurm.schedmd.com/slurm.conf.html#OPT_LaunchParameters) option of Slurm configuration ([`slurm.conf`](https://slurm.schedmd.com/slurm.conf.html)) is a comma separated list of options for the job launch plugin. The `use_interactive_step` option has `salloc` launch a shell on the first node of the allocation; otherwise `salloc` launches a shell locally, in the machine where it was invoked.
+The `<command>` argument of `salloc` is optional. The default behavior in our site when no `<command>` is provided is for `salloc` to launch an interactive shell on the first node of the allocation. The shell session is configured to overlap, that is it is not consuming any resources from other [job steps](). The interactive session terminates with an `exit` command, or the allocation times out.
+
+!!! example "Example of launching an interactive shell"
+    ```console
+    0 [username@access1 ~]$ salloc --partition=batch --qos=normal --nodes=1 --time=8:00:00
+    salloc: Granted job allocation 9805184
+    salloc: Nodes aion-0207 are ready for job
+    0 [username@aion-0207 ~](9805184 1N/T/1CN)$
+    ```
+
+??? info "Configuring the default behavior of `salloc` when no command is provided"
+    If no command is provided then the behavior of `salloc` depends on the configuration of Slurm. The [LaunchParameters](https://slurm.schedmd.com/slurm.conf.html#OPT_LaunchParameters) option of Slurm configuration ([`slurm.conf`](https://slurm.schedmd.com/slurm.conf.html)) is a comma separated list of options for the job launch plugin. The `use_interactive_step` option has `salloc` launch a shell on the first node of the allocation; otherwise `salloc` launches a shell locally, in the machine where it was invoked.
 
     The [InteractiveStepOptions](https://slurm.schedmd.com/slurm.conf.html#OPT_InteractiveStepOptions) of Slurm configuration determines the command run by `salloc` when `use_interactive_step` is included in LaunchParameters. The default value is
     ```
@@ -80,23 +93,28 @@ The main difference of `salloc` from `sbatch` is that `salloc` runs for the whol
 
 To create a allocation without launching any command, use the `--no-shell` option. Then `salloc` immediately exits after allocating job resources without running a command. Job steps can still be launched in the job allocation using the `srun` command with the `--jobid=<job allocation id>` command.
 
-### Implicit job creation with `srun`
+#### Implicit interactive job creation with `srun`
 
 The [`srun`](https://slurm.schedmd.com/srun.html) is used to initiate parallel job steps within a job allocation. However, if `srun` is invoked outside an allocation, then
 
 - `srun` automatically allocates a job in a blocking manner similar to `salloc`, and
 - when the requested resources become available, it launches a single job step to run the provided command.
 
-??? info "Lunching job with `srun`"
-    To create an implicit job allocation and launch a job step with `srun` provide the usual options usually required by  `salloc` or `sbatch`.
+!!! info "Lunching interactive jobs with `srun`"
+    To create an implicit job allocation and launch a job step with `srun` provide the usual options usually required by `salloc` or `sbatch`.
     ```bash
     srun --partition=<partition> [--qos=<qos>] [--account=<account>] [...] <command>
     ```
-    To launch an interactive allocation, use the [`--pty` option](https://slurm.schedmd.com/srun.html#OPT_pty).
+
+!!! info "Lunching interactive shells with `srun`"
+    To launch an interactive shell in an implicit job allocation, use the [`--pty` option](https://slurm.schedmd.com/srun.html#OPT_pty).
     ```bash
     srun --partition=<partition> [--qos=<qos>] [--account=<account>] [...] --pty bash --login
     ```
     The `--pty` option instructs `srun` to execute the command in [terminal mode](https://en.wikipedia.org/wiki/Terminal_mode) in a [pseudoterminal](https://en.wikipedia.org/wiki/Pseudoterminal), so you can interact with bash as if it was launched in your terminal.
+
+    !!! note
+        In insteractive shell session created implicitly with `srun`, the shell occupies one of the available tasks (`SLURM_NTASKS`) in contrast to jobs launched with `salloc` and without command argument.
 
 <!--submit-end-->
 
