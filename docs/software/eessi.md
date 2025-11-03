@@ -41,4 +41,20 @@ Here is a short excerpt of the output produced by module avail:
 ...
 ```
 
+??? note "Accessing development versions of EESSI"
+    New releases of EESSI are hidden while they are under development. However, you can still access the hidden modules. To view releases under development enable reporting of hidden modules, with
+    ```console
+    $ module --show_hidden avail
+    ```
+    or
+    ```console
+    $ module --show_hidden avail EESSI
+    ```
+    to search specifically for EESSI. You can load a hidden module by providing the full name of the module, for instance
+    ```console
+    $ module load EESSI/2025.06
+    ```
+    even though autocompletion will not work for hidden module names.
+
+
 For more precise information, please refer to the [official documentation](https://www.eessi.io/docs).
