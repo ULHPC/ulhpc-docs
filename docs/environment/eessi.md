@@ -10,7 +10,7 @@ The EESSI software stack is available on the ULHPC platform, and gives you acces
 
 On a compute node, to set up the EESSI environment, simply load the EESSI [module](/environment/modules/):
 
-```
+```bash
 module load EESSI
 ```
 
@@ -18,16 +18,14 @@ The first usage may be slow as the files are downloaded from an upstream Stratum
 
 You should see the following output:
 
-```
+```console
 $ module load EESSI
 EESSI/2023.06 loaded successfully
 ```
 
-The last line is the shell output.
-
 Your environment is now set up, you are ready to start running software provided by EESSI! To see which modules (and extensions) are available, run:
 
-```
+```bash
 module avail
 ```
 
