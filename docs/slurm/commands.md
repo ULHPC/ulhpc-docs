@@ -114,7 +114,7 @@ The [`srun`](https://slurm.schedmd.com/srun.html) is used to initiate parallel j
     The `--pty` option instructs `srun` to execute the command in [terminal mode](https://en.wikipedia.org/wiki/Terminal_mode) in a [pseudoterminal](https://en.wikipedia.org/wiki/Pseudoterminal), so you can interact with bash as if it was launched in your terminal.
 
     !!! note
-        In insteractive shell session created implicitly with `srun`, the shell occupies one of the available tasks (`SLURM_NTASKS`) in contrast to jobs launched with `salloc` and without command argument.
+        In an interactive shell session created implicitly with `srun`, the shell occupies one of the available tasks (`SLURM_NTASKS`) in contrast to jobs launched with `salloc` and without command argument.
 
 <!--submit-end-->
 
