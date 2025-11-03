@@ -100,13 +100,13 @@ The [`srun`](https://slurm.schedmd.com/srun.html) is used to initiate parallel j
 - `srun` automatically allocates a job in a blocking manner similar to `salloc`, and
 - when the requested resources become available, it launches a single job step to run the provided command.
 
-!!! info "Lunching interactive jobs with `srun`"
+!!! info "Launching interactive jobs with `srun`"
     To create an implicit job allocation and launch a job step with `srun` provide the usual options usually required by `salloc` or `sbatch`.
     ```bash
     srun --partition=<partition> [--qos=<qos>] [--account=<account>] [...] <command>
     ```
 
-!!! info "Lunching interactive shells with `srun`"
+!!! info "Launching interactive shells with `srun`"
     To launch an interactive shell in an implicit job allocation, use the [`--pty` option](https://slurm.schedmd.com/srun.html#OPT_pty).
     ```bash
     srun --partition=<partition> [--qos=<qos>] [--account=<account>] [...] --pty bash --login
