@@ -1,7 +1,7 @@
 
 # EESSI - European Environment for Scientific Software Installations
 
-[<img width='400px' src='https://www.eessi.io/docs/img/logos/EESSI_logo_horizontal.jpg'/>](https://www.eessi.io/)
+[<img width='400px' style='float:left' src='https://www.eessi.io/docs/img/logos/EESSI_logo_horizontal.jpg'/>](https://www.eessi.io/)
 
 The [European Environment for Scientific Software Installations (EESSI, pronounced as "easy")](https://www.eessi.io/) is a collaboration between different European partners in HPC community.
 The goal of this project is to build a common stack of scientific software installations for HPC systems and beyond, including laptops, personal workstations and cloud infrastructure.
