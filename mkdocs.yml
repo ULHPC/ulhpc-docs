@@ -72,6 +72,7 @@ nav:
     - Overview:   'environment/index.md'
     - Modules:    'environment/modules.md'
     - Easybuild:  'environment/easybuild.md'
+    - EESSI software stack: 'environment/eessi.md'
     - Containers: 'environment/containers.md'
     - Conda:      'environment/conda.md'
   ###########
@@ -150,7 +151,6 @@ nav:
     ### END GENERATED CONTENT
     # - Software Set Versioning:     'software/swsets.md'
     - Compiling/building your own software: 'software/build.md'
-    - EESSI software stack: 'software/eessi.md'
     # - Management:                  'software/management.md'
     # - Contributing:                'software/contributing.md'
     # - BigData Analytics:           'software/bigdata/index.md'

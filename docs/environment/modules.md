@@ -135,7 +135,7 @@ In UL HPC we are using environment meta-modules to modify the available module s
 There are two types of software sets.
 
 - _Modules under_ `env`: this is a set of modules optimized for the UL HPC systems. The modules are designed to load a different natively optimized set of modules for each system in UL HPC.
-- _Modules under_ [`EESSI`](/software/eessi): this modules load EESSI software sets. The software sets distributed under EESSI provide binaries generically optimized for a number of architectures. The EESSI modules are design to provide a uniform collection of software sets across multiple HPC center to support reproducibility.
+- _Modules under_ [`EESSI`](/environment/eessi): this modules load EESSI software sets. The software sets distributed under EESSI provide binaries generically optimized for a number of architectures. The EESSI modules are design to provide a uniform collection of software sets across multiple HPC center to support reproducibility.
 
 !!! important "When to use EESSI modules"
 
