@@ -1,8 +1,6 @@
 # Containers
 
-Many applications and libraries can also be used through container systems. The UL HPC clusters provide the [Apptainer](https://apptainer.org/) container platform (formerly Singularity). The Apptainer platform provides multiple features targeted towards HPC systems, such as support for Open Containers Initiative (OCI) containers, including Docker OCI, and support for secure containers, that is building and running encrypted containers with RSA keys and passphrases[^43].
-
-[^43]: Encrypted containers are not currently supported in UL HPC systems.
+Many applications and libraries can also be used through container systems. The UL HPC clusters provide the [Apptainer](https://apptainer.org/) container platform (formerly Singularity). The Apptainer platform provides multiple features targeted towards HPC systems, such as support for Open Containers Initiative (OCI) containers, including Docker OCI, and support for secure containers, that is building and running encrypted containers with RSA keys and passphrases.
 
 ## Apptainer
 
