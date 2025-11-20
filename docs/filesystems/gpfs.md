@@ -50,7 +50,6 @@ The environment variable `${PROJECTHOME}` points to the parent directory of all 
 
     See [quotas](quotas.md) for detailed information about inode, space quotas, and file system purge policies. Your HOME is backuped weekly, according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
 
-
 ## Storage System Implementation
 
 The way the UL HPC GPFS file system is implemented is depicted on the below figure.
@@ -87,7 +86,6 @@ Finally, each server is connected directly to the Aion Infiniband network via re
         - 4x SS9012 disk expansion enclosures
         - 360x NL-SAS HDDs (6TB, Self Encrypted Disks (SED)) configured over 36 RAID6 (8+2) pools
         - 10x 3.2TB SED SAS-SSD for metadata.
-
 
 ## Filesystem Performance
 
