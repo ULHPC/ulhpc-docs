@@ -154,4 +154,3 @@ For more details, you can read the following external resources:
 * [Reference Documentation:  Managing File Layout (Striping) and Free Space](https://doc.lustre.org/lustre_manual.xhtml#managingstripingfreespace)
 * [Lustre Wiki](https://wiki.lustre.org/Main_Page)
 * [Lustre Best Practices - Nasa HECC](http://www.nas.nasa.gov/hecc/support/kb/lustre-best-practices_226.html)
-* [I/O and Lustre Usage - NISC](https://www.nics.tennessee.edu/computing-resources/file-systems/io-lustre-tips)

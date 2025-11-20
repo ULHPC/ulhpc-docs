@@ -134,7 +134,6 @@ The performance of the ULHPC Lustre filesystem is expected to be in the range of
 
 Upon release of the system, performance measurement by [IOR](https://github.com/hpc/ior), a synthetic benchmark for testing the performance of distributed filesystems, was run for an increasing number of clients as well as with 1kiB, 4kiB, 1MiB and 4MiB transfer sizes.
 
-
 ![](perfs/2018-Lustre_IOR-DDN.png)
 
 As can be seen, aggregated writes and reads exceed 15 GB/s (depending on the test) which meets the minimum requirement.
