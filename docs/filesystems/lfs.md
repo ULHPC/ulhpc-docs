@@ -11,35 +11,26 @@ This technique is called [**file striping**](https://en.wikipedia.org/wiki/Data_
 The stripes are distributed among the OSTs in a round-robin fashion to ensure load balancing.
 It is thus important to know the number of OST on your running system.
 
-As mentioned in the [Lustre implementation section](lustre.md#storage-system-implementation), the ULHPC Lustre infrastructure is composed of 2 MDS servers (2 MDT), 2 OSS servers and **16 OSTs**.
+As mentioned in the [Lustre implementation section](lustre.md#storage-system-implementation), the ULHPC Lustre infrastructure is composed of **2 MDTs** and **8 OSTs**.
 You can list the MDTs and OSTs with the command `lfs df`:
 
 ```bash
 $ cds      # OR: cd $SCRATCH
 $ lfs df -h
 UUID                       bytes        Used   Available Use% Mounted on
-lscratch-MDT0000_UUID        3.2T       15.4G        3.1T   1% /mnt/lscratch[MDT:0]
-lscratch-MDT0001_UUID        3.2T        3.8G        3.2T   1% /mnt/lscratch[MDT:1]
-lscratch-OST0000_UUID       57.4T       16.7T       40.2T  30% /mnt/lscratch[OST:0]
-lscratch-OST0001_UUID       57.4T       18.8T       38.0T  34% /mnt/lscratch[OST:1]
-lscratch-OST0002_UUID       57.4T       17.6T       39.3T  31% /mnt/lscratch[OST:2]
-lscratch-OST0003_UUID       57.4T       16.6T       40.3T  30% /mnt/lscratch[OST:3]
-lscratch-OST0004_UUID       57.4T       16.5T       40.3T  30% /mnt/lscratch[OST:4]
-lscratch-OST0005_UUID       57.4T       16.5T       40.3T  30% /mnt/lscratch[OST:5]
-lscratch-OST0006_UUID       57.4T       16.3T       40.6T  29% /mnt/lscratch[OST:6]
-lscratch-OST0007_UUID       57.4T       17.0T       39.9T  30% /mnt/lscratch[OST:7]
-lscratch-OST0008_UUID       57.4T       16.8T       40.0T  30% /mnt/lscratch[OST:8]
-lscratch-OST0009_UUID       57.4T       13.2T       43.6T  24% /mnt/lscratch[OST:9]
-lscratch-OST000a_UUID       57.4T       13.2T       43.7T  24% /mnt/lscratch[OST:10]
-lscratch-OST000b_UUID       57.4T       13.3T       43.6T  24% /mnt/lscratch[OST:11]
-lscratch-OST000c_UUID       57.4T       14.0T       42.8T  25% /mnt/lscratch[OST:12]
-lscratch-OST000d_UUID       57.4T       13.9T       43.0T  25% /mnt/lscratch[OST:13]
-lscratch-OST000e_UUID       57.4T       14.4T       42.5T  26% /mnt/lscratch[OST:14]
-lscratch-OST000f_UUID       57.4T       12.9T       43.9T  23% /mnt/lscratch[OST:15]
+es7k2-MDT0000_UUID          5.4T       10.0G        5.3T   1% /mnt/scratch[MDT:0]
+es7k2-MDT0001_UUID          5.5T       11.4G        5.4T   1% /mnt/scratch[MDT:1]
+es7k2-OST0000_UUID        185.0T       52.0T      123.7T  30% /mnt/scratch[OST:0]
+es7k2-OST0001_UUID        185.0T       52.0T      123.7T  30% /mnt/scratch[OST:1]
+es7k2-OST0002_UUID        185.0T       52.0T      123.7T  30% /mnt/scratch[OST:2]
+es7k2-OST0003_UUID        185.0T       51.9T      123.8T  30% /mnt/scratch[OST:3]
+es7k2-OST0004_UUID        185.0T       52.0T      123.7T  30% /mnt/scratch[OST:4]
+es7k2-OST0005_UUID        185.0T       51.9T      123.8T  30% /mnt/scratch[OST:5]
+es7k2-OST0006_UUID        185.0T       52.0T      123.7T  30% /mnt/scratch[OST:6]
+es7k2-OST0007_UUID        185.0T       51.9T      123.8T  30% /mnt/scratch[OST:7]
 
-filesystem_summary:       919.0T      247.8T      662.0T  28% /mnt/lscratch
+filesystem_summary:         1.4P      415.5T      989.9T  30% /mnt/scratch
 ```
-
 
 ### File striping
 
@@ -63,8 +54,7 @@ _Note_: With regards `stripe_offset` (the index of the OST where the first strip
 
 * Use the `lfs getstripe` command for getting the stripe parameters.
 * Use `lfs setstripe` for setting the stripe parameters to get optimal I/O performance. The correct stripe setting depends on your needs and file access patterns.
-    - Newly created files and directories will inherit these parameters from their parent directory. However, the parameters cannot be changed on an existing file.
-
+    * Newly created files and directories will inherit these parameters from their parent directory. However, the parameters cannot be changed on an existing file.
 
 ```console
 $ lfs getstripe dir|filename
@@ -88,7 +78,8 @@ $ lfs getstripe $SCRATCH
 stripe_count:  -1 stripe_size:   1048576 pattern:       raid0 stripe_offset: -1
 ```
 
-In this example, we view the current stripe setting of the `$SCRATCH` directory. The stripe count is changed to all OSTs and verified.
+In this example, we view the current stripe setting of the `$SCRATCH` directory.
+The stripe count is changed to all OSTs and verified.
 All files written to this directory will be striped over the maximum number of OSTs (16).
 Use `lfs check osts` to see the number and status of active OSTs for each filesystem on the cluster. Learn more by reading the man page:
 
@@ -137,7 +128,6 @@ stripe_count:   6 stripe_size:    4194304 stripe_offset:  -1
     Using a large stripe size can improve performance when accessing very large files
 
 Large stripe size allows each client to have exclusive access to its own part of a file. However, it can be counterproductive in some cases if it does not match your I/O pattern. The choice of stripe size has no effect on a single-stripe file.
-
 
 Note that these are simple examples, the optimal settings defer depending on the application (concurrent threads accessing the same file, size of each write operation, etc).
 
