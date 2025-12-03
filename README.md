@@ -33,10 +33,10 @@ $ pip install --requirement requirements.txt
 If your system Python is not compatible with the required packages, we suggest that you install Python in a Conda environment using the [Micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) package manager for Conda.
 
 - Begin by [installing the Micromamba package manager](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html).
-- Install Python 3.8 in a new environment.
+- Install the Python version listed in `.python-version` in a new environment.
 ```
 $ micromamba env create --name ulhpc-docs-python
-$ micromamba install python=3.8 --channel conda-forge --name ulhpc-docs-python
+$ micromamba install python=$(cat .python-version) --channel conda-forge --name ulhpc-docs-python
 ```
 - You now have 2 options. First options is to install the required python packages directly in the Conda environment.
 ```

@@ -6,12 +6,12 @@ nav:
   - Getting Started: 'getting-started.md'
   - HPC Trainings and Tutorials: 'hpc-schools.md'
   - Accounts:
-    - Get an Account:             'accounts/index.md'
-    - Password Policy:            'policies/passwords.md'
-    - Collaboration Accounts:     'accounts/collaboration_accounts.md'
-    - Projects Accounts:          'accounts/projects.md'
+    - Get an Account: 'accounts/index.md'
+    - Password Policy: 'policies/passwords.md'
+    - Collaboration Accounts: 'accounts/collaboration_accounts.md'
+    - Projects Accounts: 'accounts/projects.md'
     - Identity Management Portal: 'connect/ipa.md'
-    - Slurm Account Hierarchy:    'slurm/accounts.md'
+    - Slurm Account Hierarchy: 'slurm/accounts.md'
   - Teaching with the ULHPC: 'teaching-with-the-ulhpc.md'
   ##############
   - Data Center:
@@ -20,60 +20,73 @@ nav:
   - ULHPC Supercomputers:
     - Overview: 'systems/index.md'
     - Aion:
-      - Aion System:   'systems/aion/index.md'
+      - Aion System: 'systems/aion/index.md'
       - Compute Nodes: 'systems/aion/compute.md'
       - Fast Local Interconnect: 'systems/aion/interconnect.md'
-      - Timeline:      'systems/aion/timeline.md'
+      - Timeline: 'systems/aion/timeline.md'
     - Iris:
-      - Iris System:   'systems/iris/index.md'
+      - Iris System: 'systems/iris/index.md'
       - Compute Nodes: 'systems/iris/compute.md'
       - Fast Local Interconnect: 'systems/iris/interconnect.md'
-      - Timeline:      'systems/iris/timeline.md'
+      - Timeline: 'systems/iris/timeline.md'
+  - Grid'5000:
+      - Getting started: 'g5k/getting-started-g5k.md'
+      - Luxembourg site: 'https://www.grid5000.fr/w/Luxembourg:Home'
+      - Network: 'https://www.grid5000.fr/w/Luxembourg:Network'
+      - Compute Nodes: 'https://www.grid5000.fr/w/Luxembourg:Hardware'
   #######################
   - Interconnect:
     - Fast Infiniband Interconnect: 'interconnect/ib.md'
-    - Ethernet Interconnect:        'interconnect/ethernet.md'
+    - Ethernet Interconnect: 'interconnect/ethernet.md'
   #######################
   - Storage:
-    - Overview:                   'filesystems/index.md'
-    - Data Sharing:               'data/sharing.md'
-    - Data Transfer:              'data/transfer.md'
-    - Project Data Management:    'data/project.md'
-    - Scratch Data Management:    'filesystems/lfs.md'
-    - Quotas:                     'filesystems/quotas.md'
-    - Backups:                    'data/backups.md'
-    # - Archiving:                  'data/archiving.md'
-    - Unix File Permissions:      'filesystems/unix-file-permissions.md'
-    # - Version Control with Git:   'workflow/git.md'
-    - Datasets:                   'data/datasets.md'
-    - GDPR Compliance:            'data/gdpr.md'
-    - Sensitive Data Protection:  'data/encryption.md'
+    - Overview: 'filesystems/index.md'
+    - Data Sharing: 'data/sharing.md'
+    - Data Transfer: 'data/transfer.md'
+    - Project Data Management: 'data/project.md'
+    - Scratch Data Management: 'filesystems/lfs.md'
+    - Quotas: 'filesystems/quotas.md'
+    - Backups: 'data/backups.md'
+    # - Archiving: 'data/archiving.md'
+    - Unix File Permissions: 'filesystems/unix-file-permissions.md'
+    # - Version Control with Git: 'workflow/git.md'
+    - Datasets: 'data/datasets.md'
+    - GDPR Compliance: 'data/gdpr.md'
+    - Sensitive Data Protection: 'data/encryption.md'
     - Clustered and Networked File Systems:
-      - GPFS/SpectrumScale:         'filesystems/gpfs.md'
-      - Lustre:                     'filesystems/lustre.md'
-      - OneFS Isilon:               'filesystems/isilon.md'
+      - GPFS/SpectrumScale: 'filesystems/gpfs.md'
+      - Lustre: 'filesystems/lustre.md'
+      - OneFS Isilon: 'filesystems/isilon.md'
   #################
   - Access/Connect:
-    - Access/Login Servers:          'connect/access.md'
-    - SSH:                           'connect/ssh.md'
+    - Access/Login Servers: 'connect/access.md'
+    - SSH: 'connect/ssh.md'
+    - SSH (Windows): 'connect/windows.md'
     - Identity Management (IdM/IPA): 'connect/ipa.md'
-    - Open On Demand Portal:         'connect/ood.md'
-    - Troubleshooting:               'connect/troubleshooting.md'
+    - Open On Demand Portal: 'connect/ood.md'
+    - Troubleshooting: 'connect/troubleshooting.md'
 
     # - Multi-Factor Authentication: 'connect/mfa.md'
   ##############
   - Environment:
+<<<<<<< HEAD
     - Overview:   'environment/index.md'
     - Modules:    'environment/modules.md'
     - Easybuild:  'environment/easybuild.md'
     - Spack:      'environment/spack.md'
+=======
+    - Overview: 'environment/index.md'
+    - Modules: 'environment/modules.md'
+    - Easybuild: 'environment/easybuild.md'
+    - EESSI software stack: 'environment/eessi.md'
+>>>>>>> upstream
     - Containers: 'environment/containers.md'
-    - Conda:      'environment/conda.md'
+    - Conda: 'environment/conda.md'
   ###########
   - Policies:
-    - Acceptable Use Policy (AUP):                   'policies/aup.md'
-    - Downtime and Maintenance:                      'policies/maintenance.md'
-    - Usage Charging Policy:                         'policies/usage-charging.md'
+    - Acceptable Use Policy (AUP): 'policies/aup.md'
+    - Downtime and Maintenance: 'policies/maintenance.md'
+    - Usage Charging Policy: 'policies/usage-charging.md'
   ###############
   - Running Jobs:
     - Slurm Overview: 'slurm/index.md'
@@ -96,6 +109,8 @@ nav:
     - Long Jobs: 'jobs/long.md'
     - Best-effort Jobs: 'jobs/best-effort.md'
     - Launcher Scripts Examples: 'slurm/launchers.md'
+    - Job arrays: 'jobs/arrays.md'
+    - GNU parallel: 'jobs/gnu-parallel.md'
     # - Affinity: 'jobs/affinity.md'
     # - (Multi-)GPU Jobs: 'jobs/gpu.md'
     # - Memory Management: 'jobs/memory.md'
@@ -116,148 +131,139 @@ nav:
   - Software:
     ### BEGIN GENERATED CONTENT
     - Supported Software List:
-        - Overview: 'software/swsets/index.md'
-        - Full List (alphabetical order): 'software/swsets/all_softwares.md'
-        - Biology: 'software/swsets/bio.md'
-        - CFD/Finite element modelling: 'software/swsets/cae.md'
-        - Chemistry: 'software/swsets/chem.md'
-        - Compilers: 'software/swsets/compiler.md'
-        - Data processing: 'software/swsets/data.md'
-        - Debugging: 'software/swsets/debugger.md'
-        - Development: 'software/swsets/devel.md'
-        # - Weather modelling: 'software/swsets/geo.md'
-        - Programming Languages: 'software/swsets/lang.md'
-        - Libraries: 'software/swsets/lib.md'
-        - Mathematics: 'software/swsets/math.md'
-        - MPI: 'software/swsets/mpi.md'
-        - Numerical libraries: 'software/swsets/numlib.md'
-        - Performance measurements: 'software/swsets/perf.md'
-        - Physics: 'software/swsets/phys.md'
-        - System-level software: 'software/swsets/system.md'
-        - Toolchains (software stacks): 'software/swsets/toolchain.md'
-        - Utilities: 'software/swsets/tools.md'
-        - Visualisation: 'software/swsets/vis.md'
+      - Overview: 'software/swsets/index.md'
+      - Full List (alphabetical order): 'software/swsets/all_softwares.md'
+      - Biology: 'software/swsets/bio.md'
+      - CFD/Finite element modelling: 'software/swsets/cae.md'
+      - Chemistry: 'software/swsets/chem.md'
+      - Compilers: 'software/swsets/compiler.md'
+      - Data processing: 'software/swsets/data.md'
+      - Debugging: 'software/swsets/debugger.md'
+      - Development: 'software/swsets/devel.md'
+      # - Weather modelling: 'software/swsets/geo.md'
+      - Programming Languages: 'software/swsets/lang.md'
+      - Libraries: 'software/swsets/lib.md'
+      - Mathematics: 'software/swsets/math.md'
+      - MPI: 'software/swsets/mpi.md'
+      - Numerical libraries: 'software/swsets/numlib.md'
+      - Performance measurements: 'software/swsets/perf.md'
+      - Physics: 'software/swsets/phys.md'
+      - System-level software: 'software/swsets/system.md'
+      - Toolchains (software stacks): 'software/swsets/toolchain.md'
+      - Utilities: 'software/swsets/tools.md'
+      - Visualisation: 'software/swsets/vis.md'
     - Software Sets:
-        - 2019b: 'software/swsets/2019b.md'
-        - 2020a: 'software/swsets/2020b.md'
+       - 2019b: 'software/swsets/2019b.md'
+       - 2020a: 'software/swsets/2020b.md'
     ### END GENERATED CONTENT
-    # - Software Set Versioning:     'software/swsets.md'
+    # - Software Set Versioning: 'software/swsets.md'
     - Compiling/building your own software: 'software/build.md'
-    - EESSI software stack: 'software/eessi.md'
-    # - Management:                  'software/management.md'
-    # - Contributing:                'software/contributing.md'
-    # - BigData Analytics:           'software/bigdata/index.md'
+    # - Management: 'software/management.md'
+    # - Contributing: 'software/contributing.md'
+    # - BigData Analytics: 'software/bigdata/index.md'
     # - Bioinformatics/Life Science: 'software/bio/index.md'
     - Computer Aided Eng. (CAE):
-        - FEniCS : 'software/cae/fenics.md'
-        - ANSYS : 'software/cae/ansys.md'
-        - OpenFOAM : 'software/cae/openfoam.md'
-        - Abaqus : 'software/cae/abaqus.md'
-        - FDS : 'software/cae/fds.md'
-        - Meshing-Tools : 'software/cae/meshing-tools.md'
+      - FEniCS : 'software/cae/fenics.md'
+      - ANSYS : 'software/cae/ansys.md'
+      - OpenFOAM : 'software/cae/openfoam.md'
+      - Abaqus : 'software/cae/abaqus.md'
+      - FDS : 'software/cae/fds.md'
+      - Meshing-Tools : 'software/cae/meshing-tools.md'
     - Physics:
-        - WRF: 'software/physics/wrf.md'
+      - WRF: 'software/physics/wrf.md'
     - Computational Chemistry:
-        - Electronics:
-            - ABINIT:              'software/computational-chemistry/electronics/abinit.md'
-            - ASE:                 'software/computational-chemistry/electronics/ase.md'
-            - MEEP:                'software/computational-chemistry/electronics/meep.md'
-            - Quantum Espresso:    'software/computational-chemistry/electronics/quantum-espresso.md'
-            - VASP:                'software/computational-chemistry/electronics/vasp.md'
-        - Molecular Dynamics:
-            - CP2K: 'software/computational-chemistry/molecular-dynamics/cp2k.md'
-            - GROMACS: 'software/computational-chemistry/molecular-dynamics/gromacs.md'
-            - NAMD: 'software/computational-chemistry/molecular-dynamics/namd.md'
-            - NWCHEM: 'software/computational-chemistry/molecular-dynamics/nwchem.md'
-            - Helping Libraries: 'software/computational-chemistry/molecular-dynamics/helping-libraries.md'
-    # - Deep and Machine Learning:   'software/ml/index.md'
-    # - Earth Sciences:              'software/geo/index.md'
+      - Electronics:
+        - ABINIT: 'software/computational-chemistry/electronics/abinit.md'
+        - ASE: 'software/computational-chemistry/electronics/ase.md'
+        - MEEP: 'software/computational-chemistry/electronics/meep.md'
+        - Quantum Espresso: 'software/computational-chemistry/electronics/quantum-espresso.md'
+        - VASP: 'software/computational-chemistry/electronics/vasp.md'
+      - Molecular Dynamics:
+        - CP2K: 'software/computational-chemistry/molecular-dynamics/cp2k.md'
+        - GROMACS: 'software/computational-chemistry/molecular-dynamics/gromacs.md'
+        - NAMD: 'software/computational-chemistry/molecular-dynamics/namd.md'
+        - NWCHEM: 'software/computational-chemistry/molecular-dynamics/nwchem.md'
+        - Helping Libraries: 'software/computational-chemistry/molecular-dynamics/helping-libraries.md'
+    # - Deep and Machine Learning: 'software/ml/index.md'
+    # - Earth Sciences: 'software/geo/index.md'
     - Mathematics & Statistics:
-          - MATLAB:    'software/maths/matlab.md'
-          - MATHEMATICA:    'software/maths/mathematica.md'
-          - Stata: 'software/maths/stata.md'
-          - Julia:    'software/maths/julia.md'
-    - Optimizers:                  'software/optim/index.md'
-    # - Performance/Debugging:       'development/performance-debugging-tools/index.md'
-    # - Physics:                     'software/phys/index.md'
-    # - Toolchains/Compilers:        'development/toolchains/index.md'
+      - MATLAB: 'software/maths/matlab.md'
+      - MATHEMATICA: 'software/maths/mathematica.md'
+      - Stata: 'software/maths/stata.md'
+      - Julia: 'software/maths/julia.md'
+    - Optimizers: 'software/optim/index.md'
+    # - Performance/Debugging: 'development/performance-debugging-tools/index.md'
+    # - Physics: 'software/phys/index.md'
+    # - Toolchains/Compilers: 'development/toolchains/index.md'
     - Visualization:
-      - ParaView:                  'software/visu/paraview.md'
+      - ParaView: 'software/visu/paraview.md'
 
   ##############
   - Development:
     # - Toolchains and Compilers:
-    #     - Overview: 'development/toolchains/index.md'
-    #     - FOSS:     'development/toolchains/foss.md'
-    #     - Intel:    'development/toolchains/intel.md'
-    #     - LLVM:     'development/compilers/llvm.md'
-    #     - PGI:      'development/compilers/pgi.md'
+    #   - Overview: 'development/toolchains/index.md'
+    #   - FOSS: 'development/toolchains/foss.md'
+    #   - Intel: 'development/toolchains/intel.md'
+    #   - LLVM: 'development/compilers/llvm.md'
+    #   - PGI: 'development/compilers/pgi.md'
     # - Build Tools:
-    #     - Autoconf and Make: 'development/build-tools/autoconf-make.md'
-    #     - CMake:             'development/build-tools/cmake.md'
-    #     - EasyBuild:         'development/build-tools/easybuild.md'
-    #     - Spack:             'https://spack-tutorial.readthedocs.io/en/latest/'
+    #   - Autoconf and Make: 'development/build-tools/autoconf-make.md'
+    #   - CMake: 'development/build-tools/cmake.md'
+    #   - EasyBuild: 'development/build-tools/easybuild.md'
+    #   - Spack: 'https://spack-tutorial.readthedocs.io/en/latest/'
     # - Programming Models:
-    #     - Overview: 'development/programming-models/index.md'
-    #     - MPI Stack:
-    #       - About:   'development/programming-models/mpi/index.md'
-    #       - OpenMPI: 'development/programming-models/mpi/openmpi.md'
-    #     - OpenMP:  'development/programming-models/openmp/openmp.md'
-    #     - CUDA:    'development/programming-models/cuda.md'
-    #     - Kokkos : 'development/programming-models/kokkos.md'
-    #     - UPC :    'development/programming-models/upc.md'
+    #   - Overview: 'development/programming-models/index.md'
+    #   - MPI Stack:
+    #     - About: 'development/programming-models/mpi/index.md'
+    #     - OpenMPI: 'development/programming-models/mpi/openmpi.md'
+    #   - OpenMP: 'development/programming-models/openmp/openmp.md'
+    #   - CUDA: 'development/programming-models/cuda.md'
+    #   - Kokkos: 'development/programming-models/kokkos.md'
+    #   - UPC: 'development/programming-models/upc.md'
     # - Languages:
-    #     - Go:    'development/languages/go.md'
-    #     - Java:  'development/languages/java.md'
-    #     - Julia: 'development/languages/julia.md'
-    #     - Python:
-    #         - About:            'development/languages/python/index.md'
-    #         - Virtual Env.:     'development/languages/python/venv.md'
-    #         - Best Practices:   'development/languages/python/best-practices.md'
-    #         - Python on GPU:    'development/languages/python/python-on-gpu.md'
-    #         - Scaling Up:       'development/languages/python/scaling-up.md'
-    #         - Multiprocessing:  'development/languages/python/multiprocessing.md'
-    #         - mpi4py:           'development/languages/python/mpi4py.md'
-    #         - Notebook:         'development/languages/python/notebook.md'
-    #         - Python Profiling: 'development/languages/python/profiling.md'
-    #         - Python FAQ:       'development/languages/python/faq.md'
-    #     - R:    'development/languages/r.md'
-    #     - Ruby: 'development/languages/ruby.md'
-    #     - Rust: 'development/languages/rust.md'
+    #   - Go: 'development/languages/go.md'
+    #   - Java: 'development/languages/java.md'
+    #   - Julia: 'development/languages/julia.md'
+    #   - Python:
+    #     - About: 'development/languages/python/index.md'
+    #     - Virtual Env.: 'development/languages/python/venv.md'
+    #     - Best Practices: 'development/languages/python/best-practices.md'
+    #     - Python on GPU: 'development/languages/python/python-on-gpu.md'
+    #     - Scaling Up: 'development/languages/python/scaling-up.md'
+    #     - Multiprocessing: 'development/languages/python/multiprocessing.md'
+    #     - mpi4py: 'development/languages/python/mpi4py.md'
+    #     - Notebook: 'development/languages/python/notebook.md'
+    #     - Python Profiling: 'development/languages/python/profiling.md'
+    #     - Python FAQ: 'development/languages/python/faq.md'
+    #   - R: 'development/languages/r.md'
+    #   - Ruby: 'development/languages/ruby.md'
+    #   - Rust: 'development/languages/rust.md'
     # - Libraries:
-    #     - About:     'development/libraries/index.md'
-    #     - Boost C++: 'development/libraries/boost.md'
-    #     - FFTW :     'development/libraries/fftw.md'
-    #     - HDF5 :     'development/libraries/hdf5.md'
-    #     - LAPACK :   'development/libraries/lapack.md'
-    #     - MKL :      'development/libraries/mkl.md'
-    #     - NetCDF :   'development/libraries/netcdf.md'
+    #   - About: 'development/libraries/index.md'
+    #   - Boost C++: 'development/libraries/boost.md'
+    #   - FFTW: 'development/libraries/fftw.md'
+    #   - HDF5: 'development/libraries/hdf5.md'
+    #   - LAPACK: 'development/libraries/lapack.md'
+    #   - MKL: 'development/libraries/mkl.md'
+    #   - NetCDF: 'development/libraries/netcdf.md'
     - Performance/Debugging:
-        # - About:           'development/performance-debugging-tools/index.md'
-        - Arm Forge:       'development/performance-debugging-tools/arm-forge.md'
-        # - GDB:             'development/performance-debugging-tools/gdb.md'
-        - Intel VTune:     'development/performance-debugging-tools/vtune.md'
-        - Intel Advisor:   'development/performance-debugging-tools/advisor.md'
-        - Intel Inspector: 'development/performance-debugging-tools/inspector.md'
-        - Intel Trace Analyzer and Collector: 'development/performance-debugging-tools/itac.md'
-        # - LIKWID:          'development/performance-debugging-tools/likwid.md'
-        # - Nvidia Nsight:   'development/performance-debugging-tools/nsight.md'
-        # - Roofline Performance Model: 'development/performance-debugging-tools/roofline.md'
-        # - PAPI:            'development/performance-debugging-tools/papi.md'
-        - Scalasca:        'development/performance-debugging-tools/scalasca.md'
-        - Valgrind:        'development/performance-debugging-tools/valgrind.md'
-        - APS:             'development/performance-debugging-tools/aps.md'
+      # - About: 'development/performance-debugging-tools/index.md'
+      - Arm Forge: 'development/performance-debugging-tools/arm-forge.md'
+      # - GDB: 'development/performance-debugging-tools/gdb.md'
+      - Intel VTune: 'development/performance-debugging-tools/vtune.md'
+      - Intel Advisor: 'development/performance-debugging-tools/advisor.md'
+      - Intel Inspector: 'development/performance-debugging-tools/inspector.md'
+      - Intel Trace Analyzer and Collector: 'development/performance-debugging-tools/itac.md'
+      # - LIKWID: 'development/performance-debugging-tools/likwid.md'
+      # - Nvidia Nsight: 'development/performance-debugging-tools/nsight.md'
+      # - Roofline Performance Model: 'development/performance-debugging-tools/roofline.md'
+      # - PAPI: 'development/performance-debugging-tools/papi.md'
+      - Scalasca: 'development/performance-debugging-tools/scalasca.md'
+      - Valgrind: 'development/performance-debugging-tools/valgrind.md'
+      - APS: 'development/performance-debugging-tools/aps.md'
   ###############
   # - Applications:
   #   - Overview: 'software/index.md'
-  #########################
-  - Services: 'services/index.md'
-    # - Gitlab: 'services/gitlab.md'
-    # - Gforge: 'service/gforge.md'
-    # - Jupyter : 'services/jupyter.md'
-    # - EtherPad: 'services/etherpad.md'
-    # - PrivateBin: 'services/privatebin.md'
-    # - Databases: 'services/databases.md'
   #########################
   - Help and Support:
     # - FAQ: 'support/faq.md'
@@ -271,8 +277,8 @@ nav:
   #     - ClusterShell: 'tools/clustershell.md'
   #     - GPG: 'tools/gpg.md'
   #     - Git:
-  #         - Basics: 'git/index.md'
-  #         - Workflow: 'git/workflow.md'
+  #       - Basics: 'git/index.md'
+  #       - Workflow: 'git/workflow.md'
   #     - Password Management: 'tools/password-manager.md'
   #   - Configuration Management:
   #     - Puppet: 'infra/management/puppet.md'
@@ -328,7 +334,6 @@ edit_uri: blob/master/docs/
 # Copyright
 copyright: Copyright &copy; 2007-2025 Uni.lu HPC (ULHPC) Team
 
-
 # Configuration
 # strict: true
 
@@ -338,10 +343,11 @@ theme:
   language: en
   palette:
     primary: blue
-    accent:  light blue
+    accent: light blue
   features:
     - navigation.instant
-  # #   - tabs
+    #- navigation.tabs
+    - content.tabs.link
 
 plugins:
   - search # necessary for search to work
@@ -408,8 +414,8 @@ markdown_extensions:
   - pymdownx.details
   # Icons from Emoji extensions, giving access to following icon sets:
   # - Material Design: https://materialdesignicons.com/
-  # - FontAwesome:     https://fontawesome.com/icons?d=gallery&m=free
-  # – Octicons:        https://octicons.github.com/
+  # - FontAwesome: https://fontawesome.com/icons?d=gallery&m=free
+  # – Octicons: https://octicons.github.com/
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
@@ -419,7 +425,8 @@ markdown_extensions:
       social_url_shorthand: true
   - pymdownx.snippets:
       base_path: snippets
-  - pymdownx.tabbed
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.smartsymbols
   # code blocks with syntax highlighting, graphs
   - pymdownx.superfences

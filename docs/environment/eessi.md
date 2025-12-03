@@ -1,7 +1,7 @@
 
 # EESSI - European Environment for Scientific Software Installations
 
-[<img width='400px' src='https://www.eessi.io/docs/img/logos/EESSI_logo_horizontal.jpg'/>](https://www.eessi.io/)
+[<img width='400px' style='float:left' src='https://www.eessi.io/docs/img/logos/EESSI_logo_horizontal.jpg'/>](https://www.eessi.io/)
 
 The [European Environment for Scientific Software Installations (EESSI, pronounced as "easy")](https://www.eessi.io/) is a collaboration between different European partners in HPC community.
 The goal of this project is to build a common stack of scientific software installations for HPC systems and beyond, including laptops, personal workstations and cloud infrastructure.
@@ -10,7 +10,7 @@ The EESSI software stack is available on the ULHPC platform, and gives you acces
 
 On a compute node, to set up the EESSI environment, simply load the EESSI [module](/environment/modules/):
 
-```
+```bash
 module load EESSI
 ```
 
@@ -18,16 +18,14 @@ The first usage may be slow as the files are downloaded from an upstream Stratum
 
 You should see the following output:
 
-```
+```console
 $ module load EESSI
 EESSI/2023.06 loaded successfully
 ```
 
-The last line is the shell output.
-
 Your environment is now set up, you are ready to start running software provided by EESSI! To see which modules (and extensions) are available, run:
 
-```
+```bash
 module avail
 ```
 
@@ -40,5 +38,21 @@ Here is a short excerpt of the output produced by module avail:
    ELPA/2022.05.001-foss-2022b    foss/2022b                       foss/2023b (D)        OpenFOAM/11-foss-2023a
 ...
 ```
+
+??? note "Accessing development versions of EESSI"
+    New releases of EESSI are hidden while they are under development. However, you can still access the hidden modules. To view releases under development enable reporting of hidden modules, with
+    ```console
+    $ module --show_hidden avail
+    ```
+    or
+    ```console
+    $ module --show_hidden avail EESSI
+    ```
+    to search specifically for EESSI. You can load a hidden module by providing the full name of the module, for instance
+    ```console
+    $ module load EESSI/2025.06
+    ```
+    even though autocompletion will not work for hidden module names.
+
 
 For more precise information, please refer to the [official documentation](https://www.eessi.io/docs).

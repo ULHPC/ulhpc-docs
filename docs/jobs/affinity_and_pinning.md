@@ -1,6 +1,6 @@
 # Affinity and pinning of processes and threads
 
-HPC systems consist of multiple components that provide access to various resources. A process or thread running in some core of the system rarely has the same quality of access to all the resources. Take for instance a single CPU node of Iris.
+HPC systems consist of multiple components that provide access to various resources. A process or thread running in some core of the system rarely has the same quality of access to all the resources. Take for instance a CPU node of Iris.
 
 !!! tip "Topology of an Iris CPU node"
 
@@ -27,11 +27,11 @@ Typically the libraries used in HPC applications provide a high degree of contro
 
 ??? info "TL; DR"
 
-    For regular CPU nodes there configuration that work well for the majority of the applications.
+    For regular CPU nodes these configurations work well for the majority of applications.
 
     === "Iris CPU nodes"
 
-        The recommended settings for optimal performance for most applications when using full nodes of Iris is to add the options:
+        The recommended setting for optimal performance for most applications when using full nodes of Iris is to add the options:
 
         - `--ntasks-per-socket=1`,
         - `--cpus-per-task=14`, and
@@ -45,19 +45,19 @@ Typically the libraries used in HPC applications provide a high degree of contro
         #SBATCH --partition=batch
         #SBATCH --qos=normal
         #SBATCH --nodes=4
-        #SBATCH --time=02:00:00
+        #SBATCH --time=00:15:00
         #SBATCH --output=%x-%j.out
         #SBATCH --error=%x-%j.err
         #SBATCH --exclusive
 
         declare stress_test_duration=160
 
-        srun --ntasks-per-socket=1 --cpu-per-task=14 --distribution=block:block stress --cpu 14 --timeout "${stress_test_duration}"
+        srun --ntasks-per-socket=1 --cpus-per-task=14 --distribution=block:block stress-ng --cpu 14 --timeout "${stress_test_duration}"
         ```
 
     === "Aion nodes"
 
-        The recommended settings for optimal performance for most applications when using full nodes of Aion is to add the options:
+        The recommended setting for optimal performance for most applications when using full nodes of Aion is to add the options:
 
         - `--ntasks-per-socket=1`,
         - `--cpus-per-task=16`, and
@@ -71,14 +71,14 @@ Typically the libraries used in HPC applications provide a high degree of contro
         #SBATCH --partition=batch
         #SBATCH --qos=normal
         #SBATCH --nodes=4
-        #SBATCH --time=02:00:00
+        #SBATCH --time=00:15:00
         #SBATCH --output=%x-%j.out
         #SBATCH --error=%x-%j.err
         #SBATCH --exclusive
 
         declare stress_test_duration=160
 
-        srun --ntasks-per-socket=1 --cpu-per-task=16 --distribution=block:block stress --cpu 16 --timeout "${stress_test_duration}"
+        srun --ntasks-per-socket=1 --cpus-per-task=16 --distribution=block:block stress-ng --cpu 16 --timeout "${stress_test_duration}"
         ```
 
 ## Process placement
@@ -101,11 +101,11 @@ Like with other resources, Slurm is using the [control group](https://www.kernel
 
 #### Mask binding
 
-The basic biding option is the mask option, `mask_cpu:<list>`, all other options are converted to masks according to the site configuration of Slurm.
+The basic binding option is the mask option, `mask_cpu:<list>`, all other options are converted to masks according to the site configuration of Slurm.
 
 - The `<mask>` is a bit field over the processor unit ranks (as reported by hardware locality) that marks with 1 the processor units that are available to a process running within a job step.
-- The `<list> == <mask>[,<mask>]` option of the binding directive is a comma separated list of masks, each consecutive process of the `srun` command uses the corresponding mask.
-- The list is reused if the available masks are exhausted.
+- The `<list> == <mask>[,<mask>]*` option of the binding directive is a comma separated list of masks, each consecutive process of the `srun` command uses the next available mask.
+- The list is reused in a round-robin manner if there are more processes than masks.
 - Processes are allowed to move freely within the allocated processor units.
 
 ??? info "Hexadecimal notation for masks"
@@ -114,7 +114,7 @@ The basic biding option is the mask option, `mask_cpu:<list>`, all other options
     ```
     mask_cpu:0xff0000,0xff000000
     ```	
-    maps 4 processes to to the following bit fields
+    maps 4 processes to the following bit fields
 
     | Process number | Processor unit availability               |
     | :------------: | :---------------------------------------- |
@@ -130,7 +130,7 @@ The basic biding option is the mask option, `mask_cpu:<list>`, all other options
 
     For convenience, you can add leading zeros to a mask so that all masks are of the same length, so, `0x00ff0000 = 0xff0000`.
 
-As an example consider an I/O throughput test for Aion local storage. In Aion there are 8 NUMA nodes per compute node, 4 CCXs per NUMA node, and 4 cores sharing a single L3 cache per CCX. Every digit in the hexadecimal mask controls the availability of a single CCX. To launch an I/O stress test in 4 parallel processes, with
+As an example consider an I/O throughput test for Aion local storage. In Aion there are 8 NUMA nodes per compute node, 4 [CCXs](/jobs/hwloc/#object-types) per NUMA node, and 4 cores sharing a single L3 cache per CCX. Every digit in the hexadecimal mask controls the availability of a single CCX. To launch an I/O stress test in 4 parallel processes, with
 
 - processes 0 and 2 pinned on CCX 0 of virtual socket 0, and
 - processes 1 and 3 pinned on CCX 0 of virtual socket 1
@@ -139,7 +139,7 @@ use the following command.
 
 ```bash
 salloc --nodes=1 --exclusive --partition=batch --qos=normal --time=4:00:00
-srun --nodes=1 --ntasks-per-node=4 --cpu-bind=verbose,mask_cpu:0xf,0xf0000 stress --hdd 1 --timeout 240
+srun --nodes=1 --ntasks-per-node=4 --cpu-bind=verbose,mask_cpu:0xf,0xf0000 stress-ng --hdd 1 --timeout 240
 ```
 
 ??? note "Context switching within binding regions"
@@ -148,16 +148,16 @@ srun --nodes=1 --ntasks-per-node=4 --cpu-bind=verbose,mask_cpu:0xf,0xf0000 stres
 
 #### Map binding
 
-The map binding binds processes to specific processor units (PUs). The `<list>==<PU rank>[,<PU rank>]` option of the binding directive is a list of processing unit ranks, as reported by hardware locality.
+The map binding binds processes to specific processor units ([PUs](/jobs/hwloc/#object-types)). The `<list>==<PU rank>[,<PU rank>]*` option of the binding directive is a list of processing unit ranks, as reported by hardware locality.
 
 - Processes launched within a job step use the processor unit with corresponding rank.
 - Ranks may appear more that once if processing units are shared between processes.
 - The list is reused if the available ranks are exhausted.
 
 !!! important "Limitations of map binding"
-    Note that with the map binding each process is assigned a single processor unit. If your process needs more that one processor unit, as is the case with multithreaded processes, using another binging option like mask.
+    Note that with the map binding each process is assigned a single processor unit. If your process needs more that one processor unit, as is the case with multithreaded processes, uss another binging option like mask.
 
-As an example consider an I/O throughput test for Aion local storage. In Aion there are 8 NUMA nodes per compute node, with 16 cores per NUMA node. Every digit in the hexadecimal mask controls the availability of a single CCX. To launch an I/O stress test in 4 parallel processes, with
+As an example consider an I/O throughput test for Aion local storage. In Aion there are 8 NUMA nodes per compute node, with 16 cores per NUMA node. Every digit in the map maps a process to the processor unit (PU) with the corresponding rank. To launch an I/O stress test in 4 parallel processes, with
 
 - processes 0 and 1 pinned on cores 0 and 2 of virtual socket 0, and
 - processes 2 and 3 pinned on cores 16 and 18 of virtual socket 1
@@ -166,12 +166,12 @@ use the following command.
 
 ```bash
 salloc --nodes=1 --exclusive --partition=batch --qos=normal --time=4:00:00
-srun --nodes=1 --ntasks-per-node=4 --cpu-bind=verbose,map_cpu:0,2,16,18 stress --hdd 1 --timeout 240
+srun --nodes=1 --ntasks-per-node=4 --cpu-bind=verbose,map_cpu:0,2,16,18 stress-ng --hdd 1 --timeout 240
 ```
 
 #### Automatically generated masks binding
 
-The Slurm scheduler provides options to generate bindings automatically. Many systems as MUMPS rely on simple allocations of one MPI process per NUMA node, and OpenMP thread parallelism within NUMA nodes. Automatically generated masks can describe such simple binding efficiently and the resulting description is most often portable between systems.
+The Slurm scheduler provides options to generate bindings automatically. Many systems as [MUMPS](https://mumps-solver.org/index.php) rely on simple allocations of one MPI process per NUMA node, and OpenMP thread parallelism within NUMA nodes. Automatically generated masks can describe such simple binding efficiently and the resulting description is most often portable between systems.
 
 When using automatic binging users may want to inspect the resulting binding mask. The binding is implemented using [control groups](https://slurm.schedmd.com/cpu_management.html#Step4), so the cores allocated for the process can be inspected with
 
@@ -179,7 +179,7 @@ When using automatic binging users may want to inspect the resulting binding mas
 - the `taskset` command, or
 - directly reading the `Cpus_allowed_list` in `/proc/self/status`.
 
-As an example consider binding 2 process per node for 2 nodes with the various available options. The `taskset` command is used to report the core bindings, and the verbose option is enabled to print the same information in a format closer to the internal system representation. Start by creating an allocation with exclusive access to 2 nodes:
+As an example consider binding 2 processes per node for 2 nodes with the various available options. The `taskset` command is used to report the core bindings, and the verbose option is enabled to print the same information in a format closer to the internal system representation. Start by creating an allocation with exclusive access to 2 nodes:
 
 ```bash
 salloc --exclusive --nodes=2 --ntasks-per-node=2 --time=1:00:00
@@ -292,13 +292,13 @@ An exhaustive [list of reporting features for binding configurations](https://sl
 
 ## Process distribution
 
-The processes of a job step are distributed along the compute nodes of a job. The distribution of the process is controlled with the `--distribution` option flag or `srun`, and the distribution mechanism is based on hardware locality and control groups, like the binding mechanism. The basic options for the distribution option flags are `--distribution={*|block|cyclic|arbitrary}[:{*|block|cyclic|fcyclic}[:{*|block|cyclic|fcyclic}]]` and their meaning is the following.
+The processes of a job step are distributed along the compute nodes of a job. The distribution of the process is controlled with the `--distribution` option flag of `srun`, and the distribution mechanism is based on hardware locality and control groups, like the binding mechanism. The basic options for the distribution option flag are `--distribution={*|block|cyclic|arbitrary}[:{*|block|cyclic|fcyclic}[:{*|block|cyclic|fcyclic}]]` and their meaning is the following.
 
 - **Level 0** (default `block`): Determines the distributing of processes across nodes ([depth 0](/jobs/hwloc/#object-types) of hardware locality objects).
     - `*`: Use the default method
     - `block`: Distribute processes in a balanced manner across nodes so that if not enough node are available consecutive tasks share a node.
     - `cyclic`: Distribute processes across nodes in a round-robin manner, so that consecutive processes are placed on consecutive nodes of the allocation node list (`${SLURM_NODELIST}`).
-    - `arbitrary`: Used in conjunction with `--nodelist=<node>,[<nodes>]*` to place processes in consecutive nodes in the provided nodes in a round-robin manner.
+    - `arbitrary`: Used in conjunction with `--nodelist=<node>[,<nodes>]*` to place processes in consecutive nodes in the provided node list in a round-robin manner.
 - **Level 1** (default `block`): Determines the distributing of processes across sockets ([depth 1](/jobs/hwloc/#object-types) of hardware locality objects).
     - `*`: Use the default method
     - `block`: Distribute processes for binding in a balanced manner across sockets of the node so that consecutive processes are places in consecutive cores.
@@ -552,7 +552,7 @@ Very precise placement of processes is afforded using the node list (`--nodelist
   aion-[0001,0339]
   ```
 
-- Finally, use a combination of the `--nodelist` option to place processes into nodes and bind them is the desired group of cores.
+- Finally, use a combination of the `--nodelist` option to place processes into nodes and bind them to the desired group of cores.
   ```
   $ srun --nodelist=aion-[0001,0339,0001,0339,0339,0339,0339,0339] --distribution=arbitrary --cpu-bind=verbose,mask_cpu:0xf,0xf0,0xf00,0xf000,0xf0000,0xf00000,0xf000000,0xf0000000 bash -c 'echo -n "task $SLURM_PROCID (node $SLURM_NODEID): "; taskset --cpu-list --pid ${BASHPID}' | sort
 
@@ -573,7 +573,7 @@ Very precise placement of processes is afforded using the node list (`--nodelist
   task 6 (node 1): pid 3623225's current affinity list: 16-19
   ```
 
-With the `arbitrary` option of the distribution flag, the launcher will launch one processes in every entry of the node list (repeated entries allowed). If no node list (`--nodelist`) is provided, then the distribution method defaults to `block`.
+With the `arbitrary` option of the distribution flag, the launcher will launch one process in every entry of the node list (repeated entries allowed). If no node list (`--nodelist`) is provided, then the distribution method defaults to `block`.
 
 <!--
 ## Distributing and binding OpenMP process threads
@@ -585,4 +585,4 @@ The Slurm distribution and binding mechanisms only bind the processes of MPI app
 
 1. [Hardware Locality (hwloc)](/jobs/hwloc/)
 2. [Distribution and binding options - LUMI](https://docs.lumi-supercomputer.eu/runjobs/scheduled-jobs/distribution-binding/)
-3. [Process and Thread Distribution and Binding - MUNI trainings](https://lumi-supercomputer.github.io/LUMI-training-materials/2day-20240502/07_Binding/)
+3. [Process and Thread Distribution and Binding - LUMI trainings](https://lumi-supercomputer.github.io/LUMI-training-materials/2day-20240502/07_Binding/)

@@ -6,7 +6,7 @@ Packages provided through the standard channels of [modules](modules.md) and [co
 
 !!! warning "Contact the ULHPC before installing any software with Conda"
 	Prefer binaries provided through [modules](modules.md) or [containers](../containers/). Conda installs generic binaries that may be suboptimal for the configuration of the ULHPC clusters. Furthermore, installing packages locally with Conda consumes quotas in your or your project's account in terms of [storage space and number of files](/filesystems/quotas/#current-usage).
-	
+
 	Contact the ULHPC High Level Support Team in the [service portal](https://service.uni.lu/sp?id=index) [Home > Research > HPC > Software environment > Request expertise] to discuss possible options before installing any software.
 
 [Conda](https://docs.conda.io/en/latest/) is an open source environment and package management system. With Conda you can create independent environments, where you can install applications such as python and R, together with any packages which will be used by these applications. The environments are independent, with the Conda package manager managing the binaries, resolving dependencies, and ensuring that package used in multiple environments are stored only once. In a typical setting, each user has their own installation of a Conda and a set of personal environments.
@@ -64,7 +64,7 @@ The [Micromaba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.htm
 A complete guide regarding Micromamba installation can be found in the [official documentation](https://mamba.readthedocs.io/en/latest/micromamba-installation.html). To install micromamaba in the HPC clusters, log in to Aion or Iris. Working on a login node, run the installation script,
 ```bash
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
-``` 
+```
 which will install the executable and setup the environment. There are 4 options to select during the installation of Micromamba:
 
 - The directory for the installation of the binary file:
@@ -108,7 +108,7 @@ micromamba install <package_name>
 ```
 all the required packages. Quite often, the channel name must also be specified:
 ```bash
-micromamba install --chanell <chanell_name> <package_name>
+micromamba install --channel <channel_name> <package_name>
 ```
 Packages can be found by searching the [conda-forge channel](https://anaconda.org/conda-forge).
 
@@ -170,7 +170,7 @@ that opens up an interactive dialogue with details about the operations performe
 
 ??? info "Updating environments to remove old package versions"
 	As we create new environments, we often install the latest version of each package. However, if the environments are not updated regularly, we may end up with different versions of the same package across multiple environments. If we have the same version of a package installed in all environments, we can save space by removing unused older versions.
-	
+
 	To update a package across all environments, use the command
 	```bash
 	for e in $(micromamba env list | awk 'FNR>2 {print $1}'); do micromamba update --name $e <package name>; done
@@ -180,7 +180,7 @@ that opens up an interactive dialogue with details about the operations performe
 	for e in $(micromamba env list | awk 'FNR>2 {print $1}'); do micromamba update --name $e --all; done
 	```
 	where `FNR>2` removes the headers in the output of `micromamba env list`, and is thus sensitive to changes in the user interface of Micromamba.
-	
+
 	After updating packages, the `clean` command can be called to removed the data of unused older package versions.
 
 _Sources_
@@ -310,7 +310,7 @@ if the default location for the Micromamba environment directory is used.
 
 ??? info "Advanced management of package data"
 	Julia packages will consume [storage and number of files quota](/filesystems/quotas/#current-usage). Pkg uses automatic garbage collection to cleanup packages that are no longer is use. In general you don't need to manage then package data, simply remove the package and its data will be deleted automatically after some time. However, when you exceed your quota you need to delete files immediately.
-	
+
 	The _immediate removal_ of the data of uninstalled packages can be forced with the command:
 	```julia
 	using Pkg
@@ -318,7 +318,7 @@ if the default location for the Micromamba environment directory is used.
 	Pkg.gc(;collect_delay=Dates.Day(0))
 	```
 	Make sure that the packages have been removed from all the environments that use them
-	
+
 	_Sources_: [Immediate package data clean up](https://discourse.julialang.org/t/packages-clean-up-general-julia-data-consumption/56198)
 
 _Useful resources_

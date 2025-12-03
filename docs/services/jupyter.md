@@ -325,6 +325,13 @@ If you encounter any issues, have a look in the debug output in `Jupyter_<job id
       python3             /home/users/gkafanas/environments/jupyter_env/share/jupyter/kernels/python3 
     ```
 
+!!! error "Troubleshooting"
+    If there is no connection link in the connection instructions, for instance
+    ```
+    Then navigate to:
+    ```
+    the consider resetting the setup of `Jupyter` by deleting `~/.jupyter`.
+
 ### Environment configuration
 
 Jupyter generates various files during runtime, and reads configuration files from various locations. You can control these paths using [environment variables](https://docs.jupyter.org/en/latest/use/jupyter-directories.html). For instance, you may set the `JUPYTER_RUNTIME_DIR` to point somewhere in the [`/tmp` directory](https://hpc-docs.uni.lu/filesystems/#intended-usage-of-file-systems) for better performance.

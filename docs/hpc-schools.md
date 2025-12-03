@@ -22,13 +22,13 @@ Limited spots available per session (usually 30 max).
 
 ### Upcoming sessions
 
-No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
-
 <!--
-- Date: July 2024, 1st-2nd
-- Time: 9am to 12pm (both days).
-- Location: 1.040, MNO - Belval Campus.
+No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 -->
+
+- Date: September 2025, 11th-12th
+- Time: 9am to 12pm (both days).
+- Location: 2.380, MSA - Belval Campus.
 
 ### Morning 1 - Accessing the Cluster and Command Line Introduction 
 Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
@@ -43,13 +43,13 @@ A combination of "[Introduction to HPC](#introduction-to-hpc)" and "[Machine Lea
 
 ### Upcoming sessions
 
-<!--
 No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
--->
 
+<!--
 - Date: 2nd to 4th of June 2025
 - Time: 9am to 12pm (all days)
 - Location: MNO 1.040 and 1.050, Belval Campus
+-->
 
 
 ## Introduction to HPC

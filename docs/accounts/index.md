@@ -61,33 +61,29 @@ Students - submit your account request on the [Student Service Portal](https://s
 Externals - a University staff member must request the account for you, using the section [New HPC account for external](https://service.uni.lu/sp?id=sc_cat_item&sys_id=b12bce4d8776c610aa6d65740cbb3536&sysparm_category=9c992749db8f84109aa59ee3db96196f). Enter the professional data (organization and institutional email address). Specify the line manager / project PI if needed.
 2. If you need to access a specific project directory, ask the project directory owner to open a ticket using the section [Add user within project](https://service.uni.lu/sp?id=sc_cat_item&sys_id=47f37b09dbcf84109aa59ee3db9619a5&sysparm_category=9c992749db8f84109aa59ee3db96196f).
 3. Your account will undergo user checks, in accordance with ULHPC policies, to verify your identity and the information proposed. Under some circumstances, there could be a delay while this vetting takes place.
-4. After vetting has completed, you will receive a welcome email with your login information, and a unique link to a [PrivateBin](https://privatebin.info/) [^1] holding a random temporary password. That link will expire if not used within 24 hours.
-The PI and PI Proxies for the project will be notified when applicable.
-5. Finally, you will need to log into the [HPC IPA](https://hpc-ipa.uni.lu/ipa/ui/) Portal to set up your initial password and Multi-Factor Authentication (MFA) for your account.
+4. After vetting has completed, you will receive a welcome email with your login information, and a link to the [HPC Identity Management Portal](https://hpc-account.uni.lu/realms/hpc/login-actions/reset-credentials?client_id=account-console) where you can setup your password and a Multi-Factor Authentication (MFA) method for your account.
     * **Your new password must adhere to ULHPC's password requirements**
         - see  [Password policy and guidelines](../policies/passwords.md)
-    * [ULHPC Identity Management (IPA portal) documentation](../connect/ipa.md)
+    * [ULHPC Identity Management Portal documentation](../connect/ipa.md)
 
 
-??? warning "UL HPC $\neq$ University credentials"
+??? warning "UL HPC credentials are not University credentials"
     Be aware that the source of authentication for the HPC services based on [RedHat IdM/IPA](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/linux_domain_identity_authentication_and_policy_guide/index) **DIFFERS** from the University credentials (based on UL Active Directory).
 
-    * ULHPC credentials are maintained by the HPC team; associated portal: <https://hpc-ipa.uni.lu/ipa/ui/>
+    * ULHPC credentials are maintained by the HPC team; associated portal: <https://hpc-account.uni.lu>
         - authentication service for: UL HPC
     * University credentials are maintained by the IT team of the University
         - authentication service for Service Now and all other UL services
 
-[^1]: [PrivateBin](https://privatebin.info/) is a minimalist, open source online [pastebin](https://pastebin.com/) where the server has zero knowledge of pasted data. Data is encrypted / decrypted in the browser using 256bit AES in Galois Counter mode.
-
 ## Managing User Accounts
 
-ULHPC user accounts are managed in through the [HPC IPA web portal](../connect/ipa.md).
+ULHPC user accounts are managed in through the [HPC Identity Management Portal](../connect/ipa.md).
 
 ## Security Incidents
 
 If you think there has been a computer security incident, you should contact the ULHPC Team and the [University CISO](https://www.uni.lu/en/about/organisation/administration/it-security-team/) team as soon as possible:
 
-> To: [hpc-team@uni.lu,laurent.weber@uni.lu](mailto:hpc-team@uni.lu,laurent.weber@uni.lu)
+> To: [hpc-team@uni.lu,iso@uni.lu](mailto:hpc-team@uni.lu,iso@uni.lu)
 
 > Subject: Security Incident for HPC account '`<login>`' (**ADAPT accordingly**)
 

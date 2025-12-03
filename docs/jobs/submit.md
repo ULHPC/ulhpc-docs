@@ -260,10 +260,10 @@ pestat [-p <partition>] [-G] [-f]
 As mentionned before, always check your node activity with _at least_ `htop` on the **all** allocated nodes to ensure you use them as expected. Several cases might apply to your job workflow:
 
 === "Single Node, single core"
-    You are dealing with an [embarrasingly parallel job campaign](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#embarrassingly-gnu-parallel-tasks-across-multiples-nodes) and this approach is **bad** and overload the scheduler unnecessarily.
+    You are dealing with an [embarrassingly parallel job campaign](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#embarrassingly-gnu-parallel-tasks-across-multiples-nodes) and this approach is **bad** and overload the scheduler unnecessarily.
     You will also quickly cross the limits set in terms of maximum number of jobs.
     **You must aggregate multiples tasks within a single job** to exploit fully a complete node.
-    In particular, you **MUST** consider using [GNU Parallel](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/) and our [generic GNU launcher `launcher.parallel.sh`](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/launcher.parallel.sh).
+    In particular, you **MUST** consider using [GNU Parallel](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/) and our [generic GNU launcher `launcher.parallel.sh`](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/advanced_scripts/launcher.parallel.sh).
 
     [:fontawesome-solid-right-to-bracket: ULHPC Tutorial / HPC Management of Embarrassingly Parallel Jobs](https://ulhpc-tutorials.readthedocs.io/en/latest/beginners/){: .md-button .md-button--link }
 
