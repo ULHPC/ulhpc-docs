@@ -386,7 +386,8 @@ extra_css:
 extra_javascript:
   - javascripts/extra.js
   - javascripts/bootstrap.min.js
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
   # https://squidfunk.github.io/mkdocs-material/reference/data-tables/#sortable-tables
   - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
   - javascripts/tables.js
@@ -396,15 +397,17 @@ markdown_extensions:
   - attr_list
   # notes, warnings, hints, ...
   - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - markdown.extensions.admonition
   - codehilite:
       guess_lang: false
   - footnotes
   - markdown_include.include:
       base_path: docs
-  - markdown.extensions.admonition
   - meta
-  - pymdownx.arithmatex
-  - pymdownx.details
+  - pymdownx.arithmatex:
+      generic: false
   # Icons from Emoji extensions, giving access to following icon sets:
   # - Material Design: https://materialdesignicons.com/
   # - FontAwesome: https://fontawesome.com/icons?d=gallery&m=free
@@ -422,7 +425,6 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.smartsymbols
   # code blocks with syntax highlighting, graphs
-  - pymdownx.superfences
   - md_in_html
   - toc:
       permalink: true
