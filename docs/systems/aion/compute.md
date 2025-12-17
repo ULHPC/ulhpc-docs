@@ -16,8 +16,7 @@ Aion compute nodes are configured as _8 virtual sockets (processors)_ with _16 c
 
 ## Processor Performance
 
-Each Aion node rely on an AMD Epyc Rome processor architecture which is binary compatible with the x86-64 architecture.
-Each processor has the following performance:
+Each Aion node rely on an AMD Epyc Rome processor architecture which is binary compatible with the x86-64 architecture. Each processor has the following performance:
 
 | Processor Model                                                         | #cores | TDP(*) | CPU Freq. | $R_\text{peak}$<br/><small>[TFlops]</small> | $R_\text{max}$<br/><small>[TFlops]</small> |
 |-------------------------------------------------------------------------|--------|--------|-----------|---------------------------------------------|--------------------------------------------|
@@ -26,22 +25,19 @@ Each processor has the following performance:
 <small>(*) The _Thermal Design Power_ (TDP) represents the average power, in watts, the processor dissipates when operating at Base Frequency with all cores active under an Intel-defined, high-complexity workload.</small>
 
 ??? info "Theoretical $R_\text{peak}$ vs. Maximum $R_\text{max}$ Performance for AMD Epyc"
-    The **AMD Epyc** processors carry on **16 Double Precision (DP) ops/cycle**.
-    Thus the reported $R_\text{peak}$ performance is computed as follows:
-    $R_\text{peak} = ops/cycle \times Freq. \times \#Cores$
+    The _AMD Epyc_ processors carry on _16 Double Precision (DP) ops/cycle_. Thus the reported $R_\text{peak}$ performance is computed as follows:
 
-    With regards the _estimation_ of the Maximum Performance $R_\text{max}$, an efficiency factor of 80% is applied.
-    It is computed from the expected performance runs during the [HPL](http://www.netlib.org/benchmark/hpl/index.html) benchmark workload.
+    $$R_\text{peak} = \left( \text{ops}/\text{cycle} \right) \times \text{Freq.} \times \text{#Cores}$$
+
+    With regards the _estimation_ of the Maximum Performance $R_\text{max}$, an efficiency factor of 80% is applied. It is computed from the expected performance runs during the [HPL](http://www.netlib.org/benchmark/hpl/index.html) benchmark workload.
 
 ## Regular Dual-CPU Nodes
 
 These nodes are packaged within [BullSequana X2410 AMD compute blades](BullSequanaXH2000_Features_Atos_supercomputers.pdf).
 
-![](images/aion_x2410_AMD_blade.png){: style="width:300px;float: right;" }
+![](images/aion_x2410_AMD_blade.png){: style="width:350px;float: right;" }
 
-Each blade contains 3 dual-socket AMD Rome nodes side-by-side, connected to the BullSequana XH2000 local interconnect network through HDR100 ports which is done through a mezzanine board.
-The BullSequana AMD blade is built upon a cold plate which cools all components by direct contact, except DIMMS for which custom heat spreaders evacuate the heat to the cold plate -- see [exploded view](index.md#cooling)
-Characteristics of each blade and associated compute nodes are depicted in the below table
+Each blade contains 3 dual-socket AMD Rome nodes side-by-side, connected to the BullSequana XH2000 local interconnect network through HDR100 ports which is done through a mezzanine board. The BullSequana AMD blade is built upon a cold plate which cools all components by direct contact, except DIMMS for which custom heat spreaders evacuate the heat to the cold plate -- see [exploded view](index.md#cooling). Characteristics of each blade and associated compute nodes are depicted in the table below.
 
 |                         | BullSequana X2410 AMD blade                                                                    |
 |-------------------------|------------------------------------------------------------------------------------------------|
