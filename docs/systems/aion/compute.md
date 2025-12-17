@@ -1,13 +1,12 @@
 # Aion Compute Nodes
 
-Aion is a cluster of x86-64 AMD-based compute nodes.
-More precisely, Aion consists of 354 "_regular_" computational nodes named `aion-[0001-0354]` as follows:
+Aion is a cluster of x86-64 AMD-based compute nodes. More precisely, Aion consists of 354 "_regular_" computational nodes named `aion-[0001-0354]` as follows:
 
 | Hostname           (#Nodes)  | #cores | type                        | Processors                                                                                     | RAM    | $R_\text{peak}$<br/><small>[TFlops]</small>  |
 |------------------------------|--------|-----------------------------|------------------------------------------------------------------------------------------------|--------|----------------------------------------------|
 | `aion-[0001-0354]`     (354) |  45312 | Regular <small>Epyc</small> | 2 [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) @ 2.6 GHz [64c/280W] | 256 GB | 5.32 TF                                      |
 
-Aion compute nodes compute nodes **MUST** be seen as **8 (virtual) processors of 16 cores each**, even if physically the nodes are hosting 2 physical sockets of [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) processors having 64 cores each (total: 128 cores per node).
+Aion compute nodes are configured as _8 virtual sockets (processors)_ with _16 cores per virtual socket_, even if physically the nodes are hosting 2 physical sockets of [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) processors having 64 cores each (total: 128 cores per node).
 
 * As will be highlighted in the [slurm resource allocation](../../slurm/index.md#specific-resource-allocation), that means that targetting a full node utilization assumes that you use the following format attributes to your jobs: `{sbatch|srun|si|salloc} [-N <N>] --ntasks-per-node <8n> --ntasks-per-socket <n> -c <thread>` where 
     - you want to ensure that `<n>`$\times$`<thread>`= 16 on aion
