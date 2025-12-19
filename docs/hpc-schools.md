@@ -6,96 +6,76 @@ Additionally, we also accept users from LIST, LISER and LIH. If you are part of 
 
 ## Forthcoming events
 
-- [Introduction to HPC and Machine Learning](#introduction-to-hpc-and-machine-learning), eligible for ECTS credits: 2-4 of June 2025, Belval Campus
+- [HPC school for beginners](#hpc-school-for-beginners): **eligible for ECTS credits**  
+Quaterly, dates to be announced, Belval Campus
+- [Introduction to Machine Learning](#introduction-to-hpc-and-machine-learning):
+Dates to be announced, Belval Campus
+- [Python for HPC](#python-hpc-school):
+Dates to be announced, Belval Campus
 
 
 ## HPC School for beginners
 
-This event aims to equip you with essential skills and knowledge to embark on your High-Performance Computing journey. The event is organized monthly and is composed of two half days (usually 9am-12pm).
-
-Feel free to only attend the second day session if:
-
-- You can connect to the ULHPC
-- You are comfortable with the command line interface
+This event aims to equip you with essential skills and knowledge to embark on your High-Performance Computing journey. The event is organized each trimester and is composed of six half days.
 
 Limited spots available per session (usually 30 max).
 
 ### Upcoming sessions
 
-<!--
-No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
--->
+No dates annouced at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
+<!---
 - Date: September 2025, 11th-12th
 - Time: 9am to 12pm (both days).
 - Location: 2.380, MSA - Belval Campus.
-
-### Morning 1 - Accessing the Cluster and Command Line Introduction 
-Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
-
-### Morning 2 - Understanding HPC Workflow: Job Submission and Monitoring
-Explore the inner workings of HPC systems. Discover the process of submitting and managing computational tasks. Learn how to monitor and optimize job performance.
-
-
-## Introduction to HPC and Machine Learning
-
-A combination of "[Introduction to HPC](#introduction-to-hpc)" and "[Machine Learning for beginners](#machine-learning-for-beginners)" courses that is eligible for ECTS credits.
-
-### Upcoming sessions
-
-No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
-
-<!--
-- Date: 2nd to 4th of June 2025
-- Time: 9am to 12pm (all days)
-- Location: MNO 1.040 and 1.050, Belval Campus
 -->
 
+### Prerequisites
 
-## Introduction to HPC
+- No specific knowledge required
+- Bring your own computer (Linux, MacOS and Windows are welcome)
+- An active HPC account. You can request one [here](/accounts/#how-to-get-a-new-user-account).
 
-This event is an extended version of the "HPC school for beginners" and provides users with the essential skills required to use HPC facilities and to compose and deploy efficient programs in an HPC environment. The event is spread in 4 sessions across 2 days.
+### Session 1 - Accessing the Cluster and Command Line Introduction 
 
-Limited spots available per session (20 max).
+Learn how to:
 
-### Upcoming sessions
+- access the HPC cluster and set up your machine
+- use the command line interface effectively (manage your files, run software, ...). Gain confidence in interacting with the cluster environment.
+- tranfer data to and from the cluster
 
-<!--
-No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
--->
+### Session 2 - HPC Basics: Job Submission and Monitoring
 
-- Dates: 2nd and 3rd of June 2025
-- Time: 9am to 5pm (both days)
-- Location: MNO 1.040, Belval Campus
+Learn:
 
-### Session 1 - Accessing the Cluster and Command Line Introduction
+- the inner workings of the university HPC clusters 
+- how to submit and manage computational tasks. 
+- how to monitor and optimize job performance.
 
-_Timeslot:_ Day 1 09:00-12:00, _Location:_ MNO 1.040, Belval Campus 
+### Session 3 - Reproducibility: Working with software environments and containers
 
-Learn how to access the HPC cluster, set up your machine, and navigate the command line interface effectively. Gain confidence in interacting with the cluster environment.
+Learn how to:
 
-Feel free to skip session 1 if:
-
-- you can connect to the ULHPC, and
-- you are comfortable with the command line interface.
-
-### Session 2 - Understanding HPC Workflow: Job Submission and Monitoring
-
-_Timeslot:_ Day 1 13:00-17:00, _Location:_ MNO 1.040, Belval Campus
-
-Explore the inner workings of HPC systems. Discover the process of submitting and managing computational tasks. Learn how to monitor and optimize job performance.
-
-### Session 3 - Working with software environments and containers
-
-_Timeslot:_ Day 2 09:00-12:00, _Location:_ MNO 1.040, Belval Campus
-
-Discover how you can setup isolated software environments and containers in the HPC systems. Improve the reproducibility of you workflows by creating reproducible setups.
+- setup isolated software environments
+- create and use containers in the HPC systems
+- Improve the reproducibility of your workflows by creating reproducible setups.
 
 ### Session 4 - Using resources efficiently
 
-_Timeslot:_ Day 2 13:00-17:00, _Location:_ MNO 1.040, Belval Campus
+- Understand the allocation of resources in HPC systems
+- Optimise your job submission workflow
+- Configure you code to access cores, memory channels, and GPUs efficiently and prevent over-subscription.
 
-Understand the allocation of resources in HPC systems. Configure you code to access cores, memory channels, and GPUs efficiently and prevent over-subscription.
+### Session 5 - Optimising storage access
+
+Learn about:
+
+- the different storage tiers and their characteristics
+- Using parallel file systems effectively
+- Optimising storage access patterns
+
+### Session 6 - TBA
+
 
 ### Resources
 
@@ -108,10 +88,6 @@ Understand the allocation of resources in HPC systems. Configure you code to acc
     - [Introduction to the job scheduler](resources/HPC_School_-_Beginner_S2.pdf)
 - [CLI Cheat Sheet](resources/CLI_Cheat_Sheet.pdf)
 
-### Requirements
-
-- Having an HPC account to access the cluster. Request an account following the [instructions in our system documentation](/accounts/#how-to-get-a-new-user-account).
-
 
 ## Machine Learning for beginners
 
@@ -121,14 +97,14 @@ Limited spots available per session (20 max).
 
 ### Upcoming sessions
 
-<!--
-No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
--->
 
+No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
+
+<!--
 - Date: 4th and 5th of June 2025
 - Time: 9am to 5pm (both days)
 - Location: MNO 1.040 and 1.050, Belval Campus
-
+-->
 ### Training outcomes
 
 By the end of the course, participants will:
@@ -142,7 +118,7 @@ By the end of the course, participants will:
 
 #### Day 1 - ML Foundations
 
-_Location:_ MNO 1.050, Belval Campus
+<!--_Location:_ MNO 1.050, Belval Campus-->
 
 - Introduction to ML - AI & ML, types of ML, key concepts;
 - Exploratory Data Analysis (EDA) in Jupyter Notebook - Loading, preprocessing, and visualizing;
@@ -151,7 +127,7 @@ _Location:_ MNO 1.050, Belval Campus
 
 #### Day 2 - DL & HPC Acceleration
 
-_Location:_ MNO 1.040, Belval Campus
+<!--_Location:_ MNO 1.040, Belval Campus-->
 
 - DL & CNNs - Building and training DL models;
 - Distributed computing on HPC;
@@ -221,7 +197,7 @@ No sessions are planned at the moment. Future sessions will be announced here, p
 - A basic understanding of Numpy and linear algebra. 
 - Familiarity with parallel programming. 
 
-
+<!--
 ## Conda environment management for Python and R
 
 The creation of Conda environments is supported in the University of Luxembourg HPC systems. But when Conda environments are needed and what tools are available to create Conda environments? Attend this tutorial if your projects involve R or Python and you need support with installing packages.
@@ -236,8 +212,9 @@ The topics that will be covered include:
 ### Upcoming sessions
 
 No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
+-->
 
-
+<!--
 ## Introduction to numerical methods with BLAS
 
 This seminar covers basic principles of numerical library usage with BLAS as an example. The library mechanisms for organizing software are studied in detail, covering topics such as the differences between static and dynamic libraries. The practical sessions will demonstrate the generation of library files from source code, and how programs can use library functions.
@@ -254,8 +231,9 @@ Overall in this seminar you learn how to:
 ### Upcoming sessions
 
 No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
+-->
 
-
+<!--
 ## An overview of HPC systems and applications
 
 This introductory presentation for HPC users with previous computing experience. It's a quite condensed course with minimal practical sections. The topics covered are
@@ -275,3 +253,4 @@ The course is given only at special events.
 ### Resources
 
 - [An overview of HPC systems and applications](resources/An_introduction_to_HPC.pdf)
+-->
