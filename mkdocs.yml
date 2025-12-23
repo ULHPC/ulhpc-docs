@@ -69,17 +69,11 @@ nav:
     # - Multi-Factor Authentication: 'connect/mfa.md'
   ##############
   - Environment:
-<<<<<<< HEAD
     - Overview:   'environment/index.md'
     - Modules:    'environment/modules.md'
     - Easybuild:  'environment/easybuild.md'
     - Spack:      'environment/spack.md'
-=======
-    - Overview: 'environment/index.md'
-    - Modules: 'environment/modules.md'
-    - Easybuild: 'environment/easybuild.md'
     - EESSI software stack: 'environment/eessi.md'
->>>>>>> upstream
     - Containers: 'environment/containers.md'
     - Conda: 'environment/conda.md'
   ###########
