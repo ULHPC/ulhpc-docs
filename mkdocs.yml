@@ -419,6 +419,7 @@ markdown_extensions:
   - pymdownx.magiclink:
       repo_url_shorthand: true
       social_url_shorthand: true
+  - mdx_truly_sane_lists
   - pymdownx.snippets:
       base_path: snippets
   - pymdownx.tabbed:
