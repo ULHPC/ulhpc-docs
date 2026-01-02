@@ -1,4 +1,3 @@
-
 # EESSI - European Environment for Scientific Software Installations
 
 [<img width='400px' style='float:left' src='https://www.eessi.io/docs/img/logos/EESSI_logo_horizontal.jpg'/>](https://www.eessi.io/)
@@ -7,6 +6,8 @@ The [European Environment for Scientific Software Installations (EESSI, pronounc
 The goal of this project is to build a common stack of scientific software installations for HPC systems and beyond, including laptops, personal workstations and cloud infrastructure.
 
 The EESSI software stack is available on the ULHPC platform, and gives you access to software modules maintained by the EESSI project and optimized for the CPU architectures available on the ULHPC platform.
+
+## UL HPC systems compute nodes
 
 On a compute node, to set up the EESSI environment, simply load the EESSI [module](/environment/modules/):
 
@@ -56,3 +57,75 @@ Here is a short excerpt of the output produced by module avail:
 
 
 For more precise information, please refer to the [official documentation](https://www.eessi.io/docs).
+
+## Grid'5000 compute nodes
+
+The EESSI environment is also accessible on [Grid'5000](/g5k/getting-started-g5k/) compute nodes, but EESSI must first be installed. This article explains the installation of EESSI in Debian which is the default operating system for Grif'5000, but the installation process is similar if you prefer to deploy another operating system.
+
+Root rights are required to install EESSI. Start an interactive session in a compute node and get access to the `sudo` command with the `sudo-g5k` command.
+
+```bash
+sudo-g5k
+```
+
+The installation of EESSI requires first the installation of [CernVM-FS](https://cvmfs.readthedocs.io/en/stable/index.html) which the underlying file system used to distribute the software binaries. 
+
+- Start by adding the GPG keys for the CernVM-FS repository.
+
+  ```bash
+  wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
+  dpkg-deb --raw-extract cvmfs-release-latest_all.deb cvmfs-release
+  sudo cp cvmfs-release/etc/apt/trusted.gpg.d/cernvm.gpg /etc/apt/trusted.gpg.d/cernvm.gpg
+  ```
+
+- Add the CernVM-FS repository in the list of sources.
+
+  ```bash
+  sudo cp cvmfs-release/usr/share/cvmfs-release/cernvm.list.$(lsb_release --codename | awk '{print $2}') /etc/apt/sources.list.d/cernvm.list
+  ```
+
+  ??? info "Installation in Debian 13 (trixie)"
+      The APT interface was updated in Debian 13. Currently Debian 13 (trixie) is only supported by the experimental release of CERN VM-FS. Install the APT sources with the following command:
+      ```bash
+      sudo bash -c 'cat <<EOF > /etc/apt/sources.list.d/cernvm.sources
+      Types: deb
+      URIs: http://cvmrepo.s3.cern.ch/cvmrepo/apt/
+      Suites: trixie-testing
+      Components: main
+      Signed-By: /etc/apt/trusted.gpg.d/cernvm.gpg
+      EOF'
+      ```
+
+- Install CernVM-FS.
+
+  ```bash
+  sudo apt update
+  sudo apt install cvmfs
+  ```
+
+Now the EESSI can be installed and configured from the official package.
+
+- Download the package for EESSI.
+
+  ```bash
+  wget https://github.com/EESSI/filesystem-layer/releases/download/latest/cvmfs-config-eessi_latest_all.deb
+  ```
+
+- Install and configure EESSI.
+
+  ```
+  sudo dpkg -i cvmfs-config-eessi_latest_all.deb
+  # create client configuration file for CernVM-FS (no squid proxy, 10GB local CernVM-FS client cache)
+  sudo bash -c "echo 'CVMFS_CLIENT_PROFILE="single"' > /etc/cvmfs/default.local"
+  sudo bash -c "echo 'CVMFS_QUOTA_LIMIT=10000' >> /etc/cvmfs/default.local"
+  # make sure that EESSI CernVM-FS repository is accessible
+  sudo cvmfs_config setup
+  ```
+
+The EESSI environment can now be accessed by sourcing the appropriate initialization script.
+
+```
+source /cvmfs/software.eessi.io/versions/2023.06/init/lmod/bash
+```
+
+_The installation process must be performed every time you access a new compute node. If your job involves multiple nodes, you have to repeat the process in each compute node._
