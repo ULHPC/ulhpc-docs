@@ -1,6 +1,5 @@
 [![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/ANSYS_logo.png/320px-ANSYS_logo.png){: style="width:200px;float: right;" }](https://www.ansys.com/) [ANSYS](https://www.ansys.com/) offers a comprehensive software suite that spans the entire range of physics, providing access to virtually any field of engineering simulation that a design process requires.
 
-
 ## Available versions of ANSYS at ULHPC
 
 You can check the available versions of ANSYS at ULHPC with the command `module spider ansys`.

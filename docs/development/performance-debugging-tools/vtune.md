@@ -1,11 +1,11 @@
 # VTune
 
 [![](https://software.intel.com/content/dam/develop/public/us/en/images/diagrams-infographics/screen-intel-vtune-profiler-16x9.png.rendition.intel.web.720.405.png){: style="width:300px;float: right;" }](https://software.intel.com/content/www/us/en/develop/tools/vtune-profiler.html)
-Use [Intel VTune](https://software.intel.com/content/www/us/en/develop/tools/vtune-profiler.html) Profiler to profile serial and multithreaded applications that are executed on a variety of hardware platforms (CPU, GPU, FPGA). The tool is delivered as a Performance Profiler with Intel Performance Snapshots and supports local and remote target analysis on the Windows*, Linux*, and Android* platforms.
-Without the right data, you’re guessing about how to improve software performance and are unlikely to make the most effective improvements.
-Intel® VTune™ Profiler collects key profiling data and presents it with a powerful interface that simplifies its analysis and interpretation. 
 
-## Environmental models for VTune on ULHPC:
+Use [Intel VTune](https://software.intel.com/content/www/us/en/develop/tools/vtune-profiler.html) Profiler to profile serial and multithreaded applications that are executed on a variety of hardware platforms (CPU, GPU, FPGA). The tool is delivered as a Performance Profiler with Intel Performance Snapshots and supports local and remote target analysis on the Windows*, Linux*, and Android* platforms.  Without the right data, you’re guessing about how to improve software performance and are unlikely to make the most effective improvements.  Intel® VTune™ Profiler collects key profiling data and presents it with a powerful interface that simplifies its analysis and interpretation. 
+
+## Environmental models for VTune on ULHPC
+
 ```bash
 module purge 
 module load swenv/default-env/v1.2-20191021-production
@@ -24,15 +24,27 @@ $ icc -qopenmp example.c
 $ export OMP_NUM_THREADS=16
 $ amplxe-cl -collect hotspots -r my_result ./a.out
 ```
-To see the result in GUI `$ amplxe-gui my_result`
+
+To see the result in GUI use the command:
+
+```bash
+amplxe-gui my_result
+```
 
 ![VTune OpenMP result](images/OpenMP-VTune.png)
 
-`$ amplxe-cl` will list out the analysis types and `$ amplxe-cl -hlep report` will list out available reports in VTune.
+The command
+
+```bash
+amplxe-cl
+```
+
+will list out the analysis types and `$ amplxe-cl -hlep report` will list out available reports in VTune.
 
 ## Batch Mode
 
 ### Shared Memory Programming Model (OpenMP)
+
 ```bash
 #!/bin/bash -l
 #SBATCH -J VTune
@@ -54,8 +66,7 @@ amplxe-cl -collect hotspots-r my_result ./a.out
 
 ### Distributed Memory Programming Model
 
-To compile just `MPI` application run `$ mpiicc example.c`
-and for `MPI+OpenMP` run `$ mpiicc -qopenmp example.c`
+To compile just `MPI` application run `$ mpiicc example.c` and for `MPI+OpenMP` run `$ mpiicc -qopenmp example.c`.
 
 ```bash
 #!/bin/bash -l
@@ -87,8 +98,4 @@ The below figure shows the hybrid(MPI+OpenMP) programming analysis results:
 ![VTune MPI result](images/MPI-VTune.png)
 
 !!! tip
-    If you find some issues with the instructions above,
-    please report it to us using [support ticket](https://hpc.uni.lu/support).
-
-
-
+    If you find some issues with the instructions above, please report it to us using [support ticket](https://hpc.uni.lu/support).

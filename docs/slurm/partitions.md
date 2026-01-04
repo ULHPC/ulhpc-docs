@@ -10,12 +10,12 @@ srun|sbatch|salloc|sinfo|squeue... --partition=<partition> [...]
 
 You will find on ULHPC resources the following partitions (mostly matching the 3 types of computing resources)
 
-* `batch` is intended for running parallel scientific applications as _passive_ jobs on "__regular__" nodes (Dual CPU, no accelerators, 128 to 256 GB of RAM)
-* `gpu` is intended for running GPU-accelerated scientific applications  as _passive_ jobs on "__gpu__" nodes (Dual CPU, 4 Nvidia accelerators, 768 GB RAM)
-* `bigmem` is dedicated for memory intensive data processing jobs on "__bigmem__" nodes (Quad-CPU, no accelerators, 3072 GB RAM)
-* `interactive`: a _floating_ partition intended for quick [interactive jobs](../jobs/interactive.md), allowing for quick tests and compilation/preparation work.
-    - this is the only partition crossing all type of nodes (thus _floating_).
-    - use `si`, `si-gpu` or `si-bigmem` to submit an interactive job on either a regular, gpu or bigmem node
+- `batch` is intended for running parallel scientific applications as _passive_ jobs on "__regular__" nodes (Dual CPU, no accelerators, 128 to 256 GB of RAM)
+- `gpu` is intended for running GPU-accelerated scientific applications  as _passive_ jobs on "__gpu__" nodes (Dual CPU, 4 Nvidia accelerators, 768 GB RAM)
+- `bigmem` is dedicated for memory intensive data processing jobs on "__bigmem__" nodes (Quad-CPU, no accelerators, 3072 GB RAM)
+- `interactive`: a _floating_ partition intended for quick [interactive jobs](../jobs/interactive.md), allowing for quick tests and compilation/preparation work.
+  - this is the only partition crossing all type of nodes (thus _floating_).
+  - use `si`, `si-gpu` or `si-bigmem` to submit an interactive job on either a regular, gpu or bigmem node
 
 ## Aion
 
@@ -73,9 +73,9 @@ As part of the custom ULHPC Slurm helpers defined in [`/etc/profile.d/slurm.sh`]
 
 At partition level, only the following limits can be enforced:
 
-* `DefaultTime`:       Default time limit
-* `MaxNodes`:          Maximum number of nodes per job
-* `MinNodes`:          Minimum number of nodes per job
-* `MaxCPUsPerNode`:    Maximum number of CPUs job can be allocated on any node
-* `MaxMemPerCPU/Node`: Maximum memory job can be allocated on any CPU or node
-* `MaxTime`:           Maximum length of time user's job can run
+- `DefaultTime`:       Default time limit
+- `MaxNodes`:          Maximum number of nodes per job
+- `MinNodes`:          Minimum number of nodes per job
+- `MaxCPUsPerNode`:    Maximum number of CPUs job can be allocated on any node
+- `MaxMemPerCPU/Node`: Maximum memory job can be allocated on any CPU or node
+- `MaxTime`:           Maximum length of time user's job can run

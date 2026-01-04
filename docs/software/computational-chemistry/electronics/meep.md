@@ -1,12 +1,11 @@
 [![](https://meep.readthedocs.io/en/latest/images/Meep-banner.png){: style="width:300px;float: right;" }](https://meep.readthedocs.io/en/latest/)
-[Meep](https://meep.readthedocs.io/en/latest/) is a free and open-source
-software package for electromagnetics simulation via
-the finite-difference time-domain (FDTD) method spanning a
-broad range of applications.
+
+[Meep](https://meep.readthedocs.io/en/latest/) is a free and open-source software package for electromagnetics simulation via the finite-difference time-domain (FDTD) method spanning a broad range of applications.
 
 ## Available versions of Meep in ULHPC
-To check available versions of Meep at ULHPC type `module spider meep`.
-The following list shows the available versions of Meep in ULHPC.
+
+To check available versions of Meep at ULHPC type `module spider meep`. The following list shows the available versions of Meep in ULHPC.
+
 ```bash
 phys/Meep/1.3-intel-2017a
 phys/Meep/1.4.3-intel-2018a
@@ -14,6 +13,7 @@ phys/Meep/1.4.3-intel-2019a
 ```
 
 ## Interactive mode
+
 To try Meep in the interactive mode, please follow the following steps:
 
 ```bash
@@ -33,6 +33,7 @@ $ meep example.ctl > result_output
 ```
 
 ## Batch mode
+
 ```bash
 #!/bin/bash -l
 #SBATCH -J Meep
@@ -52,12 +53,8 @@ module load phys/Meep/1.4.3-intel-2019a
 srun -n ${SLURM_NTASKS} meep example.ctl > result_output
 ```
 ## Additional information
-To know more information about Meep tutorial and documentation,
-please refer to [Meep tutorial](http://ab-initio.mit.edu/wiki/index.php/Meep_tutorial).
+
+To know more information about Meep tutorial and documentation, please refer to [Meep tutorial](http://ab-initio.mit.edu/wiki/index.php/Meep_tutorial).
 
 !!! tip
-    If you find some issues with the instructions above,
-    please report it to us using [support ticket](https://hpc.uni.lu/support).
-
-
-
+    If you find some issues with the instructions above, please report it to us using [support ticket](https://hpc.uni.lu/support).

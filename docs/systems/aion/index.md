@@ -2,11 +2,9 @@
 
 [![](images/aion_compute_racks.jpg){: style="width:400px;float: right;margin-right:10px" }](BullSequanaXH2000_Features_Atos_supercomputers.pdf)
 
-Aion is a [Atos/Bull](https://atos.net/en/solutions/high-performance-computing-hpc)/AMD supercomputer which consists of **354 compute nodes, totaling 45312 compute cores** and 90624 GB RAM,
-with a peak performance of about **1,88 PetaFLOP/s**.
+Aion is a [Atos/Bull](https://atos.net/en/solutions/high-performance-computing-hpc)/AMD supercomputer which consists of **354 compute nodes, totaling 45312 compute cores** and 90624 GB RAM, with a peak performance of about **1,88 PetaFLOP/s**.
 
-All nodes are interconnected through a **Fast InfiniBand (IB) HDR100 network**[^1], configured over a ** [Fat-Tree](https://clusterdesign.org/fat-trees/) Topology** (blocking factor 1:2).
-Aion nodes are equipped with [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) processors.
+All nodes are interconnected through a **Fast InfiniBand (IB) HDR100 network**[^1], configured over a **[Fat-Tree](https://clusterdesign.org/fat-trees/) Topology** (blocking factor 1:2). Aion nodes are equipped with [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) processors.
 
 [^1]: Infiniband (IB) HDR networks offer a 200 Gb/s throughput with a very low latency (0,6$\mu$s). The HDR100 technology allows one 200Gbps HDR port (aggregation 4x 50Gbps) to be divided into 2 HDR100 ports with 100Gbps (2x 50Gbps) bandwidth using an [optical] ["_splitter_" cable](https://www.mellanox.com/related-docs/prod_cables/PB_MFS1S50-HxxxE_200Gbps_QSFP56_to_2x100Gbps_QSFP56_AOC.pdf).
 
@@ -14,12 +12,9 @@ Two global [_high_-performance clustered file systems](../../filesystems/index.m
 
 [:fontawesome-solid-right-to-bracket: Aion Compute](compute.md){: .md-button .md-button--link } [:fontawesome-solid-right-to-bracket: Aion Interconnect](interconnect.md){: .md-button .md-button--link } [:fontawesome-solid-right-to-bracket: Global Storage](../../filesystems/index.md){: .md-button .md-button--link }
 
-The cluster runs a [Red Hat Linux](https://www.redhat.com/) operating system.
-The ULHPC Team supplies on all clusters a large variety of HPC utilities, scientific applications and programming libraries to its user community.
-The [user software environment](../../software/index.md) is generated using [Easybuild](https://easybuild.readthedocs.io) (EB) and is made available as [environment modules](../../environment/modules.md) from the compute nodes only.
+The cluster runs a [Red Hat Linux](https://www.redhat.com/) operating system. The ULHPC Team supplies on all clusters a large variety of HPC utilities, scientific applications and programming libraries to its user community. The [user software environment](../../software/index.md) is generated using [Easybuild](https://easybuild.readthedocs.io) (EB) and is made available as [environment modules](../../environment/modules.md) from the compute nodes only.
 
-[Slurm](https://slurm.schedmd.com/documentation.html) is the Resource and Job Management Systems (RJMS) which provides computing resources allocations and job execution.
-For more information: see [ULHPC slurm docs](../../slurm/index.md).
+[Slurm](https://slurm.schedmd.com/documentation.html) is the Resource and Job Management Systems (RJMS) which provides computing resources allocations and job execution. For more information: see [ULHPC slurm docs](../../slurm/index.md).
 
 ## Cluster Organization
 
@@ -27,8 +22,7 @@ For more information: see [ULHPC slurm docs](../../slurm/index.md).
 
 The Aion cluster is based on a cell made of 4 [BullSequana XH2000](https://atos.net/en/solutions/high-performance-computing-hpc/bullsequana-x-supercomputers) adjacent racks installed in the [CDC (_Centre de Calcul_) data center of the University](../../data-center/index.md) within one of the DLC-enabled server room (CDC S-02-004) adjacent to the room hosting the [Iris](../iris/index.md) cluster and the [global storage](../../filesystems/index.md).
 
-Each rack has the following dimensions: HxWxD (mm) = 2030x750x1270 (Depth is 1350mm with aesthetic doors).
-The full solution with 4 racks (total dimension: dimensions: HxWxD (mm) = 2030x3000x1270) with the following characteristics:
+Each rack has the following dimensions: HxWxD (mm) = 2030x750x1270 (Depth is 1350mm with aesthetic doors). The full solution with 4 racks (total dimension: dimensions: HxWxD (mm) = 2030x3000x1270) with the following characteristics:
 
 |                              |    Rack 1 |    Rack 2 |    Rack 3 |    Rack 4 | __TOTAL__      |
 |------------------------------|-----------|-----------|-----------|-----------|----------------|
@@ -42,37 +36,36 @@ For more details: [:fontawesome-solid-right-to-bracket: BullSequana XH2000 SpecS
 
 ### Cooling
 
-The BullSequana XH2000 is a fan less innovative cooling solution which is ultra-energy-efficient (targeting a PUE very close to 1) using an enhanced version of the Bull [Direct Liquid Cooling (DLC)](../../data-center/index.md#direct-liquid-cooling) technology.
-A separate **hot**-water circuit minimizes the total energy consumption of a system. For more information: see [[Direct] Liquid Cooling](../../data-center/index.md#direct-liquid-cooling).
+The BullSequana XH2000 is a fan less innovative cooling solution which is ultra-energy-efficient (targeting a PUE very close to 1) using an enhanced version of the Bull [Direct Liquid Cooling (DLC)](../../data-center/index.md#direct-liquid-cooling) technology. A separate hot-water circuit minimizes the total energy consumption of a system. For more information: see [[Direct] Liquid Cooling](../../data-center/index.md#direct-liquid-cooling).
 
 The illustration on the right shows an exploded view of a compute blade with the cold plate and heat spreaders.
+
 ![](images/aion_DLC_blade_splitted_view.png){: style="width:300px;float: right;" }
+
 The DLC[^1] components in the rack are:
 
-* Compute nodes (CPU, Memory, Drives, GPU)
-* High Speed Interconnect: HDR
-* Management network: Ethernet management switches
-* Power Supply Unit: DLC shelves
+- Compute nodes (CPU, Memory, Drives, GPU)
+- High Speed Interconnect: HDR
+- Management network: Ethernet management switches
+- Power Supply Unit: DLC shelves
 
 The cooling area in the rack is composed of:
 
-* 3 Hydraulic chassis (HYCs) for 2+1 redundancy at the bottom of the cabinet, 10.5U height.
-   - Each HYCs dissipates at a maximum of 240W in the air.
-* A primary manifold system connects the University hot-water loop to the HYCs primary water inlets
-* A secondary manifold system connects HYCs outlets to each blade in the compute cabinet
+- 3 Hydraulic chassis (HYCs) for 2+1 redundancy at the bottom of the cabinet, 10.5U height.
+  - Each HYCs dissipates at a maximum of 240W in the air.
+- A primary manifold system connects the University hot-water loop to the HYCs primary water inlets
+- A secondary manifold system connects HYCs outlets to each blade in the compute cabinet
 
 [^1]: All DLC components are built on a cold plate which cools all components by direct contact, except DIMMS for which custom heat spreaders evacuate the heat to the cold plate.
 
-
 ## Login/Access servers
 
-* Aion has 2 access servers (256 GB of memory each, general access) `access[1-2]`
-   - Each login node has two sockets, each socket is populated with an [AMD EPYC 7452](https://www.amd.com/fr/products/cpu/amd-epyc-7452) processor (2.2 GHz, 32 cores)
+- Aion has 2 access servers (256 GB of memory each, general access) `access[1-2]`
+  - Each login node has two sockets, each socket is populated with an [AMD EPYC 7452](https://www.amd.com/fr/products/cpu/amd-epyc-7452) processor (2.2 GHz, 32 cores)
 
 !!! warning "Access servers are not meant for compute!"
     - The `module` command is not available on the access servers, only on the compute nodes
     - **you MUST NOT run any computing process on the access servers**.
-
 
 ## Rack Cabinets
 

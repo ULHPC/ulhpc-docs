@@ -6,7 +6,7 @@ The university _central data storage services_ uses a [NAS](https://en.wikipedia
 
 In the UL HPC platform the NFS exported by Isilon is used to host project data when they are not actively used in computations, and for archival purposes. Projects are mounted under `/mnt/isilon/projects`.
 
--  The file system in Isilon is redundant, regularly snapshot, and backed up, including off site backups. Data is replicated across multiple OneFS instances for high availability with the live sync feature of OneFS. Isilon is thus resilient to hardware failure, protected against catastrophic data loss, and also highly available.
+- The file system in Isilon is redundant, regularly snapshot, and backed up, including off site backups. Data is replicated across multiple OneFS instances for high availability with the live sync feature of OneFS. Isilon is thus resilient to hardware failure, protected against catastrophic data loss, and also highly available.
 
 - The NFS share exported from Isilon to the UL HPC platform is not using the Infiniband high performance network and the OneFS file system has lower I/O performance that GPFS and lustre file systems. However, the central data storage has significantly higher capacity.
 

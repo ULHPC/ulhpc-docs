@@ -1,8 +1,7 @@
 # ULHPC Usage Charging Policy
 
 !!! danger "The advertised prices are for internal partners only"
-    The price list and all other information of this page are meant for internal partners, i.e., not for external companies. 
-    If you are not an internal partner, please contact us at hpc-partnership@uni.lu. Alternatively, you can contact [LuxProvide](https://luxprovide.lu/), the national HPC center which aims at serving the private sector for HPC needs.
+    The price list and all other information of this page are meant for internal partners, i.e., not for external companies. If you are not an internal partner, please contact us at hpc-partnership@uni.lu. Alternatively, you can contact [LuxProvide](https://luxprovide.lu/), the national HPC center which aims at serving the private sector for HPC needs.
 
 ## How to estimate HPC costs for projects?
 
@@ -57,9 +56,7 @@ Note that for project storage, we charge **the quota and not the used storage**.
 
 <!--resource-allocation-ul-start-->
 
-ULHPC resources are **free of charge for UL staff for their _internal_ work and training activities**.
-Principal Investigators (PI) will nevertheless receive on a regular basis a usage report of their team activities on the UL HPC platform.
-The corresponding accumulated price will be provided even if this amount is purely indicative and won't be charged back.
+ULHPC resources are **free of charge for UL staff for their _internal_ work and training activities**. Principal Investigators (PI) will nevertheless receive on a regular basis a usage report of their team activities on the UL HPC platform. The corresponding accumulated price will be provided even if this amount is purely indicative and won't be charged back.
 
 Any other activities will be reviewed with the rectorate and are a priori subjected to be billed.
 
@@ -75,5 +72,3 @@ To allow the ULHPC team to keep track of the jobs related to a project, use the 
 ```
 
 or on the command line when you submit your job, _e.g._, `sbatch -A myproject /path/to/launcher.sh`
-
-

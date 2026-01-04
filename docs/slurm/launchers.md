@@ -12,8 +12,7 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 ## Resource allocation Guidelines
 
 !!! important "General guidelines"
-    Always try to align [resource specifications](index.md#specific-resource-allocation) for your jobs with physical characteristics.
-    Always prefer the use of `--ntasks-per-{node,socket}` over `-n` when defining your tasks allocation request to automatically scale appropriately upon multi-nodes submission with for instance `sbatch -N 2 <launcher>`. Launcher template:
+    Always try to align [resource specifications](index.md#specific-resource-allocation) for your jobs with physical characteristics. Always prefer the use of `--ntasks-per-{node,socket}` over `-n` when defining your tasks allocation request to automatically scale appropriately upon multi-nodes submission with for instance `sbatch -N 2 <launcher>`. Launcher template:
     ```bash
     #!/bin/bash -l # <--- DO NOT FORGET '-l' to facilitate further access to ULHPC modules
     #SBATCH -p <partition>                     #SBATCH -p <partition>
@@ -22,13 +21,10 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
     #SBATCH -c <thread>                        #SBATCH --ntasks-per-socket <s>
                                                #SBATCH -c <thread>
     ```
-    This would define by default a **total** of `<n>` (left) or $\#sockets \times$`<s>` (right) **tasks per node**, each on `<thread>` **threads**.
-    You **MUST** ensure that either:
+    This would define by default a **total** of `<n>` (left) or $\#sockets \times$`<s>` (right) **tasks per node**, each on `<thread>` **threads**. You **MUST** ensure that either:
 
-    * `<n>`$\times$`<thread>` matches the number of cores avaiable on the target
-    computing node (left), or
-    * `<n>`=$\#sockets \times$`<s>`, and `<s>`$\times$`<thread>` matches the
-    number of cores _per socket_ available on the target computing node (right).
+    - `<n>`$\times$`<thread>` matches the number of cores avaiable on the target computing node (left), or
+    - `<n>`=$\#sockets \times$`<s>`, and `<s>`$\times$`<thread>` matches the number of cores _per socket_ available on the target computing node (right).
 
     See [Specific Resource Allocation](index.md#specific-resource-allocation)
 
@@ -60,8 +56,7 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
     ```
 
 === "Iris (GPU)"
-    14 cores per socket and 2 sockets (physical CPUs) per _gpu_ `iris`, 4 GPU accelerator cards per node.
-    You probably want to dedicate 1 task and $\frac{1}{4}$ of the available cores to the management of each GPU accelerator. Examples:
+    14 cores per socket and 2 sockets (physical CPUs) per _gpu_ `iris`, 4 GPU accelerator cards per node. You probably want to dedicate 1 task and $\frac{1}{4}$ of the available cores to the management of each GPU accelerator. Examples:
     ```bash
     #SBATCH -p gpu                  #SBATCH -p gpu                   #SBATCH -p gpu
     #SBATCH -N 1                    #SBATCH -N 1                     #SBATCH -N 1
@@ -72,8 +67,7 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
     ```
 
 === "Iris (Large-Memory)"
-    28 cores per socket and 4 sockets (physical CPUs) per _bigmem_ `iris`
-    node. Examples:
+    28 cores per socket and 4 sockets (physical CPUs) per _bigmem_ `iris` node. Examples:
     ```bash
     #SBATCH -p bigmem              #SBATCH -p bigmem                 #SBATCH -p bigmem
     #SBATCH -N 1                   #SBATCH -N 1                      #SBATCH -N 1
@@ -82,8 +76,6 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
     #SBATCH -c 28                  #SBATCH -c 14                     #SBATCH -c 7
     ```
     You probably want to play with a _single_ task but define the expected memory allocation with `--mem=<size[units]>` (Default units are megabytes - Different units can be specified using the suffix `[K|M|G|T]`)
-
-
 
 ## Basic Slurm Launcher Examples
 
@@ -154,8 +146,7 @@ or search-space explorations:
 
 In most of the cases, your favorite Java application or R/python (custom) development scripts, iterated again over multiple input conditions, are **inherently SERIAL**: they are able to use only one core when executed. You thus deal with what is often call a _Bag of (independent) tasks_, also referred to as **embarrassingly parallel tasks**.
 
-In this case, you **MUST NOT** overload the job scheduler with a large number of small (single-core) jobs.
-Instead, you should use [GNU Parallel](http://www.gnu.org/software/parallel/) which permits the effective management of such tasks in a way that optimize both the resource allocation and the completion time.
+In this case, you **MUST NOT** overload the job scheduler with a large number of small (single-core) jobs. Instead, you should use [GNU Parallel](http://www.gnu.org/software/parallel/) which permits the effective management of such tasks in a way that optimize both the resource allocation and the completion time.
 
 More specifically, [GNU Parallel](http://www.gnu.org/software/parallel/) is a tool for executing tasks in parallel, typically on a single machine. When coupled with the Slurm command srun, `parallel` becomes a powerful way of distributing a set of tasks amongst a number of workers. This is particularly useful when the number of tasks is significantly larger than the number of available workers (i.e. `$SLURM_NTASKS`), and each tasks is independent of the others.
 
@@ -164,16 +155,14 @@ More specifically, [GNU Parallel](http://www.gnu.org/software/parallel/) is a to
 Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/launcher.parallel.sh) that should be straight forward to adapt to your own workflow following [our tutorial](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/basics/#best-launcher-based-on-gnu-parallel-1-job-1-node-n-tasks):
 
 1. Create a dedicated script `run_<task>` responsible to run your java/R/Python tasks while taking as argument the parameter of each run. You can inspire from [`run_stressme`](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/run_stressme) for instance.
-    - test it in interactive
+  - test it in interactive
 2. rename the generic launcher [`launcher.parallel.sh`](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/launcher.parallel.sh) to `launcher_<task>.sh`,
-    - enable `#SBATCH --dependency singleton`
-    - set the jobname
-    - change TASK to point to the **absolute** path to `run_<task>` script
- 	- set TASKLISTFILE to point to a files with the parameters to pass to your script for each task
-    - adapt eventually the `#SBATCH --ntasks-per-node [...]` and `#SBATCH -c [...]` to match your needs AND the hardware configs of a single node (28 cores on iris, 128 cores on Aion) -- see [guidelines](#resource-allocation-guidelines)
-
+  - enable `#SBATCH --dependency singleton`
+  - set the jobname
+  - change TASK to point to the **absolute** path to `run_<task>` script
+  - set TASKLISTFILE to point to a files with the parameters to pass to your script for each task
+  - adapt eventually the `#SBATCH --ntasks-per-node [...]` and `#SBATCH -c [...]` to match your needs AND the hardware configs of a single node (28 cores on iris, 128 cores on Aion) -- see [guidelines](#resource-allocation-guidelines)
 3. test a batch run -- **stick to a single node** to take the best out of one full node.
-
 
 ## Serial Task script Launcher
 
@@ -260,7 +249,6 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
         matlab -nodisplay -nosplash < INPUTFILE.m > OUTPUTFILE.out
         ```
 
-
 ## Specialized BigData/GPU launchers
 
 !!! example "BigData/[Large-]memory single-core tasks"
@@ -309,8 +297,7 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 ## pthreads/OpenMP Launcher
 
 !!! warning "Always set `OMP_NUM_THREADS` to match `${SLURM_CPUS_PER_TASK:-1}`"
-    You **MUST** enforce the use of `-c <threads>` in your launcher to ensure the variable `$SLURM_CPUS_PER_TASK` exists within your launcher scripts.
-    This is the appropriate value to set for [`OMP_NUM_THREAD`](https://www.openmp.org/spec-html/5.0/openmpse50.html), with default to 1 as extra safely which can be obtained with the following affectation:
+    You **MUST** enforce the use of `-c <threads>` in your launcher to ensure the variable `$SLURM_CPUS_PER_TASK` exists within your launcher scripts. This is the appropriate value to set for [`OMP_NUM_THREAD`](https://www.openmp.org/spec-html/5.0/openmpse50.html), with default to 1 as extra safely which can be obtained with the following affectation:
 
     ```bash
     export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}

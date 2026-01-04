@@ -1,32 +1,22 @@
 [![](https://upload.wikimedia.org/wikipedia/en/f/f9/Valgrind_logo.png){: style="width:300px;float: right;" }](https://valgrind.org/)
-The [Valgrind](https://valgrind.org/) tool suite provides a number of debugging and profiling
-tools that help you make your programs faster and more correct. The
-most popular of these tools is called Memcheck which can detect
-many memory-related errors and memory leaks.
+
+The [Valgrind](https://valgrind.org/) tool suite provides a number of debugging and profiling tools that help you make your programs faster and more correct. The most popular of these tools is called Memcheck which can detect many memory-related errors and memory leaks.
 
 ### Prepare Your Program
 
-Compile your program with -g to include debugging information so
-that Memcheck's error messages include exact line numbers. Using
--O0 is also a good idea, if you can tolerate the slowdown. With -O1
-line numbers in error messages can be inaccurate, although generally
-speaking running Memcheck on code compiled at -O1 works fairly well,
-and the speed improvement compared to running -O0 is quite significant.
-Use of -O2 and above is not recommended as Memcheck occasionally
-reports uninitialised-value errors which don't really exist.
+Compile your program with `-g` to include debugging information so that Memcheck's error messages include exact line numbers. Using `-O0` is also a good idea, if you can tolerate the slowdown. With `-O1` line numbers in error messages can be inaccurate, although generally speaking running Memcheck on code compiled at `-O1` works fairly well, and the speed improvement compared to running `-O0` is quite significant.  Use of `-O2` and above is not recommended as Memcheck occasionally reports uninitialised-value errors which don't really exist.
 
 ## Environmental models for Valgrind in ULHPC
-
 
 ```bash
 $ module purge
 $ module load debugger/Valgrind/3.15.0-intel-2019a
 ```
 
-
 ## Interactive mode
 
 Example code:
+
 ```cpp
 #include <iostream>                                                                                           
 using namespace std;                                                                                          
@@ -51,9 +41,11 @@ $ icc -g example.cc
 # Code execution
 $ valgrind --leak-check=full --show-leak-kinds=all ./a.out
 ```
-Result output (with leak)
+
+### Result output (with leak)
 
 If we do not delete `delete[] array` the memory, then there will be a memory leak.
+
 ```bash
 ==26756== Memcheck, a memory error detector
 ==26756== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
@@ -86,9 +78,10 @@ If we do not delete `delete[] array` the memory, then there will be a memory lea
 ==26756== ERROR SUMMARY: 1000 errors from 2 contexts (suppressed: 0 from 0)
 ```
 
-Result output (without leak)
+### Result output (without leak)
 
 When we delete `delete[] array` the allocated memory, there will not be leaked memory.
+
 ```bash
 ==26172== Memcheck, a memory error detector
 ==26172== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
@@ -117,10 +110,7 @@ When we delete `delete[] array` the allocated memory, there will not be leaked m
 
 ## Additional information 
 
-This page is based on the "Valgrind Quick Start Page". For more
-information about valgrind, please refer to
-[http://valgrind.org/](http://valgrind.org/).
+This page is based on the "Valgrind Quick Start Page". For more information about valgrind, please refer to [http://valgrind.org/](http://valgrind.org/).
 
 !!! tip
-    If you find some issues with the instructions above,
-    please report it to us using [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above, please report it to us using [support ticket](https://hpc.uni.lu/support).

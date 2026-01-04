@@ -19,18 +19,18 @@ Each DLC cooled (see splitted view on the right) HDR switch has the following ch
 
 ![](images/aion_WH40_DLC_quantum-switch__splitted_view.png){: style="width:300px;float: right;" }
 
-* 80 X HDR100 100Gb/s ports in a 1U switch (40 X HDR 200Gb/s ports if used in full HDR mode)
-* 16Tb/s aggregate switch throughput
-* Up to 15.8 billion messages-per-second
-* 90ns switch latency
+- 80 X HDR100 100Gb/s ports in a 1U switch (40 X HDR 200Gb/s ports if used in full HDR mode)
+- 16Tb/s aggregate switch throughput
+- Up to 15.8 billion messages-per-second
+- 90ns switch latency
 
 Aion 2-Level 1:2 Fat-Tree  is composed of:
 
-* 12x Infiniband HDR[^1] switches (40 HDR ports / 80 HDR100 ports)
-    - 8x Leaf  IB (LIB) switches (L1), each with 12 HDR L1-L2 interlinks (2 on each rack)
-    - 4x Spine IB (SIB) switches (L2), with up to 16 HDR100 uplinks (12 used, total: 48 links) used for the interconnexion with the Iris Cluster
-* Up to 48 compute nodes HDR100 connection per L1 switch using 24 HDR ports with Y-cable
-    - 4 available HDR connections for Service, Access or Gateway node per L1 switch
+- 12x Infiniband HDR[^1] switches (40 HDR ports / 80 HDR100 ports)
+  - 8x Leaf  IB (LIB) switches (L1), each with 12 HDR L1-L2 interlinks (2 on each rack)
+  - 4x Spine IB (SIB) switches (L2), with up to 16 HDR100 uplinks (12 used, total: 48 links) used for the interconnexion with the Iris Cluster
+- Up to 48 compute nodes HDR100 connection per L1 switch using 24 HDR ports with Y-cable
+  - 4 available HDR connections for Service, Access or Gateway node per L1 switch
 
 [^2]: with blocking factor 1:2.
 

@@ -1,16 +1,13 @@
 # Compiling/Building your own software
 
-We try to provide within the [ULHPC software sets](../software/swsets/index.md) the most used application among our users.
-It may however happen that you may find a given software you expect to use to be either missing among the [available software sets](../software/swsets/all_softwares.md), or provided in a version you considered not enough recent.
+We try to provide within the [ULHPC software sets](../software/swsets/index.md) the most used application among our users. It may however happen that you may find a given software you expect to use to be either missing among the [available software sets](../software/swsets/all_softwares.md), or provided in a version you considered not enough recent.
 
-In that case, the **RECOMMENDED** approach is to rely on [Easybuild](../environment/easybuild.md) to **EXTEND** the available software set.
-Below are guidelines to support that case.
+In that case, the **RECOMMENDED** approach is to rely on [Easybuild](../environment/easybuild.md) to **EXTEND** the available software set. Below are guidelines to support that case.
 
 Alternatively, you can of course follow the installation guidelines provided on the software website to compile it the way it should be. For that case, you **MUST** rely on the provided [toolchains](../software/swsets/toolchain.md) and [compilers](software/swsets/compiler.md).
 
 !!! important ""
-    In all cases, **NEVER compile or build softawre from the ULHPC frontends!**
-    Always perform these actions from the expected compute node, either reserved within an [interactive job](../jobs/interactive.md) or through a [passive submission](../jobs/submit.md)
+    In all cases, **NEVER compile or build softawre from the ULHPC frontends!** Always perform these actions from the expected compute node, either reserved within an [interactive job](../jobs/interactive.md) or through a [passive submission](../jobs/submit.md)
 
 ## Missing or Outdated Software
 
@@ -37,11 +34,11 @@ You will then be confronted to the following cases.
 
 You're lucky but this is very likely to happen (and justify to rely on [streamline Easyconfigs](https://github.com/easybuilders/easybuild-easyconfigs/tree/develop))
 
-* Typical Example:
-    - `CMake-<version>-GCCcore-<gccversion>.eb`: depends on GCCcore, thus common to both `foss` and `intel`. The same happens with `GCC`
-    - `Go-<version>.eb` (no dependency on any toolchain)
-    - `Boost-<version>-{gompi,iimpi}-<toolchainversion>.eb`, derived toolchains, compliant with `foss` (resp. `intel`) ones;
-    - `GDAL-<version>-{foss,intel}-<toolchainversion>-Python-<pythonversion>.eb`
+- Typical Example:
+  - `CMake-<version>-GCCcore-<gccversion>.eb`: depends on GCCcore, thus common to both `foss` and `intel`. The same happens with `GCC`
+  - `Go-<version>.eb` (no dependency on any toolchain)
+  - `Boost-<version>-{gompi,iimpi}-<toolchainversion>.eb`, derived toolchains, compliant with `foss` (resp. `intel`) ones;
+  - `GDAL-<version>-{foss,intel}-<toolchainversion>-Python-<pythonversion>.eb`
 
 In that case, you **MUST** test the build in your home or in a shared project using the `resif-load-{home,project}-swset-{prod,devel}` helpers to set a consistent environment for your builds compilant with the ULHPC software sets layout (in particular with regards the `$EASYBUILD_PREFIX` and `$MODULEPATH` environment variables). See [below](#using-easybuild-to-build-software-in-your-home) for building instructions.
 
@@ -134,14 +131,11 @@ Below is a past complex exemple illustrating the adaptation done for GDB
 
 __Note on dependencies version:__ typically as in the above  example, the version to use for dependencies are not obvious to guess (Ex: `texinfo`, `expat` etc.) and you need to be aware of the matching toolchain/GCC/binutils versions for the available `prod` or `devel` software sets recalled before -- use `eb -S <dependency>` to find the appropriate versions.
 
-
 ### None (or only very old/obsolete) easyconfigs are suggested
 
-Don't panic, it simply means that the  **official** repositories do not hold any recent reciPY for the considered software.
- You _may_ find a __pending [Pull-request](https://github.com/easybuilders/easybuild-easyconfigs/pulls)__ addressing the software you're looking for.
+Don't panic, it simply means that the  **official** repositories do not hold any recent reciPY for the considered software. You _may_ find a __pending [Pull-request](https://github.com/easybuilders/easybuild-easyconfigs/pulls)__ addressing the software you're looking for.
 
 Otherwise, you can either try to create a new easyconfig file, or simply follow the installation guildes for the considered software to build it.
-
 
 ## Using Easybuild to Build software in your Home
 
@@ -183,8 +177,7 @@ module load <softwarename>[/<version>]
 
 ## Using Easybuild to Build software in the <project> project
 
-Similarly to the above home builds, you should repeat the procedure this time using the helper script `resif-load-project-swset-{prod | devel}`.
-Don't forget [Project Data Management instructions](../data/project.md#project-directory-modification): to avoid quotas issues, you have to use [`sg`](https://linux.die.net/man/1/sg)
+Similarly to the above home builds, you should repeat the procedure this time using the helper script `resif-load-project-swset-{prod | devel}`. Don't forget [Project Data Management instructions](../data/project.md#project-directory-modification): to avoid quotas issues, you have to use [`sg`](https://linux.die.net/man/1/sg)
 
 ```bash
 # BETTER work in a screen or tmux session ;)
@@ -219,9 +212,7 @@ module load <softwarename>[/<version>]
 
 ## Contribute back to Easybuild
 
-If you developped new easyconfig(s), you are expected to contribute them back to the Easybuilders community!
-Consider creating a Pull-Request. You can even do it by command-line assuming you have [setup your Github integration](https://easybuild.readthedocs.io/en/latest/Integration_with_GitHub.html#requirements).  On `iris` or `aion`, you will likely need to install the possibly-insecure, alternate keyrings `keyrings.alt` packages -- see https://pypi.org/project/keyring/
-
+If you developped new easyconfig(s), you are expected to contribute them back to the Easybuilders community! Consider creating a Pull-Request. You can even do it by command-line assuming you have [setup your Github integration](https://easybuild.readthedocs.io/en/latest/Integration_with_GitHub.html#requirements). On `iris` or `aion`, you will likely need to install the possibly-insecure, alternate keyrings `keyrings.alt` packages -- see [`keyring`](https://pypi.org/project/keyring/).
 
 ```bash
 # checking code style - see https://easybuild.readthedocs.io/en/latest/Code_style.html#code-style

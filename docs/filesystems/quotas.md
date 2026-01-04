@@ -70,13 +70,13 @@ For a more graphical approach, use `ncdu`. With the `c` option `ncdu` displays t
 Sometimes it may be useful to inspect the global file system usage. For instance, the `${SCRATCH}` space is over subscribed, and you may experience a slowdown if the storage is reaching its limits.
 
 - Check free space on all file systems:
-```
-df -h
-```
+  ```
+  df -h
+  ```
 - Check free space on the file system containing a given path:
-```
-df -h <path>
-```
+  ```
+  df -h <path>
+  ```
 
 ## Increasing quota
 
@@ -91,4 +91,3 @@ The quotas on project directories are based on the group. Be aware that the quot
 To avoid this issue, check out the `newgrp` command or set the `s` mode bit ("set group ID") on the directory with `chmod g+s <directory>`. The `s` bit means that any file or folder created below will inherit the group.
 
 To transfer data with `rsync` into a project directory, please check the [data transfer documentation](/data/transfer/#transfer-from-your-local-machine-to-a-project-directory-on-the-remote-cluster).
-

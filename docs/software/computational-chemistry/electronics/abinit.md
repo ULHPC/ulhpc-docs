@@ -1,16 +1,11 @@
 [![](https://www.abinit.org/themes/abinit/logo-abinit-2015.svg){: style="width:300px;float: right;" }](https://www.abinit.org/)
-[ABINIT](https://www.abinit.org/) is a software suite to calculate the optical, mechanical, vibrational,
-and other observable properties of materials. Starting from the quantum equations
-of density functional theory, you can build up to advanced applications with
-perturbation theories based on DFT, and many-body Green's functions (GW and DMFT) .
-ABINIT can calculate molecules, nanostructures and solids with any chemical composition,
-and comes with several complete and robust tables of atomic potentials.
-On-line tutorials are available for the main features of the code,
-and several schools and workshops are organized each year.
+
+[ABINIT](https://www.abinit.org/) is a software suite to calculate the optical, mechanical, vibrational, and other observable properties of materials. Starting from the quantum equations of density functional theory, you can build up to advanced applications with perturbation theories based on DFT, and many-body Green's functions (GW and DMFT) . ABINIT can calculate molecules, nanostructures and solids with any chemical composition, and comes with several complete and robust tables of atomic potentials. On-line tutorials are available for the main features of the code, and several schools and workshops are organized each year.
 
 ## Available versions of ABINIT in ULHPC
-To check available versions of ABINIT at ULHPC type `module spider abinit`.
-The following list shows the available versions of ABINIT in ULHPC. 
+
+To check available versions of ABINIT at ULHPC type `module spider abinit`. The following list shows the available versions of ABINIT in ULHPC.
+
 ```shell
 chem/ABINIT/8.2.3-intel-2017a
 chem/ABINIT/8.6.3-intel-2018a-trio-nc
@@ -19,6 +14,7 @@ chem/ABINIT/8.10.2-intel-2019a
 ```
 
 ## Interactive mode
+
 To open an ABINIT in the interactive mode, please follow the following steps:
 
 ```shell
@@ -39,6 +35,7 @@ $ abinit < example.in
 ```
 
 ## Batch mode
+
 ```shell
 #!/bin/bash -l
 #SBATCH -J ABINIT
@@ -57,10 +54,8 @@ module load chem/ABINIT/8.10.2-intel-2019a
 srun -n ${SLURM_NTASKS} abinit < input.files &> out
 ```
 ## Additional information
-To know more information about ABINIT tutorial and documentation,
-please refer to [ABINIT tutorial](https://docs.abinit.org/tutorial/).
+
+To know more information about ABINIT tutorial and documentation, please refer to [ABINIT tutorial](https://docs.abinit.org/tutorial/).
 
 !!! tip
-    If you find some issues with the instructions above,
-    please report it to us using [support ticket](https://hpc.uni.lu/support).
-
+    If you find some issues with the instructions above, please report it to us using [support ticket](https://hpc.uni.lu/support).

@@ -1,13 +1,8 @@
 # Job Status and Reason Codes
 
-The `squeue` command details a variety of information on an active
-job’s status with state and reason codes. *__Job state
-codes__* describe a job’s current state in queue (e.g. pending,
-completed). *__Job reason codes__* describe the reason why the job is
-in its current state.
+The `squeue` command details a variety of information on an active job’s status with state and reason codes. *__Job state codes__* describe a job’s current state in queue (e.g. pending, completed). *__Job reason codes__* describe the reason why the job is in its current state.
 
-The following tables outline a variety of job state and reason codes you
-may encounter when using squeue to check on your jobs.
+The following tables outline a variety of job state and reason codes you may encounter when using squeue to check on your jobs.
 
 ### Job State Codes
 
@@ -28,8 +23,7 @@ may encounter when using squeue to check on your jobs.
 | TIMEOUT       | `TO`  | Job terminated upon reaching its time limit.                           |
 |               |       |                                                                        |
 
-A full list of these Job State codes can be found in [`squeue`
-documentation.](https://slurm.schedmd.com/squeue.html#lbAG) or [`sacct` documentation](https://slurm.schedmd.com/sacct.html#lbAG).
+A full list of these Job State codes can be found in [`squeue` documentation.](https://slurm.schedmd.com/squeue.html#lbAG) or [`sacct` documentation](https://slurm.schedmd.com/sacct.html#lbAG).
 
 ### Job Reason Codes
 
@@ -50,27 +44,18 @@ documentation.](https://slurm.schedmd.com/squeue.html#lbAG) or [`sacct` document
 | `AssociationMaxJobsLimit` | Maximum number of jobs for your job’s association have been met; job will run eventually.   |
 | `AssociationNodeLimit`    | All nodes assigned to your job’s specified association are in use; job will run eventually. |
 
-A full list of these Job Reason Codes can be found [in Slurm’s
-documentation.](https://slurm.schedmd.com/squeue.html#lbAF)
+A full list of these Job Reason Codes can be found [in Slurm’s documentation.](https://slurm.schedmd.com/squeue.html#lbAF)
 
 ### Running Job Statistics Metrics
 
-The [`sstat`](https://slurm.schedmd.com/sstat.html) command allows users to
-easily pull up status information about their currently running jobs.
-This includes information about *__CPU usage__*,
-*__task information__*, *__node information__*, *__resident set size
-(RSS)__*, and *__virtual memory (VM)__*. We can invoke the sstat
-command as such:
+The [`sstat`](https://slurm.schedmd.com/sstat.html) command allows users to easily pull up status information about their currently running jobs. This includes information about *__CPU usage__*, *__task information__*, *__node information__*, *__resident set size (RSS)__*, and *__virtual memory (VM)__*. We can invoke the sstat command as such:
 
 ```bash
 # /!\ ADAPT <jobid> accordingly
 $ sstat --jobs=<jobid>
 ```
 
-By default, sstat will pull up significantly more information than
-what would be needed in the commands default output. To remedy this,
-we can use the `--format` flag to choose what we want in our
-output. A chart of some these variables are listed in the table below:
+By default, sstat will pull up significantly more information than what would be needed in the commands default output. To remedy this, we can use the `--format` flag to choose what we want in our output. A chart of some these variables are listed in the table below:
 
 | __Variable__ | __Description__                                          |
 | ------------ | -------------------------------------------------------- |
@@ -82,17 +67,14 @@ output. A chart of some these variables are listed in the table below:
 | `maxvsize`   | Maximum number of bytes written by all tasks in the job. |
 | `ntasks`     | Number of tasks in a job.                                |
 
-For an example, let's print out a job's average job id, cpu time, max
-rss, and number of tasks. We can do this by typing out the command:
+For an example, let's print out a job's average job id, cpu time, max rss, and number of tasks. We can do this by typing out the command:
 
 ```bash
 # /!\ ADAPT <jobid> accordingly
 sstat --jobs=<jobid> --format=jobid,cputime,maxrss,ntasks
 ```
 
-A full list of variables that specify data handled by sstat can be
-found with the `--helpformat` flag or by [visiting the slurm page on
-`sstat`](https://slurm.schedmd.com/sstat.html).
+A full list of variables that specify data handled by sstat can be found with the `--helpformat` flag or by [visiting the slurm page on `sstat`](https://slurm.schedmd.com/sstat.html).
 
 
 ### Past Job Statistics Metrics
@@ -107,12 +89,7 @@ Usage: susage [-m] [-Y] [-S YYYY-MM-DD] [-E YYYT-MM-DD]
 Display past job usage summary
 ```
 
-But by default, you should use the
-[`sacct`](https://slurm.schedmd.com/sacct.html) command allows users to pull up
-status information about past jobs.
-This command is very similar to `sstat`, but is used on jobs
-that have been previously run on the system instead of currently
-running jobs.
+But by default, you should use the [`sacct`](https://slurm.schedmd.com/sacct.html) command allows users to pull up status information about past jobs. This command is very similar to `sstat`, but is used on jobs that have been previously run on the system instead of currently running jobs.
 
 ```bash
 # /!\ ADAPT <jobid> accordingly
@@ -123,9 +100,7 @@ $ sacct [-X] -u $USER  [-S YYYY-MM-DD] [-E YYYY-MM-DD] [--format=metric1,...]
 $ sacct [-X] -A <account> [--format=metric1,...]
 ```
 
-Use `-X` to _aggregate_ the statistics relevant to the job allocation itself, not
-taking job steps into consideration.
-
+Use `-X` to _aggregate_ the statistics relevant to the job allocation itself, not taking job steps into consideration.
 
 The main metrics code you may be interested to review are listed below.
 
@@ -152,6 +127,4 @@ The main metrics code you may be interested to review are listed below.
 | `reqtres`      | Required [Trackable RESources (TRES)](https://slurm.schedmd.com/tres.html) |
 | `user`         | Userna                                                                      |
 
-A full list of variables that specify data handled by sacct can be
-found with the `--helpformat` flag or by [visiting the slurm page on
-`sacct`](https://slurm.schedmd.com/sacct.html).
+A full list of variables that specify data handled by sacct can be found with the `--helpformat` flag or by [visiting the slurm page on `sacct`](https://slurm.schedmd.com/sacct.html).

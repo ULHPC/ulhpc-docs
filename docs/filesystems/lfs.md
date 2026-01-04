@@ -6,13 +6,9 @@ If multiple clients try to read and write the same part of a file at the same ti
 
 ### Discover MDTs and OSTs
 
-ULHPC's Lustre file systems look and act like a single logical storage, but a large files on Lustre can be divided into multiple chunks (**stripes**) and stored across over OSTs.
-This technique is called [**file striping**](https://en.wikipedia.org/wiki/Data_striping).
-The stripes are distributed among the OSTs in a round-robin fashion to ensure load balancing.
-It is thus important to know the number of OST on your running system.
+ULHPC's Lustre file systems look and act like a single logical storage, but a large files on Lustre can be divided into multiple chunks (**stripes**) and stored across over OSTs. This technique is called [**file striping**](https://en.wikipedia.org/wiki/Data_striping). The stripes are distributed among the OSTs in a round-robin fashion to ensure load balancing. It is thus important to know the number of OST on your running system.
 
-As mentioned in the [Lustre implementation section](lustre.md#storage-system-implementation), the ULHPC Lustre infrastructure is composed of **2 MDTs** and **8 OSTs**.
-You can list the MDTs and OSTs with the command `lfs df`:
+As mentioned in the [Lustre implementation section](lustre.md#storage-system-implementation), the ULHPC Lustre infrastructure is composed of **2 MDTs** and **8 OSTs**. You can list the MDTs and OSTs with the command `lfs df`:
 
 ```bash
 $ cds      # OR: cd $SCRATCH
@@ -36,10 +32,7 @@ filesystem_summary:         1.4P      415.5T      989.9T  30% /mnt/scratch
 
 **[File striping](https://en.wikipedia.org/wiki/Data_striping)** permits to increase the throughput of operations by taking advantage of several OSSs and OSTs, by allowing one or more clients to read/write different parts of the same file in parallel. On the other hand, striping small files can decrease the performance.
 
-File striping allows file sizes larger than a single OST, large files **MUST** be striped over several OSTs in order to avoid filling a single OST and harming the performance for all users.
-There is default stripe configuration for ULHPC Lustre filesystems (see below).
-However, users can set the following stripe parameters for their own directories or files to get optimum I/O performance.
-You can tune file striping using 3 properties:
+File striping allows file sizes larger than a single OST, large files **MUST** be striped over several OSTs in order to avoid filling a single OST and harming the performance for all users. There is default stripe configuration for ULHPC Lustre filesystems (see below). However, users can set the following stripe parameters for their own directories or files to get optimum I/O performance. You can tune file striping using 3 properties:
 
 | Property          | Effect                                                           | Default            | Accepted values                     | Advised values |
 |-------------------|------------------------------------------------------------------|--------------------|-------------------------------------|----------------|
@@ -52,9 +45,9 @@ _Note_: With regards `stripe_offset` (the index of the OST where the first strip
 !!! note
     Setting stripe size and stripe count correctly for your needs may significantly affect the I/O performance.
 
-* Use the `lfs getstripe` command for getting the stripe parameters.
-* Use `lfs setstripe` for setting the stripe parameters to get optimal I/O performance. The correct stripe setting depends on your needs and file access patterns.
-    * Newly created files and directories will inherit these parameters from their parent directory. However, the parameters cannot be changed on an existing file.
+- Use the `lfs getstripe` command for getting the stripe parameters.
+- Use `lfs setstripe` for setting the stripe parameters to get optimal I/O performance. The correct stripe setting depends on your needs and file access patterns.
+  - Newly created files and directories will inherit these parameters from their parent directory. However, the parameters cannot be changed on an existing file.
 
 ```console
 $ lfs getstripe dir|filename
@@ -78,10 +71,7 @@ $ lfs getstripe $SCRATCH
 stripe_count:  -1 stripe_size:   1048576 pattern:       raid0 stripe_offset: -1
 ```
 
-In this example, we view the current stripe setting of the `$SCRATCH` directory.
-The stripe count is changed to all OSTs and verified.
-All files written to this directory will be striped over the maximum number of OSTs (16).
-Use `lfs check osts` to see the number and status of active OSTs for each filesystem on the cluster. Learn more by reading the man page:
+In -his example, we view the current stripe setting of the `$SCRATCH` directory. The stripe count is changed to all OSTs and verified. All files written to this directory will be striped over the maximum number of OSTs (16). Use `lfs check osts` to see the number and status of active OSTs for each filesystem on the cluster. Learn more by reading the man page:
 
 ```console
 $ lfs check osts
@@ -90,39 +80,39 @@ $ man lfs
 
 ### File stripping Examples
 
-* Set the striping parameters for a directory containing only small files (< 20MB)
+- Set the striping parameters for a directory containing only small files (< 20MB)
 
-```console
-$ cd $SCRATCH
-$ mkdir test_small_files
-$ lfs getstripe test_small_files
-test_small_files
-stripe_count:   1 stripe_size:    1048576 stripe_offset:  -1 pool:
-$ lfs setstripe --stripe-size 1M --stripe-count 1 test_small_files
-$ lfs getstripe test_small_files
-test_small_files
-stripe_count:   1 stripe_size:    1048576 stripe_offset:  -1
-```
+  ```console
+  $ cd $SCRATCH
+  $ mkdir test_small_files
+  $ lfs getstripe test_small_files
+  test_small_files
+  stripe_count:   1 stripe_size:    1048576 stripe_offset:  -1 pool:
+  $ lfs setstripe --stripe-size 1M --stripe-count 1 test_small_files
+  $ lfs getstripe test_small_files
+  test_small_files
+  stripe_count:   1 stripe_size:    1048576 stripe_offset:  -1
+  ```
 
-* Set the striping parameters for a directory containing only large files between 100MB and 1GB
+- Set the striping parameters for a directory containing only large files between 100MB and 1GB
 
-```console
-$ mkdir test_large_files
-$ lfs setstripe --stripe-size 2M --stripe-count 2 test_large_files
-$ lfs getstripe test_large_files
-test_large_files
-stripe_count:   2 stripe_size:    2097152 stripe_offset:  -1
-```
+  ```console
+  $ mkdir test_large_files
+  $ lfs setstripe --stripe-size 2M --stripe-count 2 test_large_files
+  $ lfs getstripe test_large_files
+  test_large_files
+  stripe_count:   2 stripe_size:    2097152 stripe_offset:  -1
+  ```
 
-* Set the striping parameters for a directory containing files larger than 1GB
+- Set the striping parameters for a directory containing files larger than 1GB
 
-```console
-$ mkdir test_larger_files
-$ lfs setstripe --stripe-size 4M --stripe-count 6 test_larger_files
-$ lfs getstripe test_larger_files
-test_larger_files
-stripe_count:   6 stripe_size:    4194304 stripe_offset:  -1
-```
+  ```console
+  $ mkdir test_larger_files
+  $ lfs setstripe --stripe-size 4M --stripe-count 6 test_larger_files
+  $ lfs getstripe test_larger_files
+  test_larger_files
+  stripe_count:   6 stripe_size:    4194304 stripe_offset:  -1
+  ```
 
 !!! Hint "Big Data files management on Lustre"
     Using a large stripe size can improve performance when accessing very large files
@@ -138,9 +128,8 @@ Note that these are simple examples, the optimal settings defer depending on the
 
 When multiple processes are writing blocks of data to the same file in parallel, the I/O performance for large files will improve when the `stripe_count` is set to a larger value. The stripe count sets the number of OSTs to which the file will be written. By default, the stripe count is set to 1. While this default setting provides for efficient access of metadata (for example to support the `ls -l` command), large files should use stripe counts of greater than 1. This will increase the aggregate I/O bandwidth by using multiple OSTs in parallel instead of just one. A rule of thumb is to use a stripe count approximately equal to the number of gigabytes in the file.
 
-Another good practice is to make the stripe count be an integral factor of the number of processes performing the write in parallel, so that you achieve load balance among the OSTs. For example, set the stripe count to 16 instead of 15 when you have 64 processes performing the writes.
-For more details, you can read the following external resources:
+Another good practice is to make the stripe count be an integral factor of the number of processes performing the write in parallel, so that you achieve load balance among the OSTs. For example, set the stripe count to 16 instead of 15 when you have 64 processes performing the writes. For more details, you can read the following external resources:
 
-* [Reference Documentation:  Managing File Layout (Striping) and Free Space](https://doc.lustre.org/lustre_manual.xhtml#managingstripingfreespace)
-* [Lustre Wiki](https://wiki.lustre.org/Main_Page)
-* [Lustre Best Practices - Nasa HECC](http://www.nas.nasa.gov/hecc/support/kb/lustre-best-practices_226.html)
+- [Reference Documentation:  Managing File Layout (Striping) and Free Space](https://doc.lustre.org/lustre_manual.xhtml#managingstripingfreespace)
+- [Lustre Wiki](https://wiki.lustre.org/Main_Page)
+- [Lustre Best Practices - Nasa HECC](http://www.nas.nasa.gov/hecc/support/kb/lustre-best-practices_226.html)

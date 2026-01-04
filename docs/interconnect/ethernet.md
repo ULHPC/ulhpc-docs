@@ -9,8 +9,8 @@ An additional, Ethernet-based network offers the robustness and resiliency neede
 Outside the [Fast IB interconnect network](ib.md) used **inside** the clusters, we maintain an Ethernet network organized as a 2-layer topology:
 
 1. one upper level (__Gateway Layer__) with routing, switching features, network isolation and filtering (ACL) rules and meant to interconnect _only_ switches.
-     - This layer is handled by a redundant set of site routers (ULHPC gateway routers).
-     - it allows to interface the University network for both internal (LAN) and external (WAN) communications
+  - This layer is handled by a redundant set of site routers (ULHPC gateway routers).
+  - it allows to interface the University network for both internal (LAN) and external (WAN) communications
 2. one bottom level (__Switching Layer__) composed by the [stacked] _core_ switches as well as the _TOR_ (Top-the-rack) switches, meant to interface the HPC servers and compute nodes.
 
 An overview of this topology is provided in the below figure.

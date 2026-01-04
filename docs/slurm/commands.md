@@ -267,9 +267,7 @@ Use `seff` to double check a _past_ job CPU/Memory efficiency. Below examples sh
     ```
      **This is typical of a single-core task** can could be drastically improved via [GNU Parallel](https://ulhpc-tutorials.readthedocs.io/en/latest/sequential/gnu-parallel/).
 
-**Note however that demonstrating a CPU good efficiency with `seff` may not be enough!**
-You may still induce an _abnormal_ load on the reserved nodes if you spawn more processes than allowed by the Slurm reservation.
-To avoid that, always try to prefix your executions with `srun` within your launchers. See also [Specific Resource Allocations](../slurm/index.md#specific-resource-allocation).
+**Note however that demonstrating a CPU good efficiency with `seff` may not be enough!** You may still induce an _abnormal_ load on the reserved nodes if you spawn more processes than allowed by the Slurm reservation. To avoid that, always try to prefix your executions with `srun` within your launchers. See also [Specific Resource Allocations](../slurm/index.md#specific-resource-allocation).
 
 <!--seff-end-->
 
@@ -291,11 +289,11 @@ Display past job usage summary
 
 <!--sacct-start-->
 
-
 Alternatively, you can use [`sacct`](https://slurm.schedmd.com/sacct.html) (use `sacct --helpformat` to get the list of) for COMPLETED or TIMEOUT jobs (see [Job State Codes](../jobs/reason-codes.md)).
 
 ??? example "using `sacct -X -S <start> [...] --format [...],time,elapsed,[...]`"
     ADAPT `-S <start>` and `-E <end>` dates accordingly - Format: `YYYY-MM-DD`.
+
     _hint_: `$(date +%F)` will return today's date in that format, `$(date +%Y)` return the current year, so the below command will list your completed (or timeout jobs) since the beginning of the month:
     ```console
     $ sacct -X -S $(date +%Y)-01-01 -E $(date +%F) --partition batch,gpu,bigmem --state CD,TO --format User,JobID,partition%12,qos,state,time,elapsed,nnodes,ncpus,allocGRES
@@ -336,8 +334,7 @@ We are providing a certain number of [helper functions](https://github.com/ULHPC
 
 ### Cluster, partition and QOS usage stats
 
-We have defined several custom ULHPC Slurm helpers defined in [`/etc/profile.d/slurm.sh`](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh) to facilitate access to account/parition/qos/usage information.
-They are listed below.
+We have defined several custom ULHPC Slurm helpers defined in [`/etc/profile.d/slurm.sh`](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh) to facilitate access to account/parition/qos/usage information. They are listed below.
 
 | __Command__                | __Description__                                                        |
 |----------------------------|------------------------------------------------------------------------|
@@ -353,7 +350,6 @@ They are listed below.
 | `sqos`                     | Show QOS information and limits                                        |
 | `susage [-m] [-Y] [...]`   | Display past job usage summary                                         |
 
-
 ## Updating jobs
 
 | __Command__                           | __Description__               |
@@ -363,8 +359,7 @@ They are listed below.
 | `scontrol hold <jobid>`               | Hold job                      |
 | `scontrol resume <jobid>`             | Resume held job               |
 
-The [`scontrol`](https://slurm.schedmd.com/scontrol.html) command allows certain charactistics of a job to be
-updated while it is still **queued** (_i.e._ not running ), with the syntax `scontrol update jobid=<jobid> [...]`
+The [`scontrol`](https://slurm.schedmd.com/scontrol.html) command allows certain charactistics of a job to be updated while it is still **queued** (_i.e._ not running ), with the syntax `scontrol update jobid=<jobid> [...]`
 
 !!! important
     Once the job is running, most changes requested with `scontrol update jobid=[...]` will **NOT** be applied.
@@ -425,5 +420,4 @@ scancel <jobid>
     ```
     scancel -u $USER
     ```
-    This only applies to jobs which are associated with your
-    accounts.
+    This only applies to jobs which are associated with your accounts.
