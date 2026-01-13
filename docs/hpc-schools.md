@@ -1,28 +1,28 @@
-# On-site HPC trainings and tutorials
+# On-Site HPC Trainings and Tutorials
 
 We propose periodical on-site events for our users. They are free of charge and can be attended by anyone from the University of Luxembourg faculties and interdisciplinary centers. 
 Additionally, we also accept users from LIST, LISER and LIH. If you are part of another public research center, please [contact us](mailto:hpc-school-for-beginners@uni.lu).
 
 
-## Forthcoming events
+## Forthcoming Events
 
-- [HPC school for beginners](#hpc-school-for-beginners): **eligible for ECTS credits**  
-Quaterly, dates to be announced, Belval Campus
+- [HPC School for Beginners](#hpc-school-for-beginners): **Eligible for ECTS Credits**
+Quarterly, Dates to Be Announced, Belval Campus
 - [Introduction to Machine Learning](#introduction-to-hpc-and-machine-learning):
-Dates to be announced, Belval Campus
+Dates to Be Announced, Belval Campus
 - [Python for HPC](#python-hpc-school):
-Dates to be announced, Belval Campus
+Dates to Be Announced, Belval Campus
 
 
-## HPC School for beginners
+## HPC School for Beginners
 
 This event aims to equip you with essential skills and knowledge to embark on your High-Performance Computing journey. The event is organized each trimester and is composed of six half days.
 
 Limited spots available per session (usually 30 max).
 
-### Upcoming sessions
+### Upcoming Sessions
 
-No dates annouced at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
+No dates announced at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
 <!---
 - Date: September 2025, 11th-12th
@@ -33,69 +33,75 @@ No dates annouced at the moment. Future sessions will be announced here, please 
 ### Prerequisites
 
 - No specific knowledge required
-- Bring your own computer (Linux, MacOS and Windows are welcome)
+- Bring your own computer (Linux, macOS, and Windows are welcome)
 - An active HPC account. You can request one [here](/accounts/#how-to-get-a-new-user-account).
 
-### Session 1 - Accessing the Cluster and Command Line Introduction 
+### Session 1 - Accessing the Cluster and Command Line Introduction
 
 Learn how to:
 
-- access the HPC cluster and set up your machine
-- use the command line interface effectively (manage your files, run software, ...). Gain confidence in interacting with the cluster environment.
-- tranfer data to and from the cluster
+- Access the HPC cluster and set up your machine
+- Use the command line interface effectively (manage your files, run software, ...). Gain confidence in interacting with the cluster environment.
+- Transfer data to and from the cluster
 
 ### Session 2 - HPC Basics: Job Submission and Monitoring
 
 Learn:
 
-- the inner workings of the university HPC clusters 
-- how to submit and manage computational tasks. 
-- how to monitor and optimize job performance.
+- The inner workings of the university HPC clusters
+- How to submit and manage computational tasks.
+- How to monitor and optimize job performance.
 
-### Session 3 - Reproducibility: Working with software environments and containers
+### Session 3 - Working with Software Environments and Containers
 
 Learn how to:
 
-- setup isolated software environments
-- create and use containers in the HPC systems
-- Improve the reproducibility of your workflows by creating reproducible setups.
+- Set up isolated software environments
+- Create and use containers in the HPC systems
 
-### Session 4 - Using resources efficiently
+### Session 4 - Advanced Job Submission
 
 - Understand the allocation of resources in HPC systems
-- Optimise your job submission workflow
-- Configure you code to access cores, memory channels, and GPUs efficiently and prevent over-subscription.
+- Optimize your job submission workflow
+- Configure your code to access cores, memory channels, and GPUs efficiently and prevent over-subscription.
 
-### Session 5 - Optimising storage access
+### Session 5 - Optimizing Storage Access
 
 Learn about:
 
-- the different storage tiers and their characteristics
+- The different storage tiers and their characteristics
 - Using parallel file systems effectively
-- Optimising storage access patterns
+- Optimizing storage access patterns
 
-### Session 6 - TBA
+### Session 6 - Reproducibility
+
+Learn how to:
+
+- Improve the reproducibility of your workflows by creating reproducible setups
+- Manage your dependencies
+- Version, store, and share your workflows and code
+
 
 
 ### Resources
 
 - Setup
-    - [Request an account](resources/HPC_School_-_Beginner_S1-1_-_Account_request.pdf)
+    - [Request an Account](resources/HPC_School_-_Beginner_S1-1_-_Account_request.pdf)
     - [Access the HPC - Linux and Mac](resources/HPC_School_-_Beginner_S1-1_-_Mac_and_Linux.pdf)
     - [Access the HPC - Windows](resources/HPC_School_-_Beginner_S1-1_-_Windows.pdf)
-- Basic shell and cluster skills
-    - [Introduction to the shell](resources/HPC_School_-_Beginner_S1-2.pdf)
-    - [Introduction to the job scheduler](resources/HPC_School_-_Beginner_S2.pdf)
+- Basic Shell and Cluster Skills
+    - [Introduction to the Shell](resources/HPC_School_-_Beginner_S1-2.pdf)
+    - [Introduction to the Job Scheduler](resources/HPC_School_-_Beginner_S2.pdf)
 - [CLI Cheat Sheet](resources/CLI_Cheat_Sheet.pdf)
 
 
-## Machine Learning for beginners
+## Machine Learning for Beginners
 
 This two-days course introduces participants to Machine Learning (ML) and Deep Learning (DL) on HPC. During the course, we will cover the fundamentals of ML and DL, work through practical exercises on model training, and explore how to speed up computations using HPC resources, distributed computing, and GPU acceleration. The course combines theory, coding exercises, and HPC applications to give participants both a solid foundation and practical skills.
 
 Limited spots available per session (20 max).
 
-### Upcoming sessions
+### Upcoming Sessions
 
 
 No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
@@ -105,7 +111,7 @@ No sessions are planned at the moment. Future sessions will be announced here, p
 - Time: 9am to 5pm (both days)
 - Location: MNO 1.040 and 1.050, Belval Campus
 -->
-### Training outcomes
+### Training Outcomes
 
 By the end of the course, participants will:
 
@@ -114,7 +120,7 @@ By the end of the course, participants will:
 - Learn how to use HPC resources for accelerated ML workloads;
 - Explore distributed computing and GPU acceleration tools;
 
-### Course structure
+### Course Structure
 
 #### Day 1 - ML Foundations
 
@@ -136,20 +142,20 @@ By the end of the course, participants will:
 ### Requirements
 
 - Having an HPC account to access the cluster.
-- Basic knowledge on SLURM (beginners HPC school).
+- Basic knowledge of SLURM (Beginners HPC School).
 - A basic understanding of Python programming.
 - Familiarity with Jupyter Notebook (installed and configured).
-- A basic understanding of Numpy and linear algebra.
+- A basic understanding of NumPy and linear algebra.
 
 
 ## Python HPC School
 
 In this workshop, we will explore the process of improving Python code for efficient execution. Chances are, you 're already familiar with Python and Numpy. However, we will start by mastering profiling and efficient NumPy usage as these are crucial steps before venturing into parallelization. Once your code is fine-tuned with Numpy we will explore the utilization of Python's parallel libraries to unlock the potential of using multiple CPU cores. By the end, you will be well equipped to harness Python's potential for high-performance tasks on the HPC infrastructure. 
 
-### Target Audience Description 
+### Target Audience Description
 The workshop is designed for individuals who are interested in advancing their skills and knowledge in Python-based scientific and data computing. The ideal participants would typically possess basic to intermediate Python and Numpy skills, along with some familiarity with parallel programming. This workshop will give a good starting point to leverage the usage of the HPC computing power to speed up your Python programs. 
 
-### Upcoming sessions
+### Upcoming Sessions
 
 No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 
@@ -159,14 +165,14 @@ No sessions are planned at the moment. Future sessions will be announced here, p
 - Location: MNO 1.030. - Belval campus
 -->
 
-### First day – Jupyter notebook on ULHPC / profiling efficient usage of Numpy
+### First Day – Jupyter Notebook on ULHPC / Profiling Efficient Usage of NumPy
 
 #### Program
 
-- Setting up a Jupyter notebook on an HPC node - 10am to 11am
-- Taking time and profiling python code - 11am to 12pm
+- Setting up a Jupyter Notebook on an HPC node - 10am to 11am
+- Taking time and profiling Python code - 11am to 12pm
 - Lunch break - 12pm to 2pm
-- Numpy basics for replacing python loops for efficient computations - 2pm to 4pm
+- NumPy basics for replacing Python loops for efficient computations - 2pm to 4pm
 
 #### Requirements 
 
@@ -176,26 +182,26 @@ No sessions are planned at the moment. Future sessions will be announced here, p
 - Familiarity with Jupyter Notebook (installed and configured). 
 - A basic understanding of Numpy and linear algebra. 
 
-### Second day – Improving performance with python parallel packages 
+### Second Day – Improving Performance with Python Parallel Packages
 
 #### Program
 
 - Use case understanding and Python implementation - 10am to 10:30am
-- Numpy implementation - 10:30am to 11am
+- NumPy implementation - 10:30am to 11am
 - Python’s Multiprocessing - 11am to 12pm
 - Lunch break - 12pm to 2pm
 - PyMP - 2pm to 2:30pm
 - Cython - 2:30pm to 3pm
-- Numba and final remarks- 3pm to 4pm
+- Numba and final remarks - 3pm to 4pm
 
 #### Requirements
 
 - **Having an HPC account to access the cluster.**
-- Basic knowledge on SLURM (beginners HPC school). 
-- A basic understanding of Python programming. 
-- Familiarity with Jupyter Notebook (installed and configured). 
-- A basic understanding of Numpy and linear algebra. 
-- Familiarity with parallel programming. 
+- Basic knowledge of SLURM (Beginners HPC School).
+- A basic understanding of Python programming.
+- Familiarity with Jupyter Notebook (installed and configured).
+- A basic understanding of NumPy and linear algebra.
+- Familiarity with parallel programming.
 
 <!--
 ## Conda environment management for Python and R
