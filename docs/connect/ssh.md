@@ -1,23 +1,10 @@
 # SSH
 
-All ULHPC servers are reached using either the Secure
-Shell (SSH) communication and encryption protocol (version 2).
+All ULHPC servers are reached using either the Secure Shell (SSH) communication and encryption protocol (version 2).
 
-Developed by [SSH Communications Security Ltd.](http://www.ssh.com), Secure Shell is a an encrypted network protocol used to log into another computer over an unsecured network, to execute commands in a remote machine, and to move files from one machine to another in a secure way.
-On UNIX/LINUX/BSD type systems, SSH is also the name of a suite of software applications for
-connecting via the SSH protocol. The SSH applications can execute
-commands on a remote machine and transfer files from one machine to
-another.  All communications are automatically and transparently
-encrypted, including passwords. Most versions of SSH provide login
-(`ssh`, `slogin`), a remote copy operation (`scp`), and many also provide a
-secure ftp client (`sftp`). Additionally, SSH allows secure X Window
-connections.
+Developed by [SSH Communications Security Ltd.](http://www.ssh.com), Secure Shell is a an encrypted network protocol used to log into another computer over an unsecured network, to execute commands in a remote machine, and to move files from one machine to another in a secure way. On UNIX/LINUX/BSD type systems, SSH is also the name of a suite of software applications for connecting via the SSH protocol. The SSH applications can execute commands on a remote machine and transfer files from one machine to another. All communications are automatically and transparently encrypted, including passwords. Most versions of SSH provide login (`ssh`, `slogin`), a remote copy operation (`scp`), and many also provide a secure ftp client (`sftp`). Additionally, SSH allows secure X Window connections.
 
-To use SSH, you have to generate a pair of keys, one **public** and the other
-**private**.
-The public key authentication is the most secure and flexible approach to ensure a multi-purpose transparent connection to a remote server.
-This approach is enforced on the ULHPC platforms and assumes that the _public_ key is known by the system in order to perform an authentication based on a challenge/response protocol instead of the
-classical password-based protocol.
+To use SSH, you have to generate a pair of keys, one **public** and the other **private**. The public key authentication is the most secure and flexible approach to ensure a multi-purpose transparent connection to a remote server. This approach is enforced on the ULHPC platforms and assumes that the _public_ key is known by the system in order to perform an authentication based on a challenge/response protocol instead of the classical password-based protocol.
 
 The way SSH handles the keys and the configuration files is illustrated in the following figure:
 
@@ -25,11 +12,11 @@ The way SSH handles the keys and the configuration files is illustrated in the f
 
 ## Installation
 
-* OpenSSH is natively supported on Linux / Mac OS / Unix / WSL (see below)
-* On Windows, you are thus encouraged to install [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (WSL) and setup an Ubuntu subsystem from  [Microsoft Store](https://aka.ms/wslstore).
-    - You probably want to also install [Windows Terminal](https://github.com/microsoft/terminal) and  [MobaXterm](http://mobaxterm.mobatek.net/)
-    - Better performance of your Linux subsystem can be obtained by migrating to WSL 2
-    - Follow the [ULHPC Tutorial: Setup Pre-Requisites / Windows](https://ulhpc-tutorials.readthedocs.io/en/latest/setup/preliminaries/#microsoft-windows) for detailed instructions.
+- OpenSSH is natively supported on Linux / Mac OS / Unix / WSL (see below)
+- On Windows, you are thus encouraged to install [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about) (WSL) and setup an Ubuntu subsystem from  [Microsoft Store](https://aka.ms/wslstore).
+  - You probably want to also install [Windows Terminal](https://github.com/microsoft/terminal) and  [MobaXterm](http://mobaxterm.mobatek.net/)
+  - Better performance of your Linux subsystem can be obtained by migrating to WSL 2
+  - Follow the [ULHPC Tutorial: Setup Pre-Requisites / Windows](https://ulhpc-tutorials.readthedocs.io/en/latest/setup/preliminaries/#microsoft-windows) for detailed instructions.
 
 ## SSH Key Generation
 
@@ -41,12 +28,11 @@ ssh-keygen -t rsa -b 4096 -a 100
 
 After the execution of this command, the generated keys are stored in the following files:
 
-* SSH RSA _Private_ key: `~/.ssh/id_rsa`.      **NEVER EVER TRANSMIT THIS FILE**
-* SSH RSA _Public_ key:  `~/.ssh/id_rsa.pub`.  **This file is the ONLY one SAFE to distribute**
+- SSH RSA _Private_ key: `~/.ssh/id_rsa`. **NEVER EVER TRANSMIT THIS FILE**
+- SSH RSA _Public_ key:  `~/.ssh/id_rsa.pub`. **This file is the ONLY one SAFE to distribute**
 
 !!! danger "To passphrase or not to passphrase"
-    To ensure the security of your SSH key-pair on your laptop, you **MUST** protect your SSH keys with a passphrase!
-    Note however that while possible, this passphrase is purely private and has _a priori_ nothing to do with your University or your ULHPC credentials. Nevertheless, a strong passphrase follows the same recommendations as for strong passwords (for instance: see [password requirements and guidelines](../policies/passwords.md#password-requirements-and-guidelines).
+    To ensure the security of your SSH key-pair on your laptop, you **MUST** protect your SSH keys with a passphrase! Note however that while possible, this passphrase is purely private and has _a priori_ nothing to do with your University or your ULHPC credentials. Nevertheless, a strong passphrase follows the same recommendations as for strong passwords (for instance: see [password requirements and guidelines](../policies/passwords.md#password-requirements-and-guidelines).
 
     Finally, just like encryption keys, passphrases need to be kept safe and protected from _unauthorised_ access. A _Password Manager_  can help you to store all your passwords safely. The University is currently not offering a university wide password manger but there are many free and paid ones you can use, for example: [KeePassX](https://www.keepassx.org/), [PWSafe](https://www.pwsafe.org/relatedprojects.shtml), [Dashlane](https://www.dashlane.com/), [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/).
 
@@ -66,35 +52,34 @@ $ ls -l ~/.ssh/id_*
 -rw-r--r-- username groupname ~/.ssh/id_ed25519.pub # Public ED25519 key
 ```
 
-Ensure the access rights are correct on the generated keys using the '`ls -l`' command.
-In particular, the _private_ key should be readable only by you:
+Ensure the access rights are correct on the generated keys using the '`ls -l`' command. In particular, the _private_ key should be readable only by you:
 
 For more details, follow the [ULHPC Tutorials: Preliminaries / SSH](https://ulhpc-tutorials.readthedocs.io/en/latest/preliminaries/#secure-shell-ssh).
 
 ??? note "(deprecated - Windows only): SSH key management with MobaKeyGen tool"
     On Windows with [MobaXterm](http://mobaxterm.mobatek.net/), a tool exists and can be used to generate an SSH key pair. While not recommended (we encourage you to run WSL), here are the instructions to follow to generate these keys:
 
-    * Open the application **Start > Program Files > MobaXterm**.
-    * Change the default home directory for a persistent home directory instead of the default Temp directory. Go onto **Settings > Configuration > General > Persistent home directory**.
-         - choose a location for your home directory.
-             * your local SSH configuration will be located under `HOME/.ssh/`
-    * Go onto **Tools > Network > MobaKeyGen (SSH key generator)**.
-         - Choose **RSA** as the type of key to generate and change "Number of bits in a generated key" to 4096.
-         - Click on the **Generate** button. Move your mouse to generate some randomness.
-         - Select a strong passphrase in the **Key passphrase** field for your key.
-    * Save the public and private keys as respectively `id_rsa.pub` and `id_rsa.ppk`.
-         - Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
+    - Open the application **Start > Program Files > MobaXterm**.
+    - Change the default home directory for a persistent home directory instead of the default Temp directory. Go onto **Settings > Configuration > General > Persistent home directory**.
+      - choose a location for your home directory.
+        - your local SSH configuration will be located under `HOME/.ssh/`
+    - Go onto **Tools > Network > MobaKeyGen (SSH key generator)**.
+      - Choose **RSA** as the type of key to generate and change "Number of bits in a generated key" to 4096.
+      - Click on the **Generate** button. Move your mouse to generate some randomness.
+      - Select a strong passphrase in the **Key passphrase** field for your key.
+    - Save the public and private keys as respectively `id_rsa.pub` and `id_rsa.ppk`.
+      - Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
 
     ![MobaKeyGen (SSH key generator)](images/moba-ssh-key-gen.png)
 
 ??? note "(deprecated - Windows only): SSH key management with PuTTY"
     While no longer recommended, you may still want to use [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/) and the associated tools, more precisely:
 
-    * [PuTTY](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe), the free SSH client
-    * [Pageant](https://the.earth.li/~sgtatham/putty/latest/w64/pageant.exe), an SSH authentication agent for PuTTY tools
-    * [PuTTYgen](https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe), an RSA key generation utility
-    * [PSCP](https://the.earth.li/~sgtatham/putty/latest/w64/pscp.exe), an SCP (file transfer) client, i.e. command-line secure file copy
-    * [WinSCP](http://winscp.net/eng/download.php), SCP/SFTP (file transfer) client with easy-to-use graphical interface
+    - [PuTTY](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe), the free SSH client
+    - [Pageant](https://the.earth.li/~sgtatham/putty/latest/w64/pageant.exe), an SSH authentication agent for PuTTY tools
+    - [PuTTYgen](https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe), an RSA key generation utility
+    - [PSCP](https://the.earth.li/~sgtatham/putty/latest/w64/pscp.exe), an SCP (file transfer) client, i.e. command-line secure file copy
+    - [WinSCP](http://winscp.net/eng/download.php), SCP/SFTP (file transfer) client with easy-to-use graphical interface
 
     The different steps involved in the installation process are illustrated below (**REMEMBER to tick the option "Associate .PPK files (PuTTY Private Key) with Pageant and PuTTYGen"**):
 
@@ -108,20 +93,16 @@ For more details, follow the [ULHPC Tutorials: Preliminaries / SSH](https://ulhp
 
     ![Saving the public key](images/puttygen-screenshot-3.png)
 
-    * Save the public and private keys as respectively `id_rsa.pub` and `id_rsa.ppk`.
-         - Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
-
+    - Save the public and private keys as respectively `id_rsa.pub` and `id_rsa.ppk`.
+      - Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
 
 ## Password-less logins and transfers
 
-Password based authentication is disabled on all ULHPC servers.
-You can **only use public-key authentication**.
-This assumes that you upload your **public** SSH keys `*.pub` to your user entry on the [ULHPC Identity Management Portal](ipa.md).
+Password based authentication is disabled on all ULHPC servers. You can **only use public-key authentication**. This assumes that you upload your **public** SSH keys `*.pub` to your user entry on the [ULHPC Identity Management Portal](ipa.md).
 
 Consult the [associated documentation](ipa.md) to discover how to do it.
 
-Once done, you can connect by SSH to the ULHPC clusters.
-Note that the port on which the SSH servers are listening is **not** the default SSH one (*i.e.* 22) but **8022**. Consequently, if you want to connect to the Iris cluster, open a terminal and run (substituting *yourlogin* with the login name you received from us):
+Once done, you can connect by SSH to the ULHPC clusters. Note that the port on which the SSH servers are listening is **not** the default SSH one (*i.e.* 22) but **8022**. Consequently, if you want to connect to the Iris cluster, open a terminal and run (substituting *yourlogin* with the login name you received from us):
 
 === "Iris"
     ```bash
@@ -140,8 +121,7 @@ Of course, we advise you to setup your SSH configuration to avoid typing this de
 
 ## SSH Configuration
 
-On Linux / Mac OS / Unix / WSL, your SSH configuration is defined in `~/.ssh/config`.
-As recommended in the [ULHPC Tutorials: Preliminaries / SSH](https://ulhpc-tutorials.readthedocs.io/en/latest/preliminaries/#secure-shell-ssh), you probably want to create the following configuration to easiest further access and data transfers:
+On Linux / Mac OS / Unix / WSL, your SSH configuration is defined in `~/.ssh/config`. As recommended in the [ULHPC Tutorials: Preliminaries / SSH](https://ulhpc-tutorials.readthedocs.io/en/latest/preliminaries/#secure-shell-ssh), you probably want to create the following configuration to easiest further access and data transfers:
 
 ```bash
 # ~/.ssh/config -- SSH Configuration
@@ -177,8 +157,7 @@ You should now be able to connect as follows
     ```
 
 ??? note "(Windows only) Remote session configuration with MobaXterm"
-    This part of the documentation comes from [MobaXterm documentation page](http://mobaxterm.mobatek.net/documentation.html#1_1)
-    MobaXterm allows you to launch remote sessions. You just have to click on the "Sessions" button to start a new session. Select SSH session on the second screen.
+    This part of the documentation comes from [MobaXterm documentation page](http://mobaxterm.mobatek.net/documentation.html#1_1) MobaXterm allows you to launch remote sessions. You just have to click on the "Sessions" button to start a new session. Select SSH session on the second screen.
 
     ![MobaXterm Session button](images/moba-session-button.png)
 
@@ -186,13 +165,13 @@ You should now be able to connect as follows
 
     Enter the following parameters:
 
-    * Remote host: `access-iris.uni.lu` (repeat with `access-aion.uni.lu`)
-    * Check the **Specify username** box
-    * Username: `yourlogin`
-         - Adapt to match the one that was sent to you in the Welcome e-mail once your HPC account was created
-    * Port: `8022`
-    * Go in **Advanced SSH settings** and check the **Use private key** box.
-        - Select your previously generated key `id_rsa.ppk`.
+    - Remote host: `access-iris.uni.lu` (repeat with `access-aion.uni.lu`)
+    - Check the **Specify username** box
+    - Username: `yourlogin`
+      - Adapt to match the one that was sent to you in the Welcome e-mail once your HPC account was created
+    - Port: `8022`
+    - Go in **Advanced SSH settings** and check the **Use private key** box.
+      - Select your previously generated key `id_rsa.ppk`.
 
     ![MobaXterm Session Manager Advanced](images/moba-session-advanced.png)
 
@@ -201,14 +180,14 @@ You should now be able to connect as follows
 ??? note "(deprecated - Windows only) - Remote session configuration with PuTTY"
     If you want to connect to one of the ULHPC cluster, open Putty and enter the following settings:
 
-    * In _Category:Session_ :
+    - In _Category:Session_ :
       - Host Name: `access-iris.uni.lu` (or `access-aion.uni.lu` if you want to access Aion)
       - Port: `8022`
       - Connection Type: `SSH` (leave as default)
-    * In _Category:Connection:Data_ :
+    - In _Category:Connection:Data_ :
        - Auto-login username: `yourlogin`
-           * Adapt to match the one that was sent to you in the Welcome e-mail once your HPC account was created
-    * In _Category:SSH:Auth_ :
+         - Adapt to match the one that was sent to you in the Welcome e-mail once your HPC account was created
+    - In _Category:SSH:Auth_ :
        - Upload your private key: `Options controlling SSH authentication`
 
     Click on _Open_ button. If this is the first time connecting to the server from this computer a **Putty Security Alert** will appear. Accept the connection by clicking _Yes_.
@@ -217,13 +196,12 @@ You should now be able to connect as follows
 
     Now you probably want want to **save the configuration of this connection**:
 
-    * Go onto the _Session_ category.
-       - Enter the settings you want to save.
-       - Enter a name in the _Saved session_ field (for example `Iris` for access to Iris cluster).
-       - Click on the _Save_ button.
+    - Go onto the _Session_ category.
+      - Enter the settings you want to save.
+      - Enter a name in the _Saved session_ field (for example `Iris` for access to Iris cluster).
+      - Click on the _Save_ button.
 
     Next time you want to connect to the cluster, click on _Load_ button and _Open_ to open a new connection.
-
 
 ## SSH Agent
 
@@ -386,8 +364,7 @@ Agent pid <PID> killed
 
 ## Key fingerprints
 
-ULHPC may occasionally update the host keys on the major systems.  Check here
-to confirm the current fingerprints.
+ULHPC may occasionally update the host keys on the major systems. Check here to confirm the current fingerprints.
 
 === "Iris"
 
@@ -468,9 +445,7 @@ The `bash-completion` package eases the ssh command usage by providing completio
 
 Many Data Analytics framework involves a web interface (at the level of the master and/or the workers) you probably want to access in a relative transparent way.
 
-For that, a convenient way is to rely on a SOCKS proxy, which is basically an SSH tunnel in which specific applications forward their traffic down the tunnel to the server, and then on the server end, the proxy forwards the traffic out to the general Internet.
-Unlike a VPN, a SOCKS proxy has to be configured on an app by app basis on the client machine, but can be set up without any specialty client agents.
-The general principle is depicted below.
+For that, a convenient way is to rely on a SOCKS proxy, which is basically an SSH tunnel in which specific applications forward their traffic down the tunnel to the server, and then on the server end, the proxy forwards the traffic out to the general Internet. Unlike a VPN, a SOCKS proxy has to be configured on an app by app basis on the client machine, but can be set up without any specialty client agents. The general principle is depicted below.
 
 ![Creating a SOCKS proxy with SSH](images/SshD.png)
 
@@ -488,29 +463,27 @@ To initiate such a SOCKS proxy using SSH (listening on `localhost:1080` for inst
     ssh -D 1080 -C aion-cluster
     ```
 
-* `-D`: Tells SSH that we want a SOCKS tunnel on the specified port number (you can choose a number between 1025-65536)
-* `-C`: Compresses the data before sending it
+- `-D`: Tells SSH that we want a SOCKS tunnel on the specified port number (you can choose a number between 1025-65536), and
+- `-C`: compresses the data before sending it.
 
 
 #### FoxyProxy [Firefox] Extension
 
-Now that you have an SSH tunnel, it's time to configure your web browser (recommended: Firefox) to use that tunnel.
-In particular, install the [Foxy Proxy](https://getfoxyproxy.org/order/?src=FoxyProxyForFirefox)
-extension for Firefox and configure it to use your SOCKS proxy:
+Now that you have an SSH tunnel, it's time to configure your web browser (recommended: Firefox) to use that tunnel. In particular, install the [Foxy Proxy](https://getfoxyproxy.org/order/?src=FoxyProxyForFirefox) extension for Firefox and configure it to use your SOCKS proxy:
 
-* Right click on the fox icon, Select Options
-* **Add a new proxy** button
-* Name: `ULHPC proxy`
-* Informations > **Manual configuration**
-    -  Host IP: `127.0.0.1`
-    -  Port: `1080`
-    -  Check the **Proxy SOCKS** Option
-* Click on **OK**
-* Close
-* Open a new tab
-* Click on the Fox
-* Choose the **ULHPC proxy**
-    - disable it when you no longer need it.
+- Right click on the fox icon, Select Options
+- **Add a new proxy** button
+- Name: `ULHPC proxy`
+- Informations > **Manual configuration**
+  -  Host IP: `127.0.0.1`
+  -  Port: `1080`
+  -  Check the **Proxy SOCKS** Option
+- Click on **OK**
+- Close
+- Open a new tab
+- Click on the Fox
+- Choose the **ULHPC proxy**
+  - disable it when you no longer need it.
 
 You can now access any web interface deployed on any service reachable from the SSH jump host _i.e._ the ULHPC login node.
 
@@ -534,7 +507,6 @@ Then you can make the VNC client on your workstation use this tunnel to access t
 
 !!! tips "tsock Escape character"
     Use `~.` to disconnect, even if your remote command hangs.
-
 
 ### SSH Port Forwarding
 
@@ -636,24 +608,22 @@ This command can be combined with [passwordless access](#passwordless-ssh-jumps)
 
 ## Extras Tools around SSH
 
-* [Assh](https://github.com/moul/advanced-ssh-config) - Advanced SSH config is a transparent wrapper that make `~/.ssh/config` easier to manage
-    - support for _templates_, _aliases_, _defaults_, _inheritance_ etc.
-    - _gateways_: transparent ssh connection chaining
-    - more flexible command-line. _Ex_: Connect to `hosta` using `hostb` as a gateway
-      ```console
-      $ ssh hosta/hostb
-      ```
+- [Assh](https://github.com/moul/advanced-ssh-config) - Advanced SSH config is a transparent wrapper that make `~/.ssh/config` easier to manage
+  - support for _templates_, _aliases_, _defaults_, _inheritance_ etc.
+  - _gateways_: transparent ssh connection chaining
+  - more flexible command-line. _Ex_: Connect to `hosta` using `hostb` as a gateway
+    ```console
+    $ ssh hosta/hostb
+    ```
 
-    - drastically simplify your SSH config
-    - Linux / Mac OS **only**
-
-*  [ClusterShell](https://clustershell.readthedocs.io): `clush`, `nodeset` (or cluset),
-    - light, unified, robust command execution framework
-    - well-suited to _ease daily administrative tasks_ of Linux clusters.
-        * using tools like `clush` and `nodeset`
-    - _efficient, parallel, scalable command execution engine_ \hfill{\tiny in Python}
-    - provides an _unified node groups syntax_ and external group access
-        * see `nodeset` and the NodeSet class
-
-* [DSH](http://www.netfort.gr.jp/~dancer/software/dsh.html.en) - Distributed / Dancer's Shell
-* [sshutle](https://github.com/sshuttle/sshuttle), "_where transparent proxy meets VPN meets ssh_"
+  - drastically simplify your SSH config
+  - Linux / Mac OS **only**
+- [ClusterShell](https://clustershell.readthedocs.io): `clush`, `nodeset` (or cluset),
+  - light, unified, robust command execution framework
+  - well-suited to _ease daily administrative tasks_ of Linux clusters.
+    - using tools like `clush` and `nodeset`
+  - _efficient, parallel, scalable command execution engine_ \hfill{\tiny in Python}
+  - provides an _unified node groups syntax_ and external group access
+    - see `nodeset` and the NodeSet class
+- [DSH](http://www.netfort.gr.jp/~dancer/software/dsh.html.en) - Distributed / Dancer's Shell
+- [sshutle](https://github.com/sshuttle/sshuttle), "_where transparent proxy meets VPN meets ssh_"

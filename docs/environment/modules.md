@@ -37,9 +37,9 @@ By automatically modifying the shell environment, the modules can load and unloa
 
     When users login to a Linux system, they get a login shell and the [shell](index.md#shell-and-dotfiles) uses Environment variables to run commands and applications. Most common are:
 
-    * [`PATH`](https://en.wikipedia.org/wiki/PATH_(variable)):  colon-separated list of directories in which your system looks for executable files;
-    * [`MANPATH`](https://man7.org/linux/man-pages/man1/manpath.1.html): colon-separated list of directories in which [`man`](https://man7.org/linux/man-pages/man1/man.1.html) searches for the man pages;
-    * [`LD_LIBRARY_PATH`](https://man7.org/linux/man-pages/man8/ld.so.8.html): colon-separated list of directories in which your system looks for for ELF / `*.so` libraries at execution time needed by applications.
+    - [`PATH`](https://en.wikipedia.org/wiki/PATH_(variable)):  colon-separated list of directories in which your system looks for executable files;
+    - [`MANPATH`](https://man7.org/linux/man-pages/man1/manpath.1.html): colon-separated list of directories in which [`man`](https://man7.org/linux/man-pages/man1/man.1.html) searches for the man pages;
+    - [`LD_LIBRARY_PATH`](https://man7.org/linux/man-pages/man8/ld.so.8.html): colon-separated list of directories in which your system looks for for ELF / `*.so` libraries at execution time needed by applications.
 
     There are also _application specific_ environment variables such as `CPATH`, `LIBRARY_PATH`, `JAVA_HOME`, `LM_LICENSE_FILE`, `MKLROOT` etc.
 
@@ -56,21 +56,20 @@ By automatically modifying the shell environment, the modules can load and unloa
 
     There exists several implementation of the `module` tool:
 
-    * [Tcl/C Environment Modules](http://modules.sourceforge.net/) (3.2.10 $\leq$ version < 4), also known as `Tmod`: the _seminal_ (old) implementation
-    * [Environment modules](https://modules.readthedocs.io/) (version $\geq$ 4), previously called `Modules-Tcl`: Tcl-only variant of Environment modules
-    * (**recommended**) [Lmod](https://lmod.readthedocs.io/): a Lua based Environment Module system
-        - Lmod ("L" stands for [Lua](http://www.lua.org/)) provides all of the functionality of Tcl/C Environment Modules plus more features:
-            * support for _hierarchical_ module file structure
-            * `MODULEPATH` is dynamically updated when modules are loaded.
-            * makes loaded modules inactive and active to provide sane environment.
-            * supports for _hidden_ modules
-            * support for _optional_ usage tracking (implemented on ULHPC facilities)
-       - In particular, Lmod enforces the following [safety features](https://lmod.readthedocs.io/en/latest/010_user.html#safety-features) which were only reently provided by [Environment Modules](https://modules.readthedocs.io/):
-          1. The _One Name Rule_: Users can only have one version active
-          2. Users can only load one compiler or MPI stack at a time (through the `family(...)` directive)
+    - [Tcl/C Environment Modules](http://modules.sourceforge.net/) (3.2.10 $\leq$ version < 4), also known as `Tmod`: the _seminal_ (old) implementation
+    - [Environment modules](https://modules.readthedocs.io/) (version $\geq$ 4), previously called `Modules-Tcl`: Tcl-only variant of Environment modules
+    - (**recommended**) [Lmod](https://lmod.readthedocs.io/): a Lua based Environment Module system
+      - Lmod ("L" stands for [Lua](http://www.lua.org/)) provides all of the functionality of Tcl/C Environment Modules plus more features:
+        - support for _hierarchical_ module file structure
+        - `MODULEPATH` is dynamically updated when modules are loaded.
+        - makes loaded modules inactive and active to provide sane environment.
+        - supports for _hidden_ modules
+        - support for _optional_ usage tracking (implemented on ULHPC facilities)
+      - In particular, Lmod enforces the following [safety features](https://lmod.readthedocs.io/en/latest/010_user.html#safety-features) which were only reently provided by [Environment Modules](https://modules.readthedocs.io/):
+        1. The _One Name Rule_: Users can only have one version active
+        2. Users can only load one compiler or MPI stack at a time (through the `family(...)` directive)
 
     The ULHPC Facility relies on [Lmod](https://lmod.readthedocs.io/), a Lua-based Environment module system that easily handles the `MODULEPATH` Hierarchical problem.
-
 
 ### Working with environment modules
 
@@ -260,14 +259,14 @@ In the [natively optimized software sets](/environment/modules/#loading-a-native
 The natively optimized modules under `env` prepend one of the following paths to `${MODULEPATH}` in the order described below.
 
 - On all nodes except for the `gpu` partition of [Iris](/systems/iris/):
-    - `/opt/apps/easybuild/systems/<cluster name>/<build version>/<software set version>/<target architecture>/modules/all`: Location of _natively optimized modules_.
-    - `/opt/apps/easybuild/systems/binary/<build version>/<software set version>/generic/modules/all`: Location of software distributed as binaries that cannot be optimized for any target architecture.
-- On nodes of the `gpu` partition of [Iris](/systems/iris/):
-    - `/opt/apps/easybuild/systems/iris/<build version>/<software set version>/gpu/modules/all`: Location of _natively optimized modules_ that use the GPU.
-    - `/opt/apps/easybuild/systems/iris/<build version>/<software set version>/skylake/modules/all`: Location of _natively optimized modules_.
-    - `/opt/apps/easybuild/systems/binary/<build version>/<software set version>/generic/modules/all`: Location of software distributed as binaries that cannot be optimized for any target architecture.
+  - `/opt/apps/easybuild/systems/<cluster name>/<build version>/<software set version>/<target architecture>/modules/all`: Location of _natively optimized modules_.
+  - `/opt/apps/easybuild/systems/binary/<build version>/<software set version>/generic/modules/all`: Location of software distributed as binaries that cannot be optimized for any target architecture.
+-  nodes of the `gpu` partition of [Iris](/systems/iris/):
+  - `/opt/apps/easybuild/systems/iris/<build version>/<software set version>/gpu/modules/all`: Location of _natively optimized modules_ that use the GPU.
+  - `/opt/apps/easybuild/systems/iris/<build version>/<software set version>/skylake/modules/all`: Location of _natively optimized modules_.
+  - `/opt/apps/easybuild/systems/binary/<build version>/<software set version>/generic/modules/all`: Location of software distributed as binaries that cannot be optimized for any target architecture.
 
-    The GPU optimized modules still need the CPU modules to function, like for instance the MPI module. The GPU nodes use Skylake CPUs, so the modules optimized for Skylake are loaded.
+  The GPU optimized modules still need the CPU modules to function, like for instance the MPI module. The GPU nodes use Skylake CPUs, so the modules optimized for Skylake are loaded.
 
 ??? info "Parameters in the software set directory paths"
 
@@ -275,8 +274,8 @@ The natively optimized modules under `env` prepend one of the following paths to
 
     - `<cluster name>`: the name of the cluster (`iris` or `aion`), as set in the environment variable `${ULHPC_CLUSTER}`.
     - `<build version>`: the version of the software build, determined by the operating system (OS) and the date of the build as `<OS version>-<ISO date squashed>`, where for instance
-        - RHEL 8.10 become `<OS version>`=`rhel810`, and
-        - 2025-02-16 becomes `<ISO date squashed>`=`20252010`.
+      - RHEL 8.10 become `<OS version>`=`rhel810`, and
+      - 2025-02-16 becomes `<ISO date squashed>`=`20252010`.
     - `<software set version>`: the ULHPC Software set release, aligned with [Easybuid toolchains release](https://easybuild.readthedocs.io/en/master/Common-toolchains.html#component-versions-in-foss-toolchain).
     - `<target architecture>`: the architecture for which the software set has been optimized, as set in the `${RESIF_ARCH}` environment variable.
 

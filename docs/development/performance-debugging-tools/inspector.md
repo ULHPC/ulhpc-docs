@@ -1,22 +1,15 @@
 # Intel Inspector
+
 [![](https://software.intel.com/content/dam/develop/public/us/en/images/screenshots/screen-intel-inspector-16x9.png.rendition.intel.web.720.405.png){: style="width:300px;float: right;" }](https://software.intel.com/content/www/us/en/develop/tools/inspector.html)
-[Intel Inspector](https://software.intel.com/content/www/us/en/develop/tools/inspector.html) is a memory and threading error checking tool for users
-developing serial and multithreaded applications on Windows and Linux operating
-systems. The essential features of Intel Inspector for Linux are:
 
-* Standalone GUI and command-line environments
-* Preset analysis configurations (with some configurable settings) and the
-  ability to create custom analysis configurations to help the user control
-  analysis scope and cost
-* Interactive debugging capability so one can investigate problems more deeply
-  during the analysis
-* A large number of reported memory errors, including on-demand memory leak
-  detection
-* Memory growth measurement to help ensure that the application uses no more
-  memory than expected
-* Data race, deadlock, lock hierarchy violation, and cross-thread stack access
-  error detection
+[Intel Inspector](https://software.intel.com/content/www/us/en/develop/tools/inspector.html) is a memory and threading error checking tool for users developing serial and multithreaded applications on Windows and Linux operating systems. The essential features of Intel Inspector for Linux are:
 
+- Standalone GUI and command-line environments
+- Preset analysis configurations (with some configurable settings) and the ability to create custom analysis configurations to help the user control analysis scope and cost
+- Interactive debugging capability so one can investigate problems more deeply during the analysis
+- A large number of reported memory errors, including on-demand memory leak detection
+- Memory growth measurement to help ensure that the application uses no more memory than expected
+- Data race, deadlock, lock hierarchy violation, and cross-thread stack access error detection
 
 ### Options for the Collect Action
 
@@ -38,8 +31,7 @@ systems. The essential features of Intel Inspector for Linux are:
 | observations | A detailed report of all code locations used to form new problem sets |
 | status       | A brief statement of the total number of detected problems and the number that are *not investigated*, grouped by category |
 
-For more information on Intel Inspector, please visit
-https://software.intel.com/en-us/intel-inspector-xe.
+For more information on Intel Inspector, please visit the [official documentation](https://software.intel.com/en-us/intel-inspector-xe).
 
 ## Environmental models for Inspector on UL-HPC
 
@@ -52,9 +44,8 @@ module load vis/GTK+/3.24.8-GCCcore-8.2.0
 ```
 
 ### Interactive Mode
-To launch Inspector on Iris, we recommend that you use the command
-line tool  `inspxe-cl`  to collect data via batch jobs and then display
-results using the GUI, `inspxe-gui`, on a login node.
+
+To launch Inspector on Iris, we recommend that you use the command line tool  `inspxe-cl`  to collect data via batch jobs and then display results using the GUI, `inspxe-gui`, on a login node.
 
 ```bash
 # Compilation
@@ -73,6 +64,7 @@ $ cat inspxe-cl.txt
 ```
 
 ## Batch Mode
+
 ### Shared memory programming model (OpenMP)
 
 Example for the batch script:
@@ -94,6 +86,7 @@ module load vis/GTK+/3.24.8-GCCcore-8.2.0
 
 inspxe-cl -collect mi1 -result-dir mi1 -- ./a.out`
 ```
+
 To see the result:
 
 ```bash
@@ -107,12 +100,16 @@ $ cat inspxe-cl.txt
 ```
 
 ### Distributed memory programming model (MPI)
+
 To compile:
+
 ```bash
 # Compilation
 $ mpiicc -qopenmp example.cc
 ```
+
 Example for batch script:
+
 ```shell
 #!/bin/bash -l
 #SBATCH -J Inspector
@@ -132,6 +129,7 @@ srun -n {SLURM_NTASKS} inspxe-cl -collect=ti2 -r result ./a.out
 ```
 
 To see result output:
+
 ```bash
 $ cat inspxe-cl.txt
 0 new problem(s) found
@@ -142,5 +140,4 @@ $ cat inspxe-cl.txt
 ```
 
 !!! tip
-    If you find some issues with the instructions above,
-    please report it to us using [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above, please report it to us using [support ticket](https://hpc.uni.lu/support).

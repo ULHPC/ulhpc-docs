@@ -1,31 +1,28 @@
 # Optimizers
 
-
-Mathematical optimization (alternatively spelled optimisation) or mathematical programming is the selection of a best element (with regard to some criterion) from some set of available alternatives. Optimization problems of sorts arise in all quantitative disciplines from computer science and engineering to operations research and economics, and the development of solution methods has been of interest in mathematics for centuries
+Mathematical optimization (alternatively spelled optimisation) or mathematical programming is the selection of a best element (with regard to some criterion) from some set of available alternatives. Optimization problems of sorts arise in all quantitative disciplines from computer science and engineering to operations research and economics, and the development of solution methods has been of interest in mathematics for centuries.
 
 ## Mathematical programming with Cplex and Gurobi
 
 [**Cplex**](https://www.ibm.com/analytics/cplex-optimizer) is an optimization software for mathematical programming.
 The Cplex optimizer can solve:
 
-* Mixed-Integer programming problems (MIP)
-* Very large linear programming problems (LP)
-* Non-convex quadratic programming problems (QP)
-* Convex quadratically constrained problems (QCP)
+- Mixed-Integer programming problems (MIP)
+- Very large linear programming problems (LP)
+- Non-convex quadratic programming problems (QP)
+- Convex quadratically constrained problems (QCP)
 
 [**Gurobi**](http://www.gurobi.com) is a powerful optimization software and an alternative to Cplex for solving. Gurobi has some additionnal features compared to Cplex. For example, it can perform Mixed-Integer Quadratic Programming (MIQP) and Mixed-Integer Quadratic Constrained Programming (MIQCP).
 
 ### Loading Cplex or Gurobi
 
-To use these optimization sfotwares, you need to load the corresponding [Lmod](https://lmod.readthedocs.io/en/latest/) module.
-
-For Cplex
+To use these optimization sfotwares, you need to load the corresponding [Lmod](https://lmod.readthedocs.io/en/latest/) module. For Cplex:
 
 ```shell
 >$ module load maths/Cplex
 ```
 
-or for Gurobi
+or for Gurobi:
 
 ```bash
 >$ module load math/Gurobi
@@ -37,12 +34,9 @@ or for Gurobi
     salloc -p interactive     # OR, use the helper script: si
     ```
 
-
 ### Using Cplex 
 
 In order to test cplex and gurobi, we need an optimization instance. Hereafter, we are going to rely on instances from the [miplib](http://miplib2017.zib.de). For example, let us the following instance [ex10.mps.gz](http://miplib2017.zib.de/WebData/instances/ex10.mps.gz) described in details [here](http://miplib2017.zib.de/instance_details_ex10.html) for the interested readers.
-
-
 
 #### Multi-threaded optimization with Cplex
 
@@ -65,8 +59,6 @@ MPS_FILE=$1
 RES_FILE=$2
 CPLEX_COMMAND_SCRIPT="command_job${SLURM_JOBID}.lst"
 
-
-
 # Create cplex command script
 cat << EOF > ${CPLEX_COMMAND_SCRIPT}
 set threads ${SLURM_CPUS_PER_TASK}
@@ -82,17 +74,11 @@ cplex -f ${CPLEX_COMMAND_SCRIPT}
 rm ${CPLEX_COMMAND_SCRIPT}
 ```
 
-
-Using the script ```cplex_mtt.slurm ```, you can launch a batch job with the ```sbatch``` command as follows ``` sbatch cplex_mtt.slurm ex10.mps.gz cplex_mtt```.
-
-
-
+Using the script `cplex_mtt.slurm`, you can launch a batch job with the `sbatch` command as follows `sbatch cplex_mtt.slurm ex10.mps.gz cplex_mtt`.
 
 #### Distributed optimization with Cplex
 
-When you require more computing power (e.g. more cores), distributed computations is the way to go. The cplex optimization software embeds a feature that allows you to perform distributed MIP. Using the Message Passing Interface (MPI), cplex will distribute the exploration of the tree search to multiple workers.
-The below launcher is an example showing how to reserve ressources on multiple nodes through the Slurm scheduler. In this example, 31 tasks will be distributed over 2 nodes. 
-
+When you require more computing power (e.g. more cores), distributed computations is the way to go. The cplex optimization software embeds a feature that allows you to perform distributed MIP. Using the Message Passing Interface (MPI), cplex will distribute the exploration of the tree search to multiple workers. The below launcher is an example showing how to reserve ressources on multiple nodes through the Slurm scheduler. In this example, 31 tasks will be distributed over 2 nodes. 
 
 ```slurm
 #!/bin/bash -l
@@ -109,8 +95,6 @@ module load math/CPLEX
 MPS_FILE=$1
 RES_FILE=$2
 CPLEX_COMMAND_SCRIPT="command_job${SLURM_JOBID}.lst"
-
-
 
 # Create cplex command script
 cat << EOF > ${CPLEX_COMMAND_SCRIPT}
@@ -129,14 +113,13 @@ mpirun -np 1 cplex -f ${CPLEX_COMMAND_SCRIPT} -mpi : -np $((SLURM_NTASKS - 1)) c
 rm ${CPLEX_COMMAND_SCRIPT}
 ```
 
-Using the script ```cplex_dist.slurm ```, you can launch a batch job with the ```sbatch``` command as follows ``` sbatch cplex_dist.slurm ex10.mps.gz cplex_dist```.
+Using the script `cplex_dist.slurm`, you can launch a batch job with the `sbatch` command as follows `sbatch cplex_dist.slurm ex10.mps.gz cplex_dist`.
 
 ### Gurobi
 
 #### Multi-threaded optimization with Gurobi
 
 The script below allows you to start multi-threaded MIP optimization with Gurobi. 
-
 
 ```slurm
 #!/bin/bash -l
@@ -158,11 +141,9 @@ RES_FILE=$2
 gurobi_cl Threads=${SLURM_CPUS_PER_TASK} ResultFile="${RES_FILE}.sol" ${MPS_FILE}
 ```
 
-Using the script ```gurobi_mtt.slurm ```, you can launch a batch job with the ```sbatch``` command as follows ``` sbatch gurobi_mtt.slurm ex10.mps.gz gurobi_mtt```.
+Using the script `gurobi_mtt.slurm`, you can launch a batch job with the `sbatch` command as follows `sbatch gurobi_mtt.slurm ex10.mps.gz gurobi_mtt`.
 
 #### Distributed optimization with Gurobi 
-
-
 
 ```slurm
 #!/bin/bash -l
@@ -193,7 +174,6 @@ else
     echo "THREADLIMIT=${SLURM_CPUS_PER_TASK}" >> grb_rs.cnf
 fi
 
-
 cat << 'EOF' > ${GUROBI_INNER_LAUNCHER}
 #!/bin/bash
 MASTER_NODE=$(scontrol show hostname ${SLURM_NODELIST} | head -n 1)
@@ -223,5 +203,4 @@ done
 rm ${GUROBI_INNER_LAUNCHER}
 ```
 
-
-Using the script ```gurobi_dist.slurm ```, you can launch a batch job with the ```sbatch``` command as follows ``` sbatch gurobi_dist.slurm ex10.mps.gz gurobi_dist```.
+Using the script `gurobi_dist.slurm`, you can launch a batch job with the `sbatch` command as follows `sbatch gurobi_dist.slurm ex10.mps.gz gurobi_dist`.

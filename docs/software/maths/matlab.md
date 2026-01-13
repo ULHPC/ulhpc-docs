@@ -1,23 +1,18 @@
 [![](https://pbs.twimg.com/profile_images/1041686882915155968/qw90wxxo.jpg){: style="width:300px;float: right;" }](https://nl.mathworks.com/)
-[MATLAB®](https://nl.mathworks.com/products/matlab.html) combines
-a desktop environment tuned for iterative analysis and design processes
-with a programming language that expresses matrix and array mathematics directly.
-It includes the Live Editor for creating scripts that combine code, output,
-and formatted text in an executable notebook.
 
+[MATLAB®](https://nl.mathworks.com/products/matlab.html) combines a desktop environment tuned for iterative analysis and design processes with a programming language that expresses matrix and array mathematics directly. It includes the Live Editor for creating scripts that combine code, output, and formatted text in an executable notebook.
 
 ## Available versions of MATLAB in ULHPC
-To check available versions of MATLAB at ULHPC type `module spider matlab`.
-It will list the available versions:
+
+To check available versions of MATLAB at ULHPC type `module spider matlab`. It will list the available versions:
+
 ```bash
 math/MATLAB/<version>
 ```
 
 ## Interactive mode
 
-To open MATLAB in the interactive mode, please follow the following steps:
-
-(_eventually_) [connect](../../connect/access.md) to the ULHPC login node with the `-X` (or `-Y`) option:
+To open MATLAB in the interactive mode, start by [connecting](../../connect/access.md) to the ULHPC login node with the `-X` (or `-Y`) option:
 
 === "Iris"
     ```bash
@@ -28,7 +23,7 @@ To open MATLAB in the interactive mode, please follow the following steps:
     ssh -X aion-cluster   # OR on Mac OS: ssh -Y aion-cluster
     ```
 
-Then you can reserve an [interactive job](../../jobs/interactive.md), for instance with 4 cores. **Don't forget to use the `--x11` option if you intend to use the GUI**.
+Then, you can reserve an [interactive job](../../jobs/interactive.md), for instance with 4 cores. **Don't forget to use the `--x11` option if you intend to use the GUI**.
 
 ```bash
 $ si --x11 -c4
@@ -66,8 +61,7 @@ ans =
 
 ## Batch mode
 
-For non-interactive or long executions, MATLAB can be ran in [passive or batch mode](../../jobs/submit.md), reading all commands from an input file (with `.m` extension) you provide (Ex: `inputfile.m`) and saving the results into an output file, for instance `outputfile.out`).
-You have two ways to proceed:
+For non-interactive or long executions, MATLAB can be ran in [passive or batch mode](../../jobs/submit.md), reading all commands from an input file (with `.m` extension) you provide (Ex: `inputfile.m`) and saving the results into an output file, for instance `outputfile.out`). You have two ways to proceed:
 
 === "using redirection operators"
     ```bash
@@ -113,7 +107,6 @@ rm -rf ${HOME}/java*
 Most matlab scripts cannot take advantage of more that one core (`--cpus-per-task=1`). If you want to use more than one core in your computations, use a parallel pool of threads.
 
 A parallel pool of threads allows the allocation of threads form the local computing node to independent workers that then use the thread to evaluate functions in parallel. Create a parallel pool on using the [parpool](https://mathworks.com/help/parallel-computing/parallel.threadpool.html) function. After you create the pool, parallel pool features, such as [`parfor`](https://mathworks.com/help/parallel-computing/parallel-for-loops-parfor.html) or [`parfeval`](https://fr.mathworks.com/help/matlab/ref/parfeval.html?searchHighlight=parfeval&s_tid=srchtitle_parfeval_1), run computations on independent workers in parallel. With the ThreadPool object, you can interact with the parallel pool.
-
 
 !!! example
 

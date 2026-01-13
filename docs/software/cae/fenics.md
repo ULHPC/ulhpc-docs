@@ -1,16 +1,10 @@
 [![](https://fenicsproject.org/pub/tutorial/sphinx1/_static/fenics_banner.png){: style="width:200px;float: right;" }](https://fenicsproject.org/)
-[FEniCS](https://fenicsproject.org/) is a popular open-source (LGPLv3) computing platform for
-solving partial differential equations (PDEs).
-FEniCS enables users to quickly translate scientific models
-into efficient finite element code. With the high-level
-Python and C++ interfaces to FEniCS, it is easy to get started,
-but FEniCS offers also powerful capabilities for more
-experienced programmers. FEniCS runs on a multitude of
-platforms ranging from laptops to high-performance clusters.
+
+[FEniCS](https://fenicsproject.org/) is a popular open-source (LGPLv3) computing platform for solving partial differential equations (PDEs). FEniCS enables users to quickly translate scientific models into efficient finite element code. With the high-level Python and C++ interfaces to FEniCS, it is easy to get started, but FEniCS offers also powerful capabilities for more experienced programmers. FEniCS runs on a multitude of platforms ranging from laptops to high-performance clusters.
 
 ## How to access the FEniCS through [Anaconda](https://www.anaconda.com/products/individual)
-The following steps provides information about how to installed
-on your local path. 
+
+The following steps provides information about how to installed on your local path. 
 ```bash
 # From your local computer
 $ ssh -X iris-cluster    # OR ssh -Y iris-cluster on Mac
@@ -47,12 +41,13 @@ Anaconda3 will now be installed into this location:
 # Install matplotlib for the visualization 
 /scratch/users/<login> $ conda install -c conda-forge matplotlib 
 ```
-Once you have installed the anaconda, you can always
-activate it by calling the `source activate` path where `anaconda`
-has been installed. 
+
+Once you have installed the anaconda, you can always activate it by calling the `source activate` path where `anaconda` has been installed. 
 
 ## Working example
+
 ### Interactive mode
+
 ```bash
 # From your local computer
 $ ssh -X iris-cluster      # or ssh -Y iris-cluster on Mac
@@ -72,6 +67,7 @@ $ python3 Poisson.py
 ```
 
 ### Batch script
+
 ```bash
 #!/bin/bash -l                                                                                                 
 #SBATCH -J FEniCS                                                                                        
@@ -98,6 +94,7 @@ srun python3 Poisson.py
 ```
 
 ### Example (Poisson.py)
+
 ```bash
 # FEniCS tutorial demo program: Poisson equation with Dirichlet conditions.
 # Test problem is chosen to give an exact solution at all nodes of the mesh.
@@ -159,10 +156,8 @@ print('error_max =', error_max)
 ```
 
 ## Additional information
-FEniCS provides the [technical documentation](https://fenicsproject.org/documentation/),
-and also it provides lots of [communication channel](https://fenicsproject.org/community/)
-for support and development.
+
+FEniCS provides the [technical documentation](https://fenicsproject.org/documentation/), and also it provides lots of [communication channel](https://fenicsproject.org/community/) for support and development.
 
 !!! tip
-    If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above, please file a [support ticket](https://hpc.uni.lu/support).

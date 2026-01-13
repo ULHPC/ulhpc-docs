@@ -8,11 +8,10 @@ Aion is a cluster of x86-64 AMD-based compute nodes. More precisely, Aion consis
 
 Aion compute nodes are configured as _8 virtual sockets (processors)_ with _16 cores per virtual socket_, even if physically the nodes are hosting 2 physical sockets of [AMD Epyc ROME 7H12](https://www.amd.com/en/products/cpu/amd-epyc-7h12) processors having 64 cores each (total: 128 cores per node).
 
-* As will be highlighted in the [slurm resource allocation](../../slurm/index.md#specific-resource-allocation), that means that targetting a full node utilization assumes that you use the following format attributes to your jobs: `{sbatch|srun|si|salloc} [-N <N>] --ntasks-per-node <8n> --ntasks-per-socket <n> -c <thread>` where 
-    - you want to ensure that `<n>`$\times$`<thread>`= 16 on aion
-    - this will bring a total of `<N>`$\times 8\times$`<n>` tasks, each on `<thread>` threads
-    - Ex: `-N 2 --ntasks-per-node 32 --ntasks-per-socket 4 -c 4` (_Total_: 64 tasks)
-
+- As will be highlighted in the [slurm resource allocation](../../slurm/index.md#specific-resource-allocation), that means that targetting a full node utilization assumes that you use the following format attributes to your jobs: `{sbatch|srun|si|salloc} [-N <N>] --ntasks-per-node <8n> --ntasks-per-socket <n> -c <thread>` where 
+  - you want to ensure that `<n>`$\times$`<thread>`= 16 on aion
+  - this will bring a total of `<N>`$\times 8\times$`<n>` tasks, each on `<thread>` threads
+  - Ex: `-N 2 --ntasks-per-node 32 --ntasks-per-socket 4 -c 4` (_Total_: 64 tasks)
 
 ## Processor Performance
 

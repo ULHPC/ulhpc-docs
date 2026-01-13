@@ -3,7 +3,6 @@
 HPC systems consist of multiple components that provide access to various resources. A process or thread running in some core of the system rarely has the same quality of access to all the resources. Take for instance a CPU node of Iris.
 
 !!! tip "Topology of an Iris CPU node"
-
     <figure markdown="span">
         ![Iris CPU node topology](images/iris-cpu-node-topology.svg){width="600" style="display: block; margin: 0 auto"}
     </figure>
@@ -143,7 +142,6 @@ srun --nodes=1 --ntasks-per-node=4 --cpu-bind=verbose,mask_cpu:0xf,0xf0000 stres
 ```
 
 ??? note "Context switching within binding regions"
-
     The HDD stress test processes are I/O heavy and are often interrupted by thread and process context switching. You can login to the running job from another terminal using the `sjoin` alias available in UL HPC systems, and with `htop` you may see the load moving among the allocated cores.
 
 #### Map binding
@@ -295,20 +293,20 @@ An exhaustive [list of reporting features for binding configurations](https://sl
 The processes of a job step are distributed along the compute nodes of a job. The distribution of the process is controlled with the `--distribution` option flag of `srun`, and the distribution mechanism is based on hardware locality and control groups, like the binding mechanism. The basic options for the distribution option flag are `--distribution={*|block|cyclic|arbitrary}[:{*|block|cyclic|fcyclic}[:{*|block|cyclic|fcyclic}]]` and their meaning is the following.
 
 - **Level 0** (default `block`): Determines the distributing of processes across nodes ([depth 0](/jobs/hwloc/#object-types) of hardware locality objects).
-    - `*`: Use the default method
-    - `block`: Distribute processes in a balanced manner across nodes so that if not enough node are available consecutive tasks share a node.
-    - `cyclic`: Distribute processes across nodes in a round-robin manner, so that consecutive processes are placed on consecutive nodes of the allocation node list (`${SLURM_NODELIST}`).
-    - `arbitrary`: Used in conjunction with `--nodelist=<node>[,<nodes>]*` to place processes in consecutive nodes in the provided node list in a round-robin manner.
+  - `*`: Use the default method
+  - `block`: Distribute processes in a balanced manner across nodes so that if not enough node are available consecutive tasks share a node.
+  - `cyclic`: Distribute processes across nodes in a round-robin manner, so that consecutive processes are placed on consecutive nodes of the allocation node list (`${SLURM_NODELIST}`).
+  - `arbitrary`: Used in conjunction with `--nodelist=<node>[,<nodes>]*` to place processes in consecutive nodes in the provided node list in a round-robin manner.
 - **Level 1** (default `block`): Determines the distributing of processes across sockets ([depth 1](/jobs/hwloc/#object-types) of hardware locality objects).
-    - `*`: Use the default method
-    - `block`: Distribute processes for binding in a balanced manner across sockets of the node so that consecutive processes are places in consecutive cores.
-    - `cyclic`: Distribute processes across sockets of a node in a round-robin manner so that consecutive processes are placed in consecutive sockets, and allocate cores in for each process in a consecutive manner within the socket.
-    - `fcyclic`: Distribute processes across sockets of a node in a round-robin manner over processes so that a core of the 1st non-fully allocated process is placed on the first socket with an available core, then a core of the 2nd non-fully allocated process is placed on the first socket with an unallocated core, and so on.
+  - `*`: Use the default method
+  - `block`: Distribute processes for binding in a balanced manner across sockets of the node so that consecutive processes are places in consecutive cores.
+  - `cyclic`: Distribute processes across sockets of a node in a round-robin manner so that consecutive processes are placed in consecutive sockets, and allocate cores in for each process in a consecutive manner within the socket.
+  - `fcyclic`: Distribute processes across sockets of a node in a round-robin manner over processes so that a core of the 1st non-fully allocated process is placed on the first socket with an available core, then a core of the 2nd non-fully allocated process is placed on the first socket with an unallocated core, and so on.
 - **Level 2** (default `block`): Determines the distributing of processes across cores in a socket ([depth 7](/jobs/hwloc/#object-types) of hardware locality objects).
-    - `*`: Use the default method
-    - `block`: Distribute processes for binding in a balanced manner across processor units (hardware threads) of the core so that consecutive processes are places in consecutive processor units.
-    - `cyclic`: Distribute processes in a round robin manner across cores so that consecutive processes are placed in consecutive cores, and allocate processor units for each processes in a consecutive manner within the core.
-    - `fcyclic`: Distribute processes across processor units of a core in a round-robin manner over processes so that a processor unit of the 1st non-fully allocated process is places on the first core with an available processor unit, then a processor unit of the 2nd non-fully allocated process is place in the first core with an unallocated processor unit, and so on.
+  - `*`: Use the default method
+  - `block`: Distribute processes for binding in a balanced manner across processor units (hardware threads) of the core so that consecutive processes are places in consecutive processor units.
+  - `cyclic`: Distribute processes in a round robin manner across cores so that consecutive processes are placed in consecutive cores, and allocate processor units for each processes in a consecutive manner within the core.
+  - `fcyclic`: Distribute processes across processor units of a core in a round-robin manner over processes so that a processor unit of the 1st non-fully allocated process is places on the first core with an available processor unit, then a processor unit of the 2nd non-fully allocated process is place in the first core with an unallocated processor unit, and so on.
 
 !!! note "Relevant options for Aion and Iris"
     In Aion and Iris the simultaneous multithreading (SMT) is disabled, and all cores contain a single processor unit (hardware thread). Thus, the level 2 options for the `--distribution` flag are redundant.

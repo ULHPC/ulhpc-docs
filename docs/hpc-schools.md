@@ -51,7 +51,6 @@ No sessions are planned at the moment. Future sessions will be announced here, p
 - Location: MNO 1.040 and 1.050, Belval Campus
 -->
 
-
 ## Introduction to HPC
 
 This event is an extended version of the "HPC school for beginners" and provides users with the essential skills required to use HPC facilities and to compose and deploy efficient programs in an HPC environment. The event is spread in 4 sessions across 2 days.
@@ -100,18 +99,17 @@ Understand the allocation of resources in HPC systems. Configure you code to acc
 ### Resources
 
 - Setup
-    - [Request an account](resources/HPC_School_-_Beginner_S1-1_-_Account_request.pdf)
-    - [Access the HPC - Linux and Mac](resources/HPC_School_-_Beginner_S1-1_-_Mac_and_Linux.pdf)
-    - [Access the HPC - Windows](resources/HPC_School_-_Beginner_S1-1_-_Windows.pdf)
+  - [Request an account](resources/HPC_School_-_Beginner_S1-1_-_Account_request.pdf)
+  - [Access the HPC - Linux and Mac](resources/HPC_School_-_Beginner_S1-1_-_Mac_and_Linux.pdf)
+  - [Access the HPC - Windows](resources/HPC_School_-_Beginner_S1-1_-_Windows.pdf)
 - Basic shell and cluster skills
-    - [Introduction to the shell](resources/HPC_School_-_Beginner_S1-2.pdf)
-    - [Introduction to the job scheduler](resources/HPC_School_-_Beginner_S2.pdf)
+  - [Introduction to the shell](resources/HPC_School_-_Beginner_S1-2.pdf)
+  - [Introduction to the job scheduler](resources/HPC_School_-_Beginner_S2.pdf)
 - [CLI Cheat Sheet](resources/CLI_Cheat_Sheet.pdf)
 
 ### Requirements
 
 - Having an HPC account to access the cluster. Request an account following the [instructions in our system documentation](/accounts/#how-to-get-a-new-user-account).
-
 
 ## Machine Learning for beginners
 
@@ -164,7 +162,6 @@ _Location:_ MNO 1.040, Belval Campus
 - A basic understanding of Python programming.
 - Familiarity with Jupyter Notebook (installed and configured).
 - A basic understanding of Numpy and linear algebra.
-
 
 ## Python HPC School
 
@@ -221,7 +218,6 @@ No sessions are planned at the moment. Future sessions will be announced here, p
 - A basic understanding of Numpy and linear algebra. 
 - Familiarity with parallel programming. 
 
-
 ## Conda environment management for Python and R
 
 The creation of Conda environments is supported in the University of Luxembourg HPC systems. But when Conda environments are needed and what tools are available to create Conda environments? Attend this tutorial if your projects involve R or Python and you need support with installing packages.
@@ -236,7 +232,6 @@ The topics that will be covered include:
 ### Upcoming sessions
 
 No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
-
 
 ## Introduction to numerical methods with BLAS
 
@@ -254,7 +249,6 @@ Overall in this seminar you learn how to:
 ### Upcoming sessions
 
 No sessions are planned at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
-
 
 ## An overview of HPC systems and applications
 

@@ -1,14 +1,11 @@
 [![](https://i.dlpng.com/static/png/7149729_preview.png){: style="width:300px;float: right;" }](url)
 
-[OpenFOAM](https://openfoam.org/) is the free, open source CFD software developed primarily by OpenCFD Ltd since 2004.
-It has a large user base across most areas of engineering and science,
-from both commercial and academic organisations. OpenFOAM has an extensive
-range of features to solve anything from complex fluid flows involving chemical reactions,
-turbulence and heat transfer, to acoustics, solid mechanics and electromagnetics
+[OpenFOAM](https://openfoam.org/) is the free, open source CFD software developed primarily by OpenCFD Ltd since 2004. It has a large user base across most areas of engineering and science, from both commercial and academic organisations. OpenFOAM has an extensive range of features to solve anything from complex fluid flows involving chemical reactions, turbulence and heat transfer, to acoustics, solid mechanics and electromagnetics
 
 ## Available versions of OpenFOAM in ULHPC
-To check available versions of OpenFOAM at ULHPC type `module spider openfoam`.
-The following versions of OpenFOAM are available in ULHPC:
+
+To check available versions of OpenFOAM at ULHPC type `module spider openfoam`. The following versions of OpenFOAM are available in ULHPC:
+
 ```bash
 # Available versions
 cae/OpenFOAM/v1712-intel-2018a
@@ -16,6 +13,7 @@ cae/OpenFOAM/v1812-foss-2019a
 ```
 
 ## Interactive mode
+
 To run an OpenFOAM in the interactive mode, please follow the following steps:
 ```bash
 # From your local computer
@@ -49,6 +47,7 @@ $ paraFoam
 ```
 
 ## Batch mode
+
 Example of computational domain preparation (Dambreak example).
 ```bash
 $ mkdir OpenFOAM
@@ -57,9 +56,8 @@ $ cp -r /opt/apps/resif/data/production/v1.1-20180716/default/software/cae/OpenF
 $ blockMesh
 $ cd damBreak/system
 ```
-Open a `decomposeParDict` and set `numberOfSubdomains 16` where `n` is number of MPI processor.
-And do `blockMesh` to prepare the computational domain (mesh) and finally do the `decomposePar` to
-repartition the mesh domain. 
+
+Open a `decomposeParDict` and set `numberOfSubdomains 16` where `n` is number of MPI processor. And do `blockMesh` to prepare the computational domain (mesh) and finally do the `decomposePar` to repartition the mesh domain. 
 
 ```bash
 #!/bin/bash -l
@@ -96,9 +94,8 @@ srun interFoam -parallel
 ```
 
 ## Additional information
-To know more information about OpenFOAM tutorial/documentation,
-please refer https://www.openfoam.com/documentation/tutorial-guide/
+
+To know more information about OpenFOAM tutorial/documentation, please refer to the [OpenFOAM guides](https://www.openfoam.com/documentation/tutorial-guide/).
 
 !!! tip
-    If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above, please file a [support ticket](https://hpc.uni.lu/support).
