@@ -422,6 +422,8 @@ markdown_extensions:
   - mdx_truly_sane_lists
   - pymdownx.snippets:
       base_path: snippets
+      check_paths: true
+      url_download: true  # This enables remote URL fetching
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.smartsymbols
