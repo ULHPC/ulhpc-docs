@@ -162,6 +162,7 @@ cd Installing-EESSI-in-G5K-nodes
     The installation uses a couple of installation scripts. The main script extracts the nodes of the job, and then lunches an installation script to all nodes of the job with cluster shell (`clush`).
 
     ??? info "`install-eessi-in-g5k-job-nodes`"
+        ```bash
         #!/usr/bin/bash
 
         set -euo pipefail
@@ -175,8 +176,10 @@ cd Installing-EESSI-in-G5K-nodes
         done
 
         clush --dshbak -w "${node_list}" "${PWD}/setup-eessi-in-g5k"
+        ```
 
     ??? info "`install-eessi-in-g5k`"
+        ```bash
         #!/usr/bin/bash
 
         set -euo pipefail
@@ -232,3 +235,4 @@ cd Installing-EESSI-in-G5K-nodes
         }
 
         main
+        ```
