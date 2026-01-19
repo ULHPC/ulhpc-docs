@@ -157,82 +157,16 @@ cd Installing-EESSI-in-G5K-nodes
 
     The first column of the output contains the job ID.
 
-!!! info "Installation scripts"
+??? info "Installation scripts"
 
-    The installation uses a couple of installation scripts. The main script extracts the nodes of the job, and then lunches an installation script to all nodes of the job with cluster shell (`clush`).
+    The [installation repository](https://github.com/ULHPC/Installing-EESSI-in-G5K-nodes.git) is composed by a couple of installation scripts. The main script extracts the nodes of the job, and then lunches an installation script to all nodes of the job with [cluster shell (`clush`)](/jobs/submit/#clush).
 
     ??? info "`install-eessi-in-g5k-job-nodes`"
         ```bash
-        #!/usr/bin/bash
-
-        set -euo pipefail
-
-        declare node_list=""
-        declare job_id="${1}"
-
-        while [ -z "${node_list}" ]; do
-          node_list=$(oarstat --full --job "${job_id}" | awk 'BEGIN {FS="="} $1 ~ /assigned_hostnames/ {gsub(" ", "", $2); gsub(".luxembourg.grid5000.fr", "", $2); gsub("+", ",", $2); print $2}')
-          [ -z "${node_list}" ] && sleep 5
-        done
-
-        clush --dshbak -w "${node_list}" "${PWD}/setup-eessi-in-g5k"
+        --8<-- "https://raw.githubusercontent.com/ULHPC/Installing-EESSI-in-G5K-nodes/refs/heads/main/install-eessi-in-g5k-job-nodes"
         ```
 
     ??? info "`install-eessi-in-g5k`"
         ```bash
-        #!/usr/bin/bash
-
-        set -euo pipefail
-
-        declare DEBIAN_FRONTEND=noninteractive
-
-        main() {
-          sudo-g5k
-          install_cvmfs
-          install_eessi
-        }
-
-        install_cvmfs() {
-          # Install CMFS keys
-          if [ ! -f /tmp/cvmfs-release-latest_all.deb ]; then
-            wget --output-document=/tmp/cvmfs-release-latest_all.deb https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
-          fi
-          dpkg-deb --raw-extract /tmp/cvmfs-release-latest_all.deb /tmp/cvmfs-release
-          sudo cp /tmp/cvmfs-release/etc/apt/trusted.gpg.d/cernvm.gpg /etc/apt/trusted.gpg.d/cernvm.gpg
-
-          # Add CVMFS sources
-          sudo cp /tmp/cvmfs-release/usr/share/cvmfs-release/cernvm.list.$(lsb_release --codename | awk '{print $2}') /etc/apt/sources.list.d/cernvm.list
-
-          # Install CVMFS
-          sudo apt --assume-yes update
-          sudo apt --assume-yes install cvmfs
-
-          cleaup_cvmfs_installation_files
-        }
-
-        cleaup_cvmfs_installation_files() {
-          rm /tmp/cvmfs-release-latest_all.deb
-          rm -r /tmp/cvmfs-release
-        }
-
-        install_eessi() {
-          # Install EESSI package
-          if [ ! -f /tmp/cvmfs-config-eessi_latest_all.deb ]; then
-            wget --output-document=/tmp/cvmfs-config-eessi_latest_all.deb https://github.com/EESSI/filesystem-layer/releases/download/latest/cvmfs-config-eessi_latest_all.deb
-          fi
-          sudo dpkg -i /tmp/cvmfs-config-eessi_latest_all.deb
-          # create client configuration file for CernVM-FS (no squid proxy, 10GB local CernVM-FS client cache)
-          sudo bash -c "echo 'CVMFS_CLIENT_PROFILE="single"' > /etc/cvmfs/default.local"
-          sudo bash -c "echo 'CVMFS_QUOTA_LIMIT=10000' >> /etc/cvmfs/default.local"
-          # make sure that EESSI CernVM-FS repository is accessible
-          sudo cvmfs_config setup
-
-          cleanup_eessi_installation_files
-        }
-
-        cleanup_eessi_installation_files() {
-          rm /tmp/cvmfs-config-eessi_latest_all.deb
-        }
-
-        main
+        --8<-- "https://raw.githubusercontent.com/ULHPC/Installing-EESSI-in-G5K-nodes/refs/heads/main/install-eessi-in-g5k"
         ```
