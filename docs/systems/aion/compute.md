@@ -26,7 +26,7 @@ Each Aion node rely on an AMD Epyc Rome processor architecture which is binary c
 ??? info "Theoretical $R_\text{peak}$ vs. Maximum $R_\text{max}$ Performance for AMD Epyc"
     The _AMD Epyc_ processors carry on _16 Double Precision (DP) ops/cycle_. Thus the reported $R_\text{peak}$ performance is computed as follows:
 
-    $$R_\text{peak} = \left( \text{ops}/\text{cycle} \right) \times \text{Freq.} \times \text{#Cores}$$
+    $$R_\text{peak} = \left( \text{ops}/\text{cycle} \right) \times \text{Freq.} \times \text{\#Cores}$$
 
     With regards the _estimation_ of the Maximum Performance $R_\text{max}$, an efficiency factor of 80% is applied. It is computed from the expected performance runs during the [HPL](http://www.netlib.org/benchmark/hpl/index.html) benchmark workload.
 
