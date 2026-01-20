@@ -17,9 +17,7 @@ The above policy is in practice implemented through the Slurm [Trackable RESourc
 
 <!--TRESBillingWeight-start-->
 
-As explained in the [ULHPC Usage Charging
-Policy](../policies/usage-charging.md), we set TRES for CPU, GPU, and Memory
-usage according to _weights_ defined as follows:
+As explained in the [ULHPC Usage Charging Policy](../policies/usage-charging.md), we set TRES for CPU, GPU, and Memory usage according to _weights_ defined as follows:
 
 | __Weight__     | __Description__                                                                       |
 |----------------|---------------------------------------------------------------------------------------|
@@ -27,8 +25,7 @@ usage according to _weights_ defined as follows:
 | $\alpha_{mem}$ | Inverse of the average available memory size per core                                 |
 | $\alpha_{GPU}$ | Weight per GPU accelerator                                                          |
 
-Each [partition](../slurm/partitions.md) has its own weights
-(combined into [`TRESBillingWeight`](https://slurm.schedmd.com/tres.html)) you can check with
+Each [partition](../slurm/partitions.md) has its own weights (combined into [`TRESBillingWeight`](https://slurm.schedmd.com/tres.html)) you can check with
 
 ```bash
 # /!\ ADAPT <partition> accordingly

@@ -61,7 +61,7 @@ The [Micromaba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.htm
 
 ### Installation
 
-A complete guide regarding Micromamba installation can be found in the [official documentation](https://mamba.readthedocs.io/en/latest/micromamba-installation.html). To install micromamaba in the HPC clusters, log in to Aion or Iris. Working on a login node, run the installation script,
+A complete guide regarding Micromamba installation can be found in the [official documentation](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html). To install micromamaba in the HPC clusters, log in to Aion or Iris. Working on a login node, run the installation script,
 ```bash
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
 ```

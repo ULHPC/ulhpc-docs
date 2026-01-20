@@ -53,8 +53,8 @@ The UL HPC platform has kept growing over time thanks to the continuous efforts 
     Installed in the premises of the University’s _Centre de Calcul_ (CDC), the UL HPC facilities provides a total computing capacity of __2.76 PetaFlops__ and a shared storage capacity of around **10 PetaBytes**.
 
 ??? question "How big is 1 PetaFlops? 1 PetaByte?"
-    * 1 PetaFlops = 10<sup>15</sup> floating-point operations per second (PFlops or PF for short), corresponds to the cumulative performance of more than 3510 Macbook Pro 13" laptops [^1], or 7420 iPhone XS [^2]
-    * 1 PetaByte = 10<sup>15</sup> bytes = 8*10<sup>15</sup> bits, corresponding to the cumulative raw capacity of more than 1950 SSDs 512GB.
+    - 1 PetaFlops = 10<sup>15</sup> floating-point operations per second (PFlops or PF for short), corresponds to the cumulative performance of more than 3510 Macbook Pro 13" laptops [^1], or 7420 iPhone XS [^2]
+    - 1 PetaByte = 10<sup>15</sup> bytes = 8*10<sup>15</sup> bits, corresponding to the cumulative raw capacity of more than 1950 SSDs 512GB.
 
 ![](images/plots/plot_piechart_compute_cluster.png){: style="width:325px;"}
 ![](images/plots/plot_piechart_storage_fs.png){: style="width:325px;"}
@@ -63,9 +63,9 @@ This places the HPC center of the University of Luxembourg as one of the major a
 
 In practice, the UL HPC Facility features 3 types of computing resources:
 
-* "__regular__" nodes: Dual CPU, no accelerators, 128 to 256 GB of RAM
-* "__gpu__" nodes:     Dual CPU, 4 Nvidia accelerators, 768 GB RAM
-* "__bigmem__" nodes:  Quad-CPU, no accelerators, 3072 GB RAM
+- "__regular__" nodes: Dual CPU, no accelerators, 128 to 256 GB of RAM
+- "__gpu__" nodes: Dual CPU, 4 Nvidia accelerators, 768 GB RAM
+- "__bigmem__" nodes: Quad-CPU, no accelerators, 3072 GB RAM
 
 These resources can be reserved and allocated for the execution of jobs scheduled on the platform thanks to a Resource and Job Management Systems (RJMS) - [Slurm](https://slurm.schedmd.com/documentation.html) in practice. This tool allows for a fine-grain analysis and accounting of the used resources, facilitating the generation of activity reports for a given time period.
 
@@ -108,17 +108,15 @@ and is meant to host **temporary scratch data**.
 In 2014, the SIU, the UL HPC and the LCSB join their forces (and their funding) to acquire a scalable and modular NAS solution able to sustain the need for an internal big data storage, i.e. provides space for centralized data and backups of all devices used by the UL staff and all research-related data, including the one proceed on the UL HPC platform.
 A global _low_-performance [Dell/EMC Isilon](https://www.dellemc.com/en-us/collaterals/unauth/data-sheets/products/storage/h10717-isilon-onefs-ds.pdf) system is available on all ULHPC computational systems. It is intended for long term storage of data that is not frequently accessed. For more details, see [Isilon specifications](filesystems/isilon.md).
 
-
 ### Fast Infiniband Network
 
 High Performance Computing (HPC) encompasses advanced computation over parallel processing, enabling faster execution of highly compute intensive tasks. The execution time of a given simulation depends upon many factors, such as the number of CPU/GPU cores and their utilisation factor and the interconnect performance, efficiency, and scalability.
 [InfiniBand](https://en.wikipedia.org/wiki/InfiniBand) is the fast interconnect technology implemented within all [ULHPC supercomputers](interconnect/ib.md), more specifically:
 
-* [Iris](systems/iris/interconnect.md) relies on a **EDR** Infiniband (IB) Fabric in a **Fat-Tree** Topology
-* [Aion](systems/iris/interconnect.md) relies on a **HDR100** Infiniband (IB) Fabric in a **Fat-Tree** Topology
+- [Iris](systems/iris/interconnect.md) relies on a **EDR** Infiniband (IB) Fabric in a **Fat-Tree** Topology
+- [Aion](systems/iris/interconnect.md) relies on a **HDR100** Infiniband (IB) Fabric in a **Fat-Tree** Topology
 
 For more details, see [ULHPC IB Network Detailed specifications](interconnect/ib.md).
-
 
 ## Acceptable Use Policy (AUP)
 
@@ -132,11 +130,11 @@ For more details, see [ULHPC IB Network Detailed specifications](interconnect/ib
 
 In order to use the ULHPC facilities, you need to have a user account with an associated user login name (also called username) placed under an account hierarchy.
 
-* [Get a ULHPC account](accounts/index.md)
-* [Understanding Slurm account hierarchy and accounting rules](slurm/accounts.md)
-* [ULHPC Identity Management (IPA portal)](connect/ipa.md)
-* [Password policy](policies/passwords.md)
-* [Usage Charging Policy](policies/usage-charging.md)
+- [Get a ULHPC account](accounts/index.md)
+- [Understanding Slurm account hierarchy and accounting rules](slurm/accounts.md)
+- [ULHPC Identity Management (IPA portal)](connect/ipa.md)
+- [Password policy](policies/passwords.md)
+- [Usage Charging Policy](policies/usage-charging.md)
 
 ## Connecting to ULHPC supercomputers
 
@@ -145,29 +143,26 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 
 <!-- * [Multi-Factor Authentication (MFA)](connect/mfa.md)-->
 
-* [SSH](connect/ssh.md)
-* [Open On Demand Portal](connect/ood.md)
-* [ULHPC Login/Access servers](connect/access.md)
-* [Troubleshooting connection problems](connect/troubleshooting.md)
-
+- [SSH](connect/ssh.md)
+- [Open On Demand Portal](connect/ood.md)
+- [ULHPC Login/Access servers](connect/access.md)
+- [Troubleshooting connection problems](connect/troubleshooting.md)
 
 ## Data Management
 
-* [Global Directory Structure](data/layout.md)
-* [Transferring data](data/transfer.md): Tools and recommendations to transfer data both inside and outside
+- [Global Directory Structure](data/layout.md)
+- [Transferring data](data/transfer.md): Tools and recommendations to transfer data both inside and outside
 of ULHPC.
-* [Quotas](filesystems/quotas.md)
-* Understanding [Unix File Permissions](filesystems/unix-file-permissions.md)
-
+- [Quotas](filesystems/quotas.md)
+- Understanding [Unix File Permissions](filesystems/unix-file-permissions.md)
 
 ## User Environment
 
 !!! info
-	`$HOME`, Project and `$SCRATCH` directories are shared
-	across all ULHPC systems, meaning that
+	`$HOME`, Project and `$SCRATCH` directories are sharedacross all ULHPC systems, meaning that
 
-    * every file/directory pushed or created on the front-end is available on the computing nodes
-    * every file/directory pushed or created on the computing nodes is available on the front-end
+    - every file/directory pushed or created on the front-end is available on the computing nodes, and
+    - every file/directory pushed or created on the computing nodes is available on the front-end.
 
 [:fontawesome-solid-right-to-bracket: ULHPC User Environment](environment/index.md){: .md-button .md-button--link }
 
@@ -182,16 +177,16 @@ of ULHPC.
 The ULHPC Team supplies a large variety of HPC utilities, scientific applications and programming libraries to its user community.
 The user software environment is generated using [Easybuild](https://easybuild.readthedocs.io) (EB) and is made available as environment modules through [LMod](https://lmod.readthedocs.io/). <!-- We have developped a specific tool named [RESIF](software/resif.md) -->
 
-* [ULHPC Modules Environment](/environment/modules)
-* [ULHPC Supported Software List](/software/).
-    - Available [modules](/environment/modules) are reachable **from the compute nodes only** via `module avail`
-* [ULHPC Easybuild Configuration](/environment/easybuild)
+- [ULHPC Modules Environment](/environment/modules)
+- [ULHPC Supported Software List](/software/).
+  - Available [modules](/environment/modules) are reachable **from the compute nodes only** via `module avail`
+- [ULHPC Easybuild Configuration](/environment/easybuild)
 
 <!-- * [RESIF Architecture-at-a-glance](software/resif.md) -->
 <!-- * [Software Sets, compilers and toolchains at ULHPC](software/swsets.md) -->
 <!-- * [Compiling/building software](development/software/index.md) -->
 <!--     - [Building missing software with Easybuild](development/software/easybuild.md) -->
-* [Running Containers](/environment/containers)
+- [Running Containers](/environment/containers)
 <!-- * [Contributing to the ULHPC User Software](development/software/contributing.md) -->
 
 !!! question "Software building support"
@@ -206,27 +201,23 @@ Typical usage of the ULHPC supercomputers involves the reservation and allocatio
 [:fontawesome-solid-right-to-bracket: Slurm on ULHPC clusters](slurm/index.md){: .md-button .md-button--link }
 [:fontawesome-solid-right-to-bracket: Convenient Slurm Commands](slurm/commands.md){: .md-button .md-button--link }
 
-* [Rich set of launcher scripts examples](slurm/launchers.md)
-* [Fairshare](slurm/fairsharing.md)
-* [Job Priority and Backfilling](jobs/priority.md)
-* [Job Accounting and Billing](jobs/billing.md)
-
+- [Rich set of launcher scripts examples](slurm/launchers.md)
+- [Fairshare](slurm/fairsharing.md)
+- [Job Priority and Backfilling](jobs/priority.md)
+- [Job Accounting and Billing](jobs/billing.md)
 
 ## Interactive Computing
 
 ULHPC also supports interactive computing.
 
-* [Interactive jobs](jobs/interactive.md)
-* [Jupyter Notebook](services/jupyter.md)
+- [Interactive jobs](jobs/interactive.md)
+- [Jupyter Notebook](services/jupyter.md)
 <!-- * [Interactive Big Data Analytics with Spark](bigdata/spark.md) -->
 
 
 ## Getting Help
 
-ULHPC places a very strong emphasis on enabling science and providing
-user-oriented systems and services.
-
-
+ULHPC places a very strong emphasis on enabling science and providing user-oriented systems and services.
 
 ### Documentation
 
@@ -247,4 +238,3 @@ We have always maintained an extensive [documentation](https://hpc-docs.uni.lu) 
 
 !!! info "Availability and Response Time"
     HPC support is provided on a volunteer basis by UL HPC staff and associated UL experts working at normal business hours. We offer **no guarantee** on response time except with paid support contracts.
-

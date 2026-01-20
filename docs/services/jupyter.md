@@ -378,7 +378,6 @@ To login to a password protected [session](#starting-a-jupyterlab-session), navi
 
     To login to a [running notebook](#starting-a-jupyterlab-session), navigate to [`http://127.0.0.1:8888/`](http://127.0.0.1:8888/) and enter your password. You may have to logout to clear the page cache if you have logged in previously with a token.
 
-
 ## Install Jupyter
 
 In case you need some features of JupyterLab that are not available in the versions of JupyterLab provided by modules in our systems, you can install JupyterLab in a Python environment.
@@ -424,4 +423,3 @@ After installing your required version of JupyterLab, you can install your packa
     pip install jupyter ipykernel
     ```
     in the creation of the `jupyter_env` Python environment.
-

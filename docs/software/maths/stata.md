@@ -1,11 +1,9 @@
-
 [![](http://www.stata.com/includes/images/stata-fb.jpg){: style="width:300px;float: right;" }](https://www.stata.com//)
 
 
 [Stata](https://www.stata.com/) is a commercial statistical package, which provides a complete solution for data analysis, data management, and graphics.
 
 The University of Luxembourg contributes to a campus-wide license -- see SIU / Service Now [Knowledge Base ticket on Stata MP2](https://service.uni.lu/sp?id=kb_article&sysparm_article=KB0010885)
-
 
 ## Available versions of Stata on ULHPC platforms
 
@@ -26,9 +24,7 @@ Once loaded, the modules brings to you the following binaries:
 
 ## Interactive Mode
 
-To open a Stata session in [interactive](../../jobs/interactive.md) mode, please follow the following steps:
-
-(_eventually_) [connect](../../connect/access.md) to the ULHPC login node with the `-X` (or `-Y`) option:
+To open a Stata session in an [interactive](../../jobs/interactive.md) mode, start by [connecting](../../connect/access.md) to the ULHPC login node with the `-X` (or `-Y`) option:
 
 === "Iris"
     ```bash
@@ -39,7 +35,7 @@ To open a Stata session in [interactive](../../jobs/interactive.md) mode, please
     ssh -X aion-cluster   # OR on Mac OS: ssh -Y aion-cluster
     ```
 
-Then you can reserve an [interactive job](../../jobs/interactive.md), for instance with 2 cores. **Don't forget to use the `--x11` option if you intend to use the GUI**.
+Then, you can reserve an [interactive job](../../jobs/interactive.md), for instance with 2 cores. **Don't forget to use the `--x11` option if you intend to use the GUI**.
 
 ```bash
 $ si --x11 -c2      # You CANNOT use more than 2 cores
@@ -91,8 +87,7 @@ You should thus store ado files in `$HOME/ado/personal. For more see this docume
 
 ## Batch mode
 
-To run Stata in batch mode, you need to create do-files which contain the series of commands you would like to run.
-With a do file (`filename.do`) in hand, you can run it from the shell in the command line with:
+To run Stata in batch mode, you need to create do-files which contain the series of commands you would like to run. With a do file (`filename.do`) in hand, you can run it from the shell in the command line with:
 
 ```
 stata -b do filename.do
@@ -135,16 +130,13 @@ With the `-b` flag, outputs will be automatically saved to the outputfile `filen
     srun -c $SLURM_CPUS_PER_TASK stata-mp -b do INPUTFILE.do
     ```
 
-
 ## Running Stata in Parallel
 
 ### Stata/MP
 
-You can use [Stata/MP](https://www.stata.com/statamp/) to advantage of the advanced multiprocessing capabilities of Stata/MP.
-Stata/MP provides the most extensive multicore support of any statistics and data management package.
+You can use [Stata/MP](https://www.stata.com/statamp/) to advantage of the advanced multiprocessing capabilities of Stata/MP. Stata/MP provides the most extensive multicore support of any statistics and data management package.
 
-Note however that **the current license limits the maximum number of cores (to 2 !)**.
-Example of interactive usage:
+Note however that **the current license limits the maximum number of cores (to 2 !)**. Example of interactive usage:
 
 ```bash
 $ si --x11 -c2      # You CANNOT use more than 2 cores
@@ -176,21 +168,18 @@ Serial number: <serial>
 . exit, clear
 ```
 
-Note that using the `stata-mp` executable, Stata will automatically use the requested number of cores from Slurm's `--cpus-per-task` option.
-This implicit parallelism does not require any changes to your code.
-
-
+Note that using the `stata-mp` executable, Stata will automatically use the requested number of cores from Slurm's `--cpus-per-task` option. This implicit parallelism does not require any changes to your code.
 
 ### User-packages parallel and gtools
 
 User-developed Stata packages can be installed from a login node using one of the Stata commands
-
-      net install <package>
+```
+net install <package>
+```
 
 These packages will be installed in your home directory by default.
 
-Among others, the [`parallel`](https://github.com/gvegayon/parallel) package implements parallel for loops.
-Also, the [`gtools`]( https://github.com/mcaceresb/stata-gtools) provides faster alternatives to some Stata commands when working with big data.
+Among others, the [`parallel`](https://github.com/gvegayon/parallel) package implements parallel for loops. Also, the [`gtools`]( https://github.com/mcaceresb/stata-gtools) provides faster alternatives to some Stata commands when working with big data.
 
 ```bash
 (node)$ stata

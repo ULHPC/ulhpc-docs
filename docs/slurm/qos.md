@@ -69,8 +69,8 @@ Use the `sqos` utility function to list the existing QOS limits.
     At the QoS level, the following elements are composed to define the [resource limits](https://slurm.schedmd.com/resource_limits.html) for our QoS:
 
     - Limits on Trackable RESources [TRES](https://slurm.schedmd.com/tres.html) - a resource (nodes, cpus, gpus, etc.) tracked for usage or used to enforce limits against, in particular:
-        - `GrpTRES`: The total count of TRES able to be used at any given time from all jobs running from the QoS; if this limit is reached new jobs will be queued but only allowed to run after resources have been relinquished from this group.
-        - `MaxTresPerJob`: the maximum size in TRES any given job can have from the QoS.
+      - `GrpTRES`: The total count of TRES able to be used at any given time from all jobs running from the QoS; if this limit is reached new jobs will be queued but only allowed to run after resources have been relinquished from this group.
+      - `MaxTresPerJob`: the maximum size in TRES any given job can have from the QoS.
     - `MaxJobsPerUser`: The maximum number of jobs a user can have running at a given time.
     - `MaxWall[DurationPerJob]`: The maximum wall clock time any individual job can run for in the given QoS.
 

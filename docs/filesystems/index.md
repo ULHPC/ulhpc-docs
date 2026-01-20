@@ -10,18 +10,18 @@ The UL HPC clusters provide access to several different _File Systems (FS)_ whic
     - _Local FS_ you find on laptops and servers, such as `NTFS`, `HFS+`, `ext4`, `{x,z,btr}fs`, and other;
     - _Network FS_, such as `NFS`, `CIFS`/`SMB`, `AFP`, allowing to access a remote storage system as a NAS (Network Attached Storage);
     - [_Parallel and Distributed FS_ (_clustered FS_)](https://en.wikipedia.org/wiki/Clustered_file_system), such as `SpectrumScale/GPFS` or `Lustre`; those are file systems used in HPC and HTC (High Throughput Computing) facilities, such that
-        - data is spread across multiple storage nodes for redundancy and performance, and
-        - global capacity and performance are scalable and increase as additional nodes are added to the storage infrastructure.
+      - data is spread across multiple storage nodes for redundancy and performance, and
+      - global capacity and performance are scalable and increase as additional nodes are added to the storage infrastructure.
 
 In the UL HPC cluster nodes, there are 3 types of file system in use.
 
 - Clustered file systems attached to cluster nodes through the fast [Infiniband network](/interconnect/ib/). These are,
-    - a [GPFS](gpfs) file system storing home and project directories, and
-    - a [Lustre](lustre) file system for storing scratch data.
+  - a [GPFS](gpfs) file system storing home and project directories, and
+  - a [Lustre](lustre) file system for storing scratch data.
 - A networked file system attached to cluster nodes through the [Ethernet network](/interconnect/ethernet/). This is
-    - an NFS export of an Isilon file system that stores directories.
+  - an NFS export of an Isilon file system that stores directories.
 - File systems local to the compute nodes. These are
-    - `etx4` file systems mounted on `/tmp` of cluster nodes.
+  - `etx4` file systems mounted on `/tmp` of cluster nodes.
 
 ??? info "File systems not directly visible to users"
 
@@ -43,10 +43,8 @@ The following table summarize the mount location, backing up, and environment se
     | [`/mnt/isilon/projects/<project name>`](../filesystems/isilon.md)                      | -                                                                                          | [OneFS](../filesystems/isilon.md)                      | yes (and live sync<sup>[2]</sup>)         | Ehternet     |
 
     1. The  file system mounted on the home directories (`/home/users`) and project directories (`/work/projects`) are both exported by the [GPFS/Spectrumscale](../filesystems/gpfs.md) file system.
-
-        - Storage for both directories is redundant, so they are safe against hardware failure.
-        - Only `/home/users` is mirrored in a SSD cache, so `/home/users` is a significantly faster for random and small file I/O.
-
+      - Storage for both directories is redundant, so they are safe against hardware failure.
+      - Only `/home/users` is mirrored in a SSD cache, so `/home/users` is a significantly faster for random and small file I/O.
     2. Live sync replicates data across multiple OneFS instances for high availability.
 
 <!--file-system-table-end-->

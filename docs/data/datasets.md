@@ -3,9 +3,9 @@
 The ULHPC team provides central storage for various public and freely usable datasets and databases in the shared directory `/work/project/bigdata_sets/`.
 This directory is read-only for all users of the HPC platform. The advantage of this central location is twofold:
 
-* **Prevents data duplication**: It avoids many users downloading the same dataset to their own directories.
-* **Performance**: `/work/project/bigdata_sets/` is hosted on our fast storage tier.
-* **Scientific reproducibility**: It ensures that different users can use the same version of the dataset.
+- **Prevents data duplication**: It avoids many users downloading the same dataset to their own directories.
+- **Performance**: `/work/project/bigdata_sets/` is hosted on our fast storage tier.
+- **Scientific reproducibility**: It ensures that different users can use the same version of the dataset.
 
 Users who use public data for their calculations should always check first if it's already available in `/work/project/bigdata_sets/`.
 
@@ -15,8 +15,6 @@ Users who use public data for their calculations should always check first if it
 You can request to host a new dataset in this dedicated space on [service.uni.lu](https://service.uni.lu/sp?id=sc_cat_item&sys_id=9f9acb4887b2c210aa6d65740cbb355c&table=sc_cat_item&searchTerm=dataset) (Section Research > HPC > Storage & projects > Request a dataset upload). 
 
 Note that some datasets may not be shareable publicly in this directory due to licensing or distribution constraints.
-
-
 
 ## Data Manipulation
 

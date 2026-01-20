@@ -1,20 +1,10 @@
 [![](https://images.g2crowd.com/uploads/product/image/large_detail/large_detail_d05e3566f966e83e3ef9753e3aed4086/abaqus.png){: style="width:300px;float: right;" }](https://www.3ds.com/products-services/simulia/products/abaqus/abaquscae/)
 
-The [Abaqus Unified FEA](https://www.3ds.com/products-services/simulia/products/abaqus/abaquscae/)
-product suite offers powerful and complete solutions
-for both routine and sophisticated engineering problems covering a vast
-spectrum of industrial applications. In the automotive industry engineering
-work groups are able to consider full vehicle loads, dynamic vibration,
-multibody systems, impact/crash, nonlinear static, thermal coupling, and
-acoustic-structural coupling using a common model data structure and integrated
-solver technology. Best-in-class companies are taking advantage of
-Abaqus Unified FEA to consolidate their processes and tools,
-reduce costs and inefficiencies, and gain a competitive advantage
+The [Abaqus Unified FEA](https://www.3ds.com/products-services/simulia/products/abaqus/abaquscae/) product suite offers powerful and complete solutions for both routine and sophisticated engineering problems covering a vast spectrum of industrial applications. In the automotive industry engineering work groups are able to consider full vehicle loads, dynamic vibration, multibody systems, impact/crash, nonlinear static, thermal coupling, and acoustic-structural coupling using a common model data structure and integrated solver technology. Best-in-class companies are taking advantage of Abaqus Unified FEA to consolidate their processes and tools, reduce costs and inefficiencies, and gain a competitive advantage
 
 ## Available versions of Abaqus in ULHPC
 
-To check available versions of Abaqus at ULHPC, type `module spider abaqus`.
-It will list the available versions with the following format:
+To check available versions of Abaqus at ULHPC, type `module spider abaqus`. It will list the available versions with the following format:
 ```bash
 cae/ABAQUS/<version>[-hotfix-<hotfix>]
 ```
@@ -28,30 +18,28 @@ cae/ABAQUS/<version>[-hotfix-<hotfix>]
 
 When using a general compute node for Abaqus 2021, please run:
 
-* `abaqus cae -mesa` to launch the GUI without support for hardware-accelerated graphics rendering.
-    - the option `-mesa` disables hardware-accelerated graphics rendering within Abaqus’s GUI.
-* For a Non-Graphical execution, use
+- `abaqus cae -mesa` to launch the GUI without support for hardware-accelerated graphics rendering.
+  - the option `-mesa` disables hardware-accelerated graphics rendering within Abaqus’s GUI.
+- For a Non-Graphical execution, use
   ```
   abaqus job=<my_job_name> input=<filename>.inp mp_mode=<mode> cpus=<cores> [gpus=<gpus>] scratch=$SCRATCH memory="<mem>gb"
   ```
-
-
 ## Supported parallel mode
 
 Abaqus has two parallelization options which are mutually exclusive:
 
-* __MPI__ (`mp_mode=mpi`), which is generally preferred since this allows for scaling the job to multiple compute nodes. As for MPI jobs, use `-N <nodes> --ntasks-per-node <cores> -c1` upon submission to use:
-
-         abaqus mp_mode=mpi cpu=$SLURM_NTASKS [...]
-
-* __Shared memory / Threads__ (`mp_mode=threads`) for single node / multi-threaded executions. Typically use `-N1 --ntasks-per-node 1 -c <threads>` upon submission to use:
-
-        abaqus mp_mode=threads cpus=${SLURM_CPUS_PER_TASK} [...]
-
-*  __Shared memory for single node with GPU(s)__ / multi-threaded executions (`mp_mode=threads`).  Typically use `-N1 -G 1 --ntasks-per-node 1 -c <threads>` upon submission **on a GPU node** to use:
-
-        abaqus mp_mode=threads cpus=${SLURM_CPUS_PER_TASK} gpus=${SLURM_GPUS} [...]
-
+- __MPI__ (`mp_mode=mpi`), which is generally preferred since this allows for scaling the job to multiple compute nodes. As for MPI jobs, use `-N <nodes> --ntasks-per-node <cores> -c1` upon submission to use:
+  ```
+  abaqus mp_mode=mpi cpu=$SLURM_NTASKS [...]
+  ```
+- __Shared memory / Threads__ (`mp_mode=threads`) for single node / multi-threaded executions. Typically use `-N1 --ntasks-per-node 1 -c <threads>` upon submission to use:
+  ```
+  abaqus mp_mode=threads cpus=${SLURM_CPUS_PER_TASK} [...]
+  ```
+-  __Shared memory for single node with GPU(s)__ / multi-threaded executions (`mp_mode=threads`).  Typically use `-N1 -G 1 --ntasks-per-node 1 -c <threads>` upon submission **on a GPU node** to use:
+  ```
+  abaqus mp_mode=threads cpus=${SLURM_CPUS_PER_TASK} gpus=${SLURM_GPUS} [...]
+  ```
 
 ## Abaqus example problems
 
@@ -62,14 +50,11 @@ Abaqus contains a large number of example problems which can be used to become f
     ```
     abaqus fetch job=s4d
     ```
-    This will extract the input file `s4d.inp`
-    See also [Abaqus performance data](https://www.3ds.com/support/hardware-and-software/simulia-system-information/abaqus-69/performance-data/).
-
+    This will extract the input file `s4d.inp`. See also [Abaqus performance data](https://www.3ds.com/support/hardware-and-software/simulia-system-information/abaqus-69/performance-data/).
 
 ## Interactive mode
-To open an Abaqus in the interactive mode, please follow the following steps:
 
-(_eventually_) [connect](../../connect/access.md) to the ULHPC login node with the `-X` (or `-Y`) option:
+To open an Abaqus in the interactive mode, start by [connecting](../../connect/access.md) to the ULHPC login node with the `-X` (or `-Y`) option:
 
 === "Iris"
     ```bash
@@ -80,7 +65,7 @@ To open an Abaqus in the interactive mode, please follow the following steps:
     ssh -X aion-cluster   # OR on Mac OS: ssh -Y aion-cluster
     ```
 
-Then you can reserve an [interactive job](../../jobs/interactive.md), for instance with 8 MPI processes. **Don't forget to use the `--x11` option if you intend to use the GUI**.
+Then, you can reserve an [interactive job](../../jobs/interactive.md), for instance with 8 MPI processes. **Don't forget to use the `--x11` option if you intend to use the GUI**.
 
 ```bash
 $ si --x11 -c 8               # Abaqus mp_mode=threads test
@@ -127,15 +112,14 @@ Then the general format to run your Non-Graphical multithreaded interactive exec
 
 ### GUI
 
-If you want to run the GUI, use: `abaqus cae -mesa`
+If you want to run the GUI, use: `abaqus cae -mesa`.
 
 ??? info "License information"
-    Assuming you have set the variable `LM_LICENSE_FILE` to point to **YOUR** licence server, you can
-    check the available license and group you belongs to with:
+    Assuming you have set the variable `LM_LICENSE_FILE` to point to **YOUR** licence server, you can check the available license and group you belongs to with:
     ```
     abaqus licensing lmstat -a
     ```
-    **If**  your server is hosted outside the ULHPC network, you will have to contact the HPC team to adapt the network firewalls to allow the connection towards your license server.
+    **If** your server is hosted outside the ULHPC network, you will have to contact the HPC team to adapt the network firewalls to allow the connection towards your license server.
 
 Use the following options for simulation to stop and resume it:
 ```bash
@@ -217,18 +201,14 @@ abaqus job=<jobname> resume
         input=${INPUTFILE} cpus=${SLURM_CPUS_PER_TASK} gpus=${SLURM_GPUS} mp_mode=threads
     ```
 
-
-
 ## Additional information
-To know more about Abaqus documentation and tutorial,
-please refer [Abaqus CAE](http://130.149.89.49:2080/v6.11/pdf_books/CAE.pdf)
+
+To know more about Abaqus documentation and tutorial, please refer to [Abaqus CAE](http://130.149.89.49:2080/v6.11/pdf_books/CAE.pdf).
 
 ??? Tutorial
-     * http://www.franc3d.com/wp-content/uploads/2012/05/FRANC3D_V7_ABAQUS_Tutorial.pdf
-     * https://sig.ias.edu/files/Abaqus%20tutorial.pdf
-     * https://sites.engineering.ucsb.edu/~tshugar/GET_STARTED.pdf?fbclid=IwAR2MQTzCTISqdPuM4D3PiDwXk9oVTBqZWXJUvMccVPYsd1kKPwPOZcnq078
-
+    - http://www.franc3d.com/wp-content/uploads/2012/05/FRANC3D_V7_ABAQUS_Tutorial.pdf
+    - https://sig.ias.edu/files/Abaqus%20tutorial.pdf
+    - https://sites.engineering.ucsb.edu/~tshugar/GET_STARTED.pdf?fbclid=IwAR2MQTzCTISqdPuM4D3PiDwXk9oVTBqZWXJUvMccVPYsd1kKPwPOZcnq078
 
 !!! tip
-    If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above, please file a [support ticket](https://hpc.uni.lu/support).

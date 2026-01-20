@@ -1,12 +1,10 @@
-In this page, we cover two different SSH client software: MobaXterm and Putty.
-Choose your preferred tool.
+In this page, we cover two different SSH client software: MobaXterm and Putty. Choose your preferred tool.
 
 ## MobaXterm
 
 ### Installation notes
 
-The following steps will help you to configure [MobaXterm](http://mobaxterm.mobatek.net/) to access the UL HPC clusters.
-You can also check out the [MobaXterm demo](http://mobaxterm.mobatek.net/demo.html) which shows an overview of its features.
+The following steps will help you to configure [MobaXterm](http://mobaxterm.mobatek.net/) to access the UL HPC clusters. You can also check out the [MobaXterm demo](http://mobaxterm.mobatek.net/demo.html) which shows an overview of its features.
 
 First, [download](http://mobaxterm.mobatek.net/download-home-edition.html) and install MobaXterm. Open the application **Start > Program Files > MobaXterm**.
 
@@ -14,13 +12,10 @@ Change the default home directory for a persistent home directory instead of the
 
 Your local SSH configuration is located in the  `HOME/.ssh/` directory and consists of:
 
-* `HOME/.ssh/id_rsa.pub`: your SSH public key. **This one is the only one SAFE to distribute.**
-
-* `HOME/.ssh/id_rsa`: the associated **private** key. __NEVER EVER TRANSMIT THIS FILE__
-
-* (eventually) the configuration of the SSH client `HOME/.ssh/config`
-
-* `HOME/.ssh/known_hosts`: Contains a list of host keys for all hosts you have logged into that are not already in the system-wide list of known host keys. This permits to detect man-in-the-middle attacks.
+- `HOME/.ssh/id_rsa.pub`: your SSH public key. **This one is the only one SAFE to distribute.**
+- `HOME/.ssh/id_rsa`: the associated **private** key. __NEVER EVER TRANSMIT THIS FILE__
+- (eventually) the configuration of the SSH client `HOME/.ssh/config`
+- `HOME/.ssh/known_hosts`: Contains a list of host keys for all hosts you have logged into that are not already in the system-wide list of known host keys. This permits to detect man-in-the-middle attacks.
 
 
 ### SSH Key Management
@@ -32,11 +27,9 @@ Choose the method you prefer: either the graphical interface MobaKeyGen or comma
 Go onto **Tools > Network > MobaKeyGen (SSH key generator)**. Choose **RSA** as the type of key to generate and change "Number of bits in a generated key" to 4096. Click on the **Generate** button. Move your mouse to generate some randomness.
 
 !!! Warning
-    To ensure the security of the platform and your data stored on it, you must protect your SSH keys with a passphrase!
-    Additionally, your private key and passphrase should never be transmitted to anybody.
+    To ensure the security of the platform and your data stored on it, you must protect your SSH keys with a passphrase! Additionally, your private key and passphrase should never be transmitted to anybody.
 
-Select a strong passphrase in the **Key passphrase** field for your key. Save the public and private keys as respectively `id_rsa.pub` and `id_rsa.ppk`.
-Please keep a copy of the public key, you will have to add this public key into your account, using the ULHPC Identity Management Portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
+Select a strong passphrase in the **Key passphrase** field for your key. Save the public and private keys as respectively `id_rsa.pub` and `id_rsa.ppk`. Please keep a copy of the public key, you will have to add this public key into your account, using the ULHPC Identity Management Portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
 
 ![MobaKeyGen (SSH key generator)](images/moba-ssh-key-gen.png)
 
@@ -73,8 +66,8 @@ Click on **Start local terminal**. To generate an SSH keys, just use the `ssh-ke
 
 After the execution of `ssh-keygen` command, the keys are generated and stored in the following files:
 
-* SSH RSA Private key: `HOME/.ssh/id_rsa`. Again, **NEVER EVER TRANSMIT THIS FILE**
-* SSH RSA Public key:  `HOME/.ssh/id_rsa.pub`.  **This file is the ONLY one SAFE to distribute**
+- SSH RSA Private key: `HOME/.ssh/id_rsa`. Again, **NEVER EVER TRANSMIT THIS FILE**
+- SSH RSA Public key:  `HOME/.ssh/id_rsa.pub`. **This file is the ONLY one SAFE to distribute**
 
 ### Configuration
 
@@ -88,11 +81,11 @@ MobaXterm allows you to launch remote sessions. You just have to click on the "S
 
  Enter the following parameters:
 
-* Remote host: `access-iris.uni.lu` or `access-aion.uni.lu`
-* Check the **Specify username** box
-* Username: `yourlogin`
+- Remote host: `access-iris.uni.lu` or `access-aion.uni.lu`
+- Check the **Specify username** box
+- Username: `yourlogin`
   - as was sent to you in the Welcome e-mail once your HPC account was created
-* Port: `8022`
+- Port: `8022`
 
 Go in **Advanced SSH settings** and check the **Use private key** box. Select your previously generated key `id_rsa.ppk`.
 
@@ -151,15 +144,11 @@ Click on **Connect**. The following text appears.
 
 You need to install [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/) and the associated tools, more precisely:
 
-* [PuTTY](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe), the free SSH client
-
-* [Pageant](https://the.earth.li/~sgtatham/putty/latest/w64/pageant.exe), an SSH authentication agent for PuTTY tools
-
-* [PuTTYgen](https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe), an RSA key generation utility
-
-* [PSCP](https://the.earth.li/~sgtatham/putty/latest/w64/pscp.exe), an SCP (file transfer) client, i.e. command-line secure file copy
-
-* [WinSCP](http://winscp.net/eng/download.php), SCP/SFTP (file transfer) client with easy-to-use graphical interface
+- [PuTTY](https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe), the free SSH client
+- [Pageant](https://the.earth.li/~sgtatham/putty/latest/w64/pageant.exe), an SSH authentication agent for PuTTY tools
+- [PuTTYgen](https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe), an RSA key generation utility
+- [PSCP](https://the.earth.li/~sgtatham/putty/latest/w64/pscp.exe), an SCP (file transfer) client, i.e. command-line secure file copy
+- [WinSCP](http://winscp.net/eng/download.php), SCP/SFTP (file transfer) client with easy-to-use graphical interface
 
 
 The simplest method is probably to download and run the [latest Putty installer](http://the.earth.li/~sgtatham/putty/latest/x86/putty-0.66-installer.exe) (does not include WinSCP).
@@ -194,17 +183,16 @@ In order to be able to login to the clusters, you will have to add this **public
 
 ![Identity Management Portal](images/idm-ssh.png)
 
-The port on which the SSH servers are listening is not the default one (*i.e.* 22) but **8022**.
-Consequently, if you want to connect to the Iris cluster, open Putty and enter the following settings:
+The port on which the SSH servers are listening is not the default one (*i.e.* 22) but **8022**. Consequently, if you want to connect to the Iris cluster, open Putty and enter the following settings:
 
-* In _Category:Session_ :
-  * Host Name: `access-iris.uni.lu` or `access-aion.uni.lu`
-  * Port: `8022`
-  * Connection Type: `SSH` (leave as default)
-* In _Category:Connection:Data_ :
-  * Auto-login username: `yourlogin`
-* In _Category:SSH:Auth_ :
-  * Upload your private key: `Options controlling SSH authentication`
+- In _Category:Session_ :
+  - Host Name: `access-iris.uni.lu` or `access-aion.uni.lu`
+  - Port: `8022`
+  - Connection Type: `SSH` (leave as default)
+- In _Category:Connection:Data_ :
+  - Auto-login username: `yourlogin`
+- In _Category:SSH:Auth_ :
+  - Upload your private key: `Options controlling SSH authentication`
 
 Click on _Open_ button. If this is the first time connecting to the server from this computer a **Putty Security Alert** will appear. Accept the connection by clicking _Yes_.
 
@@ -262,16 +250,17 @@ You should run [Pageant](http://the.earth.li/~sgtatham/putty/latest/x86/pageant.
 
 Open `Putty.exe` (connection type: `SSH`)
 
-* In _Category:Session_:
- * Host Name: `access-iris.uni.lu` or `access-aion.uni.lu`
- * Port: 8022
- * Saved session: `Iris`
-* In _Category:Connection:Data_:
-  * Auto-login username: `yourlogin`
-* Go back to _Category:Session_ and click on _Save_
-* Click on _Open_
+- In _Category:Session_:
+  - Host Name: `access-iris.uni.lu` or `access-aion.uni.lu`
+  - Port: 8022
+  - Saved session: `Iris`
+- In _Category:Connection:Data_:
+  - Auto-login username: `yourlogin`
+- Go back to _Category:Session_ and click on _Save_
+- Click on _Open_
 
 ## SSH Resources
-* OpenSSH/[Cygwin](http://www.cygwin.com/): OpenSSH is available with Cygwin. You may then find the same features in your SSH client even if you run Windows. Furthermore, Cygwin also embeds many other GNU Un*x like tools, and even a FREE X server for windows.
-* [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/): Free windowish SSH client
-* [ssh.com](http://www.ssh.com/) Free for non commercial use windows client
+
+- OpenSSH/[Cygwin](http://www.cygwin.com/): OpenSSH is available with Cygwin. You may then find the same features in your SSH client even if you run Windows. Furthermore, Cygwin also embeds many other GNU Unix like tools, and even a FREE X server for windows.
+- [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/): Free windowish SSH client
+- [ssh.com](http://www.ssh.com/) Free for non commercial use windows client

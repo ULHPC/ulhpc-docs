@@ -1,9 +1,8 @@
-[Fire Dynamics Simulator (FDS)](https://pages.nist.gov/fds-smv/) is a large-eddy simulation (LES)
-code for low-speed flows, with an emphasis on smoke and heat transport from fires.
+[Fire Dynamics Simulator (FDS)](https://pages.nist.gov/fds-smv/) is a large-eddy simulation (LES) code for low-speed flows, with an emphasis on smoke and heat transport from fires.
 
 ## Available versions of FDS in ULHPC
-To check available versions of FDS at ULHPC type `module spider abaqus`.
-The following versions of FDS are available in ULHPC: 
+To check available versions of FDS at ULHPC type `module spider abaqus`. The following versions of FDS are available in ULHPC:
+
 ```shell
 # Available versions
 phys/FDS/6.7.1-intel-2018a
@@ -12,7 +11,9 @@ phys/FDS/6.7.3-intel-2019a
 ```
 
 ## Interactive mode
+
 To try FDS in the interactive mode, please follow the following steps:
+
 ```shell
 # From your local computer
 $ ssh -X iris-cluster
@@ -32,6 +33,7 @@ $ fds example.fds
 ## Batch mode
 
 ### MPI only:
+
 ```shell
 #!/bin/bash -l
 #SBATCH -J FDS-mpi
@@ -64,6 +66,7 @@ srun fds example.fds
 ```
 
 ### MPI+OpenMP (hybrid):
+
 ```shell
 #!/bin/bash -l
 #SBATCH -J FDS-hybrid
@@ -95,9 +98,8 @@ srun --cpus-per-task=2 fds_hyb example.fds
 ```
 
 ## Additional information
-To know more about FDS documentation and tutorial,
-please refer https://pages.nist.gov/fds-smv/manuals.html
+
+To know more about FDS documentation and tutorial, please refer to the [FDS manual](https://pages.nist.gov/fds-smv/manuals.html).
 
 !!! tip
-    If you find some issues with the instructions above,
-    please file a [support ticket](https://hpc.uni.lu/support).
+    If you find some issues with the instructions above, please file a [support ticket](https://hpc.uni.lu/support).

@@ -66,6 +66,27 @@ apptainer exec ubuntu_latest.sif cat /etc/os-release
     LOGO=ubuntu-logo
     ```
 
+!!! warning "Errors and warning in container run executables"
+    If you encounter any errors or warnings of the form
+    ```
+    -bash: <command>: command not found
+    ```
+    when you execute a command (`exec`) or start an interactive shell (`shell`) in a container, then disable the default binding of the home directory with the option `--no-mount home`. The full command is the following.
+    ```
+    apptainer (exec|shell|run) --no-mount home <path/to/container_file>.sif [...]
+    ```
+
+    Apptainer binds a default set of directories in the container it runs, including the user `${HOME}` directory. Users may define set up components of their environment in scripts stored in their home directory, like `.bashrc` and Python user package installations. When the home directory is bound in the container, then the home environment configuration of the user can override the container environment.
+
+??? info "System-defined default bind paths"
+    The Apptainer is configured to mount a set directories automatically. The complete list is found in the [documentation](https://apptainer.org/docs/user/main/bind_paths_and_mounts.html#disabling-system-binds) and the directories mount automatically in our systems are listing in the `mount` options of the configuration file `${EBROOTAPPTAINER}/etc/apptainer/apptainer.conf`. All `mount` option in the configuration file, for instance
+    ```
+    mount home = yes
+    ```
+    can be disabled with the `--no-mount` command option.
+
+    There are some more files bound with `bind` options in the configuration file. These files are required for network connection and other services.
+
 ### Building container images
 
 Building container images requires root privileges. Therefore, users have to build images on their local machine before transferring them to the UL HPC platform. Please refer to the [Data transfer](../data/transfer.md) section for this purpose.

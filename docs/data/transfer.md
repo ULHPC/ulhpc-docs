@@ -4,13 +4,13 @@
 
 Directories such as `$HOME`, `$WORK` or `$SCRATCH` are shared among the nodes of the cluster that you are using (including the login node) via shared filesystems (SpectrumScale, Lustre) meaning that:
 
-* every file/directory pushed or created on the login node is available on the computing nodes
-* every file/directory pushed or created on the computing nodes is available on the login node
+- every file/directory pushed or created on the login node is available on the computing nodes
+- every file/directory pushed or created on the computing nodes is available on the login node
 
 The two most common commands you can use for data transfers over SSH:
 
-* `scp`: for the full transfer of files and directories (only works fine for single files or directories of small/trivial size)
-* `rsync`: a software application which synchronizes files and directories from one location to another while minimizing data transfer as only the outdated or inexistent elements are transferred (practically required for lengthy complex transfers, which are more likely to be interrupted in the middle).
+- `scp`: for the full transfer of files and directories (only works fine for single files or directories of small/trivial size)
+- `rsync`: a software application which synchronizes files and directories from one location to another while minimizing data transfer as only the outdated or inexistent elements are transferred (practically required for lengthy complex transfers, which are more likely to be interrupted in the middle).
 
 !!! danger "scp or rsync?"
     While both ensure a secure transfer of the data within an encrypted tunnel, **`rsync` should be preferred**: as mentionned in the [from openSSH 8.0 release notes](https://www.openssh.com/txt/release-8.0):
@@ -24,16 +24,18 @@ The two most common commands you can use for data transfers over SSH:
 
 ??? warning "Consider `scp` as deprecated! Click nevertheless to get usage details"
     `scp` (see [scp(1)](https://linux.die.net/man/1/scp) ) or secure copy is probably the easiest of all the methods. The basic syntax is as follows:
+     ```
+     scp [-P 8022] [-Cr] source_path destination_path
+     ```
 
-        scp [-P 8022] [-Cr] source_path destination_path
-
-    * the `-P` option specifies the SSH port to use (in this case 8022)
-    * the `-C` option activates the compression (actually, it passes the -C flag to [ssh(1)](https://linux.die.net/man/1/ssh) to enable compression).
-    * the `-r` option states to recursively copy entire directories (in this case, `scp` follows symbolic links encountered in the tree traversal).  Please note that in this case, you must specify the source file as a directory for this to work.
+    - the `-P` option specifies the SSH port to use (in this case 8022)
+    - the `-C` option activates the compression (actually, it passes the -C flag to [ssh(1)](https://linux.die.net/man/1/ssh) to enable compression).
+    - the `-r` option states to recursively copy entire directories (in this case, `scp` follows symbolic links encountered in the tree traversal).  Please note that in this case, you must specify the source file as a directory for this to work.
 
     The syntax for declaring a remote path is as follows on the cluster:
-    <br/>
-    `yourlogin@iris-cluster:path/from/homedir`
+    ```
+    yourlogin@iris-cluster:path/from/homedir
+    ```
 
     **Transfer from your local machine to the remote cluster login node**
 
@@ -70,17 +72,17 @@ The two most common commands you can use for data transfers over SSH:
     !!! danger
         `scp` **SHOULD NOT be used in the following cases:**
 
-        * When you are copying more than a few files, as scp spawns a new process for each file and can be quite slow and resource intensive when copying a large number of files.
-        * When using the `-r` switch, scp does not know about symbolic links and will blindly follow them, even if it has already made a copy of the file. That can lead to scp copying an infinite amount of data and can easily fill up your hard disk (or worse, a system shared disk), so be careful.
+        - When you are copying more than a few files, as scp spawns a new process for each file and can be quite slow and resource intensive when copying a large number of files.
+        - When using the `-r` switch, scp does not know about symbolic links and will blindly follow them, even if it has already made a copy of the file. That can lead to scp copying an infinite amount of data and can easily fill up your hard disk (or worse, a system shared disk), so be careful.
 
 
 N.B. There are [many alternative ways](http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html) to transfer files in HPC platforms and you should check your options according to the problem at hand.
 
 Windows and OS X users may wish to transfer files from their systems to the clusters' login nodes with easy-to-use GUI applications such as:
 
-* [WinSCP](http://winscp.net) (Windows only)
-* [FileZilla Client](https://filezilla-project.org) (Windows, OS X)
-* [Cyberduck](http://cyberduck.ch/) (Windows, OS X)
+- [WinSCP](http://winscp.net) (Windows only)
+- [FileZilla Client](https://filezilla-project.org) (Windows, OS X)
+- [Cyberduck](http://cyberduck.ch/) (Windows, OS X)
 
 These applications will need to be configured to connect to the frontends with the same parameters as [discussed on the SSH access page](../connect/ssh.md).
 
@@ -88,8 +90,7 @@ These applications will need to be configured to connect to the frontends with t
 
 ## Using `rsync`
 
-The clever alternative to `scp` is `rsync`, which has the advantage of transferring only the files which differ between the source and the destination. This feature is often referred to as fast incremental file transfer. Additionally, symbolic links can be  preserved.
-The typical syntax of `rsync` (see [rsync(1)](https://linux.die.net/man/1/rsync) ) for the cluster is similar to the one of `scp`:
+The clever alternative to `scp` is `rsync`, which has the advantage of transferring only the files which differ between the source and the destination. This feature is often referred to as fast incremental file transfer. Additionally, symbolic links can be  preserved. The typical syntax of `rsync` (see [rsync(1)](https://linux.die.net/man/1/rsync) ) for the cluster is similar to the one of `scp`:
 
 ```bash
 # /!\ ADAPT </path/to/source> and </path/to/destination>
@@ -99,11 +100,12 @@ rsync --rsh='ssh -p 8022' -avzu /path/to/local/source  [user@]hostname:/path/to/
 rsync --rsh='ssh -p 8022' -avzu [user@]hostname:/path/to/source  /path/to/local/destination
 ```
 
-* the `--rsh` option specifies the connector to use (here SSH on port 8022)
-* the `-a` option corresponds to the "Archive" mode. Most likely you should always keep this on as it preserves file permissions and does not follow symlinks.
-* the `-v` option enables the verbose mode
-* the `-z` option enable compression, this will compress each file as it gets sent over the pipe. This can greatly decrease time, depending on what sort of files you are copying.
-* the `-u` option (or `--update`) corresponds to an updating process which skips files that are newer on the receiver. At this level, you may prefer the more dangerous option `--delete` that deletes extraneous files from dest dirs.
+- the `--rsh` option specifies the connector to use (here SSH on port 8022)
+- the `-a` option corresponds to the "Archive" mode. Most likely you should always keep this on as it preserves file permissions and does not follow symlinks.
+- the `-v` option enables the verbose mode
+- the `-z` option enable compression, this will compress each file as it gets sent over the pipe. This can greatly decrease time, depending on what sort of files you are copying.
+- the `-u` option (or `--update`) corresponds to an updating process which skips files that are newer on the receiver. At this level, you may prefer the more dangerous option `--delete` that deletes extraneous files from dest dirs.
+
 Just like `scp`, the syntax for qualifying a remote path is as follows on the cluster: `yourlogin@iris-cluster:path/from/homedir`
 
 ### Transfer from your local machine to the remote cluster
@@ -117,8 +119,7 @@ $> rsync --rsh='ssh -p 8022' -avzu ~/devel/myproject yourlogin@access-iris.uni.l
 This will synchronize your local directory `~/devel/myproject`  on the cluster front-end (in your homedir).
 
 !!! info "Transfer to Iris, Aion or both?"
-    The above example target the access server of Iris.
-    Actually, you could have targetted the access server of Aion: **it doesn't matter** since the storage is **SHARED** between both clusters.
+    The above example target the access server of Iris. Actually, you could have targetted the access server of Aion: **it doesn't matter** since the storage is **SHARED** between both clusters.
 
 Note that if you configured (as advised above) your SSH connection in your `~/.ssh/config` file with a dedicated SSH entry `{iris,aion}-cluster`, you can use a simpler syntax:
 
@@ -161,8 +162,7 @@ As always, see the [man page](https://linux.die.net/man/1/rsync) or `man rsync` 
 
 ### Data Transfer within Project directories
 
-The ULHPC facility features a [Global Project directory `$PROJECTHOME`](../filesystems/gpfs.md#global-project-directory-projecthomeworkprojects) hosted within the [GPFS/SpecrumScale](../filesystems/gpfs.md) file-system.
-You have to pay a particular attention when using `rsync` to transfer data within your project directory as depicted below.
+The ULHPC facility features a [Global Project directory `$PROJECTHOME`](../filesystems/gpfs.md#global-project-directory-projecthomeworkprojects) hosted within the [GPFS/SpecrumScale](../filesystems/gpfs.md) file-system. You have to pay a particular attention when using `rsync` to transfer data within your project directory as depicted below.
 
 {%
    include-markdown "../data/project_acl.md"
@@ -189,7 +189,6 @@ You have to pay a particular attention when using `rsync` to transfer data withi
         find <path to directory or file> -type d | xargs -I % chmod g-s '%'
         ```
 
-
 ## Using MobaXterm (Windows)
 
 If you are under Windows and you have [MobaXterm installed and configured](../connect/ssh.md#ssh-configuration), you probably want to use it to transfer your files to the clusters. Here are the steps to use `rsync` *inside* MobaXterm in Windows.
@@ -199,9 +198,8 @@ If you are under Windows and you have [MobaXterm installed and configured](../co
 
 ### Using a local bash, transfer your files
 
-* Open a local "bash" shell. Click on *Start local terminal* on the welcome page of MobaXterm.
-
-* Find the location of the files you want to transfer. They should be located under `/drives/<name of your disk>`. You will have to use the Linux command line to move from one directory to the other. The `cd` command is used to change the current directory and `ls` to list files. For example, if your files are under `C:\\Users\janedoe\Downloads\` you should then go to `/drives/c/Users/janedoe/Downloads/` with this command:
+- Open a local "bash" shell. Click on *Start local terminal* on the welcome page of MobaXterm.
+- Find the location of the files you want to transfer. They should be located under `/drives/<name of your disk>`. You will have to use the Linux command line to move from one directory to the other. The `cd` command is used to change the current directory and `ls` to list files. For example, if your files are under `C:\\Users\janedoe\Downloads\` you should then go to `/drives/c/Users/janedoe/Downloads/` with this command:
 
 ```
 cd /drives/c/Users/janedoe/Downloads/
@@ -209,23 +207,21 @@ cd /drives/c/Users/janedoe/Downloads/
 
 Then list the files with `ls` command. You should see the list of your data files.
 
-* When you have retrieved the location of your files, we can begin the transfer with `rsync`. For example `/drives/c/Users/janedoe/Downloads/` (watch out, there is no `/` character at the end of the path, it is important).
-
-* Launch the command `rsync` with this parameters to transfer all the content of the `Downloads` directory to the `/isilon/projects/market_data/` directory on the cluster (the syntax is very important, be careful)
+- When you have retrieved the location of your files, we can begin the transfer with `rsync`. For example `/drives/c/Users/janedoe/Downloads/` (watch out, there is no `/` character at the end of the path, it is important).
+- Launch the command `rsync` with this parameters to transfer all the content of the `Downloads` directory to the `/isilon/projects/market_data/` directory on the cluster (the syntax is very important, be careful)
 
 ```
 rsync -avzpP -e "ssh -p 8022" /drives/c/Users/janedoe/Downloads/ yourlogin@access-iris.uni.lu:/isilon/projects/market_data/
 ```
 
-* You should see the output of transfer in progress. Wait for it to finish (it can be very long).
+- You should see the output of transfer in progress. Wait for it to finish (it can be very long).
 
 ![](images/filetransfer/MobaXterm_transfer.png)
 
 ### Interrupt and resume a transfer in progress
 
-* If you want to interrupt the transfer to resume it later, press `Ctrl-C` and exit MobaXterm.
-
-* To resume a transfer, go in the right location and execute the `rsync` command again. Only the files that have not been transferred will be transferred again.
+- If you want to interrupt the transfer to resume it later, press `Ctrl-C` and exit MobaXterm.
+- To resume a transfer, go in the right location and execute the `rsync` command again. Only the files that have not been transferred will be transferred again.
 
 ## Alternative approaches
 
@@ -233,8 +229,8 @@ You can also consider alternative approaches to synchronize data with the cluste
 
 - rely on a versioning system such as [Git](http://git-scm.com); this approach works well for source code trees;
 - mount your remote homedir by [SSHFS](#sshfs):
-    - on Mac OS X, you should consider installing [MacFusion](http://macfusionapp.org) for this purpose, where as
-    - on Linux, just use the command-line `sshfs` or, `mc`;
+  - on Mac OS X, you should consider installing [MacFusion](http://macfusionapp.org) for this purpose, where as
+  - on Linux, just use the command-line `sshfs` or, `mc`;
 - use GUI tools like [FileZilla](https://filezilla-project.org/), [Cyberduck](https://cyberduck.io/), or [WindSCP](https://winscp.net/eng/download.php) (or proprietary options like [ExpanDrive](https://www.expandrive.com/) or [ForkLift 3](https://binarynights.com/)).
 
 ### SSHFS

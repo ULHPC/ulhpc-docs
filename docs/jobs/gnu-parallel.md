@@ -8,7 +8,6 @@ Job campaigns that allocate many small jobs quickly, either using job arrays or 
 Slurm is designed to allocate resources in an allocation loop that runs periodically, usually every 30-180s, depending on its configuration. If many small jobs are in the queue, then operations triggered during the allocation loop, such as backfilling, become expensive. As a result, the scheduling loop can delay past its period, causing the scheduler to appear slow and unresponsive. GNU parallel executes multiple commands in parallel in a single allocation or even in a single job step, removing the need to allocate resources and reducing the scheduler load.
 
 !!! info "When should GNU parallel be used?"
-
     As a rule of thumb,
 
     - if you are planning to execute jobs campaigns that require more than 10 job allocations per minute, then please consider [grouping jobs with GNU parallel](#grouping-allocations-with-gnu-parallel);

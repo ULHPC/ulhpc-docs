@@ -155,7 +155,6 @@ By the end of the course, participants will:
 - Familiarity with Jupyter Notebook (installed and configured).
 - A basic understanding of NumPy and linear algebra.
 
-
 ## Python HPC School
 
 In this workshop, we will explore the process of improving Python code for efficient execution. Chances are, you 're already familiar with Python and Numpy. However, we will start by mastering profiling and efficient NumPy usage as these are crucial steps before venturing into parallelization. Once your code is fine-tuned with Numpy we will explore the utilization of Python's parallel libraries to unlock the potential of using multiple CPU cores. By the end, you will be well equipped to harness Python's potential for high-performance tasks on the HPC infrastructure. 

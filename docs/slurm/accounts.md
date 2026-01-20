@@ -112,9 +112,9 @@ $ sassoc <login>
 ```
 You may use more classically the [`sacctmgr show [...]`](https://slurm.schedmd.com/sacctmgr.html) command:
 
-* User information: `sacctmgr show user where name=<login> [withassoc]` (use the `withassoc` attribute to list all associations).
-* Default account:  `sacctmgr show user where name="<login>" format=DefaultAccount -P -n`
-* Get the parent account: `sacctmgr show account where name=ulhpc format=Org -n -P`
+- User information: `sacctmgr show user where name=<login> [withassoc]` (use the `withassoc` attribute to list all associations).
+- Default account:  `sacctmgr show user where name="<login>" format=DefaultAccount -P -n`
+- Get the parent account: `sacctmgr show account where name=ulhpc format=Org -n -P`
 
 To get the current association _tree_: add `withsubaccounts` to see ALL sub accounts
 
@@ -128,29 +128,27 @@ sacctmgr show association where users=$USER  format=account,User,share,Partition
 ??? warning "No association, no job!"
     It is mandatory to have your login registered within at least one _association_ toward a meta-account (PI, project name) to be able to schedule jobs on the
 
-
 ## Impact on FairSharing and Job Accounting
 
 Every node in the above-mentioned tree hierarchy is associated with a weight defining its **Raw Share** in the [FairSharing](../slurm/fairsharing.md) mechanism in place.
 <!--share-rule-per-level-start-->
 Different rules are applied to define these weights/shares depending on the level in the hierarchy:
 
-* __L1__ (Organizational Unit): arbitrary shares to dedicate at least 85% of the platform to serve UL needs and projects
-* __L2__: function of the out-degree of the tree nodes, reflecting also the past year funding
-* __L3__: a function reflecting the budget contribution of the PI/project (normalized on a per-month basis) for the year in exercise.
-* __L4__ (ULHPC/IPA login): efficiency score, giving incentives for a more efficient usage of the platform.
+- __L1__ (Organizational Unit): arbitrary shares to dedicate at least 85% of the platform to serve UL needs and projects
+- __L2__: function of the out-degree of the tree nodes, reflecting also the past year funding
+- __L3__: a function reflecting the budget contribution of the PI/project (normalized on a per-month basis) for the year in exercise.
+- __L4__ (ULHPC/IPA login): efficiency score, giving incentives for a more efficient usage of the platform.
 
 <!--share-rule-per-level-end-->
 More details are given [on this page](../slurm/fairsharing.md).
-
 
 ## Default vs. Project accounts
 
 Default account associations are defined as follows:
 
-* For UL staff or external partners: your direct Line Manager `firstname.lastname` within the institution (Faculty, IC, Company) you belong too.
-* For students: the lecture/course they are registered too
-    - Guest student/training accounts are associated to the `Students` meta-account.
+- For UL staff or external partners: your direct Line Manager `firstname.lastname` within the institution (Faculty, IC, Company) you belong too.
+- For students: the lecture/course they are registered too
+  - Guest student/training accounts are associated to the `Students` meta-account.
 
 In addition, your user account (ULHPC login) may be associated to other meta-accounts such as projects or specific training events.
 
@@ -161,6 +159,5 @@ To establish job accounting against these extra specific accounts, use:
 ```
 
 For more details, see [Project accounts](../accounts/projects.md).
-
 
 [^1]: restrictions applies and do not permit to reveal all information for other accounts than yours.
