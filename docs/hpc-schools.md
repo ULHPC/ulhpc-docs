@@ -16,19 +16,27 @@ Dates to Be Announced, Belval Campus
 
 ## HPC School for Beginners
 
-This event aims to equip you with essential skills and knowledge to embark on your High-Performance Computing journey. The event is organized each trimester and is composed of six half days.
+This event aims to equip you with essential skills and knowledge to embark on your High-Performance Computing journey. The event is organized each trimester and is composed of six half day sessions.
 
-Limited spots available per session (usually 30 max).
+*Limited spots available per session (usually 30 max). Priority to University's staff. Eligible for ECTS with the doctoral school.*
 
 ### Upcoming Sessions
 
-No dates announced at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
-
 <!---
-- Date: September 2025, 11th-12th
-- Time: 9am to 12pm (both days).
-- Location: 2.380, MSA - Belval Campus.
+No dates announced at the moment. Future sessions will be announced here, please wait for announcements or contact the HPC team via [email](mailto:hpc-school-for-beginners@uni.lu) to express your interest.
 -->
+
+Sessions planned in March, June, September and November 2026. 
+
+#### March session
+  - Monday March 9th, 8:30am to 12:30pm
+  - Tuesday March 10th, 8:30am to 12:30pm
+  - Monday March 16th, 8:30am to 12:30pm
+  - Tuesday March 17th, 8:30am to 12:30pm
+  - Monday March 23rd, 8:30am to 12:30pm
+  - Tuesday March 24th, 8:30am to 12:30pm
+  
+Location: Belval Campus, TBA
 
 ### Prerequisites
 
