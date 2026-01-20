@@ -29,12 +29,13 @@ No dates announced at the moment. Future sessions will be announced here, please
 Sessions planned in March, June, September and November 2026. 
 
 #### March session
-  - Monday March 9th, 8:30am to 12:30pm
-  - Tuesday March 10th, 8:30am to 12:30pm
-  - Monday March 16th, 8:30am to 12:30pm
-  - Tuesday March 17th, 8:30am to 12:30pm
-  - Monday March 23rd, 8:30am to 12:30pm
-  - Tuesday March 24th, 8:30am to 12:30pm
+
+- Monday March 9th, 8:30am to 12:30pm
+- Tuesday March 10th, 8:30am to 12:30pm
+- Monday March 16th, 8:30am to 12:30pm
+- Tuesday March 17th, 8:30am to 12:30pm
+- Monday March 23rd, 8:30am to 12:30pm
+- Tuesday March 24th, 8:30am to 12:30pm
   
 Location: Belval Campus, TBA
 
@@ -94,12 +95,12 @@ Learn how to:
 ### Resources
 
 - Setup
-    - [Request an Account](resources/HPC_School_-_Beginner_S1-1_-_Account_request.pdf)
-    - [Access the HPC - Linux and Mac](resources/HPC_School_-_Beginner_S1-1_-_Mac_and_Linux.pdf)
-    - [Access the HPC - Windows](resources/HPC_School_-_Beginner_S1-1_-_Windows.pdf)
+  - [Request an Account](resources/HPC_School_-_Beginner_S1-1_-_Account_request.pdf)
+  - [Access the HPC - Linux and Mac](resources/HPC_School_-_Beginner_S1-1_-_Mac_and_Linux.pdf)
+  - [Access the HPC - Windows](resources/HPC_School_-_Beginner_S1-1_-_Windows.pdf)
 - Basic Shell and Cluster Skills
-    - [Introduction to the Shell](resources/HPC_School_-_Beginner_S1-2.pdf)
-    - [Introduction to the Job Scheduler](resources/HPC_School_-_Beginner_S2.pdf)
+  - [Introduction to the Shell](resources/HPC_School_-_Beginner_S1-2.pdf)
+  - [Introduction to the Job Scheduler](resources/HPC_School_-_Beginner_S2.pdf)  
 - [CLI Cheat Sheet](resources/CLI_Cheat_Sheet.pdf)
 
 
