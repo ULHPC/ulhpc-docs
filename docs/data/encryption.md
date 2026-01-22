@@ -201,15 +201,3 @@ It is of course even more important __in the context of git repositories__, whet
 > git-crypt enables transparent encryption and decryption of files in a git repository. Files which you choose to protect are encrypted when committed, and decrypted when checked out. git-crypt lets you freely share a repository containing a mix of public and private content. git-crypt gracefully degrades, so developers without the secret key can still clone and commit to a repository with encrypted files. This lets you store your secret material (such as keys or passwords) in the same repository as your code, without requiring you to lock down your entire repository.
 
 The biggest advantage of [git-crypt](https://github.com/AGWA/git-crypt) is that private data and public data can live in the same location.
-
-## PetaSuite Protect
-
-[PetaSuite](https://www.petagene.com/products/) is a compression suite for Next-Generation-Sequencing (NGS) data. It consists of a command-line tool and a user-mode library. The command line tool performs compression and decompression operations on files. The user-mode library allows other tools and pipelines to transparently access the NGS data in their original file formats.
-
-PetaSuite is used within LCSB and provides the following features:
-
-- Encrypt and compress genomic data
-- Encryption keys and access managed centrally
-- Decryption and decompression on-the-fly using a library that intercepts all FS access
-
-This is a commercial software -- contact `lcsb.software@uni.lu` if you would like to use it
