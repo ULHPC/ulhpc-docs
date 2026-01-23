@@ -97,14 +97,14 @@ Commands:
   render   Generate markdown files summarizing available ULHPC modules
 ```
 
-* `./scripts/resif3_module2markdown.py collect [...]` is **expected to by run on one of the cluster** to access the RESIF root path `/opt/apps/resif`
-     - use **`make resif-collect`** to perform the following operations:
-          * upload the script and the necessary files on the cluster access frontend (see `RESIF_COLLECT_HOST` variable in [`.Makefile.local`](.Makefile.local))
-          * generate a virtualenv under `RESIF_COLLECT_TMPDIR`
-          * invoke the script in `collect` mode to generate the YAML file `RESIF_COLLECT_YAML`
-          * download the generated yaml and store it under [`data/resif_modules.yaml`](data/resif_modules.yaml)
-*  `./scripts/resif3_module2markdown.py render [...]` can be used locally to render/generate the markdown files **based on the data stored in [`data/resif_modules.yaml`](data/resif_modules.yam)**
-    - use **`make resif-render`** to perform this action
+- `./scripts/resif3_module2markdown.py collect [...]` is **expected to by run on one of the cluster** to access the RESIF root path `/opt/apps/resif`
+  - use **`make resif-collect`** to perform the following operations:
+    - upload the script and the necessary files on the cluster access frontend (see `RESIF_COLLECT_HOST` variable in [`.Makefile.local`](.Makefile.local))
+    - generate a virtualenv under `RESIF_COLLECT_TMPDIR`
+    - invoke the script in `collect` mode to generate the YAML file `RESIF_COLLECT_YAML`
+    - download the generated yaml and store it under [`data/resif_modules.yaml`](data/resif_modules.yaml)
+- `./scripts/resif3_module2markdown.py render [...]` can be used locally to render/generate the markdown files **based on the data stored in [`data/resif_modules.yaml`](data/resif_modules.yam)**
+  - use **`make resif-render`** to perform this action
 
 
 ## Contributors
