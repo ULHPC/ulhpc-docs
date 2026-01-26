@@ -50,7 +50,7 @@ Projects stored on the [Isilon system](/filesystems/isilon) are snapshotted regu
 
 !!! info "SIU back up policy"
 
-    Snapshots do not protect on themselves against a system failure, they only permit recovering files in case of accidental deletion. To ensure the safe storage, snapshots data is copied to a Disaster Recovery Site (DRS) in a location outside the server room where the primary data storage (Isilon) is located.
+    Snapshots do not protect on themselves against a system failure, they only permit recovering files in case of accidental deletion.
 
 <!--backup-isilon-end-->
 
@@ -63,9 +63,9 @@ Users can access some backed up data through the snapshots in Isilon file system
 
 ## Restore
 
-If you require the restoration of lost data in Isilon that cannot be accomplished via the snapshots capability, please create a new request on [Service Now portal](https://hpc.uni.lu/support), with pathnames and timestamps of the missing data. Create a new request for all data stored in the `backup` directory of projects in the clustered file systems.
+If you require the restoration of lost data, please create a new request on [Service Now portal](https://hpc.uni.lu/support), with pathnames and timestamps of the missing data.
 
-Such restore requests may take a few days to complete.
+Such restore requests may take a few days to complete and are not guaranteed.
 
 ## Backup Tools
 
