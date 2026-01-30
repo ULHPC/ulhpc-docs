@@ -223,7 +223,7 @@ The most critical security risk when using SSH agent is the [man in the middle a
 - When agent forwarding is enabled, a sufficiently privileged user in the remote machine can impersonate the identities linked to keys in your local machine.
 - When you enable the agent after connecting to a shared machine, a sufficiently privileged user can impersonate the identities linked to keys in the shared machine.
 
-Because of the risk of man in the middle attacks, SSH agent forwarding is prohibited in UL HPC systems and it is recommended that you also explicitly disable it in your SSH configuration file (see [`ForwardAgent no` option in [recommended SSH configuration file](#ssh-configuration)).
+Because of the risk of man in the middle attacks, SSH agent forwarding is prohibited in UL HPC systems and it is recommended that you also explicitly disable it in your SSH configuration file (see `ForwardAgent no` option in [recommended SSH configuration file](#ssh-configuration)).
 
 ### Adding keys
 
@@ -328,7 +328,7 @@ You can also add the source command above in your `~/.profile` script to load th
 
 ### On ULHPC clusters
 
-SSH agent forwarding is prohibited in UL HPC systems for [security reasons](#security-implications) mentioned above and it is recommended that you also explicitly disable it in your SSH configuration.For more details, see the `ForwardAgent no` configuration option in the [SSH configuration](#ssh-configuration) proposed for UL HPC clusters. There are however legitimate uses of SSH agent. Consider for instance keys _generated in the UL HPC cluster_ to access a remote service. You can use SSH agent to avoid entering the passphrase of SSH keys every time you access the remote service. 
+SSH agent forwarding is prohibited in UL HPC systems for [security reasons](#security-implications) mentioned above and it is recommended that you also explicitly disable it in your SSH configuration. For more details, see the `ForwardAgent no` configuration option in the [SSH configuration](#ssh-configuration) proposed for UL HPC clusters. There are however legitimate uses of SSH agent. Consider for instance keys _generated in the UL HPC cluster_ to access a remote service. You can use SSH agent to avoid entering the passphrase of SSH keys every time you access the remote service. 
 
 In such cases an SSH agent must be manually loaded after connecting to UL HPC facilities. To load the agent, execute the command,
 
