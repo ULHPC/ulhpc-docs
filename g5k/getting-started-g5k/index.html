@@ -1,0 +1,7562 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ULHPC Technical Documentation">
+      
+      
+        <meta name="author" content="Uni.lu HPC (ULHPC) Team">
+      
+      
+        <link rel="canonical" href="https://hpc-docs.uni.lu/g5k/getting-started-g5k/">
+      
+      
+        <link rel="prev" href="../../systems/iris/timeline/">
+      
+      
+        <link rel="next" href="../../interconnect/ib/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Getting started - ULHPC Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ULHPC Technical Documentation" class="md-header__button md-logo" aria-label="ULHPC Technical Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ULHPC Technical Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ULHPC/ulhpc-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ULHPC Technical Documentation" class="md-nav__button md-logo" aria-label="ULHPC Technical Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    ULHPC Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ULHPC/ulhpc-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hpc-schools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HPC Trainings and Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accounts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Accounts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get an Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/passwords/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Password Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accounts/collaboration_accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Collaboration Accounts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accounts/projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Accounts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/ipa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity Management Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slurm Account Hierarchy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teaching-with-the-ulhpc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teaching with the ULHPC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Center
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Center
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-center/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Centre de Calcul (CDC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ULHPC Supercomputers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ULHPC Supercomputers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aion
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aion
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aion System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/interconnect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fast Local Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/timeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iris
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iris
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iris System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/interconnect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fast Local Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/timeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grid'5000
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Grid'5000
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#grid5000-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grid'5000 platform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Grid&#39;5000 platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discovering-grid5000-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discovering Grid'5000 resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Discovering Grid&#39;5000 resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grid5000-wiki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grid'5000 wiki
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Grid&#39;5000 wiki">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resources-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources-availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources availability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status page
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sites-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sites descriptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-into-a-site" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging into a site
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logging into a site">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-log-in-on-grid5000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        First log in on Grid'5000
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efficient-ssh-connection-with-config-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Efficient SSH connection with config file
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#first-resource-reservation-with-oar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        First resource reservation with OAR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="First resource reservation with OAR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reserving-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reserving resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#information-about-a-reservation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Information about a reservation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-the-reservation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to the reservation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connecting to the reservation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#information-about-storage-on-grid5000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Information about storage on Grid'5000
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-usage-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node usage example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deeper-customization-by-gaining-root-access-with-sudo-g5k" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deeper customization by gaining root access with sudo-g5k
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#releasing-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Releasing resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plan-a-reservation-on-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan a reservation on resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-resource-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced resource management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced resource management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filter-resources-with-p-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter resources with -p option
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filter resources with -p option">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exotic-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exotic type
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources-quantity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources quantity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resources quantity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extend-a-reservation-with-oarwalltime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extend a reservation with oarwalltime
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basics-of-system-deployment-with-kadeploy3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basics of system deployment with kadeploy3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basics of system deployment with kadeploy3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grid5000-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grid'5000 environments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-a-reservation-for-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Make a reservation for deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Make a reservation for deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-t-deploy-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "-t deploy" parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customize-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Customize environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serial-console-with-kaconsole3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serial console with kaconsole3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-of-network-mistake-repaired-with-kaconsole3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example of network mistake repaired with kaconsole3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment automation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiment automation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grid5000-experimentation-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grid'5000 experimentation workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submitting-a-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Submitting a command
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Submitting a command">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#script-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fully-scripted-usage-of-grid5000-through-the-rest-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fully scripted usage of Grid'5000 through the REST API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fully scripted usage of Grid&#39;5000 through the REST API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#programmatically-discovering-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Programmatically discovering resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Job submission
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-go-further-links-and-tutorials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        To go further: links and tutorials
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="To go further: links and tutorials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.grid5000.fr/w/Luxembourg:Home" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luxembourg site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.grid5000.fr/w/Luxembourg:Network" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.grid5000.fr/w/Luxembourg:Hardware" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interconnect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interconnect/ib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fast Infiniband Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interconnect/ethernet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ethernet Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Storage
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/sharing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Sharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/transfer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Transfer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Data Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/lfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scratch Data Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/quotas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quotas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/backups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/unix-file-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unix File Permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/datasets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/gdpr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GDPR Compliance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sensitive Data Protection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_12" id="__nav_10_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustered and Networked File Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clustered and Networked File Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/gpfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPFS/SpectrumScale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/lustre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lustre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/isilon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OneFS Isilon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access/Connect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Access/Connect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access/Login Servers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH (Windows)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/ipa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity Management Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/ood/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Open On Demand Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Environment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/easybuild/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Easybuild
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/eessi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EESSI software stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/conda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conda
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Policies
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Policies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/aup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acceptable Use Policy (AUP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/maintenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Downtime and Maintenance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/usage-charging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Charging Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Jobs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Running Jobs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slurm Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenient Slurm Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/partitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Partition/Queues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/qos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quality of Service (QoS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/affinity_and_pinning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Affinity and pinning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/hwloc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inspecting node architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slurm Account Hierarchy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/reason-codes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job State and Reason Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/fairsharing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairsharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/priority/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job Priority and Backfilling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/billing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job Accounting and Billing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/interactive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interactive Job
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/submit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Passive/Batch Job
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/gpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/long/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Long Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/best-effort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Best-effort Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/launchers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Launcher Scripts Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/gnu-parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GNU parallel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../services/jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jupyter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_1" id="__nav_15_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supported Software List
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Supported Software List
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/all_softwares/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full List (alphabetical order)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/bio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Biology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/cae/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CFD/Finite element modelling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/chem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/compiler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/debugger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/devel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/lang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programming Languages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/lib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/mpi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/numlib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numerical libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance measurements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/phys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System-level software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Toolchains (software stacks)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/vis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2" id="__nav_15_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Sets
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software Sets
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/2019b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019b
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/2020b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020a
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling/building your own software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_4" id="__nav_15_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer Aided Eng. (CAE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computer Aided Eng. (CAE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/fenics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FEniCS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/ansys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ANSYS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/openfoam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenFOAM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/abaqus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Abaqus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/fds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FDS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/meshing-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meshing-Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_5" id="__nav_15_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Physics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/physics/wrf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WRF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_6" id="__nav_15_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computational Chemistry
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computational Chemistry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_6_1" id="__nav_15_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electronics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Electronics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/abinit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ABINIT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/ase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/meep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEEP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/quantum-espresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantum Espresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/vasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VASP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_6_2" id="__nav_15_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molecular Dynamics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Molecular Dynamics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/cp2k/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CP2K
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/gromacs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GROMACS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/namd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAMD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/nwchem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NWCHEM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/helping-libraries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helping Libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_7" id="__nav_15_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematics & Statistics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mathematics & Statistics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/matlab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MATLAB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/mathematica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MATHEMATICA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/stata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/julia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Julia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/optim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_9" id="__nav_15_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visualization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/visu/paraview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ParaView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_16_1" id="__nav_16_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance/Debugging
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance/Debugging
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/arm-forge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arm Forge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/vtune/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel VTune
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/advisor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel Advisor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/inspector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel Inspector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/itac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel Trace Analyzer and Collector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/scalasca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scalasca
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/valgrind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Valgrind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/aps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help and Support
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Help and Support
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc.uni.lu/support" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helpdesk / Ticket Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_18">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Semantic Versioning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Portals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web Portals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc.uni.lu" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ULHPC Website
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc-docs.uni.lu" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ulhpc-tutorials.readthedocs.io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ULHPC Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc.uni.lu/support" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helpdesk / Ticket Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#grid5000-platform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grid'5000 platform
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Grid&#39;5000 platform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discovering-grid5000-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discovering Grid'5000 resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Discovering Grid&#39;5000 resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grid5000-wiki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grid'5000 wiki
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Grid&#39;5000 wiki">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resources-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources-availability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources availability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Status page
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sites-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sites descriptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-into-a-site" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging into a site
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Logging into a site">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-log-in-on-grid5000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        First log in on Grid'5000
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#efficient-ssh-connection-with-config-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Efficient SSH connection with config file
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#first-resource-reservation-with-oar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        First resource reservation with OAR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="First resource reservation with OAR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reserving-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reserving resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#information-about-a-reservation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Information about a reservation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-the-reservation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to the reservation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connecting to the reservation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#information-about-storage-on-grid5000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Information about storage on Grid'5000
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node-usage-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node usage example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deeper-customization-by-gaining-root-access-with-sudo-g5k" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deeper customization by gaining root access with sudo-g5k
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#releasing-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Releasing resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plan-a-reservation-on-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan a reservation on resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-resource-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced resource management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced resource management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filter-resources-with-p-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter resources with -p option
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filter resources with -p option">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exotic-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exotic type
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources-quantity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources quantity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resources quantity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extend-a-reservation-with-oarwalltime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extend a reservation with oarwalltime
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basics-of-system-deployment-with-kadeploy3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basics of system deployment with kadeploy3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basics of system deployment with kadeploy3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grid5000-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grid'5000 environments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-a-reservation-for-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Make a reservation for deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Make a reservation for deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-t-deploy-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "-t deploy" parameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment deployment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customize-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Customize environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serial-console-with-kaconsole3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serial console with kaconsole3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-of-network-mistake-repaired-with-kaconsole3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example of network mistake repaired with kaconsole3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experiment automation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiment automation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grid5000-experimentation-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grid'5000 experimentation workflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#submitting-a-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Submitting a command
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Submitting a command">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#script-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script execution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fully-scripted-usage-of-grid5000-through-the-rest-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fully scripted usage of Grid'5000 through the REST API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fully scripted usage of Grid&#39;5000 through the REST API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#programmatically-discovering-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Programmatically discovering resources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Job submission
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-go-further-links-and-tutorials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        To go further: links and tutorials
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="To go further: links and tutorials">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Links
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<p><a class="md-button md-button--link" href="../slides.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32v210.7l-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7zM64 320c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64v-32c0-35.3-28.7-64-64-64h-46.9l-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48"/></svg></span> Presentation slides [pdf]</a></p>
+<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
+<p>Grid'5000 is a large-scale and flexible testbed for experiment-driven research in all areas of computer science, with a focus on parallel and distributed computing, cloud, HPC, Big Data and AI.</p>
+<p>It provides:</p>
+<ul>
+<li>access to a large amount of resources (about 25000 cores, 800 compute nodes, 550 GPUs...)</li>
+<li>highly configurable and controllable hardware</li>
+<li>advanced monitoring and measurement features</li>
+<li>Reproducible Research and Open Science support</li>
+<li>a large community of 500+ users</li>
+</ul>
+<p>In this tutorial, we'll cover the basics of Grid'5000 usage. At the end of this session, you should be able to log into the platform, reserve computing resources, and perform basic experiments on them.</p>
+<h2 id="grid5000-platform">Grid'5000 platform<a class="headerlink" href="#grid5000-platform" title="Permanent link">&para;</a></h2>
+<p>Grid'5000 is a distributed platform, composed of multiple sites scattered all over France, Luxembourg and Belgium. To use Grid'5000, a user will log into a given site (e.g., Luxembourg, Lyon, Grenoble, Toulouse, e.t.c.) and reserve computing resources located at this site in order to deploy their experimentation (or reserve resources across several sites to perform multi-site experimentation).</p>
+<p><img alt="Grid'5000's distributed architecture" src="https://www.grid5000.fr/mediawiki/images/Grid5000_SSH_access.png" /></p>
+<h3 id="discovering-grid5000-resources">Discovering Grid'5000 resources<a class="headerlink" href="#discovering-grid5000-resources" title="Permanent link">&para;</a></h3>
+<p>Grid'5000 resources are organized in <strong>clusters</strong>. A <strong>cluster</strong> is a named group of <strong>nodes</strong> with homogeneous hardware (CPU, RAM, disk space, GPU...): for example <em>larochette</em> in Luxembourg, <em>neowise</em> in Lyon, <em>dahu</em> in Grenoble...</p>
+<p>A <strong>node</strong> is a bare-metal resource (server, or edge-class machine) composed of several <strong>cores</strong>. A <strong>node</strong> is named by appending its ID to the <strong>cluster</strong> name, for example: <em>larochette-1</em> and <em>larochette-2</em> are nodes belonging to the <em>larochette</em> cluster.</p>
+<p>Finally, a <strong>core</strong> (CPU core) is the smallest resource size that can be reserved on Grid'5000. Each <strong>node</strong> is composed of several <strong>cores</strong> that can be reserved individually.</p>
+<h4 id="grid5000-wiki">Grid'5000 wiki<a class="headerlink" href="#grid5000-wiki" title="Permanent link">&para;</a></h4>
+<h5 id="resources-list">Resources list<a class="headerlink" href="#resources-list" title="Permanent link">&para;</a></h5>
+<p>The <a href="https://www.grid5000.fr/w/Home">Grid'5000 wiki</a> provides a lot of information regarding the platform.
+On this website, we'll find the <a href="https://www.grid5000.fr/w/Hardware">Global Hardware page</a> which contains the list of Grid'5000 computing resources.
+You can filter your search by using the links on the page header to filter resources by site.</p>
+<h5 id="resources-availability">Resources availability<a class="headerlink" href="#resources-availability" title="Permanent link">&para;</a></h5>
+<p>The <a href="https://www.grid5000.fr/w/Status">Status Page</a> provides links to check status of Grid'5000 and its resources.
+The "Resources reservations (OAR) status" section provides availability of Grid'5000 nodes on each site (among other types of resources, which are beyond the scope of this tutorial).</p>
+<p>By clicking on the <code>nodes</code> link of a given site, a user can check the resources' availability for a given amount of time on a drawgantt chart.
+This can help users see what type of resources are immediately free to use.</p>
+<h5 id="status-page">Status page<a class="headerlink" href="#status-page" title="Permanent link">&para;</a></h5>
+<p>Maintenances, incidents, and other unpredicted events can alter the platform usability, resources' availability, or experiments' reproducibility.
+You can check the list of events currently ongoing, planned, and terminated at the following link: <a href="https://www.grid5000.fr/status/">Grid'5000 platform status</a>.</p>
+<h5 id="sites-descriptions">Sites descriptions<a class="headerlink" href="#sites-descriptions" title="Permanent link">&para;</a></h5>
+<p>Each Grid'5000 site also has a Home page where links related to the site are aggregated and additional information can be found.
+The more interesting links on these pages are the hardware and network page links.
+Here are some links for the biggest sites:</p>
+<ul>
+<li>grenoble: <a href="https://www.grid5000.fr/w/Grenoble:Hardware">hardware</a> | <a href="https://www.grid5000.fr/w/Grenoble:Network">network</a></li>
+<li>lille: <a href="https://www.grid5000.fr/w/Lille:Hardware">hardware</a> | <a href="https://www.grid5000.fr/w/Lille:Network">network</a></li>
+<li>luxembourg: <a href="https://www.grid5000.fr/w/Luxembourg:Hardware">hardware</a> | <a href="https://www.grid5000.fr/w/Luxembourg:Network">network</a></li>
+<li>lyon: <a href="https://www.grid5000.fr/w/Lyon:Hardware">hardware</a> | <a href="https://www.grid5000.fr/w/Lyon:Network">network</a></li>
+<li>nancy: <a href="https://www.grid5000.fr/w/Nancy:Hardware">hardware</a> | <a href="https://www.grid5000.fr/w/Nancy:Network">network</a></li>
+<li>nantes: <a href="https://www.grid5000.fr/w/Nantes:Hardware">hardware</a> | <a href="https://www.grid5000.fr/w/Nantes:Network">network</a></li>
+<li>rennes <a href="https://www.grid5000.fr/w/Rennes:Hardware">hardware</a> | <a href="https://www.grid5000.fr/w/Rennes:Network">network</a></li>
+</ul>
+<h2 id="logging-into-a-site">Logging into a site<a class="headerlink" href="#logging-into-a-site" title="Permanent link">&para;</a></h2>
+<p>In order to reserve resources located on a given site, users must log into the related frontend. A frontend is a virtual machine which has a software environment very close to the one deployed on the nodes by default. There, users will be able to reserve resources, start deployment, and more.</p>
+<p><strong>If you haven't done it before, generate an SSH key and put your public key on Grid'5000 User Management System</strong>. This is done with the <code>ssh-keygen</code> command:</p>
+<div class="highlight"><pre><span></span><code>user@pc:<span class="w"> </span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519
+</code></pre></div>
+<blockquote>
+<p>The choice of how you configure your SSH key (passphrase, location...) is yours. Just remember that this key will be used each time you log in to Grid'5000.</p>
+</blockquote>
+<p>When the SSH key is generated, copy the public key:</p>
+<div class="highlight"><pre><span></span><code>user@pc:<span class="w"> </span>cat<span class="w"> </span>.ssh/id_ed25519.pub
+<span class="c1"># Copy the output of this command.</span>
+</code></pre></div>
+<p>Then go to the following link: <a href="https://api.grid5000.fr/stable/users/">https://api.grid5000.fr/stable/users/</a>. Paste the content of your public key in the <code>SSH Keys</code> tab on the right.</p>
+<h3 id="first-log-in-on-grid5000">First log in on Grid'5000<a class="headerlink" href="#first-log-in-on-grid5000" title="Permanent link">&para;</a></h3>
+<p>As seen in the schema describing the Grid'5000 platform, users must pass through <code>access.grid5000.fr</code> to gain access to the platform. Once on this machine, they can start another SSH connection to the site frontend they want to reach:</p>
+<div class="highlight"><pre><span></span><code>user@pc:~$<span class="w"> </span>ssh<span class="w"> </span>&lt;g5k_login&gt;@access.grid5000.fr
+user@access-north:~$<span class="w"> </span>ssh<span class="w"> </span>luxembourg
+user@fluxembourg:~$
+</code></pre></div>
+<p>You should be greeted by a message similar to below:</p>
+<div class="highlight"><pre><span></span><code>Linux fluxembourg 5.10.0-35-amd64 #1 SMP Debian 5.10.237-1 (2025-05-19) x86_64
+------ Welcome to SLICES-FR - Luxembourg ------
+
+As a member of the &#39;ulhpc&#39; group, you can access the following clusters in queue &#39;default&#39; on this site:
+ - petitprince (2012): 11 nodes (2 CPUs Intel Xeon E5-2630L, 6 cores/CPU, 32GB RAM, 232GB HDD, 2 x 10Gb Ethernet)
+ - larochette  (2024): 7 nodes (2 CPUs Intel Xeon Platinum 8568Y+, 48 cores/CPU, 4 GPUs Instinct MI210, 512GB RAM, 2980GB SSD, 1 x 25Gb Ethernet)
+* with exotic job type:
+ - vianden     (2024): 1 node (2 CPUs Intel Xeon Platinum 8470, 52 cores/CPU, 8 GPUs AMD Instinct MI300X, 2048GB RAM, 2980GB SSD, 1 x 100Gb Ethernet, 2 x 10Gb Ethernet)
+
+More resources are available in other sites and queues. See &lt;https://api.grid5000.fr/explorer&gt;
+
+** Other SLICES-FR sites: grenoble lille lyon nancy nantes rennes sophia strasbourg toulouse
+** Other groups you are a member of: g5k-staff
+
+** 1 bug could affect your experiment (see https://www.grid5000.fr/status/artifact/)
+--&gt; Inconsistent BIOS configuration details on petitprince
+    https://intranet.grid5000.fr/bug/10647
+
+** Useful links:
+ - users home: https://www.grid5000.fr/w/Users_Home
+ - usage policy: https://www.grid5000.fr/w/Grid5000:UsagePolicy
+ - account management (password change): https://api.grid5000.fr/ui/account
+ - support: https://www.grid5000.fr/w/Support
+Last login: Tue Sep  2 16:43:50 2025 from 192.168.66.33
+[user@fluxembourg|~]$
+</code></pre></div>
+<p>The Message of the Day provides a little summary of the site:</p>
+<ul>
+<li>resources provided by the site</li>
+<li>other sites list</li>
+<li>Events and bugs that could affect experiments</li>
+<li>links to the wiki</li>
+</ul>
+<h3 id="efficient-ssh-connection-with-config-file">Efficient SSH connection with config file<a class="headerlink" href="#efficient-ssh-connection-with-config-file" title="Permanent link">&para;</a></h3>
+<p>Currently we need to manually connect to <code>access.grid5000.fr</code> via SSH and then start another SSH connection to a site. This is tedious and error prone, so we'll configure our SSH client to automatically start an SSH connection to <code>access.grid5000.fr</code> when we're trying to access the Grid'5000 network.</p>
+<p>Open the file where your SSH user configuration is stored <strong>on your local machine</strong>. It is usually <code>~/.ssh/config</code>. Add the following lines to this file, and replace <code>&lt;g5k_login&gt;</code> with your Grid'5000 login:</p>
+<div class="highlight"><pre><span></span><code># Alias for the gateway (not really needed, but convenient)
+Host g5k
+  User &lt;g5k_login&gt;
+  Hostname access.grid5000.fr
+  ForwardAgent no
+
+# Direct connection to hosts within Grid&#39;5000 which are not reachable directly
+Host *.g5k
+  User &lt;g5k_login&gt;
+  ProxyCommand ssh g5k -W &quot;$(basename %h .g5k):%p&quot;
+  ForwardAgent no
+</code></pre></div>
+<blockquote>
+<p>The ProxyCommand given might not work with shells other than bash on the Grid'5000 side.</p>
+</blockquote>
+<p>Now, we should be able to log into any Grid'5000 site <em>"directly"</em> with this command:</p>
+<div class="highlight"><pre><span></span><code>user@pc:~$<span class="w"> </span>ssh<span class="w"> </span>luxembourg.g5k
+user@fluxembourg:~$
+</code></pre></div>
+<h2 id="first-resource-reservation-with-oar">First resource reservation with OAR<a class="headerlink" href="#first-resource-reservation-with-oar" title="Permanent link">&para;</a></h2>
+<p>OAR is the tool used by Grid'5000 to manage its resources.</p>
+<p>In this part of the tutorial, we'll connect to a Grid'5000 site and reserve resources to learn how users can perform experiments on the platform.</p>
+<p>Before logging into a Grid'5000 site, it's best to already know what resources we'd like to reserve. Usually, users will explore the Hardware pages mentioned earlier and choose resources that fit their experiment's requirements. For this tutorial, we'll use the <em>clervaux</em> cluster in Luxembourg.</p>
+<h4 id="reserving-resources">Reserving resources<a class="headerlink" href="#reserving-resources" title="Permanent link">&para;</a></h4>
+<p>We are now ready to reserve resources. Grid'5000's resources are managed by the <a href="https://oar.imag.fr/">OAR</a> resources and tasks manager. Hence, the command to reserve a resource is <code>oarsub</code>. A basic <code>oarsub</code> command will allocate the first resource available for a default duration (wall time) of 1 hour:</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>user@fluxembourg<span class="p">|</span>~<span class="o">]</span>$<span class="w"> </span>oarsub<span class="w"> </span>-r<span class="w"> </span>now<span class="w"> </span>-q<span class="w"> </span>testing
+<span class="c1"># Filtering out exotic resources (vianden).</span>
+<span class="c1"># Set walltime to default (3600 s).</span>
+<span class="nv">OAR_JOB_ID</span><span class="o">=</span><span class="m">256908</span>
+<span class="c1"># Advance reservation request: waiting for validation...</span>
+<span class="c1"># Reservation valid --&gt; OK</span>
+</code></pre></div>
+<p>Our reservation has been assigned a job ID. Our reservation should be visible on the drawgantt of the site we're currently logged into. It may not have started yet, so it may be worth checking our reservation's state with the <code>oarstat</code> command:</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>user@fluxembourg<span class="p">|</span>~<span class="o">]</span>$<span class="w"> </span>oarstat<span class="w"> </span>-u
+Job<span class="w"> </span>id<span class="w">     </span>Name<span class="w">           </span>User<span class="w">           </span>Submission<span class="w"> </span>Date<span class="w">     </span>S<span class="w"> </span>Queue
+----------<span class="w"> </span>--------------<span class="w"> </span>--------------<span class="w"> </span>-------------------<span class="w"> </span>-<span class="w"> </span>----------
+<span class="m">1894417</span><span class="w">                   </span>user<span class="w">           </span><span class="m">2025</span>-06-08<span class="w"> </span><span class="m">12</span>:19:52<span class="w"> </span>R<span class="w"> </span>default
+</code></pre></div>
+<p>(<code>-u</code> option is used to show reservations from the current user only)</p>
+<p>The state of the reservation will be shown in the <code>S</code> column. There are the following job states:</p>
+<ul>
+<li><code>W</code>: waiting - OAR must wait before scheduling the job, because the requested resources are not available yet</li>
+<li><code>L</code>: launching - the job is starting, resources will be available to use soon</li>
+<li><code>R</code>: running - The job is currently running</li>
+<li><code>E</code>: error - There was an error with the job</li>
+<li><code>F</code>: finished - The job has terminated</li>
+</ul>
+<p>Check regularly the state of your job until its state is <code>R</code>.</p>
+<h4 id="information-about-a-reservation">Information about a reservation<a class="headerlink" href="#information-about-a-reservation" title="Permanent link">&para;</a></h4>
+<p>After submitting a reservation, it can be useful to check related information, such as the node(s) allocated, with the <code>oarstat</code> command.</p>
+<!-- TODO: update ? -->
+
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarstat<span class="w"> </span>-f<span class="w"> </span>-j<span class="w"> </span><span class="m">1894417</span>
+id:<span class="w"> </span><span class="m">1894417</span>
+<span class="w">    </span><span class="nv">array_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1894417</span>
+<span class="w">    </span><span class="nv">array_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="nv">name</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="nv">project</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>g5k-staff
+<span class="w">    </span><span class="nv">owner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>user
+<span class="w">    </span><span class="nv">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Error
+<span class="w">    </span><span class="nv">wanted_resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-l<span class="w"> </span><span class="s2">&quot;{(type = &#39;default&#39;) AND exotic = &#39;NO&#39;}/host=1,walltime=0:59:49&quot;</span>
+<span class="w">    </span><span class="nv">types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">monitor</span><span class="o">=</span>prom_.*default_metrics
+<span class="w">    </span><span class="nv">dependencies</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="nv">assigned_resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2762</span>+2763+2764+2765+2766+2767+2768+2769+2770+2771+2772+2773
+<span class="w">    </span><span class="nv">assigned_hostnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>clervaux-11.luxembourg.grid5000.fr
+<span class="w">    </span><span class="nv">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>default
+<span class="w">    </span><span class="nb">command</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="nv">launching_directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/home/user
+<span class="w">    </span><span class="nv">stdout_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;interactive<span class="w"> </span>shell&gt;
+<span class="w">    </span><span class="nv">stderr_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;interactive<span class="w"> </span>shell&gt;
+<span class="w">    </span><span class="nb">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>INTERACTIVE
+<span class="w">    </span><span class="nv">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">maintenance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;NO&#39;</span>
+<span class="w">    </span><span class="nv">reservation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Scheduled
+<span class="w">    </span><span class="nv">walltime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>:59:49
+<span class="w">    </span><span class="nv">submission_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2025</span>-06-08<span class="w"> </span><span class="m">12</span>:19:52
+<span class="w">    </span><span class="nv">start_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2025</span>-06-08<span class="w"> </span><span class="m">12</span>:20:02
+<span class="w">    </span><span class="nv">stop_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2025</span>-06-08<span class="w"> </span><span class="m">12</span>:45:26
+<span class="w">    </span><span class="nv">cpuset_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>user_1894417
+<span class="w">    </span><span class="nv">initial_request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>oarsub<span class="w"> </span>-r<span class="w"> </span>now
+<span class="w">    </span><span class="nv">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">R</span><span class="o">=</span><span class="m">12</span>,W<span class="o">=</span><span class="m">0</span>:59:49,J<span class="o">=</span>R,P<span class="o">=</span>g5k-staff,T<span class="o">=</span><span class="nv">monitor</span><span class="o">=</span>prom_.*default_metrics
+<span class="w">    </span><span class="nv">scheduled_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>no<span class="w"> </span>prediction
+<span class="w">    </span><span class="nv">resubmit_job_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="nv">events</span><span class="w"> </span><span class="o">=</span>
+</code></pre></div>
+<p>If needed, <code>oarstat</code> can output in YAML format with the <code>-Y</code> parameter, or JSON with the <code>-J</code> parameter.</p>
+<p>The node allocated to our reservation can be found by looking at the <code>assigned_hostnames</code> property of the oarstat output. This will help us log into our resource during the next step.</p>
+<h4 id="connecting-to-the-reservation">Connecting to the reservation<a class="headerlink" href="#connecting-to-the-reservation" title="Permanent link">&para;</a></h4>
+<p>Now that we have a resource reserved, we can connect to the node allocated and use it. This can be done using SSH:</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>user@fluxembourg<span class="p">|</span>~<span class="o">]</span>$<span class="w"> </span>ssh<span class="w"> </span>clervaux-11
+user@clervaux-11:~$
+</code></pre></div>
+<p>You can also use the following command to get connected to the node:</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>user@fluxembourg<span class="p">|</span>~<span class="o">]</span>$<span class="w"> </span>oarsub<span class="w"> </span>-C
+user@clervaux-11:~$
+</code></pre></div>
+<blockquote>
+<p><code>oarsub -C</code> will work only if you have <strong>one</strong> reservation currently ongoing at the moment. If you have several reservations running at the same time, <code>oarsub</code> can't decide which node it will send you to, and it will ask you to enter the OAR Job ID like this: <code>oarsub -C &lt;jobid&gt;</code></p>
+</blockquote>
+<p>You should see that your prompt changed: it now displays the current Grid'5000 node on which you are logged.</p>
+<h5 id="information-about-storage-on-grid5000">Information about storage on Grid'5000<a class="headerlink" href="#information-about-storage-on-grid5000" title="Permanent link">&para;</a></h5>
+<p>On Grid'5000 infrastructure, users have access to several means of storing their files. First, each user is allocated one homedir directory per site, with a 25GB soft quota (and 100GB hard quota). These homes are mounted by default on the nodes that are used by an experiment.</p>
+<p>Apart from this homedir mounted via NFS, computing nodes have their own filesystem on disk by default. This means that if someone is writing files into <code>/tmp</code> or <code>/var</code> they are writing directly to the nodes' disk, thus having quicker IOs than if they were writing in their home via NFS. However, disks are not persistent on Grid'5000, so any file written on a node's disk will be lost eventually. Users still need to bring back their files to their home at the end of their experiment.</p>
+<p>Finally, users can benefit from <em>storage groups</em>. <em>Storage groups</em> are big dedicated volumes located on NFS servers which volume is around several terabytes. These volumes can be associated with a dedicated user group, ensuring that only a subset of users are allowed to access.</p>
+<p>Each of these storage options is described in the <a href="https://www.grid5000.fr/w/Storage">Storage Guide</a>.</p>
+<h4 id="node-usage-example">Node usage example<a class="headerlink" href="#node-usage-example" title="Permanent link">&para;</a></h4>
+<p>At this time, users start prototyping their experiments. For example, we could clone a git repository, build it, and then execute the code.
+Let's assume we wanted to run a benchmark. We'll get the <em>NAS Parallel Benchmarks</em> (NPB), compile and run them. Once done, we'll export the result to our home.</p>
+<p>Let's start by going into the <code>/tmp/</code> directory and downloading the benchmarks' source code:</p>
+<div class="highlight"><pre><span></span><code>user@clervaux-11:~$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/tmp/
+user@clervaux-11:~$<span class="w"> </span>wget<span class="w"> </span><span class="s1">&#39;https://www.nas.nasa.gov/assets/npb/NPB3.4.3.tar.gz&#39;</span>
+user@clervaux-11:~$<span class="w"> </span>tar<span class="w"> </span>-xzvf<span class="w"> </span>NPB3.4.3.tar.gz
+</code></pre></div>
+<blockquote>
+<p>It's important to keep in mind that the <code>/tmp/</code> directory is located on the disk's filesystem, while our current home directory is mounted via NFS from a storage server. Working in <code>/tmp/</code> reduces network I/O overhead and reduces pressure on the storage servers.</p>
+</blockquote>
+<p>Now we'll use the default template and Makefile to compile the benchmarks:</p>
+<div class="highlight"><pre><span></span><code>user@clervaux-11:~$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>NPB3.4.3/NPB3.4-OMP
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$<span class="w"> </span>cp<span class="w"> </span>config/suite.def.template<span class="w"> </span>config/suite.def
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$<span class="w"> </span>cp<span class="w"> </span>config/make.def.template<span class="w"> </span>config/make.def
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$<span class="w"> </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span><span class="w"> </span>suite
+</code></pre></div>
+<p>Now that everything is compiled, we can run the benchmarks. The following commands create a directory where the benchmarks output will be stored. The benchmarks are run with the default configuration, and once they have completed their output is copied to our home directory.</p>
+<div class="highlight"><pre><span></span><code>user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$<span class="w"> </span>mkdir<span class="w"> </span>/tmp/benchs
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$<span class="w"> </span><span class="k">for</span><span class="w"> </span>bench<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>bin<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>./bin/<span class="nv">$bench</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>/tmp/benchs/<span class="nv">$bench</span>.txt<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$<span class="w"> </span>cp<span class="w"> </span>-R<span class="w"> </span>/tmp/benchs<span class="w"> </span>~/benchs-<span class="nv">$OAR_JOBID</span>
+</code></pre></div>
+<p>The benchmarks output should have been copied to our home directory. Each benchmark output can now be read with <code>cat</code> or <code>less</code>, and will stay in our home even when our reservation is over.</p>
+<div class="highlight"><pre><span></span><code>user@clervaux-11:/tmp/NPB3.4.3/NPB3.4-OMP$<span class="w"> </span><span class="nb">cd</span>
+user@clervaux-11:~$<span class="w"> </span>cat<span class="w"> </span>benchs-<span class="nv">$OAR_JOBID</span>/lu.S.x.txt
+</code></pre></div>
+<blockquote>
+<p>In the example we use the <code>OAR_JOBID</code> variable because we are still "in" our reservation. If someone wishes to come back to their results later, they'll have to enter the reservation's job id manually.</p>
+</blockquote>
+<h4 id="deeper-customization-by-gaining-root-access-with-sudo-g5k">Deeper customization by gaining root access with sudo-g5k<a class="headerlink" href="#deeper-customization-by-gaining-root-access-with-sudo-g5k" title="Permanent link">&para;</a></h4>
+<p>One of the key features of Grid'5000 is that you are allowed to become root under certain conditions to fully customize your experiment setup. One way of becoming root is by reserving a whole computing node as we did and using the <code>sudo-g5k</code> command. This command is a wrapper for <code>sudo</code> that will perform safety checks before granting you the right to use the default sudo and become root.</p>
+<p>Once logged into their computing resource, users can ask for root access with the following command:</p>
+<div class="highlight"><pre><span></span><code>user@clervaux-11:~$<span class="w"> </span>sudo-g5k<span class="w"> </span><span class="o">[</span>command-to-execute<span class="o">]</span>
+</code></pre></div>
+<blockquote>
+<p>Providing a command while using <code>sudo-g5k</code> is not mandatory.</p>
+</blockquote>
+<p>Once <code>sudo-g5k</code> has run, the platform is aware that the user is going to perform non-trivial operations on the node. When their job is finished, the default environment will be redeployed to provide a clean copy for future users.</p>
+<p>After running <code>sudo-g5k</code>, it is possible to run root commands with <code>sudo</code> or to become root directly:</p>
+<div class="highlight"><pre><span></span><code>user@clervaux-11:~$<span class="w"> </span>sudo<span class="w"> </span>-iu<span class="w"> </span>root
+root@clervaux-11:~#
+</code></pre></div>
+<blockquote>
+<p>Note that the <code>$</code> at the end of the prompt has changed to <code>#</code>, indicating you are indeed root.</p>
+</blockquote>
+<p>Once a user is allowed to use the root account, they can perform any operation that would be forbidden as a normal user:</p>
+<div class="highlight"><pre><span></span><code>root@clervaux-11:~#<span class="w"> </span>apt<span class="w"> </span>update
+root@clervaux-11:~#<span class="w"> </span>apt<span class="w"> </span>upgrade
+root@clervaux-11:~#<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ninvaders
+root@clervaux-11:~#<span class="w"> </span><span class="nb">exit</span>
+user@clervaux-11:~$<span class="w"> </span>ninvaders
+</code></pre></div>
+<blockquote>
+<p>You can quit ninvaders by using <code>Ctrl</code>+<code>c</code> shortcut if the lecturer or your thesis professor is coming. <img alt="👀" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f440.svg" title=":eyes:" /></p>
+</blockquote>
+<p>Be aware that using <code>sudo-g5k</code> will trigger a full redeployment of the node at the end of your reservation. <code>sudo-g5k</code> is a very great tool for prototyping, but it should not be used intensively, especially on automatic and short reservations. By using <code>sudo-g5k</code> in short reservations performed by a script you might end up submitting reservations faster than the node can be redeployed, causing a starvation phenomenon for other users.</p>
+<h4 id="releasing-resources">Releasing resources<a class="headerlink" href="#releasing-resources" title="Permanent link">&para;</a></h4>
+<p>When work is finished on the node we reserved, we can log out and delete our job with the <code>oardel</code> command:</p>
+<div class="highlight"><pre><span></span><code>user@clervaux-11:~$<span class="w"> </span><span class="nb">logout</span>
+Connection<span class="w"> </span>to<span class="w"> </span>clervaux-11.luxembourg.grid5000.fr<span class="w"> </span>closed.
+Disconnected<span class="w"> </span>from<span class="w"> </span>OAR<span class="w"> </span>job<span class="w"> </span><span class="m">1894417</span>.
+<span class="o">[</span>user@fluxembourg<span class="p">|</span>~<span class="o">]</span>$<span class="w"> </span>oardel<span class="w"> </span><span class="m">1894417</span>
+Deleting<span class="w"> </span>the<span class="w"> </span><span class="nv">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1894417</span><span class="w"> </span>...REGISTERED.
+The<span class="w"> </span>job<span class="o">(</span>s<span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">1894417</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>deleted<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>near<span class="w"> </span>future.
+</code></pre></div>
+<p>If we don't do the <code>oardel</code> command, the node will sit idle for approximately one hour (due to the fact that our reservation has a default duration, also called "job walltime", of 1 hour).</p>
+<p>It is important to delete jobs that are holding unused resources to make them available to other users.</p>
+<h3 id="plan-a-reservation-on-resources">Plan a reservation on resources<a class="headerlink" href="#plan-a-reservation-on-resources" title="Permanent link">&para;</a></h3>
+<p>Users can reserve resources in advance for a given date and a given amount of time. This can be done with the <code>oarsub</code> command by specifying the start date and end date of the job:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarsub<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;2025-06-10 10:00, 2025-06-10 12:00&quot;</span>
+<span class="c1"># Filtering out exotic resources (vianden).</span>
+<span class="nv">OAR_JOB_ID</span><span class="o">=</span><span class="m">256910</span>
+<span class="c1"># Advance reservation request: waiting for validation...</span>
+<span class="c1"># Reservation valid --&gt; OK</span>
+</code></pre></div>
+<p>Here, a node has been allocated on 2025-06-10 between 10AM and 12PM (French time). The job will start automatically at the given date, and we'll be able to log in when it starts.</p>
+<p>Delete this job, since we are not going to use it:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oardel<span class="w"> </span><span class="m">256910</span>
+Deleting<span class="w"> </span>the<span class="w"> </span><span class="nv">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">256910</span><span class="w"> </span>...REGISTERED.
+The<span class="w"> </span>job<span class="o">(</span>s<span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">256910</span><span class="w"> </span><span class="o">]</span><span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>deleted<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>near<span class="w"> </span>future.
+</code></pre></div>
+<h2 id="advanced-resource-management">Advanced resource management<a class="headerlink" href="#advanced-resource-management" title="Permanent link">&para;</a></h2>
+<p>For now, we have been reserving resources without specifically asking for anything. This part of the tutorial will present some ways to select resources according to given criteria.</p>
+<h3 id="filter-resources-with-p-option">Filter resources with -p option<a class="headerlink" href="#filter-resources-with-p-option" title="Permanent link">&para;</a></h3>
+<h4 id="cluster-name">Cluster name<a class="headerlink" href="#cluster-name" title="Permanent link">&para;</a></h4>
+<p>With the <code>-p</code> option of the <code>oarsub</code> command we can ask for a given cluster. For example:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarsub<span class="w"> </span>-r<span class="w"> </span>now<span class="w"> </span>-p<span class="w"> </span>larochette
+</code></pre></div>
+<h4 id="cluster-properties">Cluster properties<a class="headerlink" href="#cluster-properties" title="Permanent link">&para;</a></h4>
+<p>The <code>-p</code> option can also be used to specify hardware specs we want to get for our reservation. For example, <code>-p "core_count &gt; 8"</code> will let us reserve computing resources with more than 8 cores.</p>
+<p>The string passed with the <code>-p</code> option follows SQL syntax, so we can write selections like this:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarsub<span class="w"> </span>-r<span class="w"> </span>now<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;cputype LIKE &#39;Intel Xeon%&#39;&quot;</span>
+</code></pre></div>
+<!-- TODO: check if relevant -->
+<p>This <code>oarsub</code> command will reserve one node having an Intel Xeon CPU.</p>
+<p>For more properties, consult the <a href="https://www.grid5000.fr/w/OAR_Properties">OAR properties page</a> of the wiki. The <a href="https://www.grid5000.fr/w/OAR_Syntax_simplification">OAR Syntax Simplification</a> page also describes how to ease the use of the <code>-p</code> parameter by avoiding having to write SQL syntax.</p>
+<h4 id="exotic-type">Exotic type<a class="headerlink" href="#exotic-type" title="Permanent link">&para;</a></h4>
+<p>By default, OAR will exclude some resources from the pool of resources that can be allocated to users. These resources are called <strong>exotic</strong>.
+A resource can be declared exotic for several reasons:</p>
+<ul>
+<li>It is rare on the platform (only a few machines with the same particular characteristics are available in Grid'5000)</li>
+<li>Its usage is complex: a relevant usage of these resources requires specific knowledge</li>
+<li>It has characteristics too different from regular Grid'5000 resources to be allocated as a "standard" resource</li>
+</ul>
+<p>For all the reasons mentioned above, some resources won't be allocated unless users specify the <code>-t exotic</code> parameter in their oarsub command.</p>
+<p>The list of exotic resources available on Grid'5000 can be found here: <a href="https://www.grid5000.fr/w/Exotic">https://www.grid5000.fr/w/Exotic</a>.</p>
+<!-- TODO: should we put this example? Maybe by reserving only a few cpu to avoid clashes? Should vianden be reserved for the tutorial? -->
+
+<p>Here is an oarsub command that will reserve the vianden node in Luxembourg:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarsub<span class="w"> </span>-r<span class="w"> </span>now<span class="w"> </span>-p<span class="w"> </span>vianden<span class="w"> </span>-t<span class="w"> </span>exotic
+</code></pre></div>
+<h3 id="resources-quantity">Resources quantity<a class="headerlink" href="#resources-quantity" title="Permanent link">&para;</a></h3>
+<p>The <code>-l</code> parameter can be used to alter various parameters regarding the reservation:</p>
+<ul>
+<li>walltime of the job, which corresponds to reservation duration</li>
+<li>number of resources requested (nodes, cpu, cores, gpu...)</li>
+</ul>
+<p>By using these options, you can modify the granularity of your reservation and extend the time your resources will be allocated to you.</p>
+<p>The following command will book 2 nodes for a duration of 4 hours:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarsub<span class="w"> </span>-r<span class="w"> </span>now<span class="w"> </span>-l<span class="w"> </span><span class="nv">nodes</span><span class="o">=</span><span class="m">2</span>,walltime<span class="o">=</span><span class="m">4</span>:00
+</code></pre></div>
+<p>Once again, when reserving several nodes at the same time, the oarstat command can provide the list of reserved computing resources. Here is a command that formats the output of <code>oarstat</code> into JSON and prints the assigned_network_address of the nodes allocated:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarstat<span class="w"> </span>-j<span class="w"> </span><span class="m">1899660</span><span class="w"> </span>-fJ<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.&quot;1899660&quot;.assigned_network_address&#39;</span>
+<span class="o">[</span>
+<span class="w">  </span><span class="s2">&quot;clervaux-1.luxembourg.grid5000.fr&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;clervaux-10.luxembourg.grid5000.fr&quot;</span>
+<span class="o">]</span>
+</code></pre></div>
+<h4 id="extend-a-reservation-with-oarwalltime">Extend a reservation with oarwalltime<a class="headerlink" href="#extend-a-reservation-with-oarwalltime" title="Permanent link">&para;</a></h4>
+<p>Once the walltime of a reservation is reached, users are logged out of their node and their processes are killed. To avoid this issue, users can extend the walltime of their reservation while it is running with the command <code>oarwalltime</code>. Note that <code>oarwalltime</code> will not be able to extend the reservation duration every time; if someone is in the queue for the same resources, based on several parameters oarwalltime might refuse to extend the walltime.</p>
+<p>The following command extends by 1 hour the walltime of a reservation:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarwalltime<span class="w"> </span>&lt;oar_job_id&gt;<span class="w"> </span>+1:00
+</code></pre></div>
+<h2 id="basics-of-system-deployment-with-kadeploy3">Basics of system deployment with kadeploy3<a class="headerlink" href="#basics-of-system-deployment-with-kadeploy3" title="Permanent link">&para;</a></h2>
+<p>One of the key features of Grid'5000 is that users are allowed to deploy another operating system on the computing nodes they reserved and become root on their resources. Operating system deployment is done with <a href="https://kadeploy.gitlabpages.inria.fr/">kadeploy3</a>.</p>
+<p>With kadeploy3, users can deploy software environments (usually GNU/Linux distributions) on their computing resources and customize the system to set up a complex experiment.</p>
+<h3 id="grid5000-environments">Grid'5000 environments<a class="headerlink" href="#grid5000-environments" title="Permanent link">&para;</a></h3>
+<p>The Grid'5000/SLICES-FR &amp; ABACA technical teams maintain several environments that can be deployed. Here is a partial list of the environments available:</p>
+<table>
+<thead>
+<tr>
+<th>environment</th>
+<th>quick description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>debian11-min</td>
+<td>Debian 11 distribution with standard system utilities</td>
+</tr>
+<tr>
+<td>debian11-nfs</td>
+<td>debian11-min with nfs configuration for user home mounting</td>
+</tr>
+<tr>
+<td>debian11-big</td>
+<td>debian11-nfs with partial support of modules providing for scientific software</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>debian12-min</td>
+<td>Debian 12 distribution with standard system utilities</td>
+</tr>
+<tr>
+<td>debian12-nfs</td>
+<td>debian12-min with user home mounted on the computing node</td>
+</tr>
+<tr>
+<td>debian12-big</td>
+<td>debian12-nfs with partial support of modules providing for scientific software</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ubuntu2404-min</td>
+<td>ubuntu 24.04 with standard system utilities</td>
+</tr>
+<tr>
+<td>ubuntu2404-nfs</td>
+<td>ubuntu2404-min with nfs configuration for user home mounting</td>
+</tr>
+</tbody>
+</table>
+<p>The full list of environments can be found on <a href="https://www.grid5000.fr/w/Advanced_Kadeploy#Search_an_environment">the following page</a>.</p>
+<p>On a site frontend, the command <code>kaenv3</code> can be used to print the list of available environments.</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>kaenv3
+</code></pre></div>
+<h3 id="make-a-reservation-for-deployment">Make a reservation for deployment<a class="headerlink" href="#make-a-reservation-for-deployment" title="Permanent link">&para;</a></h3>
+<h4 id="-t-deploy-parameter">"-t deploy" parameter<a class="headerlink" href="#-t-deploy-parameter" title="Permanent link">&para;</a></h4>
+<p>In order to be deployed, nodes must be reserved with the <code>-t deploy</code> parameter. This notifies OAR that we are about to change the operating system of the node, and that it will have to redeploy the node back to its original environment when our job is over.</p>
+<p>Let's reserve a node with this parameter:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarsub<span class="w"> </span>-r<span class="w"> </span>now<span class="w"> </span>-t<span class="w"> </span>deploy<span class="w"> </span>-q<span class="w"> </span>testing
+</code></pre></div>
+<h4 id="environment-deployment">Environment deployment<a class="headerlink" href="#environment-deployment" title="Permanent link">&para;</a></h4>
+<p>Once the job has started, we can start the deployment using:</p>
+<p><div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>kadeploy3<span class="w"> </span>-e<span class="w"> </span>debian12-min<span class="w"> </span>-m<span class="w"> </span>clervaux-3.luxembourg.grid5000.fr
+</code></pre></div>
+(<code>-m</code> can be given multiple times to deploy several nodes at once)</p>
+<p>Alternatively, you can use your reservation's job ID to perform the deployment:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarsub<span class="w"> </span>-C<span class="w"> </span><span class="m">1895784</span>
+user@fluxembourg:~$<span class="w"> </span>kadeploy3<span class="w"> </span>-e<span class="w"> </span>debian12-min
+</code></pre></div>
+<p>Once the deployment is over, we can log in as root on our newly-deployed node:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$ ssh root@clervaux-3
+root@clervaux-3:~#
+</code></pre></div>
+<p>To ensure we have changed the distribution running on the node, we can take a look at the file <code>/etc/os-release</code>, or install <code>lsb_release</code>:</p>
+<div class="highlight"><pre><span></span><code>root@clervaux-3:~# apt update &amp;&amp; apt install -y lsb-release
+root@clervaux-3:~# lsb_release -a
+</code></pre></div>
+<h4 id="customize-environment">Customize environment<a class="headerlink" href="#customize-environment" title="Permanent link">&para;</a></h4>
+<p>Now that we are logged in as root on the node, we can fully customize the system. For example, install upgrades, install a newer kernel, drivers, toolchain etc.</p>
+<p>Once a user is happy with their customization, they should think about saving their environment to be able to deploy it later without having to reconfigure it. The <a href="https://www.grid5000.fr/w/Environment_creation">Environment Creation page</a> describes two methods for storing Grid'5000 environments:</p>
+<ul>
+<li>saving the current customized environment to a compressed tarball with <strong>tgz-g5k</strong></li>
+<li>write a reproducible recipe and generate the environment with <strong>Kameleon</strong></li>
+</ul>
+<h4 id="serial-console-with-kaconsole3">Serial console with kaconsole3<a class="headerlink" href="#serial-console-with-kaconsole3" title="Permanent link">&para;</a></h4>
+<p>Now that we gained root access to a computing node, the risk of committing a regrettable mistake increases: some modification performed as root may disconnect the node from the network, or prevent it from booting.</p>
+<p>To prevent users from being stuck in situations where they lost access to their resource and are forced to redeploy a full environment, Grid'5000 provides a way to access the nodes via their serial console.</p>
+<p>This is done by using the <code>kaconsole3</code> command.</p>
+<p>The following command will give access to a node's serial console, if we reserved it via a -t deploy job:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>kaconsole3<span class="w"> </span>-m<span class="w"> </span>clervaux-3
+</code></pre></div>
+<blockquote>
+<p>Since you are accessing a serial console, it is possible that you don't see anything at first. Pressing <code>ENTER</code> should make information appear, such as the login prompt. To exit a kaconsole3 session, type <code>&amp;.</code>, or press <code>ESC</code> 4 times.</p>
+</blockquote>
+<p>This tool is also very useful for debugging boot problems. Let's reboot the node and look at the kaconsole3 output to see the boot logs of the node. Rebooting a node reserved via a <code>-t deploy</code> job can be done with the <code>kareboot3</code> command. Open a new shell, connect to Grid'5000 and enter the following command. Next, go to your kaconsole3 session and look at the logs outputted by the kernel on serial TTY.</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>kareboot3<span class="w"> </span>simple<span class="w"> </span>-m<span class="w"> </span>clervaux-3
+user@fluxembourg:~$<span class="w"> </span>kaconsole3<span class="w"> </span>-m<span class="w"> </span>clervaux-3
+</code></pre></div>
+<h4 id="example-of-network-mistake-repaired-with-kaconsole3">Example of network mistake repaired with kaconsole3<a class="headerlink" href="#example-of-network-mistake-repaired-with-kaconsole3" title="Permanent link">&para;</a></h4>
+<p>A common use case of Grid'5000 is to deploy network topologies to study distributed systems. In this context, a mistake in the network configuration can be costly: a misconfigured node might not be reachable anymore, thus being unconfigurable.</p>
+<p>We'll simulate this mistake by harshly deactivating the network interface of our node:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>ssh<span class="w"> </span>root@clervaux-3
+</code></pre></div>
+<p>Use the <code>ip a</code> command to see which interface has an IP address. On the clervaux cluster, this interface is <code>enp1s0f0np0</code>. Let's shutdown this interface:</p>
+<div class="highlight"><pre><span></span><code>root@clervaux-4:~#<span class="w"> </span>ifdown<span class="w"> </span>enp1s0f0np0
+</code></pre></div>
+<p>Our terminal is hanging! This means we have cut the branch we were sitting on: the node is not reachable via the network. Let's log into Grid'5000 in another terminal and try to ping our node:</p>
+<div class="highlight"><pre><span></span><code>user@pc:~$<span class="w"> </span>ssh<span class="w"> </span>luxembourg.g5k
+user@fluxembourg:~$<span class="w"> </span>ping<span class="w"> </span>clervaux-3
+PING<span class="w"> </span>clervaux-3.luxembourg.grid5000.fr<span class="w"> </span><span class="o">(</span><span class="m">172</span>.16.180.3<span class="o">)</span><span class="w"> </span><span class="m">56</span><span class="o">(</span><span class="m">84</span><span class="o">)</span><span class="w"> </span>bytes<span class="w"> </span>of<span class="w"> </span>data.
+From<span class="w"> </span>fluxembourg.luxembourg.grid5000.fr<span class="w"> </span><span class="o">(</span><span class="m">172</span>.16.191.109<span class="o">)</span><span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>Destination<span class="w"> </span>Host<span class="w"> </span>Unreachable
+From<span class="w"> </span>fluxembourg.luxembourg.grid5000.fr<span class="w"> </span><span class="o">(</span><span class="m">172</span>.16.191.109<span class="o">)</span><span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span><span class="w"> </span>Destination<span class="w"> </span>Host<span class="w"> </span>Unreachable
+From<span class="w"> </span>fluxembourg.luxembourg.grid5000.fr<span class="w"> </span><span class="o">(</span><span class="m">172</span>.16.191.109<span class="o">)</span><span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">3</span><span class="w"> </span>Destination<span class="w"> </span>Host<span class="w"> </span>Unreachable
+^C
+---<span class="w"> </span>clervaux-3.luxembourg.grid5000.fr<span class="w"> </span>ping<span class="w"> </span>statistics<span class="w"> </span>---
+<span class="m">6</span><span class="w"> </span>packets<span class="w"> </span>transmitted,<span class="w"> </span><span class="m">0</span><span class="w"> </span>received,<span class="w"> </span>+3<span class="w"> </span>errors,<span class="w"> </span><span class="m">100</span>%<span class="w"> </span>packet<span class="w"> </span>loss,<span class="w"> </span><span class="nb">time</span><span class="w"> </span>5113ms
+pipe<span class="w"> </span><span class="m">4</span>
+</code></pre></div>
+<p>Pings don't reach our computing resource. It is really disconnected from the network. We'll use <code>kaconsole3</code> to gain access to the serial console of the node and then put back up the network interface of the node:</p>
+<blockquote>
+<p>Reminder: the default password for the root account in Grid'5000 environments is <code>grid5000</code>.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>kaconsole3<span class="w"> </span>-m<span class="w"> </span>clervaux-3
+root
+password:
+<span class="o">[</span>...<span class="o">]</span>
+root@clervaux-4:~#<span class="w"> </span>ifup<span class="w"> </span>enp1s0f0np0
+</code></pre></div>
+<p>We have restored the network connection! The previous SSH connection should resume a few moments later.</p>
+<h2 id="experiment-automation">Experiment automation<a class="headerlink" href="#experiment-automation" title="Permanent link">&para;</a></h2>
+<h3 id="grid5000-experimentation-workflow">Grid'5000 experimentation workflow<a class="headerlink" href="#grid5000-experimentation-workflow" title="Permanent link">&para;</a></h3>
+<p>On Grid'5000, there is a distinction between interactive usage and non-interactive usage. For now, we've been using resources in 'interactive mode', meaning that we were performing every action by ourselves. 'Non-interactive mode' is when someone lets a script (bash, python, ruby, e.t.c.) use the resources that were allocated. Even resource reservations can be scripted.</p>
+<p>Grid'5000 usage is split between day and night: the day is intended to let people use computing nodes interactively, while the night (and full weekends) are used to run longer and automated reservations. <a href="https://www.grid5000.fr/w/Grid5000:UsagePolicy">Grid'5000 Usage Policy</a> provides more information about this day/night concept.</p>
+<h3 id="submitting-a-command">Submitting a command<a class="headerlink" href="#submitting-a-command" title="Permanent link">&para;</a></h3>
+<p>For simple tasks, users can submit a command that will be executed when the job starts. When we made our previous reservations for this tutorial, there was actually a command that was executed by default: <code>sleep infinity</code>. That was this command that was holding our job in place.
+By providing our own command, we can start a script at the beginning of our reservation that will handle our experiment (for example, start a deployment, setup a software stack on the node, and then run a series of benchmarks).</p>
+<p>Let's submit a simple command to experiment with this feature:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>oarsub<span class="w"> </span>-r<span class="w"> </span>now<span class="w"> </span><span class="s2">&quot;lscpu &gt; lscpu.txt&quot;</span>
+</code></pre></div>
+<p>Let this job be scheduled and executed, and then take a look at the <code>lscpu.txt</code> file. You'll see that this file has been populated with the output of lscpu, and this output suggests that it has been executed on the computing node that was allocated to you.</p>
+<blockquote>
+<p>If your <strong>non-deploy</strong> reservation contains several nodes, the given command will be executed on the first allocated node, which is called the <em>head node</em>. A <strong>deploy</strong> reservation will have its command executed on the site's frontend. When this command terminates, the reservation is over, and any remaining connection will be closed. When no command is provided (as we did until now), a default <code>sleep infinity</code> command is started. This command will never complete, so it ensures that the job will only terminate when the reservation's walltime has been exceeded.</p>
+</blockquote>
+<p>Instead of submitting a basic command like we did, we could submit a command launching a script of our own and performing a whole experiment: fetching source code, building, running, extracting relevant metrics.</p>
+<h4 id="script-execution">Script execution<a class="headerlink" href="#script-execution" title="Permanent link">&para;</a></h4>
+<p>While specifying a command of their own with their reservation, users can execute a script of their own to handle their experiment. Here is a small bash script that will deploy an environment and run a stress command:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># bash strict mode configuration</span>
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+<span class="nv">IFS</span><span class="o">=</span><span class="s1">$&#39;\n\t&#39;</span>
+
+<span class="nv">ENV</span><span class="o">=</span>debian12-min
+<span class="nv">NODES_FILE</span><span class="o">=</span>~/.nodes
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OAR_NODEFILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;OAR_NODEFILE variable not defined.&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Please submit a reservation and rerun this script.&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+cat<span class="w"> </span><span class="nv">$OAR_NODEFILE</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$NODES_FILE</span>
+kadeploy3<span class="w"> </span>-f<span class="w"> </span><span class="nv">$OAR_NODEFILE</span><span class="w"> </span>-e<span class="w"> </span><span class="nv">$ENV</span>
+clush<span class="w"> </span>-l<span class="w"> </span>root<span class="w"> </span>--hostfile<span class="o">=</span><span class="nv">$NODES_FILE</span><span class="w"> </span><span class="s2">&quot;apt-get update &amp;&amp; apt-get install -y stress&quot;</span>
+clush<span class="w"> </span>-l<span class="w"> </span>root<span class="w"> </span>--hostfile<span class="o">=</span><span class="nv">$NODES_FILE</span><span class="w"> </span><span class="s1">&#39;stress -c $(nproc) -t 60 &gt; /tmp/stress.txt&#39;</span>
+
+mkdir<span class="w"> </span>-p<span class="w"> </span>stress
+clush<span class="w"> </span>-l<span class="w"> </span>root<span class="w"> </span>--hostfile<span class="o">=</span><span class="nv">$NODES_FILE</span><span class="w"> </span>--rcopy<span class="w"> </span>/tmp/stress.txt<span class="w"> </span>--dest<span class="w"> </span>stress
+
+rm<span class="w"> </span><span class="nv">$NODES_FILE</span>
+</code></pre></div>
+<blockquote>
+<p>This script deploys a <code>-min</code> environment. Min environments don't include NFS tools and configuration allowing automagic homedir mounting. This is why we must use <em>scp</em> to retrieve the data generated by our experiment at the end of the job. In a similar way, users often need to clone git repositories or send source code to their reserved nodes at the beginning of their reservation.</p>
+</blockquote>
+<p>Let's save this script as <code>experiment.sh</code> in our home directory. Be careful about setting the <code>x</code> permission, as we'll need to execute it:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>experiment.sh
+user@fluxembourg:~$<span class="w"> </span>oarsub<span class="w"> </span>-t<span class="w"> </span>deploy<span class="w"> </span>-r<span class="w"> </span>now<span class="w"> </span><span class="s2">&quot;./experiment.sh&quot;</span><span class="w"> </span>-q<span class="w"> </span>testing
+</code></pre></div>
+<p>We can track the progress of the job by looking at the job's state with the <code>oarstat</code> command, or by looking at <code>OAR.&lt;jobid&gt;.stdout</code> and <code>OAR.&lt;jobid&gt;.stderr</code> content. Once the reservation is over, we should see that a <code>stress</code> directory was created in our home, and a .txt file has been synced inside.</p>
+<p>Let's find the job id of our reservation and then monitor our experiment with the multitail command:</p>
+<div class="highlight"><pre><span></span><code>user:~$<span class="w"> </span>multitail<span class="w"> </span>-i<span class="w"> </span>OAR.&lt;jobid&gt;.stdout<span class="w"> </span>-i<span class="w"> </span>OAR.&lt;jobid&gt;.stderr
+</code></pre></div>
+<h3 id="fully-scripted-usage-of-grid5000-through-the-rest-api">Fully scripted usage of Grid'5000 through the REST API<a class="headerlink" href="#fully-scripted-usage-of-grid5000-through-the-rest-api" title="Permanent link">&para;</a></h3>
+<h4 id="programmatically-discovering-resources">Programmatically discovering resources<a class="headerlink" href="#programmatically-discovering-resources" title="Permanent link">&para;</a></h4>
+<p>Grid'5000 provides a REST API that allows users to automatically discover resources and allows monitoring their evolution over time. Using tools like curl, or a simple web browser, users can obtain a lot of information such as:</p>
+<ul>
+<li>Grid'5000 sites list and information: <a href="https://api.grid5000.fr/stable/sites/">https://api.grid5000.fr/stable/sites/</a><ul>
+<li>luxembourg site description: <a href="https://api.grid5000.fr/stable/sites/luxembourg/">https://api.grid5000.fr/stable/sites/luxembourg/</a></li>
+</ul>
+</li>
+<li>Clusters information:<ul>
+<li>luxembourg clusters information: <a href="https://api.grid5000.fr/stable/sites/luxembourg/clusters/">https://api.grid5000.fr/stable/sites/luxembourg/clusters/</a></li>
+</ul>
+</li>
+<li>Nodes information:<ul>
+<li>luxembourg vianden-1 node information: <a href="https://api.grid5000.fr/stable/sites/luxembourg/clusters/vianden/nodes/vianden-1">https://api.grid5000.fr/stable/sites/luxembourg/clusters/vianden/nodes/vianden-1</a></li>
+</ul>
+</li>
+</ul>
+<p>These endpoints allow users to explore Grid'5000 resources programmatically. Here is a bash script that will search for any cluster having more than 2 network interfaces:</p>
+<!--TODO: Simplify?-->
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+mapfile<span class="w"> </span>-t<span class="w"> </span>sites<span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>curl<span class="w"> </span>-s<span class="w"> </span>https://api.grid5000.fr/stable/sites<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;.items[] | .uid&quot;</span><span class="o">)</span>
+
+<span class="k">for</span><span class="w"> </span>site<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sites</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>mapfile<span class="w"> </span>-t<span class="w"> </span>clusters<span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>curl<span class="w"> </span>-s<span class="w"> </span>https://api.grid5000.fr/stable/sites/<span class="nv">$site</span>/clusters<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;.items[] | .uid&quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>cluster<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clusters</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">count</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>https://api.grid5000.fr/stable/sites/<span class="nv">$site</span>/clusters/<span class="nv">$cluster</span>/nodes.json<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s2">&quot;.items[0].kavlan | length&quot;</span><span class="k">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="k">$((</span><span class="nv">$count</span><span class="k">))</span><span class="w"> </span>-ge<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$site</span><span class="s2">: </span><span class="nv">$cluster</span><span class="s2"> has </span><span class="nv">$count</span><span class="s2"> network interfaces&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="k">done</span>
+</code></pre></div>
+<p>This script must be executed from within Grid'5000. We'll see in the next steps how we can log into the platform. Users wanting to reach the API from outside Grid'5000 will have to authenticate themselves using their Grid'5000 account.</p>
+<h4 id="job-submission">Job submission<a class="headerlink" href="#job-submission" title="Permanent link">&para;</a></h4>
+<p>Since Grid'5000 provides a REST API, each API call can be automatized via a high-level script (python, ruby, bash, e.t.c.). This allows users to script and reproduce all their experiments: from the reservation to the results saving.</p>
+<p>Let's write a python script that submits the reservation for our previous stress reservation. Below is a script that will ask users to specify the Grid'5000 site and cluster where to perform the experiment, and will then submit a reservation executing the <code>experiment.sh</code> shown above.</p>
+<blockquote>
+<p>This python script assumes that there is a bash script named <code>experiment.sh</code> located at the root of your home directory and executable! If you want to launch the experiment on a different site you must ensure that the <code>experiment.sh</code> script has been copied to the homedir of this site.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="c1"># When querying the API from the frontends, users are already identified.</span>
+<span class="c1"># However, if using this script from outside of Grid&#39;5000, g5k_auth</span>
+<span class="c1"># must be a tuple of strings: (username, password)</span>
+<span class="n">g5k_auth</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">site_id</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a site: &quot;</span><span class="p">)</span>
+<span class="n">cluster</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a cluster name: &quot;</span><span class="p">)</span>
+
+<span class="n">api_job_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://api.grid5000.fr/stable/sites/</span><span class="si">{</span><span class="n">site_id</span><span class="si">}</span><span class="s2">/jobs&quot;</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;resources&#39;</span><span class="p">:</span> <span class="s1">&#39;nodes=1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;types&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;deploy&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;command&#39;</span><span class="p">:</span> <span class="s1">&#39;./experiment.sh&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;cluster=&#39;</span><span class="si">{</span><span class="n">cluster</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;slices-fr-school-2025&#39;</span>
+<span class="p">}</span>
+
+<span class="n">job</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">api_job_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">g5k_auth</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">job_id</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Job submitted (</span><span class="si">{</span><span class="n">job_id</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>While executing this script, you will be asked for a site and a cluster name:</p>
+<div class="highlight"><pre><span></span><code>user@fluxembourg:~$<span class="w"> </span>python<span class="w"> </span>api.py
+Enter<span class="w"> </span>a<span class="w"> </span>site:<span class="w"> </span>luxembourg
+Enter<span class="w"> </span>a<span class="w"> </span>cluster:<span class="w"> </span>clervaux
+Job<span class="w"> </span>submitted<span class="w"> </span><span class="o">(</span><span class="m">1900199</span><span class="o">)</span>
+</code></pre></div>
+<p>Then, we can monitor our job with the <code>oarstat</code> and <code>kaconsole3</code> commands. At some point, we should see a new file appear in the <code>stress</code> folder located in our home directory.</p>
+<p>This python script has been kept simple for teaching purposes, but it could be far more complex. For example, kadeploy3 deployment can also be automatized through the Grid'5000 API. A user could also monitor the state of the reservation (<code>waiting</code>, <code>launching</code>, <code>running</code>, e.t.c.) to provide more information as the reservation is handled by OAR.</p>
+<p>Many libraries are already available to reduce the amount of code needed to script a Grid'5000 experiment. They are listed on the <a href="https://www.grid5000.fr/w/Experiment_scripting_tutorial">Experiment scripting tutorial page</a>.</p>
+<h2 id="to-go-further-links-and-tutorials">To go further: links and tutorials<a class="headerlink" href="#to-go-further-links-and-tutorials" title="Permanent link">&para;</a></h2>
+<p>This tutorial introduced a very basic usage of Grid'5000 and its resources.</p>
+<!-- TODO: add recommendations -->
+
+<h3 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://www.grid5000.fr/w/Advanced_OAR">Advanced resources reservation with OAR</a></li>
+<li><a href="https://www.grid5000.fr/w/OAR_Syntax_simplification">OAR Syntax Simplification</a></li>
+<li><a href="https://manpages.debian.org/testing/oar-user/oarsub.1.en.html">oarsub manual (online)</a></li>
+</ul>
+<ul>
+<li><a href="https://www.grid5000.fr/w/Advanced_kadeploy">Grid'5000 nodes bare-metal deployment with kadeploy3</a></li>
+<li><a href="https://www.grid5000.fr/w/Environment_creation">System environment creation guide</a></li>
+</ul>
+<ul>
+<li><a href="https://www.grid5000.fr/w/Experiment_scripting_tutorial">Experiment scripting tutorial</a></li>
+<li><a href="https://www.grid5000.fr/w/API">REST API</a></li>
+<li><a href="https://www.grid5000.fr/w/API_tutorial">API tutorial</a></li>
+</ul>
+<ul>
+<li><a href="https://www.grid5000.fr/w/KaVLAN">KaVLAN introduction</a></li>
+<li><a href="https://www.grid5000.fr/w/Advanced_KaVLAN">KaVLAN advanced usage</a></li>
+<li><a href="https://www.grid5000.fr/w/Network_reconfiguration_tutorial">Network reconfiguration tutorial</a></li>
+<li><a href="https://www.grid5000.fr/w/Network_emulation">Network Emulation</a></li>
+<li><a href="https://www.grid5000.fr/w/IPv6">IPv6</a></li>
+<li><a href="https://www.grid5000.fr/w/Reconfigurable_Firewall">Reconfigurable firewall</a></li>
+</ul>
+<ul>
+<li><a href="https://www.grid5000.fr/w/Monitoring_Using_Kwollect">Monitoring with Kwollect</a></li>
+<li><a href="https://www.grid5000.fr/w/Energy_consumption_monitoring_tutorial">Energy consumption tutorial</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 30, 2026 10:52:15 UTC">January 30, 2026</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2007-2025 Uni.lu HPC (ULHPC) Team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ULHPC" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/ULHPC" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/bootstrap.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>

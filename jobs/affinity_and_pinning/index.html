@@ -1,0 +1,6656 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ULHPC Technical Documentation">
+      
+      
+        <meta name="author" content="Uni.lu HPC (ULHPC) Team">
+      
+      
+        <link rel="canonical" href="https://hpc-docs.uni.lu/jobs/affinity_and_pinning/">
+      
+      
+        <link rel="prev" href="../../slurm/qos/">
+      
+      
+        <link rel="next" href="../hwloc/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Affinity and pinning - ULHPC Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#affinity-and-pinning-of-processes-and-threads" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ULHPC Technical Documentation" class="md-header__button md-logo" aria-label="ULHPC Technical Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ULHPC Technical Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Affinity and pinning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ULHPC/ulhpc-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ULHPC Technical Documentation" class="md-nav__button md-logo" aria-label="ULHPC Technical Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    ULHPC Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ULHPC/ulhpc-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hpc-schools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HPC Trainings and Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accounts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Accounts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get an Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/passwords/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Password Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accounts/collaboration_accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Collaboration Accounts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accounts/projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Accounts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/ipa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity Management Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slurm Account Hierarchy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teaching-with-the-ulhpc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teaching with the ULHPC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Center
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Center
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-center/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Centre de Calcul (CDC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ULHPC Supercomputers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ULHPC Supercomputers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aion
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aion
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aion System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/interconnect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fast Local Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/timeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iris
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iris
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iris System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/interconnect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fast Local Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/timeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grid'5000
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Grid'5000
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../g5k/getting-started-g5k/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.grid5000.fr/w/Luxembourg:Home" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luxembourg site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.grid5000.fr/w/Luxembourg:Network" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.grid5000.fr/w/Luxembourg:Hardware" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interconnect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interconnect/ib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fast Infiniband Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interconnect/ethernet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ethernet Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Storage
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/sharing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Sharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/transfer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Transfer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Data Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/lfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scratch Data Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/quotas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quotas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/backups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/unix-file-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unix File Permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/datasets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/gdpr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GDPR Compliance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sensitive Data Protection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_12" id="__nav_10_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustered and Networked File Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clustered and Networked File Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/gpfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPFS/SpectrumScale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/lustre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lustre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/isilon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OneFS Isilon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access/Connect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Access/Connect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access/Login Servers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH (Windows)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/ipa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity Management Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/ood/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Open On Demand Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connect/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Environment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/easybuild/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Easybuild
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/eessi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EESSI software stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/conda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conda
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Policies
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Policies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/aup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acceptable Use Policy (AUP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/maintenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Downtime and Maintenance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/usage-charging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Charging Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Jobs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Running Jobs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slurm Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenient Slurm Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/partitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Partition/Queues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/qos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quality of Service (QoS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Affinity and pinning
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Affinity and pinning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#process-placement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process placement
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Process placement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binding-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binding processes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Binding processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mask-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mask binding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map binding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatically-generated-masks-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatically generated masks binding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process distribution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Process distribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-distributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic distributions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hwloc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inspecting node architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slurm Account Hierarchy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reason-codes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job State and Reason Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/fairsharing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairsharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../priority/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job Priority and Backfilling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../billing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job Accounting and Billing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interactive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interactive Job
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../submit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Passive/Batch Job
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../long/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Long Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../best-effort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Best-effort Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/launchers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Launcher Scripts Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gnu-parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GNU parallel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../services/jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jupyter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_1" id="__nav_15_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supported Software List
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Supported Software List
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/all_softwares/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full List (alphabetical order)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/bio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Biology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/cae/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CFD/Finite element modelling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/chem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/compiler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/debugger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/devel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/lang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programming Languages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/lib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/mpi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/numlib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numerical libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance measurements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/phys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System-level software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Toolchains (software stacks)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/vis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2" id="__nav_15_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Sets
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software Sets
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/2019b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019b
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/2020b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020a
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling/building your own software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_4" id="__nav_15_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer Aided Eng. (CAE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computer Aided Eng. (CAE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/fenics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FEniCS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/ansys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ANSYS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/openfoam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenFOAM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/abaqus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Abaqus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/fds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FDS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/meshing-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meshing-Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_5" id="__nav_15_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Physics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/physics/wrf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WRF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_6" id="__nav_15_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computational Chemistry
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computational Chemistry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_6_1" id="__nav_15_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electronics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Electronics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/abinit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ABINIT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/ase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/meep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEEP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/quantum-espresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantum Espresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/vasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VASP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_6_2" id="__nav_15_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molecular Dynamics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Molecular Dynamics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/cp2k/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CP2K
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/gromacs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GROMACS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/namd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAMD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/nwchem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NWCHEM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/helping-libraries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helping Libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_7" id="__nav_15_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematics & Statistics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mathematics & Statistics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/matlab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MATLAB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/mathematica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MATHEMATICA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/stata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/julia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Julia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/optim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_9" id="__nav_15_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visualization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/visu/paraview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ParaView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_16_1" id="__nav_16_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance/Debugging
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance/Debugging
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/arm-forge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arm Forge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/vtune/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel VTune
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/advisor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel Advisor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/inspector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel Inspector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/itac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel Trace Analyzer and Collector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/scalasca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scalasca
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/valgrind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Valgrind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/aps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help and Support
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Help and Support
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc.uni.lu/support" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helpdesk / Ticket Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_18">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Semantic Versioning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Portals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web Portals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc.uni.lu" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ULHPC Website
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc-docs.uni.lu" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ulhpc-tutorials.readthedocs.io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ULHPC Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc.uni.lu/support" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helpdesk / Ticket Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#process-placement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process placement
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Process placement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binding-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binding processes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Binding processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mask-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mask binding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map binding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatically-generated-masks-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatically generated masks binding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Process distribution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Process distribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-distributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic distributions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="affinity-and-pinning-of-processes-and-threads">Affinity and pinning of processes and threads<a class="headerlink" href="#affinity-and-pinning-of-processes-and-threads" title="Permanent link">&para;</a></h1>
+<p>HPC systems consist of multiple components that provide access to various resources. A process or thread running in some core of the system rarely has the same quality of access to all the resources. Take for instance a CPU node of Iris.</p>
+<div class="admonition tip">
+<p class="admonition-title">Topology of an Iris CPU node</p>
+<p><figure markdown="span">
+    <img alt="Iris CPU node topology" src="../images/iris-cpu-node-topology.svg" style="display: block; margin: 0 auto" width="600" />
+</figure></p>
+<p>An Iris CPU node; the node contains 2 CPU sockets, each socket contains a single NUMA<sup id="fnref:43"><a class="footnote-ref" href="#fn:43">1</a></sup> node, each NUMA node consists of a group of 14 cores sharing a single physical L3 cache, and each core provides a single PU<sup id="fnref:53"><a class="footnote-ref" href="#fn:53">2</a></sup>.</p>
+</div>
+<p>A typical HPC cluster node is composed of computing cores that are integrated in an recursive manner in more complex structures to implement the functionality of the node. In Iris CPU nodes for instance,</p>
+<ul>
+<li>compute nodes contain 2 sockets,</li>
+<li>each socket contains a single NUMA<sup id="fnref2:43"><a class="footnote-ref" href="#fn:43">1</a></sup>,</li>
+<li>each NUMA node consists of a group of 14 cores sharing a single physical L3 cache, and</li>
+<li>each core provides a single PU (processor unit)<sup id="fnref2:53"><a class="footnote-ref" href="#fn:53">2</a></sup><sup id="fnref:56"><a class="footnote-ref" href="#fn:56">3</a></sup>.</li>
+</ul>
+<p>The CPU is thus organized in a number of levels with actual threads running on processor units, and processes consist of one or more threads. Communication between threads and thus processes, involves sending information from one thread to another. Depending on how many levels of the node architecture hierarchy the message has to pass the slower the communication will be. Also, threads and thus processes that are close in the architectural hierarchy tend to share memory. If you want more memory per thread you may have to spread your threads across processor units that are distant with respect to communication.</p>
+<p>Typically the libraries used in HPC applications provide a high degree of control of process and thread placement. In order to extract the best performance from the HPC system you often need to specify the placement of threads and processes.</p>
+<details class="info">
+<summary>TL; DR</summary>
+<p>For regular CPU nodes these configurations work well for the majority of applications.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Iris CPU nodes</label><label for="__tabbed_1_2">Aion nodes</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The recommended setting for optimal performance for most applications when using full nodes of Iris is to add the options:</p>
+<ul>
+<li><code>--ntasks-per-socket=1</code>,</li>
+<li><code>--cpus-per-task=14</code>, and</li>
+<li><code>--distribution=block:block</code></li>
+</ul>
+<p>in every call of <code>srun</code>. This is an example submission script.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash --login</span>
+<span class="c1">#SBATCH --job-name=stress_test</span>
+<span class="c1">#SBATCH --partition=batch</span>
+<span class="c1">#SBATCH --qos=normal</span>
+<span class="c1">#SBATCH --nodes=4</span>
+<span class="c1">#SBATCH --time=00:15:00</span>
+<span class="c1">#SBATCH --output=%x-%j.out</span>
+<span class="c1">#SBATCH --error=%x-%j.err</span>
+<span class="c1">#SBATCH --exclusive</span>
+
+<span class="nb">declare</span><span class="w"> </span><span class="nv">stress_test_duration</span><span class="o">=</span><span class="m">160</span>
+
+srun<span class="w"> </span>--ntasks-per-socket<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">14</span><span class="w"> </span>--distribution<span class="o">=</span>block:block<span class="w"> </span>stress-ng<span class="w"> </span>--cpu<span class="w"> </span><span class="m">14</span><span class="w"> </span>--timeout<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">stress_test_duration</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>The recommended setting for optimal performance for most applications when using full nodes of Aion is to add the options:</p>
+<ul>
+<li><code>--ntasks-per-socket=1</code>,</li>
+<li><code>--cpus-per-task=16</code>, and</li>
+<li><code>--distribution=block:block</code></li>
+</ul>
+<p>in every call of <code>srun</code>. This is an example submission script.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash --login</span>
+<span class="c1">#SBATCH --job-name=stress_test</span>
+<span class="c1">#SBATCH --partition=batch</span>
+<span class="c1">#SBATCH --qos=normal</span>
+<span class="c1">#SBATCH --nodes=4</span>
+<span class="c1">#SBATCH --time=00:15:00</span>
+<span class="c1">#SBATCH --output=%x-%j.out</span>
+<span class="c1">#SBATCH --error=%x-%j.err</span>
+<span class="c1">#SBATCH --exclusive</span>
+
+<span class="nb">declare</span><span class="w"> </span><span class="nv">stress_test_duration</span><span class="o">=</span><span class="m">160</span>
+
+srun<span class="w"> </span>--ntasks-per-socket<span class="o">=</span><span class="m">1</span><span class="w"> </span>--cpus-per-task<span class="o">=</span><span class="m">16</span><span class="w"> </span>--distribution<span class="o">=</span>block:block<span class="w"> </span>stress-ng<span class="w"> </span>--cpu<span class="w"> </span><span class="m">16</span><span class="w"> </span>--timeout<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">stress_test_duration</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+</details>
+<h2 id="process-placement">Process placement<a class="headerlink" href="#process-placement" title="Permanent link">&para;</a></h2>
+<p>A call to <code>sbatch</code> or <code>salloc</code> in clusters with the Slurm scheduler allocates the resources for a job. To pin processes of your job to specific cores within each node you need to set binding option in each step of your job with <code>srun</code> or in raw calls to <code>mpirun</code>.</p>
+<h3 id="binding-processes">Binding processes<a class="headerlink" href="#binding-processes" title="Permanent link">&para;</a></h3>
+<p>Process (tasks) are bound to cores with the <code>--cpu-bind=[verbose],&lt;bind type&gt;</code> option flag of <code>srun</code>. The bind option assigns a process to fixed group of <em>processor units</em> for the duration of a job step. Some common options for <code>&lt;bind type&gt;</code> are</p>
+<ul>
+<li><code>threads</code>: binds processes to threads,</li>
+<li><code>cores</code>: binds processes to cores,</li>
+<li><code>sockets</code>: binds processes to sockets,</li>
+<li><code>map_cpu:&lt;list&gt;</code>: binds processes to processor unit ranks given in a comma separated <code>&lt;list&gt;</code>, and</li>
+<li><code>mask_cpu:&lt;list&gt;</code>: binds processes to groups of processing units defined by <em>masks</em> upon ranks given in a comma separated <code>&lt;list&gt;</code>.</li>
+</ul>
+<p>You can optionally add the <code>verbose</code> option in debugging jobs to print process bindings before the job step runs.</p>
+<p>Like with other resources, Slurm is using the <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/cgroup-v1/cgroups.html">control group</a> feature of Linux to allocate processor units to processes. The base option that controls the allocation of cores is the <code>mask_cpu</code>. The other allocation options are converted to mask according to groupings of cores with similar access to resources by the <a href="/jobs/hwloc/">hardware locality</a> tool.</p>
+<h4 id="mask-binding">Mask binding<a class="headerlink" href="#mask-binding" title="Permanent link">&para;</a></h4>
+<p>The basic binding option is the mask option, <code>mask_cpu:&lt;list&gt;</code>, all other options are converted to masks according to the site configuration of Slurm.</p>
+<ul>
+<li>The <code>&lt;mask&gt;</code> is a bit field over the processor unit ranks (as reported by hardware locality) that marks with 1 the processor units that are available to a process running within a job step.</li>
+<li>The <code>&lt;list&gt; == &lt;mask&gt;[,&lt;mask&gt;]*</code> option of the binding directive is a comma separated list of masks, each consecutive process of the <code>srun</code> command uses the next available mask.</li>
+<li>The list is reused in a round-robin manner if there are more processes than masks.</li>
+<li>Processes are allowed to move freely within the allocated processor units.</li>
+</ul>
+<details class="info">
+<summary>Hexadecimal notation for masks</summary>
+<p>Masks are written in hexadecimal notation. For instance, assume an allocation on some machine with 2 sockets, 16 cores per socket, and one hardware thread per core. Such an allocation contains 32 processor units (cores). Then, the mask
+<div class="highlight"><pre><span></span><code>mask_cpu:0xff0000,0xff000000
+</code></pre></div>
+maps 4 processes to the following bit fields</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Process number</th>
+<th style="text-align: left;">Processor unit availability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>0</code></td>
+<td style="text-align: left;"><code>0000 0000 1111 1111 0000 0000 0000 0000</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>1</code></td>
+<td style="text-align: left;"><code>1111 1111 0000 0000 0000 0000 0000 0000</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>2</code></td>
+<td style="text-align: left;"><code>0000 0000 1111 1111 0000 0000 0000 0000</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>3</code></td>
+<td style="text-align: left;"><code>1111 1111 0000 0000 0000 0000 0000 0000</code></td>
+</tr>
+</tbody>
+</table>
+<p>that in turn constrain</p>
+<ul>
+<li>task 0 and 2 to run on processor units (hardware threads) 16 to 23 of the node, and</li>
+<li>task 1 and 3 to run on processor units (hardware threads) 24 to 31 of the node.</li>
+</ul>
+<p>For convenience, you can add leading zeros to a mask so that all masks are of the same length, so, <code>0x00ff0000 = 0xff0000</code>.</p>
+</details>
+<p>As an example consider an I/O throughput test for Aion local storage. In Aion there are 8 NUMA nodes per compute node, 4 <a href="/jobs/hwloc/#object-types">CCXs</a> per NUMA node, and 4 cores sharing a single L3 cache per CCX. Every digit in the hexadecimal mask controls the availability of a single CCX. To launch an I/O stress test in 4 parallel processes, with</p>
+<ul>
+<li>processes 0 and 2 pinned on CCX 0 of virtual socket 0, and</li>
+<li>processes 1 and 3 pinned on CCX 0 of virtual socket 1</li>
+</ul>
+<p>use the following command.</p>
+<div class="highlight"><pre><span></span><code>salloc<span class="w"> </span>--nodes<span class="o">=</span><span class="m">1</span><span class="w"> </span>--exclusive<span class="w"> </span>--partition<span class="o">=</span>batch<span class="w"> </span>--qos<span class="o">=</span>normal<span class="w"> </span>--time<span class="o">=</span><span class="m">4</span>:00:00
+srun<span class="w"> </span>--nodes<span class="o">=</span><span class="m">1</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">4</span><span class="w"> </span>--cpu-bind<span class="o">=</span>verbose,mask_cpu:0xf,0xf0000<span class="w"> </span>stress-ng<span class="w"> </span>--hdd<span class="w"> </span><span class="m">1</span><span class="w"> </span>--timeout<span class="w"> </span><span class="m">240</span>
+</code></pre></div>
+<details class="note">
+<summary>Context switching within binding regions</summary>
+<p>The HDD stress test processes are I/O heavy and are often interrupted by thread and process context switching. You can login to the running job from another terminal using the <code>sjoin</code> alias available in UL HPC systems, and with <code>htop</code> you may see the load moving among the allocated cores.</p>
+</details>
+<h4 id="map-binding">Map binding<a class="headerlink" href="#map-binding" title="Permanent link">&para;</a></h4>
+<p>The map binding binds processes to specific processor units (<a href="/jobs/hwloc/#object-types">PUs</a>). The <code>&lt;list&gt;==&lt;PU rank&gt;[,&lt;PU rank&gt;]*</code> option of the binding directive is a list of processing unit ranks, as reported by hardware locality.</p>
+<ul>
+<li>Processes launched within a job step use the processor unit with corresponding rank.</li>
+<li>Ranks may appear more that once if processing units are shared between processes.</li>
+<li>The list is reused if the available ranks are exhausted.</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Limitations of map binding</p>
+<p>Note that with the map binding each process is assigned a single processor unit. If your process needs more that one processor unit, as is the case with multithreaded processes, uss another binging option like mask.</p>
+</div>
+<p>As an example consider an I/O throughput test for Aion local storage. In Aion there are 8 NUMA nodes per compute node, with 16 cores per NUMA node. Every digit in the map maps a process to the processor unit (PU) with the corresponding rank. To launch an I/O stress test in 4 parallel processes, with</p>
+<ul>
+<li>processes 0 and 1 pinned on cores 0 and 2 of virtual socket 0, and</li>
+<li>processes 2 and 3 pinned on cores 16 and 18 of virtual socket 1</li>
+</ul>
+<p>use the following command.</p>
+<div class="highlight"><pre><span></span><code>salloc<span class="w"> </span>--nodes<span class="o">=</span><span class="m">1</span><span class="w"> </span>--exclusive<span class="w"> </span>--partition<span class="o">=</span>batch<span class="w"> </span>--qos<span class="o">=</span>normal<span class="w"> </span>--time<span class="o">=</span><span class="m">4</span>:00:00
+srun<span class="w"> </span>--nodes<span class="o">=</span><span class="m">1</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">4</span><span class="w"> </span>--cpu-bind<span class="o">=</span>verbose,map_cpu:0,2,16,18<span class="w"> </span>stress-ng<span class="w"> </span>--hdd<span class="w"> </span><span class="m">1</span><span class="w"> </span>--timeout<span class="w"> </span><span class="m">240</span>
+</code></pre></div>
+<h4 id="automatically-generated-masks-binding">Automatically generated masks binding<a class="headerlink" href="#automatically-generated-masks-binding" title="Permanent link">&para;</a></h4>
+<p>The Slurm scheduler provides options to generate bindings automatically. Many systems as <a href="https://mumps-solver.org/index.php">MUMPS</a> rely on simple allocations of one MPI process per NUMA node, and OpenMP thread parallelism within NUMA nodes. Automatically generated masks can describe such simple binding efficiently and the resulting description is most often portable between systems.</p>
+<p>When using automatic binging users may want to inspect the resulting binding mask. The binding is implemented using <a href="https://slurm.schedmd.com/cpu_management.html#Step4">control groups</a>, so the cores allocated for the process can be inspected with</p>
+<ul>
+<li>the <code>vorbose</code> option of binding,</li>
+<li>the <code>taskset</code> command, or</li>
+<li>directly reading the <code>Cpus_allowed_list</code> in <code>/proc/self/status</code>.</li>
+</ul>
+<p>As an example consider binding 2 processes per node for 2 nodes with the various available options. The <code>taskset</code> command is used to report the core bindings, and the verbose option is enabled to print the same information in a format closer to the internal system representation. Start by creating an allocation with exclusive access to 2 nodes:</p>
+<div class="highlight"><pre><span></span><code>salloc<span class="w"> </span>--exclusive<span class="w"> </span>--nodes<span class="o">=</span><span class="m">2</span><span class="w"> </span>--ntasks-per-node<span class="o">=</span><span class="m">2</span><span class="w"> </span>--time<span class="o">=</span><span class="m">1</span>:00:00
+</code></pre></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Threads</label><label for="__tabbed_2_2">Cores</label><label for="__tabbed_2_3">Sockets</label><label for="__tabbed_2_4">Custom binding</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Simultaneous multi-threading is disabled in our systems, so the <code>threads</code> option is not relevant. The <em>core</em> and <em>processor unit</em> (threads) object types of hardware locality coincide.</p>
+</div>
+<div class="tabbed-block">
+<p>In this example the processes are pinned to cores of the CPUs.</p>
+<ul>
+<li>Allow processes to share sockets.
+  <div class="highlight"><pre><span></span><code>$ srun --nodes=2 --ntasks-per-node=2 --cpu-bind=verbose,cores bash -c &#39;echo -n &quot;task ${SLURM_PROCID} (node ${SLURM_NODEID}): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort
+cpu-bind=MASK - aion-0014, task  0  0 [3431378]: mask 0x1 set
+cpu-bind=MASK - aion-0014, task  1  1 [3431379]: mask 0x2 set
+cpu-bind=MASK - aion-0220, task  2  0 [2549677]: mask 0x1 set
+cpu-bind=MASK - aion-0220, task  3  1 [2549678]: mask 0x2 set
+task 0 (node 0): pid 3431378&#39;s current affinity list: 0
+task 1 (node 0): pid 3431379&#39;s current affinity list: 1
+task 2 (node 1): pid 2549677&#39;s current affinity list: 0
+task 3 (node 1): pid 2549678&#39;s current affinity list: 1
+</code></pre></div></li>
+</ul>
+<ul>
+<li>Processes pinned with one process per socket.
+  <div class="highlight"><pre><span></span><code>$ srun --nodes=2 --ntasks-per-node=2 --ntasks-per-socket=1 --cpu-bind=verbose,cores bash -c &#39;echo -n &quot;task ${SLURM_PROCID} (node ${SLURM_NODEID}): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort
+cpu-bind=MASK - aion-0014, task  0  0 [3431621]: mask 0x1 set
+cpu-bind=MASK - aion-0014, task  1  1 [3431622]: mask 0x10000 set
+cpu-bind=MASK - aion-0220, task  2  0 [2549899]: mask 0x1 set
+cpu-bind=MASK - aion-0220, task  3  1 [2549900]: mask 0x10000 set
+task 0 (node 0): pid 3431621&#39;s current affinity list: 0
+task 1 (node 0): pid 3431622&#39;s current affinity list: 16
+task 2 (node 1): pid 2549899&#39;s current affinity list: 0
+task 3 (node 1): pid 2549900&#39;s current affinity list: 16
+</code></pre></div></li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>In this example the processes are pinned to sockets of the processesing nodes.</p>
+<ul>
+<li>Allow processes to share sockets (one processor unit per process by default).
+  <div class="highlight"><pre><span></span><code>$ srun --nodes=2 --ntasks-per-node=2 --cpu-bind=verbose,sockets bash -c &#39;echo -n &quot;task ${SLURM_PROCID} (node ${SLURM_NODEID}): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort
+cpu-bind=MASK - aion-0014, task  0  0 [3431515]: mask 0xffff set
+cpu-bind=MASK - aion-0014, task  1  1 [3431516]: mask 0xffff set
+cpu-bind=MASK - aion-0220, task  2  0 [2549712]: mask 0xffff set
+cpu-bind=MASK - aion-0220, task  3  1 [2549713]: mask 0xffff set
+task 0 (node 0): pid 3431515&#39;s current affinity list: 0-15
+task 1 (node 0): pid 3431516&#39;s current affinity list: 0-15
+task 2 (node 1): pid 2549712&#39;s current affinity list: 0-15
+task 3 (node 1): pid 2549713&#39;s current affinity list: 0-15
+</code></pre></div></li>
+</ul>
+<ul>
+<li>Processes pinned with one process per socket.
+  <div class="highlight"><pre><span></span><code>$ srun --nodes=2 --ntasks-per-node=2 --ntasks-per-socket=1 --cpu-bind=verbose,sockets bash -c &#39;echo -n &quot;task ${SLURM_PROCID} (node ${SLURM_NODEID}): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort
+cpu-bind=MASK - aion-0014, task  0  0 [3431908]: mask 0xffff set
+cpu-bind=MASK - aion-0014, task  1  1 [3431909]: mask 0xffff0000 set
+cpu-bind=MASK - aion-0220, task  2  0 [2550128]: mask 0xffff set
+cpu-bind=MASK - aion-0220, task  3  1 [2550129]: mask 0xffff0000 set
+task 0 (node 0): pid 3431908&#39;s current affinity list: 0-15
+task 1 (node 0): pid 3431909&#39;s current affinity list: 16-31
+task 2 (node 1): pid 2550128&#39;s current affinity list: 0-15
+task 3 (node 1): pid 2550129&#39;s current affinity list: 16-31
+</code></pre></div></li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>With custom bindings we specify exactly where processes are bound.</p>
+<ul>
+<li>Pin (single threaded) processes to sockets.
+  <div class="highlight"><pre><span></span><code>$ srun --cpu-bind=verbose,mask_cpu:0xffff,0xffff0000 bash -c &#39;echo -n &quot;task ${SLURM_PROCID} (node ${SLURM_NODEID})&quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort
+cpu-bind=MASK - aion-0001, task  0  0 [3535103]: mask 0xffff set
+cpu-bind=MASK - aion-0001, task  1  1 [3535104]: mask 0xffff0000 set
+cpu-bind=MASK - aion-0339, task  2  0 [3595625]: mask 0xffff set
+cpu-bind=MASK - aion-0339, task  3  1 [3595626]: mask 0xffff0000 set
+task 0 (node 0)pid 3535103&#39;s current affinity list: 0-15
+task 1 (node 0)pid 3535104&#39;s current affinity list: 16-31
+task 2 (node 1)pid 3595625&#39;s current affinity list: 0-15
+task 3 (node 1)pid 3595626&#39;s current affinity list: 16-31
+</code></pre></div></li>
+</ul>
+<ul>
+<li>Pin processes to cores.
+  <div class="highlight"><pre><span></span><code>$ srun --cpu-bind=verbose,mask_cpu:0x1,0x10000 bash -c &#39;echo -n &quot;task ${SLURM_PROCID} (node ${SLURM_NODEID})&quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort
+cpu-bind=MASK - aion-0014, task  0  0 [3435289]: mask 0x1 set
+cpu-bind=MASK - aion-0014, task  1  1 [3435290]: mask 0x10000 set
+cpu-bind=MASK - aion-0220, task  2  0 [2553408]: mask 0x1 set
+cpu-bind=MASK - aion-0220, task  3  1 [2553409]: mask 0x10000 set
+task 0 (node 0)pid 3435289&#39;s current affinity list: 0
+task 1 (node 0)pid 3435290&#39;s current affinity list: 16
+task 2 (node 1)pid 2553408&#39;s current affinity list: 0
+task 3 (node 1)pid 2553409&#39;s current affinity list: 16
+</code></pre></div></li>
+</ul>
+<p>Printing the binding information however, demonstrates how processes are spread across nodes. By default, the tasks are distributed in <em>blocks</em>, where first the available slots in the first node of the allocation are filled, before moving to the next.</p>
+</div>
+</div>
+</div>
+<hr />
+<p>An exhaustive <a href="https://slurm.schedmd.com/cpu_management.html#Section2">list of reporting features for binding configurations</a> can be found in the administrator's guide of Slurm.</p>
+<details class="info">
+<summary><em>Resources</em></summary>
+<ol>
+<li><a href="https://slurm.schedmd.com/cpu_management.html">Configuration options managing the allocation of CPU resources</a></li>
+<li><a href="https://slurm.schedmd.com/cgroup.conf.html">Configuration of the control group plugin of Slurm (<code>cgroup.conf</code>)</a></li>
+</ol>
+</details>
+<h2 id="process-distribution">Process distribution<a class="headerlink" href="#process-distribution" title="Permanent link">&para;</a></h2>
+<p>The processes of a job step are distributed along the compute nodes of a job. The distribution of the process is controlled with the <code>--distribution</code> option flag of <code>srun</code>, and the distribution mechanism is based on hardware locality and control groups, like the binding mechanism. The basic options for the distribution option flag are <code>--distribution={*|block|cyclic|arbitrary}[:{*|block|cyclic|fcyclic}[:{*|block|cyclic|fcyclic}]]</code> and their meaning is the following.</p>
+<ul>
+<li><strong>Level 0</strong> (default <code>block</code>): Determines the distributing of processes across nodes (<a href="/jobs/hwloc/#object-types">depth 0</a> of hardware locality objects).<ul>
+<li><code>*</code>: Use the default method</li>
+<li><code>block</code>: Distribute processes in a balanced manner across nodes so that if not enough node are available consecutive tasks share a node.</li>
+<li><code>cyclic</code>: Distribute processes across nodes in a round-robin manner, so that consecutive processes are placed on consecutive nodes of the allocation node list (<code>${SLURM_NODELIST}</code>).</li>
+<li><code>arbitrary</code>: Used in conjunction with <code>--nodelist=&lt;node&gt;[,&lt;nodes&gt;]*</code> to place processes in consecutive nodes in the provided node list in a round-robin manner.</li>
+</ul>
+</li>
+<li><strong>Level 1</strong> (default <code>block</code>): Determines the distributing of processes across sockets (<a href="/jobs/hwloc/#object-types">depth 1</a> of hardware locality objects).<ul>
+<li><code>*</code>: Use the default method</li>
+<li><code>block</code>: Distribute processes for binding in a balanced manner across sockets of the node so that consecutive processes are places in consecutive cores.</li>
+<li><code>cyclic</code>: Distribute processes across sockets of a node in a round-robin manner so that consecutive processes are placed in consecutive sockets, and allocate cores in for each process in a consecutive manner within the socket.</li>
+<li><code>fcyclic</code>: Distribute processes across sockets of a node in a round-robin manner over processes so that a core of the 1<sup>st</sup> non-fully allocated process is placed on the first socket with an available core, then a core of the 2<sup>nd</sup> non-fully allocated process is placed on the first socket with an unallocated core, and so on.</li>
+</ul>
+</li>
+<li><strong>Level 2</strong> (default <code>block</code>): Determines the distributing of processes across cores in a socket (<a href="/jobs/hwloc/#object-types">depth 7</a> of hardware locality objects).<ul>
+<li><code>*</code>: Use the default method</li>
+<li><code>block</code>: Distribute processes for binding in a balanced manner across processor units (hardware threads) of the core so that consecutive processes are places in consecutive processor units.</li>
+<li><code>cyclic</code>: Distribute processes in a round robin manner across cores so that consecutive processes are placed in consecutive cores, and allocate processor units for each processes in a consecutive manner within the core.</li>
+<li><code>fcyclic</code>: Distribute processes across processor units of a core in a round-robin manner over processes so that a processor unit of the 1<sup>st</sup> non-fully allocated process is places on the first core with an available processor unit, then a processor unit of the 2<sup>nd</sup> non-fully allocated process is place in the first core with an unallocated processor unit, and so on.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Relevant options for Aion and Iris</p>
+<p>In Aion and Iris the simultaneous multithreading (SMT) is disabled, and all cores contain a single processor unit (hardware thread). Thus, the level 2 options for the <code>--distribution</code> flag are redundant.</p>
+</div>
+<details class="info">
+<summary>Difference between the <code>cyclic</code> and <code>fcyclic</code> options</summary>
+<p>Consider a system with</p>
+<ul>
+<li>2 sockets (<code>S[0-1]</code>)</li>
+<li>4 cores per socket (<code>C[0-3]</code>), and</li>
+<li>2 processor units per core (<code>P[0-1]</code>).</li>
+</ul>
+<p>If a job step with 16 processes with 1 processor unit per process are allocated as follows.</p>
+<table>
+<thead>
+<tr>
+<th>Distribution (<code>--distribution</code>)</th>
+<th style="text-align: left;">Allocation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*:cyclic:cyclic</code></td>
+<td style="text-align: left;"><code>S0C0P0 S0C0P1 S0C1P0 S0C1P1 S0C2P0 S0C2P1 S0C3P0 S0C3P1 S1C0P0 S1C0P1 S1C1P0 S1C1P1 S1C2P0 S1C2P1 S1C3P0 S1C3P1</code></td>
+</tr>
+<tr>
+<td><code>*:cyclic:fcyclic</code></td>
+<td style="text-align: left;"><code>S0C0P0 S0C1P0 S0C2P0 S0C3P0 S0C0P1 S0C1P1 S0C2P1 S0C3P1 S1C0P0 S1C1P0 S1C2P0 S1C3P0 S1C0P1 S1C1P1 S1C2P1 S1C3P1</code></td>
+</tr>
+<tr>
+<td><code>*:fcyclic:cyclic</code></td>
+<td style="text-align: left;"><code>S0C0P0 S1C0P0 S0C0P1 S1C0P1 S0C1P0 S1C1P0 S0C1P1 S1C1P1 S0C2P0 S1C2P0 S0C2P1 S1C2P1 S3C1P0 S1C3P0 S0C3P1 S1C3P1</code></td>
+</tr>
+<tr>
+<td><code>*:fcyclic:fcyclic</code></td>
+<td style="text-align: left;"><code>S0C0P0 S1C0P0 S0C1P0 S1C1P0 S0C0P1 S1C0P1 S0C1P1 S1C1P1 S0C2P0 S1C2P0 S0C3P0 S1C3P0 S0C2P1 S1C2P1 S0C3P1 S1C3P1</code></td>
+</tr>
+</tbody>
+</table>
+<p>An easy way to remember the order is that <code>f</code> prefix flips the order of significance between adjacent objects of the system starting from right to left on the original significance order. The relation is depicted in the following table.</p>
+<table>
+<thead>
+<tr>
+<th>Distribution (<code>--distribution</code>)</th>
+<th style="text-align: center;">Order of object significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*:cyclic:cyclic</code></td>
+<td style="text-align: center;"><code>SCP</code></td>
+</tr>
+<tr>
+<td><code>*:cyclic:fcyclic</code></td>
+<td style="text-align: center;"><code>SPC</code></td>
+</tr>
+<tr>
+<td><code>*:fcyclic:cyclic</code></td>
+<td style="text-align: center;"><code>CPS</code></td>
+</tr>
+<tr>
+<td><code>*:fcyclic:fcyclic</code></td>
+<td style="text-align: center;"><code>PCS</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<h3 id="automatic-distributions">Automatic distributions<a class="headerlink" href="#automatic-distributions" title="Permanent link">&para;</a></h3>
+<p>Typical distributions of processes can be achieved using the typical automatic options of the distribution flag. Consider for instance an allocation of 2 nodes in Aion.</p>
+<div class="highlight"><pre><span></span><code>salloc<span class="w"> </span>--exclusive<span class="w"> </span>--nodes<span class="o">=</span><span class="m">2</span>
+</code></pre></div>
+<p>Then, the processes of a job step with 8 processes can be distributed using the automatic options for nodes (level 0) in 2 different manners.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">block</label><label for="__tabbed_3_2">cyclic</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>$ srun --ntasks=8 --distribution=block bash -c &#39;echo -n &quot;task $SLURM_PROCID (node $SLURM_NODEID): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort --key=2 --numeric-sort
+task 0 (node 0): pid 3584429&#39;s current affinity list: 0
+task 1 (node 0): pid 3584430&#39;s current affinity list: 1
+task 2 (node 0): pid 3584431&#39;s current affinity list: 2
+task 3 (node 0): pid 3584432&#39;s current affinity list: 3
+task 4 (node 1): pid 3628427&#39;s current affinity list: 0
+task 5 (node 1): pid 3628428&#39;s current affinity list: 1
+task 6 (node 1): pid 3628429&#39;s current affinity list: 2
+task 7 (node 1): pid 3628430&#39;s current affinity list: 3
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>$ srun --ntasks=8 --distribution=cyclic bash -c &#39;echo -n &quot;task $SLURM_PROCID (node $SLURM_NODEID): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort --key=2 --numeric-sort
+task 0 (node 0): pid 3584499&#39;s current affinity list: 0
+task 1 (node 1): pid 3628579&#39;s current affinity list: 0
+task 2 (node 0): pid 3584500&#39;s current affinity list: 1
+task 3 (node 1): pid 3628580&#39;s current affinity list: 1
+task 4 (node 0): pid 3584501&#39;s current affinity list: 2
+task 5 (node 1): pid 3628581&#39;s current affinity list: 2
+task 6 (node 0): pid 3584502&#39;s current affinity list: 3
+task 7 (node 1): pid 3628582&#39;s current affinity list: 3
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<p>Consider another example where a job step with 32 processes of 4 threads each needs to be distributed over 2 nodes. This is a typical situation for Aion where every 4 cores share a physically coherent cache. Many applications are optimized to take advantage of L3 cache for shared memory parallelism and use message passing parallelism for communication across physically coherent L3 cache regions. A combination of the <code>--cpus-per-task</code> flag that generates binding automatically, and the automatic options for the distribution flag is usually sufficient for most such jobs.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:4"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">block:block</label><label for="__tabbed_4_2">block:cyclic</label><label for="__tabbed_4_3">cyclic:block</label><label for="__tabbed_4_4">cyclic:cyclic</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>$ srun --ntasks=32 --cpus-per-task=4 --distribution=block:block bash -c &#39;echo -n &quot;task $SLURM_PROCID (node $SLURM_NODEID): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort --key=2 --numeric-sort
+task 0 (node 0): pid 3585148&#39;s current affinity list: 0-3
+task 1 (node 0): pid 3585149&#39;s current affinity list: 4-7
+task 2 (node 0): pid 3585150&#39;s current affinity list: 8-11
+task 3 (node 0): pid 3585151&#39;s current affinity list: 12-15
+task 4 (node 0): pid 3585152&#39;s current affinity list: 16-19
+task 5 (node 0): pid 3585153&#39;s current affinity list: 20-23
+task 6 (node 0): pid 3585154&#39;s current affinity list: 24-27
+task 7 (node 0): pid 3585155&#39;s current affinity list: 28-31
+task 8 (node 0): pid 3585156&#39;s current affinity list: 32-35
+task 9 (node 0): pid 3585157&#39;s current affinity list: 36-39
+task 10 (node 0): pid 3585158&#39;s current affinity list: 40-43
+task 11 (node 0): pid 3585159&#39;s current affinity list: 44-47
+task 12 (node 0): pid 3585160&#39;s current affinity list: 48-51
+task 13 (node 0): pid 3585161&#39;s current affinity list: 52-55
+task 14 (node 0): pid 3585162&#39;s current affinity list: 56-59
+task 15 (node 0): pid 3585163&#39;s current affinity list: 60-63
+task 16 (node 1): pid 3629024&#39;s current affinity list: 0-3
+task 17 (node 1): pid 3629025&#39;s current affinity list: 4-7
+task 18 (node 1): pid 3629026&#39;s current affinity list: 8-11
+task 19 (node 1): pid 3629027&#39;s current affinity list: 12-15
+task 20 (node 1): pid 3629028&#39;s current affinity list: 16-19
+task 21 (node 1): pid 3629029&#39;s current affinity list: 20-23
+task 22 (node 1): pid 3629030&#39;s current affinity list: 24-27
+task 23 (node 1): pid 3629031&#39;s current affinity list: 28-31
+task 24 (node 1): pid 3629032&#39;s current affinity list: 32-35
+task 25 (node 1): pid 3629033&#39;s current affinity list: 36-39
+task 26 (node 1): pid 3629034&#39;s current affinity list: 40-43
+task 27 (node 1): pid 3629035&#39;s current affinity list: 44-47
+task 28 (node 1): pid 3629036&#39;s current affinity list: 48-51
+task 29 (node 1): pid 3629037&#39;s current affinity list: 52-55
+task 30 (node 1): pid 3629038&#39;s current affinity list: 56-59
+task 31 (node 1): pid 3629039&#39;s current affinity list: 60-63
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>$ srun --ntasks=32 --cpus-per-task=4 --distribution=block:cyclic bash -c &#39;echo -n &quot;task $SLURM_PROCID (node $SLURM_NODEID): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort --key=2 --numeric-sort
+task 0 (node 0): pid 3585968&#39;s current affinity list: 0-3
+task 1 (node 0): pid 3585969&#39;s current affinity list: 16-19
+task 2 (node 0): pid 3585970&#39;s current affinity list: 32-35
+task 3 (node 0): pid 3585971&#39;s current affinity list: 48-51
+task 4 (node 0): pid 3585972&#39;s current affinity list: 64-67
+task 5 (node 0): pid 3585973&#39;s current affinity list: 80-83
+task 6 (node 0): pid 3585974&#39;s current affinity list: 96-99
+task 7 (node 0): pid 3585975&#39;s current affinity list: 112-115
+task 8 (node 0): pid 3585976&#39;s current affinity list: 4-7
+task 9 (node 0): pid 3585977&#39;s current affinity list: 20-23
+task 10 (node 0): pid 3585978&#39;s current affinity list: 36-39
+task 11 (node 0): pid 3585979&#39;s current affinity list: 52-55
+task 12 (node 0): pid 3585980&#39;s current affinity list: 68-71
+task 13 (node 0): pid 3585981&#39;s current affinity list: 84-87
+task 14 (node 0): pid 3585982&#39;s current affinity list: 100-103
+task 15 (node 0): pid 3585983&#39;s current affinity list: 116-119
+task 16 (node 1): pid 3629593&#39;s current affinity list: 0-3
+task 17 (node 1): pid 3629594&#39;s current affinity list: 16-19
+task 18 (node 1): pid 3629595&#39;s current affinity list: 32-35
+task 19 (node 1): pid 3629596&#39;s current affinity list: 48-51
+task 20 (node 1): pid 3629597&#39;s current affinity list: 64-67
+task 21 (node 1): pid 3629598&#39;s current affinity list: 80-83
+task 22 (node 1): pid 3629599&#39;s current affinity list: 96-99
+task 23 (node 1): pid 3629600&#39;s current affinity list: 112-115
+task 24 (node 1): pid 3629601&#39;s current affinity list: 4-7
+task 25 (node 1): pid 3629602&#39;s current affinity list: 20-23
+task 26 (node 1): pid 3629603&#39;s current affinity list: 36-39
+task 27 (node 1): pid 3629604&#39;s current affinity list: 52-55
+task 28 (node 1): pid 3629605&#39;s current affinity list: 68-71
+task 29 (node 1): pid 3629606&#39;s current affinity list: 84-87
+task 30 (node 1): pid 3629607&#39;s current affinity list: 100-103
+task 31 (node 1): pid 3629608&#39;s current affinity list: 116-119
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>$ srun --ntasks=32 --cpus-per-task=4 --distribution=cyclic:block bash -c &#39;echo -n &quot;task $SLURM_PROCID (node $SLURM_NODEID): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort --key=2 --numeric-sort
+task 0 (node 0): pid 3586174&#39;s current affinity list: 0-3
+task 1 (node 1): pid 3629673&#39;s current affinity list: 0-3
+task 2 (node 0): pid 3586175&#39;s current affinity list: 4-7
+task 3 (node 1): pid 3629674&#39;s current affinity list: 4-7
+task 4 (node 0): pid 3586176&#39;s current affinity list: 8-11
+task 5 (node 1): pid 3629675&#39;s current affinity list: 8-11
+task 6 (node 0): pid 3586177&#39;s current affinity list: 12-15
+task 7 (node 1): pid 3629676&#39;s current affinity list: 12-15
+task 8 (node 0): pid 3586178&#39;s current affinity list: 16-19
+task 9 (node 1): pid 3629677&#39;s current affinity list: 16-19
+task 10 (node 0): pid 3586179&#39;s current affinity list: 20-23
+task 11 (node 1): pid 3629678&#39;s current affinity list: 20-23
+task 12 (node 0): pid 3586180&#39;s current affinity list: 24-27
+task 13 (node 1): pid 3629679&#39;s current affinity list: 24-27
+task 14 (node 0): pid 3586181&#39;s current affinity list: 28-31
+task 15 (node 1): pid 3629680&#39;s current affinity list: 28-31
+task 16 (node 0): pid 3586182&#39;s current affinity list: 32-35
+task 17 (node 1): pid 3629681&#39;s current affinity list: 32-35
+task 18 (node 0): pid 3586183&#39;s current affinity list: 36-39
+task 19 (node 1): pid 3629682&#39;s current affinity list: 36-39
+task 20 (node 0): pid 3586184&#39;s current affinity list: 40-43
+task 21 (node 1): pid 3629683&#39;s current affinity list: 40-43
+task 22 (node 0): pid 3586185&#39;s current affinity list: 44-47
+task 23 (node 1): pid 3629684&#39;s current affinity list: 44-47
+task 24 (node 0): pid 3586186&#39;s current affinity list: 48-51
+task 25 (node 1): pid 3629685&#39;s current affinity list: 48-51
+task 26 (node 0): pid 3586187&#39;s current affinity list: 52-55
+task 27 (node 1): pid 3629686&#39;s current affinity list: 52-55
+task 28 (node 0): pid 3586188&#39;s current affinity list: 56-59
+task 29 (node 1): pid 3629687&#39;s current affinity list: 56-59
+task 30 (node 0): pid 3586189&#39;s current affinity list: 60-63
+task 31 (node 1): pid 3629688&#39;s current affinity list: 60-63
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>$ srun --ntasks=32 --cpus-per-task=4 --distribution=cyclic:cyclic bash -c &#39;echo -n &quot;task $SLURM_PROCID (node $SLURM_NODEID): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort --key=2 --numeric-sort
+task 0 (node 0): pid 3586295&#39;s current affinity list: 0-3
+task 1 (node 1): pid 3629775&#39;s current affinity list: 0-3
+task 2 (node 0): pid 3586296&#39;s current affinity list: 16-19
+task 3 (node 1): pid 3629776&#39;s current affinity list: 16-19
+task 4 (node 0): pid 3586297&#39;s current affinity list: 32-35
+task 5 (node 1): pid 3629777&#39;s current affinity list: 32-35
+task 6 (node 0): pid 3586298&#39;s current affinity list: 48-51
+task 7 (node 1): pid 3629778&#39;s current affinity list: 48-51
+task 8 (node 0): pid 3586299&#39;s current affinity list: 64-67
+task 9 (node 1): pid 3629779&#39;s current affinity list: 64-67
+task 10 (node 0): pid 3586300&#39;s current affinity list: 80-83
+task 11 (node 1): pid 3629780&#39;s current affinity list: 80-83
+task 12 (node 0): pid 3586301&#39;s current affinity list: 96-99
+task 13 (node 1): pid 3629781&#39;s current affinity list: 96-99
+task 14 (node 0): pid 3586302&#39;s current affinity list: 112-115
+task 15 (node 1): pid 3629782&#39;s current affinity list: 112-115
+task 16 (node 0): pid 3586303&#39;s current affinity list: 4-7
+task 17 (node 1): pid 3629783&#39;s current affinity list: 4-7
+task 18 (node 0): pid 3586304&#39;s current affinity list: 20-23
+task 19 (node 1): pid 3629784&#39;s current affinity list: 20-23
+task 20 (node 0): pid 3586305&#39;s current affinity list: 36-39
+task 21 (node 1): pid 3629785&#39;s current affinity list: 36-39
+task 22 (node 0): pid 3586306&#39;s current affinity list: 52-55
+task 23 (node 1): pid 3629786&#39;s current affinity list: 52-55
+task 24 (node 0): pid 3586307&#39;s current affinity list: 68-71
+task 25 (node 1): pid 3629787&#39;s current affinity list: 68-71
+task 26 (node 0): pid 3586308&#39;s current affinity list: 84-87
+task 27 (node 1): pid 3629788&#39;s current affinity list: 84-87
+task 28 (node 0): pid 3586309&#39;s current affinity list: 100-103
+task 29 (node 1): pid 3629789&#39;s current affinity list: 100-103
+task 30 (node 0): pid 3586310&#39;s current affinity list: 116-119
+task 31 (node 1): pid 3629790&#39;s current affinity list: 116-119
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<p>Automatic options for the distribution flag are simple to define reducing the chance of typos, and are portable between systems. However, sometimes like in the case of system benchmarking, very accurate control of process placement is required.</p>
+<h3 id="manual-distribution">Manual distribution<a class="headerlink" href="#manual-distribution" title="Permanent link">&para;</a></h3>
+<p>Very precise placement of processes is afforded using the node list (<code>--nodelist</code>) argument, the <code>arbitrary</code> distribution, and CPU masks. The automatic options themselves are converted into node lists and CPU masks in the background. This is demonstrated in the following example.</p>
+<ul>
+<li>Start by allocating a job with 2 nodes:
+  <div class="highlight"><pre><span></span><code>salloc<span class="w"> </span>--exclusive<span class="w"> </span>--nodes<span class="o">=</span><span class="m">2</span>
+</code></pre></div></li>
+</ul>
+<ul>
+<li>Then read the allocated nodes:
+  <div class="highlight"><pre><span></span><code>$ echo $SLURM_NODELIST
+aion-[0001,0339]
+</code></pre></div></li>
+</ul>
+<ul>
+<li>Finally, use a combination of the <code>--nodelist</code> option to place processes into nodes and bind them to the desired group of cores.
+  <div class="highlight"><pre><span></span><code>$ srun --nodelist=aion-[0001,0339,0001,0339,0339,0339,0339,0339] --distribution=arbitrary --cpu-bind=verbose,mask_cpu:0xf,0xf0,0xf00,0xf000,0xf0000,0xf00000,0xf000000,0xf0000000 bash -c &#39;echo -n &quot;task $SLURM_PROCID (node $SLURM_NODEID): &quot;; taskset --cpu-list --pid ${BASHPID}&#39; | sort
+
+cpu-bind=MASK - aion-0001, task  0  0 [3576513]: mask 0xf set
+cpu-bind=MASK - aion-0001, task  2  1 [3576514]: mask 0xf0 set
+cpu-bind=MASK - aion-0339, task  1  0 [3623221]: mask 0xf set
+cpu-bind=MASK - aion-0339, task  3  1 [3623222]: mask 0xf0 set
+cpu-bind=MASK - aion-0339, task  4  2 [3623223]: mask 0xf00 set
+cpu-bind=MASK - aion-0339, task  5  3 [3623224]: mask 0xf000 set
+cpu-bind=MASK - aion-0339, task  6  4 [3623225]: mask 0xf0000 set
+cpu-bind=MASK - aion-0339, task  7  5 [3623226]: mask 0xf00000 set
+task 0 (node 0): pid 3576513&#39;s current affinity list: 0-3
+task 1 (node 1): pid 3623221&#39;s current affinity list: 0-3
+task 2 (node 0): pid 3576514&#39;s current affinity list: 4-7
+task 3 (node 1): pid 3623222&#39;s current affinity list: 4-7
+task 4 (node 1): pid 3623223&#39;s current affinity list: 8-11
+task 5 (node 1): pid 3623224&#39;s current affinity list: 12-15
+task 6 (node 1): pid 3623225&#39;s current affinity list: 16-19
+</code></pre></div></li>
+</ul>
+<p>With the <code>arbitrary</code> option of the distribution flag, the launcher will launch one process in every entry of the node list (repeated entries allowed). If no node list (<code>--nodelist</code>) is provided, then the distribution method defaults to <code>block</code>.</p>
+<!--
+## Distributing and binding OpenMP process threads
+
+The Slurm distribution and binding mechanisms only bind the processes of MPI applications
+-->
+
+<h2 id="resources"><em>Resources</em><a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="/jobs/hwloc/">Hardware Locality (hwloc)</a></li>
+<li><a href="https://docs.lumi-supercomputer.eu/runjobs/scheduled-jobs/distribution-binding/">Distribution and binding options - LUMI</a></li>
+<li><a href="https://lumi-supercomputer.github.io/LUMI-training-materials/2day-20240502/07_Binding/">Process and Thread Distribution and Binding - LUMI trainings</a></li>
+</ol>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:43">
+<p>NUMA: Non-Uniform Memory Access&#160;<a class="footnote-backref" href="#fnref:43" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:43" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:53">
+<p>PU: Processor Unit&#160;<a class="footnote-backref" href="#fnref:53" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:53" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:56">
+<p>Simultaneous Multi Threading (SMT), also known as Hyper-Threading for Intel CPUs, is disabled in our cluster nodes because it impacts negatively numerical calculations that comprise the vast majority of our workloads.&#160;<a class="footnote-backref" href="#fnref:56" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 30, 2026 10:52:15 UTC">January 30, 2026</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2007-2025 Uni.lu HPC (ULHPC) Team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ULHPC" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/ULHPC" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/bootstrap.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>

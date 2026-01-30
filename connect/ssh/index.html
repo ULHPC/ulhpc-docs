@@ -1,0 +1,6991 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ULHPC Technical Documentation">
+      
+      
+        <meta name="author" content="Uni.lu HPC (ULHPC) Team">
+      
+      
+        <link rel="canonical" href="https://hpc-docs.uni.lu/connect/ssh/">
+      
+      
+        <link rel="prev" href="../access/">
+      
+      
+        <link rel="next" href="../windows/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>SSH - ULHPC Technical Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ssh" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ULHPC Technical Documentation" class="md-header__button md-logo" aria-label="ULHPC Technical Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ULHPC Technical Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SSH
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ULHPC/ulhpc-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ULHPC Technical Documentation" class="md-nav__button md-logo" aria-label="ULHPC Technical Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo_ULHPC_square.jpg" alt="logo">
+
+    </a>
+    ULHPC Technical Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ULHPC/ulhpc-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ULHPC/ulhpc-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hpc-schools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HPC Trainings and Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accounts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Accounts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get an Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/passwords/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Password Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accounts/collaboration_accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Collaboration Accounts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accounts/projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects Accounts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity Management Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slurm Account Hierarchy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../teaching-with-the-ulhpc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Teaching with the ULHPC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Center
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Center
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-center/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Centre de Calcul (CDC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ULHPC Supercomputers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ULHPC Supercomputers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aion
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Aion
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Aion System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/interconnect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fast Local Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/aion/timeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iris
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iris
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iris System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/compute/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/interconnect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fast Local Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/iris/timeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grid'5000
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Grid'5000
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../g5k/getting-started-g5k/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.grid5000.fr/w/Luxembourg:Home" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Luxembourg site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.grid5000.fr/w/Luxembourg:Network" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.grid5000.fr/w/Luxembourg:Hardware" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compute Nodes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interconnect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interconnect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interconnect/ib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fast Infiniband Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interconnect/ethernet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ethernet Interconnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Storage
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/sharing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Sharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/transfer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Transfer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project Data Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/lfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scratch Data Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/quotas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quotas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/backups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/unix-file-permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unix File Permissions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/datasets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/gdpr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GDPR Compliance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data/encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sensitive Data Protection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_10_12" id="__nav_10_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustered and Networked File Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_10_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clustered and Networked File Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/gpfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPFS/SpectrumScale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/lustre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lustre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../filesystems/isilon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OneFS Isilon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access/Connect
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Access/Connect
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../access/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access/Login Servers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh-key-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Key Generation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#password-less-logins-and-transfers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Password-less logins and transfers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Agent
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSH Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#security-implications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security implications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-keychain-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The keychain package
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-ulhpc-clusters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        On ULHPC clusters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-fingerprints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key fingerprints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host Keys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-ssh-tips-and-tricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced SSH Tips and Tricks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced SSH Tips and Tricks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI Completion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#socks-5-proxy-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOCKS 5 Proxy plugin
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SOCKS 5 Proxy plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-tunnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting Up the Tunnel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foxyproxy-firefox-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FoxyProxy [Firefox] Extension
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-tsock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using tsock
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-port-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Port Forwarding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSH Port Forwarding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forwarding-a-local-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forwarding a local port
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forwarding-a-remote-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forwarding a remote port
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tunnelling-for-others" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tunnelling for others
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-jumps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH jumps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSH jumps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authorizing-access-to-compute-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authorizing access to compute nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-forwarding-over-ssh-jumps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Port forwarding over SSH jumps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extras-tools-around-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extras Tools around SSH
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH (Windows)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Identity Management Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ood/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Open On Demand Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Environment
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/easybuild/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Easybuild
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/eessi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EESSI software stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Containers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../environment/conda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conda
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Policies
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Policies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/aup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Acceptable Use Policy (AUP)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/maintenance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Downtime and Maintenance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policies/usage-charging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Charging Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Running Jobs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Running Jobs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slurm Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenient Slurm Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/partitions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Partition/Queues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/qos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quality of Service (QoS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/affinity_and_pinning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Affinity and pinning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/hwloc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inspecting node architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/accounts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Slurm Account Hierarchy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/reason-codes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job State and Reason Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/fairsharing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fairsharing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/priority/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job Priority and Backfilling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/billing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job Accounting and Billing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/interactive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interactive Job
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/submit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Passive/Batch Job
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/gpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/long/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Long Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/best-effort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Best-effort Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../slurm/launchers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Launcher Scripts Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/arrays/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Job arrays
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jobs/gnu-parallel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GNU parallel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../services/jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jupyter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_1" id="__nav_15_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supported Software List
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Supported Software List
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/all_softwares/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full List (alphabetical order)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/bio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Biology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/cae/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CFD/Finite element modelling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/chem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/compiler/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compilers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/debugger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/devel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/lang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programming Languages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/lib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/math/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/mpi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/numlib/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Numerical libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/perf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance measurements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/phys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System-level software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Toolchains (software stacks)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/vis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualisation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_2" id="__nav_15_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Sets
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Software Sets
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/2019b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019b
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/swsets/2020b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020a
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compiling/building your own software
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_4" id="__nav_15_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer Aided Eng. (CAE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computer Aided Eng. (CAE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/fenics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FEniCS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/ansys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ANSYS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/openfoam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OpenFOAM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/abaqus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Abaqus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/fds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FDS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/cae/meshing-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meshing-Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_5" id="__nav_15_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Physics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/physics/wrf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WRF
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_6" id="__nav_15_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computational Chemistry
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computational Chemistry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_6_1" id="__nav_15_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electronics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Electronics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/abinit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ABINIT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/ase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/meep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MEEP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/quantum-espresso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quantum Espresso
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/electronics/vasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VASP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_6_2" id="__nav_15_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Molecular Dynamics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_15_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Molecular Dynamics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/cp2k/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CP2K
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/gromacs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GROMACS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/namd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NAMD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/nwchem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NWCHEM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/computational-chemistry/molecular-dynamics/helping-libraries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helping Libraries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_7" id="__nav_15_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematics & Statistics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mathematics & Statistics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/matlab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MATLAB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/mathematica/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MATHEMATICA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/stata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/maths/julia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Julia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/optim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_15_9" id="__nav_15_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visualization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Visualization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../software/visu/paraview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ParaView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_16_1" id="__nav_16_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance/Debugging
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_16_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance/Debugging
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/arm-forge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arm Forge
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/vtune/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel VTune
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/advisor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel Advisor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/inspector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel Inspector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/itac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intel Trace Analyzer and Collector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/scalasca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scalasca
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/valgrind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Valgrind
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/performance-debugging-tools/aps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Help and Support
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Help and Support
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc.uni.lu/support" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helpdesk / Ticket Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_18">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/versioning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Semantic Versioning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Portals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_19">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web Portals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc.uni.lu" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ULHPC Website
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc-docs.uni.lu" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://ulhpc-tutorials.readthedocs.io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ULHPC Tutorials
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hpc.uni.lu/support" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Helpdesk / Ticket Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh-key-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Key Generation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#password-less-logins-and-transfers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Password-less logins and transfers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssh-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Agent
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSH Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#security-implications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security implications
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-keychain-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The keychain package
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-ulhpc-clusters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        On ULHPC clusters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-fingerprints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key fingerprints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#host-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Host Keys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-ssh-tips-and-tricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced SSH Tips and Tricks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced SSH Tips and Tricks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI Completion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#socks-5-proxy-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SOCKS 5 Proxy plugin
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SOCKS 5 Proxy plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-tunnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting Up the Tunnel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#foxyproxy-firefox-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FoxyProxy [Firefox] Extension
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-tsock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using tsock
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-port-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH Port Forwarding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSH Port Forwarding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forwarding-a-local-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forwarding a local port
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forwarding-a-remote-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forwarding a remote port
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tunnelling-for-others" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tunnelling for others
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-jumps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSH jumps
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSH jumps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authorizing-access-to-compute-nodes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authorizing access to compute nodes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#port-forwarding-over-ssh-jumps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Port forwarding over SSH jumps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extras-tools-around-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extras Tools around SSH
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="ssh">SSH<a class="headerlink" href="#ssh" title="Permanent link">&para;</a></h1>
+<p>All ULHPC servers are reached using either the Secure Shell (SSH) communication and encryption protocol (version 2).</p>
+<p>Developed by <a href="http://www.ssh.com">SSH Communications Security Ltd.</a>, Secure Shell is a an encrypted network protocol used to log into another computer over an unsecured network, to execute commands in a remote machine, and to move files from one machine to another in a secure way. On UNIX/LINUX/BSD type systems, SSH is also the name of a suite of software applications for connecting via the SSH protocol. The SSH applications can execute commands on a remote machine and transfer files from one machine to another. All communications are automatically and transparently encrypted, including passwords. Most versions of SSH provide login (<code>ssh</code>, <code>slogin</code>), a remote copy operation (<code>scp</code>), and many also provide a secure ftp client (<code>sftp</code>). Additionally, SSH allows secure X Window connections.</p>
+<p>To use SSH, you have to generate a pair of keys, one <strong>public</strong> and the other <strong>private</strong>. The public key authentication is the most secure and flexible approach to ensure a multi-purpose transparent connection to a remote server. This approach is enforced on the ULHPC platforms and assumes that the <em>public</em> key is known by the system in order to perform an authentication based on a challenge/response protocol instead of the classical password-based protocol.</p>
+<p>The way SSH handles the keys and the configuration files is illustrated in the following figure:</p>
+<p><img alt="" src="../images/ssh.png" /></p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<ul>
+<li>OpenSSH is natively supported on Linux / Mac OS / Unix / WSL (see below)</li>
+<li>On Windows, you are thus encouraged to install <a href="https://docs.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux</a> (WSL) and setup an Ubuntu subsystem from  <a href="https://aka.ms/wslstore">Microsoft Store</a>.<ul>
+<li>You probably want to also install <a href="https://github.com/microsoft/terminal">Windows Terminal</a> and  <a href="http://mobaxterm.mobatek.net/">MobaXterm</a></li>
+<li>Better performance of your Linux subsystem can be obtained by migrating to WSL 2</li>
+<li>Follow the <a href="https://ulhpc-tutorials.readthedocs.io/en/latest/setup/preliminaries/#microsoft-windows">ULHPC Tutorial: Setup Pre-Requisites / Windows</a> for detailed instructions.</li>
+</ul>
+</li>
+</ul>
+<h2 id="ssh-key-generation">SSH Key Generation<a class="headerlink" href="#ssh-key-generation" title="Permanent link">&para;</a></h2>
+<p>To generate an RSA SSH keys <strong>of 4096-bit length</strong>, just use the <code>ssh-keygen</code> command <a href="https://explainshell.com/explain?cmd=ssh-keygen+-t+rsa+-o+-a+100">as follows</a>:</p>
+<div class="highlight"><pre><span></span><code>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>rsa<span class="w"> </span>-b<span class="w"> </span><span class="m">4096</span><span class="w"> </span>-a<span class="w"> </span><span class="m">100</span>
+</code></pre></div>
+<p>After the execution of this command, the generated keys are stored in the following files:</p>
+<ul>
+<li>SSH RSA <em>Private</em> key: <code>~/.ssh/id_rsa</code>. <strong>NEVER EVER TRANSMIT THIS FILE</strong></li>
+<li>SSH RSA <em>Public</em> key:  <code>~/.ssh/id_rsa.pub</code>. <strong>This file is the ONLY one SAFE to distribute</strong></li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">To passphrase or not to passphrase</p>
+<p>To ensure the security of your SSH key-pair on your laptop, you <strong>MUST</strong> protect your SSH keys with a passphrase! Note however that while possible, this passphrase is purely private and has <em>a priori</em> nothing to do with your University or your ULHPC credentials. Nevertheless, a strong passphrase follows the same recommendations as for strong passwords (for instance: see <a href="../../policies/passwords/#password-requirements-and-guidelines">password requirements and guidelines</a>.</p>
+<p>Finally, just like encryption keys, passphrases need to be kept safe and protected from <em>unauthorised</em> access. A <em>Password Manager</em>  can help you to store all your passwords safely. The University is currently not offering a university wide password manger but there are many free and paid ones you can use, for example: <a href="https://www.keepassx.org/">KeePassX</a>, <a href="https://www.pwsafe.org/relatedprojects.shtml">PWSafe</a>, <a href="https://www.dashlane.com/">Dashlane</a>, <a href="https://1password.com/">1Password</a> or <a href="https://www.lastpass.com/">LastPass</a>.</p>
+</div>
+<p>You may want to generate also <strong>ED25519</strong> Key Pairs (which is the most recommended public-key algorithm available today) -- see <a href="https://explainshell.com/explain?cmd=ssh-keygen+-t+ed25519+-o+-a+100">explaination</a></p>
+<div class="highlight"><pre><span></span><code>ssh-keygen -t ed25519 -a 100
+</code></pre></div>
+<p>Your key pairs will be located under <code>~/.ssh/</code> and follow the following format -- the <code>.pub</code> extension indicated the <strong>public</strong> key part and is the <strong>ONLY one SAFE to distribute</strong>:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ls<span class="w"> </span>-l<span class="w"> </span>~/.ssh/id_*
+-rw-------<span class="w"> </span>username<span class="w"> </span>groupname<span class="w"> </span>~/.ssh/id_rsa
+-rw-r--r--<span class="w"> </span>username<span class="w"> </span>groupname<span class="w"> </span>~/.ssh/id_rsa.pub<span class="w">     </span><span class="c1"># Public  RSA key</span>
+-rw-------<span class="w"> </span>username<span class="w"> </span>groupname<span class="w"> </span>~/.ssh/id_ed25519
+-rw-r--r--<span class="w"> </span>username<span class="w"> </span>groupname<span class="w"> </span>~/.ssh/id_ed25519.pub<span class="w"> </span><span class="c1"># Public ED25519 key</span>
+</code></pre></div>
+<p>Ensure the access rights are correct on the generated keys using the '<code>ls -l</code>' command. In particular, the <em>private</em> key should be readable only by you:</p>
+<p>For more details, follow the <a href="https://ulhpc-tutorials.readthedocs.io/en/latest/preliminaries/#secure-shell-ssh">ULHPC Tutorials: Preliminaries / SSH</a>.</p>
+<details class="note">
+<summary>(deprecated - Windows only): SSH key management with MobaKeyGen tool</summary>
+<p>On Windows with <a href="http://mobaxterm.mobatek.net/">MobaXterm</a>, a tool exists and can be used to generate an SSH key pair. While not recommended (we encourage you to run WSL), here are the instructions to follow to generate these keys:</p>
+<ul>
+<li>Open the application <strong>Start &gt; Program Files &gt; MobaXterm</strong>.</li>
+<li>Change the default home directory for a persistent home directory instead of the default Temp directory. Go onto <strong>Settings &gt; Configuration &gt; General &gt; Persistent home directory</strong>.<ul>
+<li>choose a location for your home directory.<ul>
+<li>your local SSH configuration will be located under <code>HOME/.ssh/</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Go onto <strong>Tools &gt; Network &gt; MobaKeyGen (SSH key generator)</strong>.<ul>
+<li>Choose <strong>RSA</strong> as the type of key to generate and change "Number of bits in a generated key" to 4096.</li>
+<li>Click on the <strong>Generate</strong> button. Move your mouse to generate some randomness.</li>
+<li>Select a strong passphrase in the <strong>Key passphrase</strong> field for your key.</li>
+</ul>
+</li>
+<li>Save the public and private keys as respectively <code>id_rsa.pub</code> and <code>id_rsa.ppk</code>.<ul>
+<li>Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).</li>
+</ul>
+</li>
+</ul>
+<p><img alt="MobaKeyGen (SSH key generator)" src="../images/moba-ssh-key-gen.png" /></p>
+</details>
+<details class="note">
+<summary>(deprecated - Windows only): SSH key management with PuTTY</summary>
+<p>While no longer recommended, you may still want to use <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">Putty</a> and the associated tools, more precisely:</p>
+<ul>
+<li><a href="https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe">PuTTY</a>, the free SSH client</li>
+<li><a href="https://the.earth.li/~sgtatham/putty/latest/w64/pageant.exe">Pageant</a>, an SSH authentication agent for PuTTY tools</li>
+<li><a href="https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe">PuTTYgen</a>, an RSA key generation utility</li>
+<li><a href="https://the.earth.li/~sgtatham/putty/latest/w64/pscp.exe">PSCP</a>, an SCP (file transfer) client, i.e. command-line secure file copy</li>
+<li><a href="http://winscp.net/eng/download.php">WinSCP</a>, SCP/SFTP (file transfer) client with easy-to-use graphical interface</li>
+</ul>
+<p>The different steps involved in the installation process are illustrated below (<strong>REMEMBER to tick the option "Associate .PPK files (PuTTY Private Key) with Pageant and PuTTYGen"</strong>):</p>
+<p><img alt="Putty Setup Screen #4" src="../images/putty-setup-screenshot.png" /></p>
+<p>Now you can use the <a href="http://the.earth.li/~sgtatham/putty/latest/x86/puttygen.exe">PuTTYgen</a> utility to generate an RSA key pair. The main steps for the generation of the keys are illustrated below (yet with <strong>4096 bits</strong> instead of 2048):</p>
+<p><img alt="Configuring a passphrase" src="../images/puttygen-screenshot-1.png" /></p>
+<p><img alt="Saving the private key" src="../images/puttygen-screenshot-2.png" /></p>
+<p><img alt="Saving the public key" src="../images/puttygen-screenshot-3.png" /></p>
+<ul>
+<li>Save the public and private keys as respectively <code>id_rsa.pub</code> and <code>id_rsa.ppk</code>.<ul>
+<li>Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).</li>
+</ul>
+</li>
+</ul>
+</details>
+<h2 id="password-less-logins-and-transfers">Password-less logins and transfers<a class="headerlink" href="#password-less-logins-and-transfers" title="Permanent link">&para;</a></h2>
+<p>Password based authentication is disabled on all ULHPC servers. You can <strong>only use public-key authentication</strong>. This assumes that you upload your <strong>public</strong> SSH keys <code>*.pub</code> to your user entry on the <a href="../ipa/">ULHPC Identity Management Portal</a>.</p>
+<p>Consult the <a href="../ipa/">associated documentation</a> to discover how to do it.</p>
+<p>Once done, you can connect by SSH to the ULHPC clusters. Note that the port on which the SSH servers are listening is <strong>not</strong> the default SSH one (<em>i.e.</em> 22) but <strong>8022</strong>. Consequently, if you want to connect to the Iris cluster, open a terminal and run (substituting <em>yourlogin</em> with the login name you received from us):</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Iris</label><label for="__tabbed_1_2">Aion</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1"># ADAPT &#39;yourlogin&#39; accordingly</span>
+ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">8022</span><span class="w"> </span>yourlogin@access-iris.uni.lu
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1"># ADAPT &#39;yourlogin&#39; accordingly</span>
+ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">8022</span><span class="w"> </span>yourlogin@access-aion.uni.lu
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Of course, we advise you to setup your SSH configuration to avoid typing this detailed command. This is explained in the next section.</p>
+<h2 id="ssh-configuration">SSH Configuration<a class="headerlink" href="#ssh-configuration" title="Permanent link">&para;</a></h2>
+<p>On Linux / Mac OS / Unix / WSL, your SSH configuration is defined in <code>~/.ssh/config</code>. As recommended in the <a href="https://ulhpc-tutorials.readthedocs.io/en/latest/preliminaries/#secure-shell-ssh">ULHPC Tutorials: Preliminaries / SSH</a>, you probably want to create the following configuration to easiest further access and data transfers:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ~/.ssh/config -- SSH Configuration</span>
+<span class="c1"># Common options</span>
+Host<span class="w"> </span>*
+<span class="w">    </span>Compression<span class="w"> </span>yes
+<span class="w">    </span>ConnectTimeout<span class="w"> </span><span class="m">15</span>
+
+<span class="c1"># ULHPC Clusters</span>
+Host<span class="w"> </span>iris-cluster
+<span class="w">    </span>Hostname<span class="w"> </span>access-iris.uni.lu
+
+Host<span class="w"> </span>aion-cluster
+<span class="w">    </span>Hostname<span class="w"> </span>access-aion.uni.lu
+
+<span class="c1"># /!\ ADAPT &#39;yourlogin&#39; accordingly</span>
+Host<span class="w"> </span>*-cluster
+<span class="w">    </span>User<span class="w"> </span>yourlogin
+<span class="w">    </span>Port<span class="w"> </span><span class="m">8022</span>
+<span class="w">    </span>ForwardAgent<span class="w"> </span>no
+</code></pre></div>
+<p>You should now be able to connect as follows</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Iris</label><label for="__tabbed_2_2">Aion</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>iris-cluster
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>aion-cluster
+</code></pre></div>
+</div>
+</div>
+</div>
+<details class="note">
+<summary>(Windows only) Remote session configuration with MobaXterm</summary>
+<p>This part of the documentation comes from <a href="http://mobaxterm.mobatek.net/documentation.html#1_1">MobaXterm documentation page</a> MobaXterm allows you to launch remote sessions. You just have to click on the "Sessions" button to start a new session. Select SSH session on the second screen.</p>
+<p><img alt="MobaXterm Session button" src="../images/moba-session-button.png" /></p>
+<p><img alt="MobaXterm Session Manager" src="../images/moba-network-sessions-manager.png" /></p>
+<p>Enter the following parameters:</p>
+<ul>
+<li>Remote host: <code>access-iris.uni.lu</code> (repeat with <code>access-aion.uni.lu</code>)</li>
+<li>Check the <strong>Specify username</strong> box</li>
+<li>Username: <code>yourlogin</code><ul>
+<li>Adapt to match the one that was sent to you in the Welcome e-mail once your HPC account was created</li>
+</ul>
+</li>
+<li>Port: <code>8022</code></li>
+<li>Go in <strong>Advanced SSH settings</strong> and check the <strong>Use private key</strong> box.<ul>
+<li>Select your previously generated key <code>id_rsa.ppk</code>.</li>
+</ul>
+</li>
+</ul>
+<p><img alt="MobaXterm Session Manager Advanced" src="../images/moba-session-advanced.png" /></p>
+<p>You can now click on <strong>Connect</strong> and enjoy.</p>
+</details>
+<details class="note">
+<summary>(deprecated - Windows only) - Remote session configuration with PuTTY</summary>
+<p>If you want to connect to one of the ULHPC cluster, open Putty and enter the following settings:</p>
+<ul>
+<li>In <em>Category:Session</em> :<ul>
+<li>Host Name: <code>access-iris.uni.lu</code> (or <code>access-aion.uni.lu</code> if you want to access Aion)</li>
+<li>Port: <code>8022</code></li>
+<li>Connection Type: <code>SSH</code> (leave as default)</li>
+</ul>
+</li>
+<li>In <em>Category:Connection:Data</em> :<ul>
+<li>Auto-login username: <code>yourlogin</code><ul>
+<li>Adapt to match the one that was sent to you in the Welcome e-mail once your HPC account was created</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>In <em>Category:SSH:Auth</em> :<ul>
+<li>Upload your private key: <code>Options controlling SSH authentication</code></li>
+</ul>
+</li>
+</ul>
+<p>Click on <em>Open</em> button. If this is the first time connecting to the server from this computer a <strong>Putty Security Alert</strong> will appear. Accept the connection by clicking <em>Yes</em>.</p>
+<p>You should now be logged into the selected <a href="../access/">ULHPC login node</a>.</p>
+<p>Now you probably want want to <strong>save the configuration of this connection</strong>:</p>
+<ul>
+<li>Go onto the <em>Session</em> category.<ul>
+<li>Enter the settings you want to save.</li>
+<li>Enter a name in the <em>Saved session</em> field (for example <code>Iris</code> for access to Iris cluster).</li>
+<li>Click on the <em>Save</em> button.</li>
+</ul>
+</li>
+</ul>
+<p>Next time you want to connect to the cluster, click on <em>Load</em> button and <em>Open</em> to open a new connection.</p>
+</details>
+<h2 id="ssh-agent">SSH Agent<a class="headerlink" href="#ssh-agent" title="Permanent link">&para;</a></h2>
+<p>Using passphrase protected private keys can be tedious as you have to unlock the key every time it is used. SSH agent mitigate this issue by reducing the number of times you have to enter your passphrase.</p>
+<p>SSH agents are programs that safely hold unencrypted private keys used for public key authentication schemes. The agent unlocks the encrypted private key once per session<sup id="fnref:576"><a class="footnote-ref" href="#fn:576">1</a></sup>, and stores the unencrypted key is in program memory. A <a href="https://en.wikipedia.org/wiki/Unix_domain_socket">socket</a> is provided where programs that have access to the socket can request responses to challenges on the public key.</p>
+<p>Due to the <a href="http://www.unixwiz.net/techtips/ssh-agent-forwarding.html">challenge-response protocol</a> architecture of SSH agents, there are differences between how SSH works with and without SSH agents.</p>
+<ul>
+<li>The clients of the SSH agent, such as the SSH program, only get responses to challenges on the public key, not the private key itself.</li>
+<li>The socket of the SSH agent can be forwarded to remove hosts, where every process that has access to socket can request a response to a public key challenge as if it was located in the local host.</li>
+</ul>
+<h3 id="security-implications">Security implications<a class="headerlink" href="#security-implications" title="Permanent link">&para;</a></h3>
+<p>The most critical security risk when using SSH agent is the <a href="https://goteleport.com/blog/how-to-use-ssh-agent-safely/">man in the middle attack</a>. Any sufficiently privileged user, like a system administrator, can hijack the process by accessing the exposed socket and use it to impersonate you in a remote connection. While this does not reveal the user's private keys, it still violates the integrity of your communications.</p>
+<ul>
+<li>When agent forwarding is enabled, a sufficiently privileged user in the remote machine can impersonate the identities linked to keys in your local machine.</li>
+<li>When you enable the agent after connecting to a shared machine, a sufficiently privileged user can impersonate the identities linked to keys in the shared machine.</li>
+</ul>
+<p>Because of the risk of man in the middle attacks, SSH agent forwarding is prohibited in UL HPC systems and it is recommended that you also explicitly disable it in your SSH configuration file (see <code>ForwardAgent no</code> option in <a href="#ssh-configuration">recommended SSH configuration file</a>).</p>
+<h3 id="adding-keys">Adding keys<a class="headerlink" href="#adding-keys" title="Permanent link">&para;</a></h3>
+<p>In most UNIX like operating systems the SSH agent is installed and setup by default.</p>
+<ul>
+<li><strong>Mac OS X (&gt;= 10.5):</strong> the SSH agent is installed and setup by default.</li>
+<li><strong>Linux:</strong> in most distribution the SSH agent is installed and setup by default.</li>
+</ul>
+<p>However if you get a message similar to the following,</p>
+<div class="highlight"><pre><span></span><code>(laptop) $ ssh -vv iris-cluster
+[...]
+Agent admitted failure to sign using the key.
+Permission denied (publickey).
+</code></pre></div>
+<p>this means that you have to manually load your keys to the SSH agent by running the <code>ssh-add</code> command of the SSH agent. When running the command without any arguments</p>
+<div class="highlight"><pre><span></span><code>(laptop) $ ssh-add
+</code></pre></div>
+<p>the agent scans the home directory for some standard keys and adds imports them. By default, the agent looks for:</p>
+<ul>
+<li><code>~/.ssh/id_rsa</code></li>
+<li><code>~/.ssh/id_ed25519</code></li>
+<li><code>~/.ssh/id_ecdsa</code></li>
+</ul>
+<p>If you would like to add specific keys, then provide the <em>private</em> key of the key pair as argument to the agent. For instance to add only the RSA and ED25519 keys call the following command.</p>
+<div class="highlight"><pre><span></span><code>(laptop) $ ssh-add ~/.ssh/id_rsa
+Enter passphrase for ~/.ssh/id_rsa: # &lt;-- enter your passphrase here
+Identity added: ~/.ssh/id_rsa (&lt;login&gt;@&lt;hostname&gt;)
+(laptop) $ ssh-add ~/.ssh/id_ed25519
+Enter passphrase for ~/.ssh/id_ed25519: # &lt;-- enter your passphrase here
+Identity added: ~/.ssh/id_ed25519 (&lt;login&gt;@&lt;hostname&gt;)
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Useful commands</p>
+<p>You can add as many identities as you need in your <code>ssh-agent</code>.</p>
+<ul>
+<li>list the identities added with: <code>ssh-add -L</code></li>
+<li>delete an identity added with: <code>ssh-add -d &lt;private key file&gt;</code></li>
+<li>delete <em>all</em> identities added with: <code>ssh-add -D</code></li>
+</ul>
+</div>
+<details class="note">
+<summary>Issues in Ubuntu on WSL</summary>
+<p>If you experience issues when using <code>ssh-add</code>, the install the <a href="#the-keychain-package"><code>keychain</code> package</a>.</p>
+</details>
+<details class="note">
+<summary>SSH Agent within MobaXterm (Windows only)</summary>
+<ul>
+<li>Go in <strong>Settings &gt; SSH Tab</strong>.</li>
+<li>In <strong>SSH agents</strong> section, check <strong>Use internal SSH agent "MobAgent"</strong>.</li>
+</ul>
+<p><img alt="" src="../images/moba-agent1.png" /></p>
+<ul>
+<li>Click on the <code>+</code> button on the right.</li>
+<li>Select your private key file. If you have several keys, you can add them by doing steps above again.</li>
+<li>Click on "Show keys currently loaded in MobAgent". An advertisement window may appear asking if you want to run MobAgent. Click on "Yes".</li>
+<li>Check that your key(s) appears in the window.</li>
+</ul>
+<p><img alt="" src="../images/moba-agent2.png" /></p>
+<ul>
+<li>Close the window.</li>
+<li>Click on <code>OK</code> and then restart MobaXterm.</li>
+</ul>
+</details>
+<details class="note">
+<summary>SSH Agent with PuTTY Pageant (Windows only - deprecated)</summary>
+<p>To be able to use your PuTTY key in a public-key authentication scheme, it must be loaded by an SSH agent. You should run <a href="http://the.earth.li/~sgtatham/putty/latest/x86/pageant.exe">Pageant</a> for that. To load your SSH key in Pageant,</p>
+<ul>
+<li>right-click on the pageant icon in the system tray,</li>
+<li>click on the <code>Add key</code> menu item,</li>
+<li>select the private key file you saved while running <code>puttygen.exe</code>,</li>
+<li>save the private key by clicking on the <code>Open</code> button which opens a new dialog pop up and asks for your passphrase, and</li>
+<li>add your passphrase and click <code>OK</code>.</li>
+</ul>
+<p>Once your passphrase is entered, your key will be loaded in pageant, enabling you to connect with Putty.</p>
+</details>
+<h3 id="the-keychain-package">The keychain package<a class="headerlink" href="#the-keychain-package" title="Permanent link">&para;</a></h3>
+<p>The keychain utility (program) checks for a running <code>ssh-agent</code> and starts one if it’s not already running. It saves the <code>ssh-agent</code> environment variables to the <code>~/.keychain/${HOSTNAME}-sh</code> file, allowing subsequent logins and non-interactive shells such as <code>cron</code> jobs to source the file and establish passwordless <code>ssh</code> connections.</p>
+<p>Install the <code>keychain</code> package with the following command.</p>
+<div class="highlight"><pre><span></span><code>(laptop) $ sudo apt install keychain
+</code></pre></div>
+<p>Then, save the passphrase for <em>all</em> the keys you would like to use. For instance to save the passphrases for the RSA and ED25519 keys call the following command.</p>
+<div class="highlight"><pre><span></span><code>(laptop) $ /usr/bin/keychain --nogui ~/.ssh/id_rsa
+(laptop) $ /usr/bin/keychain --nogui ~/.ssh/id_ed25519
+</code></pre></div>
+<p>Finally to load the agent in you shell source the file generated for your local host in your current session.</p>
+<div class="highlight"><pre><span></span><code>(laptop) $ source ~/.keychain/$(hostname)-sh
+</code></pre></div>
+<p>You can also add the source command above in your <code>~/.profile</code> script to load the <code>ssh-agent</code> automatically in every session.</p>
+<h3 id="on-ulhpc-clusters">On ULHPC clusters<a class="headerlink" href="#on-ulhpc-clusters" title="Permanent link">&para;</a></h3>
+<p>SSH agent forwarding is prohibited in UL HPC systems for <a href="#security-implications">security reasons</a> mentioned above and it is recommended that you also explicitly disable it in your SSH configuration. For more details, see the <code>ForwardAgent no</code> configuration option in the <a href="#ssh-configuration">SSH configuration</a> proposed for UL HPC clusters. There are however legitimate uses of SSH agent. Consider for instance keys <em>generated in the UL HPC cluster</em> to access a remote service. You can use SSH agent to avoid entering the passphrase of SSH keys every time you access the remote service. </p>
+<p>In such cases an SSH agent must be manually loaded after connecting to UL HPC facilities. To load the agent, execute the command,</p>
+<div class="highlight"><pre><span></span><code><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="k">)</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p>that exports the <code>SSH_AUTH_SOCK</code> and <code>SSH_AGENT_PID</code> environment variables required by the clients of the SSH agent. Then, you can setup the agent by <a href="adding-keys">adding your keys</a>. For instance to add the RSA and ED25519 keys, execute the following command.</p>
+<div class="highlight"><pre><span></span><code>$ ssh-add ~/.ssh/id_rsa
+Enter passphrase for ~/.ssh/id_rsa: # &lt;-- enter your passphrase here
+Identity added: ~/.ssh/id_rsa (&lt;login&gt;@&lt;hostname&gt;)
+$ ssh-add ~/.ssh/id_ed25519
+Enter passphrase for ~/.ssh/id_ed25519: # &lt;-- enter your passphrase here
+Identity added: ~/.ssh/id_ed25519 (&lt;login&gt;@&lt;hostname&gt;)
+</code></pre></div>
+<p>Adding your keys to the agent exposes your session to a <a href="#security-implications">man in the middle attack</a>, as discussed above <sup id="fnref:5223"><a class="footnote-ref" href="#fn:5223">2</a></sup>. Thus, you <em>must</em> kill your agent whenever it is no longer needed. Kill the agent executing the following command.</p>
+<div class="highlight"><pre><span></span><code>$ eval &quot;$(ssh-agent -k)&quot;
+Agent pid &lt;PID&gt; killed
+</code></pre></div>
+<details class="info">
+<summary><em>Useful resources</em></summary>
+<ol>
+<li><a href="http://www.unixwiz.net/techtips/ssh-agent-forwarding.html">An Illustrated Guide to SSH Agent Forwarding</a></li>
+<li><a href="https://smallstep.com/blog/ssh-agent-explained/">SSH Agent Explained</a></li>
+<li><a href="https://goteleport.com/blog/how-to-use-ssh-agent-safely/">How to Use SSH Agent Safely</a></li>
+</ol>
+</details>
+<h2 id="key-fingerprints">Key fingerprints<a class="headerlink" href="#key-fingerprints" title="Permanent link">&para;</a></h2>
+<p>ULHPC may occasionally update the host keys on the major systems. Check here to confirm the current fingerprints.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Iris</label><label for="__tabbed_3_2">Aion</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>With regards <code>access-iris.uni.lu</code>:</p>
+<div class="highlight"><pre><span></span><code>256 SHA256:tkhRD9IVo04NPw4OV/s2LSKEwe54LAEphm7yx8nq1pE /etc/ssh/ssh_host_ed25519_key.pub (ED25519)
+2048 SHA256:WDWb2hh5uPU6RgaSotxzUe567F3scioJWy+9iftVmhI /etc/ssh/ssh_host_rsa_key.pub (RSA)
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>With regards <code>access-aion.uni.lu</code>:</p>
+<div class="highlight"><pre><span></span><code>256 SHA256:jwbW8pkfCzXrh1Xhf9n0UI+7hd/YGi4FlyOE92yxxe0 [access-aion.uni.lu]:8022 (ED25519)
+3072 SHA256:L9n2gT6aV9KGy0Xdh1ks2DciE9wFz7MDRBPGWPFwFK4 [access-aion.uni.lu]:8022 (RSA)
+</code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Get SSH key fingerprint</p>
+<p>The ssh fingerprints can be obtained via:
+<div class="highlight"><pre><span></span><code>ssh-keygen -lf &lt;(ssh-keyscan -t rsa,ed25519 $(hostname) 2&gt;/dev/null)
+</code></pre></div></p>
+</div>
+<details class="tips">
+<summary>Putty key fingerprint format</summary>
+<p>Depending on the ssh client you use to connect to ULHPC systems, you may see different key fingerprints.
+For example, Putty uses different format of fingerprints as follows:</p>
+<ul>
+<li><code>access-iris.uni.lu</code>
+<div class="highlight"><pre><span></span><code>ssh-ed25519 255 4096 07:6a:5f:11:df:d4:3f:d4:97:98:12:69:3a:63:70:2f
+</code></pre></div></li>
+</ul>
+<p>You may see the following warning when connecting to Cori with Putty, but it is safe to ingore.</p>
+<div class="highlight"><pre><span></span><code>PuTTY Security Alert
+The server&#39;s host key is not cached in the registry. You have no guarantee that the server is the computer you think it is.
+The server&#39;s ssh-ed25519 key fingerprint is:
+ssh-ed25519 255 4096 07:6a:5f:11:df:d4:3f:d4:97:98:12:69:3a:63:70:2f
+If you trust this host, hit Yes to add the key to PuTTY&#39;s cache and carry on connecting.
+If you want to carry on connecting just once, without adding the key to the cache, hit No.
+If you do not trust this host, hit Cancel to abandon the connection.
+</code></pre></div>
+</details>
+<h2 id="host-keys">Host Keys<a class="headerlink" href="#host-keys" title="Permanent link">&para;</a></h2>
+<p>These are the entries in <code>~/.ssh/known_hosts</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Iris</label><label for="__tabbed_4_2">Aion</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>The known host SSH entry for the <a href="../../systems/iris/">Iris cluster</a>  should be as follows:</p>
+<div class="highlight"><pre><span></span><code>[access-iris.uni.lu]:8022 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOP1eF8uJ37h5jFQQShn/NHRGD/d8KsMMUTHkoPRANLn
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>The known host SSH entry for the <a href="../../systems/aion/">Aion cluster</a> should be as follows:</p>
+<div class="highlight"><pre><span></span><code>[access-aion.uni.lu]:8022 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmcYJ7T6A1wOvIQaohgwVCrKLqIrzpQZAZrlEKx8Vsy
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<p>See <a href="../troubleshooting/">the corresponding section</a>.</p>
+<h2 id="advanced-ssh-tips-and-tricks">Advanced SSH Tips and Tricks<a class="headerlink" href="#advanced-ssh-tips-and-tricks" title="Permanent link">&para;</a></h2>
+<h3 id="cli-completion">CLI Completion<a class="headerlink" href="#cli-completion" title="Permanent link">&para;</a></h3>
+<p>The <code>bash-completion</code> package eases the ssh command usage by providing completion for hostnames and more (assuming you set the directive <code>HashKnownHost</code> to <code>no</code> in your <code>~/etc/ssh_config</code>).</p>
+<h3 id="socks-5-proxy-plugin">SOCKS 5 Proxy plugin<a class="headerlink" href="#socks-5-proxy-plugin" title="Permanent link">&para;</a></h3>
+<p>Many Data Analytics framework involves a web interface (at the level of the master and/or the workers) you probably want to access in a relative transparent way.</p>
+<p>For that, a convenient way is to rely on a SOCKS proxy, which is basically an SSH tunnel in which specific applications forward their traffic down the tunnel to the server, and then on the server end, the proxy forwards the traffic out to the general Internet. Unlike a VPN, a SOCKS proxy has to be configured on an app by app basis on the client machine, but can be set up without any specialty client agents. The general principle is depicted below.</p>
+<p><img alt="Creating a SOCKS proxy with SSH" src="../images/SshD.png" /></p>
+<h4 id="setting-up-the-tunnel">Setting Up the Tunnel<a class="headerlink" href="#setting-up-the-tunnel" title="Permanent link">&para;</a></h4>
+<p>To initiate such a SOCKS proxy using SSH (listening on <code>localhost:1080</code> for instance), you simply need to use the <code>-D 1080</code> command line option when connecting to a remote server:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Iris</label><label for="__tabbed_5_2">Aion</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="go">ssh -D 1080 -C iris-cluster</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="go">ssh -D 1080 -C aion-cluster</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li><code>-D</code>: Tells SSH that we want a SOCKS tunnel on the specified port number (you can choose a number between 1025-65536), and</li>
+<li><code>-C</code>: compresses the data before sending it.</li>
+</ul>
+<h4 id="foxyproxy-firefox-extension">FoxyProxy [Firefox] Extension<a class="headerlink" href="#foxyproxy-firefox-extension" title="Permanent link">&para;</a></h4>
+<p>Now that you have an SSH tunnel, it's time to configure your web browser (recommended: Firefox) to use that tunnel. In particular, install the <a href="https://getfoxyproxy.org/order/?src=FoxyProxyForFirefox">Foxy Proxy</a> extension for Firefox and configure it to use your SOCKS proxy:</p>
+<ul>
+<li>Right click on the fox icon, Select Options</li>
+<li><strong>Add a new proxy</strong> button</li>
+<li>Name: <code>ULHPC proxy</code></li>
+<li>Informations &gt; <strong>Manual configuration</strong><ul>
+<li>Host IP: <code>127.0.0.1</code></li>
+<li>Port: <code>1080</code></li>
+<li>Check the <strong>Proxy SOCKS</strong> Option</li>
+</ul>
+</li>
+<li>Click on <strong>OK</strong></li>
+<li>Close</li>
+<li>Open a new tab</li>
+<li>Click on the Fox</li>
+<li>Choose the <strong>ULHPC proxy</strong><ul>
+<li>disable it when you no longer need it.</li>
+</ul>
+</li>
+</ul>
+<p>You can now access any web interface deployed on any service reachable from the SSH jump host <em>i.e.</em> the ULHPC login node.</p>
+<h4 id="using-tsock">Using <code>tsock</code><a class="headerlink" href="#using-tsock" title="Permanent link">&para;</a></h4>
+<p>Once you setup a SSH SOCKS proxy, you can also use <code>tsocks</code>, a Shell wrapper to simplify the use of the <a href="https://linux.die.net/man/8/tsocks">tsocks(8)</a> library to transparently allow an application (not aware of SOCKS) to transparently use a SOCKS proxy. For instance, assuming you create a VNC server on a given remote server as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="gp gp-VirtualEnv">(remote_server)</span><span class="gp">$</span>&gt;<span class="w"> </span>vncserver<span class="w"> </span>-geometry<span class="w"> </span>1366x768
+<span class="go">New &#39;X&#39; desktop is remote_server:1</span>
+
+<span class="go">Starting applications specified in /home/username/.vnc/xstartup</span>
+<span class="go">Log file is /home/username/.vnc/remote_server:1.log</span>
+</code></pre></div>
+<p>Then you can make the VNC client on your workstation use this tunnel to access the VNS server as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="gp gp-VirtualEnv">(laptop)</span><span class="gp">$</span>&gt;<span class="w"> </span>tsocks<span class="w"> </span>vncviewer<span class="w"> </span>&lt;IP_of_remote_server&gt;:1
+</code></pre></div>
+<div class="admonition tips">
+<p class="admonition-title">tsock Escape character</p>
+<p>Use <code>~.</code> to disconnect, even if your remote command hangs.</p>
+</div>
+<h3 id="ssh-port-forwarding">SSH Port Forwarding<a class="headerlink" href="#ssh-port-forwarding" title="Permanent link">&para;</a></h3>
+<h4 id="forwarding-a-local-port">Forwarding a local port<a class="headerlink" href="#forwarding-a-local-port" title="Permanent link">&para;</a></h4>
+<p>You can forward a local port to a host behind a firewall.</p>
+<p><img alt="SSH forward of local port" src="../images/SshL.png" /></p>
+<p>This is useful if you run a server on one of the cluster nodes (let's say listening on port 2222) and you want to access it via the local port 1111 on your machine. Then you'll run:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Here targeting iris cluster</span>
+<span class="o">(</span>laptop<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>ssh<span class="w"> </span>iris-cluster<span class="w"> </span>-L<span class="w"> </span><span class="m">1111</span>:iris-014:2222
+</code></pre></div>
+<h4 id="forwarding-a-remote-port">Forwarding a remote port<a class="headerlink" href="#forwarding-a-remote-port" title="Permanent link">&para;</a></h4>
+<p>You can forward a remote port back to a host protected by your firewall.</p>
+<p><img alt="SSH forward of a remote port" src="../images/SshR.png" /></p>
+<p>This is useful when you want the HPC node to access some local service. For instance is your local machine runs a service that is listening at some local port, say 2222, and you have some service in the HPC node that listens to some local port, say 1111, then the you'll run:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Here targeting the iris cluster</span>
+<span class="o">(</span><span class="nb">local</span><span class="w"> </span>machine<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>ssh<span class="w"> </span>iris-cluster<span class="w"> </span>-R<span class="w"> </span><span class="m">1111</span>:<span class="k">$(</span>hostname<span class="w"> </span>-i<span class="k">)</span>:2222
+</code></pre></div>
+<h4 id="tunnelling-for-others">Tunnelling for others<a class="headerlink" href="#tunnelling-for-others" title="Permanent link">&para;</a></h4>
+<p>By using the <code>-g</code> parameter, you allow connections from other hosts than localhost to use your SSH tunnels. Be warned that anybody within your network may access the tunnelized host this way, which may be a security issue.</p>
+<h3 id="ssh-jumps">SSH jumps<a class="headerlink" href="#ssh-jumps" title="Permanent link">&para;</a></h3>
+<p>Compute nodes are not directly accessible from the outside network. To login into a cluster node you will need to jump through a login node. Remember, you need a job running in a node before you can ssh into it. Assume that you have some job running on <code>aion-0014</code> for instance. Then, connect to <code>aion-0014</code> with,</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-J<span class="w"> </span><span class="si">${</span><span class="nv">USER</span><span class="si">}</span>@access-aion.uni.lu:8022<span class="w"> </span><span class="si">${</span><span class="nv">USER</span><span class="si">}</span>@aion-0014
+</code></pre></div>
+<p>where <code>USER</code> is a variable containing your username in UL HPC clusters. The domain resolution in the login node will determine the IP of the <code>aion-0014</code>. You can always use the IP address of the node directly.</p>
+<details class="tip">
+<summary>Obtaining the IP address of cluster nodes</summary>
+<p>To get the IP address of any node just run the following command.</p>
+<div class="highlight"><pre><span></span><code>hostname<span class="w"> </span>--ip-address
+</code></pre></div>
+</details>
+<details class="tip">
+<summary>Useful environment variables for SSH jumps</summary>
+<ul>
+<li><code>USER</code>: In most Linux systems the <code>USER</code> environment variable is defined in the <code>/etc/profile</code> and <code>/etc/prifile.d/*</code> scripts, and contains the username of the user.</li>
+<li><code>HOSTNAME</code>: A shell variable defined in BASH that contains the name of the host machine.</li>
+<li><code>ULHPC_CLUSTER</code>: An environment variable defined in environment initialization scripts of UL HPC, and contains and identifier of the system, <code>aion</code> or <code>iris</code>.</li>
+</ul>
+</details>
+<h4 id="authorizing-access-to-compute-nodes">Authorizing access to compute nodes<a class="headerlink" href="#authorizing-access-to-compute-nodes" title="Permanent link">&para;</a></h4>
+<p>In UL HPC clusters, the authorization for logging into the login nodes is not provided by the <code>authorized_keys</code> file, but by <a href="/connect/ipa/">identity management</a> system. However, connections to the compute nodes are authorized by the <code>authorized_keys</code> file. Use the command</p>
+<div class="highlight"><pre><span></span><code>ssh-copy-id -i &lt;private key&gt; aion-cluster
+</code></pre></div>
+<p>if you have <a href="#ssh-configuration">configured SSH</a>, or</p>
+<div class="highlight"><pre><span></span><code>ssh-copy-id -i &lt;private key&gt; -p 8022 &lt;user name&gt;@access-aion.uni.lu
+</code></pre></div>
+<p>if you haven't; the <code>&lt;private key&gt;</code> is the private key for the public key you would like to copy to the UL HPC cluster. For instance,</p>
+<ul>
+<li><code>&lt;private key&gt;</code> is <code>~/.ssh/id_ed25519</code> for the default ED25519 key pair, and</li>
+<li><code>&lt;private key&gt;</code> is <code>~/.ssh/id_rsa</code> for the default RSA key pair.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Passwordless SSH jumps</p>
+<p>With a proxy jump command SSH logs into the jump host, initiates I/O forwarding, and then logs into the target remote host using the credentials of your local machine. Thus, the <code>ProxyJump</code> SSH option <a href="https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts#Old:_Recursively_Chaining_Gateways_Using_stdio_Forwarding">obviates the need for SSH agent forwarding</a>. You do not need SSH agent forwarding to the jump host or the target remote host, just ensure that your private key is authorized both in the jump hosts and in the target remote host.</p>
+<p>You still need to run the <a href="#ssh-agent">SSH agent</a> in your local machine to ensure passwordless to keys protected by passphrase.</p>
+</div>
+<details class="tip">
+<summary>the <code>authorized_keys</code> file</summary>
+<p>The <code>authorized_keys</code> file is located in 
+<div class="highlight"><pre><span></span><code>${HOME}/.ssh/authorized_keys
+</code></pre></div>
+and <code>ssh-copy-id</code> simply automatically appends the key at the end of the file in the remote host.</p>
+</details>
+<h4 id="port-forwarding-over-ssh-jumps">Port forwarding over SSH jumps<a class="headerlink" href="#port-forwarding-over-ssh-jumps" title="Permanent link">&para;</a></h4>
+<p>You can combine the jump command with other options, such as <a href="#ssh-port-forwarding">port forwarding</a>, for instance to access from you local machine a web server running in a compute node. Assume for instance that you have a server running in <code>iris-014</code> and listens at the IP <code>127.0.0.1</code> and port <code>2222</code>, and that you would like to forward the remote port <code>2222</code> to the <code>1111</code> port of you local machine. The, call the port forwarding command with a jump though the login node:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-J<span class="w"> </span>iris-cluster<span class="w"> </span>-L<span class="w"> </span><span class="m">1111</span>:127.0.0.1:2222<span class="w"> </span>&lt;cluster<span class="w"> </span>username&gt;@iris-014
+</code></pre></div>
+<p>This command can be combined with <a href="#passwordless-ssh-jumps">passwordless access</a> to the cluster node.</p>
+<h2 id="extras-tools-around-ssh">Extras Tools around SSH<a class="headerlink" href="#extras-tools-around-ssh" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><a href="https://github.com/moul/advanced-ssh-config">Assh</a> - Advanced SSH config is a transparent wrapper that make <code>~/.ssh/config</code> easier to manage</p>
+<ul>
+<li>support for <em>templates</em>, <em>aliases</em>, <em>defaults</em>, <em>inheritance</em> etc.</li>
+<li><em>gateways</em>: transparent ssh connection chaining</li>
+<li>more flexible command-line. <em>Ex</em>: Connect to <code>hosta</code> using <code>hostb</code> as a gateway
+  <div class="highlight"><pre><span></span><code><span class="gp">$ </span>ssh<span class="w"> </span>hosta/hostb
+</code></pre></div></li>
+</ul>
+<ul>
+<li>drastically simplify your SSH config</li>
+<li>Linux / Mac OS <strong>only</strong></li>
+<li><a href="https://clustershell.readthedocs.io">ClusterShell</a>: <code>clush</code>, <code>nodeset</code> (or cluset),</li>
+<li>light, unified, robust command execution framework</li>
+<li>well-suited to <em>ease daily administrative tasks</em> of Linux clusters.<ul>
+<li>using tools like <code>clush</code> and <code>nodeset</code></li>
+</ul>
+</li>
+<li><em>efficient, parallel, scalable command execution engine</em> \hfill{\tiny in Python}</li>
+<li>provides an <em>unified node groups syntax</em> and external group access<ul>
+<li>see <code>nodeset</code> and the NodeSet class</li>
+</ul>
+</li>
+<li><a href="http://www.netfort.gr.jp/~dancer/software/dsh.html.en">DSH</a> - Distributed / Dancer's Shell</li>
+<li><a href="https://github.com/sshuttle/sshuttle">sshutle</a>, "<em>where transparent proxy meets VPN meets ssh</em>"</li>
+</ul>
+</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:576">
+<p>SSH agents usually support session timeout to limit the time duration a key is exposed without a passphrase; this can guard against accidental key exposure, for instance if a user leaves their computer unlocked.&#160;<a class="footnote-backref" href="#fnref:576" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5223">
+<p>If you store private keys in the UL HPC cluster file systems these keys are already visible to users with sufficiently high privileges. You must kill the SSH agent to avoid exposing these keys to <a href="#security-implications">man in the middle attack</a> through SSH agent forwarding.&#160;<a class="footnote-backref" href="#fnref:5223" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="January 30, 2026 10:52:15 UTC">January 30, 2026</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2007-2025 Uni.lu HPC (ULHPC) Team
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ULHPC" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/ULHPC" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/bootstrap.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+    
+  </body>
+</html>
