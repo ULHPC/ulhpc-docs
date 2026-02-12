@@ -37,7 +37,7 @@ The main configuration options for Slurm that affect the resources that are avai
   - `interactive`: _floating partition_ across all node types allowing higher priority allocation for quicks tests. Best used in interactive allocations for code development, testing, and debugging. Limited to _max_:
     - 2 nodes, and
     - 2h walltime.
-- _Queue policies/Quality of Service (QoS's)__](/slurm/qos) apply restrictions to resource access and modify job priority on top of (overriding) access restrictions and priority modifications applied by partitions.
+- [__Queue policies/Quality of Service (QoS's)__](/slurm/qos) apply restrictions to resource access and modify job priority on top of (overriding) access restrictions and priority modifications applied by partitions.
   - _Cross-partition QoS's_ are tied to a priority level.
     - `low`: Priority 10 and _max_ 300 jobs per user.
     - `normal`: Priority 100 and _max_ 100 jobs per user.
