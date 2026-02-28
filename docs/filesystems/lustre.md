@@ -10,7 +10,7 @@ It is available as a global _high_-performance file system on all ULHPC computat
 
 It is meant to host **temporary scratch data** within your jobs. In terms of raw storage capacities, it represents more than **2PB**.
 
-## Scratch directory `($SCRATCH)`
+## Scratch directory `(${SCRATCH})`
 
 <!--scratch-mount-start-->
 
