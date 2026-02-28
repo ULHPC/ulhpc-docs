@@ -1,12 +1,12 @@
-# Lustre (`$SCRATCH`)
+# Lustre (`${SCRATCH}`)
 
 ![Piechart storage per filesystem](../images/plots/plot_piechart_storage_fs.png){: style="width:350px; float: right;"}
 
-## Introduction
+A Lustre file system is used in UL HPC clusters to provide _temporary scratch data storage_ within jobs or job campaigns. In terms of raw storage capacities, its capacity is more than **2PB**.
 
 The [Lustre](http://lustre.org/) file system is an open-source, parallel file system that supports many requirements of leadership class HPC simulation environments.
 
-It is available as a global _high_-performance file system on all ULHPC computational systems through a [DDN ExaScaler](https://www.ddn.com/products/lustre-file-system-exascaler/) system.[^0947]
+It is available as a global _high_-performance file system on all UL HPC computational clusters through a [DDN ExaScaler](https://www.ddn.com/products/lustre-file-system-exascaler/) system.[^0947]
 
 [^0947]:
     ??? info "A short history of Lustre"
@@ -14,13 +14,11 @@ It is available as a global _high_-performance file system on all ULHPC computat
  
         WhamCloud was bought by Intel in 2011 and Xyratex took over the Lustre trade mark, logo, related assets (support) from Oracle. In June 2018, the Lustre team and assets were acquired from Intel by DDN. DDN organized the new acquisition as an independent division, reviving the WhamCloud name for the new division.
 
-It is meant to host **temporary scratch data** within your jobs. In terms of raw storage capacities, it represents more than **2PB**.
-
 ## Scratch directory `(${SCRATCH})`
 
 <!--scratch-mount-start-->
 
-The _scratch_ area is a [Lustre](http://lustre.org/)-based file system that provides high performance temporary storage of large files and is accessible across all cluster nodes. Use scratch to store working files and temporary large data files. The scratch file system is providing redundancy and high availability that protect your data from corruption and loss of access in case of hardware failure, however, it is not a place to store files long term.
+The _scratch_ area is a [Lustre](http://lustre.org/)-based file system that provides high performance temporary storage of large files and is accessible across all cluster nodes. Use scratch to store working files and temporary large data files within single jobs or job campaigns. The scratch file system is providing redundancy and high availability that protect your data from corruption and loss of access in case of hardware failure, however, it is not a place to store files long term.
 
 - The scratch file system _is not a [backup](/data/backups/)_ solution. Your data is not protected in case of total system loss.
 - The scratch file system _is oversubscribed_, there is more space allocated to users than physically available. If the file system start filling up, then policies will be implemented to recover space, and your data may be deleted after a warning and a grace period that will allow you to move data to permanent storage ([GPFS](/filesystems/gpfs/)).
