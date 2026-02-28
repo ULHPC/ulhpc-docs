@@ -14,9 +14,12 @@ It is meant to host **temporary scratch data** within your jobs. In terms of raw
 
 <!--scratch-mount-start-->
 
-The _scratch_ area is a [Lustre](http://lustre.org/)-based file system that provides high performance temporary storage of large files and is accessible across all cluster nodes. Use scratch to store working files and temporary large data files.
+The _scratch_ area is a [Lustre](http://lustre.org/)-based file system that provides high performance temporary storage of large files and is accessible across all cluster nodes. Use scratch to store working files and temporary large data files. The scratch file system is providing redundancy and high availability that protect your data from corruption and loss of access in case of hardware failure, however, it is not a place to store files long term.
 
-- The scratch file system is not fully redundant, so do not use scratch to store files that cannot be recreated. For instance store only simulation output that can be recalculated.
+- The scratch file system _is not a [backup](/data/backups/)_ solution. Your data is not protected in case of total system loss.
+- The scratch file system _is oversubscribed_, there is more space allocated to users than physically available. If the file system start filling up, then policies will be implemented to recover space, and your data may be deleted after a warning and a grace period that will allow you to move data to permanent storage ([GPFS](/filesystems/gpfs/)).
+
+The environment variable `${SCRATCH}` (which expands to `/scratch/users/$(whoami)`) points to a users scratch directory. The absolute path may change, but the value of `${SCRATCH}` will always be correct.
 
 !!! warning "Small file and random I/O"
     The scratch is best used to write large files in a continuous manner. Even though the Lustre file system can handle small file and random I/O better that our GPFS system, it still slows down considerably as the number of I/O operations increases. Typical example of operations with a lot random and small file I/O operations in the parallel compilation of large projects.
@@ -26,12 +29,10 @@ The _scratch_ area is a [Lustre](http://lustre.org/)-based file system that prov
 ??? info "Origin of the term scratch"
     The term scratch originates from [scratch data tapes](https://en.wikipedia.org/wiki/Scratch_tape). People uses scratch tapes to write and read data that did not fit into the main memory, and since it was a tape, it could only perform continuous I/O. The term scratch is a bit abused in modern times as most storage systems nowadays support random access. In the case of the lustre system in UL HPC, the terms scratch serves as a reminder that the file system is best used for contiguous I/O, even though it supports random access quite well.
 
-The environment variable `${SCRATCH}` (which expands to `/scratch/users/$(whoami)`) points to a users scratch directory. The absolute path may change, but the value of `${SCRATCH}` will always be correct.
-
 <!--scratch-mount-end-->
 
 !!! warning "ULHPC `$SCRATCH` quotas and backup"
-    Extended ACLs are provided for sharing data with other users using fine-grained control. See [quotas](quotas.md) for detailed information about inode, space quotas, and file system policies. In particular, your `$SCRATCH` directory is [**NOT** backuped](../data/backups.md) according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
+    Extended ACLs are provided for sharing data with other users using fine-grained control. See [quotas](quotas.md) for detailed information about inode, space quotas, and file system policies. In particular, your `$SCRATCH` directory is [**not** backuped](../data/backups.md) according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
 
 ## General Architecture
 
