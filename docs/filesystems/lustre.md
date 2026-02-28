@@ -32,7 +32,7 @@ The environment variable `${SCRATCH}` (which expands to `/scratch/users/$(whoami
 <!--scratch-mount-end-->
 
 !!! warning "ULHPC `$SCRATCH` quotas and backup"
-    Extended ACLs are provided for sharing data with other users using fine-grained control. See [quotas](quotas.md) for detailed information about inode, space quotas, and file system policies. In particular, your `$SCRATCH` directory is [**not** backuped](../data/backups.md) according to the policy detailed in the [ULHPC backup policies](../data/backups.md).
+    Extended ACLs are provided for sharing data with other users using fine-grained control. See [quotas](/filesystems/quotas/) for detailed information about inode, space quotas, and file system policies. In particular, your `$SCRATCH` directory is [**not** backuped](/data/backups/) according to the policy detailed in the [ULHPC backup policies](/data/backups/).
 
 ## General Architecture
 
@@ -78,7 +78,7 @@ The way the ULHPC Lustre file system is implemented is depicted on the below fig
 
 ![ulhpc_lustre](images/2025_ulhpc_lustre.png){: style="width:800px;"}
 
-Acquired [as part of RFP 190027](../systems/aion/timeline.md), the ULHPC configuration has been converted to Lustre in 2025. It is based upon:
+Acquired [as part of RFP 190027](/systems/aion/timeline/), the ULHPC configuration has been converted to Lustre in 2025. It is based upon:
 
 - 1x DDN EXAScaler Lustre building block that consist of:
   - 1x DDN ES7990 base enclosure and its controller pair with 4x EDR ports
@@ -140,7 +140,7 @@ Random IOPS benchmark was performed using [FIO](http://freecode.com/projects/fio
    include-markdown "filesystems/lfs.md"
 %}
 
-??? note "(Obsolete) Initial ExaScaler infrastructure ([as part of RFP 170035](../systems/iris/timeline.md#october-2017))"
+??? note "(Obsolete) Initial ExaScaler infrastructure ([as part of RFP 170035](/systems/iris/timeline/#october-2017))"
 
     Until end of 2025, the Iris and Aion cluster used a different DDN ExaScaler infrastructure.
     Due to the end of support and warranty, we have migrated all the data to the new system described above.
