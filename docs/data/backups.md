@@ -50,7 +50,9 @@ Projects stored on the [Isilon system](/filesystems/isilon) are snapshotted regu
 
 !!! info "SIU back up policy"
 
-    Snapshots do not protect on themselves against a system failure, they only permit recovering files in case of accidental deletion.
+    Snapshots do not protect on themselves against a system failure, they only permit recovering files in case of accidental deletion. Proper backup storage requires that the data are redundant and highly available with respect to whole system failure (the whole Isilon system failing).
+
+    Isilon backups your data automatically, by copying snapshot data to a Disaster Recovery Site (DRS) in a location outside the server room where the primary data storage (Isilon) is located.
 
 <!--backup-isilon-end-->
 
