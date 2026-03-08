@@ -36,7 +36,7 @@
     bare_compute_node/.pic={
         \node [compute_node] (compute_node) at (0,0) {};
         \node [device, right=of compute_node.east, anchor=west] (local_storage) {SSDs}; % \texttt{/dev/sdX}
-        \path [draw] (compute_node.east) -- (local_storage.west);
+        \path [draw, line width=1.5pt] (compute_node.east) -- (local_storage.west);
         \node [core_device] (cpu) at ($(compute_node.west)!0.15!(compute_node.east)$) {CPUs};
         \node [core_device, right=2em of cpu] (ram) {RAM};
         \coordinate (-base) at (compute_node.center);
@@ -52,8 +52,8 @@
         \coordinate (accelerator_connection) at ($(compute_node.north east)!0.78!(compute_node.south east)$);
         \node [device, right=of storage_connection, anchor=west] (local_storage) {SSDs}; % \texttt{/dev/sdX}
         \node [device, right=of accelerator_connection, anchor=west] (accelerator) {GPUs}; % \texttt{/dev/nvidiaX}
-        \path [draw] (storage_connection) -- (local_storage.west);
-        \path [draw] (accelerator_connection) -- (accelerator.west);
+        \path [draw, line width=1.5pt] (storage_connection) -- (local_storage.west);
+        \path [draw, line width=1.5pt] (accelerator_connection) -- (accelerator.west);
         \node [core_device] (cpu) at ($(compute_node.west)!0.15!(compute_node.east)$) {CPUs};
         \node [core_device, right=2em of cpu] (ram) {RAM};
         \coordinate (-base) at (compute_node.center);
@@ -162,7 +162,7 @@
         in
         coordinate (permanent_storage_bend) at (\x{permanent_storage_plug},\y{permanent_storage_connection})
         (permanent_storage_plug) -- (permanent_storage_bend)
-            -- node[above, pos=0.825] {Ethernet ($10$\,Gb/s)} (permanent_storage_connection)
+            -- node[above, pos=0.8] {Ethernet ($10$\,Gb/s)} (permanent_storage_connection)
             -- (isilon.north)
     ;
 
