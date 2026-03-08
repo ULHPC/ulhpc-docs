@@ -42,26 +42,32 @@ The cluster file systems are not meant to be used for data storage, so there are
 
 Projects stored on the [Isilon system](/filesystems/isilon) are snapshotted regularly. This includes the NFS export of Isilon in HL HPC systems, personal and project directories in Atlas, the SMB export of Isilon, but not the personal directories of the students exported through the Poseidon SMB export of Isilon. The following snapshot schedule and retention strategy are used:
 
-| Backed up snapshot | Retention |
-|--------------------|-----------|
-| Daily              | 14 days   |
-| Weekly             | 5 months  |
-| Monthly            | 12 months |
-
 !!! info "SIU back up policy"
+    | Backed up snapshot | Retention |
+    |--------------------|-----------|
+    | Daily              | 14 days   |
+    | Weekly             | 5 months  |
+    | Monthly            | 12 months |
 
-    Snapshots do not protect on themselves against a system failure, they only permit recovering files in case of accidental deletion. Proper backup storage requires that the data are redundant and highly available with respect to whole system failure (the whole Isilon system failing).
+### Snapshots of directories in Isilon
 
-    Isilon backups your data automatically, by copying snapshot data to a Disaster Recovery Site (DRS) in a location outside the server room where the primary data storage (Isilon) is located.
-
-<!--backup-isilon-end-->
-
-Users can access some backed up data through the snapshots in Isilon file systems. This can help restoration after incidents such as accidental data deletion. Each project directory, in `/mnt/isilon/projects/` contains a hidden sub-directory `.snapshot`.
+Users can access some snapshoted data through the snapshots of the Isilon file systems. This can help restore data after incidents such as accidental data deletion. Each project directory, in `/mnt/isilon/projects/` contains a hidden sub-directory called `.snapshot`.
 
 - The `.snapshot` directory is invisible to `ls`, but also to `ls -a`, `find` and similar commands.
 - Snapshots can be browsed normally after changing into the snapshot directory (`cd .snapshot`).
-- Files cannot be created, deleted, or edited in snapshots; files can *only* be copied *out* of a snapshot.
+- Files cannot be created, deleted, or edited in snapshots; files _can only be copied out_ of a snapshot.
 - Only a few, strategically selected snapshots are exposed to the users. See the [section on backup restoration](#restore) on how to access other snapshots if you need them.
+
+### Backup of directories in Isilon
+
+Isilon backups your data automatically, by copying snapshot data to storage in a Disaster Recovery Site (DRS) in a location outside the server room where the primary data storage (Isilon) is located. In case of system failure, the latest snapshot in the DRS storage system will be used to restore your data.
+
+??? info "Backup and snapshot relation"
+    Snapshots are not backups as they do not protect against a total system failure, they only permit recovering files in case of accidental deletion. Proper backup storage requires that the data are redundant and highly available with respect to a whole system failure (the whole of Isilon system failing). Snapshots provide a frozen version of the data that is then replicated in the DRS system to guard against whole system failure.
+
+The Isilon system provides backup storage by copying snapshot data to the DRS system. Backup policies impose specific restrictions on the frequency of snapshot, number of copies, and storage types used, like requirements to maintain a copy of your data in an offline system. If the policy of your project imposes any requirements that are stricter than the SIU policy, you will have to provide your own backup solution.
+
+<!--backup-isilon-end-->
 
 ## Restore
 
