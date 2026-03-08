@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Directories such as `$HOME`, `$WORK` or `$SCRATCH` are shared among the nodes of the cluster that you are using (including the login node) via shared filesystems (SpectrumScale, Lustre) meaning that:
+Directories such as `${HOME}`, `${WORK}` or `${SCRATCH}` are shared among the nodes of the cluster that you are using (including the login node) via shared filesystems (SpectrumScale, Lustre) meaning that:
 
 - every file/directory pushed or created on the login node is available on the computing nodes
 - every file/directory pushed or created on the computing nodes is available on the login node

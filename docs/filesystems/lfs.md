@@ -71,7 +71,7 @@ $ lfs getstripe $SCRATCH
 stripe_count:  -1 stripe_size:   1048576 pattern:       raid0 stripe_offset: -1
 ```
 
-In this example, we view the current stripe setting of the `$SCRATCH` directory. The stripe count is changed to all OSTs and verified. All files written to this directory will be striped over the maximum number of OSTs (16). Use `lfs check osts` to see the number and status of active OSTs for each filesystem on the cluster. Learn more by reading the man page:
+In this example, we view the current stripe setting of the `${SCRATCH}` directory. The stripe count is changed to all OSTs and verified. All files written to this directory will be striped over the maximum number of OSTs (16). Use `lfs check osts` to see the number and status of active OSTs for each filesystem on the cluster. Learn more by reading the man page:
 
 ```console
 $ lfs check osts
