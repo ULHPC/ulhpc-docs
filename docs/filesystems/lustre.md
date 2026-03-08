@@ -35,15 +35,14 @@ The environment variable `${SCRATCH}` (which expands to `/scratch/users/$(whoami
 
 <!--scratch-mount-end-->
 
-!!! warning "ULHPC `$SCRATCH` quotas and backup"
-    Extended ACLs are provided for sharing data with other users using fine-grained control. See [quotas](/filesystems/quotas/) for detailed information about inode, space quotas, and file system policies. In particular, your `$SCRATCH` directory is [**not** backuped](/data/backups/) according to the policy detailed in the [ULHPC backup policies](/data/backups/).
+!!! warning "ULHPC `${SCRATCH}` quotas and backup"
+    Extended ACLs are provided for sharing data with other users using fine-grained control. See [quotas](/filesystems/quotas/) for detailed information about inode, space quotas, and file system policies. In particular, your `${SCRATCH}` directory is [**not** backuped](/data/backups/) according to the policy detailed in the [ULHPC backup policies](/data/backups/).
 
 ## General Architecture
 
 A Lustre file system consists of three major functional units:
 
-- One or more MetaData Server (MDS) nodes (typically two in high-availability configurations) that host one or more MetaData Target (MDT) devices per Lustre filesystem. These store namespace metadata, such as filenames, directories, access permissions, and file layouts. The MDT data is stored in a local disk filesystem. Unlike block-based distributed filesystems (such as GPFS/SpectrumScale and PanFS) where the metadata server controls all block allocation,
-  the Lustre metadata server is only involved in pathname and permission checks. It is not involved in file I/O operations, which avoids I/O scalability bottlenecks on the metadata server.
+- One or more MetaData Server (MDS) nodes (typically two in high-availability configurations) that host one or more MetaData Target (MDT) devices per Lustre filesystem. These store namespace metadata, such as filenames, directories, access permissions, and file layouts. The MDT data is stored in a local disk filesystem. Unlike block-based distributed filesystems (such as GPFS/SpectrumScale and PanFS) where the metadata server controls all block allocation, the Lustre metadata server is only involved in pathname and permission checks. It is not involved in file I/O operations, which avoids I/O scalability bottlenecks on the metadata server.
 
 - One or more Object Storage Server (OSS) nodes that store file data on one or more Object Storage Target (OST) devices. The capacity of a Lustre file system is the sum of the capacities provided by the OSTs.
 

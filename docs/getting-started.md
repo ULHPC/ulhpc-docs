@@ -96,7 +96,7 @@ It allows sharing **homedirs and project data** between users, systems, and even
 
 [:fontawesome-solid-right-to-bracket: GPFS/Spectrumscale Detailed specifications](filesystems/gpfs.md){: .md-button .md-button--link }
 
-### Lustre File System (`$SCRATCH`)
+### Lustre File System (`${SCRATCH}`)
 
 The [Lustre](http://lustre.org/) file system is an open-source, parallel file system that supports many requirements of leadership class HPC simulation environments. It is available as a global _high_-performance file system on all ULHPC computational systems through a [DDN ExaScaler](https://www.ddn.com/products/lustre-file-system-exascaler/)
 and is meant to host **temporary scratch data**.
@@ -159,7 +159,7 @@ of ULHPC.
 ## User Environment
 
 !!! info
-	`$HOME`, Project and `$SCRATCH` directories are sharedacross all ULHPC systems, meaning that
+	`${HOME}`, Project and `${SCRATCH}` directories are sharedacross all ULHPC systems, meaning that
 
     - every file/directory pushed or created on the front-end is available on the computing nodes, and
     - every file/directory pushed or created on the computing nodes is available on the front-end.
@@ -174,8 +174,7 @@ of ULHPC.
 
 ## Computing Software Environment
 
-The ULHPC Team supplies a large variety of HPC utilities, scientific applications and programming libraries to its user community.
-The user software environment is generated using [Easybuild](https://easybuild.readthedocs.io) (EB) and is made available as environment modules through [LMod](https://lmod.readthedocs.io/). <!-- We have developped a specific tool named [RESIF](software/resif.md) -->
+The ULHPC Team supplies a large variety of HPC utilities, scientific applications and programming libraries to its user community. The user software environment is generated using [Easybuild](https://easybuild.readthedocs.io) (EB) and is made available as environment modules through [LMod](https://lmod.readthedocs.io/). <!-- We have developped a specific tool named [RESIF](software/resif.md) -->
 
 - [ULHPC Modules Environment](/environment/modules)
 - [ULHPC Supported Software List](/software/).
