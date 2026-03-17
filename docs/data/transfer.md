@@ -271,6 +271,17 @@ Note the leaving the `[dir]` argument blanck, mounts the user's home directory b
 - `reconnect` allows the SSHFS client to automatically reconnect to server if connection is interrupted;
 - `dir_cache` enables or disables the directory cache which holds the names of directory entries (can be slow for mounted remote directories with many files).
 
+???info "Accessing SSHFS mounted files in Windows"
+    If you mount your files in WSL, you can access them in the Windows host (for instance to edit text files in a project with VSCode). To access the files add the option `allow_other`, which allows other users to access the data, including the default Widows user inside the WSL virtual machine.
+
+    The full command is:
+
+    ```console
+    sshfs iris-cluster: ~/ulhpc -o follow_symlinks,reconnect,dir_cache=no,allow_other
+    ```
+
+    Note that you will need to edit some configuration files in `/etc` to enable the use of `allow_other`.
+
 When you no longer need the mounted remote directory, you **must** unmount your remote file system:
 
 === "Linux"
