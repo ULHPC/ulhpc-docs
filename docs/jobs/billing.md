@@ -19,11 +19,11 @@ The above policy is in practice implemented through the Slurm [Trackable RESourc
 
 As explained in the [ULHPC Usage Charging Policy](../policies/usage-charging.md), we set TRES for CPU, GPU, and Memory usage according to _weights_ defined as follows:
 
-| __Weight__     | __Description__                                                                       |
-|----------------|---------------------------------------------------------------------------------------|
+| __Weight__     | __Description__                                                                        |
+|----------------|----------------------------------------------------------------------------------------|
 | $\alpha_{cpu}$ | Normalized relative performance of CPU processor core (ref.: skylake 73.6 GFlops/core) |
-| $\alpha_{mem}$ | Inverse of the average available memory size per core                                 |
-| $\alpha_{GPU}$ | Weight per GPU accelerator                                                          |
+| $\alpha_{mem}$ | Inverse of the average available memory size per core                                  |
+| $\alpha_{GPU}$ | Weight per GPU accelerator                                                             |
 
 Each [partition](../slurm/partitions.md) has its own weights (combined into [`TRESBillingWeight`](https://slurm.schedmd.com/tres.html)) you can check with
 

@@ -26,7 +26,7 @@ Job_priority =
 
 All of the factors in this formula are floating point numbers that range from 0.0 to 1.0. The weights are unsigned, 32 bit integers, you can get with:
 ```console
-$ sprio -w
+$ sprio --weights
 # OR, from slurm.conf
 $ scontrol show config | grep -i PriorityWeight
 ```
@@ -35,24 +35,24 @@ You can use the [`sprio`](https://slurm.schedmd.com/sprio.html) to view the fact
 !!! example "sprio Utility usage"
     Show current weights
     ```
-    sprio -w
+    sprio --weights
     ```
     List pending jobs, sorted by jobid
     ```bash
-    sprio [-n]     # OR: sp
+    sprio [--norm]     # OR: sp
     ```
     List pending jobs, sorted by priority
     ```
-    sprio [-n] -S+Y
-    sprio [-n] | sort -k 3 -n
-    sprio [-n] -l | sort -k 4 -n
+    sprio [--norm] --sort=+Y
+    sprio [--norm] | sort --key=3 --numeric-sort
+    sprio [--norm] --long | sort --key=4 --numeric-sort
     ```
 
 Getting the priority given to a job can be done either with [`squeue`](https://slurm.schedmd.com/squeue.html):
 
 ```bash
 # /!\ ADAPT <jobid> accordingly
-squeue -o %Q -j <jobid>
+squeue --format=%Q --jobs=<jobid>
 ```
 
 ## Backfill Scheduling

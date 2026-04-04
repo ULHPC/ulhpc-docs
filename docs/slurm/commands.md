@@ -146,10 +146,10 @@ For more details, see [interactive jobs](../jobs/interactive.md).
 You can  view information about jobs located in the Slurm scheduling queue (partition/qos), eventually filter on specific job state (_R_:running /_PD_:pending / _F_:failed / _PR_:preempted) with [`squeue`](https://slurm.schedmd.com/squeue.html):
 
 ```console
-$ squeue [-u <user>] [-p <partition>] [---qos <qos>] [--reservation <name>] [-t R|PD|F|PR]
+$ squeue [--user=<user>] [--partition=<partition>] [---qos=<qos>] [--reservation=<name>] [--states=(RUNNING|PENDING|FAILED|PREEMPTED)]
 ```
 
-To quickly access **your** jobs, you can simply use `sq`
+To quickly access **your** jobs, you can simply use `sq`.
 
 ### Live job statistics
 
@@ -277,7 +277,7 @@ Use `seff` to double check a _past_ job CPU/Memory efficiency. Below examples sh
 Use `susage` to check your past _jobs walltime accuracy_ (`Timelimit` vs. `Elapsed`)
 
 ```console
-$ susage -h
+$ susage --help
 Usage: susage [-m] [-Y] [-S YYYY-MM-DD] [-E YYYT-MM-DD]
   For a specific user (if accounting rights granted):    susage [...] -u <user>
   For a specific account (if accounting rights granted): susage [...] -A <account>
@@ -291,12 +291,12 @@ Display past job usage summary
 
 Alternatively, you can use [`sacct`](https://slurm.schedmd.com/sacct.html) (use `sacct --helpformat` to get the list of) for COMPLETED or TIMEOUT jobs (see [Job State Codes](../jobs/reason-codes.md)).
 
-??? example "using `sacct -X -S <start> [...] --format [...],time,elapsed,[...]`"
-    ADAPT `-S <start>` and `-E <end>` dates accordingly - Format: `YYYY-MM-DD`.
+??? example "using `sacct --allocations --starttime=<start> [...] --format=[...],time,elapsed,[...]`"
+    ADAPT `--starttime=<start>` and `--endtime=<end>` dates accordingly - Format: `YYYY-MM-DD`.
 
     _hint_: `$(date +%F)` will return today's date in that format, `$(date +%Y)` return the current year, so the below command will list your completed (or timeout jobs) since the beginning of the month:
     ```console
-    $ sacct -X -S $(date +%Y)-01-01 -E $(date +%F) --partition batch,gpu,bigmem --state CD,TO --format User,JobID,partition%12,qos,state,time,elapsed,nnodes,ncpus,allocGRES
+    $ sacct --allocations --starttime=$(date +%Y)-01-01 --endtime=$(date +%F) --partition=batch,gpu,bigmem --state=COMPLETED,TIMEOUT --format=User,JobID,partition%12,qos,state,time,elapsed,nnodes,ncpus,allocGRES
          User        JobID    Partition        QOS      State  Timelimit    Elapsed   NNodes      NCPUS    AllocGRES
     --------- ------------ ------------ ---------- ---------- ---------- ---------- -------- ---------- ------------
      <login> 2243517             batch     normal    TIMEOUT 2-00:00:00 2-00:00:05        4        112
@@ -315,10 +315,10 @@ Alternatively, you can use [`sacct`](https://slurm.schedmd.com/sacct.html) (use 
 
 ### `sinfo`
 
-[`sinfo`](https://slurm.schedmd.com/sinfo.html) allow to view information about partition status (`-p <partition>`),  problematic nodes (`-R`), reservations (`-T`), eventually in a summarized form (`-s`),
+[`sinfo`](https://slurm.schedmd.com/sinfo.html) allow to view information about partition status (`--partition=<partition>`),  problematic nodes (`--list-reasons`), reservations (`--reservation`), eventually in a summarized form (`--summarize`),
 
 ```
-sinfo [-p <partition>] {-s | -R | -T |...}
+sinfo [--partition=<partition>] {--summarize | --list-reasons | --reservations |...}
 ```
 
 We are providing a certain number of [helper functions](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh) based on `sinfo`:
@@ -336,18 +336,18 @@ We are providing a certain number of [helper functions](https://github.com/ULHPC
 
 We have defined several custom ULHPC Slurm helpers defined in [`/etc/profile.d/slurm.sh`](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh) to facilitate access to account/parition/qos/usage information. They are listed below.
 
-| __Command__                | __Description__                                                        |
-|----------------------------|------------------------------------------------------------------------|
-| `acct <name>`              | Get information on user/account holder `<name>` in Slurm accounting DB |
-| `irisstat`, `aionstat`     | report cluster status (utilization, partition and QOS live stats)      |
-| `listpartitionjobs <part>` | List jobs (and current load) of the slurm partition `<part>`           |
-| `pload [-a] i/b/g/m `      | Overview of the Slurm partition load                                   |
-| `qload [-a]  <qos>`        | Show current load of the slurm QOS `<qos>`                             |
-| `sjoin [-w <node>]`        | join a running job                                                     |
-| `sassoc <name>`            | Show Slurm association information for `<name>` (user or account)      |
-| `slist <jobid> [-X]`       | List statistics of a past job                                          |
-| `sqos`                     | Show QOS information and limits                                        |
-| `susage [-m] [-Y] [...]`   | Display past job usage summary                                         |
+| __Command__                       | __Description__                                                        |
+|-----------------------------------|------------------------------------------------------------------------|
+| `acct <name>`                     | Get information on user/account holder `<name>` in Slurm accounting DB |
+| `irisstat`, `aionstat`            | report cluster status (utilization, partition and QOS live stats)      |
+| `listpartitionjobs <part>`        | List jobs (and current load) of the slurm partition `<part>`           |
+| `pload [--all] i/b/g/m`           | Overview of the Slurm partition load                                   |
+| `qload [--all]  <qos>`            | Show current load of the slurm QOS `<qos>`                             |
+| `sjoin [--nodelist=<node>]`       | join a running job                                                     |
+| `sassoc <name>`                   | Show Slurm association information for `<name>` (user or account)      |
+| `slist <jobid> [--allocations]`   | List statistics of a past job                                          |
+| `sqos`                            | Show QOS information and limits                                        |
+| `susage [--month] [--year] [...]` | Display past job usage summary                                         |
 
 ## Updating jobs
 
@@ -417,6 +417,6 @@ scancel <jobid>
 
 ??? info "Cancel all jobs owned by a user (you)"
     ```
-    scancel -u $USER
+    scancel --user=$USER
     ```
     This only applies to jobs which are associated with your accounts.

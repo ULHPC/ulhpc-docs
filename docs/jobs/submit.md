@@ -1,10 +1,10 @@
 #  Regular Jobs
 
-| __Node Type__ | __Slurm command__                                                                      |
-|:-------------:|----------------------------------------------------------------------------------------|
-| regular       | `sbatch [-A <project>] -p batch  [--qos {high,urgent}] [-C {broadwell,skylake}] [...]` |
-| gpu           | `sbatch [-A <project>] -p gpu    [--qos {high,urgent}] [-C volta[32]] -G 1 [...]`      |
-| bigmem        | `sbatch [-A <project>] -p bigmem [--qos {high,urgent}] [...]`                          |
+| __Node Type__ | __Slurm command__                                                                                                 |
+|:-------------:|-------------------------------------------------------------------------------------------------------------------|
+| regular       | `sbatch [--account=<project>] --partition=batch  [---qos={high,urgent}] [--constraint={broadwell,skylake}] [...]` |
+| gpu           | `sbatch [--account=<project>] --partition=gpu    [---qos={high,urgent}] [--constraint=volta[32]] --gpus=1 [...]`  |
+| bigmem        | `sbatch [--account=<project>] --partition=bigmem [---qos={high,urgent}] [...]`                                    |
 
 [:fontawesome-solid-right-to-bracket: Main Slurm commands](../slurm/commands.md){: .md-button .md-button--link }
 [:fontawesome-solid-right-to-bracket: Resource Allocation guide](../slurm/index.md#specific-resource-allocation){: .md-button .md-button--link }
@@ -47,19 +47,19 @@ You will find below several ways to monitor the effective usage of the resources
 At any moment of time, you can _join_ a running job using the [custom helper functions](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh) `sjoin` **in another terminal** (or another screen/tmux tab/window). The format is as follows:
 
 ```bash
-sjoin <jobid> [-w <node>]    # Use <tab> to automatically complete <jobid> among your jobs
+sjoin <jobid> [--nodelist=<node>]    # Use <tab> to automatically complete <jobid> among your jobs
 ```
 
 !!! example "Using `sjoin` to `htop` your processes"
     ```bash
     # check your running job
     (access)$> sq
-    # squeue -u $(whoami)
+    # squeue --user=$(whoami)
        JOBID PARTIT       QOS                 NAME       USER NODE  CPUS ST         TIME    TIME_LEFT PRIORITY NODELIST(REASON)
      2171206  [...]
     # Connect to your running job, identified by its Job ID
     (access)$> sjoin 2171206     # /!\ ADAPT <jobid> accordingly, use <TAB> to have it autocatically completed
-    # Equivalent of: srun --jobid 2171206 --gres=gpu:0 --pty bash -i
+    # Equivalent of: srun --jobid=2171206 --gres=gpu:0 --pty bash -i
     (node)$> htop # view of all processes
     #               F5: tree view
     #               u <name>: filter by process of <name>
@@ -88,32 +88,32 @@ The [`nodeset`](https://clustershell.readthedocs.io/en/latest/tools/nodeset.html
 
 The nice difference is you can ask for **folded** (e.g. `iris-[075,078,091-092]`) or **expanded** (e.g. `iris-075 iris-078 iris-091 iris-092`) forms of the node lists.
 
-| __Command__        | __description__                                      |
-|--------------------|------------------------------------------------------|
-| `nodeset -L[LL]`   | List all groups  available                           |
-| `nodeset -c [...]` | show number of nodes in nodeset(s)                   |
-| `nodeset -e [...]` | expand nodeset(s) to separate nodes                  |
-| `nodeset -f [...]` | fold nodeset(s) (or separate nodes) into one nodeset |
-
+| __Command__                | __description__                                                |
+|----------------------------|----------------------------------------------------------------|
+| `nodeset --list-all [...]` | List all groups  available                                     |
+| `nodeset --count [...]`    | show number of nodes in nodeset(s)                             |
+| `nodeset --expand [...]`   | expand nodeset(s) to separate nodes                            |
+| `nodeset --fold [...]`     | fold nodeset(s) (or separate nodes) into one nodeset           |
+| `nodeset -L[L[L]]`         | List all groups  available (LL = expand, LLL = expand + count) |
 
 ??? example "Nodeset expansion and folding"
-    === "nodeset -e (expand)"
+    === "Expand: `nodeset --expand`"
         ```bash
         # Get list of nodes with issues
-        $ sinfo -R --noheader -o "%N"
+        $ sinfo --list-reasons --noheader --format="%N"
         iris-[005-008,017,161-162]
         # ... and expand that list
-        $ sinfo -R --noheader -o "%N" | nodeset -e
+        $ sinfo --list-reasons --noheader --format="%N" | nodeset --expand
         iris-005 iris-006 iris-007 iris-008 iris-017 iris-161 iris-162
 
         # Actually equivalent of (see below)
-        $ nodeset -e @state:drained
+        $ nodeset --expand @state:drained
         ```
 
-    === "nodeset -f (fold)"
+    === "Fold: `nodeset --fold`"
         ```bash
         # List nodes in IDLE state
-        $> sinfo -t IDLE --noheader
+        $> sinfo --states=IDLE --noheader
         interactive    up    4:00:00      4   idle iris-[003-005,007]
         long           up 30-00:00:0      2   idle iris-[015-016]
         batch*         up 5-00:00:00      1   idle iris-134
@@ -121,33 +121,33 @@ The nice difference is you can ask for **folded** (e.g. `iris-[075,078,091-092]`
         bigmem         up 5-00:00:00      0    n/a
 
         # make out a synthetic list
-        $> sinfo -t IDLE --noheader | awk '{ print $6 }' | nodeset -f
+        $> sinfo --states=IDLE --noheader | awk '{ print $6 }' | nodeset --fold
         iris-[003-005,007,015-016,134,170,173,175-178,181]
 
         # ... actually done when restricting the column to nodelist only
-        $> sinfo -t IDLE --noheader -o "%N"
+        $> sinfo --states=IDLE --noheader --format="%N"
         iris-[003-005,007,015-016,134,170,173,175-178,181]
 
         # Actually equivalent of (see below)
-        $ nodeset -f @state:idle
+        $ nodeset --fold @state:idle
         ```
 
 ??? example "Exclusion / intersection  of nodeset"
-    | __Option__               | __Description__                                                         |
-    |--------------------------|-------------------------------------------------------------------------|
-    | `-x <nodeset>`           | __exclude__ from working set `<nodeset>`                                |
-    | `-i <nodeset>`           | __intersection__ from working set with `<nodeset>`                      |
-    | `-X <nodeset>` (`--xor`) | elements that are in __exactly one__ of the working set and `<nodeset>` |
+    | __Option__                 | __Description__                                                         |
+    |----------------------------|-------------------------------------------------------------------------|
+    | `--exclude=<nodeset>`      | __exclude__ from working set `<nodeset>`                                |
+    | `--intersection=<nodeset>` | __intersection__ from working set with `<nodeset>`                      |
+    | `--xo=r<nodeset>` (`-X`)   | elements that are in __exactly one__ of the working set and `<nodeset>` |
 
     ```bash
     # Exclusion
-    $> nodeset -f iris-[001-010] -x iris-[003-005,007,015-016]
+    $> nodeset --fold iris-[001-010] --exclude=iris-[003-005,007,015-016]
     iris-[001-002,006,008-010]
     # Intersection
-    $> nodeset -f iris-[001-010] -i iris-[003-005,007,015-016]
+    $> nodeset --fold iris-[001-010] --include=iris-[003-005,007,015-016]
     iris-[003-005,007]
     # "XOR" (one occurrence only)
-    $> nodeset -f iris-[001-010] -x iris-006 -X iris-[005-007]
+    $> nodeset --fold iris-[001-010] --exclude=iris-006 --xor=iris-[005-007]
     iris-[001-004,006,008-010]
     ```
 
@@ -176,22 +176,22 @@ The groups useful to you that we have configured are `@user`, `@job` and `@state
 === "User group"
     List expanded node names where you have jobs running
     ```bash
-    # Similar to: squeue -h -u $USER -o "%N"|nodeset -e
-    $ nodeset -e @user:$USER
+    # Similar to: squeue --noheader --user=$USER --format="%N" | nodeset --expand
+    $ nodeset --expand @user:$USER
     ```
 
 === "Job group"
     List folded nodes where your job 1234567 is running (use `sq` to quickly list your jobs):
     ```bash
-    $ similar to squeue -h -j 1234567 -o "%N"
-    nodeset -f @job:1234567
+    $ similar to squeue --noheader --jobs=1234567 --format="%N"
+    nodeset --fold @job:1234567
     ```
 
 === "State group"
     List expanded node names that are idle according to slurm
     ```bash
-    # Similar to: sinfo -t IDLE -o "%N"
-    nodeset -e @state:idle
+    # Similar to: sinfo --states=IDLE --format="%N"
+    nodeset --expand @state:idle
     ```
 
 #### `clush`
@@ -272,7 +272,7 @@ As mentionned before, always check your node activity with _at least_ `htop` on 
     # check you running job
     $ sq
     # Join **another** node than the first one listed
-    $ sjoin <jobid> -w <node>
+    $ sjoin <jobid> --nodelist=<node>
     $ htop  # view of all processes
     #               F5: tree view
     #               u <name>: filter by process of <name>
@@ -305,4 +305,4 @@ The following utilities will help you track the CPU/Memory efficiency (`seff`) o
    end="<!--susage-end-->"
 %}
 
-In all cases, if you are confident that your jobs will last more than 2 days **while efficiently using the allocated resources**, you can use [`--qos long`](long.md) QOS. Be aware that special restrictions applies for this kind of jobs.
+In all cases, if you are confident that your jobs will last more than 2 days **while efficiently using the allocated resources**, you can use [`--qos=long`](long.md) QOS. Be aware that special restrictions applies for this kind of jobs.

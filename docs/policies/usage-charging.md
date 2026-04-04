@@ -65,10 +65,10 @@ Any other activities will be reviewed with the rectorate and are a priori subjec
 
 ## Submit project related jobs 
 
-To allow the ULHPC team to keep track of the jobs related to a project, use the `-A <projectname>` flag in Slurm, either in the Slurm directives preamble of your script, e.g.,
+To allow the ULHPC team to keep track of the jobs related to a project, use the `--account=<projectname>` flag in Slurm, either in the Slurm directives preamble of your script, e.g.,
 
 ```bash
-#SBATCH -A myproject
+#SBATCH --account=myproject
 ```
 
-or on the command line when you submit your job, _e.g._, `sbatch -A myproject /path/to/launcher.sh`
+or on the command line when you submit your job, _e.g._, `sbatch --account=myproject /path/to/launcher.sh`
