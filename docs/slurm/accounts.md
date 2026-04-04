@@ -17,12 +17,12 @@ At the leaf hierarchy stands the End user `<login>` from the IPA IdM database, b
 
 [![](../images/slurm_account_hierarchy.png)](../images/slurm_account_hierarchy.pdf)
 
-| Level  | Account Type | Description                                                              | Example                                           |
-|--------|--------------|--------------------------------------------------------------------------|---------------------------------------------------|
-| __L1__ | meta-account | Top-level structure / organizations                                      | UL, CRP, Externals, Projects, Trainings           |
-| __L2__ | meta-account | Organizational Unit (Faculty, ICs, External partner, Funding program...) | FSTM, LCSB, LIST...                               |
-| __L3__ | meta-account | Principal investigators (PIs), project, courses/lectures                 | `<firstname>.<lastname>`, `<acronym>`, `<course>` |
-| __L4__ | login        | End-users (staff, student):  your [ULHPC/IPA login](../accounts/index.md)              | `yourlogin`                                       |
+| Level  | Account Type | Description                                                               | Example                                           |
+|--------|--------------|---------------------------------------------------------------------------|---------------------------------------------------|
+| __L1__ | meta-account | Top-level structure / organizations                                       | UL, CRP, Externals, Projects, Trainings           |
+| __L2__ | meta-account | Organizational Unit (Faculty, ICs, External partner, Funding program...)  | FSTM, LCSB, LIST...                               |
+| __L3__ | meta-account | Principal investigators (PIs), project, courses/lectures                  | `<firstname>.<lastname>`, `<acronym>`, `<course>` |
+| __L4__ | login        | End-users (staff, student):  your [ULHPC/IPA login](../accounts/index.md) | `yourlogin`                                       |
 
 
 !!! info "Extracting your association tree"
@@ -96,12 +96,12 @@ To get information about your account information in the hierarchy, use the cust
     # ==> <login> Default account: <firstname>.<lastname>
     ```
     In the above example, the user `<login>` is associated to 3 meta-accounts at the L3 level of the hierarchy (his PI `<firstname>.<lastname>` and two projects account), each granting access to potentially different [QOS](../slurm/qos.md).
-    The account used upon job submission can be set with the `-A <account>` option. With the above example:
+    The account used upon job submission can be set with the `--account=<account>` option. With the above example:
     ```bash
-    $ sbatch|srun|... [...]                     # Use default account: <firstname>.<lastname>
-    $ sbatch|srun|... -A project_<name1> [...]  # Use account project_<name1>
-    $ sbatch|srun|... -A project_<name2> --qos high [...] # Use account project_<name2>, granting access to high QOS
-    $ sbatch|srun|... -A anotheraccount [...]   # Error: non-existing association between <login> and anotheraccount
+    $ sbatch|srun|... [...]                                      # Use default account: <firstname>.<lastname>
+    $ sbatch|srun|... --account=project_<name1> [...]            # Use account project_<name1>
+    $ sbatch|srun|... --account=project_<name2> --qos=high [...] # Use account project_<name2>, granting access to high QOS
+    $ sbatch|srun|... --account=anotheraccount [...]             # Error: non-existing association between <login> and anotheraccount
     ```
 
 To list all associations for a given user or meta-account, use the [`sassoc` helper function](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh):
@@ -112,8 +112,8 @@ $ sassoc <login>
 You may use more classically the [`sacctmgr show [...]`](https://slurm.schedmd.com/sacctmgr.html) command:
 
 - User information: `sacctmgr show user where name=<login> [withassoc]` (use the `withassoc` attribute to list all associations).
-- Default account:  `sacctmgr show user where name="<login>" format=DefaultAccount -P -n`
-- Get the parent account: `sacctmgr show account where name=ulhpc format=Org -n -P`
+- Default account:  `sacctmgr show user where name="<login>" format=DefaultAccount --parsable2 --noheader`
+- Get the parent account: `sacctmgr show account where name=ulhpc format=Org --parsable2 --noheader`
 
 To get the current association _tree_: add `withsubaccounts` to see ALL sub accounts
 
@@ -154,7 +154,7 @@ In addition, your user account (ULHPC login) may be associated to other meta-acc
 To establish job accounting against these extra specific accounts, use:
 
 ```
-{sbatch|srun} -A project_<name> [...]
+{sbatch|srun} --account=project_<name> [...]
 ```
 
 For more details, see [Project accounts](../accounts/projects.md).

@@ -79,9 +79,9 @@ In practice, Slurm's fair-share factor is a floating point number between 0.0 an
     # your current shares and fair-share factors among your associations
     ulhpcshare
     # as above, but for user '<login>'
-    ulhpcshare -u <login>
+    ulhpcshare --users=<login>
     # as above, but for account '<account>'
-    ulhpcshare -A <account>
+    ulhpcshare -accounts=<account>
     ```
     The column that contains the actual factor is called "FairShare".
 
@@ -89,7 +89,7 @@ In practice, Slurm's fair-share factor is a floating point number between 0.0 an
 
 `ulhpcshare` is a wrapper around the official [`sshare`](https://slurm.schedmd.com/sshare.html) utility. You can quickly see your score with
 ```console
-$ sshare  [-A <account>] [-l] [--format=Account,User,RawShares,NormShares,EffectvUsage,LevelFS,FairShare]
+$ sshare  [--accounts=<account>] [--long] [--format=Account,User,RawShares,NormShares,EffectvUsage,LevelFS,FairShare]
 ```
 It will show the Level Fairshare value as `Level FS`. The field shows the value for each association, thus allowing users to see the results of the fairshare calculation at each level.
 

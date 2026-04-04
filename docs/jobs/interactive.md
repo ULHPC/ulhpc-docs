@@ -15,21 +15,20 @@ You can access the different node classes available using the `-C <class>` flag 
         # salloc -p interactive --qos debug -C batch
 
         ### Explicitly ask for a skylake node
-        $ si -C skylake
-        # salloc -p interactive --qos debug -C batch -C skylake
+        $ si -Cskylake
+        # salloc -p interactive --qos debug -C batch -Cskylake
 
         ### Use 1 full node for 28 tasks
-        $ si --ntasks-per-node 28
-        # salloc -p interactive --qos debug -C batch --ntasks-per-node 28
+        $ si --ntasks-per-node=28
+        # salloc -p interactive --qos debug -C batch --ntasks-per-node=28
 
         ### interactive job for 2 hours
-        $ si -t 02:00:00
-        # salloc -p interactive --qos debug -C batch -t 02:00:00
+        $ si -t2:00:00
+        # salloc -p interactive --qos debug -C batch -t2:00:00
 
         ### interactive job on 2 nodes, 1 multithreaded tasks per node
-        $ si -N 2 --ntasks-per-node 1 -c 4
-        si -N 2 --ntasks-per-node 1 -c 4
-        # salloc -p interactive --qos debug -C batch -N 2 --ntasks-per-node 1 -c 4
+        $ si -N2 --ntasks-per-node=1 -c4
+        # salloc -p interactive --qos debug -C batch -N2 --ntasks-per-node=1 -c4
         ```
 
 === "GPU node"
@@ -41,9 +40,9 @@ You can access the different node classes available using the `-C <class>` flag 
         # salloc -p interactive --qos debug -C gpu -G 1
 
         ### (Better) Allocate 1/4 of available CPU cores per GPU to manage
-        $ si-gpu -G 1 -c 7
-        $ si-gpu -G 2 -c 14
-        $ si-gpu -G 4 -c 28
+        $ si-gpu -G1 -c7
+        $ si-gpu -G2 -c14
+        $ si-gpu -G4 -c28
         ```
 
 === "Large-Memory node"
@@ -54,21 +53,21 @@ You can access the different node classes available using the `-C <class>` flag 
         # salloc -p interactive --qos debug -C bigmem
 
         ### interactive job with 1 multithreaded task per socket available (4 in total)
-        $ si-bigmem --ntasks-per-node 4 --ntasks-per-socket 1 -c 28
-        # salloc -p interactive --qos debug -C bigmem --ntasks-per-node 4 --ntasks-per-socket 1 -c 4
+        $ si-bigmem --ntasks-per-node=4 --ntasks-per-socket=1 -c28
+        # salloc -p interactive --qos debug -C bigmem --ntasks-per-node=4 --ntasks-per-socket=1 -c4
 
         ### interactive job for 1 task but 512G of memory
-        $ si-bigmem --mem 512G
-        # salloc -p interactive --qos debug -C bigmem --mem 512G
+        $ si-bigmem --mem=512G
+        # salloc -p interactive --qos debug -C bigmem --mem=512G
         ```
 
 If you prefer to rely on the regular [`srun`](https://slurm.schedmd.com/srun.html), the below table proposes the equivalent commands run by the helper scripts `si*`:
 
-| Node Type                    | Slurm command                                                                         |
-|:----------------------------:|---------------------------------------------------------------------------------------|
-| regular<br/>`si [...]`       | `salloc -p interactive --qos debug -C batch [...]`<br/>`salloc -p interactive --qos debug -C batch,broadwell [...]`<br/>`salloc -p interactive --qos debug -C batch,skylake [...]` |
-| gpu<br/>`si-gpu [...]`       | `salloc -p interactive --qos debug -C gpu    [-C volta[32]] -G 1 [...]`      |
-| bigmem<br/>`si-bigmem [...]` | `salloc -p interactive --qos debug -C bigmem [...]`                          |
+| Node Type | UL HPC helper function         | Slurm command                                                                                                                                                                                                                               |
+|:----------|:------------------------------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| regular   | `si [...]`                     | `salloc --partition=interactive --qos=debug --constraint=batch [...]`<br/>`salloc --partition=interactive --qos=debug --constraint=batch,broadwell [...]`<br/>`salloc --partition=interactive --qos=debug --constraint=batch,skylake [...]` |
+| gpu       | `si-gpu [...]`                 | `salloc --partition=interactive --qos=debug --constraint=gpu,[volta[32]] --gpus=1 [...]`                                                                                                                                                    |
+| bigmem    | `si-bigmem [...]`              | `salloc --partition=interactive --qos=debug --constraint=bigmem [...]`                                                                                                                                                                      |
 
 
 !!! important "Impact of Interactive jobs implementation over a _floating_ partition"

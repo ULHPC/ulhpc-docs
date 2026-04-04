@@ -7,19 +7,19 @@
 When setting your default `#SBATCH` directive, always keep in mind your expected _default_ resource allocation that would permit to submit your launchers
 
 1. without options `sbatch <launcher>` (you will be glad in a couple of month not to have to remember the options you need to pass) and
-2. try to stick to a single node (to avoid to accidentally induce a huge submission).
+1. try to stick to a single node (to avoid to accidentally induce a huge submission).
 
 ## Resource allocation Guidelines
 
 !!! important "General guidelines"
-    Always try to align [resource specifications](index.md#specific-resource-allocation) for your jobs with physical characteristics. Always prefer the use of `--ntasks-per-{node,socket}` over `-n` when defining your tasks allocation request to automatically scale appropriately upon multi-nodes submission with for instance `sbatch -N 2 <launcher>`. Launcher template:
+    Always try to align [resource specifications](index.md#specific-resource-allocation) for your jobs with physical characteristics. Always prefer the use of `--ntasks-per-{node,socket}` over `-n` when defining your tasks allocation request to automatically scale appropriately upon multi-nodes submission with for instance `sbatch --nodes=2 <launcher>`. Launcher template:
     ```bash
-    #!/bin/bash -l # <--- DO NOT FORGET '-l' to facilitate further access to ULHPC modules
-    #SBATCH -p <partition>                     #SBATCH -p <partition>
-    #SBATCH -N 1                               #SBATCH -N 1
-    #SBATCH --ntasks-per-node=<n>              #SBATCH --ntasks-per-node <#sockets * s>
-    #SBATCH -c <thread>                        #SBATCH --ntasks-per-socket <s>
-                                               #SBATCH -c <thread>
+    #!/bin/bash --login # <--- DO NOT FORGET '--login/-l' to facilitate further access to ULHPC modules
+    #SBATCH --partition=<partition>            #SBATCH --partition=<partition>
+    #SBATCH --nodes=1                          #SBATCH --nodes=1
+    #SBATCH --ntasks-per-node=<n>              #SBATCH --ntasks-per-node=<#sockets * s>
+    #SBATCH --cpus-per-task=<thread>           #SBATCH --ntasks-per-socket=<s>
+                                               #SBATCH --cpus-per-task=<thread>
     ```
     This would define by default a **total** of `<n>` (left) or $\#sockets \times$`<s>` (right) **tasks per node**, each on `<thread>` **threads**. You **MUST** ensure that either:
 
@@ -38,42 +38,42 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 === "Aion (default Dual-CPU)"
     16 cores per socket and 8 (virtual) sockets (CPUs) per `aion` node. Examples:
     ```bash
-    #SBATCH -p batch                 #SBATCH -p batch                #SBATCH -p batch
-    #SBATCH -N 1                     #SBATCH -N 1                    #SBATCH -N 1
-    #SBATCH --ntasks-per-node=128    #SBATCH --ntasks-per-node 16    #SBATCH --ntasks-per-node 8
-    #SBATCH --ntasks-per-socket 16   #SBATCH --ntasks-per-socket 2   #SBATCH --ntasks-per-socket 1
-    #SBATCH -c 1                     #SBATCH -c 8                    #SBATCH -c 16
+    #SBATCH --partition=batch        #SBATCH --partition=batch       #SBATCH --partition=batch
+    #SBATCH --nodes=1                #SBATCH --nodes=1               #SBATCH --nodes=1
+    #SBATCH --ntasks-per-node=128    #SBATCH --ntasks-per-node=16    #SBATCH --ntasks-per-node=8
+    #SBATCH --ntasks-per-socket=16   #SBATCH --ntasks-per-socket=2   #SBATCH --ntasks-per-socket=1
+    #SBATCH --cpus-per-task=1        #SBATCH --cpus-per-task=8       SBATCH --cpus-per-task=16
     ```
 
 === "Iris (default Dual-CPU)"
     14 cores per socket and 2 sockets (physical CPUs) per _regular_ `iris`. Examples:
     ```bash
-    #SBATCH -p batch                #SBATCH -p batch                 #SBATCH -p batch
-    #SBATCH -N 1                    #SBATCH -N 1                     #SBATCH -N 1
-    #SBATCH --ntasks-per-node=28    #SBATCH --ntasks-per-node 14     #SBATCH --ntasks-per-node 4
-    #SBATCH --ntasks-per-socket=14  #SBATCH --ntasks-per-socket 7    #SBATCH --ntasks-per-socket 2
-    #SBATCH -c 1                    #SBATCH -c 2                     #SBATCH -c 7
+    #SBATCH --partition=batch       #SBATCH --partition=batch        #SBATCH --partition=batch
+    #SBATCH --nodes=1               #SBATCH --nodes=1                #SBATCH --nodes=1
+    #SBATCH --ntasks-per-node=28    #SBATCH --ntasks-per-node=14     #SBATCH --ntasks-per-node=4
+    #SBATCH --ntasks-per-socket=14  #SBATCH --ntasks-per-socket=7    #SBATCH --ntasks-per-socket=2
+    #SBATCH --cpus-per-task=1       #SBATCH --cpus-per-task=2        #SBATCH --cpus-per-task=7
     ```
 
 === "Iris (GPU)"
     14 cores per socket and 2 sockets (physical CPUs) per _gpu_ `iris`, 4 GPU accelerator cards per node. You probably want to dedicate 1 task and $\frac{1}{4}$ of the available cores to the management of each GPU accelerator. Examples:
     ```bash
-    #SBATCH -p gpu                  #SBATCH -p gpu                   #SBATCH -p gpu
-    #SBATCH -N 1                    #SBATCH -N 1                     #SBATCH -N 1
-    #SBATCH --ntasks-per-node=1     #SBATCH --ntasks-per-node 2      #SBATCH --ntasks-per-node 4
-    #SBATCH -c 7                    #SBATCH --ntasks-per-socket 1    #SBATCH --ntasks-per-socket 2
-    #SBATCH -G 1                    #SBATCH -c 7                     #SBATCH -c 7
-                                    #SBATCH -G 2                     #SBATCH -G 4
+    #SBATCH --partition=gpu         #SBATCH --partition=gpu          #SBATCH --partition=gpu
+    #SBATCH --nodes=1               #SBATCH --nodes=1                #SBATCH --nodes=1
+    #SBATCH --ntasks-per-node=1     #SBATCH --ntasks-per-node=2      #SBATCH --ntasks-per-node=4
+    #SBATCH --cpus-per-task=7       #SBATCH --ntasks-per-socket=1    #SBATCH --ntasks-per-socket=2
+    #SBATCH --gpus-per-task=1       #SBATCH --cpus-per-task=7        #SBATCH --cpus-per-task=7
+                                    #SBATCH --gpus-per-task=2        #SBATCH --gpus-per-task=4
     ```
 
 === "Iris (Large-Memory)"
     28 cores per socket and 4 sockets (physical CPUs) per _bigmem_ `iris` node. Examples:
     ```bash
-    #SBATCH -p bigmem              #SBATCH -p bigmem                 #SBATCH -p bigmem
-    #SBATCH -N 1                   #SBATCH -N 1                      #SBATCH -N 1
-    #SBATCH --ntasks-per-node=4    #SBATCH --ntasks-per-node 8       #SBATCH --ntasks-per-node 16
-    #SBATCH --ntasks-per-socket=1  #SBATCH --ntasks-per-socket 2     #SBATCH --ntasks-per-socket 4
-    #SBATCH -c 28                  #SBATCH -c 14                     #SBATCH -c 7
+    #SBATCH --partition=bigmem     #SBATCH --partition=bigmem        #SBATCH --partition=bigmem
+    #SBATCH --nodes=1              #SBATCH --nodes=1                 #SBATCH --nodes=1
+    #SBATCH --ntasks-per-node=4    #SBATCH --ntasks-per-node=8       #SBATCH --ntasks-per-node=16
+    #SBATCH --ntasks-per-socket=1  #SBATCH --ntasks-per-socket=2     #SBATCH --ntasks-per-socket=4
+    #SBATCH --cpus-per-task=28     #SBATCH --cpus-per-task=14        #SBATCH --cpus-per-task=7
     ```
     You probably want to play with a _single_ task but define the expected memory allocation with `--mem=<size[units]>` (Default units are megabytes - Different units can be specified using the suffix `[K|M|G|T]`)
 
@@ -82,13 +82,13 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 === "Single core task"
     !!! example "1 task per job (Note: prefer GNU Parallel in that case - see below)"
         ```bash
-        #!/bin/bash -l                # <--- DO NOT FORGET '-l'
+        #!/bin/bash --login                # <--- DO NOT FORGET '-l'
         ### Request a single task using one core on one node for 5 minutes in the batch queue
-        #SBATCH -N 1
+        #SBATCH --nodes=1
         #SBATCH --ntasks-per-node=1
-        #SBATCH -c 1
+        #SBATCH --cpus-per-task=1
         #SBATCH --time=0-00:05:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         # Safeguard for NOT running this launcher on access/login nodes
@@ -101,13 +101,13 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 === "Multiple Single core tasks"
     !!! example "28 single-core tasks per job"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         ### Request as many tasks as cores available on a single node for 3 hours
-        #SBATCH -N 1
+        #SBATCH --nodes=1
         #SBATCH --ntasks-per-node=28  # On iris; for aion, use --ntasks-per-node=128
-        #SBATCH -c 1
+        #SBATCH --cpus-per-task=1
         #SBATCH --time=0-03:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -118,13 +118,13 @@ When setting your default `#SBATCH` directive, always keep in mind your expected
 === "Multithreaded parallel tasks"
     !!! example "7 multithreaded tasks per job (4 threads each)"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         ### Request as many tasks as cores available on a single node for 3 hours
-        #SBATCH -N 1
+        #SBATCH --nodes=1
         #SBATCH --ntasks-per-node=7  # On iris; for aion, use --ntasks-per-node=32
-        #SBATCH -c 4
+        #SBATCH --cpus-per-task=4
         #SBATCH --time=0-03:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -157,11 +157,11 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 1. Create a dedicated script `run_<task>` responsible to run your java/R/Python tasks while taking as argument the parameter of each run. You can inspire from [`run_stressme`](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/run_stressme) for instance.
   - test it in interactive
 2. rename the generic launcher [`launcher.parallel.sh`](https://github.com/ULHPC/tutorials/blob/devel/sequential/basics/scripts/launcher.parallel.sh) to `launcher_<task>.sh`,
-  - enable `#SBATCH --dependency singleton`
+  - enable `#SBATCH --dependency=singleton`
   - set the jobname
   - change TASK to point to the **absolute** path to `run_<task>` script
   - set TASKLISTFILE to point to a files with the parameters to pass to your script for each task
-  - adapt eventually the `#SBATCH --ntasks-per-node [...]` and `#SBATCH -c [...]` to match your needs AND the hardware configs of a single node (28 cores on iris, 128 cores on Aion) -- see [guidelines](#resource-allocation-guidelines)
+  - adapt eventually the `#SBATCH --ntasks-per-node=[...]` and `#SBATCH --cpus-per-task=[...]` to match your needs AND the hardware configs of a single node (28 cores on iris, 128 cores on Aion) -- see [guidelines](#resource-allocation-guidelines)
 3. test a batch run -- **stick to a single node** to take the best out of one full node.
 
 ## Serial Task script Launcher
@@ -169,12 +169,12 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 === "Serial Killer (Generic template)"
     !!! example ""
         ```bash
-        #!/bin/bash -l     # <--- DO NOT FORGET '-l'
-        #SBATCH -N 1
+        #!/bin/bash --login     # <--- DO NOT FORGET '--login/-l'
+        #SBATCH --nodes=1
         #SBATCH --ntasks-per-node=1
-        #SBATCH -c 1
+        #SBATCH --cpus-per-task=1
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -191,12 +191,12 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 === "Serial Python"
     !!! example ""
         ```bash
-        #!/bin/bash -l
-        #SBATCH -N 1
+        #!/bin/bash --login
+        #SBATCH --nodes=1
         #SBATCH --ntasks-per-node=1
-        #SBATCH -c 1
+        #SBATCH --cpus-per-task=1
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -214,12 +214,12 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 === "R"
     !!! example ""
         ```bash
-        #!/bin/bash -l
-        #SBATCH -N 1
+        #!/bin/bash --login
+        #SBATCH --nodes=1
         #SBATCH --ntasks-per-node=1
-        #SBATCH -c 28
+        #SBATCH --cpus-per-task=28
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -235,12 +235,12 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
     !!! example ""
         ```bash
-        #!/bin/bash -l
-        #SBATCH -N 1
+        #!/bin/bash --login
+        #SBATCH --nodes=1
         #SBATCH --ntasks-per-node=1
-        #SBATCH -c 28
+        #SBATCH --cpus-per-task=28
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -253,17 +253,17 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
 !!! example "BigData/[Large-]memory single-core tasks"
     ```bash
-	#!/bin/bash -l
+	#!/bin/bash --login
 	### Request one sequential task requiring half the memory of a regular iris node for 1 day
-	#SBATCH -J MyLargeMemorySequentialJob		# Job name
-	#SBATCH --mail-user=Your.Email@Address.lu	# mail me ...
-	#SBATCH --mail-type=end,fail				# ... upon end or failure
-	#SBATCH -N 1
+	#SBATCH --job-name=MyLargeMemorySequentialJob # Job name
+	#SBATCH --mail-user=Your.Email@Address.lu     # mail me ...
+	#SBATCH --mail-type=end,fail                  # ... upon end or failure
+	#SBATCH --nodes=1
 	#SBATCH --ntasks-per-node=1
-	#SBATCH -c 1
-	#SBATCH --mem=64GB		   # if above 112GB: consider bigmem partition (USE WITH CAUTION)
+	#SBATCH --cpus-per-task=1
+	#SBATCH --mem=64GB                            # if above 112GB: consider bigmem partition (USE WITH CAUTION)
 	#SBATCH --time=1-00:00:00
-	#SBATCH -p batch		   # if above 112GB: consider bigmem partition (USE WITH CAUTION)
+	#SBATCH --partition=batch                     # if above 112GB: consider bigmem partition (USE WITH CAUTION)
 
 	print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
 	module purge || print_error_and_exit "No 'module' command"
@@ -273,14 +273,14 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 
 !!! example "AI/DL task  tasks"
     ```bash
-	#!/bin/bash -l
+	#!/bin/bash --login
 	### Request one GPU tasks for 4 hours - dedicate 1/4 of available cores for its management
-	#SBATCH -N 1
+	#SBATCH --nodes=1
 	#SBATCH --ntasks-per-node=1
-	#SBATCH -c 7
-	#SBATCH -G 1
+	#SBATCH --cpus-per-task=7
+	#SBATCH --gpus-per-task=1
 	#SBATCH --time=04:00:00
-	#SBATCH -p gpu
+	#SBATCH --partition=gpu
 
 	print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
 	module purge || print_error_and_exit "No 'module' command"
@@ -297,7 +297,7 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 ## pthreads/OpenMP Launcher
 
 !!! warning "Always set `OMP_NUM_THREADS` to match `${SLURM_CPUS_PER_TASK:-1}`"
-    You **MUST** enforce the use of `-c <threads>` in your launcher to ensure the variable `$SLURM_CPUS_PER_TASK` exists within your launcher scripts. This is the appropriate value to set for [`OMP_NUM_THREAD`](https://www.openmp.org/spec-html/5.0/openmpse50.html), with default to 1 as extra safely which can be obtained with the following affectation:
+    You **MUST** enforce the use of `--cpus-per-task=<threads>` in your launcher to ensure the variable `$SLURM_CPUS_PER_TASK` exists within your launcher scripts. This is the appropriate value to set for [`OMP_NUM_THREAD`](https://www.openmp.org/spec-html/5.0/openmpse50.html), with default to 1 as extra safely which can be obtained with the following affectation:
 
     ```bash
     export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
@@ -306,13 +306,13 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 === "Aion (default Dual-CPU)"
     !!! example "Single node, threaded (pthreads/OpenMP) application launcher"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         # Single node, threaded (pthreads/OpenMP) application launcher, using all 128 cores of an aion cluster node
-        #SBATCH -N 1
+        #SBATCH --nodes=1
         #SBATCH --ntasks-per-node=1
-        #SBATCH -c 128
+        #SBATCH --cpus-per-task=128
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -327,13 +327,13 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 === "Iris (default Dual-CPU)"
     !!! example "Single node, threaded (pthreads/OpenMP) application launcher"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         # Single node, threaded (pthreads/OpenMP) application launcher, using all 28 cores of an iris cluster node:
-        #SBATCH -N 1
+        #SBATCH --nodes=1
         #SBATCH --ntasks-per-node=1
-        #SBATCH -c 28
+        #SBATCH --cpus-per-task=28
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -355,14 +355,14 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 === "Aion (default Dual-CPU)"
     !!! example "Multi-node parallel application IntelMPI launcher"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         # Multi-node parallel application IntelMPI launcher, using 256 MPI processes
 
-        #SBATCH -N 2
-        #SBATCH --ntasks-per-node 128    # MPI processes per node
-        #SBATCH -c 1
+        #SBATCH --nodes=2
+        #SBATCH --ntasks-per-node=128    # MPI processes per node
+        #SBATCH --cpus-per-task=1
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -376,14 +376,14 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
 === "Iris (default Dual-CPU)"
     !!! example "Multi-node parallel application IntelMPI launcher"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         # Multi-node parallel application IntelMPI launcher, using 56 MPI processes
 
-        #SBATCH -N 2
-        #SBATCH --ntasks-per-node 28    # MPI processes per node
-        #SBATCH -c 1
+        #SBATCH --nodes=2
+        #SBATCH --ntasks-per-node=28    # MPI processes per node
+        #SBATCH --cpus-per-task=1
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -404,14 +404,14 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 === "Aion (default Dual-CPU)"
     !!! example "Multi-node parallel application OpenMPI launcher"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         # Multi-node parallel application OpenMPI launcher, using 256 MPI processes
 
-        #SBATCH -N 2
-        #SBATCH --ntasks-per-node 128    # MPI processes per node
-        #SBATCH -c 1
+        #SBATCH --nodes=2
+        #SBATCH --ntasks-per-node=128    # MPI processes per node
+        #SBATCH --cpus-per-task=1
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -425,14 +425,14 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 === "Iris (default Dual-CPU)"
     !!! example "Multi-node parallel application OpenMPI launcher"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         # Multi-node parallel application OpenMPI launcher, using 56 MPI processes
 
-        #SBATCH -N 2
-        #SBATCH --ntasks-per-node 28    # MPI processes per node
-        #SBATCH -c 1
+        #SBATCH --nodes=2
+        #SBATCH --ntasks-per-node=28    # MPI processes per node
+        #SBATCH --cpus-per-task=1
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -448,15 +448,15 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 === "Aion (default Dual-CPU)"
     !!! example "Multi-node hybrid parallel application IntelMPI/OpenMP launcher"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         # Multi-node hybrid application IntelMPI+OpenMP launcher, using 16 threads per socket(CPU) on 2 nodes (256 cores):
 
-        #SBATCH -N 2
-        #SBATCH --ntasks-per-node   8    # MPI processes per node
-        #SBATCH --ntasks-per-socket 1    # MPI processes per (virtual) processor
-        #SBATCH -c 16
+        #SBATCH --nodes=2
+        #SBATCH --ntasks-per-node=8   # MPI processes per node
+        #SBATCH --ntasks-per-socket=1 # MPI processes per (virtual) processor
+        #SBATCH --cpus-per-task=16
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -470,15 +470,15 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 === "Iris (default Dual-CPU)"
     !!! example "Multi-node hybrid parallel application IntelMPI/OpenMP launcher"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         # Multi-node hybrid application IntelMPI+OpenMP launcher, using 14 threads per socket(CPU) on 2 nodes (56 cores):
 
-        #SBATCH -N 2
-        #SBATCH --ntasks-per-node   2    # MPI processes per node
-        #SBATCH --ntasks-per-socket 1    # MPI processes per processor
-        #SBATCH -c 14
+        #SBATCH --nodes=2
+        #SBATCH --ntasks-per-node=2   # MPI processes per node
+        #SBATCH --ntasks-per-socket=1 # MPI processes per processor
+        #SBATCH --cpus-per-task=14
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -494,15 +494,15 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 === "Aion (default Dual-CPU)"
     !!! example "Multi-node hybrid parallel application OpenMPI/OpenMP launcher"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         # Multi-node hybrid application OpenMPI+OpenMP launcher, using 16 threads per socket(CPU) on 2 nodes (256 cores):
 
-        #SBATCH -N 2
-        #SBATCH --ntasks-per-node   8    # MPI processes per node
-        #SBATCH --ntasks-per-socket 1    # MPI processes per processor
-        #SBATCH -c 16
+        #SBATCH --nodes=2
+        #SBATCH --ntasks-per-node=8   # MPI processes per node
+        #SBATCH --ntasks-per-socket=1 # MPI processes per processor
+        #SBATCH --cpus-per-task=16
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"
@@ -517,15 +517,15 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
 === "Iris (default Dual-CPU)"
     !!! example "Multi-node hybrid parallel application OpenMPI/OpenMP launcher"
         ```bash
-        #!/bin/bash -l
+        #!/bin/bash --login
         # Multi-node hybrid application OpenMPI+OpenMP launcher, using 14 threads per socket(CPU) on 2 nodes (56 cores):
 
-        #SBATCH -N 2
-        #SBATCH --ntasks-per-node   2    # MPI processes per node
-        #SBATCH --ntasks-per-socket 1    # MPI processes per processor
-        #SBATCH -c 14
+        #SBATCH --nodes=2
+        #SBATCH --ntasks-per-node=2   # MPI processes per node
+        #SBATCH --ntasks-per-socket=1 # MPI processes per processor
+        #SBATCH --cpus-per-task=14
         #SBATCH --time=0-01:00:00
-        #SBATCH -p batch
+        #SBATCH --partition=batch
 
         print_error_and_exit() { echo "***ERROR*** $*"; exit 1; }
         module purge || print_error_and_exit "No 'module' command"

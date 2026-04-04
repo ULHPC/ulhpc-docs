@@ -17,8 +17,8 @@ We favor in general _cross-partition QoS_, mainly tied to _priority level_ (`low
 
 <!--qos-start-->
 
-| QoS              | cluster | partition   | Prio | GrpTRES    | MaxTresPJ  | MaxJobPU | MaxWall     |
-|------------------|---------|-------------|------|------------|------------|----------|-------------|
+| QoS                | cluster | partition   | Prio | GrpTRES    | MaxTresPJ  | MaxJobPU | MaxWall     |
+|--------------------|---------|-------------|------|------------|------------|----------|-------------|
 | `besteffort`       | *       | *           | 1    |            |            | 300      | 50-00:00:00 |
 | `low`              | *       | *           | 10   |            |            | 200      |             |
 | `normal`           | *       | *           | 100  |            |            | 100      |             |
@@ -76,7 +76,7 @@ Use the `sqos` utility function to list the existing QOS limits.
 
 As explained in the [Limits](/slurm/partitionS/#partition-limits) section, there are basically three layers of Slurm limits, from lower to higher precedence:
 
-0. None
-0. [Partitions](/slurm/partitions/)
-0. Account associations: Root/Cluster -> Account (ascending the hierarchy) -> User
-0. Job/Partition [QoS](/slurm/qos/)
+1. None
+1. [Partitions](/slurm/partitions/)
+1. Account associations: Root/Cluster -> Account (ascending the hierarchy) -> User
+1. Job/Partition [QoS](/slurm/qos/)

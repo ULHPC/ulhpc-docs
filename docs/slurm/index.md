@@ -74,7 +74,6 @@ The main configuration options for Slurm that affect the resources that are avai
 
 A _job_ is the minimal independent unit of work in a Slurm cluster.
 
-
 an allocation of resources such as compute nodes assigned to a user for an certain amount of time. Jobs can be _interactive_ or _passive_ (e.g., a batch script) scheduled for later execution.
 
 The resources that the scheduler manages are physical entities like nodes, CPU cores, GPUs, access to special devices, but also system resources like and memory and I/O operations.
@@ -94,7 +93,6 @@ Once a job is assigned a set of nodes, the user is able to initiate parallel wor
 
 When you login to a ULHPC system you land on a [access/login node](../connect/access.md). Login nodes are only for editing and preparing jobs: They are not meant for actually running jobs. From the login node you can interact with Slurm to **submit** job scripts or start interactive jobs, which will be further run on the compute nodes.
 
-
 ## Submit Jobs
 
 {%
@@ -112,22 +110,22 @@ Within a job, you aim at running a certain number of **tasks**, and Slurm allow 
 !!! danger "Beware of Slurm terminology in [Multicore Architecture](https://slurm.schedmd.com/mc_support.html)!"
     ![](../slurm/images/slurm_mc_support.png){: style="width:350px; float: right;"}
 
-    - __Slurm Node = Physical node__, specified with `-N <#nodes>`
-      - _Advice_: always explicit number of expected number of tasks _per node_ using `--ntasks-per-node <n>`. This way you control the node footprint of your job.
+    - __Slurm Node = Physical node__, specified with `--nodes=<#nodes>`
+      - _Advice_: always explicit number of expected number of tasks _per node_ using `--ntasks-per-node=<n>`. This way you control the node footprint of your job.
     - __Slurm Socket = Physical Socket/CPU/Processor__
-      - _Advice_: if possible, explicit also the number of expected number of tasks _per socket_ (processor) using `--ntasks-per-socket <s>`.
+      - _Advice_: if possible, explicit also the number of expected number of tasks _per socket_ (processor) using `--ntasks-per-socket=<s>`.
         - relations between `<s>` and `<n>` must be aligned with the physical NUMA characteristics of the node.
         - For instance on aion nodes, `<n> = 8*<s>`
-        - For instance on iris regular nodes, `<n>=2*<s>` when on iris bigmem nodes, `<n>=4*<s>`.
+        - For instance on iris regular nodes, `<n> = 2*<s>` when on iris bigmem nodes, `<n> = 4*<s>`.
     - (_the most confusing_): __Slurm CPU = Physical CORE__
-      - use `-c <#threads>` to specify the number of cores reserved per task.
+      - use `--cpus-per-task=<#threads>` to specify the number of cores reserved per task.
       - Hyper-Threading (HT) Technology is _disabled_ on all ULHPC compute nodes. In particular:
-        -  assume **\#cores = \#threads**, thus when using `-c <threads>`, you can safely set
+        -  assume **\#cores = \#threads**, thus when using `--cpus-per-task=<threads>`, you can safely set
         ```bash
-        OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1} # Default to 1 if SLURM_CPUS_PER_TASK not set
+        export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1} # Default to 1 if SLURM_CPUS_PER_TASK not set
         ```
-        to automatically abstract from the job context
-        - you have interest to match the physical NUMA characteristics of the compute node you're running at (Ex: target 16 threads per socket on Aion nodes (as there are 8 virtual sockets per nodes, 14 threads per socket on Iris regular nodes).
+        to automatically abstract from the job context.
+        - try to match the physical NUMA characteristics of the compute node at which you're running, e.g. target 8 sockets per node and 16 threads per socket on Aion nodes (there are 8 virtual sockets per Aion node) and 2 scokets per node and 14 threads per socket on Iris regular nodes.
 
 The total number of tasks defined in a given job is stored in the `$SLURM_NTASKS` environment variable.
 
@@ -136,34 +134,34 @@ The total number of tasks defined in a given job is stored in the `$SLURM_NTASKS
 
 In case you would like to launch multiple programs in a single allocation/batch script, divide the resources accordingly by requesting resources with `srun` when launching the process, for instance:
 ```bash
-srun --cpus-per-task <some of the SLURM_CPUS_PER_TASK> --ntasks <some of the SLURM_NTASKS> [...] <program>
+srun --cpus-per-task=<some of the SLURM_CPUS_PER_TASK> --ntasks=<some of the SLURM_NTASKS> [...] <program>
 ```
 
-We encourage you to **always** explicitly specify upon resource allocation the number of tasks you want _per_ node/socket (`--ntasks-per-node <n> --ntasks-per-socket <s>`), to easily scale on multiple nodes with `-N <N>`. Adapt the number of threads and the settings to match the physical NUMA characteristics of the nodes
+We encourage you to **always** explicitly specify upon resource allocation the number of tasks you want _per_ node/socket (`--ntasks-per-node=<n> --ntasks-per-socket=<s>`), to easily scale on multiple nodes with `--nodes=<N>`. Adapt the number of threads and the settings to match the physical NUMA characteristics of the nodes
 
 === "Aion"
     16 cores per socket and 8 (virtual) sockets (CPUs) per `aion` node.
 
-    - `{sbatch|srun|salloc|si} [-N <N>] --ntasks-per-node <8n> --ntasks-per-socket <n> -c <thread>`
+    - `{sbatch|srun|salloc|si} [--nodes=<N>] --ntasks-per-node=<8n> --ntasks-per-socket=<n> --cpus-per-task=<thread>`
       - _Total_: `<N>`$\times 8\times$`<n>` tasks, each on `<thread>` threads
       - **Ensure** `<n>`$\times$`<thread>`= 16
-      - Ex: `-N 2 --ntasks-per-node 32 --ntasks-per-socket 4 -c 4` (_Total_: 64 tasks)
+      - Ex: `--nodes=2 --ntasks-per-node= 32 --ntasks-per-socket=4 --cpus-per-task=4` (_Total_: 64 tasks)
 
 === "Iris (default Dual-CPU)"
     14 cores per socket and 2 sockets (physical CPUs) per _regular_ `iris`.
 
-    - `{sbatch|srun|salloc|si} [-N <N>] --ntasks-per-node <2n> --ntasks-per-socket <n> -c <thread>`
+    - `{sbatch|srun|salloc|si} [--nodes=<N>] --ntasks-per-node=<2n> --ntasks-per-socket=<n> --cpus-per-task=<thread>`
       - _Total_: `<N>`$\times 2\times$`<n>` tasks, each on `<thread>` threads
       - **Ensure** `<n>`$\times$`<thread>`= 14
-      - Ex: `-N 2 --ntasks-per-node 4 --ntasks-per-socket 2  -c 7` (_Total_: 8 tasks)
+      - Ex: `-nodes=2 --ntasks-per-node=4 --ntasks-per-socket=2 --cpus-per-task=7` (_Total_: 8 tasks)
 
 === "Iris (Bigmem)"
     28 cores per socket and 4 sockets (physical CPUs) per _bigmem_ `iris`
 
-    - `{sbatch|srun|salloc|si} [-N <N>] --ntasks-per-node <4n> --ntasks-per-socket <n> -c <thread>`
+    - `{sbatch|srun|salloc|si} [--nodes=<N>] --ntasks-per-node=<4n> --ntasks-per-socket=<n> --cpus-per-task=<thread>`
       - _Total_: `<N>`$\times 4\times$`<n>` tasks, each on `<thread>` threads
       - **Ensure** `<n>`$\times$`<thread>`= 28
-      - Ex: `-N 2 --ntasks-per-node 8 --ntasks-per-socket 2  -c 14` (_Total_: 16 tasks)
+      - Ex: `--nodes=2 --ntasks-per-node=8 --ntasks-per-socket=2 --cpus-per-task=14` (_Total_: 16 tasks)
 
 <!--resource-allocation-end-->
 
@@ -174,23 +172,23 @@ We encourage you to **always** explicitly specify upon resource allocation the n
 There are several useful [environment variables](https://slurm.schedmd.com/sbatch.html#lbAK) set be Slurm _within_ an allocated job.
 The most important ones are detailed in the below table which summarizes the main job submission options offered with `{sbatch | srun | salloc} [...]`:
 
-| __Command-line option__   | __Description__                                      | __Example__              |
-|---------------------------|------------------------------------------------------|--------------------------|
-| `-N <N>`                  | **`<N>` Nodes** request                              | `-N 2`                   |
-| `--ntasks-per-node=<n>`   | `<n>` Tasks-per-node request                         | `--ntasks-per-node=28`   |
-| `--ntasks-per-socket=<s>` | `<s>` Tasks-per-socket request                       | `--ntasks-per-socket=14` |
-| `-c <c>`                  | `<c>` Cores-per-task request (multithreading)        | `-c 1`                   |
-| `--mem=<m>GB`             | **`<m>`GB memory per node** request                  | `--mem 0`                |
-| `-t [DD-]HH[:MM:SS]>`     | **Walltime** request                                 | `-t 4:00:00`             |
-| `-G <gpu>`                | `<gpu>` GPU(s) request                               | `-G 4`                   |
-| `-C <feature>`            | Feature request (`broadwell,skylake...`)             | `-C skylake`             |
-| `-p <partition>`          | Specify job partition/queue                          |                          |
-| `--qos <qos>`             | Specify job qos                                      |                          |
-| `-A <account>`            | Specify account                                      |                          |
-| `-J <name>`               | Job name                                             | `-J MyApp`               |
-| `-d <specification>`      | Job dependency                                       | `-d singleton`           |
-| `--mail-user=<email>`     | Specify email address                                |                          |
-| `--mail-type=<type>`      | Notify user by email when certain event types occur. | `--mail-type=END,FAIL`   |
+| __Command-line option__        | __Description__                                      | __Example__              |
+|--------------------------------|------------------------------------------------------|--------------------------|
+| `--nodes=<N>`                  | **`<N>` Nodes** request                              | `--nodes=2`              |
+| `--ntasks-per-node=<n>`        | `<n>` Tasks-per-node request                         | `--ntasks-per-node=28`   |
+| `--ntasks-per-socket=<s>`      | `<s>` Tasks-per-socket request                       | `--ntasks-per-socket=14` |
+| `--cpus-per-task=<c>`          | `<c>` Cores-per-task request (multithreading)        | `--cpus-per-task=1`      |
+| `--mem=<m>GB`                  | **`<m>`GB memory per node** request                  | `--mem=0`                |
+| `--time=[DD-]HH[:MM:SS]>`      | **Walltime** request                                 | `--time=4:00:00`         |
+| `--gpus-per-task=<gpu>`        | `<gpu>` GPU(s) request                               | `--gpus-per-task=4`      |
+| `--constraint=<feature>`       | Feature request (`broadwell,skylake...`)             | `--constraint=skylake`   |
+| `--partition=<partition>`      | Specify job partition/queue                          |                          |
+| `--qos=<qos>`                  | Specify job qos                                      |                          |
+| `--account=<account>`          | Specify account                                      |                          |
+| `--job-name=<name>`            | Job name                                             | `--job-name=MyApp`       |
+| `--dependency=<specification>` | Job dependency                                       | `--dependency=singleton` |
+| `--mail-user=<email>`          | Specify email address                                |                          |
+| `--mail-type=<type>`           | Notify user by email when certain event types occur. | `--mail-type=END,FAIL`   |
 
 At a minimum a job submission script must include number of nodes, time, type of partition and nodes (resource allocation constraint and features), and quality of service (QOS). If a script does not specify any of these options then a default may be applied. The full list of directives is documented in the man pages for the [`sbatch`](https://slurm.schedmd.com/sbatch.html) command (see. `man sbatch`).
 
@@ -201,50 +199,55 @@ At a minimum a job submission script must include number of nodes, time, type of
 Each option can be specified either as an `#SBATCH [...]` directive in the job submission script:
 
 ```slurm
-#!/bin/bash -l                # <--- DO NOT FORGET '-l'
+#!/bin/bash --login # <-- DO NOT FORGET '--login'
 ### Request a single task using one core on one node for 5 minutes in the batch queue
-#SBATCH -N 2
+#SBATCH --partition=batch
+#SBATCH --qos=normal
+#SBATCH --nodes=2
 #SBATCH --ntasks-per-node=1
-#SBATCH -c 1
+#SBATCH --cpus-per-task=1
 #SBATCH --time=0-00:05:00
-#SBATCH -p batch
 # [...]
 ```
 
 Or as a command line option when submitting the script:
 
 ```bash
-$ sbatch -p batch -N 2 --ntasks-per-node=1 -c 1 --time=0-00:05:00 ./first-job.sh
+$ sbatch --partition=batch --qos=normal --nodes=2 --ntasks-per-node=1 --cpus-per-task=1 --time=0-00:05:00 ./first-job.sh
 ```
 
 !!! tips ""
-    The command line and directive versions of an option are **equivalent and interchangeable**: if the same option is present both on the command line and as a directive, the command line will be honored. If the same option or directive is specified twice, the last value supplied will be used. Also, many options have both a long form, eg `--nodes=2` and a short form, eg `-N 2`. These are equivalent and interchangable.
+    The command line and directive versions of an option are **equivalent and interchangeable**: if the same option is present both on the command line and as a directive, the command line will be honored. If the same option or directive is specified twice, the last value supplied will be used. Also, many options have both a long form, e.g. `--nodes=2` and a short form, e.g. `-N 2`. These are equivalent and interchangeable.
 
-??? info "Common options to `sbatch` and `srun`"
-    Many options are common to both `sbatch` and `srun`, for example `sbatch -N 4 ./first-job.sh` allocates 4 nodes to `first-job.sh`, and `srun -N 4 uname -n` inside the job runs a copy of `uname -n` on each of 4 nodes. If you don't specify an option in the `srun` command line, `srun` will inherit the value of that option from  `sbatch`. In these cases the default behavior of `srun` is to assume the same options as were passed to `sbatch`. This is achieved via environment variables: `sbatch` sets a number of environment variables with names like `SLURM_NNODES` and srun checks the values of those variables. This has two important consequences:
+??? info "Options common to `sbatch` and `srun`"
+    Many options are common to both `sbatch` and `srun`, for example `sbatch --nodes=4 ./first-job.sh` allocates 4 nodes to `first-job.sh`, and `srun --nodes=4 uname -n` inside the job runs a copy of `uname -n` on each of 4 nodes.
 
-    1. Your job script can see the settings it was submitted with by checking these environment variables
-    2. You should **NOT** override these environment variables. Also be aware that if your job script tries to do certain tricky things, such as using `ssh` to launch a command on another node, the environment might not be propagated and your job may not behave correctly
+    The `srun` commands inherit the option values from `sbatch` unless the option value is explicitly overridden. For instance in our example, `srun --nodes=4 uname -n` runs a copy of `uname -n` in 2 out of the 4 nodes of the allocation.
+
+    The inheritance of the options is is achieved via environment variables: `sbatch` sets a number of environment variables with names like `SLURM_NNODES` and `srun` checks the values of those variables. This option inheritance mechanism has two important consequences.
+
+    1. Inside a job script options with which it was submitted are accessible by checking the corresponding  environment variables.
+    2. Environment variables used by Slurm should **NOT** be overridden. Also be aware that if a job script tries to do certain tricky things, such as using `ssh` to launch a command on another node, the environment might not be propagated and the job may not behave correctly.
 
 
-### HW characteristics and Slurm features of ULHPC nodes
+### Hardware characteristics and Slurm features of ULHPC nodes
 
 When selecting specific resources allocations, it is crucial to match the hardware characteristics of the computing nodes. Details are provided below:
 
 <!--table-feature-start-->
 
-| Node (type)                          | #Nodes | #Socket / #Cores | RAM [GB] | Features              |
-|--------------------------------------|--------|------------------|----------|-----------------------|
-| `aion-[0001-0354]`                   | 354    | 8 / 128          | 256      | `batch,epyc`          |
-| `iris-[001-108]`                     | 108    | 2 / 28           | 128      | `batch,broadwell`     |
-| `iris-[109-168]`                     | 60     | 2 / 28           | 128      | `batch,skylake`       |
-| `iris-[169-186]`   (GPU)             | 18     | 2 / 28           | 768      | `gpu,skylake,volta`   |
-| `iris-[191-196]`   (GPU)             | 6      | 2 / 28           | 768      | `gpu,skylake,volta32` |
-| `iris-[187-190]` <br/>(Large-Memory) | 4      | 4 / 112          | 3072     | `bigmem,skylake`      |
+| Node (type)                          | #Nodes | #Socket / #Cores | RAM [GB] | Features                    |
+|--------------------------------------|--------|------------------|----------|-----------------------------|
+| `aion-[0001-0354]`                   | 354    | 8 / 128          | 256      | `batch,epyc`                |
+| `iris-[001-108]`                     | 108    | 2 / 28           | 128      | `batch,broadwell`           |
+| `iris-[109-168]`                     | 60     | 2 / 28           | 128      | `batch,skylake`             |
+| `iris-[169-186]`   (GPU)             | 18     | 2 / 28           | 768      | `gpu,skylake,volta,volta16` |
+| `iris-[191-196]`   (GPU)             | 6      | 2 / 28           | 768      | `gpu,skylake,volta,volta32` |
+| `iris-[187-190]` <br/>(Large-Memory) | 4      | 4 / 112          | 3072     | `bigmem,skylake`            |
 
 <!--table-feature-end-->
 
-As can be seen, Slurm [features] are associated to ULHPC compute nodes and permits to easily filter with the `-C <feature>` option the list of nodes.
+As can be seen, Slurm [features] are associated to ULHPC compute nodes and permits to easily filter with the `--constraint=<feature>` option the list of nodes.
 
 To list available features, use [`sfeatures`](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh#L173):
 
@@ -259,8 +262,8 @@ sfeatures
 !!! important "Always try to align resource specifications for your jobs with physical characteristics"
     The typical format of your Slurm submission should thus probably be:
     ```
-    sbatch|srun|... [-N <N>] --ntasks-per-node <n> -c <thread> [...]
-    sbatch|srun|... [-N <N>] --ntasks-per-node <#sockets * s> --ntasks-per-socket <s> -c <thread> [...]
+    sbatch|srun|... [--nodes=<N>] --ntasks-per-node=<n> --cpus-per-task=<thread> [...]
+    sbatch|srun|... [--nodes=<N>] --ntasks-per-node=<#sockets * s> --ntasks-per-socket=<s> --cpus-per-task=<thread> [...]
     ```
     This would define a **total of `<N>`$\times$`<n>` TASKS** (first form) or **`<N>`$\times \#sockets \times$`<s>` TASKS** (second form), **each on `<thread>` threads**. :octicons-alert: You **MUST** ensure that either:
 
@@ -271,19 +274,19 @@ sfeatures
         16 cores per socket and 8 virtual sockets (CPUs) per `aion` node. Depending on the selected form, you **MUST** ensure that either `<n>`$\times$`<thread>`=128, or that `<n>`=8`<s>` and `<s>`$\times$`<thread>`=16.
         ```bash
         ### Example 1 - use all cores available
-        {sbatch|srun|salloc} -N 2 --ntasks-per-node 32 --ntasks-per-socket 4 -c 4 [...]
+        {sbatch|srun|salloc} --nodes=2 --ntasks-per-node=32 --ntasks-per-socket=4 --cpus-per-task=4 [...]
         # Total: 64 tasks (spread across 2 nodes), each on 4 cores/threads
 
         ### Example 2 - use all cores available
-        {sbatch|srun|salloc} --ntasks-per-node 128 -c 1  [...]
+        {sbatch|srun|salloc} --ntasks-per-node=128 --cpus-per-task=1  [...]
         # Total; 128 (single-core) tasks
 
         ### Example 3 - use all cores available
-        {sbatch|srun|salloc} -N 1 --ntasks-per-node 8 --ntasks-per-socket 1 -c 16 [...]
+        {sbatch|srun|salloc} --nodes=1 --ntasks-per-node=8 --ntasks-per-socket=1 --pus-per-task=16 [...]
         # Total: 8 tasks, each on 16 cores/threads
 
         ### Example 4 - use all cores available
-        {sbatch|srun|salloc} -N 1 --ntasks-per-node 2 -c 64 [...]
+        {sbatch|srun|salloc} --nodes=1 --ntasks-per-node=2 --cpus-per-task=64 [...]
         # Total: 2 tasks, each on 64 cores/threads
         ```
 
@@ -291,15 +294,15 @@ sfeatures
         14 cores per socket and 2 sockets (physical CPUs) per _regular_ `iris` node. Depending on the selected form, you **MUST** ensure that either `<n>`$\times$`<thread>`=28, or that `<n>`=2`<s>` and `<s>`$\times$`<thread>`=14.
         ```bash
         ### Example 1 - use all cores available
-        {sbatch|srun|salloc} -N 3 --ntasks-per-node 14 --ntasks-per-socket 7 -c 2 [...]
+        {sbatch|srun|salloc} --nodes=3 --ntasks-per-node=14 --ntasks-per-socket=7 --cpus-per-task=2 [...]
         # Total: 42 tasks (spread across 3 nodes), each on 2 cores/threads
 
         ### Example 2 - use all cores available
-        {sbatch|srun|salloc} -N 2 --ntasks-per-node 28 -c 1  [...]
+        {sbatch|srun|salloc} --nodes=2 --ntasks-per-node=28 --cpus-per-task=1  [...]
         # Total; 56 (single-core) tasks
 
         ### Example 3 - use all cores available
-        {sbatch|srun|salloc} -N 2 --ntasks-per-node 2 --ntasks-per-socket 1 -c 14 [...]
+        {sbatch|srun|salloc} --nodes=2 --ntasks-per-node=2 --ntasks-per-socket=1 --cpus-per-task=14 [...]
         # Total: 4 tasks (spread across 2 nodes), each on 14 cores/threads
         ```
 
@@ -307,15 +310,15 @@ sfeatures
         28 cores per socket and 4 sockets (physical CPUs) per _bigmem_ `iris` node. Depending on the selected form, you **MUST** ensure that either `<n>`$\times$`<thread>`=112, or that `<n>`=4`<s>` and `<s>`$\times$`<thread>`=28.
         ```bash
         ### Example 1 - use all cores available
-        {sbatch|srun|salloc} -N 1 --ntasks-per-node 56 --ntasks-per-socket 14 -c 2 [...]
+        {sbatch|srun|salloc} --nodes=1 --ntasks-per-node=56 --ntasks-per-socket=14 --cpus-per-task=2 [...]
         # Total: 56 tasks on a single bigmem node, each on 2 cores/threads
 
         ### Example 2 - use all cores available
-        {sbatch|srun|salloc} --ntasks-per-node 112 -c 1  [...]
+        {sbatch|srun|salloc} --ntasks-per-node=112 --cpus-per-task=1  [...]
         # Total; 112 (single-core) tasks
 
         ### Example 3 - use all cores available
-        {sbatch|srun|salloc} -N 1 --ntasks-per-node 4 --ntasks-per-socket 1 -c 28 [...]
+        {sbatch|srun|salloc} --nodes=1 --ntasks-per-node=4 --ntasks-per-socket=1 --cpus-per-task=28 [...]
         # Total: 4 tasks, each on 28 cores/threads
         ```
 
@@ -327,8 +330,8 @@ Recall that the Slurm controller will set several `SLURM_*` variables in the env
 
 | Submission option         | Environment variable                         | Typical usage                            |
 |---------------------------|----------------------------------------------|------------------------------------------|
-| `-N <N>`                  | `SLURM_JOB_NUM_NODES` or<br/> `SLURM_NNODES` |                                          |
+| `--nodes=<N>`             | `SLURM_JOB_NUM_NODES` or<br/> `SLURM_NNODES` |                                          |
 | `--ntasks-per-node=<n>`   | `SLURM_NTASKS_PER_NODE`                      |                                          |
 | `--ntasks-per-socket=<s>` | `SLURM_NTASKS_PER_SOCKET`                    |                                          |
-| `-c <c>`                  | `SLURM_CPUS_PER_TASK`                        | `OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}` |
-|                           | `SLURM_NTASKS`<br/> Total number of tasks    | `srun -n $SLURM_NTASKS [...]`            |
+| `--cpus-per-task=<c>`     | `SLURM_CPUS_PER_TASK`                        | `OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}` |
+| `--ntasks=<n>`            | `SLURM_NTASKS`<br/> Total number of tasks    | `srun --ntasks=$SLURM_NTASKS [...]`      |

@@ -82,7 +82,7 @@ A full list of variables that specify data handled by sstat can be found with th
 You can use the custom `susage` function in [`/etc/profile.d/slurm.sh`](https://github.com/ULHPC/tools/blob/master/slurm/profile.d/slurm.sh) to collect statistics information.
 
 ```console
-$ susage -h
+$ susage --help
 Usage: susage [-m] [-Y] [-S YYYY-MM-DD] [-E YYYT-MM-DD]
   For a specific user (if accounting rights granted):    susage [...] -u <user>
   For a specific account (if accounting rights granted): susage [...] -A <account>
@@ -93,14 +93,14 @@ But by default, you should use the [`sacct`](https://slurm.schedmd.com/sacct.htm
 
 ```bash
 # /!\ ADAPT <jobid> accordingly
-$ sacct [-X] --jobs=<jobid> [--format=metric1,...]
+$ sacct [--allocations] --jobs=<jobid> [--format=metric1,...]
 # OR, for a user, eventually between a Start and End date
-$ sacct [-X] -u $USER  [-S YYYY-MM-DD] [-E YYYY-MM-DD] [--format=metric1,...]
+$ sacct [--allocations] --user=$USER  [--starttime=YYYY-MM-DD] [--endtime=YYYY-MM-DD] [--format=metric1,...]
 # OR, for an account - ADAPT <account> accordingly
-$ sacct [-X] -A <account> [--format=metric1,...]
+$ sacct [--allocations] --account=<account> [--format=metric1,...]
 ```
 
-Use `-X` to _aggregate_ the statistics relevant to the job allocation itself, not taking job steps into consideration.
+Use `--allocations` to _aggregate_ the statistics relevant to the job allocation itself, not taking job steps into consideration.
 
 The main metrics code you may be interested to review are listed below.
 
@@ -124,7 +124,7 @@ The main metrics code you may be interested to review are listed below.
 | `qos`          | Quality of service.                                                         |
 | `reqcpu`       | Required number of CPUs                                                     |
 | `reqmem`       | Required amount of memory for a job.                                        |
-| `reqtres`      | Required [Trackable RESources (TRES)](https://slurm.schedmd.com/tres.html) |
+| `reqtres`      | Required [Trackable RESources (TRES)](https://slurm.schedmd.com/tres.html)  |
 | `user`         | Userna                                                                      |
 
 A full list of variables that specify data handled by sacct can be found with the `--helpformat` flag or by [visiting the slurm page on `sacct`](https://slurm.schedmd.com/sacct.html).

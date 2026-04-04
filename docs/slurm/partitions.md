@@ -51,12 +51,12 @@ As part of the custom ULHPC Slurm helpers defined in [`/etc/profile.d/slurm.sh`]
 | __Command__                | __Description__                                                        |
 |----------------------------|------------------------------------------------------------------------|
 | `irisstat`, `aionstat`     | report cluster status (utilization, partition and QOS live stats)      |
-| `pload [-a] i/b/g/m `      | Overview of the Slurm partition load                                   |
+| `pload [--all] i/b/g/m`    | Overview of the Slurm partition load                                   |
 | `listpartitionjobs <part>` | List jobs (and current load) of the slurm partition `<part>`           |
 
 !!! example "Partition load with `pload`"
     ```console
-    $ pload -h
+    $ pload --help
     Usage: pload [-a] [--no-header] <partition>
      => Show current load of the slurm partition <partition>, eventually without header
         <partition> shortcuts: i=interactive b=batch g=gpu m=bigmem
