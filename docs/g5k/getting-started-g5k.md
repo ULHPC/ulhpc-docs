@@ -170,7 +170,7 @@ Before logging into a Grid'5000 site, it's best to already know what resources w
 
 #### Reserving resources
 
-We are now ready to reserve resources. Grid'5000's resources are managed by the [OAR](https://oar.imag.fr/) resources and tasks manager. Hence, the command to reserve a resource is `oarsub`. A basic `oarsub` command will allocate the first resource available for a default duration (wall time) of 1 hour:
+We are now ready to reserve resources. Grid'5000's resources are managed by the [OAR](https://oar.imag.fr/) resources and tasks manager. Hence, the command to reserve a resource is [`oarsub`](https://oar.imag.fr/docs/latest/user/commands/oarsub.html). A basic `oarsub` command will allocate the first resource available for a default duration (wall time) of 1 hour:
 
 ```bash
 [user@fluxembourg|~]$ oarsub -r now -q testing
@@ -181,7 +181,7 @@ OAR_JOB_ID=256908
 # Reservation valid --> OK
 ```
 
-Our reservation has been assigned a job ID. Our reservation should be visible on the drawgantt of the site we're currently logged into. It may not have started yet, so it may be worth checking our reservation's state with the `oarstat` command:
+Our reservation has been assigned a job ID. Our reservation should be visible on the drawgantt of the site we're currently logged into. It may not have started yet, so it may be worth checking our reservation's state with the [`oarstat`](https://oar.imag.fr/docs/latest/user/commands/oarstat.html) command:
 
 ```bash
 [user@fluxembourg|~]$ oarstat -u
@@ -356,7 +356,7 @@ Be aware that using `sudo-g5k` will trigger a full redeployment of the node at t
 
 #### Releasing resources
 
-When work is finished on the node we reserved, we can log out and delete our job with the `oardel` command:
+When work is finished on the node we reserved, we can log out and delete our job with the [`oardel`](https://oar.imag.fr/docs/latest/user/commands/oardel.html) command:
 
 ```bash
 user@clervaux-11:~$ logout
