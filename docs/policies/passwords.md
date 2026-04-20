@@ -13,8 +13,9 @@ You are **strongly** encouraged also to rely on password manager applications to
 You may want to use your browser embedded solution but it's not the safest option.
 
 There are many existing password manager, but we can recommend:
-  - [KeepassXC](https://keepassxc.org/download/), see the related [ISO Knowledge Base entry](https://service.uni.lu/sp?id=kb_article_view&sys_kb_id=d9de344e939cb6101adb72718bba10e7&table=kb_knowledge&searchTerm=keepassxc)
-  - [`pass`: the Standard Unix Password Manager](https://www.passwordstore.org/)
+
+* [KeepassXC](https://keepassxc.org/download/), see the related [ISO Knowledge Base entry](https://service.uni.lu/sp?id=kb_article_view&sys_kb_id=d9de344e939cb6101adb72718bba10e7&table=kb_knowledge&searchTerm=keepassxc)
+* [`pass`: the Standard Unix Password Manager](https://www.passwordstore.org/)
 
 ### Login Failures
 
