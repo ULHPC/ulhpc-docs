@@ -38,9 +38,6 @@ The default login shell is `bash` -- see `/etc/shells` for supported shells.
     $ /etc/dotfiles.d/install.sh -d /etc/dotfiles.d/ --screen      # real install
     ```
 
-??? info "Changing Default Login Shell (or NOT)"
-    If you want to change your your default login shell, you should set that up using the [ULHPC IPA portal](../connect/ipa.md) (change the Login Shell attribute). Note **however that we STRONGLY discourage you to do so.** You may hit unexpected issues with system profile scripts expecting `bash` as running shell.
-
 ### System Profile
 
 `/etc/profile` contains Linux system wide environment and startup programs. Specific scripts are set to improve your ULHPC experience, in particular those set in the [`ULHPC/tools`](https://github.com/ULHPC/tools) repository, for instance:

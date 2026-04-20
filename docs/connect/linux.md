@@ -62,9 +62,9 @@ After the execution of `ssh-keygen` command, the keys are generated and stored i
 # Configuration
 
 
-In order to be able to login to the clusters, you will have to add this **public key** (i.e. `id_rsa.pub`) into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
+In order to be able to login to the clusters, you will have to add this **public key** (i.e. `id_rsa.pub`) into your account, using the Identity Management Portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
 
-![](images/ipa.png)
+![Identity Management Portal - adding a new ssh public key](images/idm.png)
 
 The port on which the SSH servers are listening is not the default one (*i.e.* 22) but **8022**.
 Consequently, if you want to connect to the Iris cluster, open a terminal and run (substituting *yourlogin* with the login name you received from us):
@@ -100,40 +100,40 @@ Now you'll be able to issue the following (simpler) command to connect to the cl
                  | | | || |  | \__ \ | |___| | |_| \__ \ ||  __/ |  | |
                  | ||___|_|  |_|___/  \____|_|\__,_|___/\__\___|_|  | |
                   \_\                                              /_/
-    
+
     === Support and community ======================================================
-    
+
       - Technical Docs ........... https://hpc-docs.uni.lu
       - Discourse / Forum ........ https://hpc-discourse.uni.lu/
       - Helpdesk / Service Now ... https://hpc.uni.lu/support
       - User Mailing-list ........ hpc-users@uni.lu
-    
+
     === HPC utilization as of 2025-02-18 15h00 =====================================
-    
+
       AION  batch    74.42%
       IRIS  batch    47.94%
       IRIS  gpu      85.42%
       IRIS  bigmem   51.79%
-    
+
     === Status =====================================================================
-    
+
      New environment modules (env/development/2023b env/release/default env/release/2020b)
-     The default module currently points to 'env/release/2020b' 
+     The default module currently points to 'env/release/2020b'
           but will be updated to 2023b upon release.
      Add 'module use env/release/2020b' to your scripts to ensure that
           they will continue working after the switch.
-    
+
      Cluster maintenance complete (https://gitlab.com/uniluxembourg/hpc/support/infra/-/issues/29)
      - General update to latest RedHat 8.10
      - Slurm update to 23.11.10
      - General security update
      - New software set release (foss 2023a toolchain)
-    
+
     ================================================================================
     Last login: Tue Feb 18 10:40:24 2025 from 10.187.28.101
     Linux access1.iris-cluster.uni.lux 4.18.0-553.34.1.el8_10.x86_64 x86_64
      15:09:51 up 19 days, 5 min, 41 users,  load average: 2.24, 2.55, 3.79
-    [yourlogin@access2 ~]$ 
+    [yourlogin@access2 ~]$
 
 # Activate the SSH agent
 

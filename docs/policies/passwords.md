@@ -9,36 +9,35 @@ Passwords must be changed as soon as possible after exposure or suspected compro
 
 ### Password Manager
 
-You are **strongly** encouraged also to rely on password manager applications to store your different passwords. You may want to use your browser embedded solution but it's not the safest option. Here is a list of recommended applications:
+You are **strongly** encouraged also to rely on password manager applications to store your different passwords.
+You may want to use your browser embedded solution but it's not the safest option.
 
-- [BitWarden](https://bitwarden.com/) - free with no limits ($10 per year for families) - [Github](https://github.com/bitwarden)
-- [Dashlane](https://www.dashlane.com) - free for up to 50 passwords - 40€ per year for premium (60€ for families)
-- [LastPass](https://www.lastpass.com/)
-- [NordPass](https://nordpass.com/) - free version limited to one device with unlimited number of passwords; 36$ per year for premium plan
-- [1Password](https://1password.com/) - paid version only (yet worth it) with 30-day free trial, 36$ per year (60$ for families)
-- _Self-Hosted solutions_:
-  - [KeepassXC](https://keepassxc.org/download/)
-  - [`pass`: the Standard Unix Password Manager](https://www.passwordstore.org/).
-    <!-- - See also [our tutorial on pass setup within the ULHPC team](services/pass.md) -->
-
-### Forgotten Passwords
-
-If you forget your password or if it has recently expired, you can simply [contact us](../support/index.md) to initiate the process of resetting your password.
+There are many existing password manager, but we can recommend:
+  - [KeepassXC](https://keepassxc.org/download/), see the related [ISO Knowledge Base entry](https://service.uni.lu/sp?id=kb_article_view&sys_kb_id=d9de344e939cb6101adb72718bba10e7&table=kb_knowledge&searchTerm=keepassxc)
+  - [`pass`: the Standard Unix Password Manager](https://www.passwordstore.org/)
 
 ### Login Failures
 
-Your login privileges will be disabled if you have several login failures while entering your password on a ULHPC resource. You do not need a new password in this situation. The login failures will be automatically cleared after a couple of minutes. No additional actions are necessary.
+Your login privileges will be disabled if you have several login failures while entering your password on a ULHPC resource.
+You do not need a new password in this situation.
+The login failures will be automatically cleared after a couple of minutes.
+No additional actions are necessary.
 
-## How To Change Your Password on IPA
+### Forgotten Passwords
 
-See [IPA documentation](../connect/ipa.md#change-your-password)
+If you forget your password or if it has recently expired, please use the [Identity Management Portal](../connect/idm.md) and click "Forgot Password?".
+You can also choose to login to the IdM portal using your University account.
+
+## How To Change Your Password
+
+See the [Identity Management Portal documentation](../connect/idm.md#change-your-password)
 
 !!! tip
     Passwords must be changed under any one of the following circumstances:
 
     - Immediately after someone else has obtained your password (do *NOT* give your password to anyone else).
     - As soon as possible, but at least within one business day after a password has been compromised or after you suspect that a password has been compromised.
-    - On direction from ULHPC staff, or by IPA password policy requesting to frequently change your password.
+    - On direction from ULHPC staff, or by password policy requesting to frequently change your password.
 
 **Your new password must adhere to ULHPC's password requirements.**
 

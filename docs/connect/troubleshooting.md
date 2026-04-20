@@ -11,21 +11,21 @@ Basically, you are **NOT** able to connect to the access servers until your SSH 
 - Make sure you are using the **proper ULHPC user name** (and not your local
   username or University/Eduroam login).
   - Check your mail entitled "`[HPC@Uni.lu] Welcome - Account information`" to get your ULHPC login
-- Log into [IPA](ipa.md) and double check your SSH public key settings.
+- Log into the [Identity Management Portal](idm.md) and double check your SSH public key settings.
 - [Ensure you have run your SSH agent](ssh.md)
-- If you have a **new computer** or for some other reason you have generated **new ssh key**, please update your ssh keys on the IPA user portal.
-  - See [IPA](ipa.md) for more details
+- If you have a **new computer** or for some other reason you have generated **new ssh key**, please update your ssh keys on the Identity Management Portal.
+  - See [IdM](idm.md) for more details
 - **You are using (deprecated) DSA/RSA keys**. As per the
   [OpenSSH website](https://www.openssh.com/legacy.html):
   > "OpenSSH 7.0 and greater similarly disable the ssh-dss (DSA) public key algorithm.
   > It too is weak and we recommend against its use". Solution: generate a new RSA keypair
-  > (3092 bit or more) and re-upload it on the IPA web portal (use the URL
+  > (3092 bit or more) and re-upload it on the Identity Management Portal (use the URL
   > communicated to you by the UL HPC team in your “welcome” mail). For more
   > information on keys, see [this website](https://blog.g3rt.nl/upgrade-your-ssh-keys.html).
 
-![](images/ipa.png)
+![Identity Management Portal - adding a new ssh public key](images/idm.png)
 
-- Your public key is corrupted, please verify and re-upload it on the IPA web portal.
+- Your public key is corrupted, please verify and re-upload it on the Identity Management Portal.
 - We have taken the cluster down for maintenance and we forgot to activate the banner message mentioning this. Please check the calendar, the latest Twitter messages (box on the right of this page) and the messages sent on the `hpc-users` mailing list.
 
 If the above steps did not permit to solve your issue, please open a ticket on [ServiceNow](https://hpc.uni.lu/support/) (HPC &rarr; User access & accounts &rarr; Report issue with cluster access) or send us an email to <hpc-team@uni.lu>.

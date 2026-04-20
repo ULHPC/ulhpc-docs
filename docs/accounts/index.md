@@ -52,16 +52,15 @@ See [Acceptable Use Policy](../policies/aup.md) for more details.
 
 [:fontawesome-solid-file-signature: Account Request Form](https://service.uni.lu/sp?id=sc_cat_item&sys_id=358906c98776c610aa6d65740cbb35e6&sysparm_category=9c992749db8f84109aa59ee3db96196f){: .md-button .md-button--link }
 
-
-1. University staff - you can submit a request for a new ULHPC account by using the [ServiceNow portal (Research > HPC > User access & accounts > New HPC account request)](https://service.uni.lu/sp?id=sc_cat_item&sys_id=358906c98776c610aa6d65740cbb35e6&sysparm_category=9c992749db8f84109aa59ee3db96196f).  
-Students - submit your account request on the [Student Service Portal](https://service.uni.lu/ssp).  
+1. University staff - you can submit a request for a new ULHPC account by using the [ServiceNow portal (Research > HPC > User access & accounts > New HPC account request)](https://service.uni.lu/sp?id=sc_cat_item&sys_id=358906c98776c610aa6d65740cbb35e6&sysparm_category=9c992749db8f84109aa59ee3db96196f).
+Students - submit your account request on the [Student Service Portal](https://service.uni.lu/ssp).
 Externals - a University staff member must request the account for you, using the section [New HPC account for external](https://service.uni.lu/sp?id=sc_cat_item&sys_id=b12bce4d8776c610aa6d65740cbb3536&sysparm_category=9c992749db8f84109aa59ee3db96196f). Enter the professional data (organization and institutional email address). Specify the line manager / project PI if needed.
 2. If you need to access a specific project directory, ask the project directory owner to open a ticket using the section [Add user within project](https://service.uni.lu/sp?id=sc_cat_item&sys_id=47f37b09dbcf84109aa59ee3db9619a5&sysparm_category=9c992749db8f84109aa59ee3db96196f).
 3. Your account will undergo user checks, in accordance with ULHPC policies, to verify your identity and the information proposed. Under some circumstances, there could be a delay while this vetting takes place.
 4. After vetting has completed, you will receive a welcome email with your login information, and a link to the [HPC Identity Management Portal](https://hpc-account.uni.lu/realms/hpc/login-actions/reset-credentials?client_id=account-console) where you can setup your password and a Multi-Factor Authentication (MFA) method for your account.
   - **Your new password must adhere to ULHPC's password requirements**
         - see  [Password policy and guidelines](../policies/passwords.md)
-  - [ULHPC Identity Management Portal documentation](../connect/ipa.md)
+  - [ULHPC Identity Management Portal documentation](../connect/idm.md)
 
 ??? warning "UL HPC credentials are not University credentials"
     Be aware that the source of authentication for the HPC services based on [RedHat IdM/IPA](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/linux_domain_identity_authentication_and_policy_guide/index) **DIFFERS** from the University credentials (based on UL Active Directory).
@@ -73,7 +72,7 @@ Externals - a University staff member must request the account for you, using th
 
 ## Managing User Accounts
 
-ULHPC user accounts are managed in through the [HPC Identity Management Portal](../connect/ipa.md).
+ULHPC user accounts are managed in through the [HPC Identity Management Portal](../connect/idm.md).
 
 ## Security Incidents
 

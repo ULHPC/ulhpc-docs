@@ -132,7 +132,7 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 
 - [Get a ULHPC account](accounts/index.md)
 - [Understanding Slurm account hierarchy and accounting rules](slurm/accounts.md)
-- [ULHPC Identity Management (IPA portal)](connect/ipa.md)
+- [ULHPC Identity Management Portal](connect/idm.md)
 - [Password policy](policies/passwords.md)
 - [Usage Charging Policy](policies/usage-charging.md)
 

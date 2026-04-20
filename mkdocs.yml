@@ -10,7 +10,7 @@ nav:
     - Password Policy: 'policies/passwords.md'
     - Collaboration Accounts: 'accounts/collaboration_accounts.md'
     - Projects Accounts: 'accounts/projects.md'
-    - Identity Management Portal: 'connect/ipa.md'
+    - Identity Management Portal: 'connect/idm.md'
     - Slurm Account Hierarchy: 'slurm/accounts.md'
   - Teaching with the ULHPC: 'teaching-with-the-ulhpc.md'
   ##############
@@ -62,7 +62,6 @@ nav:
     - Access/Login Servers: 'connect/access.md'
     - SSH: 'connect/ssh.md'
     - SSH (Windows): 'connect/windows.md'
-    - Identity Management (IdM/IPA): 'connect/ipa.md'
     - Open On Demand Portal: 'connect/ood.md'
     - Troubleshooting: 'connect/troubleshooting.md'
 

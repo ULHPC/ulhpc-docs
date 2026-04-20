@@ -68,7 +68,7 @@ For more details, follow the [ULHPC Tutorials: Preliminaries / SSH](https://ulhp
       - Click on the **Generate** button. Move your mouse to generate some randomness.
       - Select a strong passphrase in the **Key passphrase** field for your key.
     - Save the public and private keys as respectively `id_rsa.pub` and `id_rsa.ppk`.
-      - Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
+      - Please keep a copy of the public key, you will have to add this public key into your account, using the IdM user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
 
     ![MobaKeyGen (SSH key generator)](images/moba-ssh-key-gen.png)
 
@@ -94,13 +94,13 @@ For more details, follow the [ULHPC Tutorials: Preliminaries / SSH](https://ulhp
     ![Saving the public key](images/puttygen-screenshot-3.png)
 
     - Save the public and private keys as respectively `id_rsa.pub` and `id_rsa.ppk`.
-      - Please keep a copy of the public key, you will have to add this public key into your account, using the IPA user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
+      - Please keep a copy of the public key, you will have to add this public key into your account, using the IdM user portal (use the URL communicated to you by the UL HPC team in your "welcome" mail).
 
 ## Password-less logins and transfers
 
-Password based authentication is disabled on all ULHPC servers. You can **only use public-key authentication**. This assumes that you upload your **public** SSH keys `*.pub` to your user entry on the [ULHPC Identity Management Portal](ipa.md).
+Password based authentication is disabled on all ULHPC servers. You can **only use public-key authentication**. This assumes that you upload your **public** SSH keys `*.pub` to your user entry on the [ULHPC Identity Management Portal](idm.md).
 
-Consult the [associated documentation](ipa.md) to discover how to do it.
+Consult the [associated documentation](idm.md) to discover how to do it.
 
 Once done, you can connect by SSH to the ULHPC clusters. Note that the port on which the SSH servers are listening is **not** the default SSH one (*i.e.* 22) but **8022**. Consequently, if you want to connect to the Iris cluster, open a terminal and run (substituting *yourlogin* with the login name you received from us):
 
@@ -216,7 +216,7 @@ Due to the [challenge-response protocol](http://www.unixwiz.net/techtips/ssh-age
 
 [^576]: SSH agents usually support session timeout to limit the time duration a key is exposed without a passphrase; this can guard against accidental key exposure, for instance if a user leaves their computer unlocked.
 
-### Security implications 
+### Security implications
 
 The most critical security risk when using SSH agent is the [man in the middle attack](https://goteleport.com/blog/how-to-use-ssh-agent-safely/). Any sufficiently privileged user, like a system administrator, can hijack the process by accessing the exposed socket and use it to impersonate you in a remote connection. While this does not reveal the user's private keys, it still violates the integrity of your communications.
 
@@ -328,7 +328,7 @@ You can also add the source command above in your `~/.profile` script to load th
 
 ### On ULHPC clusters
 
-SSH agent forwarding is prohibited in UL HPC systems for [security reasons](#security-implications) mentioned above and it is recommended that you also explicitly disable it in your SSH configuration. For more details, see the `ForwardAgent no` configuration option in the [SSH configuration](#ssh-configuration) proposed for UL HPC clusters. There are however legitimate uses of SSH agent. Consider for instance keys _generated in the UL HPC cluster_ to access a remote service. You can use SSH agent to avoid entering the passphrase of SSH keys every time you access the remote service. 
+SSH agent forwarding is prohibited in UL HPC systems for [security reasons](#security-implications) mentioned above and it is recommended that you also explicitly disable it in your SSH configuration. For more details, see the `ForwardAgent no` configuration option in the [SSH configuration](#ssh-configuration) proposed for UL HPC clusters. There are however legitimate uses of SSH agent. Consider for instance keys _generated in the UL HPC cluster_ to access a remote service. You can use SSH agent to avoid entering the passphrase of SSH keys every time you access the remote service.
 
 In such cases an SSH agent must be manually loaded after connecting to UL HPC facilities. To load the agent, execute the command,
 
@@ -566,7 +566,8 @@ where `USER` is a variable containing your username in UL HPC clusters. The doma
 
 #### Authorizing access to compute nodes
 
-In UL HPC clusters, the authorization for logging into the login nodes is not provided by the `authorized_keys` file, but by [identity management](/connect/ipa/) system. However, connections to the compute nodes are authorized by the `authorized_keys` file. Use the command
+In UL HPC clusters, the authorization for logging into the login nodes is not provided by the `authorized_keys` file, but by [identity management](/connect/idm/) system.
+However, connections to the compute nodes are authorized by the `authorized_keys` file. Use the command
 
 ```
 ssh-copy-id -i <private key> aion-cluster
@@ -589,7 +590,7 @@ if you haven't; the `<private key>` is the private key for the public key you wo
     You still need to run the [SSH agent](#ssh-agent) in your local machine to ensure passwordless to keys protected by passphrase.
 
 ??? tip "the `authorized_keys` file"
-    The `authorized_keys` file is located in 
+    The `authorized_keys` file is located in
     ```
     ${HOME}/.ssh/authorized_keys
     ```

@@ -23,7 +23,7 @@ of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'
 
 ## Popular documentation pages
 
-* [SSH Management on ULHPC Identity Management Portal (IdM/IPA)](connect/ipa.md)
+* [SSH Management on ULHPC Identity Management Portal (IdM)](connect/idm.md)
 * [Usage Charging Policy](policies/usage-charging.md)
 * [Job Status and Reason Codes](jobs/reason-codes.md)
 * [Job Prioritization Factors](jobs/priority.md)
