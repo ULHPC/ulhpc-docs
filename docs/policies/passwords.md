@@ -44,11 +44,11 @@ See the [Identity Management Portal documentation](../connect/idm.md#change-your
 
 ## Password Requirements and Guidelines
 
-One of the potentially weakest links in computer security is the individual password. Despite the University's and ULHPC's efforts to keep hackers out of your personal files and away from University resources (e.g., email, web files, licensed software), easily-guessed passwords are still a big problem so you should really pay attention to the following guidelines and recommendations.
+One of the potentially weakest links in computer security is the individual password. Despite the University's and ULHPC's efforts to protect your personal files and the University resources (e.g., email, web files, licensed software), easily-guessed passwords are still a big problem so you should really pay attention to the following guidelines and recommendations.
 
 Recently, the National Institute of Standards and Technology (NIST) has updated their Digital Identity Guidelines in [Special Publication 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html). We have updated our password policy to bring it in closer alignment with this guidelines. In particular, the updated guidance is counter to the long-held philosophy that passwords must be long and complex. In contrast, the new guidelines recommend that passwords should be "__easy to remember__" but "__hard to guess__", allowing for usability and security to go hand-in-hand. Inpired with other password policies and guidelines ([Stanford](https://uit.stanford.edu/service/accounts/passwords), [NERSC](https://docs.nersc.gov/accounts/passwords/)), ULHPC thus recommends the usage of  "_pass phrases_" instead of passwords. Pass phrases are longer, but easier to remember than complex passwords, and if well-chosen can provide better protection against hackers.
 
-In addition, the following rules based on password length and usage of [Multi-Factor Authentication (MFA)](connect/mfa.md) must be satisfied:
+In addition, the following rules based on password length and usage of [Multi-Factor Authentication (MFA)](https://service.uni.lu/sp?id=kb_article_view&sys_kb_id=443d6fd03b324214fe0d676aa5e45a36) must be satisfied:
 
 - The enforced minimum length for accounts _with_ MFA enabled is 8 characters. If MFA is **not** enabled for your account the minimum password length is 14 characters.
 - The ability to use all special characters according to the following guidelines (see also the [Stanford Password Requirements Quick Guide](https://uit.stanford.edu/service/accounts/passwords/quickguide)) depending on the password length:

@@ -141,8 +141,6 @@ In order to use the ULHPC facilities, you need to have a user account with an as
 !!! check "MFA is *strongly encouraged* for all ULHPC users"
     It will be soon become mandatory - detailed instructions will be provided soon.
 
-<!-- * [Multi-Factor Authentication (MFA)](connect/mfa.md)-->
-
 - [SSH](connect/ssh.md)
 - [Open On Demand Portal](connect/ood.md)
 - [ULHPC Login/Access servers](connect/access.md)
