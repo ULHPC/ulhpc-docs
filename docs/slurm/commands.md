@@ -343,7 +343,6 @@ We have defined several custom ULHPC Slurm helpers defined in [`/etc/profile.d/s
 | `listpartitionjobs <part>` | List jobs (and current load) of the slurm partition `<part>`           |
 | `pload [-a] i/b/g/m `      | Overview of the Slurm partition load                                   |
 | `qload [-a]  <qos>`        | Show current load of the slurm QOS `<qos>`                             |
-| `sbill <jobid>`            | Display job charging / billing summary                                 |
 | `sjoin [-w <node>]`        | join a running job                                                     |
 | `sassoc <name>`            | Show Slurm association information for `<name>` (user or account)      |
 | `slist <jobid> [-X]`       | List statistics of a past job                                          |
