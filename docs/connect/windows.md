@@ -17,7 +17,6 @@ Your local SSH configuration is located in the  `HOME/.ssh/` directory and consi
 - (eventually) the configuration of the SSH client `HOME/.ssh/config`
 - `HOME/.ssh/known_hosts`: Contains a list of host keys for all hosts you have logged into that are not already in the system-wide list of known host keys. This permits to detect man-in-the-middle attacks.
 
-
 ### SSH Key Management
 
 Choose the method you prefer: either the graphical interface MobaKeyGen or command line generation of the ssh key.
