@@ -9,25 +9,20 @@ Passwords must be changed as soon as possible after exposure or suspected compro
 
 ### Password Manager
 
-You are **strongly** encouraged also to rely on password manager applications to store your different passwords.
-You may want to use your browser embedded solution but it's not the safest option.
+You are **strongly** encouraged also to rely on password manager applications to store your different passwords. You may want to use your browser embedded solution but it's not the safest option.
 
-There are many existing password manager, but we can recommend:
+There are many password manager, but we can recommend the following.
 
-* [KeepassXC](https://keepassxc.org/download/), see the related [ISO Knowledge Base entry](https://service.uni.lu/sp?id=kb_article_view&sys_kb_id=d9de344e939cb6101adb72718bba10e7&table=kb_knowledge&searchTerm=keepassxc)
-* [`pass`: the Standard Unix Password Manager](https://www.passwordstore.org/)
+- [KeepassXC](https://keepassxc.org/download/), see the related [ISO Knowledge Base entry](https://service.uni.lu/sp?id=kb_article_view&sys_kb_id=d9de344e939cb6101adb72718bba10e7&table=kb_knowledge&searchTerm=keepassxc).
+- [`pass`](https://www.passwordstore.org/): the Standard Unix Password Manager.
 
 ### Login Failures
 
-Your login privileges will be disabled if you have several login failures while entering your password on a ULHPC resource.
-You do not need a new password in this situation.
-The login failures will be automatically cleared after a couple of minutes.
-No additional actions are necessary.
+Your login privileges will be disabled if you have several login failures while entering your password on a ULHPC resource. You do not need a new password in this situation. The login failures will be automatically cleared after a couple of minutes. No additional actions are necessary.
 
 ### Forgotten Passwords
 
-If you forget your password or if it has recently expired, please use the [Identity Management Portal](../connect/idm.md) and click "Forgot Password?".
-You can also choose to login to the IdM portal using your University account.
+If you forget your password or if it has recently expired, please use the [Identity Management Portal](../connect/idm.md) and click "Forgot Password?". You can also choose to login to the IdM portal using your University account.
 
 ## How To Change Your Password
 
