@@ -38,7 +38,7 @@ Select a strong passphrase in the **Key passphrase** field for your key. Save th
 
 Click on **Start local terminal**. To generate an SSH keys, just use the `ssh-keygen` command, typically as follows:
 
-    $> ssh-keygen -t rsa -b 4096
+    $> ssh-keygen -t rsa -b 4096 -a 120
     Generating public/private rsa key pair.
     Enter file in which to save the key (/home/user/.ssh/id_rsa):
     Enter passphrase (empty for no passphrase):

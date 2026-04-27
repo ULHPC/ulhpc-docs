@@ -70,7 +70,7 @@ In order to reserve resources located on a given site, users must log into the r
 **If you haven't done it before, generate an SSH key and put your public key on Grid'5000 User Management System**. This is done with the `ssh-keygen` command:
 
 ```bash
-user@pc: ssh-keygen -t ed25519
+user@pc: ssh-keygen -t ed25519 -a 120
 ```
 
 > The choice of how you configure your SSH key (passphrase, location...) is yours. Just remember that this key will be used each time you log in to Grid'5000.
