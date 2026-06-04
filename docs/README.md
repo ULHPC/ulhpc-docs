@@ -27,7 +27,7 @@ of the [Uni.lu High Performance Computing (ULHPC) Facility](https://hpc.uni.lu)'
 * [Usage Charging Policy](policies/usage-charging.md)
 * [Job Status and Reason Codes](jobs/reason-codes.md)
 * [Job Prioritization Factors](jobs/priority.md)
-* [Example of Job Launchers](slurm/launchers.md) - currated example of job launcher scripts
+* [Example of Job Launchers](slurm/launchers.md) - curated example of job launcher scripts
 * [Slurm overview](slurm/index.md) - Slurm commands, job script basics, submitting, updating jobs
 * [Join and Monitor Jobs](jobs/submit.md#joiningmonitoring-running-jobs)
 * [File permissions](filesystems/unix-file-permissions.md) - Unix file permissions
