@@ -136,6 +136,8 @@ module load tools/JupyterLab
 
     **Any job running jupyter notebook on the GPU partition will be cancelled without warning.**
 
+    **Repeated violations will lead to account deactivation.**
+
 Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following script is a template for Jupyter submission scripts that will rarely need modifications. Most often you will need to modify the session duration (`--time` SBATCH option).
 
 !!! example "Slurm Launcher script for Jupyter Notebook"
