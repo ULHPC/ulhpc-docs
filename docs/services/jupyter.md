@@ -169,15 +169,17 @@ Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following s
     declare lab_pid=$!
 
     # Add connection instruction
-    echo "# Connection instructions" > "${connection_instructions}"
-    echo "" >> "${connection_instructions}"
-    echo "To access the jupyter notebook execute on your personal machine:" >> "${connection_instructions}"
-    echo "ssh -N -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:${loopback_device}:${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
-    echo "" >> "${connection_instructions}"
-    echo "To access the jupyter notebook if you have setup a special key (e.g ulhpc_id_ed25519) to connect to cluster nodes execute on your personal machine:" >> "${connection_instructions}"
-    echo "ssh -i ~/.ssh/hpc_id_ed25519 -N -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:${loopback_device}:${port} ${USER}@$(hostname -i)" >> "${connection_instructions}"
-    echo "" >> "${connection_instructions}"
-    echo "Then navigate to:" >> "${connection_instructions}"
+    {
+      echo "# Connection instructions"
+      echo ""
+      echo "To access the jupyter notebook execute on your personal machine:"
+      echo "ssh -N -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:${loopback_device}:${port} ${USER}@$(hostname -i)"
+      echo ""
+      echo "To access the jupyter notebook if you have setup a special key (e.g ulhpc_id_ed25519) to connect to cluster nodes execute on your personal machine:"
+      echo "ssh -i ~/.ssh/hpc_id_ed25519 -N -J ${USER}@access-${ULHPC_CLUSTER}.uni.lu:8022 -L ${port}:${loopback_device}:${port} ${USER}@$(hostname -i)"
+      echo ""
+      echo "Then navigate to:"
+    } 1>"${connection_instructions}"
 
     # Wait for the server to start
     sleep 2s
@@ -190,6 +192,7 @@ Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following s
         --silent --show-error --fail \
         "http://${loopback_device}:${port}" > /dev/null
     # Note down the URL
+    jupyter lab list 1>/dev/null 2>&1 # Needs a dry run to initialize jupyter
     jupyter lab list 2>&1 \
         | grep -E '\?token=' \
         | awk 'BEGIN {FS="::"} {gsub("[ \t]*","",$1); print $1}' \
