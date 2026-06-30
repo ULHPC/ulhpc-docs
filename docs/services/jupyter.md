@@ -130,6 +130,12 @@ module load tools/JupyterLab
 ```
 ### Starting a JupyterLab session
 
+!!! danger "Do not run heavy jobs on Jupyter notebooks"
+
+    Jupyter notebooks are meant for development jobs and not for large production runs consuming a lot of resources. The interactive nature of the notebook means that a lot of the time the occupied resources are idling.
+
+    **Any job running jupyter notebook on the GPU partition will be cancelled without warning.**
+
 Jupyter notebooks must be started as [slurm jobs](/jobs/submit). The following script is a template for Jupyter submission scripts that will rarely need modifications. Most often you will need to modify the session duration (`--time` SBATCH option).
 
 !!! example "Slurm Launcher script for Jupyter Notebook"
