@@ -292,6 +292,7 @@ When you no longer need the mounted remote directory, you **must** unmount your 
     ```
     diskutil umount ~/ulhpc
     ```
+
 !!! tip
 
     In some APT based systems (e.g. Debian and Ubuntu) the command to unmount the remote directory may be called `fusermount3`.
