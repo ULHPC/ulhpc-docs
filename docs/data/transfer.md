@@ -285,27 +285,13 @@ Note the leaving the `[dir]` argument blanck, mounts the user's home directory b
 When you no longer need the mounted remote directory, you **must** unmount your remote file system:
 
 === "Linux"
-	Generic Linux distributions:
     ```bash
     fusermount -u ~/ulhpc 
-    ```
-	Ubuntu (22.04 or newer): 
-	```bash
-    fusermount3 -u ~/ulhpc 
     ```
 === "Mac OS X"
     ```
     diskutil umount ~/ulhpc
     ```
-
-!!! tip
-
-    In some APT based systems (e.g. Debian and Ubuntu) the command to unmount the remote directory may be called `fusermount3`.
-
-!!! tip
-
-    In some APT based systems (e.g. Debian and Ubuntu) the command to unmount the remote directory may be called `fusermount3`.
-
 !!! tip
 
     In some APT based systems (e.g. Debian and Ubuntu) the command to unmount the remote directory may be called `fusermount3`.
