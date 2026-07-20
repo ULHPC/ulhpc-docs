@@ -306,6 +306,10 @@ When you no longer need the mounted remote directory, you **must** unmount your 
 
     In some APT based systems (e.g. Debian and Ubuntu) the command to unmount the remote directory may be called `fusermount3`.
 
+!!! tip
+
+    In some APT based systems (e.g. Debian and Ubuntu) the command to unmount the remote directory may be called `fusermount3`.
+
 ## Transfers between long term storage and the HPC facilities
 
 The university provides **central data storage** services for all employees and students. The data are stored securely on the university campus and are **managed by the IT department**. The storage servers most commonly used at the university are
