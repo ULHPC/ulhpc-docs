@@ -288,13 +288,6 @@ When you no longer need the mounted remote directory, you **must** unmount your 
 	Generic Linux distributions:
     ```bash
     fusermount -u ~/ulhpc 
-<<<<<<< HEAD
-    ```
-	Ubuntu (22.04 or newer): 
-	```bash
-    fusermount3 -u ~/ulhpc 
-=======
->>>>>>> upstream/master
     ```
 === "Mac OS X"
     ```
