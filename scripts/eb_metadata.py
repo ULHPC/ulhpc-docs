@@ -14,35 +14,54 @@ stack = []
 
 options, cfg_settings = set_up_configuration(args=[])
 
-# for eb in software.rglob("*.eb"):
-#     print(eb)
+for eb in software.rglob("*.eb"):
+    print(eb)
     
-#     try:
-#         ecs = process_easyconfig(str(eb), validate = False)
+    try:
+        ecs = process_easyconfig(str(eb), validate = False)
 
-#         for ecdict in ecs:
-#             ec = ecdict["ec"]
+        for ecdict in ecs:
+            ec = ecdict["ec"]
 
-#             package = {
-#                 "name": ec["name"],
-#                 "version": ec["version"],
-#                 "homepage": ec["homepage"],
-#                 "description": ec["description"],
-#                 "moduleclass": ec["moduleclass"],
-#             }
+            package = {
+                "name": ec["name"],
+                "version": ec["version"],
+                "homepage": ec["homepage"],
+                "description": ec["description"],
+                "moduleclass": ec["moduleclass"],
+            }
 
-#             stack.append(package)
+            stack.append(package)
         
-#     except Exception as excpt:
-#         print(f"Failed: {eb}: {excpt}")
-
+    except Exception as excpt:
+        print(f"Failed: {eb}: {excpt}")
 
 # with open("stack.json", "w") as fp:
 #     json.dump(stack, fp, indent=2, default=str)
 
-stack = pd.read_json("stack.json")
+#stack = pd.read_json("stack.json")
 
 df = pd.DataFrame(stack)
+
+# Clean software descriptions
+df["description"] = (
+    df["description"]
+      .fillna("")
+      .str.replace(r"\s+", " ", regex=True)
+      .str.strip()
+)
+
+
+# Combine versions for the same software
+df = (
+    df.groupby(
+        ["name", "homepage", "moduleclass", "description"],
+        as_index=False)
+    .agg({
+        "version": lambda x: "<br>".join(sorted(set(x)))
+    })
+)
+
 
 # Create Markdown hyperlinks
 df["software"] = df.apply(
@@ -50,13 +69,6 @@ df["software"] = df.apply(
     axis=1,
 )
 
-# Clean descriptions
-df["description"] = (
-    df["description"]
-      .fillna("")
-      .str.replace(r"\s+", " ", regex=True)
-      .str.strip()
-)
 #Reorder columns
 df = df[
     [
@@ -75,4 +87,4 @@ with open("stack.md", "w") as f:
     f.write(df.to_markdown(index=False))
 
 # Keep JSON too
-#df.to_json("stack.json", orient="records", indent=2)
+df.to_json("stack.json", orient="records", indent=2)
