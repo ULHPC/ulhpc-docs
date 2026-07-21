@@ -147,6 +147,7 @@ nav:
     - Software Sets:
        - 2019b: 'software/swsets/2019b.md'
        - 2020a: 'software/swsets/2020b.md'
+       - Meluxina: 'software/swsets/stack.md'
     ### END GENERATED CONTENT
     # - Software Set Versioning: 'software/swsets.md'
     - Compiling/building your own software: 'software/build.md'
