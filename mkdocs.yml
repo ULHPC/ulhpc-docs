@@ -145,9 +145,11 @@ nav:
       - Utilities: 'software/swsets/tools.md'
       - Visualisation: 'software/swsets/vis.md'
     - Software Sets:
-       - 2019b: 'software/swsets/2019b.md'
-       - 2020a: 'software/swsets/2020b.md'
-       - Meluxina: 'software/swsets/stack.md'
+        - 2019b: 'software/swsets/2019b.md'
+        - 2020a: 'software/swsets/2020b.md'
+        - 2023b: 'software/swsets/2023b.md'
+        - 2024a: 'software/swsets/2024a.md'
+        - 2025a: 'software/swsets/2025a.md'
     ### END GENERATED CONTENT
     # - Software Set Versioning: 'software/swsets.md'
     - Compiling/building your own software: 'software/build.md'
