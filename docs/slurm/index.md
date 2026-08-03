@@ -51,7 +51,7 @@ The main configuration options for Slurm that affect the resources that are avai
     - `iris-gpu-long`: _max_ 2 nodes per and 4 jobs per user.
     - `iris-bigmem-long`: _max_ 2 nodes per and 4 jobs per user.
     - `iris-hopper-long`: _max_ 1 GPU per and 100 jobs per user.
-  - Special _preemptible QoS_ for [best-effort](/jobs/best-effort') jobs.
+  - Special _preemptible QoS_ for [best-effort](/jobs/best-effort) jobs.
     - `besteffort`: jobs in best effort OoS can be interrupted by jobs in any other QoS. The processes running during interruption are killed, so the executables use in best effort jobs require a [custom checkpoint-restart mechanism](https://docs.nersc.gov/development/checkpoint-restart/).
 - [__Accounts__](/slurm/accounts) organize user access to resources hierarchically. Accounts are associated to organization (like faculties), supervisors (multiple associations possible), and activities (like projects, and trainings).
   - A default account is associated with all users affiliated with the University of Luxembourg.
