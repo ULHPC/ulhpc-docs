@@ -1,9 +1,8 @@
 import json
 import os
-from pathlib import Path
-
-from easybuild.framework.easyconfig.parser import EasyConfigParser
 import pandas as pd
+from pathlib import Path
+from easybuild.framework.easyconfig.parser import EasyConfigParser
 
 #-----------------------------------------
 # Run only with Easybuild versions 5.3.x or above
