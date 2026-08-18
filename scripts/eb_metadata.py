@@ -33,12 +33,6 @@ cluster_info = {
     'base_path' : "/opt/apps/easybuild/systems/"
 }
 
-#-----------------------------------------
-
-###############################
-## EXTRACT EASYCONFIGS INFO ##
-###############################
-
 def get_software_stack(software_path, hwd_data):
     stack = []
 
@@ -76,12 +70,6 @@ def extract_easyconfigs_info(eb, software_path, stack, hwd_data):
         print(f"Failed: {eb}: {excpt}")
 
     return stack
-
-#-----------------------------------------
-
-##########################
-## CLEAN AND MERGE DATA ##
-##########################
 
 def homepage_link(text, url):
     if pd.notna(url) and url:
@@ -158,13 +146,6 @@ def merge_dataframes(stack, collapse_descr = True):
 
     return merged_result
 
-
-#-----------------------------------------
-
-#####################
-## MAIN FUNCTIONS ###
-#####################
-
 def get_sotfware_tables(save_data = True):
     clusters = os.listdir(cluster_info['base_path'])
     clusters.remove('binary')
@@ -189,12 +170,9 @@ def get_sotfware_tables(save_data = True):
 ## Keep JSON too
 #df.to_json("stack.json", orient="records", indent=2)
 
-#-----------------------------------------
-
 def main():
     options, cfg_settings = set_up_configuration(args=[])
     get_sotfware_tables()
                         
 if __name__ == "__main__":
     main()
-
