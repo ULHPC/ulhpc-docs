@@ -1,5 +1,4 @@
 import json
-import socket
 import os
 from pathlib import Path
 
