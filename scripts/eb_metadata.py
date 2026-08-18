@@ -155,7 +155,7 @@ def get_sotfware_tables(save_data = True):
     clusters = os.listdir(cluster_info['base_path'])
     clusters.remove('binary')
 
-    stack = {}
+    stack = dict()
     for rel in cluster_info['releases']:
         stack[rel] = []
         for cl in clusters:
