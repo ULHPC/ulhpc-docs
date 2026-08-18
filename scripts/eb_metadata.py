@@ -2,7 +2,6 @@ import json
 import os
 from pathlib import Path
 
-from easybuild.tools.options import set_up_configuration
 from easybuild.framework.easyconfig.parser import EasyConfigParser
 import pandas as pd
 
@@ -169,7 +168,6 @@ def get_sotfware_tables(save_data = True):
 #df.to_json("stack.json", orient="records", indent=2)
 
 def main():
-    options, cfg_settings = set_up_configuration(args=[])
     get_sotfware_tables()
                         
 if __name__ == "__main__":
