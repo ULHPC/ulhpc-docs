@@ -3,7 +3,6 @@ import os
 from pathlib import Path
 
 from easybuild.tools.options import set_up_configuration
-from easybuild.framework.easyconfig.easyconfig import process_easyconfig
 from easybuild.framework.easyconfig.parser import EasyConfigParser
 import pandas as pd
 
