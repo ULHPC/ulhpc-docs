@@ -41,6 +41,11 @@ def get_software_stack(software_path, hwd_data):
 
     return stack
 
+def toolchain_to_string(toolchain):
+    if toolchain["name"] == "system":
+        return ""
+
+    return "{name}-{version}".format(name = toolchain["name"], version = toolchain["version"])
 
 def extract_easyconfigs_info(eb, software_path, stack, hwd_data):
     if eb.is_relative_to(software_path / "EasyBuild"):
@@ -51,12 +56,13 @@ def extract_easyconfigs_info(eb, software_path, stack, hwd_data):
         ec = parser.get_config_dict(validate = False)
 
         package = {
-            "Name": ec.get("name"),
-            "Version": ec.get("version"),
-            "Homepage": ec.get("homepage"),
+            "Name": ec["name"],
+            "Version": ec["version"],
+            "Homepage": ec["homepage"],
+            "Description": ec["description"],
+            "Toolchain": toolchain_to_string(ec["toolchain"])
             "Architectures": cluster_info["architectures"][hwd_data[1]],
             "Clusters" : hwd_data[0],
-            "Description": ec.get("description"),
             "Category": ec.get("moduleclass"),
         }
 
@@ -83,12 +89,15 @@ def get_software_table(stack):
         
     # Combine versions for the same software
     df = df.groupby(
-            ["Name",
-             "Homepage",
-             "Architectures",
-             "Clusters",
-             "Category",
-             "Description"],
+            [
+                "Name",
+                "Homepage",
+                "Architectures",
+                "Clusters",
+                "Category",
+                "Description",
+                "Toolchain",
+            ],
             as_index=False
         ).agg({
             "Version": ( lambda x: "<br>".join(sorted(list(set(x)))) ),
