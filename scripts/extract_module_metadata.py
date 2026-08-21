@@ -305,23 +305,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-def set_nested_map(mp, entries, value):
-    if len(entries) == 0:
-        return dict()
-
-    entry = entries.pop(0)
-    if len(entries) == 0:
-        mp[entry] = value
-        return mp
-
-    if len(mp) == 0:
-        mp[entry] = dict()
-
-    val = set_nested_map(mp[entry], entries, value)
-    mp[entry] = val
-
-    return mp
-
-# e.g. software_tables = set_nested_map(software_tables, [cluster, arch, version], table)
-
