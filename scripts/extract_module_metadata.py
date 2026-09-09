@@ -112,7 +112,7 @@ def get_build_software_tables(base_path: pathlib.Path, build_number: str, releas
     for cluster in release.keys():
         for arch in release[cluster].keys():
             for release_id in release[cluster][arch]:
-                target_installation_path = base_path / cluster / arch / release_id / build_number
+                target_installation_path = base_path / release_id / cluster / arch / build_number
                 stack = get_installation_target_package_list(target_installation_path)
                 table = generate_installation_target_package_table(stack)
 
