@@ -1,5 +1,4 @@
 /*
-   Time-stamp: <Sun 2021-02-07 22:20 svarrette>
    Extra CSS configuration of the ULHPC Technical Documentation website
  */
 
@@ -8,4 +7,20 @@
 }
 .md-typeset ul li li li{
     list-style: square;
+}
+
+/* Control the width of the text area */
+@media only screen and (min-width: 76.25em) {
+  .md-main__inner {
+    max-width: 24in; /* Use `none` for full width */
+  }
+  .md-sidebar--primary {
+    left: 0;
+  }
+  .md-sidebar--secondary {
+    right: 0;
+    margin-left: 0;
+    -webkit-transform: none;
+    transform: none;   
+  }
 }
