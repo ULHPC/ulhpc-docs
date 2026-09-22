@@ -14,9 +14,9 @@ You can access the different node classes available using the `-C <class>` flag 
         $ si
         # salloc -p interactive --qos debug -C batch
 
-        ### Explicitly ask for a skylake node
-        $ si -Cskylake
-        # salloc -p interactive --qos debug -C batch -Cskylake
+        ### Explicitly ask for a skylake node (last `-C/--constraint=` overrides earlier entries)
+        $ si -C"batch&skylake"
+        # salloc -p interactive --qos debug -C batch -Cbatch&skylake
 
         ### Use 1 full node for 28 tasks
         $ si --ntasks-per-node=28
@@ -68,7 +68,6 @@ If you prefer to rely on the regular [`srun`](https://slurm.schedmd.com/srun.htm
 | regular   | `si [...]`                     | `salloc --partition=interactive --qos=debug --constraint=batch [...]`<br/>`salloc --partition=interactive --qos=debug --constraint=batch,broadwell [...]`<br/>`salloc --partition=interactive --qos=debug --constraint=batch,skylake [...]` |
 | gpu       | `si-gpu [...]`                 | `salloc --partition=interactive --qos=debug --constraint=gpu,[volta[32]] --gpus=1 [...]`                                                                                                                                                    |
 | bigmem    | `si-bigmem [...]`              | `salloc --partition=interactive --qos=debug --constraint=bigmem [...]`                                                                                                                                                                      |
-
 
 !!! important "Impact of Interactive jobs implementation over a _floating_ partition"
     We have recently changed the way interactive jobs are served. Since the [`interactive` partition](../slurm/partitions.md) is no longer dedicated but _floating_ above the other partitions, there is **NO** guarantee to have an interactive job running if the surrounding partition (`batch`, `gpu` or `bigmem`) is full.
