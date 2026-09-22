@@ -1,10 +1,27 @@
 # Job dependencies
 
-Interdependent jobs can be submitted in Slurm systems to perform tasks with dependencies between their various steps. Job dependencies are useful for instance in managing data. 
+Quite often a computational analysis job consists of clearly separable steps with very different computational requirements. Consider for instance an analysis jobs that periodically searches the web for news articles, and then runs some machine learning pipeline over the collected data. This process requires
+
+- fast internet access for the fetching data from the web, and
+- a GPU server to run the machine learning pipeline.
+
+If both stage run on the GPU server, the GPUs will be idle during the data fetching face wasting valuable resources.
+
+<figure markdown="span">
+    ![Utilizing resources efficiently with job dependencies](images/job_dependencies.png){width="600" style="display: block; margin: 0 auto"}
+    <figcaption>Utilizing resources efficiently with inter-depended jobs and job dependencies.</figcaption>
+</figure>
+
+The solution is to split the job into 2 smaller jobs,
+
+- one job for the data fetching that will run in a few cores of a CPU node, and
+- one job for the machine learning pipeline that with use the data fetched and that will run on a GPU node.
+
+Slurm provides the mechanism of _job dependencies_ to orchestrate complex collections of interdependent jobs.
 
 ## Specifying job dependencies
 
-Job dependencies are inserted with the [`--dependency`](https://slurm.schedmd.com/sbatch.html#OPT_dependency) (`-d` in short format) option flag.
+Job dependencies are declared with the [`--dependency`](https://slurm.schedmd.com/sbatch.html#OPT_dependency) (`-d` in short format) option flag.
 
 ```shell 
 $ sbatch --dependency=<dependency_list> script.sh
@@ -23,7 +40,6 @@ if _any_ of the dependencies is sufficient. _Only one separator may be used_.
 When a job with dependencies is queued, the job is not considered for execution until its dependencies are satisfied. The scheduler takes into account the end time of dependencies to reserve resources for depended jobs.
 
 !!! info "Job dependencies"
-
 
     | Dependency                                  | Description                                                                                                                                                                                                      |
     |:--------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -55,7 +71,7 @@ $ job_1_id=$(sbatch --parsable job_1.sh)
 $ sbatch --dependency=afterok:${job_0_id},afterok:${job_1_id} dependant_job.sh
 ```
 
-As the number of dependent job increases, it pays off to create a submission script with all the dependency information. For instance:
+As the number of dependent job increases, it's more convenient to create a submission script with all the dependency information. For instance:
 
 !!! info "Contents of `submit_jobs.sh`"
 
@@ -68,7 +84,7 @@ As the number of dependent job increases, it pays off to create a submission scr
     sbatch --dependency=afterok:${analysis_job_0_id},${analysis_job_1_id} cleanup_job.sh
     ```
 
-Then all the jobs are submitted with the command:
+Then all jobs are submitted with one command:
 
 ```shell
 $ bash submit_jobs.sh
@@ -88,6 +104,8 @@ $ bash submit_jobs.sh
     ```
     that is only the job ID.
 
+<!--
+
 ## Examples
 
 These are 2 cases that appear often in our systems. The first is an example of transferring data between the available storage tiers. The second involves running a light database to support a serries of jobs that are submitted automatically for the duration of a project.
@@ -99,7 +117,6 @@ When using the [scratch](/filesystems/#scratch-directory) data typically needs t
 - a job to perform the data transfer to scratch,
 - a job that runs their program with data in scratch that starts _after_ the data transfer completes successfully,
 - a job to transfer the results back and clean the scratch that starts _after_ their program execution has finished successfully.
-
 
 ### Using `singleton` dependency to run a lightweight database
 
@@ -137,7 +154,7 @@ There are 2 options for running a database to collect processed results, run for
         #SBATCH --error=%x-%j.err
 
         module load tools/Apptainer
-        apptainer run ${PROJECTHOME}/project_name/containers/database.sif &
+        srun apptainer run ${PROJECTHOME}/project_name/containers/database.sif &
 
         sleep $((24*60*60)) # 1 day in sec
         ```
@@ -186,7 +203,7 @@ There are 2 options for running a database to collect processed results, run for
         fi
 
         module load tools/Apptainer
-        apptainer run ${PROJECTHOME}/project_name/containers/database.sif &
+        srun apptainer run ${PROJECTHOME}/project_name/containers/database.sif &
 
         sleep $((24*60*60)) # 1 day in sec
         ```
@@ -224,7 +241,6 @@ The job scripts for the database, `run_database.sh`, schedule the future databas
 
     If you need to run large services for unspecified amounts of time, consider [setting up a virtual machine](https://service.uni.lu/sp?id=sc_cat_item&table=sc_cat_item&sys_id=a9f01d86db165c902fa838aa7c9619ba&searchTerm=virtual%20machine).
 
-
 #### Submitting jobs that use the database
 
 To periodically submit jobs that use the database it is assumed that the analysis procedure is contained in a Singularity container and that the job is configured to access the database. For instance, the database machine IP and the port used by the database may be stored and read from a specific location in the cluster file system. It is assumed that the single input to the analysis is a binary `dat` file.
@@ -246,7 +262,7 @@ To periodically submit jobs that use the database it is assumed that the analysi
     local data="${1}"
 
     module load tools/Apptainer
-    apptainer run ${PROJECTHOME}/project_name/containers/analysis.sif "${data}"
+    srun apptainer run ${PROJECTHOME}/project_name/containers/analysis.sif "${data}"
     ```
 
 With the database job running, the data analysis job can be submitted remotely for a server with the command
@@ -254,6 +270,8 @@ With the database job running, the data analysis job can be submitted remotely f
 ssh aion-cluster "sbatch ${PROJECTHOME}/project_name/scripts/run_analysis.sh /mnt/isilon/projects/project_name/data/datafile_${id}.dat"
 ```
 given that the [SSH configuration](/connect/ssh/#ssh-configuration) of the server contains the `aion-cluster` entry for the Aion cluster.
+
+-->
 
 ## _Resources_
 
