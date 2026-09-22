@@ -369,7 +369,7 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
         module load toolchain/intel
         OPTS=$*
 
-        srun -n $SLURM_NTASKS /path/to/your/intel-toolchain-compiled-application ${OPTS}
+        srun /path/to/your/intel-toolchain-compiled-application ${OPTS}
         ```
         Recall to use [`si-bigmem`](../jobs/interactive.md) to request an [interactive](../jobs/interactive.md) job when testing your script. 
 
@@ -390,7 +390,7 @@ Luckily, we have prepared a [generic GNU Parallel launcher](https://github.com/U
         module load toolchain/intel
         OPTS=$*
 
-        srun -n $SLURM_NTASKS /path/to/your/intel-toolchain-compiled-application ${OPTS}
+        srun /path/to/your/intel-toolchain-compiled-application ${OPTS}
         ```
         Recall to use [`si-gpu`](../jobs/interactive.md) to request an [interactive](../jobs/interactive.md) job when testing your script on a GPU node. 
 
@@ -419,7 +419,7 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
         module load mpi/OpenMPI
         OPTS=$*
 
-        srun -n $SLURM_NTASKS /path/to/your/foss-toolchain-openMPIcompiled-application ${OPTS}
+        srun /path/to/your/foss-toolchain-openMPIcompiled-application ${OPTS}
         ```
 
 === "Iris (default Dual-CPU)"
@@ -440,7 +440,7 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
         module load mpi/OpenMPI
         OPTS=$*
 
-        srun -n $SLURM_NTASKS /path/to/your/foss-toolchain-openMPIcompiled-application ${OPTS}
+        srun /path/to/your/foss-toolchain-openMPIcompiled-application ${OPTS}
         ```
 
 ## Hybrid Intel MPI+OpenMP Launcher
@@ -464,7 +464,7 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
         OPTS=$*
 
-        srun -n $SLURM_NTASKS /path/to/your/parallel-hybrid-app ${OPTS}
+        srun /path/to/your/parallel-hybrid-app ${OPTS}
         ```
 
 === "Iris (default Dual-CPU)"
@@ -486,7 +486,7 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
         OPTS=$*
 
-        srun -n $SLURM_NTASKS /path/to/your/parallel-hybrid-app ${OPTS}
+        srun /path/to/your/parallel-hybrid-app ${OPTS}
         ```
 
 ## Hybrid OpenMPI+OpenMP Launcher
@@ -511,7 +511,7 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
         OPTS=$*
 
-        srun -n $SLURM_NTASKS /path/to/your/parallel-hybrid-app ${OPTS}
+        srun /path/to/your/parallel-hybrid-app ${OPTS}
         ```
 
 === "Iris (default Dual-CPU)"
@@ -534,5 +534,5 @@ You may want to use [PMIx](https://pmix.github.io/standard) as MPI initiator -- 
         export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
         OPTS=$*
 
-        srun -n $SLURM_NTASKS /path/to/your/parallel-hybrid-app ${OPTS}
+        srun /path/to/your/parallel-hybrid-app ${OPTS}
         ```
