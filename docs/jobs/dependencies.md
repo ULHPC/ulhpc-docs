@@ -9,7 +9,7 @@ If both stage run on the GPU server, the GPUs will be idle during the data fetch
 
 <figure markdown="span">
     ![Utilizing resources efficiently with job dependencies](images/job_dependencies.png){width="600" style="display: block; margin: 0 auto"}
-    <figcaption>Utilizing resources efficiently with inter-depended jobs and job dependencies.</figcaption>
+    <figcaption>Utilizing resources efficiently with inter-depended jobs and job dependencies. Separating jobs results in better utilization of occupied hardware.</figcaption>
 </figure>
 
 The solution is to split the job into 2 smaller jobs,
