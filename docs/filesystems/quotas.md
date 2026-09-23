@@ -33,7 +33,7 @@ Users and project groups are assigned a fixed amount of storage. There are quota
 
     The critical restriction in the data access pattern is that the storage in MDT devices is limited. MDT devices are typically based on high throughput and IOPS, and low latency SSD devices. For instance TLC SSDs are used in MDTs where as QLC SSDs or even HDDs are used in OSTs. At the same time, MDS have limited capacity to support MDTs per server, and as they support [fast interconnect](/interconnect/ib/) MDSs are also expensive.
 
-    _Thus, the overall MDS capacity and therefore the number of inodes is limited by the cost of fat metadata storage._
+    _Thus, the overall MDS capacity and therefore the number of inodes is limited by the cost of fast metadata storage._
 
 <!--overview-end-->
 
