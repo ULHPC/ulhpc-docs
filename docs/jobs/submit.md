@@ -196,7 +196,7 @@ The groups useful to you that we have configured are `@user`, `@job` and `@state
 
 #### `clush`
 
-[`clush`](https://clustershell.readthedocs.io/en/latest/tools/clush.html) can run commands on multiple nodes at once for instance to monitor you jobs. It uses the node grouping syntax from [`nodeset`]((https://clustershell.readthedocs.io/en/latest/tools/nodeset.html) to allow you to run commands on those nodes.
+[`clush`](https://clustershell.readthedocs.io/en/latest/tools/clush.html) can run commands on multiple nodes at once for instance to monitor you jobs. It uses the node grouping syntax from [`nodeset`](https://clustershell.readthedocs.io/en/latest/tools/nodeset.html) to allow you to run commands on those nodes.
 
 [`clush`](https://clustershell.readthedocs.io/en/latest/tools/clush.html) uses `ssh` to connect to each of these nodes. You can use the `-b` option to gather output from nodes with same output into the same lines. Leaving this out will report on each node separately.
 
