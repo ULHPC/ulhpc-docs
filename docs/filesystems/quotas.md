@@ -18,22 +18,27 @@ Users and project groups are assigned a fixed amount of storage. There are quota
     1. This is the default and free of charge allocation for projects; requests for more space may incur charges.
     2. On Isilon all projects share one global quota limit and the HPC Platform team sets up individual project quotas. Unfortunately it is not currently possible for users to see the quota status on Isilon.
 
-??? info "Why `inodes` are limited in cluster file systems"
+??? info "Why inodes are limited in cluster file systems"
 
-    In Unix-style disk file systems, [inodes](https://en.wikipedia.org/wiki/Inode) (index node) is a data structure that contains basic information about each file, such as where the data contained in the file is stored. In conventional file systems inodes stored on the disk together with the data are sufficient to direct the data access. Cluster file systems such as Lustre however, have a more complex architecture (building on top of conventional file systems) to accelerate data access.
+    The inodes in cluster filesystems are limited, because to achieve good latency, throughput, and IOPs, cluster filesystems store inodes in a dedicated fast filesystem. The fast filesystem is usually small to reduce cost, and thus the capacity for storing inodes is limited.
+
+    In Unix-style disk file systems, [inodes](https://en.wikipedia.org/wiki/Inode) (index node) is a data structure that contains basic information about each file, such as where the data contained in the file is stored. In conventional file systems inodes stored on the disk together with the data are sufficient to direct the data access. Since inodes in conventional file systems share the same space as data, there are no special restrictions in the number of inodes.
+
+    Cluster file systems such as Lustre however, have a more complex architecture, that builds on top of conventional file systems, to accelerate data access.
 
     - Data is stored in Object Storage Target (OST) devices, with each OST managing a single local disk filesystem.
     - Data in OST is accessed through Object Storage Servers (OSS), with a typically OSS serving between two and eight OSTs.
     - Inodes in the Lustre file system are stored in Metadata Storage Target (MDT) devices, and point to one or more OST objects associated with the file (rather than the underlying file data blocks on the local disk file systems).
     - Data in MDT devices are access through MetaData Servers (MDSs).
 
-    Clients connect to MDSs, access Lustre inodes for the files they need to access, and then connect to OSSs to retrieve the file data.
-
     ![Lustre filesystem components](images/LustreComponents21.gif){width="400" style="display: block; margin: 0 auto"}
 
-    The critical restriction in the data access pattern is that the storage in MDT devices is limited. MDT devices are typically based on high throughput and IOPS, and low latency SSD devices. For instance TLC SSDs are used in MDTs where as QLC SSDs or even HDDs are used in OSTs. At the same time, MDS have limited capacity to support MDTs per server, and as they support [fast interconnect](/interconnect/ib/) MDSs are also expensive.
+    Clients connect to MDSs, access Lustre inodes for the files they need to access, and then connect to OSSs to retrieve the file data.
 
-    _Thus, the overall MDS capacity and therefore the number of inodes is limited by the cost of fast metadata storage._
+    - Spreading each file across multiple OST, files are read in parallel increasing the filesystem throughput.
+    - Storing the inodes in a dedicated fast filesystem, reduces latency and increases IOPs.
+
+    MDT devices are typically based on high throughput and IOPS, and low latency SSD devices. For instance TLC SSDs are used in MDTs where as QLC SSDs or even HDDs are used in OSTs. At the same time, MDS have limited capacity to support MDTs per server, and as they support [fast interconnect](/interconnect/ib/) MDSs are also expensive. Thus, the cost of metadata storage is a critical restriction cluster file systems, and is controlled by limiting the fast storage available for inodes.
 
 <!--overview-end-->
 
