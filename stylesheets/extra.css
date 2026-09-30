@@ -1,0 +1,11 @@
+/*
+   Time-stamp: <Sun 2021-02-07 22:20 svarrette>
+   Extra CSS configuration of the ULHPC Technical Documentation website
+ */
+
+.md-typeset ul li li{
+    list-style: circle;
+}
+.md-typeset ul li li li{
+    list-style: square;
+}

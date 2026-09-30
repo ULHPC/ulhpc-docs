@@ -1,0 +1,249 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{
+    shapes,
+    arrows,
+    shadows,
+    calc,
+    positioning,
+    shapes.symbols,
+    quotes,
+    intersections,
+    fit,
+    backgrounds
+}
+
+\usepackage{amsmath}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+
+\begin{document}
+
+% Define block styles used later
+\tikzstyle{personal_machine} = [draw, fill=green!20, rounded corners, minimum height=4em, minimum width=6em] %, drop shadow
+\tikzstyle{internet} = [draw, fill=magenta!20, cloud, minimum height=2em, minimum width=8em] %, drop shadow
+\tikzstyle{web_portal} = [draw, rounded rectangle, fill=magenta!20, minimum height=4em, minimum width=8em]
+\tikzstyle{compute_node} = [draw, fill=blue!40, rounded corners, minimum height=4em, minimum width=12em]
+\tikzstyle{service_node} = [draw, fill=blue!40, rounded corners, minimum height=4em, minimum width=8em]
+\tikzstyle{device} = [draw, fill=yellow!20, rounded corners] %, drop shadow
+\tikzstyle{core_device} = [draw, rounded corners]
+\tikzstyle{storage} = [draw, ellipse, fill=blue!40, minimum height=4em, minimum width=12em]
+\tikzstyle{network} = [draw, rounded rectangle, fill=blue!40, minimum height=4em, minimum width=8em]
+
+\tikzset{
+    bare_compute_node/.pic={
+        \node [compute_node] (compute_node) at (0,0) {};
+        \node [device, right=of compute_node.east, anchor=west] (local_storage) {SSDs}; % \texttt{/dev/sdX}
+        \path [draw, line width=1.5pt] (compute_node.east) -- (local_storage.west);
+        \node [core_device] (cpu) at ($(compute_node.west)!0.15!(compute_node.east)$) {CPUs};
+        \node [core_device, right=2em of cpu] (ram) {RAM};
+        \coordinate (-base) at (compute_node.center);
+        \coordinate (-west_anchor) at (compute_node.west);
+        \node[fit=(compute_node) (local_storage)] (-full) {};
+    }
+}
+
+\tikzset{
+    accelerated_compute_node/.pic={
+        \node [compute_node] (compute_node) at (0,0) {};
+        \coordinate (storage_connection) at ($(compute_node.north east)!0.22!(compute_node.south east)$);
+        \coordinate (accelerator_connection) at ($(compute_node.north east)!0.78!(compute_node.south east)$);
+        \node [device, right=of storage_connection, anchor=west] (local_storage) {SSDs}; % \texttt{/dev/sdX}
+        \node [device, right=of accelerator_connection, anchor=west] (accelerator) {GPUs}; % \texttt{/dev/nvidiaX}
+        \path [draw, line width=1.5pt] (storage_connection) -- (local_storage.west);
+        \path [draw, line width=1.5pt] (accelerator_connection) -- (accelerator.west);
+        \node [core_device] (cpu) at ($(compute_node.west)!0.15!(compute_node.east)$) {CPUs};
+        \node [core_device, right=2em of cpu] (ram) {RAM};
+        \coordinate (-base) at (compute_node.center);
+        \coordinate (-west_anchor) at (compute_node.west);
+        \node[fit=(compute_node) (local_storage) (accelerator)] (-full) {};
+    }
+}
+
+\begin{tikzpicture}[/tikz/font=\large]
+    \node [personal_machine, name path=personal_machine_edge] (personal_machine) at (0,0) {Laptop};
+    \node [internet, below right=of personal_machine] (internet) {Internet};
+    \node [web_portal, right=1.5 of personal_machine, align=center] (openondemand) {UL HPC\\web portal};
+
+    \path [name path=internet_connection_plug]
+        let
+            \p{east} = (personal_machine.east),
+            \p{south} = (personal_machine.south),
+            \p{center} = (personal_machine.center),
+            \n{side} = {min(abs(\y{center} - \y{south}), abs(\x{center} - \x{east}))}
+        in
+        (personal_machine.south east) -- ($(personal_machine.south east)+(-\n{side},\n{side})$)
+    ;
+    \path [draw, name intersections={of=personal_machine_edge and internet_connection_plug, name=ip}]
+        (ip-1) edge[>=latex,<->] (internet.north west)
+    ;
+    
+    \node [label={[label distance=-4pt]30:ssh}] (ssh_connect) at ($(ip-1)!0.5!(internet.north west)$) {};
+    \node [label={[label distance=-4pt]210:rsync}] (rsync_connect) at ($(ip-1)!0.5!(internet.north west)$) {};
+    \path [draw,outer sep=0pt] (personal_machine.east) edge[>=latex,<->] (openondemand.west);
+    \node [label={90:https}] (https_connect) at ($([xshift=-1pt]personal_machine.east)!0.5!(openondemand.west)$) {};
+
+    \node [service_node, align=center, right=5 of internet] (access_node) {\textbf{access node}\\(iris or aion)};
+    \node [service_node, below=2 of access_node, align=center] (slurm_controller) {Slurm\\controller};
+    \path [draw,outer sep=0pt] (internet.east) edge[>=latex,<->] (access_node.west);
+    \node [label={ssh}] (ssh_connect_cluster) at ($(internet.east)!0.25!(access_node.west)$) {};
+    \node [label={270:rsync}] (rsync_connect_cluster) at ($(internet.east)!0.25!(access_node.west)$) {};
+
+    \node [network, right=1 of access_node, align=center] (infiniband) {Infiniband};
+    \path [draw] (access_node.east) -- (infiniband.west);
+
+    \path [] (infiniband.east)
+        ++(1,5) coordinate pic[anchor=west] (bare_0) {bare_compute_node}
+        ++(0,-3) coordinate pic[anchor=west] (bare_n-1) {bare_compute_node}
+        ($(bare_0-base)!0.5!(bare_n-1-base)$) node [] (bare_ellipse) {\LARGE $\mathbf{\vdots}$}
+    ;
+    \path [] (infiniband.east)
+        ++(1,-2) coordinate pic[anchor=west] (accelerated_0) {accelerated_compute_node}
+        ++(0,-3) coordinate pic[anchor=west] (accelerated_n-1) {accelerated_compute_node}
+        ($(accelerated_0-base)!0.5!(accelerated_n-1-base)$) node [] (accelerated_ellipse) {\LARGE $\mathbf{\vdots}$}
+    ;
+    \path []
+        let
+            \p{bare_0}=(bare_0-west_anchor),
+            \p{infiniband}=(infiniband.east)
+        in
+        coordinate (connection_point_long) at (\x{bare_0},\y{infiniband})
+        coordinate (connection_point) at ($(infiniband.east)!0.5!(connection_point_long)$)
+        node[right=0.5 of connection_point, align=left] (connection_speed) {EDR ($100$\,Gb/s)\\HDR ($200$\,Gb/s)}
+    ;
+    \path [draw]
+        let
+            \p{bare_n-1}=(bare_n-1-west_anchor),
+            \p{accelerated_0}=(accelerated_0-west_anchor),
+            \p{connection_point}=(connection_point)
+        in
+        (infiniband.east) -- (connection_point)
+        (\x{connection_point},\y{bare_n-1}) -- (bare_n-1-west_anchor)
+        (\x{connection_point},\y{accelerated_0}) -- (accelerated_0-west_anchor)
+        (connection_point) |- (bare_0-west_anchor)
+        (connection_point) |- (accelerated_n-1-west_anchor)
+    ;
+
+    \path[]
+        ($(infiniband.south west)!0.8!(infiniband.south east)$) coordinate (cluster_storage_plug)
+        ($(infiniband.south west)!0.2!(infiniband.south east)$) coordinate (permanent_storage_plug)
+        (cluster_storage_plug)
+            ++ (0,-6) coordinate (cluster_storage_connection)
+            ++ (-12,0) coordinate (permanent_storage_anchor)
+            ++ (0,1) coordinate (permanent_storage_connection)
+    ;
+
+    \node[storage, below=of cluster_storage_connection, anchor=north] (projects) {\texttt{\$PROJECTHOME}};
+    \node[storage, left=0.8of projects.west, anchor=east] (home) {\texttt{\$HOME}};
+    \node[storage, right=1.6 of projects.east, anchor=west] (scratch) {\texttt{\$SCRATCH}};
+    \node[storage, below=of permanent_storage_anchor, anchor=north] (isilon) {\texttt{/mnt/isilon}};
+
+    \path[draw]
+        let
+            \p{cluster_storage_plug} = (cluster_storage_plug),
+            \p{slurm_controller_plug} = (slurm_controller.east)
+        in
+        (cluster_storage_plug) -- (cluster_storage_connection)
+        (cluster_storage_connection) -- (projects)
+        (cluster_storage_connection) -| (home.north)
+        (cluster_storage_connection) -| (scratch.north)
+        (slurm_controller.east) -- (\x{cluster_storage_plug},\y{slurm_controller_plug})
+            node[] (slurm_controller_connection) {}
+    ;
+    \node[below=1 of scratch.south west, anchor=west] (lustre) {\Large lustre};
+    \node[below=1 of home.south west, anchor=west] (gpfs) {\Large SpectrumScale/GPFS};
+    \node[below=1 of isilon.south west, anchor=west] (onefs) {\Large OneFS};
+    \path[draw,dotted,line width=1pt]
+        let
+            \p{permanent_storage_plug} = (permanent_storage_plug),
+            \p{permanent_storage_connection} = (permanent_storage_connection)
+        in
+        coordinate (permanent_storage_bend) at (\x{permanent_storage_plug},\y{permanent_storage_connection})
+        (permanent_storage_plug) -- (permanent_storage_bend)
+            -- node[above, pos=0.8] {Ethernet ($10$\,Gb/s)} (permanent_storage_connection)
+            -- (isilon.north)
+    ;
+
+    \begin{scope}[on background layer,name prefix=systems-]
+        \node[
+            draw,
+            rounded corners,
+            fit=
+                (access_node)
+                (infiniband)
+                (bare_0-full)
+                (bare_n-1-full)
+                (accelerated_0-full)
+                (accelerated_n-1-full)
+                (projects)
+                (home)
+                (scratch)
+                (lustre)
+                (gpfs),
+            inner sep=2em,
+            line width=3pt,
+            fill=blue!10
+        ] (HPC) {};
+        \node[below right=of HPC.north west] (os_type) {RedHat/Rocky Linux 8.10};
+        \node[
+            draw,
+            dashed,
+            rounded corners,
+            fit=
+                (projects)
+                (home)
+                (gpfs),
+            inner sep=1em,
+            line width=3pt
+        ] (gpfs_systems) {};
+        \node[
+            draw,
+            dashed,
+            rounded corners,
+            fit=
+                (scratch)
+                (lustre),
+            inner sep=1em,
+            line width=3pt
+        ] (lustre_systems) {};
+        \node[
+            draw,
+            dashed,
+            rounded corners,
+            fit=
+                (isilon)
+                (onefs),
+            inner sep=1em,
+            line width=3pt
+        ] (onefs_systems) {};
+        \node[
+            draw,
+            dashed,
+            rounded corners,
+            fit=
+                (os_type)
+                (access_node)
+                (infiniband)
+                (bare_0-full)
+                (bare_n-1-full)
+                (accelerated_0-full)
+                (accelerated_n-1-full),
+            inner sep=1em,
+            line width=0.5pt
+        ] (compute_nodes) {};
+    \end{scope}
+
+    \path [draw]
+        let
+            \p{hpc_boarder}=(systems-HPC.west),
+            \p{openondemand_plug}=(openondemand.east)
+        in
+        (openondemand.east) -- (\x{hpc_boarder},\y{openondemand_plug})
+            node[] (openondemand_connection) {}
+    ;
+
+\end{tikzpicture}
+
+\end{document}
