@@ -754,7 +754,7 @@ This option produces a matrix of distances between an object type of the archite
 
 ??? note "Bios configuration of Aion nodes"
 
-    There are 2 options in the BIOS for configuring Aion login and compute nodes. We can either configure each NUMA node as its own virtual socket, or group all NUMA nodes of a physical socket into a single virtual socket. The latter option necessitates some extra operations to ensure L3 cache coherency between cores in different NUMA nodes on the same physical socket.
+    There are 2 options in the BIOS for configuring Aion login and compute nodes. We can either configure each NUMA node as its own virtual socket, or group all NUMA nodes of a physical socket into a single virtual socket. The latter option necessitates some extra operations by the CPU to ensure L3 cache coherency between cores in different NUMA nodes on the same physical socket.
 
     This is apparent in the distance matrix for Aion compute nodes.
 
@@ -778,7 +778,7 @@ This option produces a matrix of distances between an object type of the archite
 
     The situation is different in login nodes where conventional applications usually run. These applications rely heavily in multithreading, so it makes sense to ensure a better average L3 cache synchronization speed at the expense of synchronization speed within NUMA nodes. So in the login nodes physical sockets appear as a single NUMA node.
 
-    The login nodes have CPUs of the same architecture as compute nodes. You can print the distance matrix (hardware locality is already installed on login nodes, no need for modules).
+    The login nodes have CPUs of similar architecture as compute nodes. You can print the distance matrix (hardware locality is already installed on login nodes, no need for modules).
 
     ```
     $ hwloc-ls --distances 
