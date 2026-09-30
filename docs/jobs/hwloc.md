@@ -605,6 +605,65 @@ Running the hardware locality is as simple as loading the module and calling the
 
 ---
 
+## Inspect GPU topology
+
+The topologu of GPU nodes can be inspected using the `topo` argument of the `nvidia-smi` utility.
+
+1. Allocate a full node in Iris.
+   ```bash
+   salloc --partition=gpu --qos=normal --nodes=1 --ntasks-per-node=1 --cpus-per-task=28 --gpus-per-task=4
+   ```
+2. Run the `nvidia-smi` utility.
+   ```
+   nvidia-smi topo --matrix
+   ```
+
+??? tip "The output of `nvidia-smi topo --matrix`"
+    ```
+            GPU0    GPU1    GPU2    GPU3    NIC0    NIC1    CPU Affinity    NUMA Affinity   GPU NUMA ID
+    GPU0     X      NV2     NV2     NV2     SYS     SYS     0,2,4,6,8,10    0               N/A
+    GPU1    NV2      X      NV2     NV2     SYS     SYS     0,2,4,6,8,10    0               N/A
+    GPU2    NV2     NV2      X      NV2     SYS     SYS     0,2,4,6,8,10    0               N/A
+    GPU3    NV2     NV2     NV2      X      SYS     SYS     0,2,4,6,8,10    0               N/A
+    NIC0    SYS     SYS     SYS     SYS      X      PIX
+    NIC1    SYS     SYS     SYS     SYS     PIX      X
+
+    Legend:
+
+      X    = Self
+      SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+      NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+      PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+      PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+      PIX  = Connection traversing at most a single PCIe bridge
+      NV#  = Connection traversing a bonded set of # NVLinks
+
+    NIC Legend:
+
+      NIC0: mlx5_0
+      NIC1: mlx5_1
+    ```
+
+From the output of the command the command, you can see the following.
+
+- The GPUs are linked by double NVLink connections.
+- All GPUs are linked in PCI buses connected to socket 0 (even numbered CPUs are located in socket 0).
+- Only some of the cores in socket 0 have direct access to the PCI controller where the GPUs are connected.
+
+This output agrees with the architecture of the Iris GPU compute nodes.
+
+<!--iris-architecture-start-->
+
+Each GPU node provided as part of the [`gpu` partition](../slurm/partitions.md) feature **4x Nvidia V100 SXM2** (with either 16G or 32G memory) interconnected by the [NVLink 2.0](https://www.nvidia.com/en-us/data-center/nvlink/) architecture.
+
+<figure markdown="span">
+    ![Architecture of GPU nodes in Iris](images/nvlink.png){: style="width:325px;"}
+</figure>
+
+NVlink was designed as an alternative solution to PCI Express with higher bandwidth and additional features (e.g., shared memory) specifically designed to be compatible with Nvidia's own GPU ISA for multi-GPU systems -- see [wikichip article](https://en.wikichip.org/wiki/nvidia/nvlink).
+
+<!--iris-architecture-end-->
+
 ## Hardware locality and cluster allocations
 
 The hardware locality program is aware of the allocation in the cluster. If you request only part of a node, then hardware locality will only display the allocated resources in the node where it is running. For instance allocate a single node in Iris with 2 tasks.
