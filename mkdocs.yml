@@ -103,6 +103,7 @@ nav:
     - Launcher Scripts Examples: 'slurm/launchers.md'
     - Job arrays: 'jobs/arrays.md'
     - GNU parallel: 'jobs/gnu-parallel.md'
+    - Job checkpoints: 'jobs/signals.md'
     # - Affinity: 'jobs/affinity.md'
     # - (Multi-)GPU Jobs: 'jobs/gpu.md'
     # - Memory Management: 'jobs/memory.md'
