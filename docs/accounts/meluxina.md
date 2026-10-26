@@ -1,7 +1,4 @@
 # MeluXina HPC Resource Allocation & Usage Guide
-**University of Luxembourg — High-Performance Computing (HPC) Platform**
-
----
 
 ## 1. Contact & Support Procedures
 
