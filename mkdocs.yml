@@ -12,6 +12,7 @@ nav:
     - Projects Accounts: 'accounts/projects.md'
     - Identity Management Portal: 'connect/idm.md'
     - Slurm Account Hierarchy: 'slurm/accounts.md'
+    - MeluXina HPC: 'accounts/meluxina.md'
   - Teaching with the ULHPC: 'teaching-with-the-ulhpc.md'
   ##############
   - Data Center:
