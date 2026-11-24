@@ -6,7 +6,6 @@
 * **Existing projects with resources already allocated in 2027 must reapply to the first call** (Q1: 1st January 2027,  **submission to the SPoCs until 15 December 2026**).
 * Projects must be submitted to the UniLu SPoCs **at least 2 weeks before the call cutoff date**, and requests **may be resized** to fit the available global allocation.
 * Calls are held **for 2027 only**: no project will be allocated resources in 2028.
-* Users and PIs **must not contact LuxProvide directly**. Everything goes through the UniLu SPoCs.
 
 ---
 
@@ -29,9 +28,20 @@ The global MeluXina allocation is now **full**. It is limited to **170,000 CPU n
 | **Q3** | July 2027 | 15 June 2027 | 
 | **Q4** | October 2027 | 15 September 2027 |
 
-## Contact & Support Procedures
+---
 
-> **Important:** Users and PIs **must not contact LuxProvide directly** (including the LuxProvide Service Desk), as per LuxProvide's request. **All requests and communications must go through the University of Luxembourg SPoCs**, who will liaise with LuxProvide when needed.
+## Procedure summary for all types of requests
+
+| Request Type | Responsible Entity | Submission Channel & Requirements |
+| :--- | :--- | :--- |
+| **New Allocation Applications** | UniLu SPoCs | Email [Julien Schleich](mailto:julien.schleich@uni.lu) & [Matteo Barborini](mailto:matteo.barborini@uni.lu) with **completed Request Form + signed Terms of Use**, at least 2 weeks before the cutoff date of a quarterly call. **Do not contact LuxProvide directly.** |
+| **Quota Increase or Decrease Requests** | UniLu SPoCs | Email [Julien Schleich](mailto:julien.schleich@uni.lu) & [Matteo Barborini](mailto:matteo.barborini@uni.lu). The SPoCs will relay the request to LuxProvide. **Do not contact LuxProvide directly.** |
+| **Project Extension Requests** | UniLu SPoCs | Email [Julien Schleich](mailto:julien.schleich@uni.lu) & [Matteo Barborini](mailto:matteo.barbaaaaaorini@uni.lu) with the **completed Request Form + signed Terms of Use**, at least 2 weeks before the cutoff date of a quarterly call. **Do not contact LuxProvide directly.** |
+| **Technical issue and user change requests** | LuxProvide Service Desk | [LuxProvide Portal](https://servicedesk.lxp.lu/) / [servicedesk@lxp.lu](mailto:servicedesk@lxp.lu) |
+
+---
+
+## Contact & Support Documents
 
 ### Single Points of Contact (SPoCs) — University of Luxembourg
 Submit all requests for new allocations, quota changes and project extensions to:
@@ -39,7 +49,6 @@ Submit all requests for new allocations, quota changes and project extensions to
 - **Dr. Julien Schleich** (Research Scientist – HPC Platform Lead) — [julien.schleich@uni.lu](mailto:julien.schleich@uni.lu)
 - **Dr. Matteo Barborini** (Research Scientist – HPC Platform) — [matteo.barborini@uni.lu](mailto:matteo.barborini@uni.lu)
 
----
 
 ### Application Documents Required
 
@@ -52,7 +61,6 @@ To apply for a new resource allocation or an extension on MeluXina, you must com
    - Note: the comprehensive list of users cannot be added in the file, please ignore that part.
 
 > **Submission Instruction:** Send both completed and signed documents via email to **Julien Schleich** ([julien.schleich@uni.lu](mailto:julien.schleich@uni.lu)) and **Matteo Barborini** ([matteo.barborini@uni.lu](mailto:matteo.barborini@uni.lu)) **at least 2 weeks before the cutoff date of the relevant quarterly call** (see [Section 3](#3-onboarding-allocation-schedule)). Do not send them to LuxProvide.
-
 
 ---
 
@@ -85,17 +93,6 @@ LuxProvide has implemented a resource allocation policy to ensure that shared pu
 * **Capacity Realignment:** Significant gaps between allocated capacity and actual usage trigger adjustments, progressive reductions, or project decommissioning.
 
 
-
----
-
-## Procedure summary for all types of requests
-
-| Request Type | Responsible Entity | Submission Channel & Requirements |
-| :--- | :--- | :--- |
-| **New Allocation Applications** | UniLu SPoCs | Email [Julien Schleich](mailto:julien.schleich@uni.lu) & [Matteo Barborini](mailto:matteo.barborini@uni.lu) with **completed Request Form + signed Terms of Use**, at least 2 weeks before the cutoff date of a quarterly call. **Do not contact LuxProvide directly.** |
-| **Quota Increase or Decrease Requests** | UniLu SPoCs | Email [Julien Schleich](mailto:julien.schleich@uni.lu) & [Matteo Barborini](mailto:matteo.barborini@uni.lu). The SPoCs will relay the request to LuxProvide. **Do not contact LuxProvide directly.** |
-| **Project Extension Requests** | UniLu SPoCs | Email [Julien Schleich](mailto:julien.schleich@uni.lu) & [Matteo Barborini](mailto:matteo.barbaaaaaorini@uni.lu) with the **completed Request Form + signed Terms of Use**, at least 2 weeks before the cutoff date of a quarterly call. **Do not contact LuxProvide directly.** |
-| **Technical issue and user change requests** | LuxProvide Service Desk | [LuxProvide Portal](https://servicedesk.lxp.lu/) / [servicedesk@lxp.lu](mailto:servicedesk@lxp.lu) |
 
 
  
