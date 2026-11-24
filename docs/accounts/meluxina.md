@@ -1,8 +1,6 @@
 # MeluXina HPC Resource Allocation & Usage Guide
 
-**University of Luxembourg — High-Performance Computing (HPC) Platform**
-
- ## ⚠️ Important: Changes for 2027
+## ⚠️ Important: Changes for 2027 
  The global MeluXina allocation is **full**: it is capped at **170,000 CPU node-hours and 50,000 GPU node-hours per month**. Starting with 2027, resources are allocated through **quarterly project calls**:
 
 * **Existing projects with resources already allocated in 2027 must reapply to the first call** (Q1: 1st January 2027,  **submission to the SPoCs until 15 December 2026**).
